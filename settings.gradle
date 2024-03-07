@@ -1,5 +1,15 @@
 include 'student_lastname_firstname'
+include 'student_Andris_Kozinda'
+include 'student_aniskov_ilja'
+include 'student_daugele_svetlana'
+include 'student_dzianis_asipenka'
+include 'student_eglit_igor'
+include 'student_elina_zoldnere'
 include 'student_levs_blinnikovs'
+include 'student_radigins_olegs'
+include 'student_valera_kovss'
+include 'student_vladislav_kuznetsov'
+
 
 include 'teacher:step_0'
 include 'teacher:step_1'
