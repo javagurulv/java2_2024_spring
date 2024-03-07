@@ -1,0 +1,55 @@
+Скорее всего тест написанный вами в предыдущем шаге выглядит примерно так:
+
+class TravelCalculatePremiumServiceImplTest {
+
+    private TravelCalculatePremiumServiceImpl service = new TravelCalculatePremiumServiceImpl();
+
+    @Test
+    public void shouldPopulateResponse() {
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+        request.setPersonFirstName("John");
+        request.setPersonLastName("Peterson");
+        request.setAgreementDateFrom(new Date());
+        request.setAgreementDateTo(new Date());
+
+        TravelCalculatePremiumResponse response = service.calculatePremium(request);
+
+        assertEquals(response.getPersonFirstName(), request.getPersonFirstName());
+        assertEquals(response.getPersonLastName(), request.getPersonLastName());
+        assertEquals(response.getAgreementDateFrom(), request.getAgreementDateFrom());
+        assertEquals(response.getAgreementDateTo(), request.getAgreementDateTo());
+    }
+
+}
+
+Этот тест имеет один недостаток. Если он упадет, то сразу будет
+непонятно по какой причине он упал. "Идеальный" тест это тест
+к котором есть всего одна проверка. Если такой тест упадёт мы
+точно будем знать почему это случилось.
+
+Да, мы знаем о чём вы сейчас подумали. Эти ребята несут какую то чушь
+и хотят заставить меня делать непонятно что и непонятно зачем.
+
+Да, в действительности в реальных проектах сплошь и рядом пренебрегают
+качеством кода, качеством решений, простотой и так далее. Создают
+не идеальный код, пишут плохие тесты лишь бы они были (без них
+не пропустят на code review).
+
+Мы пишем с вами учебный проект. У нас нет жестких дедлайнов,
+стресса и прочей ерунды. Мы хотим вам показать классный, качественный
+код, мы хотим дать вам возможность увидеть и прочувствовать
+простоту решений, показать что в мире программирования есть
+место для другого подхода. Мы хотим дать вам возможность увидеть
+эти решения, прочувствовать их и взять на вооружение. Возможно
+и вы в реальных проектах в будущем захотите применить то,
+чему научитесь в этом проекте.
+
+Ваша задача: сделайте изменения в классе TravelCalculatePremiumServiceImplTest,
+напишите отдельный тестовый метод на каждое поле ответа.
+
+Совет: старайтесь выделять для работы над проектом большие
+непрерывные куски времени. Один час целиком лучше, чем 4 раза
+по 15 минут. Два часа непрерывной работы лучше, чем два
+раза по одному часу. Работая большие непрерывные куски времени
+вы лучше погружаетесь в проект/задание и качественнее выполняете
+работу.

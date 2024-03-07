@@ -1,0 +1,31 @@
+#java specific
+*.class
+*.jar
+
+#log specific
+*.log
+
+#Mac
+**/.DS_Store
+
+### Gradle ###
+.gradle
+**/build/
+**/logs/
+**/out/
+!gradle/wrapper/gradle-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+/.idea/
+*.iws
+*.iml
+*.ipr

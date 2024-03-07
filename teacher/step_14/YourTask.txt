@@ -1,0 +1,38 @@
+Ваша задача: убрать из класса TravelCalculatePremiumServiceImpl
+конструктор и для получения зависимости воспользоваться аннотацией
+@Autowired (по аналогии с TravelCalculatePremiumController).
+
+IoC в действительности поддерживает три способа получения внешних
+зависимостей классом:
+- через конструктор;
+- через set метод;
+- через свойство объекта.
+
+Попробуйте узнать, когда какой способ лучше применять.
+
+При удалении конструктора класса у вас поломается его тестовый класс.
+
+Попробуйте применить подход описанный ниже для создания мок объектов
+и внедрения их в качестве зависимостей.
+
+JUnit - это библиотека, которая управляет запуском юнит тестов.
+Ее поведение можно расширять, что и сделано с помощью
+@ExtendWith(MockitoExtension.class). Узнайте, что эта штука делает
+под капотом. Так же узнайте что такое аннотации @Mock и @InjectMocks.
+
+
+@ExtendWith(MockitoExtension.class)
+class TravelCalculatePremiumServiceImplTest {
+
+    @Mock private DateTimeService dateTimeService;
+
+    @InjectMocks
+    private TravelCalculatePremiumServiceImpl service;
+
+    private TravelCalculatePremiumRequest request;
+
+    @BeforeEach
+    public void setUp() {
+        request = createRequestWithAllFields();
+        when(dateTimeService.getDaysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo())).thenReturn(0L);
+    }
