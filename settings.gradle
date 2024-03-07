@@ -1,4 +1,5 @@
 include 'student_lastname_firstname'
+include 'student_deineka_vladislav'
 
 
 include 'teacher:step_0'
