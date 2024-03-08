@@ -9,20 +9,33 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TravelCalculatePremiumServiceImplTest {
-    TravelCalculatePremiumServiceImpl service = new TravelCalculatePremiumServiceImpl();
+
     TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Igor",
             "Eglit",
             new Date(2024, 12, 12),
             new Date(2024, 12, 13));
+
+    TravelCalculatePremiumServiceImpl service = new TravelCalculatePremiumServiceImpl();
     TravelCalculatePremiumResponse response = service.calculatePremium(request);
 
     @Test
-    public void ResponseFieldsEqualRequest() {
-        assert (request.getPersonFirstName().equals(response.getPersonFirstName()));
-        assert (request.getPersonLastName().equals(response.getPersonLastName()));
-        assertEquals(request.getAgreementDateFrom(), response.getAgreementDateFrom());
-        assertEquals(request.getAgreementDateTo(), response.getAgreementDateTo());
+    public void shouldCheckResponsePersonFirstName() {
+        assertEquals(request.getPersonFirstName(), response.getPersonFirstName());
+    }
 
+    @Test
+    public void shouldCheckResponsePersonLastName() {
+        assertEquals(request.getPersonLastName(), response.getPersonLastName());
+    }
+
+    @Test
+    public void shouldCheckResponseAgreementDateFrom() {
+        assertEquals(request.getAgreementDateFrom(), response.getAgreementDateFrom());
+    }
+
+    @Test
+    public void shouldCheckResponseAgreementDateTo() {
+        assertEquals(request.getAgreementDateTo(), response.getAgreementDateTo());
     }
 
 }
