@@ -18,13 +18,16 @@ class TravelCalculatePremiumServiceImplTest {
             LocalDate.of(2024, 12, 12),
             LocalDate.of(2024, 12, 13));
 
-    TravelCalculatePremiumServiceImpl service = new TravelCalculatePremiumServiceImpl();
+    private final DateTimeService dateTimeService = new DateTimeService();
+    private final AgreementPriceCalculator agreementPriceCalculator = new AgreementPriceCalculator(dateTimeService);
+    TravelCalculatePremiumServiceImpl service = new TravelCalculatePremiumServiceImpl(agreementPriceCalculator);
     TravelCalculatePremiumResponse response = service.calculatePremium(request);
 
     @Test
     public void shouldCheckResponseNotNull() {
         assertNotNull(response);
     }
+
     @Test
     public void shouldCheckResponsePersonFirstName() {
         assertEquals(request.getPersonFirstName(), response.getPersonFirstName());
@@ -44,6 +47,7 @@ class TravelCalculatePremiumServiceImplTest {
     public void shouldCheckResponseAgreementDateTo() {
         assertEquals(request.getAgreementDateTo(), response.getAgreementDateTo());
     }
+
     @Test
     public void shouldCheckResponseAgreementPrice() {
         assertEquals(new BigDecimal(2), response.getAgreementPrice());

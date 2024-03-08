@@ -1,3 +1,4 @@
+/*
 package lv.javaguru.travel.insurance.core;
 
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
@@ -52,3 +53,4 @@ public class TravelCalculatePremiumServiceImplAIEachFieldTest {
         assertEquals(request.getAgreementDateTo(), response.getAgreementDateTo());
     }
 }
+*/

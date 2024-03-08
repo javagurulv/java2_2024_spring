@@ -1,3 +1,4 @@
+/*
 package lv.javaguru.travel.insurance.core;
 
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
@@ -36,3 +37,4 @@ class TravelCalculatePremiumServiceImplAIOneTest {
         assertEquals(request.getAgreementDateTo(), response.getAgreementDateTo());
     }
 }
+*/
