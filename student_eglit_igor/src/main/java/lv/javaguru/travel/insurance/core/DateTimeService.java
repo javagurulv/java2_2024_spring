@@ -5,7 +5,8 @@ import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-class DaysDifferenceCalculator {
+class DateTimeService {
+
     public static long daysCalculator(TravelCalculatePremiumRequest request) {
         LocalDate dateFrom = request.getAgreementDateFrom();
         LocalDate dateTo = request.getAgreementDateTo();

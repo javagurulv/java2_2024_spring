@@ -4,7 +4,7 @@ import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 
 import java.math.BigDecimal;
 
-import static lv.javaguru.travel.insurance.core.DaysDifferenceCalculator.daysCalculator;
+import static lv.javaguru.travel.insurance.core.DateTimeService.daysCalculator;
 
 class AgreementPriceCalculator {
     public static BigDecimal calculateAgreementPrice(TravelCalculatePremiumRequest request) {
