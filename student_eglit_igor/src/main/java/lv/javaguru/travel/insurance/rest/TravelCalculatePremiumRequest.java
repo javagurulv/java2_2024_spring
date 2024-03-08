@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.rest;
 
 import java.time.LocalDate;
-import java.util.Date;
+
 
 public class TravelCalculatePremiumRequest {
 
