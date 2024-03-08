@@ -10,19 +10,6 @@ public class TravelCalculatePremiumRequest {
     private Date agreementDateFrom;
     private Date agreementDateTo;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TravelCalculatePremiumRequest request = (TravelCalculatePremiumRequest) o;
-        return Objects.equals(personFirstName, request.personFirstName) && Objects.equals(personLastName, request.personLastName) && Objects.equals(agreementDateFrom, request.agreementDateFrom) && Objects.equals(agreementDateTo, request.agreementDateTo);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(personFirstName, personLastName, agreementDateFrom, agreementDateTo);
-    }
-
     public TravelCalculatePremiumRequest() {
     }
 
@@ -34,16 +21,6 @@ public class TravelCalculatePremiumRequest {
         this.personLastName = personLastName;
         this.agreementDateFrom = agreementDateFrom;
         this.agreementDateTo = agreementDateTo;
-    }
-
-    @Override
-    public String toString() {
-        return "TravelCalculatePremiumRequest{" +
-                "personFirstName='" + personFirstName + '\'' +
-                ", personLastName='" + personLastName + '\'' +
-                ", agreementDateFrom=" + agreementDateFrom +
-                ", agreementDateTo=" + agreementDateTo +
-                '}';
     }
 
     public String getPersonFirstName() {

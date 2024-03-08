@@ -7,26 +7,51 @@ import org.junit.jupiter.api.Test;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class TravelCalculatePremiumServiceImplTest {
     TravelCalculatePremiumServiceImpl calculatePremiumService = new TravelCalculatePremiumServiceImpl();
 
     @Test
-    public void expectTrue() {
-        String personFirstName = "Ivan";
-        String personLastName = "Petrov";
-        Date agreementDateFrom = new Date();
-        Date agreementDateTo = new Date();
+    public void expectTrueInFirstName() {
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
-        TravelCalculatePremiumResponse expect = new TravelCalculatePremiumResponse();
-        request.setPersonFirstName(personFirstName);
-        request.setPersonLastName(personLastName);
-        request.setAgreementDateFrom(agreementDateFrom);
-        request.setAgreementDateTo(agreementDateTo);
+        request.setPersonFirstName("Ivan");
+        request.setPersonLastName("Petrov");
+        request.setAgreementDateFrom(new Date());
+        request.setAgreementDateTo(new Date());
         TravelCalculatePremiumResponse actualResult = calculatePremiumService.calculatePremium(request);
-        expect.setPersonFirstName(personFirstName);
-        expect.setPersonLastName(personLastName);
-        expect.setAgreementDateFrom(agreementDateFrom);
-        expect.setAgreementDateTo(agreementDateTo);
-        assertEquals(expect, actualResult);
+        assertEquals(request.getPersonFirstName(), actualResult.getPersonFirstName());
+    }
+
+    @Test
+    public void expectTrueInLastName() {
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+        request.setPersonFirstName("Ivan");
+        request.setPersonLastName("Petrov");
+        request.setAgreementDateFrom(new Date());
+        request.setAgreementDateTo(new Date());
+        TravelCalculatePremiumResponse actualResult = calculatePremiumService.calculatePremium(request);
+        assertEquals(request.getPersonLastName(), actualResult.getPersonLastName());
+    }
+
+    @Test
+    public void expectTrueInDateFrom() {
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+        request.setPersonFirstName("Ivan");
+        request.setPersonLastName("Petrov");
+        request.setAgreementDateFrom(new Date());
+        request.setAgreementDateTo(new Date());
+        TravelCalculatePremiumResponse actualResult = calculatePremiumService.calculatePremium(request);
+        assertEquals(request.getAgreementDateFrom(), actualResult.getAgreementDateFrom());
+    }
+
+    @Test
+    public void expectTrueInDateTo() {
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+        request.setPersonFirstName("Ivan");
+        request.setPersonLastName("Petrov");
+        request.setAgreementDateFrom(new Date());
+        request.setAgreementDateTo(new Date());
+        TravelCalculatePremiumResponse actualResult = calculatePremiumService.calculatePremium(request);
+        assertEquals(request.getAgreementDateTo(), actualResult.getAgreementDateTo());
     }
 }
