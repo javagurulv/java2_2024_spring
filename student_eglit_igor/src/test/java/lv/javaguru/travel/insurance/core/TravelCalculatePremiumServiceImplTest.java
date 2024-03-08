@@ -4,20 +4,27 @@ import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class TravelCalculatePremiumServiceImplTest {
 
-    TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Igor",
+    TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
+            "Igor",
             "Eglit",
-            new Date(2024, 12, 12),
-            new Date(2024, 12, 13));
+            LocalDate.of(2024, 12, 12),
+            LocalDate.of(2024, 12, 13));
 
     TravelCalculatePremiumServiceImpl service = new TravelCalculatePremiumServiceImpl();
     TravelCalculatePremiumResponse response = service.calculatePremium(request);
 
+    @Test
+    public void shouldCheckResponseNotNull() {
+        assertNotNull(response);
+    }
     @Test
     public void shouldCheckResponsePersonFirstName() {
         assertEquals(request.getPersonFirstName(), response.getPersonFirstName());
