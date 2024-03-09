@@ -1,0 +1,25 @@
+Конструктор Date(int year, int month, int day) устарел и может вызывать непредсказуемое поведение.
+Рекомендуется вместо этого использовать классы из пакета java.time, введенные в Java 8.
+
+Вот как можно исправить ваш тест, используя классы из пакета java.time:
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.time.LocalDate;
+@Test
+public void ResponseFieldsEqualRequest() {
+    TravelCalculatePremiumServiceImpl service = new TravelCalculatePremiumServiceImpl();
+
+    LocalDate fromDate = LocalDate.of(2024, 12, 12);
+    LocalDate toDate = LocalDate.of(2024, 12, 13);
+    TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Igor",
+    "Eglit",
+    fromDate,
+    toDate);
+
+    TravelCalculatePremiumResponse response = service.calculatePremium(request);
+
+    assertEquals(request.getPersonFirstName(), response.getPersonFirstName());
+    assertEquals(request.getPersonLastName(), response.getPersonLastName());
+    assertEquals(request.getAgreementDateFrom(), response.getAgreementDateFrom());
+    assertEquals(request.getAgreementDateTo(), response.getAgreementDateTo());
+}

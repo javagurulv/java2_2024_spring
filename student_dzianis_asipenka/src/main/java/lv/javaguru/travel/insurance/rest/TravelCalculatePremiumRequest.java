@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.rest;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class TravelCalculatePremiumRequest {
 
@@ -9,7 +10,8 @@ public class TravelCalculatePremiumRequest {
     private Date agreementDateFrom;
     private Date agreementDateTo;
 
-    public TravelCalculatePremiumRequest() { }
+    public TravelCalculatePremiumRequest() {
+    }
 
     public TravelCalculatePremiumRequest(String personFirstName,
                                          String personLastName,
@@ -52,5 +54,4 @@ public class TravelCalculatePremiumRequest {
     public void setAgreementDateTo(Date agreementDateTo) {
         this.agreementDateTo = agreementDateTo;
     }
-
 }
