@@ -10,23 +10,46 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TravelCalculatePremiumServiceImplTest {
 
-    //@Test
-    //public void deleteMe() {}
     TravelCalculatePremiumServiceImpl travelCalculatePremiumServiceimpl = new TravelCalculatePremiumServiceImpl();
 
     @Test
-    void setRequestTest() {
+    public void shouldBeFilledFirstName() {
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
         request.setPersonFirstName("Alex");
-        request.setPersonLastName("Ivanov");
-        request.setAgreementDateFrom(new Date());
-        request.setAgreementDateTo(new Date());
 
         TravelCalculatePremiumResponse response = travelCalculatePremiumServiceimpl.calculatePremium(request);
 
         assertEquals(response.getPersonFirstName(), request.getPersonFirstName());
+    }
+
+    public void shouldBeFilledLastName() {
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+
+        request.setPersonLastName("Ivanov");
+
+        TravelCalculatePremiumResponse response = travelCalculatePremiumServiceimpl.calculatePremium(request);;
         assertEquals(response.getPersonLastName(), request.getPersonLastName());
+
+    }
+
+    void shouldBeFilledAgreementDateFrom() {
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+
+        request.setAgreementDateFrom(new Date());
+
+        TravelCalculatePremiumResponse response = travelCalculatePremiumServiceimpl.calculatePremium(request);
+
         assertEquals(response.getAgreementDateFrom(), request.getAgreementDateFrom());
+
+    }
+
+    void shouldBeFilledAgreementDateTo() {
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+
+        request.setAgreementDateTo(new Date());
+
+        TravelCalculatePremiumResponse response = travelCalculatePremiumServiceimpl.calculatePremium(request);
+
         assertEquals(response.getAgreementDateTo(), request.getAgreementDateTo());
     }
 }
