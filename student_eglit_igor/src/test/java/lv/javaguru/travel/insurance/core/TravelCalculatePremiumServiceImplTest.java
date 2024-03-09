@@ -2,6 +2,7 @@ package lv.javaguru.travel.insurance.core;
 
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -18,11 +19,18 @@ class TravelCalculatePremiumServiceImplTest {
             LocalDate.of(2024, 12, 12),
             LocalDate.of(2024, 12, 13));
 
-    private final DateTimeService dateTimeService = new DateTimeService();
-    private final AgreementPriceCalculator agreementPriceCalculator = new AgreementPriceCalculator(dateTimeService);
-    TravelCalculatePremiumServiceImpl service = new TravelCalculatePremiumServiceImpl(agreementPriceCalculator);
-    TravelCalculatePremiumResponse response = service.calculatePremium(request);
+    private DateTimeService dateTimeService;
+    private AgreementPriceCalculator agreementPriceCalculator;
+    TravelCalculatePremiumServiceImpl service;
+    TravelCalculatePremiumResponse response;
 
+    @BeforeEach
+    public void setUp() {
+        dateTimeService = new DateTimeService();
+        agreementPriceCalculator = new AgreementPriceCalculator(dateTimeService);
+        service = new TravelCalculatePremiumServiceImpl(agreementPriceCalculator);
+        response = service.calculatePremium(request);
+    }
     @Test
     public void shouldCheckResponseNotNull() {
         assertNotNull(response);
@@ -50,6 +58,7 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void shouldCheckResponseAgreementPrice() {
+
         assertEquals(new BigDecimal(2), response.getAgreementPrice());
     }
 

@@ -20,6 +20,7 @@ public class TravelCalculatePremiumResponse {
         this.personLastName = personLastName;
         this.agreementDateFrom = agreementDateFrom;
         this.agreementDateTo = agreementDateTo;
+        this.agreementPrice = agreementPrice;
     }
 
     public TravelCalculatePremiumResponse() {
