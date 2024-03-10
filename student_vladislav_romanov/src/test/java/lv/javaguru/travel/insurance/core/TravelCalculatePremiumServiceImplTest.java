@@ -5,6 +5,7 @@ import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -59,13 +60,21 @@ class TravelCalculatePremiumServiceImplTest {
     }
 
     @Test
+    void responseAgreementPriceTest() {
+        TravelCalculatePremiumRequest request = travelCalculatePremiumRequestData;
+        TravelCalculatePremiumResponse response = new TravelCalculatePremiumServiceImpl().calculatePremium(travelCalculatePremiumRequestData);
+
+        assertEquals(new BigDecimal(10), response.getAgreementPrice());
+    }
+
+    @Test
     void responseTest() {
         Calendar calendarFrom = new GregorianCalendar(2024, Calendar.MARCH , 8);
         Calendar calendarTo = new GregorianCalendar(2024, Calendar.MARCH , 18);
         Date dateFrom = calendarFrom.getTime();
         Date dateTo = calendarTo.getTime();
 
-        TravelCalculatePremiumResponse expected = new TravelCalculatePremiumResponse("Vladislav", "Romanov", dateFrom, dateTo);
+        TravelCalculatePremiumResponse expected = new TravelCalculatePremiumResponse("Vladislav", "Romanov", dateFrom, dateTo, new BigDecimal(10));
         TravelCalculatePremiumResponse actual = new TravelCalculatePremiumServiceImpl().calculatePremium(travelCalculatePremiumRequestData);
 
         assertEquals(expected, actual);
