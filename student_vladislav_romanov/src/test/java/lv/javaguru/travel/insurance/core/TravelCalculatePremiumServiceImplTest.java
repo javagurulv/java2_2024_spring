@@ -13,7 +13,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TravelCalculatePremiumServiceImplTest {
 
-    TravelCalculatePremiumRequest travelCalculatePremiumRequestData;
+    private TravelCalculatePremiumRequest travelCalculatePremiumRequestData;
+
+    private TravelCalculatePremiumService service = new TravelCalculatePremiumServiceImpl();
 
     @BeforeEach
     void setUp() {
@@ -22,6 +24,38 @@ class TravelCalculatePremiumServiceImplTest {
         Date dateFrom = calendarFrom.getTime();
         Date dateTo = calendarTo.getTime();
         travelCalculatePremiumRequestData = new TravelCalculatePremiumRequest("Vladislav", "Romanov", dateFrom, dateTo);
+    }
+
+    @Test
+    void responseFirstNameTest() {
+        TravelCalculatePremiumRequest request = travelCalculatePremiumRequestData;
+        TravelCalculatePremiumResponse response = new TravelCalculatePremiumServiceImpl().calculatePremium(travelCalculatePremiumRequestData);
+
+        assertEquals(request.getPersonFirstName(), response.getPersonFirstName());
+    }
+
+    @Test
+    void responseLastNameTest() {
+        TravelCalculatePremiumRequest request = travelCalculatePremiumRequestData;
+        TravelCalculatePremiumResponse response = new TravelCalculatePremiumServiceImpl().calculatePremium(travelCalculatePremiumRequestData);
+
+        assertEquals(request.getPersonLastName(), response.getPersonLastName());
+    }
+
+    @Test
+    void responseDateFromTest() {
+        TravelCalculatePremiumRequest request = travelCalculatePremiumRequestData;
+        TravelCalculatePremiumResponse response = new TravelCalculatePremiumServiceImpl().calculatePremium(travelCalculatePremiumRequestData);
+
+        assertEquals(request.getAgreementDateFrom(), response.getAgreementDateFrom());
+    }
+
+    @Test
+    void responseDateToTest() {
+        TravelCalculatePremiumRequest request = travelCalculatePremiumRequestData;
+        TravelCalculatePremiumResponse response = new TravelCalculatePremiumServiceImpl().calculatePremium(travelCalculatePremiumRequestData);
+
+        assertEquals(request.getAgreementDateTo(), response.getAgreementDateTo());
     }
 
     @Test
