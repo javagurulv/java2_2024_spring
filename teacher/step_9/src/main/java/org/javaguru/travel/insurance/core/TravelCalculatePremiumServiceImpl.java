@@ -17,12 +17,8 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setPersonLastName(request.getPersonLastName());
         response.setAgreementDateFrom(request.getAgreementDateFrom());
         response.setAgreementDateTo(request.getAgreementDateTo());
-
-        long diff = request.getAgreementDateFrom().getTime() - request.getAgreementDateTo().getTime();
-        var daysBetween = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-        response.setAgreementPrice(new BigDecimal(daysBetween));
-
-        return response;
+return response;
     }
+
 
 }
