@@ -9,6 +9,9 @@ public class TravelCalculatePremiumResponse {
     private Date agreementDateFrom;
     private Date agreementDateTo;
 
+    public TravelCalculatePremiumResponse() {
+    }
+
     public TravelCalculatePremiumResponse(String personFirstName, String personLastName, Date agreementDateFrom, Date agreementDateTo) {
         this.personFirstName = personFirstName;
         this.personLastName = personLastName;
