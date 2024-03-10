@@ -1,11 +1,11 @@
-package lv.javaguru.travel.insurance.rest;
+package lv.javaguru.travel.insurance.core;
 
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
 import java.util.Date;
 
-public class TravelCalculatePremiumUtilities {
+public class DateTimeService {
 
     public int calculateTravelPeriod(Date agreementDateFrom, Date agreementDateTo) {
         return Period.
