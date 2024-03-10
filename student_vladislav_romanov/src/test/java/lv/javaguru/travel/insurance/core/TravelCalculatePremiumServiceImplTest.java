@@ -16,7 +16,9 @@ class TravelCalculatePremiumServiceImplTest {
 
     private TravelCalculatePremiumRequest travelCalculatePremiumRequestData;
 
-    private TravelCalculatePremiumService service = new TravelCalculatePremiumServiceImpl();
+    private DateTimeService dateTimeService = new DateTimeService();
+
+    private TravelCalculatePremiumService service = new TravelCalculatePremiumServiceImpl(dateTimeService);
 
     @BeforeEach
     void setUp() {
@@ -30,7 +32,7 @@ class TravelCalculatePremiumServiceImplTest {
     @Test
     void responseFirstNameTest() {
         TravelCalculatePremiumRequest request = travelCalculatePremiumRequestData;
-        TravelCalculatePremiumResponse response = new TravelCalculatePremiumServiceImpl().calculatePremium(travelCalculatePremiumRequestData);
+        TravelCalculatePremiumResponse response = service.calculatePremium(travelCalculatePremiumRequestData);
 
         assertEquals(request.getPersonFirstName(), response.getPersonFirstName());
     }
@@ -38,7 +40,7 @@ class TravelCalculatePremiumServiceImplTest {
     @Test
     void responseLastNameTest() {
         TravelCalculatePremiumRequest request = travelCalculatePremiumRequestData;
-        TravelCalculatePremiumResponse response = new TravelCalculatePremiumServiceImpl().calculatePremium(travelCalculatePremiumRequestData);
+        TravelCalculatePremiumResponse response = service.calculatePremium(travelCalculatePremiumRequestData);
 
         assertEquals(request.getPersonLastName(), response.getPersonLastName());
     }
@@ -46,7 +48,7 @@ class TravelCalculatePremiumServiceImplTest {
     @Test
     void responseDateFromTest() {
         TravelCalculatePremiumRequest request = travelCalculatePremiumRequestData;
-        TravelCalculatePremiumResponse response = new TravelCalculatePremiumServiceImpl().calculatePremium(travelCalculatePremiumRequestData);
+        TravelCalculatePremiumResponse response = service.calculatePremium(travelCalculatePremiumRequestData);
 
         assertEquals(request.getAgreementDateFrom(), response.getAgreementDateFrom());
     }
@@ -54,7 +56,7 @@ class TravelCalculatePremiumServiceImplTest {
     @Test
     void responseDateToTest() {
         TravelCalculatePremiumRequest request = travelCalculatePremiumRequestData;
-        TravelCalculatePremiumResponse response = new TravelCalculatePremiumServiceImpl().calculatePremium(travelCalculatePremiumRequestData);
+        TravelCalculatePremiumResponse response = service.calculatePremium(travelCalculatePremiumRequestData);
 
         assertEquals(request.getAgreementDateTo(), response.getAgreementDateTo());
     }
@@ -62,7 +64,7 @@ class TravelCalculatePremiumServiceImplTest {
     @Test
     void responseAgreementPriceTest() {
         TravelCalculatePremiumRequest request = travelCalculatePremiumRequestData;
-        TravelCalculatePremiumResponse response = new TravelCalculatePremiumServiceImpl().calculatePremium(travelCalculatePremiumRequestData);
+        TravelCalculatePremiumResponse response = service.calculatePremium(travelCalculatePremiumRequestData);
 
         assertEquals(new BigDecimal(10), response.getAgreementPrice());
     }
@@ -75,7 +77,7 @@ class TravelCalculatePremiumServiceImplTest {
         Date dateTo = calendarTo.getTime();
 
         TravelCalculatePremiumResponse expected = new TravelCalculatePremiumResponse("Vladislav", "Romanov", dateFrom, dateTo, new BigDecimal(10));
-        TravelCalculatePremiumResponse actual = new TravelCalculatePremiumServiceImpl().calculatePremium(travelCalculatePremiumRequestData);
+        TravelCalculatePremiumResponse actual = service.calculatePremium(travelCalculatePremiumRequestData);
 
         assertEquals(expected, actual);
     }
