@@ -9,7 +9,7 @@ public class AgreementPriceCalculator {
 
     BigDecimal agreementPrice;
 
-    BigDecimal daysBetween;
+    BigDecimal daysWithinPeriod;
 
     //public AgreementPriceCalculator() {
     //???  this.agreementPrice = BigDecimal.valueOf(daysBetweenTwoDates());
@@ -17,16 +17,16 @@ public class AgreementPriceCalculator {
 
 
     public static long daysBetweenTwoDates() {
-        long daysBetween;
+        long numberOfDaysWithinPeriod;
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
         // Calculate the difference between dates
         long diffInMillies = Math.abs(request.getAgreementDateTo().getTime() - request.getAgreementDateFrom().getTime());
-        daysBetween = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-        return daysBetween;
+        numberOfDaysWithinPeriod = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+        return numberOfDaysWithinPeriod;
     }
 
     public BigDecimal getAgreementPrice() {
-        daysBetween = agreementPrice;
+        daysWithinPeriod = agreementPrice;
         return agreementPrice;
     }
 
