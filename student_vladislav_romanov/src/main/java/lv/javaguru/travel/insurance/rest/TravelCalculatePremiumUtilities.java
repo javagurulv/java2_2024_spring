@@ -7,8 +7,10 @@ import java.util.Date;
 
 public class TravelCalculatePremiumUtilities {
 
-    public int travelPeriod(Date agreementDateFrom, Date agreementDateTo) {
-        return Period.between(convertToLocalDateViaInstant(agreementDateFrom), convertToLocalDateViaInstant(agreementDateTo)).getDays();
+    public int calculateTravelPeriod(Date agreementDateFrom, Date agreementDateTo) {
+        return Period.
+                between(convertToLocalDateViaInstant(agreementDateFrom), convertToLocalDateViaInstant(agreementDateTo))
+                .getDays();
     }
 
     public LocalDate convertToLocalDateViaInstant(Date dateToConvert) {
