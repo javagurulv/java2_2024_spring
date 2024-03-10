@@ -1,6 +1,9 @@
 package lv.javaguru.travel.insurance.rest;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
 import java.util.Date;
 
 public class TravelCalculatePremiumResponse {
@@ -63,5 +66,13 @@ public class TravelCalculatePremiumResponse {
 
     public void setAgreementPrice(BigDecimal agreementPrice) {
         this.agreementPrice = agreementPrice;
+    }
+
+
+    public static long daysBetween(Date date1, Date date2) {
+       // LocalDate localDate1 = LocalDate.of(date1.getYear(), date1.getMonth(), date1.getDay());
+       // LocalDate localDate2 = LocalDate.of(date2.getYear(), date2.getMonth(), date2.getDay());
+
+        return ChronoUnit.DAYS.between((Temporal) date1, (Temporal) date2);
     }
 }
