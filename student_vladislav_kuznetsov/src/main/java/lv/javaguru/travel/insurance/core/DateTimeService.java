@@ -3,13 +3,10 @@ package lv.javaguru.travel.insurance.core;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class DateTimeService {
-    public BigDecimal calculatePremiumPriceByDates(TravelCalculatePremiumRequest request) {
-        long agreementTimeFrom =request.getAgreementDateFrom().getTime();
-        long agreementTimeTo = request.getAgreementDateTo().getTime();
-        long differenceInMillis = Math.abs(agreementTimeFrom - agreementTimeTo);
-        long daysBetween = differenceInMillis / (1000 * 60 * 60 * 24);
-        return BigDecimal.valueOf(daysBetween);
+    public long calculateDaysBetweenDates(Date startDate, Date endDate) {
+        return (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24);
     }
 }
