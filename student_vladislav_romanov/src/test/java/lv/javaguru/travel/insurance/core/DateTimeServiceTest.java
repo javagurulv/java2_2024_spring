@@ -32,6 +32,22 @@ class DateTimeServiceTest {
     }
 
     @Test
+    void calculateTravelPeriodNegativeTest() {
+        int expected = -10;
+        int actual = dateTimeService.calculateTravelPeriod(dateTo, dateFrom);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void calculateTravelPeriodEqualTest() {
+        int expected = 0;
+        int actual = dateTimeService.calculateTravelPeriod(dateFrom, dateFrom);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void convertToLocalDateViaInstantTest() {
         LocalDate expected = LocalDate.of(2024, 3, 8);
         LocalDate actual = dateTimeService.convertToLocalDateViaInstant(dateFrom);

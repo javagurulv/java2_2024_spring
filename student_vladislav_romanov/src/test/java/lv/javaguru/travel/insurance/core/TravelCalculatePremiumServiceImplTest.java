@@ -4,6 +4,10 @@ import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
@@ -12,13 +16,15 @@ import java.util.GregorianCalendar;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@ExtendWith(MockitoExtension.class)
 class TravelCalculatePremiumServiceImplTest {
 
     private TravelCalculatePremiumRequest travelCalculatePremiumRequestData;
 
-    private DateTimeService dateTimeService = new DateTimeService();
+    @Mock
+    private DateTimeService dateTimeServiceMock;
 
-    private TravelCalculatePremiumService service = new TravelCalculatePremiumServiceImpl(dateTimeService);
+    private TravelCalculatePremiumService service;
 
     @BeforeEach
     void setUp() {
@@ -26,6 +32,8 @@ class TravelCalculatePremiumServiceImplTest {
         Calendar calendarTo = new GregorianCalendar(2024, Calendar.MARCH , 18);
         Date dateFrom = calendarFrom.getTime();
         Date dateTo = calendarTo.getTime();
+        Mockito.doReturn(10).when(dateTimeServiceMock).calculateTravelPeriod(dateFrom, dateTo);
+        service = new TravelCalculatePremiumServiceImpl(dateTimeServiceMock);
         travelCalculatePremiumRequestData = new TravelCalculatePremiumRequest("Vladislav", "Romanov", dateFrom, dateTo);
     }
 
@@ -63,7 +71,6 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     void responseAgreementPriceTest() {
-        TravelCalculatePremiumRequest request = travelCalculatePremiumRequestData;
         TravelCalculatePremiumResponse response = service.calculatePremium(travelCalculatePremiumRequestData);
 
         assertEquals(new BigDecimal(10), response.getAgreementPrice());
