@@ -17,13 +17,17 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setPersonLastName(request.getPersonLastName());
         response.setAgreementDateFrom(request.getAgreementDateFrom());
         response.setAgreementDateTo(request.getAgreementDateTo());
+        response.setAgreementPrice(calculatePremiumPriceByDates(request));
+        return response;
+    }
+@Override
+    public BigDecimal calculatePremiumPriceByDates(TravelCalculatePremiumRequest request) {
         long agreementTimeFrom =request.getAgreementDateFrom().getTime();
         long agreementTimeTo = request.getAgreementDateTo().getTime();
         long differenceInMillis = Math.abs(agreementTimeFrom - agreementTimeTo);
         long daysBetween = differenceInMillis / (1000 * 60 * 60 * 24);
-        BigDecimal agreementPrice = BigDecimal.valueOf(daysBetween);
-        response.setAgreementPrice(agreementPrice);
-        return response;
+        return BigDecimal.valueOf(daysBetween);
     }
+
 
 }
