@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/insurance/travel")
 public class TravelCalculatePremiumController {
 
-	@Autowired private TravelCalculatePremiumService calculatePremiumService;
+	@Autowired
+	private TravelCalculatePremiumService calculatePremiumService;
 
 	@PostMapping(path = "/",
 			consumes = "application/json",

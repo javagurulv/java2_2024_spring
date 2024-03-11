@@ -5,6 +5,7 @@ import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -24,7 +25,8 @@ class TravelCalculatePremiumServiceImplTest {
     @Mock
     private DateTimeService dateTimeServiceMock;
 
-    private TravelCalculatePremiumService service;
+    @InjectMocks
+    private TravelCalculatePremiumServiceImpl service;
 
     @BeforeEach
     void setUp() {
@@ -33,7 +35,6 @@ class TravelCalculatePremiumServiceImplTest {
         Date dateFrom = calendarFrom.getTime();
         Date dateTo = calendarTo.getTime();
         Mockito.doReturn(10).when(dateTimeServiceMock).calculateTravelPeriod(dateFrom, dateTo);
-        service = new TravelCalculatePremiumServiceImpl(dateTimeServiceMock);
         travelCalculatePremiumRequestData = new TravelCalculatePremiumRequest("Vladislav", "Romanov", dateFrom, dateTo);
     }
 
