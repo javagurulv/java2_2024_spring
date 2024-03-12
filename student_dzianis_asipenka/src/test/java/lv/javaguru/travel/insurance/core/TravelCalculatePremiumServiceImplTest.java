@@ -11,7 +11,8 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TravelCalculatePremiumServiceImplTest {
-    TravelCalculatePremiumServiceImpl calculatePremiumService = new TravelCalculatePremiumServiceImpl();
+    DateTimeService dateTimeService = new DateTimeService();
+    TravelCalculatePremiumServiceImpl calculatePremiumService = new TravelCalculatePremiumServiceImpl(dateTimeService);
 
     @Test
     public void expectTrueInFirstName() {
