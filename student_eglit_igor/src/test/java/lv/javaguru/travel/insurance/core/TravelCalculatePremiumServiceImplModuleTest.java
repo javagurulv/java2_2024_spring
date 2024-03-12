@@ -12,6 +12,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -32,11 +33,11 @@ class TravelCalculatePremiumServiceImplModuleTest {
 
     @BeforeEach
     public void setUp() {
-//        request = new TravelCalculatePremiumRequest(
-//                "Igor",
-//                "Eglit",
-//                LocalDate.of(2024, 12, 12),
-//                LocalDate.of(2024, 12, 22));
+        request = new TravelCalculatePremiumRequest(
+                "Igor",
+                "Eglit",
+                LocalDate.of(2024, 12, 12),
+                LocalDate.of(2024, 12, 22));
         MockitoAnnotations.openMocks(this);
         when(mockAgreementPriceCalculator.calculateAgreementPrice(any(TravelCalculatePremiumRequest.class)))
                 .thenReturn(new BigDecimal(2));
