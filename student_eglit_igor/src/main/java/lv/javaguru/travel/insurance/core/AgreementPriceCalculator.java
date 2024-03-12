@@ -1,10 +1,12 @@
 package lv.javaguru.travel.insurance.core;
 
+import lombok.AllArgsConstructor;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import java.math.BigDecimal;
 
+import java.math.BigDecimal;
+@AllArgsConstructor
 
 @Component
 class AgreementPriceCalculator {
