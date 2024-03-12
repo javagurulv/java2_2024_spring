@@ -9,11 +9,8 @@ import java.math.BigDecimal;
 @Component
 class AgreementPriceCalculator {
     @Autowired
-    private final DateTimeService dateTimeService;
+    private DateTimeService dateTimeService;
 
-    public AgreementPriceCalculator(DateTimeService dateTimeService) {
-        this.dateTimeService = dateTimeService;
-    }
 
     public  BigDecimal calculateAgreementPrice(TravelCalculatePremiumRequest request) {
 

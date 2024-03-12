@@ -7,12 +7,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
-    private final AgreementPriceCalculator agreementPriceCalculator;
+
 
     @Autowired
-    public TravelCalculatePremiumServiceImpl(AgreementPriceCalculator agreementPriceCalculator) {
-        this.agreementPriceCalculator = agreementPriceCalculator;
-    }
+    AgreementPriceCalculator agreementPriceCalculator;
+
+
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
         TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();
@@ -23,5 +23,5 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setAgreementPrice(agreementPriceCalculator.calculateAgreementPrice(request));
         return response;
     }
-
 }
+
