@@ -12,6 +12,7 @@ include 'student_vladislav_kuznetsov'
 include 'student_deineka_vladislav'
 include 'student_vavere_jelena'
 include 'student_vladislav_romanov'
+include 'student_kalninjsh_aleksandr'
 
 
 include 'teacher:step_0'
