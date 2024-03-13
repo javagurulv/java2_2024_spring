@@ -8,7 +8,5 @@ import java.math.BigDecimal;
 public interface TravelCalculatePremiumService {
 
     TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request);
-    BigDecimal calculatePremiumPriceByDates(TravelCalculatePremiumRequest request);
-
 
 }
