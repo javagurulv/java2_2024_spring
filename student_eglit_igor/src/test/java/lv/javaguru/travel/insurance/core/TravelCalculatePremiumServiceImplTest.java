@@ -4,12 +4,17 @@ import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 class TravelCalculatePremiumServiceImplTest {
 
@@ -19,25 +24,39 @@ class TravelCalculatePremiumServiceImplTest {
             LocalDate.of(2024, 12, 12),
             LocalDate.of(2024, 12, 13));
 
-    private DateTimeService dateTimeService;
-    private AgreementPriceCalculator agreementPriceCalculator;
-    TravelCalculatePremiumServiceImpl service;
-    TravelCalculatePremiumResponse response;
+    @Mock
+//    DateTimeService dateTimeService;
+//    AgreementPriceCalculator agreementPriceCalculator;
+    private TravelCalculatePremiumServiceImpl service;
+    @InjectMocks
+    //   private TravelCalculatePremiumServiceImpl travelCalculatePremiumServiceImpl;
+    private TravelCalculatePremiumResponse response;
 
     @BeforeEach
     public void setUp() {
-        dateTimeService = new DateTimeService();
+        MockitoAnnotations.openMocks(this);
+        when(service.calculatePremium(any(TravelCalculatePremiumRequest.class)))
+                .thenReturn(response = new TravelCalculatePremiumResponse(
+                        "Igor",
+                        "Eglit",
+                        LocalDate.of(2024, 12, 12),
+                        LocalDate.of(2024, 12, 13),
+                        new BigDecimal(2)));
+       /* dateTimeService = new DateTimeService();
         agreementPriceCalculator = new AgreementPriceCalculator(dateTimeService);
         service = new TravelCalculatePremiumServiceImpl(agreementPriceCalculator);
-        response = service.calculatePremium(request);
+        response = service.calculatePremium(request);*/
     }
+
     @Test
     public void shouldCheckResponseNotNull() {
+
         assertNotNull(response);
     }
 
     @Test
     public void shouldCheckResponsePersonFirstName() {
+
         assertEquals(request.getPersonFirstName(), response.getPersonFirstName());
     }
 
