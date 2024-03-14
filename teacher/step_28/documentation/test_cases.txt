@@ -1,0 +1,22 @@
+Список тестовых сценариев.
+
+1) Дано: firstName не указан.
+   Ожидаем: в ответе ошибка firstName не указан.
+
+2) Дано: lastName не указан.
+   Ожидаем: в ответе ошибка lastName не указан.
+
+3) Дано: agreementDateFrom не указан.
+   Ожидаем: в ответе ошибка agreementDateFrom не указан.
+
+4) Дано: agreementDateTo не указан.
+   Ожидаем: в ответе ошибка agreementDateTo не указан.
+
+5) Дано: allFields не указаны.
+   Ожидаем: в ответе ошибки для каждого поля.
+
+6) Дано: agreementDateTo < agreementDateFrom.
+   Ожидаем: в ответе ошибка agreementDateTo < agreementDateFrom.
+
+7) Дано: указаны все поля.
+   Ожидаем: ответ без ошибок.
