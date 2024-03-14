@@ -55,8 +55,8 @@ class TravelCalculatePremiumServiceImplTest {
 
     public TravelCalculatePremiumRequest createRequestWithAllFields (){
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
-        request.setAgreementDateTo(new Date(2024, 3, 1));
-        request.setAgreementDateFrom(new Date(2024, 3, 11));
+        request.setAgreementDateTo(new Date(2024, 3, 11));
+        request.setAgreementDateFrom(new Date(2024, 3, 1));
         request.setPersonFirstName("Vladislav");
         request.setPersonLastName("Kuznetsov");
         return request;
