@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -15,17 +16,18 @@ import java.math.BigDecimal;
 import java.util.Date;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
+@ExtendWith(MockitoExtension.class)
 class TravelCalculatePremiumServiceImplTest {
+    @Mock
     private DateTimeService dateTimeService;
+    @InjectMocks
     private TravelCalculatePremiumServiceImpl service;
     private TravelCalculatePremiumRequest request;
     @BeforeEach
     public void setUp() {
         request = createRequestWithAllFields();
-        dateTimeService = mock(DateTimeService.class);
         when(dateTimeService.calculateDaysBetweenDates(request.getAgreementDateFrom(), request.getAgreementDateTo())).thenReturn(10L);
-        service = new TravelCalculatePremiumServiceImpl(dateTimeService);
+
    }
 
 
