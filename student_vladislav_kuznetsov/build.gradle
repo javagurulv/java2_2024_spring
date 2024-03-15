@@ -7,5 +7,7 @@ dependencies {
 	test {
 		useJUnitPlatform()
 	}
+	testImplementation 'org.mockito:mockito-core:5.10.0'
+
 
 }

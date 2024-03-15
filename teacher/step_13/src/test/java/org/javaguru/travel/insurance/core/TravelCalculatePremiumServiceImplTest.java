@@ -15,7 +15,6 @@ class TravelCalculatePremiumServiceImplTest {
 
     private DateTimeService dateTimeService;
     private TravelCalculatePremiumServiceImpl service;
-
     private TravelCalculatePremiumRequest request;
 
     @BeforeEach

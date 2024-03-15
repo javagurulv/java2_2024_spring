@@ -2,27 +2,41 @@ package lv.javaguru.travel.insurance.core;
 
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mockito;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.math.BigDecimal;
 import java.util.Date;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class TravelCalculatePremiumServiceImplTest {
 
-    private TravelCalculatePremiumServiceImpl service = new TravelCalculatePremiumServiceImpl();
+class TravelCalculatePremiumServiceImplTest {
+    private DateTimeService dateTimeService;
+    private TravelCalculatePremiumServiceImpl service;
+    private TravelCalculatePremiumRequest request;
+    @BeforeEach
+    public void setUp() {
+        request = createRequestWithAllFields();
+        dateTimeService = mock(DateTimeService.class);
+        when(dateTimeService.calculateDaysBetweenDates(request.getAgreementDateFrom(), request.getAgreementDateTo())).thenReturn(10L);
+        service = new TravelCalculatePremiumServiceImpl(dateTimeService);
+   }
+
 
     @Test
     public void checkPersonFirstName(){
-        TravelCalculatePremiumRequest request = createRequestWithAllFields();
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertEquals(request.getPersonFirstName(),response.getPersonFirstName());
     }
     @Test
     public void checkPersonLastName()
     {
-        TravelCalculatePremiumRequest request = createRequestWithAllFields();
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertEquals(request.getPersonLastName(),response.getPersonLastName());
     }
@@ -30,7 +44,6 @@ class TravelCalculatePremiumServiceImplTest {
     @Test
     public void checkAgreementDateFrom()
     {
-        TravelCalculatePremiumRequest request = createRequestWithAllFields();
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertEquals(request.getAgreementDateFrom(),response.getAgreementDateFrom());
 
@@ -39,7 +52,6 @@ class TravelCalculatePremiumServiceImplTest {
     @Test
     public void checkAgreementDateTo()
     {
-        TravelCalculatePremiumRequest request = createRequestWithAllFields();
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertEquals(request.getAgreementDateTo(),response.getAgreementDateTo());
     }
@@ -47,7 +59,6 @@ class TravelCalculatePremiumServiceImplTest {
     @Test
     public void checkCalculatedAgreementPrice()
     {
-        TravelCalculatePremiumRequest request = createRequestWithAllFields();
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         BigDecimal agreementPrice = new BigDecimal(10);
         assertEquals(response.getAgreementPrice(),agreementPrice);
