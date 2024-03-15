@@ -1,10 +1,8 @@
 package lv.javaguru.travel.insurance.core;
 
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 
-import javax.xml.crypto.Data;
 import java.time.LocalDate;
-import java.util.Date;
 
 class TestData {
     TravelCalculatePremiumRequest request_1(){
