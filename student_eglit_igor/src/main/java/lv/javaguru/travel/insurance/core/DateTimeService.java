@@ -4,7 +4,8 @@ import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 @Component
 class DateTimeService {
@@ -14,6 +15,6 @@ class DateTimeService {
         dateFrom = request.getAgreementDateFrom();
         dateTo = request.getAgreementDateTo();
 
-        return (ChronoUnit.DAYS.between(dateFrom, dateTo) + 1);
+        return (DAYS.between(dateFrom, dateTo) + 1);
     }
 }

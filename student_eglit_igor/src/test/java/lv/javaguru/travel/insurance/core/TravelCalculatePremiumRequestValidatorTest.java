@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 
 class TravelCalculatePremiumRequestValidatorTest {
+
     TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
             "Igor",
             "Eglit",
@@ -26,6 +27,16 @@ class TravelCalculatePremiumRequestValidatorTest {
     @Test
     void validatePersonFirstNameIsEmpty() {
         request.setPersonFirstName("");
+        assert validator.validate(request).size() == 1;
+    }
+    @Test
+    void validatePersonLastNameIsNull() {
+        request.setPersonLastName(null);
+        assert validator.validate(request).size() == 1;
+    }
+    @Test
+    void validatePersonLastNameIsEmpty() {
+        request.setPersonLastName("");
         assert validator.validate(request).size() == 1;
     }
 }
