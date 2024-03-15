@@ -39,4 +39,14 @@ class TravelCalculatePremiumRequestValidatorTest {
         request.setPersonLastName("");
         assert validator.validate(request).size() == 1;
     }
+    @Test
+    void validateAgreementDateFromIsNull() {
+        request.setAgreementDateFrom(null);
+        assert validator.validate(request).size() == 1;
+    }
+    @Test
+    void validateAgreementDateToIsEmpty() {
+        request.setAgreementDateTo(null);
+        assert validator.validate(request).size() == 1;
+    }
 }
