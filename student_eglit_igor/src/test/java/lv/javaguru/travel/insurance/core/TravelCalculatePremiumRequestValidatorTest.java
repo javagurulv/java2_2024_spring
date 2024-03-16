@@ -49,4 +49,8 @@ class TravelCalculatePremiumRequestValidatorTest {
         request.setAgreementDateTo(null);
         assert validator.validate(request).size() == 1;
     }
+    @Test
+    void validateAgreementDateIsAfterDateFrom() {
+        assert validator.validate(request).size() == 1;
+    }
 }
