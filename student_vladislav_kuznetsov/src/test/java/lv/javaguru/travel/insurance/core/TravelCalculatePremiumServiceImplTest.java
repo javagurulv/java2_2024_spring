@@ -1,17 +1,17 @@
 package lv.javaguru.travel.insurance.core;
 
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,6 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class TravelCalculatePremiumServiceImplTest {
     @Mock
     private DateTimeService dateTimeService;
+    @Mock
+    private TravelCalculatePremiumRequestValidator requestValidator;
     @InjectMocks
     private TravelCalculatePremiumServiceImpl service;
     private TravelCalculatePremiumRequest request;

@@ -1,17 +1,9 @@
 package lv.javaguru.travel.insurance.core;
 
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.autoconfigure.web.format.DateTimeFormatters;
 
-import java.math.BigDecimal;
-import java.sql.SQLOutput;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.time.temporal.TemporalAccessor;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
