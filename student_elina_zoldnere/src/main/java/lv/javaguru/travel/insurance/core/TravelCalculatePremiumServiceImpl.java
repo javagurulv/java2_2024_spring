@@ -22,15 +22,15 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setPersonLastName(request.getPersonLastName());
         response.setAgreementDateFrom(agreementDateFrom);
         response.setAgreementDateTo(agreementDateTo);
-        response.setAgreementPrice(dateArithmetic(agreementDateFrom, agreementDateTo));
+        response.setAgreementPrice(calculateDifferenceBetweenDays(agreementDateFrom, agreementDateTo));
 
         return response;
     }
 
-    public BigDecimal dateArithmetic(Date date1, Date date2) {
+    private BigDecimal calculateDifferenceBetweenDays(Date dateFrom, Date dateTo) {
         // probably not the best workaround, will clean up later
-        if (date1 != null && date2 != null) {
-            long differenceInMillis = date2.getTime() - date1.getTime();
+        if (dateFrom != null && dateTo != null) {
+            long differenceInMillis = dateTo.getTime() - dateFrom.getTime();
             long differenceInDays = TimeUnit.DAYS.convert(differenceInMillis, TimeUnit.MILLISECONDS);
             return BigDecimal.valueOf(differenceInDays);
         }
