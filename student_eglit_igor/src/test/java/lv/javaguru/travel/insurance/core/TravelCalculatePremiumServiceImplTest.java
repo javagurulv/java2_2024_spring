@@ -1,21 +1,22 @@
 package lv.javaguru.travel.insurance.core;
 
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class TravelCalculatePremiumServiceImplTest {
 
     TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(
@@ -25,27 +26,17 @@ class TravelCalculatePremiumServiceImplTest {
             LocalDate.of(2024, 12, 13));
 
     @Mock
-//    DateTimeService dateTimeService;
-//    AgreementPriceCalculator agreementPriceCalculator;
-    private TravelCalculatePremiumServiceImpl service;
+    private AgreementPriceCalculator mockAgreementPriceCalculator;
+
     @InjectMocks
-    //   private TravelCalculatePremiumServiceImpl travelCalculatePremiumServiceImpl;
-    private TravelCalculatePremiumResponse response;
+    private TravelCalculatePremiumServiceImpl service;
+    TravelCalculatePremiumResponse response;
 
     @BeforeEach
     public void setUp() {
-        MockitoAnnotations.openMocks(this);
-        when(service.calculatePremium(any(TravelCalculatePremiumRequest.class)))
-                .thenReturn(response = new TravelCalculatePremiumResponse(
-                        "Igor",
-                        "Eglit",
-                        LocalDate.of(2024, 12, 12),
-                        LocalDate.of(2024, 12, 13),
-                        new BigDecimal(2)));
-       /* dateTimeService = new DateTimeService();
-        agreementPriceCalculator = new AgreementPriceCalculator(dateTimeService);
-        service = new TravelCalculatePremiumServiceImpl(agreementPriceCalculator);
-        response = service.calculatePremium(request);*/
+        when(mockAgreementPriceCalculator.calculateAgreementPrice(request.getAgreementDateFrom(),request.getAgreementDateTo()))
+                .thenReturn(new BigDecimal(2));
+        response = service.calculatePremium(request);
     }
 
     @Test

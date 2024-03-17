@@ -1,11 +1,12 @@
 package lv.javaguru.travel.insurance.core;
 
 import lombok.AllArgsConstructor;
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+
 @AllArgsConstructor
 
 @Component
@@ -14,9 +15,9 @@ class AgreementPriceCalculator {
     private DateTimeService dateTimeService;
 
 
-    public  BigDecimal calculateAgreementPrice(TravelCalculatePremiumRequest request) {
+    public  BigDecimal calculateAgreementPrice(LocalDate dateFrom, LocalDate dateTo) {
 
-        return new BigDecimal(dateTimeService.daysCalculator(request));
+        return new BigDecimal(dateTimeService.daysCalculator(dateFrom, dateTo));
 
     }
 }

@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.core;
 
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @DisplayName("Module AgreementPriceCalculator test for TravelCalculatePremiumServiceImpl")
@@ -39,7 +38,7 @@ class TravelCalculatePremiumServiceImplModuleTest {
                 LocalDate.of(2024, 12, 12),
                 LocalDate.of(2024, 12, 22));
         MockitoAnnotations.openMocks(this);
-        when(mockAgreementPriceCalculator.calculateAgreementPrice(any(TravelCalculatePremiumRequest.class)))
+        when(mockAgreementPriceCalculator.calculateAgreementPrice(request.getAgreementDateFrom(), request.getAgreementDateTo()))
                 .thenReturn(new BigDecimal(2));
 
     }

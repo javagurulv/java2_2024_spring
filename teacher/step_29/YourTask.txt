@@ -1,0 +1,57 @@
+В предыдущем шаге вы составили список тестовых сценариев.
+
+Вот получившийся у нас список тестовых сценариев:
+
+1) Дано: firstName не указан.
+   Ожидаем: в ответе ошибка firstName не указан.
+
+2) Дано: lastName не указан.
+   Ожидаем: в ответе ошибка lastName не указан.
+
+3) Дано: agreementDateFrom не указан.
+   Ожидаем: в ответе ошибка agreementDateFrom не указан.
+
+4) Дано: agreementDateTo не указан.
+   Ожидаем: в ответе ошибка agreementDateTo не указан.
+
+5) Дано: allFields не указаны.
+   Ожидаем: в ответе ошибки для каждого поля.
+
+6) Дано: agreementDateTo < agreementDateFrom.
+   Ожидаем: в ответе ошибка agreementDateTo < agreementDateFrom.
+
+7) Дано: указаны все поля.
+   Ожидаем: ответ без ошибок.
+
+Для того чтобы сделать этот список тестовых сценариев готовым
+к реализации не хватает одной вещи. КОНКРЕТИКИ! Какие конкретно
+данные надо подавать на вход, что конкретно должны получить
+в качестве результата.
+
+Ваша задача: дополните ваш список тестовых сценариев конкретными
+запросами и ответами для каждого тестового сценария. Добавьте к
+списку запросы и ожидаемые ответы в виде JSON.
+
+Пример:
+Request:
+{
+  "personFirstName" : null,
+  "personLastName" : "Pupkin",
+  "agreementDateFrom" : "2021-05-25",
+  "agreementDateTo" : "2021-05-29"
+}
+
+Response:
+{
+  "errors": [
+    {
+      "field": "personFirstName",
+      "message": "Must not be empty!"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPrice": null
+}
