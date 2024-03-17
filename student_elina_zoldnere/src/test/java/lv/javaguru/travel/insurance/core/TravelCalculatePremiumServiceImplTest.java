@@ -6,6 +6,7 @@ import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 class TravelCalculatePremiumServiceImplTest {
@@ -42,6 +43,16 @@ class TravelCalculatePremiumServiceImplTest {
         request.setAgreementDateTo(new Date());
         TravelCalculatePremiumResponse response = calculate.calculatePremium(request);
         assertEquals(response.getAgreementDateTo(), request.getAgreementDateTo());
+    }
+
+    @Test
+    public void calculatePremium_ShouldCalculateCorrectAgreementPrice() {
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+        // work with Date objects looks quite fancy, probably should prefer LocalDate instead
+        request.setAgreementDateFrom(new Date(2024 - 1900, 2, 10)); // March 10, 2024
+        request.setAgreementDateTo(new Date(2024 - 1900, 2, 11)); // March 11, 2024
+        TravelCalculatePremiumResponse response = calculate.calculatePremium(request);
+        assertEquals(response.getAgreementPrice(), BigDecimal.valueOf(1));
     }
 
 }
