@@ -6,19 +6,20 @@ import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 class TravelCalculatePremiumServiceImplTest {
 
     private TravelCalculatePremiumRequest request;
     private TravelCalculatePremiumServiceImpl calculate;
+    private DateTimeService dateTimeServiceMock;
 
     @BeforeEach
-    private void setUp() {
-        DateTimeService dateTimeService = new DateTimeService();
-        calculate = new TravelCalculatePremiumServiceImpl(dateTimeService);
+    public void setUp() {
+        dateTimeServiceMock = mock(DateTimeService.class);
+        calculate = new TravelCalculatePremiumServiceImpl(dateTimeServiceMock);
 
         request = new TravelCalculatePremiumRequest();
         request.setPersonFirstName("Jānis");
