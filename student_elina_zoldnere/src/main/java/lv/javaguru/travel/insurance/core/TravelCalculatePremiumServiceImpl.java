@@ -11,6 +11,12 @@ import java.util.concurrent.TimeUnit;
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
+    private DateTimeService dateTimeService;
+
+    public TravelCalculatePremiumServiceImpl(DateTimeService dateTimeService) { // dependency injection
+        this.dateTimeService = dateTimeService;
+    }
+
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
         TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();
@@ -22,21 +28,11 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setPersonLastName(request.getPersonLastName());
         response.setAgreementDateFrom(agreementDateFrom);
         response.setAgreementDateTo(agreementDateTo);
-        response.setAgreementPrice(calculateDifferenceBetweenDays(agreementDateFrom, agreementDateTo));
+
+        long differenceBetweenDays = dateTimeService.calculateDifferenceBetweenDays(agreementDateFrom,agreementDateTo);
+        response.setAgreementPrice(BigDecimal.valueOf(differenceBetweenDays));
 
         return response;
-    }
-
-    private BigDecimal calculateDifferenceBetweenDays(Date dateFrom, Date dateTo) {
-        // probably not the best workaround, will clean up later
-        if (dateFrom != null && dateTo != null) {
-            long differenceInMillis = dateTo.getTime() - dateFrom.getTime();
-            long differenceInDays = TimeUnit.DAYS.convert(differenceInMillis, TimeUnit.MILLISECONDS);
-            return BigDecimal.valueOf(differenceInDays);
-        }
-        else {
-            return null;
-        }
     }
 
 }
