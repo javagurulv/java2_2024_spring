@@ -50,7 +50,7 @@ class TravelCalculatePremiumRequestValidator {
         if (request.getAgreementDateTo() == null || request.getAgreementDateFrom() == null) {
             return Optional.empty();
         }
-        return (!request.getAgreementDateTo().isAfter(request.getAgreementDateFrom()))
+        return (request.getAgreementDateTo().isBefore(request.getAgreementDateFrom()))
                 ? Optional.of(new ValidationError("agreementDateTo", "agreementDateTo must be after agreementDateFrom!"))
                 : Optional.empty();
     }
