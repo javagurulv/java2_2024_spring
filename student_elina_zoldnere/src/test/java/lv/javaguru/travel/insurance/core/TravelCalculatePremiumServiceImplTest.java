@@ -5,22 +5,28 @@ import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
 
 import java.util.Date;
 
+@ExtendWith(MockitoExtension.class)
 class TravelCalculatePremiumServiceImplTest {
 
-    private TravelCalculatePremiumRequest request;
-    private TravelCalculatePremiumServiceImpl calculate;
+    @Mock
     private DateTimeService dateTimeServiceMock;
+
+    @InjectMocks
+    private TravelCalculatePremiumServiceImpl calculate;
+
+    private TravelCalculatePremiumRequest request;
 
     @BeforeEach
     public void setUp() {
-        dateTimeServiceMock = mock(DateTimeService.class);
-        calculate = new TravelCalculatePremiumServiceImpl(dateTimeServiceMock);
-
         request = new TravelCalculatePremiumRequest();
         request.setPersonFirstName("Jānis");
         request.setPersonLastName("Bērziņš");
@@ -30,26 +36,30 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void calculatePremium_ShouldReturnCorrectPersonFirstName() {
-        TravelCalculatePremiumResponse response = calculate.calculatePremium(request);
+        TravelCalculatePremiumResponse response = calculatePremiumTest();
         assertEquals(response.getPersonFirstName(), request.getPersonFirstName());
     }
 
     @Test
     public void calculatePremium_ShouldReturnCorrectPersonLastName() {
-        TravelCalculatePremiumResponse response = calculate.calculatePremium(request);
+        TravelCalculatePremiumResponse response = calculatePremiumTest();
         assertEquals(response.getPersonLastName(), request.getPersonLastName());
     }
 
     @Test
     public void calculatePremium_ShouldReturnCorrectAgreementDateFrom() {
-        TravelCalculatePremiumResponse response = calculate.calculatePremium(request);
+        TravelCalculatePremiumResponse response = calculatePremiumTest();
         assertEquals(response.getAgreementDateFrom(), request.getAgreementDateFrom());
     }
 
     @Test
     public void calculatePremium_ShouldReturnCorrectAgreementDateTo() {
-        TravelCalculatePremiumResponse response = calculate.calculatePremium(request);
+        TravelCalculatePremiumResponse response = calculatePremiumTest();
         assertEquals(response.getAgreementDateTo(), request.getAgreementDateTo());
+    }
+
+    private TravelCalculatePremiumResponse calculatePremiumTest() {
+        return calculate.calculatePremium(request);
     }
 
 }
