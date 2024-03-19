@@ -17,4 +17,9 @@ public class TravelCalculatePremiumRequest {
     private String personLastName;
     private Date agreementDateFrom;
     private Date agreementDateTo;
+
+    public TravelCalculatePremiumRequest(String personFirstName, String personLastName) {
+        this.personFirstName = personFirstName;
+        this.personLastName = personLastName;
+    }
 }
