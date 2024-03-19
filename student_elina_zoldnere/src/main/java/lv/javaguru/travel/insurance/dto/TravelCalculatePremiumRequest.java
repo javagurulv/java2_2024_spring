@@ -7,10 +7,10 @@ import lombok.Setter;
 
 import java.util.Date;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class TravelCalculatePremiumRequest {
 
     private String personFirstName;

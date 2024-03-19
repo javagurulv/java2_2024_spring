@@ -7,10 +7,10 @@ import lombok.Setter;
 
 import java.util.List;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class CoreResponse {
 
     private List<ValidationError> errors;

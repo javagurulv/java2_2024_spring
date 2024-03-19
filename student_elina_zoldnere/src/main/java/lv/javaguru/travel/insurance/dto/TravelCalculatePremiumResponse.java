@@ -9,10 +9,10 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class TravelCalculatePremiumResponse extends CoreResponse {
 
     private String personFirstName;
