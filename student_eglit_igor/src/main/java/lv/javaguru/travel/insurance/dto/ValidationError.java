@@ -13,4 +13,11 @@ public class ValidationError {
 
     private String field;
     private String message;
+
+    @Override
+    public String toString() {
+        return "{ \n"+ "field='" + field + '\'' +
+                ", message='" + message + "\n" + '}';
+    }
 }
+
