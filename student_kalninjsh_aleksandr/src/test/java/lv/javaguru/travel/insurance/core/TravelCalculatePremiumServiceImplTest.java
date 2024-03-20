@@ -4,6 +4,8 @@ import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class TravelCalculatePremiumServiceImplTest {
 
     private TravelCalculatePremiumServiceImpl premiumService = new TravelCalculatePremiumServiceImpl();
@@ -13,8 +15,7 @@ class TravelCalculatePremiumServiceImplTest {
         TravelCalculatePremiumRequest premiumRequest = new TravelCalculatePremiumRequest();
         premiumRequest.setPersonFirstName("Tom");
         TravelCalculatePremiumResponse premiumResponse = premiumService.calculatePremium(premiumRequest);
-        assertEquals
-
+        assertEquals(premiumResponse.getPersonFirstName(), "Tom");
     }
 
 }
