@@ -88,7 +88,18 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
 
     @Test
-    public void validate_ShouldPassWhenPersonFirstNameLastNameIsValid() {
+    public void validate_ShouldReturnErrorWhenAgreementDateToIsNull() {
+        when(requestMock.getAgreementDateTo()).thenReturn(null);
+
+        List<ValidationError> result = requestValidator.validate(requestMock);
+
+        assertEquals(1, result.size());
+        assertEquals("agreementDateTo", result.get(0).getField());
+        assertEquals("Must not be empty!", result.get(0).getMessage());
+    }
+
+    @Test
+    public void validate_ShouldPassWhenAllFieldsAreValid() {
 
         List<ValidationError> result = requestValidator.validate(requestMock);
 
