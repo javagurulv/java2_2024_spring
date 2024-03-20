@@ -1,0 +1,36 @@
+testCase1
+Description - check with all fields set valid.
+STR:
+All fields set valid
+Expected Result - 200 code, no errors in response body, response with calculated price,
+and all fields in response body are the same as in request body
+
+testCase2
+Description - check with null and empty agreementFirstName.
+STR:
+agreementFirstName set null, then retest with empty string. Rest of fields are valid.
+Expected Result - 200 code, error message in response body, field: "personFirstName", message: "Must not be empty!"
+
+testCase3
+Description - check with null and empty agreementLastName.
+STR:
+agreementLastName set null, then retest with empty string. Rest of fields are valid.
+Expected Result - 200 code, error message in response body, field: "personLastName", message: "Must not be empty!"
+
+testCase4
+Description - check with empty agreementDateFrom.
+STR:
+agreementDateFrom set empty string. Rest of fields are valid.
+Expected Result - 200 code, error message in response body, field: "agreementDateFrom", message: "Must not be empty!"
+
+testCase5
+Description - check with empty agreementDateTo.
+STR:
+agreementDateTo set empty string. Rest of fields are valid.
+Expected Result - 200 code, error message in response body, field: "agreementDateTo", message: "Must not be empty!"
+
+testCase6
+Description - check with agreementDateTo before agreementDateFrom.
+STR:
+agreementDateTo set date before agreementDateFrom. Rest of fields are valid.
+Expected Result - 200 code, error message in response body, field: "agreementDateTo", message: "agreementDateTo must be after agreementDateFrom!"
