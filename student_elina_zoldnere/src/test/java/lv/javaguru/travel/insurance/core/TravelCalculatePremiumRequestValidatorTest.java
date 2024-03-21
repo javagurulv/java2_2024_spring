@@ -99,6 +99,30 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
 
     @Test
+    public void validate_ShouldReturnErrorWhenAgreementDatesAreEqual() {
+        // requestMock.getAgreementDateFrom() returns (new Date (2024 - 1900, 2, 10))
+        when(requestMock.getAgreementDateTo()).thenReturn(new Date(2024 - 1900, 2, 10));
+
+        List<ValidationError> result = requestValidator.validate(requestMock);
+
+        assertEquals(1, result.size());
+        assertEquals("agreementDateFrom", result.get(0).getField());
+        assertEquals("Must be before agreementDateTo!", result.get(0).getMessage());
+    }
+
+    @Test
+    public void validate_ShouldReturnErrorAgreementDatesInWrongOrder() {
+        // requestMock.getAgreementDateFrom() returns (new Date (2024 - 1900, 2, 10))
+        when(requestMock.getAgreementDateTo()).thenReturn(new Date(2024 - 1900, 2, 9));
+
+        List<ValidationError> result = requestValidator.validate(requestMock);
+
+        assertEquals(1, result.size());
+        assertEquals("agreementDateFrom", result.get(0).getField());
+        assertEquals("Must be before agreementDateTo!", result.get(0).getMessage());
+    }
+
+    @Test
     public void validate_ShouldPassWhenAllFieldsAreValid() {
 
         List<ValidationError> result = requestValidator.validate(requestMock);

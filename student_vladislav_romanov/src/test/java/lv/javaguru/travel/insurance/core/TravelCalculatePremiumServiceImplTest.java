@@ -1,26 +1,30 @@
 package lv.javaguru.travel.insurance.core;
 
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.verifyNoInteractions;
 
 @ExtendWith(MockitoExtension.class)
 class TravelCalculatePremiumServiceImplTest {
 
     private TravelCalculatePremiumRequest travelCalculatePremiumRequestData;
+
+    @Mock
+    private TravelCalculatePremiumRequestValidator requestValidatorMock;
 
     @Mock
     private DateTimeService dateTimeServiceMock;
@@ -30,18 +34,17 @@ class TravelCalculatePremiumServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        Calendar calendarFrom = new GregorianCalendar(2024, Calendar.MARCH , 8);
-        Calendar calendarTo = new GregorianCalendar(2024, Calendar.MARCH , 18);
-        Date dateFrom = calendarFrom.getTime();
-        Date dateTo = calendarTo.getTime();
-        Mockito.doReturn(10).when(dateTimeServiceMock).calculateTravelPeriod(dateFrom, dateTo);
+        LocalDate dateFrom = LocalDate.of(2024, 3, 8);
+        LocalDate dateTo = LocalDate.of(2024, 3, 18);
+
         travelCalculatePremiumRequestData = new TravelCalculatePremiumRequest("Vladislav", "Romanov", dateFrom, dateTo);
     }
 
     @Test
     void responseFirstNameTest() {
         TravelCalculatePremiumRequest request = travelCalculatePremiumRequestData;
-        TravelCalculatePremiumResponse response = service.calculatePremium(travelCalculatePremiumRequestData);
+        doReturn(List.of()).when(requestValidatorMock).validate(request);
+        TravelCalculatePremiumResponse response = createResponse();
 
         assertEquals(request.getPersonFirstName(), response.getPersonFirstName());
     }
@@ -49,7 +52,8 @@ class TravelCalculatePremiumServiceImplTest {
     @Test
     void responseLastNameTest() {
         TravelCalculatePremiumRequest request = travelCalculatePremiumRequestData;
-        TravelCalculatePremiumResponse response = service.calculatePremium(travelCalculatePremiumRequestData);
+        doReturn(List.of()).when(requestValidatorMock).validate(request);
+        TravelCalculatePremiumResponse response = createResponse();
 
         assertEquals(request.getPersonLastName(), response.getPersonLastName());
     }
@@ -57,7 +61,8 @@ class TravelCalculatePremiumServiceImplTest {
     @Test
     void responseDateFromTest() {
         TravelCalculatePremiumRequest request = travelCalculatePremiumRequestData;
-        TravelCalculatePremiumResponse response = service.calculatePremium(travelCalculatePremiumRequestData);
+        doReturn(List.of()).when(requestValidatorMock).validate(request);
+        TravelCalculatePremiumResponse response = createResponse();
 
         assertEquals(request.getAgreementDateFrom(), response.getAgreementDateFrom());
     }
@@ -65,29 +70,89 @@ class TravelCalculatePremiumServiceImplTest {
     @Test
     void responseDateToTest() {
         TravelCalculatePremiumRequest request = travelCalculatePremiumRequestData;
-        TravelCalculatePremiumResponse response = service.calculatePremium(travelCalculatePremiumRequestData);
+        doReturn(List.of()).when(requestValidatorMock).validate(request);
+        TravelCalculatePremiumResponse response = createResponse();
 
         assertEquals(request.getAgreementDateTo(), response.getAgreementDateTo());
     }
 
     @Test
+    void responseWithErrorsTest() {
+        TravelCalculatePremiumRequest request = travelCalculatePremiumRequestData;
+        ValidationError validationError = new ValidationError("field", "message");
+        doReturn(List.of(validationError)).when(requestValidatorMock).validate(request);
+        TravelCalculatePremiumResponse response = createResponse();
+        assertTrue(response.hasErrors());
+    }
+
+    @Test
+    void responseWithErrorCountTest() {
+        TravelCalculatePremiumRequest request = travelCalculatePremiumRequestData;
+        ValidationError validationError = new ValidationError("field", "message");
+        doReturn(List.of(validationError)).when(requestValidatorMock).validate(request);
+        TravelCalculatePremiumResponse response = createResponse();
+        assertEquals(response.getErrors().size(), 1);
+    }
+
+    @Test
+    void responseWithCorrectErrorMessageTest() {
+        TravelCalculatePremiumRequest request = travelCalculatePremiumRequestData;
+        ValidationError validationError = new ValidationError("field", "message");
+        doReturn(List.of(validationError)).when(requestValidatorMock).validate(request);
+        TravelCalculatePremiumResponse response = createResponse();
+        assertEquals(response.getErrors().get(0).getField(), "field");
+        assertEquals(response.getErrors().get(0).getMessage(), "message");
+    }
+
+    @Test
+    void emptyResponseFieldsInCaseOfErrorsTest() {
+        TravelCalculatePremiumRequest request = travelCalculatePremiumRequestData;
+        ValidationError validationError = new ValidationError("field", "message");
+        doReturn(List.of(validationError)).when(requestValidatorMock).validate(request);
+        TravelCalculatePremiumResponse response = createResponse();
+        assertNull(response.getPersonFirstName());
+        assertNull(response.getPersonLastName());
+        assertNull(response.getAgreementDateFrom());
+        assertNull(response.getAgreementDateTo());
+        assertNull(response.getAgreementPrice());
+    }
+
+    @Test
+    void emptyResponseDontInteractWithServiceTest() {
+        TravelCalculatePremiumRequest request = travelCalculatePremiumRequestData;
+        ValidationError validationError = new ValidationError("field", "message");
+        doReturn(List.of(validationError)).when(requestValidatorMock).validate(request);
+        TravelCalculatePremiumResponse response = createResponse();
+        verifyNoInteractions(dateTimeServiceMock);
+    }
+
+    @Test
     void responseAgreementPriceTest() {
-        TravelCalculatePremiumResponse response = service.calculatePremium(travelCalculatePremiumRequestData);
+        LocalDate dateFrom = LocalDate.of(2024, 3, 8);
+        LocalDate dateTo = LocalDate.of(2024, 3, 18);
+
+        doReturn(10).when(dateTimeServiceMock).calculateTravelPeriod(dateFrom, dateTo);
+
+        TravelCalculatePremiumResponse response = createResponse();
 
         assertEquals(new BigDecimal(10), response.getAgreementPrice());
     }
 
     @Test
     void responseTest() {
-        Calendar calendarFrom = new GregorianCalendar(2024, Calendar.MARCH , 8);
-        Calendar calendarTo = new GregorianCalendar(2024, Calendar.MARCH , 18);
-        Date dateFrom = calendarFrom.getTime();
-        Date dateTo = calendarTo.getTime();
+        LocalDate dateFrom = LocalDate.of(2024, 3, 8);
+        LocalDate dateTo = LocalDate.of(2024, 3, 18);
+
+        doReturn(10).when(dateTimeServiceMock).calculateTravelPeriod(dateFrom, dateTo);
 
         TravelCalculatePremiumResponse expected = new TravelCalculatePremiumResponse("Vladislav", "Romanov", dateFrom, dateTo, new BigDecimal(10));
-        TravelCalculatePremiumResponse actual = service.calculatePremium(travelCalculatePremiumRequestData);
+        TravelCalculatePremiumResponse actual = createResponse();
 
         assertEquals(expected, actual);
+    }
+
+    private TravelCalculatePremiumResponse createResponse() {
+        return service.calculatePremium(travelCalculatePremiumRequestData);
     }
 
 }

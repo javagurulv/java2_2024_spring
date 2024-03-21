@@ -4,6 +4,8 @@ import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
 import org.junit.jupiter.api.Test;
 
+import java.util.Date;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TravelCalculatePremiumServiceImplTest {
@@ -15,7 +17,31 @@ class TravelCalculatePremiumServiceImplTest {
         TravelCalculatePremiumRequest premiumRequest = new TravelCalculatePremiumRequest();
         premiumRequest.setPersonFirstName("Tom");
         TravelCalculatePremiumResponse premiumResponse = premiumService.calculatePremium(premiumRequest);
-        assertEquals(premiumResponse.getPersonFirstName(), "Tom");
+        assertEquals(premiumResponse.getPersonFirstName(), premiumRequest.getPersonFirstName());
+    }
+
+    @Test
+    public void personLastName() {
+        TravelCalculatePremiumRequest premiumRequest = new TravelCalculatePremiumRequest();
+        premiumRequest.setPersonLastName("Sawyer");
+        TravelCalculatePremiumResponse premiumResponse = premiumService.calculatePremium(premiumRequest);
+        assertEquals(premiumResponse.getPersonLastName(), premiumRequest.getPersonLastName());
+    }
+
+    @Test
+    public void agreementDateFrom() {
+        TravelCalculatePremiumRequest premiumRequest = new TravelCalculatePremiumRequest();
+        premiumRequest.setAgreementDateFrom(new Date());
+        TravelCalculatePremiumResponse premiumResponse = premiumService.calculatePremium(premiumRequest);
+        assertEquals(premiumResponse.getAgreementDateFrom(), premiumRequest.getAgreementDateFrom());
+    }
+
+    @Test
+    public void agreementDateTo() {
+        TravelCalculatePremiumRequest premiumRequest = new TravelCalculatePremiumRequest();
+        premiumRequest.setAgreementDateTo(new Date());
+        TravelCalculatePremiumResponse premiumResponse = premiumService.calculatePremium(premiumRequest);
+        assertEquals(premiumResponse.getAgreementDateTo(), premiumRequest.getAgreementDateTo());
     }
 
 }

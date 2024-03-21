@@ -2,23 +2,26 @@ package lv.javaguru.travel.insurance.core;
 
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 @Component
 class TravelCalculatePremiumRequestValidator {
 
+    @Autowired
+    private DateTimeService dateTimeService;
+
     public List<ValidationError> validate(TravelCalculatePremiumRequest request) {
         List<ValidationError> errors = new ArrayList<>();
         validatePersonFirstName(request).ifPresent(errors::add);
         validatePersonLastName(request).ifPresent(errors::add);
-        validateAgreementDateFrom(request).ifPresent(errors::add);
-        validateAgreementDateTo(request).ifPresent(errors::add);
-        validateAgreementDateChronology(request).ifPresent(errors::add);
+        validateDateFrom(request).ifPresent(errors::add);
+        validateDateTo(request).ifPresent(errors::add);
+        validateTravelPeriod(request).ifPresent(errors::add);
         return errors;
     }
 
@@ -34,25 +37,21 @@ class TravelCalculatePremiumRequestValidator {
                 : Optional.empty();
     }
 
-    private Optional<ValidationError> validateAgreementDateFrom(TravelCalculatePremiumRequest request) {
-        return request.getAgreementDateFrom() == null
-                ? Optional.of(new ValidationError("agreementDateFrom", "Must not be empty!"))
+    private Optional<ValidationError> validateDateFrom(TravelCalculatePremiumRequest request) {
+        return (request.getAgreementDateFrom() == null)
+                ? Optional.of(new ValidationError("personDateFrom", "Must not be empty!"))
                 : Optional.empty();
     }
 
-    private Optional<ValidationError> validateAgreementDateTo(TravelCalculatePremiumRequest request) {
-        return request.getAgreementDateTo() == null
-                ? Optional.of(new ValidationError("agreementDateTo", "Must not be empty!"))
+    private Optional<ValidationError> validateDateTo(TravelCalculatePremiumRequest request) {
+        return (request.getAgreementDateTo() == null)
+                ? Optional.of(new ValidationError("personDateTo", "Must not be empty!"))
                 : Optional.empty();
     }
 
-    private Optional<ValidationError> validateAgreementDateChronology(TravelCalculatePremiumRequest request) {
-        Date agreementDateFrom = request.getAgreementDateFrom();
-        Date agreementDateTo = request.getAgreementDateTo();
-
-        return (agreementDateFrom != null && agreementDateTo != null
-                && !agreementDateFrom.before(agreementDateTo))
-                ? Optional.of(new ValidationError("agreementDateFrom", "Must be before agreementDateTo!"))
+    private Optional<ValidationError> validateTravelPeriod(TravelCalculatePremiumRequest request) {
+        return (dateTimeService.calculateTravelPeriod(request.getAgreementDateFrom(), request.getAgreementDateTo()) < 1)
+                ? Optional.of(new ValidationError("Travel Period", "contain incorrect data!"))
                 : Optional.empty();
     }
 
