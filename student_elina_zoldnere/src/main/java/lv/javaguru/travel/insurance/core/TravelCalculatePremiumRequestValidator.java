@@ -5,6 +5,7 @@ import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,7 @@ class TravelCalculatePremiumRequestValidator {
         validatePersonLastName(request).ifPresent(errors::add);
         validateAgreementDateFrom(request).ifPresent(errors::add);
         validateAgreementDateTo(request).ifPresent(errors::add);
+        validateAgreementDateChronology(request).ifPresent(errors::add);
         return errors;
     }
 
@@ -41,6 +43,16 @@ class TravelCalculatePremiumRequestValidator {
     private Optional<ValidationError> validateAgreementDateTo(TravelCalculatePremiumRequest request) {
         return request.getAgreementDateTo() == null
                 ? Optional.of(new ValidationError("agreementDateTo", "Must not be empty!"))
+                : Optional.empty();
+    }
+
+    private Optional<ValidationError> validateAgreementDateChronology(TravelCalculatePremiumRequest request) {
+        Date agreementDateFrom = request.getAgreementDateFrom();
+        Date agreementDateTo = request.getAgreementDateTo();
+
+        return (agreementDateFrom != null && agreementDateTo != null
+                && !agreementDateFrom.before(agreementDateTo))
+                ? Optional.of(new ValidationError("agreementDateFrom", "Must be before agreementDateTo!"))
                 : Optional.empty();
     }
 
