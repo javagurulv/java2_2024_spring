@@ -16,19 +16,21 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
 class TravelCalculatePremiumServiceImplTest {
 
+ValidationError validationError = new ValidationError();
     @Mock
     private DateTimeService dateTimeService;
+    @Mock TravelCalculatePremiumRequestValidator requestValidator;
     @InjectMocks
     private TravelCalculatePremiumServiceImpl service;
     private TravelCalculatePremiumRequest request;
     @BeforeEach
     public void setUp() {
         request = createRequestWithAllFields();
-        when(dateTimeService.calculateDaysBetweenDates(request.getAgreementDateFrom(), request.getAgreementDateTo())).thenReturn(10L);
    }
     @Test
     public void checkPersonFirstName(){
@@ -60,9 +62,28 @@ class TravelCalculatePremiumServiceImplTest {
     @Test
     public void checkCalculatedAgreementPrice()
     {
+        when(dateTimeService.calculateDaysBetweenDates(request.getAgreementDateFrom(), request.getAgreementDateTo())).thenReturn(10L);
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         BigDecimal agreementPrice = new BigDecimal(10);
         assertEquals(response.getAgreementPrice(),agreementPrice);
+    }
+
+    @Test
+    public void checkThatValidationErrorIsPresent (){
+        var request = new TravelCalculatePremiumRequest();
+        var validationError = new ValidationError("Empty","All fields are empty !");
+        when(requestValidator.validate(request)).thenReturn(List.of(validationError));
+        var response = service.calculatePremium(request);
+        assertTrue(response.hasErrors());
+    }
+
+    @Test
+    public void checkValidationErrorCountIsCorrect(){
+        var request = new TravelCalculatePremiumRequest();
+        var validationError = new ValidationError("Empty","All fields are empty !");
+        when(requestValidator.validate(request)).thenReturn(List.of(validationError));
+        var response = service.calculatePremium(request);
+        assertEquals(response.getErrors().size(), 1);
     }
 
 

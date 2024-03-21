@@ -13,15 +13,15 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TravelCalculatePremiumResponse {
+public class TravelCalculatePremiumResponse extends CoreResponse{
 
     private String personFirstName;
     private String personLastName;
     private Date agreementDateFrom;
     private Date agreementDateTo;
     private BigDecimal agreementPrice;
-
     public TravelCalculatePremiumResponse(List<ValidationError> errors) {
-
+        super(errors);
     }
+
 }
