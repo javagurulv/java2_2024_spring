@@ -21,6 +21,7 @@ public class TravelCalculatePremiumRequest {
         this.agreementDateTo = agreementDateTo;
     }
 
+
     public String getPersonFirstName() {
         return personFirstName;
     }
@@ -52,5 +53,6 @@ public class TravelCalculatePremiumRequest {
     public void setAgreementDateTo(Date agreementDateTo) {
         this.agreementDateTo = agreementDateTo;
     }
+
 
 }
