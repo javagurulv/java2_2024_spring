@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.core;
 
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,6 +19,9 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Mock
     private DateTimeService dateTimeServiceMock;
+
+    @Mock
+    private TravelCalculatePremiumRequestValidator validate;
 
     @InjectMocks
     private TravelCalculatePremiumServiceImpl calculate;
