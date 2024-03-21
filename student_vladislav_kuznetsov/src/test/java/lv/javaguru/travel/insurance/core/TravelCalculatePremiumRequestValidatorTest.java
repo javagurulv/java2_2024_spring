@@ -112,7 +112,6 @@ public class TravelCalculatePremiumRequestValidatorTest {
         var requestValidator = new TravelCalculatePremiumRequestValidator();
         assertEquals(0,requestValidator.validate(request).size());
     }
-
     @Test
     public void checkIfErrorIsPresentWhenAgreementDateToEqualsAgreementDateFrom(){
         var equalDate = new Date(System.currentTimeMillis());
@@ -122,7 +121,6 @@ public class TravelCalculatePremiumRequestValidatorTest {
         request.setPersonLastName("K");
         var requestValidator = new TravelCalculatePremiumRequestValidator();
         assertEquals(0,requestValidator.validate(request).size());
-
     }
 
 
