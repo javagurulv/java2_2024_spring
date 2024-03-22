@@ -17,6 +17,8 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
 
     @Autowired
     AgreementPriceCalculator agreementPriceCalculator;
+    @Autowired
+    TravelCalculatePremiumRequestValidator travelCalculatePremiumRequestValidator;
 
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
