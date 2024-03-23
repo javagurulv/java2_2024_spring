@@ -96,7 +96,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
     @Test
     public void checkIfNoErrorIsPresentWhenAgreementDateFromIsCurrentTime(){
         request.setAgreementDateFrom(new Date());
-        request.setAgreementDateTo(new Date());
+        request.setAgreementDateTo(new Date(System.currentTimeMillis()+60000));
         request.setPersonFirstName("V");
         request.setPersonLastName("K");
         var requestValidator = new TravelCalculatePremiumRequestValidator();
@@ -104,9 +104,8 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
     @Test
     public void checkIfNoErrorIsPresentWhenAgreementDateFromIsInFuture(){
-        var currentDate = new Date(System.currentTimeMillis()+(30*60*100));
-        request.setAgreementDateFrom(currentDate);
-        request.setAgreementDateTo(new Date());
+        request.setAgreementDateFrom(new Date(System.currentTimeMillis()+(30*60*1000)));
+        request.setAgreementDateTo(new Date(System.currentTimeMillis()+(30*60*10000)));
         request.setPersonFirstName("V");
         request.setPersonLastName("K");
         var requestValidator = new TravelCalculatePremiumRequestValidator();
@@ -114,14 +113,33 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
     @Test
     public void checkIfErrorIsPresentWhenAgreementDateToEqualsAgreementDateFrom(){
-        var equalDate = new Date(System.currentTimeMillis());
-        request.setAgreementDateTo(equalDate);
-        request.setAgreementDateFrom(equalDate);
+        request.setAgreementDateTo(new Date());
+        request.setAgreementDateFrom(new Date());
         request.setPersonFirstName("V");
         request.setPersonLastName("K");
         var requestValidator = new TravelCalculatePremiumRequestValidator();
-        assertEquals(0,requestValidator.validate(request).size());
+        assertEquals(1,requestValidator.validate(request).size());
     }
+
+    @Test
+    public void checkIfErrorIsPresentWhenAgreementDateToIsBeforeAgreementDateFrom(){
+        request.setAgreementDateFrom(new Date(System.currentTimeMillis()+60000));
+        request.setAgreementDateTo(new Date());
+        request.setPersonFirstName("V");
+        request.setPersonLastName("K");
+        assertEquals(1,requestValidator.validate((request)).size());
+    }
+
+    @Test
+    public void checkIfErrorIsPresentWhenAgreementDateToIsPresentAndAgreementDateFromIsNull(){
+        request.setAgreementDateFrom(null);
+        request.setAgreementDateTo(new Date());
+        request.setPersonFirstName("V");
+        request.setPersonLastName("K");
+        assertEquals(1,requestValidator.validate((request)).size());
+    }
+
+
 
 
 

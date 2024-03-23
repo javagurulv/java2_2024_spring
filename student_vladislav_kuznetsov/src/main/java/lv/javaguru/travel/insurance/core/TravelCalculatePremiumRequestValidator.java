@@ -13,10 +13,22 @@ class TravelCalculatePremiumRequestValidator {
 
     public List<ValidationError> validate(TravelCalculatePremiumRequest request) {
         List<ValidationError> errors = new ArrayList<>();
-        validatePersonFirstName(request).ifPresent(errors::add);
-        validatePersonLastName(request).ifPresent(errors::add);
-        validateAgreementDateFrom(request).ifPresent(errors::add);
-        validateAgreementDateTo(request).ifPresent(errors::add);
+      try {
+          validatePersonFirstName(request).ifPresent(errors::add);
+
+
+          validatePersonLastName(request).ifPresent(errors::add);
+
+
+          validateAgreementDateFrom(request).ifPresent(errors::add);
+
+
+          validateAgreementDateTo(request).ifPresent(errors::add);
+      }
+      catch (NullPointerException nullPointerException)
+      {
+          System.out.println("Something went wrong");
+      }
         return errors;
     }
 
@@ -45,7 +57,7 @@ class TravelCalculatePremiumRequestValidator {
                 : Optional.empty();
     }
     private Optional <ValidationError> validateAgreementDateTo(TravelCalculatePremiumRequest request) {
-        return (request.getAgreementDateTo() == null)
+        return (request.getAgreementDateTo() == null || request.getAgreementDateTo().before(request.getAgreementDateFrom()) || request.getAgreementDateFrom() == null || request.getAgreementDateTo().equals(request.getAgreementDateFrom()))
                 ? Optional.of(new ValidationError("agreementDateTo", "Must not be empty!"))
                 : Optional.empty();
     }

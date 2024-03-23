@@ -86,7 +86,6 @@ ValidationError validationError = new ValidationError();
         assertEquals(response.getErrors().size(), 1);
     }
 
-
     public TravelCalculatePremiumRequest createRequestWithAllFields (){
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
         request.setAgreementDateTo(new Date(2024, 3, 11));
