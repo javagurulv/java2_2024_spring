@@ -9,6 +9,9 @@ import java.time.Period;
 class DateTimeService {
 
     public int calculateTravelPeriod(LocalDate agreementDateFrom, LocalDate agreementDateTo) {
+        if (agreementDateFrom == null || agreementDateTo == null) {
+            return -1;
+        }
         return Period.between(agreementDateFrom, agreementDateTo).getDays();
     }
 }
