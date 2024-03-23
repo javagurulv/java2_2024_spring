@@ -76,6 +76,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
     @Test
     public void checkValidatorErrorResponseWhenAgreementRequestDateToIsNull(){
         request.setAgreementDateTo(null);
+        request.setAgreementDateFrom(null);
         validationError.setField("agreementDateTo");
         assertEquals(errors.get(0).getField(), requestValidator.validate(request).get(3).getField());
         assertEquals(errors.get(0).getMessage(), requestValidator.validate(request).get(3).getMessage());
