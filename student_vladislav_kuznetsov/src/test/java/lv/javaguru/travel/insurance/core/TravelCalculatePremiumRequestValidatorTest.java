@@ -139,6 +139,15 @@ public class TravelCalculatePremiumRequestValidatorTest {
         assertEquals(1,requestValidator.validate((request)).size());
     }
 
+    @Test
+    public void checkIfErrorsArePresentWhenAgreementDatesAreInThePast(){
+        request.setAgreementDateTo(new Date(0));
+        request.setAgreementDateFrom(new Date(0));
+        request.setPersonFirstName("V");
+        request.setPersonLastName("K");
+        assertEquals(2,requestValidator.validate((request)).size());
+    }
+
 
 
 
