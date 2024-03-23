@@ -25,11 +25,11 @@ public class TravelCalculatePremiumControllerJsonTest {
     @Test
     public void shouldCalculatePremiumWithAllFieldsValid() throws Exception {
         String actualJson = mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("allFieldsValidRequest.json"))
+                        .content(jsonFileReader.readJsonFromFile("rest/allFieldsValidRequest.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))// Устанавливаем заголовок Content-Type для запроса в виде JSON данных
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();// Получаем ответ в виде строки
-        String expectedJson = jsonFileReader.readJsonFromFile("allFieldsValidResponse.json");
+        String expectedJson = jsonFileReader.readJsonFromFile("rest/allFieldsValidResponse.json");
         JSONAssert.assertEquals(expectedJson, actualJson, true);
         /*true: Этот параметр указывает на строгое сравнение JSON-структур.
         Когда он установлен в true, это означает, что порядок элементов в
@@ -40,101 +40,101 @@ public class TravelCalculatePremiumControllerJsonTest {
     @Test
     public void shouldReturnErrorsMessageForAllFieldsEmpty() throws Exception {
         String actualJson = mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("allFieldsEmptyRequest.json"))
+                        .content(jsonFileReader.readJsonFromFile("rest/allFieldsEmptyRequest.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
-        String expectedJson = jsonFileReader.readJsonFromFile("allFieldsEmptyResponse.json");
+        String expectedJson = jsonFileReader.readJsonFromFile("rest/allFieldsEmptyResponse.json");
         JSONAssert.assertEquals(expectedJson, actualJson, false);
     }
     @Test
     public void shouldReturnErrorMessageForEmptyFirstName() throws Exception {
         String actualJson = mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("firstNameEmptyRequest.json"))
+                        .content(jsonFileReader.readJsonFromFile("rest/firstNameEmptyRequest.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
-        String expectedJson = jsonFileReader.readJsonFromFile("firstNameEmptyResponse.json");
+        String expectedJson = jsonFileReader.readJsonFromFile("rest/firstNameEmptyResponse.json");
         JSONAssert.assertEquals(expectedJson, actualJson, false);
     }
     @Test
     public void shouldReturnErrorMessageForNullFirstName() throws Exception {
         String actualJson = mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("firstNameNullRequest.json"))
+                        .content(jsonFileReader.readJsonFromFile("rest/firstNameNullRequest.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
-        String expectedJson = jsonFileReader.readJsonFromFile("firstNameNullResponse.json");
+        String expectedJson = jsonFileReader.readJsonFromFile("rest/firstNameNullResponse.json");
         JSONAssert.assertEquals(expectedJson, actualJson, false);
     }
     @Test
     public void shouldReturnErrorMessageForEmptyLastName() throws Exception {
         String actualJson = mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("lastNameEmptyRequest.json"))
+                        .content(jsonFileReader.readJsonFromFile("rest/lastNameEmptyRequest.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
-        String expectedJson = jsonFileReader.readJsonFromFile("lastNameEmptyResponse.json");
+        String expectedJson = jsonFileReader.readJsonFromFile("rest/lastNameEmptyResponse.json");
         JSONAssert.assertEquals(expectedJson, actualJson, false);
     }
     @Test
     public void shouldReturnErrorMessageForNullLastName() throws Exception {
         String actualJson = mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("lastNameNullRequest.json"))
+                        .content(jsonFileReader.readJsonFromFile("rest/lastNameNullRequest.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
-        String expectedJson = jsonFileReader.readJsonFromFile("lastNameNullResponse.json");
+        String expectedJson = jsonFileReader.readJsonFromFile("rest/lastNameNullResponse.json");
         JSONAssert.assertEquals(expectedJson, actualJson, false);
     }
     @Test
     public void shouldReturnErrorMessageForEmptyDateFrom() throws Exception {
         String actualJson = mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("dateFromEmptyRequest.json"))
+                        .content(jsonFileReader.readJsonFromFile("rest/dateFromEmptyRequest.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
-        String expectedJson = jsonFileReader.readJsonFromFile("dateFromEmptyResponse.json");
+        String expectedJson = jsonFileReader.readJsonFromFile("rest/dateFromEmptyResponse.json");
         JSONAssert.assertEquals(expectedJson, actualJson, false);
     }
     @Test
     public void shouldReturnErrorMessageForNullDateFrom() throws Exception {
         String actualJson = mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("dateFromNullRequest.json"))
+                        .content(jsonFileReader.readJsonFromFile("rest/dateFromNullRequest.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
-        String expectedJson = jsonFileReader.readJsonFromFile("dateFromNullResponse.json");
+        String expectedJson = jsonFileReader.readJsonFromFile("rest/dateFromNullResponse.json");
         JSONAssert.assertEquals(expectedJson, actualJson, false);
     }
     @Test
     public void shouldReturnErrorMessageForEmptyDateTo() throws Exception {
         String actualJson = mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("dateToEmptyRequest.json"))
+                        .content(jsonFileReader.readJsonFromFile("rest/dateToEmptyRequest.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
-        String expectedJson = jsonFileReader.readJsonFromFile("dateToEmptyResponse.json");
+        String expectedJson = jsonFileReader.readJsonFromFile("rest/dateToEmptyResponse.json");
         JSONAssert.assertEquals(expectedJson, actualJson, false);
     }
     @Test
     public void shouldReturnErrorMessageForNullDateTo() throws Exception {
         String actualJson = mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("dateToNullRequest.json"))
+                        .content(jsonFileReader.readJsonFromFile("rest/dateToNullRequest.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
-        String expectedJson = jsonFileReader.readJsonFromFile("dateToNullResponse.json");
+        String expectedJson = jsonFileReader.readJsonFromFile("rest/dateToNullResponse.json");
         JSONAssert.assertEquals(expectedJson, actualJson, false);
     }
     @Test
     public void shouldReturnErrorMessageForDateToBeforeDateFrom() throws Exception {
         String actualJson = mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("dateToBeforeDateFromRequest.json"))
+                        .content(jsonFileReader.readJsonFromFile("rest/dateToBeforeDateFromRequest.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
-        String expectedJson = jsonFileReader.readJsonFromFile("dateToBeforeDateFromResponse.json");
+        String expectedJson = jsonFileReader.readJsonFromFile("rest/dateToBeforeDateFromResponse.json");
         JSONAssert.assertEquals(expectedJson, actualJson, false);
     }
 }

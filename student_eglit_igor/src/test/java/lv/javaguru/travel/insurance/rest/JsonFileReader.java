@@ -1,8 +1,10 @@
 package lv.javaguru.travel.insurance.rest;
 
+import org.springframework.util.ResourceUtils;
+
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 
 
 
@@ -10,10 +12,16 @@ import java.nio.file.Path;
 public class JsonFileReader {
     public String readJsonFromFile(String filePath) throws IOException {
         try {
-            Path directoryPath = Path.of("C:\\Users\\igegl\\IdeaProjects\\java2_2024_spring\\student_eglit_igor\\src\\test\\resources\\rest");
-            return Files.readString(Path.of(directoryPath + "\\" + filePath));
+            File file = ResourceUtils.getFile("classpath:" + filePath);
+            return new String(Files.readAllBytes(file.toPath()));
         } catch (IOException e) {
             throw new IOException(filePath+" File not found");
         }
+
+        /*try (InputStream inputStream = getClass().getResourceAsStream(filePath)) {
+            if (inputStream == null) {
+                throw new IOException(filePath + " File not found");
+            }
+            return new String(inputStream.readAllBytes());*/
     }
 }
