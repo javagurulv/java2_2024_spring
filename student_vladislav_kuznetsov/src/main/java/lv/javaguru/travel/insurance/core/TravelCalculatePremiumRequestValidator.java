@@ -44,15 +44,16 @@ class TravelCalculatePremiumRequestValidator {
     }
 
     private Optional <ValidationError> validateAgreementDateFrom(TravelCalculatePremiumRequest request) {
-        var agreementDateFromDelay = new Date(0);
+//        var agreementDateFromDelay = new Date(0);
         Date currentDate = new Date(System.currentTimeMillis());
-        if (request.getAgreementDateFrom() != null) {
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(request.getAgreementDateFrom());
-            calendar.add(Calendar.MILLISECOND, 10);
-            agreementDateFromDelay = calendar.getTime();
-        }
-        return (request.getAgreementDateFrom() == null || agreementDateFromDelay.before(currentDate))
+
+//        if (request.getAgreementDateFrom() != null) {
+//            Calendar calendar = Calendar.getInstance();
+//            calendar.setTime(request.getAgreementDateFrom());
+//            calendar.add(Calendar.MILLISECOND, 10);
+//            agreementDateFromDelay = calendar.getTime();
+//        }
+        return (request.getAgreementDateFrom() == null || request.getAgreementDateFrom().before(currentDate))
                 ? Optional.of(new ValidationError("agreementDateFrom", "Must not be empty!"))
                 : Optional.empty();
     }

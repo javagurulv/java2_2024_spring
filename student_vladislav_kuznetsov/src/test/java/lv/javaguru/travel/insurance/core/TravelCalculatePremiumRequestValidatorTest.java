@@ -34,18 +34,21 @@ public class TravelCalculatePremiumRequestValidatorTest {
         request.setAgreementDateFrom(new Date());
         request.setAgreementDateTo(new Date());
     }
+
     @Test
     public void checkValidatorErrorResponseWhenRequestFirstNameIsEmpty(){
         validationError.setField("personFirstName");
         assertEquals(errors.get(0).getField(),requestValidator.validate(request).get(0).getField());
         assertEquals(errors.get(0).getMessage(), requestValidator.validate(request).get(0).getMessage());
     }
+
     @Test
     public void checkValidatorErrorResponseWhenRequestLastNameIsEmpty(){
         validationError.setField("personLastName");
         assertEquals(errors.get(0).getField(),requestValidator.validate(request).get(1).getField());
         assertEquals(errors.get(0).getMessage(), requestValidator.validate(request).get(1).getMessage());
     }
+
     @Test
     public void checkValidatorErrorResponseWhenRequestFirstNameIsNull(){
         request.setPersonFirstName(null);
@@ -53,6 +56,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         assertEquals(errors.get(0).getField(),requestValidator.validate(request).get(0).getField());
         assertEquals(errors.get(0).getMessage(), requestValidator.validate(request).get(0).getMessage());
     }
+
     @Test
     public void checkValidatorErrorResponseWhenRequestLastNameIsNull(){
         request.setPersonLastName(null);
@@ -68,6 +72,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         assertEquals(errors.get(0).getField(), requestValidator.validate(request).get(2).getField());
         assertEquals(errors.get(0).getMessage(), requestValidator.validate(request).get(2).getMessage());
     }
+
     @Test
     public void checkValidatorErrorResponseWhenAgreementRequestDateToIsNull(){
         request.setAgreementDateTo(null);
