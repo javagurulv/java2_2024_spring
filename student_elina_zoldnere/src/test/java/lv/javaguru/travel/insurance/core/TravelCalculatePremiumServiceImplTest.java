@@ -18,10 +18,13 @@ import java.util.Date;
 class TravelCalculatePremiumServiceImplTest {
 
     @Mock
-    private DateTimeService dateTimeServiceMock;
+    private TravelCalculatePremiumRequestValidator validateMock;
 
     @Mock
-    private TravelCalculatePremiumRequestValidator validate;
+    private TravelCalculatePremiumUnderwriting calculateUnderwritingMock;
+
+    @Mock
+    private DateTimeService dateTimeServiceMock;
 
     @InjectMocks
     private TravelCalculatePremiumServiceImpl calculate;

@@ -14,10 +14,13 @@ import java.util.List;
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
     @Autowired
-    private DateTimeService dateTimeService;
+    private TravelCalculatePremiumRequestValidator requestValidator;
 
     @Autowired
-    private TravelCalculatePremiumRequestValidator requestValidator;
+    private TravelCalculatePremiumUnderwriting calculateUnderwriting;
+
+    @Autowired
+    private DateTimeService dateTimeService;
 
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
@@ -39,14 +42,9 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setPersonLastName(request.getPersonLastName());
         response.setAgreementDateFrom(agreementDateFrom);
         response.setAgreementDateTo(agreementDateTo);
-        response.setAgreementPrice(calculateAgreementPrice(agreementDateFrom, agreementDateTo));
+        response.setAgreementPrice(calculateUnderwriting.calculateAgreementPrice(agreementDateFrom, agreementDateTo));
 
         return response;
-    }
-
-    private BigDecimal calculateAgreementPrice(Date agreementDateFrom, Date agreementDateTo) {
-        long differenceBetweenDays = dateTimeService.calculateDifferenceBetweenDays(agreementDateFrom, agreementDateTo);
-        return BigDecimal.valueOf(differenceBetweenDays);
     }
 
 }
