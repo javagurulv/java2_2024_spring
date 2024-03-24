@@ -25,18 +25,22 @@ ValidationError validationError = new ValidationError();
     @Mock
     private DateTimeService dateTimeService;
     @Mock TravelCalculatePremiumRequestValidator requestValidator;
+
     @InjectMocks
     private TravelCalculatePremiumServiceImpl service;
     private TravelCalculatePremiumRequest request;
+
     @BeforeEach
     public void setUp() {
         request = createRequestWithAllFields();
    }
+
     @Test
     public void checkPersonFirstName(){
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertEquals(request.getPersonFirstName(),response.getPersonFirstName());
     }
+
     @Test
     public void checkPersonLastName()
     {
@@ -85,7 +89,6 @@ ValidationError validationError = new ValidationError();
         var response = service.calculatePremium(request);
         assertEquals(response.getErrors().size(), 1);
     }
-
 
     public TravelCalculatePremiumRequest createRequestWithAllFields (){
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();

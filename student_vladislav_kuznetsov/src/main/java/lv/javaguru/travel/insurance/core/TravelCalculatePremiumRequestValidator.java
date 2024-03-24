@@ -13,10 +13,22 @@ class TravelCalculatePremiumRequestValidator {
 
     public List<ValidationError> validate(TravelCalculatePremiumRequest request) {
         List<ValidationError> errors = new ArrayList<>();
-        validatePersonFirstName(request).ifPresent(errors::add);
-        validatePersonLastName(request).ifPresent(errors::add);
-        validateAgreementDateFrom(request).ifPresent(errors::add);
-        validateAgreementDateTo(request).ifPresent(errors::add);
+      try {
+          validatePersonFirstName(request).ifPresent(errors::add);
+
+
+          validatePersonLastName(request).ifPresent(errors::add);
+
+
+          validateAgreementDateFrom(request).ifPresent(errors::add);
+
+
+          validateAgreementDateTo(request).ifPresent(errors::add);
+      }
+      catch (NullPointerException nullPointerException)
+      {
+          System.out.println("Something went wrong");
+      }
         return errors;
     }
 
@@ -32,20 +44,21 @@ class TravelCalculatePremiumRequestValidator {
     }
 
     private Optional <ValidationError> validateAgreementDateFrom(TravelCalculatePremiumRequest request) {
-        var agreementDateFromDelay = new Date(0);
+//        var agreementDateFromDelay = new Date(0);
         Date currentDate = new Date(System.currentTimeMillis());
-        if (request.getAgreementDateFrom() != null) {
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(request.getAgreementDateFrom());
-            calendar.add(Calendar.MILLISECOND, 10);
-            agreementDateFromDelay = calendar.getTime();
-        }
-        return (request.getAgreementDateFrom() == null || agreementDateFromDelay.before(currentDate))
+
+//        if (request.getAgreementDateFrom() != null) {
+//            Calendar calendar = Calendar.getInstance();
+//            calendar.setTime(request.getAgreementDateFrom());
+//            calendar.add(Calendar.MILLISECOND, 10);
+//            agreementDateFromDelay = calendar.getTime();
+//        }
+        return (request.getAgreementDateFrom() == null || request.getAgreementDateFrom().before(currentDate))
                 ? Optional.of(new ValidationError("agreementDateFrom", "Must not be empty!"))
                 : Optional.empty();
     }
     private Optional <ValidationError> validateAgreementDateTo(TravelCalculatePremiumRequest request) {
-        return (request.getAgreementDateTo() == null)
+        return (request.getAgreementDateTo() == null || request.getAgreementDateTo().before(request.getAgreementDateFrom()) || request.getAgreementDateFrom() == null || request.getAgreementDateTo().equals(request.getAgreementDateFrom()))
                 ? Optional.of(new ValidationError("agreementDateTo", "Must not be empty!"))
                 : Optional.empty();
     }

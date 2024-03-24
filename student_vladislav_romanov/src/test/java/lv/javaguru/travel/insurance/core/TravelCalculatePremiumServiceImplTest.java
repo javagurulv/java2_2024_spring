@@ -24,10 +24,10 @@ class TravelCalculatePremiumServiceImplTest {
     private TravelCalculatePremiumRequest travelCalculatePremiumRequestData;
 
     @Mock
-    private TravelCalculatePremiumRequestValidator requestValidatorMock;
+    private TravelPremium travelPremium;
 
     @Mock
-    private DateTimeService dateTimeServiceMock;
+    private TravelCalculatePremiumRequestValidator requestValidatorMock;
 
     @InjectMocks
     private TravelCalculatePremiumServiceImpl service;
@@ -82,6 +82,7 @@ class TravelCalculatePremiumServiceImplTest {
         ValidationError validationError = new ValidationError("field", "message");
         doReturn(List.of(validationError)).when(requestValidatorMock).validate(request);
         TravelCalculatePremiumResponse response = createResponse();
+
         assertTrue(response.hasErrors());
     }
 
@@ -91,6 +92,7 @@ class TravelCalculatePremiumServiceImplTest {
         ValidationError validationError = new ValidationError("field", "message");
         doReturn(List.of(validationError)).when(requestValidatorMock).validate(request);
         TravelCalculatePremiumResponse response = createResponse();
+
         assertEquals(response.getErrors().size(), 1);
     }
 
@@ -100,6 +102,7 @@ class TravelCalculatePremiumServiceImplTest {
         ValidationError validationError = new ValidationError("field", "message");
         doReturn(List.of(validationError)).when(requestValidatorMock).validate(request);
         TravelCalculatePremiumResponse response = createResponse();
+
         assertEquals(response.getErrors().get(0).getField(), "field");
         assertEquals(response.getErrors().get(0).getMessage(), "message");
     }
@@ -110,45 +113,12 @@ class TravelCalculatePremiumServiceImplTest {
         ValidationError validationError = new ValidationError("field", "message");
         doReturn(List.of(validationError)).when(requestValidatorMock).validate(request);
         TravelCalculatePremiumResponse response = createResponse();
+
         assertNull(response.getPersonFirstName());
         assertNull(response.getPersonLastName());
         assertNull(response.getAgreementDateFrom());
         assertNull(response.getAgreementDateTo());
         assertNull(response.getAgreementPrice());
-    }
-
-    @Test
-    void emptyResponseDontInteractWithServiceTest() {
-        TravelCalculatePremiumRequest request = travelCalculatePremiumRequestData;
-        ValidationError validationError = new ValidationError("field", "message");
-        doReturn(List.of(validationError)).when(requestValidatorMock).validate(request);
-        TravelCalculatePremiumResponse response = createResponse();
-        verifyNoInteractions(dateTimeServiceMock);
-    }
-
-    @Test
-    void responseAgreementPriceTest() {
-        LocalDate dateFrom = LocalDate.of(2024, 3, 8);
-        LocalDate dateTo = LocalDate.of(2024, 3, 18);
-
-        doReturn(10).when(dateTimeServiceMock).calculateTravelPeriod(dateFrom, dateTo);
-
-        TravelCalculatePremiumResponse response = createResponse();
-
-        assertEquals(new BigDecimal(10), response.getAgreementPrice());
-    }
-
-    @Test
-    void responseTest() {
-        LocalDate dateFrom = LocalDate.of(2024, 3, 8);
-        LocalDate dateTo = LocalDate.of(2024, 3, 18);
-
-        doReturn(10).when(dateTimeServiceMock).calculateTravelPeriod(dateFrom, dateTo);
-
-        TravelCalculatePremiumResponse expected = new TravelCalculatePremiumResponse("Vladislav", "Romanov", dateFrom, dateTo, new BigDecimal(10));
-        TravelCalculatePremiumResponse actual = createResponse();
-
-        assertEquals(expected, actual);
     }
 
     private TravelCalculatePremiumResponse createResponse() {

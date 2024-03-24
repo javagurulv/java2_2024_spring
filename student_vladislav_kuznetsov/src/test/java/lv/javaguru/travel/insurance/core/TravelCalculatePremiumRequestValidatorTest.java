@@ -34,18 +34,21 @@ public class TravelCalculatePremiumRequestValidatorTest {
         request.setAgreementDateFrom(new Date());
         request.setAgreementDateTo(new Date());
     }
+
     @Test
     public void checkValidatorErrorResponseWhenRequestFirstNameIsEmpty(){
         validationError.setField("personFirstName");
         assertEquals(errors.get(0).getField(),requestValidator.validate(request).get(0).getField());
         assertEquals(errors.get(0).getMessage(), requestValidator.validate(request).get(0).getMessage());
     }
+
     @Test
     public void checkValidatorErrorResponseWhenRequestLastNameIsEmpty(){
         validationError.setField("personLastName");
         assertEquals(errors.get(0).getField(),requestValidator.validate(request).get(1).getField());
         assertEquals(errors.get(0).getMessage(), requestValidator.validate(request).get(1).getMessage());
     }
+
     @Test
     public void checkValidatorErrorResponseWhenRequestFirstNameIsNull(){
         request.setPersonFirstName(null);
@@ -53,6 +56,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         assertEquals(errors.get(0).getField(),requestValidator.validate(request).get(0).getField());
         assertEquals(errors.get(0).getMessage(), requestValidator.validate(request).get(0).getMessage());
     }
+
     @Test
     public void checkValidatorErrorResponseWhenRequestLastNameIsNull(){
         request.setPersonLastName(null);
@@ -68,12 +72,14 @@ public class TravelCalculatePremiumRequestValidatorTest {
         assertEquals(errors.get(0).getField(), requestValidator.validate(request).get(2).getField());
         assertEquals(errors.get(0).getMessage(), requestValidator.validate(request).get(2).getMessage());
     }
+
     @Test
     public void checkValidatorErrorResponseWhenAgreementRequestDateToIsNull(){
         request.setAgreementDateTo(null);
+        request.setAgreementDateFrom(null);
         validationError.setField("agreementDateTo");
-        assertEquals(errors.get(0).getField(), requestValidator.validate(request).get(2).getField());
-        assertEquals(errors.get(0).getMessage(), requestValidator.validate(request).get(2).getMessage());
+        assertEquals(errors.get(0).getField(), requestValidator.validate(request).get(3).getField());
+        assertEquals(errors.get(0).getMessage(), requestValidator.validate(request).get(3).getMessage());
     }
 
     @Test
@@ -96,7 +102,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
     @Test
     public void checkIfNoErrorIsPresentWhenAgreementDateFromIsCurrentTime(){
         request.setAgreementDateFrom(new Date());
-        request.setAgreementDateTo(new Date());
+        request.setAgreementDateTo(new Date(System.currentTimeMillis()+60000));
         request.setPersonFirstName("V");
         request.setPersonLastName("K");
         var requestValidator = new TravelCalculatePremiumRequestValidator();
@@ -104,9 +110,8 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
     @Test
     public void checkIfNoErrorIsPresentWhenAgreementDateFromIsInFuture(){
-        var currentDate = new Date(System.currentTimeMillis()+(30*60*100));
-        request.setAgreementDateFrom(currentDate);
-        request.setAgreementDateTo(new Date());
+        request.setAgreementDateFrom(new Date(System.currentTimeMillis()+(30*60*1000)));
+        request.setAgreementDateTo(new Date(System.currentTimeMillis()+(30*60*10000)));
         request.setPersonFirstName("V");
         request.setPersonLastName("K");
         var requestValidator = new TravelCalculatePremiumRequestValidator();
@@ -114,14 +119,42 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
     @Test
     public void checkIfErrorIsPresentWhenAgreementDateToEqualsAgreementDateFrom(){
-        var equalDate = new Date(System.currentTimeMillis());
-        request.setAgreementDateTo(equalDate);
-        request.setAgreementDateFrom(equalDate);
+        request.setAgreementDateTo(new Date());
+        request.setAgreementDateFrom(new Date());
         request.setPersonFirstName("V");
         request.setPersonLastName("K");
         var requestValidator = new TravelCalculatePremiumRequestValidator();
-        assertEquals(0,requestValidator.validate(request).size());
+        assertEquals(1,requestValidator.validate(request).size());
     }
+
+    @Test
+    public void checkIfErrorIsPresentWhenAgreementDateToIsBeforeAgreementDateFrom(){
+        request.setAgreementDateFrom(new Date(System.currentTimeMillis()+60000));
+        request.setAgreementDateTo(new Date());
+        request.setPersonFirstName("V");
+        request.setPersonLastName("K");
+        assertEquals(1,requestValidator.validate((request)).size());
+    }
+
+    @Test
+    public void checkIfErrorIsPresentWhenAgreementDateToIsPresentAndAgreementDateFromIsNull(){
+        request.setAgreementDateFrom(null);
+        request.setAgreementDateTo(new Date());
+        request.setPersonFirstName("V");
+        request.setPersonLastName("K");
+        assertEquals(1,requestValidator.validate((request)).size());
+    }
+
+    @Test
+    public void checkIfErrorsArePresentWhenAgreementDatesAreInThePast(){
+        request.setAgreementDateTo(new Date(0));
+        request.setAgreementDateFrom(new Date(0));
+        request.setPersonFirstName("V");
+        request.setPersonLastName("K");
+        assertEquals(2,requestValidator.validate((request)).size());
+    }
+
+
 
 
 
