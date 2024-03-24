@@ -26,6 +26,10 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
             return new TravelCalculatePremiumResponse(requestErrors);
         }
 
+        return createPremiumResponse(request);
+    }
+
+    private TravelCalculatePremiumResponse createPremiumResponse(TravelCalculatePremiumRequest request) {
         TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();
 
         Date agreementDateFrom = request.getAgreementDateFrom();
@@ -35,11 +39,14 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setPersonLastName(request.getPersonLastName());
         response.setAgreementDateFrom(agreementDateFrom);
         response.setAgreementDateTo(agreementDateTo);
-
-        long differenceBetweenDays = dateTimeService.calculateDifferenceBetweenDays(agreementDateFrom, agreementDateTo);
-        response.setAgreementPrice(BigDecimal.valueOf(differenceBetweenDays));
+        response.setAgreementPrice(calculateAgreementPrice(agreementDateFrom, agreementDateTo));
 
         return response;
+    }
+
+    private BigDecimal calculateAgreementPrice(Date agreementDateFrom, Date agreementDateTo) {
+        long differenceBetweenDays = dateTimeService.calculateDifferenceBetweenDays(agreementDateFrom, agreementDateTo);
+        return BigDecimal.valueOf(differenceBetweenDays);
     }
 
 }
