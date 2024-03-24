@@ -17,7 +17,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
     private TravelCalculatePremiumRequestValidator requestValidator;
 
     @Autowired
-    private DateTimeService dateTimeService;
+    private TravelPremium travelPremium;
 
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
@@ -35,7 +35,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setPersonLastName(request.getPersonLastName());
         response.setAgreementDateFrom(agreementDateFrom);
         response.setAgreementDateTo(agreementDateTo);
-        response.setAgreementPrice(new BigDecimal(dateTimeService.calculateTravelPeriod(agreementDateFrom, agreementDateTo)));
+        response.setAgreementPrice(travelPremium.calculatePremium(request));
 
         return response;
     }
