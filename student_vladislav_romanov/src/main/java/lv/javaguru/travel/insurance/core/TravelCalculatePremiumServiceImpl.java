@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @Component
@@ -27,12 +28,14 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         }
 
         TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();
+        LocalDate agreementDateFrom = request.getAgreementDateFrom();
+        LocalDate agreementDateTo = request.getAgreementDateTo();
 
         response.setPersonFirstName(request.getPersonFirstName());
         response.setPersonLastName(request.getPersonLastName());
-        response.setAgreementDateFrom(request.getAgreementDateFrom());
-        response.setAgreementDateTo(request.getAgreementDateTo());
-        response.setAgreementPrice(new BigDecimal(dateTimeService.calculateTravelPeriod(request.getAgreementDateFrom(), request.getAgreementDateTo())));
+        response.setAgreementDateFrom(agreementDateFrom);
+        response.setAgreementDateTo(agreementDateTo);
+        response.setAgreementPrice(new BigDecimal(dateTimeService.calculateTravelPeriod(agreementDateFrom, agreementDateTo)));
 
         return response;
     }
