@@ -12,8 +12,8 @@ class TravelCalculatePremiumServiceImplTest {
     TravelCalculatePremiumService travelCalculatePremiumService = new TravelCalculatePremiumServiceImpl();
     String firstName = "Olegs";
     String lastName =  "Radigins";
-    Date dateFrom = new Date(1);
-    Date dateTo = new Date(2);
+    Date dateFrom = new  Date(2000,0,1);;
+    Date dateTo = new Date(2000,1,1);;
 
     @Test
     public void shouldTestResponse() {
