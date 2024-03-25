@@ -16,23 +16,20 @@ import java.math.BigDecimal;
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
     @Autowired
-    AgreementPriceCalculator agreementPriceCalculator;
-    @Autowired
-    TravelCalculatePremiumRequestValidator travelCalculatePremiumRequestValidator;
+    private AgreementPriceCalculator agreementPriceCalculator;
 
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
-        TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();
         CoreResponse coreResponse = new CoreResponse(new TravelCalculatePremiumRequestValidator().validate(request));
-
         if (coreResponse.hasErrors()) {
             return new TravelCalculatePremiumResponse(coreResponse.getErrors());
         } else {
-            return getResponse(request, response);
+            return getResponse(request);
         }
     }
 
-    private TravelCalculatePremiumResponse getResponse(TravelCalculatePremiumRequest request, TravelCalculatePremiumResponse response) {
+    private TravelCalculatePremiumResponse getResponse(TravelCalculatePremiumRequest request) {
+        TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();
         response.setPersonFirstName(request.getPersonFirstName());
         response.setPersonLastName(request.getPersonLastName());
         response.setAgreementDateFrom(request.getAgreementDateFrom());
