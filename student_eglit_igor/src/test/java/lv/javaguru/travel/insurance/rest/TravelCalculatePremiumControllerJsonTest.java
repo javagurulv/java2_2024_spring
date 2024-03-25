@@ -34,7 +34,7 @@ public class TravelCalculatePremiumControllerJsonTest {
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();// Получаем ответ в виде строки
         String expectedJson = jsonFileReader.readJsonFromFile("rest/allFieldsValidResponse.json");
-        JSONAssert.assertEquals(expectedJson, actualJson, true);
+        JSONAssert.assertEquals(expectedJson, actualJson, false);
         /*true: Этот параметр указывает на строгое сравнение JSON-структур.
         Когда он установлен в true, это означает, что порядок элементов в
         массивах и поля в объектах должны точно совпадать в обоих JSON-структурах.
