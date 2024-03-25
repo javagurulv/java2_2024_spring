@@ -19,7 +19,7 @@ class TravelCalculatePremiumRequestValidator {
         validateAgreementDateFrom(request).ifPresent(e -> errors.add(e));
         validateAgreementDateTo(request).ifPresent(e -> errors.add(e));
         validateAgreementDateToIsAfterDateFrom(request).ifPresent(e -> errors.add(e));
-        validateAgreementDateNotInThePast(request).ifPresent(e -> errors.add(e));
+        validateAgreementDateFromNotInThePast(request).ifPresent(e -> errors.add(e));
         validateAgreementDateToNotInThePast(request).ifPresent(e -> errors.add(e));
         return errors;
     }
@@ -59,7 +59,7 @@ class TravelCalculatePremiumRequestValidator {
                 ? Optional.of(new ValidationError("agreementDateTo", "agreementDateTo must be after agreementDateFrom!"))
                 : Optional.empty();
     }
-    private Optional<ValidationError> validateAgreementDateNotInThePast(TravelCalculatePremiumRequest request) {
+    private Optional<ValidationError> validateAgreementDateFromNotInThePast(TravelCalculatePremiumRequest request) {
         if (request.getAgreementDateTo() == null || request.getAgreementDateFrom() == null) {
             return Optional.empty();
         }
