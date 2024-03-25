@@ -19,8 +19,13 @@ class TravelCalculatePremiumRequestValidator {
         validateAgreementDateFrom(request).ifPresent(e -> errors.add(e));
         validateAgreementDateTo(request).ifPresent(e -> errors.add(e));
         validateAgreementDateToIsAfterDateFrom(request).ifPresent(e -> errors.add(e));
+        validateAgreementDateNotInThePast(request).ifPresent(e -> errors.add(e));
+        validateAgreementDateToNotInThePast(request).ifPresent(e -> errors.add(e));
         return errors;
     }
+
+
+
 
     private Optional<ValidationError> validatePersonFirstName(TravelCalculatePremiumRequest request) {
         return (request.getPersonFirstName() == null || request.getPersonFirstName().isEmpty())
@@ -52,6 +57,22 @@ class TravelCalculatePremiumRequestValidator {
         }
         return (request.getAgreementDateTo().isBefore(request.getAgreementDateFrom()))
                 ? Optional.of(new ValidationError("agreementDateTo", "agreementDateTo must be after agreementDateFrom!"))
+                : Optional.empty();
+    }
+    private Optional<ValidationError> validateAgreementDateNotInThePast(TravelCalculatePremiumRequest request) {
+        if (request.getAgreementDateTo() == null || request.getAgreementDateFrom() == null) {
+            return Optional.empty();
+        }
+        return (request.getAgreementDateFrom().isBefore(java.time.LocalDate.now().plusDays(1)))
+                ? Optional.of(new ValidationError("agreementDateFrom", "Must not be in the past!"))
+                : Optional.empty();
+    }
+    private Optional<ValidationError> validateAgreementDateToNotInThePast(TravelCalculatePremiumRequest request) {
+        if (request.getAgreementDateTo() == null || request.getAgreementDateFrom() == null) {
+            return Optional.empty();
+        }
+        return (request.getAgreementDateTo().isBefore(java.time.LocalDate.now().plusDays(1)))
+                ? Optional.of(new ValidationError("agreementDateTo", "Must not be in the past!"))
                 : Optional.empty();
     }
 }

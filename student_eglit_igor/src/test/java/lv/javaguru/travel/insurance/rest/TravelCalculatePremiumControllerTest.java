@@ -34,8 +34,8 @@ public class TravelCalculatePremiumControllerTest {
                         .content("""
                                 {"personFirstName" : "Vasja",
                                 "personLastName" : "Pupkin",
-                                "agreementDateFrom" : "2021-05-25",
-                                "agreementDateTo" : "2021-05-29"
+                                "agreementDateFrom" : "2025-05-25",
+                                "agreementDateTo" : "2025-05-29"
                                 }""")
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 // Ожидаем, что статус ответа будет 200 OK
@@ -43,8 +43,8 @@ public class TravelCalculatePremiumControllerTest {
                 // Ожидаем, что возвращенный JSON содержит указанные значения
                 .andExpect(jsonPath("personFirstName", is("Vasja")))
                 .andExpect(jsonPath("personLastName", is("Pupkin")))
-                .andExpect(jsonPath("agreementDateFrom", is("2021-05-25")))
-                .andExpect(jsonPath("agreementDateTo", is("2021-05-29")))
+                .andExpect(jsonPath("agreementDateFrom", is("2025-05-25")))
+                .andExpect(jsonPath("agreementDateTo", is("2025-05-29")))
                 .andExpect(jsonPath("agreementPrice", is(5))) // Ожидаем, что поле agreementPrice равно 5
                 .andReturn(); // Возвращаем результат выполнения запроса
     }
@@ -55,8 +55,8 @@ public class TravelCalculatePremiumControllerTest {
                         .content("""
                                 {"personFirstName" : "",
                                 "personLastName" : "Pupkin",
-                                "agreementDateFrom" : "2021-05-25",
-                                "agreementDateTo" : "2021-05-29"
+                                "agreementDateFrom" : "2025-05-25",
+                                "agreementDateTo" : "2025-05-29"
                                 }""")
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 // Ожидаем, что статус ответа будет 200 OK
@@ -78,8 +78,8 @@ public class TravelCalculatePremiumControllerTest {
                         .content("""
                                 {"personFirstName" : null,
                                 "personLastName" : "Pupkin",
-                                "agreementDateFrom" : "2021-05-25",
-                                "agreementDateTo" : "2021-05-29"
+                                "agreementDateFrom" : "2025-05-25",
+                                "agreementDateTo" : "2025-05-29"
                                 }""")
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 // Ожидаем, что статус ответа будет 200 OK
@@ -101,8 +101,8 @@ public class TravelCalculatePremiumControllerTest {
                         .content("""
                                 {"personFirstName" : "Vasja",
                                 "personLastName" : "",
-                                "agreementDateFrom" : "2021-05-25",
-                                "agreementDateTo" : "2021-05-29"
+                                "agreementDateFrom" : "2025-05-25",
+                                "agreementDateTo" : "2025-05-29"
                                 }""")
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 // Ожидаем, что статус ответа будет 200 OK
@@ -124,8 +124,8 @@ public class TravelCalculatePremiumControllerTest {
                         .content("""
                                 {"personFirstName" : "Vasja",
                                 "personLastName" : null,
-                                "agreementDateFrom" : "2021-05-25",
-                                "agreementDateTo" : "2021-05-29"
+                                "agreementDateFrom" : "2025-05-25",
+                                "agreementDateTo" : "2025-05-29"
                                 }""")
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 // Ожидаем, что статус ответа будет 200 OK
@@ -148,7 +148,7 @@ public class TravelCalculatePremiumControllerTest {
                                 {"personFirstName" : "Vasja",
                                 "personLastName" : "Pupkin",
                                 "agreementDateFrom" : "",
-                                "agreementDateTo" : "2021-05-29"
+                                "agreementDateTo" : "2025-05-29"
                                 }""")
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 // Ожидаем, что статус ответа будет 200 OK
@@ -171,7 +171,7 @@ public class TravelCalculatePremiumControllerTest {
                                 {"personFirstName" : "Vasja",
                                 "personLastName" : "Pupkin",
                                 "agreementDateFrom" : null,
-                                "agreementDateTo" : "2021-05-29"
+                                "agreementDateTo" : "2025-05-29"
                                 }""")
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 // Ожидаем, что статус ответа будет 200 OK
@@ -193,7 +193,7 @@ public class TravelCalculatePremiumControllerTest {
                         .content("""
                                 {"personFirstName" : "Vasja",
                                 "personLastName" : "Pupkin",
-                                "agreementDateFrom" : "2021-05-25",
+                                "agreementDateFrom" : "2025-05-25",
                                 "agreementDateTo" : ""
                                 }""")
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
@@ -216,7 +216,7 @@ public class TravelCalculatePremiumControllerTest {
                         .content("""
                                 {"personFirstName" : "Vasja",
                                 "personLastName" : "Pupkin",
-                                "agreementDateFrom" : "2021-05-25",
+                                "agreementDateFrom" : "2025-05-25",
                                 "agreementDateTo" : null
                                 }""")
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
@@ -239,8 +239,8 @@ public class TravelCalculatePremiumControllerTest {
                         .content("""
                                 {"personFirstName" : "Vasja",
                                 "personLastName" : "Pupkin",
-                                "agreementDateFrom" : "2021-05-29",
-                                "agreementDateTo" : "2021-05-25"
+                                "agreementDateFrom" : "2025-05-29",
+                                "agreementDateTo" : "2025-05-25"
                                 }""")
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 // Ожидаем, что статус ответа будет 200 OK
@@ -277,6 +277,55 @@ public class TravelCalculatePremiumControllerTest {
                 .andExpect(jsonPath("$.errors[2].message", is("Must not be empty!")))
                 .andExpect(jsonPath("$.errors[3].field", is("agreementDateTo")))
                 .andExpect(jsonPath("$.errors[3].message", is("Must not be empty!")))
+                .andExpect(jsonPath("$.personFirstName").doesNotExist())
+                .andExpect(jsonPath("$.personLastName").doesNotExist())
+                .andExpect(jsonPath("$.agreementDateFrom").doesNotExist())
+                .andExpect(jsonPath("$.agreementDateTo").doesNotExist())
+                .andExpect(jsonPath("$.agreementPrice").doesNotExist())
+                .andReturn();// Возвращаем результат выполнения запроса
+    }
+    @Test
+    public void shouldReturnErrorMessageForDateFromInThePast() throws Exception {
+        // Отправляем POST запрос на "/insurance/travel/" с JSON телом запроса
+        mockMvc.perform(post("/insurance/travel/")
+                        .content("""
+                                {"personFirstName" : "Vasja",
+                                "personLastName" : "Pupkin",
+                                "agreementDateFrom" : "2023-05-25",
+                                "agreementDateTo" : "2025-05-29"
+                                }""")
+                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
+                // Ожидаем, что статус ответа будет 200 OK
+                .andExpect(status().isOk())
+                // Ожидаем, что возвращенный JSON содержит указанные значения
+                .andExpect(jsonPath("$.errors[0].field", is("agreementDateFrom")))
+                .andExpect(jsonPath("$.errors[0].message", is("Must not be in the past!")))
+                .andExpect(jsonPath("$.personFirstName").doesNotExist())
+                .andExpect(jsonPath("$.personLastName").doesNotExist())
+                .andExpect(jsonPath("$.agreementDateFrom").doesNotExist())
+                .andExpect(jsonPath("$.agreementDateTo").doesNotExist())
+                .andExpect(jsonPath("$.agreementPrice").doesNotExist())
+                .andReturn();// Возвращаем результат выполнения запроса
+    }
+    @Test
+    public void shouldReturnErrorMessageForDateToInThePastAndBeforeDateFrom() throws Exception {
+        // Отправляем POST запрос на "/insurance/travel/" с JSON телом запроса
+        mockMvc.perform(post("/insurance/travel/")
+                        .content("""
+                                {"personFirstName" : "Vasja",
+                                "personLastName" : "Pupkin",
+                                "agreementDateFrom" : "2025-05-25",
+                                "agreementDateTo" : "2023-05-29"
+                                }""")
+                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
+                // Ожидаем, что статус ответа будет 200 OK
+                .andExpect(status().isOk())
+                // Ожидаем, что возвращенный JSON содержит указанные значения
+
+                .andExpect(jsonPath("$.errors[0].field", is("agreementDateTo")))
+                .andExpect(jsonPath("$.errors[0].message", is("agreementDateTo must be after agreementDateFrom!")))
+                .andExpect(jsonPath("$.errors[1].field", is("agreementDateTo")))
+                .andExpect(jsonPath("$.errors[1].message", is("Must not be in the past!")))
                 .andExpect(jsonPath("$.personFirstName").doesNotExist())
                 .andExpect(jsonPath("$.personLastName").doesNotExist())
                 .andExpect(jsonPath("$.agreementDateFrom").doesNotExist())

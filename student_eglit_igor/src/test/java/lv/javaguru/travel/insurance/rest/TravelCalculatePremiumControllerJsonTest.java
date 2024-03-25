@@ -109,6 +109,18 @@ public class TravelCalculatePremiumControllerJsonTest {
         var expectedJson = getExpectedJson("rest/dateToBeforeDateFromResponse.json");
         JSONAssert.assertEquals(expectedJson, actualJson, false);
     }
+    @Test
+    public void shouldReturnErrorMessageForDateFromIsInThePast() throws Exception {
+        var actualJson = getActualJson("rest/dateFromInThePastRequest.json");
+        var expectedJson = getExpectedJson("rest/dateFromInThePastResponse.json");
+        JSONAssert.assertEquals(expectedJson, actualJson, false);
+    }
+    @Test
+    public void shouldReturnErrorMessageForDateToIsInThePastAndBeforeDateFrom() throws Exception {
+        var actualJson = getActualJson("rest/dateToIsInThePastAndBeforeDateFromRequest.json");
+        var expectedJson = getExpectedJson("rest/dateToIsInThePastAndBeforeDateFromResponse.json");
+        JSONAssert.assertEquals(expectedJson, actualJson, false);
+    }
 
     private String getActualJson(String filePath) throws Exception {
         return mockMvc.perform(post("/insurance/travel/")
