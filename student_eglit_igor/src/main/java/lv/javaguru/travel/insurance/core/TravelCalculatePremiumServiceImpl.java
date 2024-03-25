@@ -28,13 +28,17 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         if (coreResponse.hasErrors()) {
             return new TravelCalculatePremiumResponse(coreResponse.getErrors());
         } else {
-            response.setPersonFirstName(request.getPersonFirstName());
-            response.setPersonLastName(request.getPersonLastName());
-            response.setAgreementDateFrom(request.getAgreementDateFrom());
-            response.setAgreementDateTo(request.getAgreementDateTo());
-            response.setAgreementPrice(calculateAgreementPrice(request));
-            return response;
+            return getResponse(request, response);
         }
+    }
+
+    private TravelCalculatePremiumResponse getResponse(TravelCalculatePremiumRequest request, TravelCalculatePremiumResponse response) {
+        response.setPersonFirstName(request.getPersonFirstName());
+        response.setPersonLastName(request.getPersonLastName());
+        response.setAgreementDateFrom(request.getAgreementDateFrom());
+        response.setAgreementDateTo(request.getAgreementDateTo());
+        response.setAgreementPrice(calculateAgreementPrice(request));
+        return response;
     }
 
     public BigDecimal calculateAgreementPrice(TravelCalculatePremiumRequest request) {

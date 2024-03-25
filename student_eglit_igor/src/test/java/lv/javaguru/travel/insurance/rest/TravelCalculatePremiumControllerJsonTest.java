@@ -19,8 +19,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class TravelCalculatePremiumControllerJsonTest {
     @Autowired
-    private MockMvc mockMvc;
-    JsonFileReader jsonFileReader = new JsonFileReader();
+    private MockMvc mockMvc; // Позволяет тестировать контроллеры без запуска сервера приложений
+    // и без отправки HTTP-запросов на сервер.
+    // Вместо этого он создает фейковый запрос
+    // и передает его контроллеру.
+    @Autowired
+    private JsonFileReader jsonFileReader;
 
     @Test
     public void shouldCalculatePremiumWithAllFieldsValid() throws Exception {
