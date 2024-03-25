@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Команда DELETE в SQL</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    h2 {
+      color: #666;
+    }
+
+    p {
+      color: #666;
+    }
+
+    code {
+      background-color: #f5f5f5;
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+<h1>Команда DELETE в SQL</h1>
+<p>
+    Команда DELETE используется для удаления одной или нескольких строк из таблицы базы данных.
+</p>
+<h2>Пример 1: Простое использование команды DELETE</h2>
+<pre><code>DELETE FROM customers
+WHERE customer_id = 1001;</code></pre>
+<p>
+    В этом примере мы удаляем строку из таблицы "customers", где значение столбца "customer_id" равно 1001.
+</p>
+<h2>Пример 2: Использование команды DELETE с условием</h2>
+<pre><code>DELETE FROM orders
+WHERE order_date < '2022-01-01';</code></pre>
+<p>
+    В этом примере мы удаляем все строки из таблицы "orders", где значение столбца "order_date" меньше заданной даты '2022-01-01'.
+</p>
+<h2>Заключение</h2>
+<p>
+    Команда DELETE позволяет удалять строки из таблицы базы данных, соответствующие заданным условиям.
+</p>
+<p>
+    Она полезна для удаления ненужных данных или исправления ошибок в таблице.
+</p>
+<p>
+    Важно быть осторожным при использовании команды DELETE, так как она приводит к фактическому удалению данных из таблицы, и удаленные данные не могут быть восстановлены без резервной копии.
+</p>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Описание команды SELECT с использованием операторов LIKE и NOT LIKE</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 24px;
+    }
+
+    p {
+      color: #666;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    code {
+      font-family: Consolas, monospace;
+      font-size: 14px;
+      background-color: #f5f5f5;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+
+    .sql-code {
+      background-color: #f1f1f1;
+      padding: 10px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+<h1>Команда SELECT с оператором LIKE и NOT LIKE</h1>
+
+<p>
+    Команда <code>SELECT</code> с оператором <code>LIKE</code> позволяет выбирать данные, значения которых соответствуют определенному шаблону, заданному с использованием символов-масок.
+    Оператор <code>NOT LIKE</code>, наоборот, позволяет выбирать данные, значения которых не соответствуют указанному шаблону.
+</p>
+
+<h2>Пример 1: SELECT с использованием оператора LIKE:</h2>
+
+<div class="sql-code">
+    <code>SELECT * FROM users WHERE name LIKE 'J%';</code>
+</div>
+
+<p>
+    В этом примере мы выбираем все столбцы (<code>*</code>) из таблицы "users" с условием <code>name LIKE 'J%'</code>.
+    Это означает, что мы выбираем только те строки, где значение столбца "name" начинается с буквы "J".
+    <code>%</code> здесь заменяет ноль или более символов после буквы "J".
+</p>
+
+<h2>Пример 2: SELECT с использованием оператора NOT LIKE:</h2>
+
+<div class="sql-code">
+    <code>SELECT * FROM products WHERE description NOT LIKE '%sale%';</code>
+</div>
+
+<p>
+    В этом примере мы выбираем все столбцы (<code>*</code>) из таблицы "products" с условием <code>description NOT LIKE '%sale%'</code>.
+    Это означает, что мы выбираем только те строки, где значение столбца "description" не содержит слово "sale".
+    <code>%</code> здесь заменяет ноль или более символов перед или после слова "sale".
+</p>
+
+
+<h2>Заключение</h2>
+
+<p>
+    Команда <code>SELECT</code> с операторами <code>LIKE</code> и <code>NOT LIKE</code> позволяет выполнять гибкую фильтрацию данных,
+    основываясь на шаблонах и символах-масках. Она может быть полезна, например, для выборки данных по определенным шаблонам и для исключения данных, соответствующих определенным шаблонам.
+</p>
+
+</body>
+</html>

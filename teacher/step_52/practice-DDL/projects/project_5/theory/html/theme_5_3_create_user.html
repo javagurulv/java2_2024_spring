@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CREATE USER в MySQL</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    p, pre, code {
+      margin-bottom: 10px;
+    }
+    pre {
+      background-color: #f5f5f5;
+      padding: 10px;
+      overflow-x: auto;
+    }
+    code {
+      background-color: #f5f5f5;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+<h1>CREATE USER в MySQL</h1>
+
+<p>Команда <code>CREATE USER</code> в MySQL используется для создания нового пользователя в базе данных. Она позволяет создать учетную запись пользователя, которая будет иметь доступ к базе данных и выполнять определенные операции.</p>
+
+<p>Вот простое объяснение команды <code>CREATE USER</code> и примеры использования:</p>
+
+<ol>
+    <li>
+        <strong>CREATE USER:</strong> Команда <code>CREATE USER</code> используется для создания новой учетной записи пользователя в MySQL. Она позволяет задать имя пользователя и пароль для этой учетной записи.
+        <br><br>
+        Пример создания пользователя с именем "username" и паролем "password" в MySQL:
+        <pre><code>CREATE USER 'username'@'localhost' IDENTIFIED BY 'password';</code></pre>
+        <br>
+        Здесь:
+        <ul>
+            <li><code>'username'</code> - это имя пользователя, которое вы хотите присвоить.</li>
+            <li><code>'localhost'</code> - это хост, с которого пользователь будет подключаться. В данном случае, 'localhost' означает, что пользователь может подключаться только с локальной машины. Вы можете указать другой хост или использовать '%' для разрешения подключения с любого хоста.</li>
+            <li><code>'password'</code> - это пароль для пользователя. Замените его на желаемый пароль.</li>
+        </ul>
+    </li>
+    <li>
+        <strong>Примеры использования CREATE USER:</strong>
+        <ol>
+            <li>Создание пользователя с именем "john" и паролем "pass123":
+                <pre><code>CREATE USER 'john'@'localhost' IDENTIFIED BY 'pass123';</code></pre>
+            </li>
+            <li>Создание пользователя с именем "mary" и паролем "marypass" для подключения с любого хоста:
+                <pre><code>CREATE USER 'mary'@'%' IDENTIFIED BY 'marypass';</code></pre>
+            </li>
+            <li>Создание пользователя с именем "guest"
+
+                без пароля (анонимный доступ):
+                <pre><code>CREATE USER 'guest'@'localhost' IDENTIFIED WITH mysql_native_password BY '';</code></pre>
+            </li>
+        </ol>
+    </li>
+</ol>
+
+<p>Обратите внимание, что создание пользователя только устанавливает учетную запись пользователя в базе данных, но не назначает ему привилегии доступа. Для назначения привилегий пользователю используйте команду GRANT.</p>
+</body>
+</html>

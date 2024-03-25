@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Ограничение NOT NULL в базах данных</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #666;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    code {
+      background-color: #f5f5f5;
+      color: #333;
+      font-family: "Courier New", monospace;
+      padding: 2px 4px;
+    }
+  </style>
+</head>
+<body>
+<h1>Ограничение NOT NULL в базах данных</h1>
+
+<p>Ограничение NOT NULL используется в базах данных для указания, что определенное поле или столбец не может содержать пустое значение (NULL).</p>
+
+<p>Простыми словами, ограничение NOT NULL гарантирует, что в поле или столбце должно быть указано конкретное значение, и оно не может быть пустым или отсутствовать.</p>
+
+<p>Когда поле имеет ограничение NOT NULL, при попытке вставки новой записи в таблицу, значение этого поля должно быть указано. Если значение не указано или является пустым, база данных выдаст ошибку и не позволит выполнить операцию.</p>
+
+<p>Пример использования ограничения NOT NULL:</p>
+
+<p>Предположим, у нас есть таблица "users" с полями "id", "name" и "email". Мы хотим, чтобы все записи в таблице имели значения для полей "name" и "email". Мы можем определить эти поля с использованием ограничения NOT NULL следующим образом:</p>
+
+<code>CREATE TABLE users (<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;id INT PRIMARY KEY,<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;name VARCHAR(50) NOT NULL,<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;email VARCHAR(100) NOT NULL<br>
+  );</code>
+
+<p>В этом примере мы указываем ограничение NOT NULL для полей "name" и "email". Теперь, при попытке вставки новой записи без указания значений для этих полей или с пустыми значениями, база данных выдаст ошибку и не позволит выполнить операцию.</p>
+
+</body>
+</html>

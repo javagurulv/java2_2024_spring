@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Пример создания VIEW для упрощения объединения таблиц</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+    }
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+    p {
+      margin-bottom: 1.5em;
+    }
+    pre {
+      background-color: #f4f4f4;
+      padding: 10px;
+      overflow-x: auto;
+    }
+    code {
+      font-family: Consolas, monospace;
+      font-size: 14px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+<h1>Пример создания VIEW для упрощения объединения таблиц</h1>
+<p>Допустим, у нас есть две таблицы: "orders" и "customers".</p>
+<p>Таблица "orders" содержит информацию о заказах, включая поле "customer_id", которое связывает заказы с соответствующими клиентами в таблице "customers".</p>
+<p>Мы можем создать VIEW, чтобы упростить объединение этих таблиц и получить информацию о заказах с именами клиентов.</p>
+<p>Вот пример создания VIEW для упрощения объединения таблиц:</p>
+<pre><code>CREATE VIEW orders_with_customer_info AS
+SELECT o.order_id, o.order_date, c.customer_name
+FROM orders o
+JOIN customers c ON o.customer_id = c.customer_id;</code></pre>
+<p>В этом примере мы создаем VIEW с именем "orders_with_customer_info". VIEW будет содержать информацию о заказах, включая идентификатор заказа, дату заказа и имя клиента. Запрос объединяет таблицы "orders" и "customers" на основе поля "customer_id" и выбирает только необходимые столбцы.</p>
+<p>Теперь мы можем выполнять запросы к этому VIEW, чтобы получить информацию о заказах с именами клиентов:</p>
+<pre><code>SELECT * FROM orders_with_customer_info;</code></pre>
+<p>Этот запрос вернет все записи из VIEW "orders_with_customer_info", которые объединяют данные из таблиц "orders" и "customers".</p>
+<p>Использование VIEW в таком случае позволяет упростить сложное объединение таблиц и получить удобное логическое представление данных, которое можно использовать для выполнения запросов и упрощения работы с данными.</p>
+</body>
+</html>

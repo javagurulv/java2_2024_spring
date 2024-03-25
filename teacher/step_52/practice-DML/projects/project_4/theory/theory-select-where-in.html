@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Описание команды SELECT с использованием операторов IN и NOT IN</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 24px;
+    }
+
+    p {
+      color: #666;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    code {
+      font-family: Consolas, monospace;
+      font-size: 14px;
+      background-color: #f5f5f5;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+
+    .sql-code {
+      background-color: #f1f1f1;
+      padding: 10px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+<h1>Команда SELECT с использованием операторов IN и NOT IN</h1>
+
+<p>
+    Команда <code>SELECT</code> с оператором <code>IN</code> позволяет выбирать данные, значения которых совпадают с указанным списком значений.
+    Оператор <code>NOT IN</code>, наоборот, позволяет выбирать данные, значения которых не совпадают с указанным списком значений.
+</p>
+
+<h2>Пример 1: SELECT с использованием оператора IN:</h2>
+
+<div class="sql-code">
+    <code>SELECT * FROM users WHERE city IN ('London', 'New York', 'Paris');</code>
+</div>
+
+<p>
+    В этом примере мы выбираем все столбцы (<code>*</code>) из таблицы "users" с условием <code>city IN ('London', 'New York', 'Paris')</code>.
+    Это означает, что мы выбираем только те строки, где значение столбца "city" совпадает с одним из значений ('London', 'New York', 'Paris').
+</p>
+
+<h2>Пример 2: SELECT с использованием оператора NOT IN:</h2>
+
+<div class="sql-code">
+    <code>SELECT * FROM products WHERE category NOT IN ('Electronics', 'Clothing');</code>
+</div>
+
+<p>
+    В этом примере мы выбираем все столбцы (<code>*</code>) из таблицы "products" с условием <code>category NOT IN ('Electronics', 'Clothing')</code>.
+    Это означает, что мы выбираем только те строки, где значение столбца "category" не совпадает ни с одним из значений ('Electronics', 'Clothing').
+</p>
+
+<h2>Заключение</h2>
+<p>
+    Команда <code>SELECT</code> с операторами <code>IN</code> и <code>NOT IN</code> позволяет гибко фильтровать данные на основе списков значений.
+    Это может быть полезно, например, для выборки пользователей из определенных городов, продуктов из определенных категорий или заказов, которые не принадлежат определенному списку статусов.
+</p>
+
+</body>
+</html>

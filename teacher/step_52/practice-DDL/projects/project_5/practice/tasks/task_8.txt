@@ -1,0 +1,2 @@
+Напишите команды SQL для удаления
+select привилегии у роли local_insert_update_role.

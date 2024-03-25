@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Команда CREATE INDEX в SQL</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+    }
+    h1 {
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    p {
+      color: #666;
+      font-size: 16px;
+    }
+    code {
+      background-color: #f5f5f5;
+      padding: 2px 4px;
+      color: #333;
+      font-size: 14px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+<h1>Команда CREATE INDEX в SQL</h1>
+<p>Команда CREATE INDEX в SQL используется для создания индекса на одном или нескольких столбцах таблицы. Индексы ускоряют операции поиска и сортировки данных в базе данных.</p>
+<p>Основной синтаксис команды CREATE INDEX выглядит следующим образом:</p>
+<pre><code>CREATE INDEX index_name
+ON table_name (column1, column2, ...);</code></pre>
+<p>Где:</p>
+<ul>
+    <li><code>CREATE INDEX</code>: ключевые слова, указывающие на создание индекса.</li>
+    <li><code>index_name</code>: имя индекса, которое вы хотите задать.</li>
+    <li><code>table_name</code>: название таблицы, на которую вы хотите создать индекс.</li>
+    <li><code>(column1, column2, ...)</code>: список столбцов, для которых вы хотите создать индекс.</li>
+</ul>
+<p>Пример команды CREATE INDEX:</p>
+<pre><code>CREATE INDEX idx_customers_name
+ON customers (name);</code></pre>
+<p>В этом примере мы создаем индекс с именем "idx_customers_name" на столбце "name" в таблице "customers". Индекс ускоряет операции поиска и сортировки данных по значению в столбце "name".</p>
+<p>Индексы в базе данных помогают ускорить операции поиска и сортировки данных, снижают объем сканирования, ускоряют время доступа, оптимизируют сортировку и улучшают производительность соединений между таблицами.</p>
+</body>
+</html>

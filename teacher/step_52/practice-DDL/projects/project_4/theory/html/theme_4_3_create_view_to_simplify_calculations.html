@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Пример создания VIEW для упрощения вычислений</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+    }
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+    p {
+      margin-bottom: 1.5em;
+    }
+    pre {
+      background-color: #f4f4f4;
+      padding: 10px;
+      overflow-x: auto;
+    }
+    code {
+      font-family: Consolas, monospace;
+      font-size: 14px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+<h1>Пример создания VIEW для упрощения вычислений</h1>
+<p>Допустим, у нас есть таблицы "orders" и "order_items".</p>
+<p>Таблица "orders" содержит информацию о заказах, а таблица "order_items" содержит информацию о товарах в каждом заказе, включая поля "order_id", "product_id" и "quantity".</p>
+<p>Мы хотим создать VIEW, который будет предоставлять сумму стоимости каждого заказа, вычисленную на основе цены и количества товаров в каждом заказе.</p>
+<p>Вот пример создания VIEW для упрощения вычислений с использованием агрегатной функции SUM():</p>
+<pre><code>CREATE VIEW order_totals AS
+SELECT o.order_id, SUM(oi.quantity * p.price) AS total_cost
+FROM orders o
+JOIN order_items oi ON o.order_id = oi.order_id
+JOIN products p ON oi.product_id = p.product_id
+GROUP BY o.order_id;</code></pre>
+<p>В этом примере мы создаем VIEW с именем "order_totals". VIEW будет содержать идентификатор заказа и общую стоимость каждого заказа, вычисленную путем умножения количества товаров на цену и суммирования этих значений для каждого заказа. Мы используем функцию SUM() для вычисления общей стоимости заказа.</p>
+<p>Теперь мы можем выполнять запросы к этому VIEW, чтобы получить информацию о стоимости каждого заказа:</p>
+<pre><code>SELECT * FROM order_totals;</code></pre>
+<p>Этот запрос вернет все записи из VIEW "order_totals", включая информацию о заказах и общую стоимость каждого заказа.</p>
+<p>Это более сложный пример, где объединяются несколько таблиц и используется агрегатная функция для вычисления общей стоимости заказа. VIEW позволяет упростить сложные вычисления и предоставляет удобное логическое представление данных для выполнения запросов и упрощения работы с данными.</p
+
+>
+</body>
+</html>

@@ -1,0 +1,45 @@
+Ваша задача: ознакомиться с записями вводных лекций по
+SQL и реляционным базам данных.
+
+SQL basics:
+Viktor: https://www.youtube.com/watch?v=qIippH729UI
+Ruslan: https://www.youtube.com/watch?v=sBwJOiwizCU
+
+SQL advanced:
+Viktor: https://www.youtube.com/watch?v=H02bJB846GU
+Ruslan: https://www.youtube.com/watch?v=egzYiYNq9hI
+
+В этих лекциях и в интернете найти ответы на вопросы:
+
+1. Что такое реляционная база данных?
+2. Что такое СУБД?
+3. Что такое SQL?
+4. Как создавать таблицы в базе данных?
+5. Что такое CRUD операции?
+6. Примеры команды SQL insert.
+7. Примеры команды SQL select
+8. Примеры команды SQL update.
+9. Примеры команды SQL delete.
+10. Что такое связи между таблицами и какие они бывают?
+11. Что такое первичный ключ (primary key)?
+12. Что такое вторичный ключ (foreign key)?
+13. Примеры команды SQL join.
+
+
+Если ты не знаком с реляционными базами данных
+или плохо знаешь язык запросов SQL, то
+пройти как можно дальше туториал по SQL:
+https://sqlbolt.com/lesson/select_queries_introduction
+
+Если хочешь (задание не обязательное), то можешь пройти
+мини курс по SQL. В этом шага есть папки:
+practice-DDL (практические проекты по Data Definition Language)
+practice-DML (практические проекты по Data Manipulation Language)
+
+DDL и DML это две основные части языка SQL.
+
+Начните с проектов practice-DML, а потом переходи к practice-DDL.
+
+Если решишь все практические задачи мини курса по SQL,
+то получишь уверенность и практические знания в SQL,
+которые тебе понадобятся в следующих шагах проекта.

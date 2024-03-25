@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRANT в MySQL</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    p, pre, code {
+      margin-bottom: 10px;
+    }
+    pre {
+      background-color: #f5f5f5;
+      padding: 10px;
+      overflow-x: auto;
+    }
+    code {
+      background-color: #f5f5f5;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+<h1>GRANT в MySQL</h1>
+
+<p>Команда <code>GRANT</code> в MySQL используется для назначения привилегий доступа к базе данных и её объектам (таблицам, представлениям, процедурам и т. д.) для определенного пользователя или роли. Она позволяет установить, какие операции и действия разрешены для конкретного пользователя или роли.</p>
+
+<p>Вот простое объяснение команды <code>GRANT</code> и примеры использования:</p>
+
+<ol>
+    <li>
+        <strong>GRANT:</strong> Команда <code>GRANT</code> используется для назначения привилегий доступа. Она позволяет указать, какие привилегии разрешены для пользователя или роли и на какие объекты базы данных они применяются.
+        <br><br>
+        Пример назначения привилегии <code>SELECT</code> на таблицу "employees" для пользователя "username" в MySQL:
+        <pre><code>GRANT SELECT ON database_name.employees TO 'username'@'localhost';</code></pre>
+        <br>
+        Здесь:
+        <ul>
+            <li><code>SELECT</code> - это привилегия, которую мы назначаем. В данном случае, разрешается пользователю выполнение операции <code>SELECT</code> (чтение) на таблице "employees".</li>
+            <li><code>database_name</code> - это имя базы данных, в которой находится таблица "employees".</li>
+            <li><code>'username'@'localhost'</code> - это имя пользователя и хост, на которые применяется данная привилегия. В данном случае, указывает на пользователя "username" с подключением только с локальной машины.</li>
+        </ul>
+    </li>
+    <li>
+        <strong>Примеры использования GRANT:</strong>
+        <ol>
+            <li>Назначение привилегий <code>SELECT</code> и <code>INSERT</code> на все таблицы базы данных "mydb" для пользователя "john" с подключ
+
+                ением только с локальной машины:
+                <pre><code>GRANT SELECT, INSERT ON mydb.* TO 'john'@'localhost';</code></pre>
+            </li>
+            <li>Назначение всех привилегий на все таблицы всех баз данных для пользователя "admin" с любого хоста:
+                <pre><code>GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%';</code></pre>
+            </li>
+            <li>Назначение привилегий <code>UPDATE</code> на таблицу "products" и <code>DELETE</code> на таблицу "orders" для роли "manager":
+                <pre><code>GRANT UPDATE ON mydb.products, DELETE ON mydb.orders TO manager;</code></pre>
+            </li>
+        </ol>
+    </li>
+</ol>
+
+<p>Обратите внимание, что назначение привилегий должно быть выполнено администратором базы данных или пользователем с соответствующими привилегиями администрирования. При назначении привилегий убедитесь, что разрешаете только необходимые операции для безопасности и правильного функционирования базы данных.</p>
+</body>
+</html>

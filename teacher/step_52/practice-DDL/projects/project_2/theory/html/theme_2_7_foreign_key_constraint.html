@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Ограничение FOREIGN KEY</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    p {
+      color: #666;
+    }
+    code {
+      background-color: #f8f8f8;
+      padding: 2px 4px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+<h1>Ограничение FOREIGN KEY</h1>
+<p>Ограничение FOREIGN KEY в базе данных используется для связи двух таблиц между собой. Оно позволяет ссылаться на записи в одной таблице из другой таблицы.</p>
+<p>Ограничение FOREIGN KEY работает следующим образом:</p>
+<ol>
+  <li>Указание столбца-родителя: В таблице-дочерней необходимо указать столбец, который будет ссылаться на столбец-родителя в другой таблице.</li>
+  <li>Связь с таблицей-родителем: В ограничении FOREIGN KEY указывается, на какую таблицу и столбец происходит ссылка, то есть указывается таблица-родитель и столбец-родитель.</li>
+  <li>Проверка целостности данных: При использовании ограничения FOREIGN KEY, база данных будет проверять существование связанных записей в таблице-родителе перед выполнением операций в таблице-дочерней. Например, база данных не позволит удалить запись в таблице-родителе, если на нее есть ссылки из таблицы-дочерней.</li>
+</ol>
+<p>Пример использования ограничения FOREIGN KEY:</p>
+<pre><code>
+CREATE TABLE users (
+  id INT PRIMARY KEY,
+  name VARCHAR(50)
+);
+
+CREATE TABLE orders (
+  order_id INT PRIMARY KEY,
+  user_id INT,
+  order_date DATE,
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
+  </code></pre>
+<p>В этом примере мы указываем, что столбец "user_id" в таблице "orders" является внешним ключом, ссылается на столбец "id" в таблице "users". Это означает, что значения в столбце "user_id" в таблице "orders" должны существовать в столбце "id" в таблице "users". База данных будет автоматически проверять целостность данных и не позволит создать запись в таблице "orders", если значение "user_id" не существует в таблице "users".</p>
+<p>Вот пример таблицы с несколькими ограничениями FOREIGN KEY в одной таблице:</p>
+<pre><code>
+CREATE TABLE orders (
+  order_id INT PRIMARY KEY,
+  customer_id INT,
+  employee_id INT,
+  product_id INT,
+  order_date DATE,
+  FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
+  FOREIGN KEY (employee_id) REFERENCES employees(employee_id),
+  FOREIGN KEY (product_id) REFERENCES products(product_id)
+);
+  </code></pre>
+<p>В этом примере у нас есть таблица "orders" с несколькими столбцами и ограничениями FOREIGN KEY, которые связывают эти столбцы с другими таблицами.</p>
+<ul>
+  <li>Столбец "customer_id" ссылается на столбец "customer_id" в таблице "customers".</li>
+  <li>Столбец "employee_id" ссылается на столбец "employee_id" в таблице "employees".</li>
+  <li>Столбец "product_id" ссылается на столбец "product_id" в таблице "products".</li>
+</ul>
+<p>Таким образом, каждое ограничение FOREIGN KEY обеспечивает связь с соответствующей таблицей и столбцом. База данных будет автоматически проверять целостность данных и не позволит создать запись в таблице "orders", если значения в столбцах "customer_id", "employee_id" и "product_id" не существуют в соответствующих таблицах "customers", "employees" и "products".</p>
+</body>
+</html>

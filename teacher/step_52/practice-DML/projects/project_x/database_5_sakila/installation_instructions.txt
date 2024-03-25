@@ -1,0 +1,20 @@
+
+1. Download all files and place it in one directory on your computer:
+sakila-data.sql
+sakila-schema.sql
+
+2. Open MySQL Workbench application and execute all SQL commands from:
+sakila-schema.sql to create a database schema.
+
+
+3. In MySQL refresh schema list and check if "sakila" schema exists,
+select it.
+
+
+4. Open MySQL Workbench application and execute all SQL commands from:
+sakila-data.sql to load sample data to a database schema.
+
+
+5. Database diagram can be found sakila-structure.png:
+https://dev.mysql.com/doc/sakila/en/sakila-structure.html
+https://www3.ntu.edu.sg/home/ehchua/programming/sql/SampleDatabases.html

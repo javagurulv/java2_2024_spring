@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CREATE ROLE в базе данных</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    p, pre, code {
+      margin-bottom: 10px;
+    }
+    pre {
+      background-color: #f5f5f5;
+      padding: 10px;
+      overflow-x: auto;
+    }
+    code {
+      background-color: #f5f5f5;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+<h1>CREATE ROLE в базе данных</h1>
+
+<p>Команда <code>CREATE ROLE</code> в базе данных используется для создания роли, которая является группой пользователей с общими правами доступа.</p>
+
+<p>Давайте представим, что у нас есть база данных для онлайн-магазина, и мы хотим создать роль "модератор". Роль "модератор" будет иметь право на редактирование и удаление отзывов о товарах.</p>
+
+<p>Пример команды <code>CREATE ROLE</code> для создания роли "модератор" в базе данных:</p>
+
+<pre><code>CREATE ROLE moderator;</code></pre>
+
+<p>После выполнения этой команды, роль "модератор" будет создана. Теперь мы можем назначать эту роль определенным пользователям.</p>
+
+<p>Пример назначения роли "модератор" для пользователя "john" в базе данных:</p>
+
+<pre><code>GRANT moderator TO john;</code></pre>
+
+<p>Теперь пользователь "john" получил роль "модератор" и все связанные с ней права доступа. Это означает, что он может редактировать и удалять отзывы о товарах в базе данных.</p>
+
+<p>Команда CREATE ROLE позволяет создавать роли и определять их набор прав доступа. Это удобный способ группировать пользователей и управлять их правами в базе данных.</p>
+</body>
+</html>

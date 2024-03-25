@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Использование команды CREATE VIEW</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+    }
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+    p {
+      margin-bottom: 1.5em;
+    }
+    pre {
+      background-color: #f4f4f4;
+      padding: 10px;
+      overflow-x: auto;
+    }
+    code {
+      font-family: Consolas, monospace;
+      font-size: 14px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+<h1>Использование команды CREATE VIEW</h1>
+<p>Команда <strong>CREATE VIEW</strong> используется для создания виртуальной таблицы в базе данных, которая представляет собой результат выполнения запроса. Вместо фактического хранения данных, VIEW представляет собой логическое представление данных, которое можно использовать для выполнения запросов и упрощения работы с данными.</p>
+<p>Простым языком, команда <strong>CREATE VIEW</strong> создает "взгляд" на данные в таблице или нескольких таблицах. VIEW сохраняет определенный запрос и позволяет вам обращаться к нему, как если бы это была отдельная таблица.</p>
+<p>Вот пример использования команды <strong>CREATE VIEW</strong>:</p>
+<pre><code>CREATE VIEW high_salary_employees AS
+SELECT first_name, last_name, salary
+FROM employees
+WHERE salary > 50000;</code></pre>
+<p>В этом примере мы создаем VIEW с именем "high_salary_employees". VIEW будет содержать имена и зарплаты сотрудников из таблицы "employees", где зарплата превышает 50 000.</p>
+<p>Теперь мы можем выполнять запросы к VIEW, чтобы получить данные высокооплачиваемых сотрудников:</p>
+<pre><code>SELECT * FROM high_salary_employees;</code></pre>
+<p>Этот запрос вернет все записи из VIEW "high_salary_employees", соответствующие условию зарплаты больше 50 000.</p>
+<p>Использование VIEW позволяет упростить запросы, скрыть сложности структуры таблиц и предоставить более высокоуровневое представление данных для удобства работы с базой данных.</p>
+</body>
+</html>

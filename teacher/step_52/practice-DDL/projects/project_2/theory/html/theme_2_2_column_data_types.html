@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Типы данных в SQL</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #666;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    code {
+      background-color: #f5f5f5;
+      color: #333;
+      font-family: "Courier New", monospace;
+      padding: 2px 4px;
+    }
+  </style>
+</head>
+<body>
+<h1>Типы данных в SQL</h1>
+
+<p>При создании таблицы с помощью команды CREATE TABLE в SQL,
+    определяются столбцы таблицы и их типы данных.</p>
+
+<p>Вот некоторые общие типы данных, которые могут быть использованы
+    при определении столбцов:</p>
+
+<ol>
+    <li>INT (целое число): Представляет целочисленные значения, например, 1, 10, -5.</li>
+    <li>VARCHAR(n) (переменная длина строки): Представляет строки переменной длины, где "n" указывает максимальную длину строки.</li>
+    <li>CHAR(n) (фиксированная длина строки): Представляет строки фиксированной длины, где "n" указывает точную длину строки.</li>
+    <li>DECIMAL(p, s) (десятичное число): Представляет числа с фиксированной точностью и масштабом.</li>
+    <li>DATE (дата): Представляет дату.</li>
+    <li>TIME (время): Представляет время.</li>
+    <li>BOOLEAN (логическое значение): Представляет булево значение true или false.</li>
+</ol>
+
+<p>Это лишь некоторые примеры типов данных, которые могут быть
+    использованы при определении столбцов. В SQL существуют и другие
+    типы данных, которые могут быть использованы в зависимости от
+    конкретных потребностей и типа базы данных.</p>
+
+<p>Вот несколько примеров создания столбцов с разными типами данных в SQL:</p>
+
+<code>
+    CREATE TABLE employees (<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;id INT,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;name VARCHAR(50),<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;age INT,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;salary DECIMAL(10, 2)<br>
+    );
+</code>
+
+<br>
+<br>
+
+<code>
+    CREATE TABLE products (<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;id INT,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;name VARCHAR(100),<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;description VARCHAR(255)<br>
+    );
+</code>
+
+<br>
+<br>
+
+<code>
+    CREATE TABLE customers (<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;id INT,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;name CHAR(50),<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;email CHAR(100)<br>
+    );
+</code>
+
+<br>
+<br>
+
+<code>
+    CREATE TABLE orders (<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;id INT,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;order_number VARCHAR(10),<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;total_amount DECIMAL(10, 2)<br>
+    );
+</code>
+
+<br>
+<br>
+
+<code>
+    CREATE TABLE tasks (<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;id INT,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;task_name VARCHAR(50),<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;due_date DATE<br>
+    );
+</code>
+
+<br>
+<br>
+
+<code>
+    CREATE TABLE appointments (<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;id INT,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;client_name VARCHAR(50),<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;appointment_time TIME<br>
+    );
+</code>
+
+<br>
+<br>
+
+<code>
+    CREATE TABLE flags (<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;id INT,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;flag_name VARCHAR(50),<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;is_active BOOLEAN<br>
+    );
+</code>
+
+<p>Это всего лишь некоторые примеры создания столбцов с разными типами данных.
+    Фактические типы данных и их размеры могут варьироваться в зависимости от
+    конкретных требований вашего проекта и используемой СУБД (системы управления базами данных).</p>
+
+</body>
+</html>

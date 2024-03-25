@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Пример миграций в базе данных</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    p, pre, code {
+      margin-bottom: 10px;
+    }
+    pre {
+      background-color: #f5f5f5;
+      padding: 10px;
+      overflow-x: auto;
+    }
+    code {
+      background-color: #f5f5f5;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+<h1>Пример миграций в базе данных</h1>
+
+<pre><code>-- Миграция 1
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(50) NOT NULL,
+  email VARCHAR(100) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+-- Миграция 2
+ALTER TABLE users
+ADD COLUMN age INT;
+
+
+-- Миграция 3
+ALTER TABLE users
+ADD INDEX idx_email (email);
+
+
+-- Миграция 4
+ALTER TABLE users
+MODIFY COLUMN age SMALLINT;
+
+
+-- Миграция 5
+ALTER TABLE users
+ADD COLUMN address VARCHAR(200);
+
+
+-- Миграция 6
+ALTER TABLE users
+DROP COLUMN age;
+
+
+-- Миграция 7
+ALTER TABLE users
+CHANGE COLUMN email user_email VARCHAR(100);
+
+
+-- Миграция 8
+CREATE TABLE orders (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  order_number VARCHAR(20) NOT NULL,
+  user_id INT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);</code></pre>
+
+<p>Выше представлен пример миграций в базе данных. Каждая миграция представляет собой отдельное изменение структуры базы данных. В данном примере мы создаем таблицу "users", добавляем столбцы, создаем индекс, изменяем тип данных столбца, удаляем столбец, изменяем имя столбца и создаем таблицу "orders" с внешним ключом. Эти миграции могут быть применены последовательно для обновления схемы базы данных.</p>
+
+<p>Миграции помогают управлять изменениями в базе данных и обеспечивают контроль над ее структурой со временем.</p>
+</body>
+</html>

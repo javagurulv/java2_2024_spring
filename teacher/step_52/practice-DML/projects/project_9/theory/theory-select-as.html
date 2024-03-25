@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Оператор AS в команде SELECT</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    p {
+      color: #666;
+    }
+
+    code {
+      background-color: #f5f5f5;
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Команда SELECT с оператором AS</h1>
+
+<p>
+    Команда <code>SELECT</code> с оператором <code>AS</code> используется для переименования столбцов
+    или выражений в результатах выборки.
+</p>
+<p>
+    Оператор <code>AS</code> позволяет задать псевдонимы (алиасы) для столбцов
+    или выражений, чтобы результаты выборки были более понятными.
+</p>
+<h2>Синтаксис команды SELECT с оператором AS:</h2>
+<pre><code>SELECT column_name AS alias_name, ...
+FROM table_name;</code></pre>
+<h3>Пример 1: SELECT с оператором AS для переименования столбца:</h3>
+<pre><code>SELECT first_name AS name,
+       last_name AS surname
+FROM users;</code></pre>
+<p>
+    В этом примере мы выбираем столбцы "first_name" и "last_name"
+    из таблицы "users" и задаем им псевдонимы "name" и "surname"
+    соответственно. Теперь в результатах выборки соответствующие
+    столбцы будут называться "name" и "surname" вместо исходных имен столбцов.
+</p>
+<h3>Пример 2: SELECT с оператором AS для создания вычисляемого столбца:</h3>
+<pre><code>SELECT quantity, price, quantity * price AS total
+FROM orders;</code></pre>
+<p>
+    В этом примере мы выбираем столбцы "quantity" и "price" из таблицы
+    "orders" и создаем вычисляемый столбец "total", умножая значения
+    столбцов "quantity" и "price". Мы задаем этому вычисляемому столбцу
+    псевдоним "total". В результатах выборки будет содержаться столбец
+    "total", который представляет собой произведение "quantity" и "price".
+</p>
+<h2>Заключение</h2>
+<p>
+    Команда <code>SELECT</code> с оператором <code>AS</code> позволяет
+    изменять имена столбцов или создавать вычисляемые столбцы с псевдонимами,
+    чтобы результаты выборки были более читабельными.
+</p>
+</body>
+</html>

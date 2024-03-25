@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Стратегии генерации первичного ключа</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #666;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    code {
+      background-color: #f5f5f5;
+      color: #333;
+      font-family: "Courier New", monospace;
+      padding: 2px 4px;
+    }
+  </style>
+</head>
+<body>
+<h1>Стратегии генерации первичного ключа</h1>
+
+<p>При проектировании базы данных и выборе стратегии генерации первичного ключа, есть несколько распространенных подходов. Вот несколько стратегий генерации первичного ключа:</p>
+
+<ol>
+    <li>Автоинкрементное поле (Auto-increment):<br>
+        В этой стратегии первичный ключ генерируется автоматически базой данных при вставке новой записи. Обычно это поле с числовым типом данных, которое автоматически увеличивается с каждой новой записью. Например:<br>
+        <code>CREATE TABLE users (<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;id INT AUTO_INCREMENT PRIMARY KEY,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;name VARCHAR(50),<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;email VARCHAR(100)<br>
+            );</code></li>
+
+    <li>Уникальный идентификатор GUID (Globally Unique Identifier):<br>
+        В этой стратегии первичный ключ представлен в виде уникального идентификатора GUID, который представляет собой 128-битное значение. GUID генерируется на основе уникальных характеристик компьютера и текущего времени. Пример использования GUID в SQL:<br>
+        <code>CREATE TABLE users (<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;id VARCHAR(36) PRIMARY KEY,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;name VARCHAR(50),<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;email VARCHAR(100)<br>
+            );<br><br>
+
+            INSERT INTO users(id, name)<br>
+            VALUES(UUID(), 'John Doe'),<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(UUID(), 'Will Smith'),<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(UUID(), 'Mary Jane');</code></li>
+
+    <li>Пользовательский код или комбинация полей:<
+
+        br>
+        В этой стратегии первичный ключ генерируется на основе комбинации значений из одного или нескольких полей таблицы. Например, можно использовать сочетание имени и фамилии пользователя в качестве первичного ключа:<br>
+        <code>CREATE TABLE users (<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;first_name VARCHAR(50),<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;last_name VARCHAR(50),<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;PRIMARY KEY (first_name, last_name)<br>
+            );</code></li>
+</ol>
+
+<p>Выбор конкретной стратегии генерации первичного ключа зависит от требований вашего приложения, особенностей базы данных и предпочтений разработчиков.</p>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8">
+   <title>Типы индексов в базах данных</title>
+   <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+    }
+    h1 {
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    p {
+      color: #666;
+      font-size: 16px;
+    }
+    code {
+      background-color: #f5f5f5;
+      padding: 2px 4px;
+      color: #333;
+      font-size: 14px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+<h1>Типы индексов в базах данных</h1>
+<p>Существует несколько типов индексов, предназначенных для различных видов поиска и сортировки данных в базах данных.</p>
+<ul>
+   <li><strong>Обычный индекс (Regular/Index)</strong>: используется для ускорения поиска и сортировки данных. Может содержать повторяющиеся значения.</li>
+   <li><strong>Уникальный индекс (Unique Index)</strong>: требует, чтобы значения в индексируемом столбце были уникальными, предотвращает вставку дублирующихся записей.</li>
+   <li><strong>Полнотекстовый индекс (Full-Text Index)</strong>: используется для текстового поиска в больших объемах текстовых данных.</li>
+   <li><strong>Составной индекс (Composite Index)</strong>: создается на основе комбинации нескольких столбцов, оптимизирует операции поиска, сортировки и соединения.</li>
+   <li><strong>Кластерный индекс (Clustered Index)</strong>: определяет физический порядок данных в таблице, позволяет быстро получать данные в определенном порядке.</li>
+</ul>
+<p>Конкретный синтаксис и возможности типов индексов могут различаться в зависимости от используемой СУБД.</p>
+<p>Примеры каждого из типов индексов:</p>
+<pre><code>CREATE INDEX idx_last_name ON employees (last_name);</code></pre>
+<pre><code>CREATE UNIQUE INDEX idx_email ON users (email);</code></pre>
+<pre><code>CREATE FULLTEXT INDEX idx_content ON articles (content);</code></pre>
+<pre><code>CREATE INDEX idx_first_last_name ON employees (first_name, last_name);</code></pre>
+<pre><code>CREATE CLUSTERED INDEX idx_date ON orders (order_date);</code></pre>
+</body>
+</html>
