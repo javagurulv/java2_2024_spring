@@ -6,7 +6,6 @@ import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 

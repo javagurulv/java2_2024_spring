@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Component
-public class TravelCalculatePremiumUnderwriting {
+class TravelCalculatePremiumUnderwriting {
 
     @Autowired
     private DateTimeService dateTimeService;
