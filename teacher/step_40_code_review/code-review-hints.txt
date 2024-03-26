@@ -1,0 +1,16 @@
+На какие моменты обратить внимание при code review?
+
+Далее приведем часто встречающиеся недочеты
+в коде требующие улучшений:
+
+1. Использование Lombok аннотаций для Spring
+компонентов (@Component) и сервисов (@Service).
+Lombok аннотации используются на простых классах
+такие как request, response, database entity.
+Для Spring компонентов вместо Lombok аннотаций
+лучше явно прописать нужный конструктор класса.
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Service
+class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
