@@ -1,0 +1,23 @@
+Ниже приведены темы, которые были включены
+в курс по SQL DML (Data Manipulation Language):
+
+1. Simple SELECT
+2. SELECT WHERE
+3. SELECT WHERE AND OR
+4. SELECT WHERE BETWEEN, NOT BETWEEN, IN, NOT IN
+5. SELECT WHERE LIKE
+6. SELECT ORDER BY
+7. SELECT DISTINCT, LIMIT
+8. Business analysis basics, practice
+9. SELECT AS, IS NULL, IS NOT NULL
+10. SELECT GROUP BY, Aggregate functions
+11. SELECT INNER JOIN
+12. SELECT LEFT/RIGHT JOIN
+13. INSERT
+14. UPDATE
+15. DELETE
+X. Complex database examples
+
+Каждая из этих тем является важной частью SQL DML.
+Охватить все темы в одном практическом курсе невозможно,
+поэтому многие возможности SQL DML остались вне курса.

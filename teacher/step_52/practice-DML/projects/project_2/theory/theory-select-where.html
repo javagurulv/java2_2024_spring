@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Описание команды SELECT с условиями</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 24px;
+    }
+
+    p {
+      color: #666;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    code {
+      font-family: Consolas, monospace;
+      font-size: 14px;
+      background-color: #f5f5f5;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+
+    .sql-code {
+      background-color: #f1f1f1;
+      padding: 10px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+<h1>Команда SELECT в SQL с условиями</h1>
+
+<p>
+    Команда <code>SELECT</code> в SQL используется для выборки данных из таблицы или таблиц базы данных.
+    Когда мы добавляем простые условия в команду SELECT, мы можем фильтровать данные и получать только те строки, которые удовлетворяют определенным условиям.
+</p>
+
+<h2>Примеры команд SELECT с условиями:</h2>
+
+<div class="sql-code">
+    <p>Пример 1: Выборка всех столбцов из таблицы "users" с определенным условием:</p>
+    <code>SELECT * FROM users WHERE age > 30;</code>
+</div>
+
+<div class="sql-code">
+    <p>Пример 2: Выборка одного столбца из таблицы "buildings" с определенным условием:</p>
+    <code>SELECT building_name FROM buildings WHERE capacity > 100;</code>
+</div>
+
+<div class="sql-code">
+    <p>Пример 3: Выборка нескольких столбцов из таблицы "products" с определенным условием:</p>
+    <code>SELECT product_name, price FROM products WHERE category = 'Electronics';</code>
+</div>
+
+
+<h2>Заключение</h2>
+<p>
+    Команда <code>SELECT</code> с простыми условиями позволяет фильтровать данные
+    на основе определенных критериев, чтобы получить только нужные строки.
+</p>
+
+<p>
+    Условия могут включать операторы сравнения (например, <code>=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>!=</code>).
+</p>
+
+<p>
+    Это позволяет более гибко настраивать выборку данных в соответствии с требуемыми условиями.
+</p>
+
+</body>
+</html>

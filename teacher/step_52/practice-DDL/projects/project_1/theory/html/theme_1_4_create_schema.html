@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Различие между CREATE DATABASE и CREATE SCHEMA в MySQL</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #666;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    code {
+      background-color: #f5f5f5;
+      color: #333;
+      font-family: "Courier New", monospace;
+      padding: 2px 4px;
+    }
+  </style>
+</head>
+<body>
+<h1>Различие между CREATE DATABASE и CREATE SCHEMA в MySQL</h1>
+
+<p>В MySQL команды CREATE DATABASE и CREATE SCHEMA по сути дела выполняют одну и ту же задачу - они создают новый контейнер для хранения данных в базе данных.</p>
+
+<p>Однако существует небольшое различие в терминологии и использовании этих команд:</p>
+
+<ol>
+    <li>
+        <p><strong>CREATE DATABASE:</strong> Команда CREATE DATABASE используется для создания новой базы данных в MySQL. При использовании этой команды вы создаете новый контейнер, который будет содержать таблицы, представления, хранимые процедуры и другие объекты базы данных. CREATE DATABASE также может принимать дополнительные параметры, такие как кодировка и сортировка базы данных.</p>
+
+        <p>Пример использования CREATE DATABASE:</p>
+
+        <code>CREATE DATABASE my_database;</code>
+    </li>
+    <li>
+        <p><strong>CREATE SCHEMA:</strong> В MySQL термин "схема" является синонимом для "базы данных". Команда CREATE SCHEMA также используется для создания нового контейнера данных в базе данных MySQL. Технически, создание схемы и создание базы данных в MySQL идентичны.</p>
+
+        <p>Пример использования CREATE SCHEMA:</p>
+
+        <code>CREATE SCHEMA my_schema;</code>
+    </li>
+</ol>
+
+<p>Таким образом, различие между CREATE DATABASE и CREATE SCHEMA в MySQL сводится к терминологии. Обе команды выполняют одно и то же действие - создание нового контейнера для хранения данных.</p>
+
+<p>Вы можете использовать любую из этих команд в зависимости от вашего предпочтения или согласно конкретным требованиям вашей системы.</p>
+
+</body>
+</html>

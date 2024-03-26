@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8">
+   <title>Команда CREATE TABLE</title>
+   <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #666;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    code {
+      background-color: #f5f5f5;
+      color: #333;
+      font-family: "Courier New", monospace;
+      padding: 2px 4px;
+    }
+  </style>
+</head>
+<body>
+<h1>Команда CREATE TABLE</h1>
+
+<p>Команда CREATE TABLE в SQL используется для создания новой таблицы в базе данных.</p>
+
+<p>Она определяет название таблицы и структуру ее столбцов, включая типы данных и ограничения.</p>
+
+<p>Простое описание команды CREATE TABLE выглядит следующим образом:</p>
+
+<code>CREATE TABLE название_таблицы (<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;столбец1 тип_данных_1 ограничения,<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;столбец2 тип_данных_2 ограничения,<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;...<br>
+   );</code>
+
+<p>Название_таблицы - имя, которое вы выбираете для новой таблицы.</p>
+<p>Столбец - имя столбца в таблице.</p>
+<p>Тип_данных - определяет тип данных, который может содержаться в столбце (например, целые числа, строки, даты).</p>
+<p>Ограничения - дополнительные условия для столбца (например, ограничение на уникальность, NOT NULL, внешний ключ).</p>
+
+<p>Пример использования команды CREATE TABLE:</p>
+
+<code>CREATE TABLE users (<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;id INT,<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;fullName VARCHAR(50),<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;email VARCHAR(100),<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;age INT<br>
+   );</code>
+
+<p>В этом примере создается таблица "users" с четырьмя столбцами:</p>
+<ul>
+   <li>"id" (тип INT)</li>
+   <li>"fullName" (тип VARCHAR с максимальной длиной 50 символов)</li>
+   <li>"email" (тип VARCHAR с максимальной длиной 100 символов)</li>
+   <li>"age" (тип INT)</li>
+</
+
+ul>
+
+</body>
+</html>

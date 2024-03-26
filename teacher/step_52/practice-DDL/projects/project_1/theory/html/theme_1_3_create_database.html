@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Команда CREATE DATABASE в MySQL</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #666;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    code {
+      background-color: #f5f5f5;
+      color: #333;
+      font-family: "Courier New", monospace;
+      padding: 2px 4px;
+    }
+  </style>
+</head>
+<body>
+<h1>Команда CREATE DATABASE в MySQL</h1>
+
+<p>Команда CREATE DATABASE в MySQL используется для создания новой базы данных. База данных - это организованная коллекция данных, которая содержит таблицы, представления, хранимые процедуры и другие объекты.</p>
+
+<p>Вот простое объяснение команды CREATE DATABASE:</p>
+
+<code>CREATE DATABASE database_name;</code>
+
+<p>Здесь <code>database_name</code> - это имя, которое вы хотите присвоить новой базе данных.</p>
+
+<p>Примеры создания базы данных в MySQL:</p>
+
+<ol>
+  <li>
+    <p>Создание базы данных с именем "my_database":</p>
+    <code>CREATE DATABASE my_database;</code>
+  </li>
+  <li>
+    <p>Создание базы данных с указанием кодировки и сортировки:</p>
+    <code>CREATE DATABASE my_database<br>
+      CHARACTER SET utf8<br>
+      COLLATE utf8_general_ci;</code>
+  </li>
+  <li>
+    <p>Создание базы данных с указанием расположения файла данных:</p>
+    <code>CREATE DATABASE my_database<br>
+      DATA DIRECTORY '/path/to/data_directory'<br>
+      DEFAULT CHARACTER SET utf8<br>
+      DEFAULT COLLATE utf8_general_ci;</code>
+  </li>
+</ol>
+
+<p>Обратите внимание, что при создании базы данных по умолчанию используется кодировка и сортировка, установленная для сервера MySQL. Вы также можете указать другие параметры, такие как расположение файла данных, если требуется.</p>
+
+<p>Команда CREATE DATABASE создает новую базу данных, которая может быть использована для создания таблиц и других объектов базы данных.</p>
+
+<p>После создания базы данных, вы можете использовать команду USE database_name для выбора этой базы данных и начала работы с ней.</p>
+
+</body>
+</html>

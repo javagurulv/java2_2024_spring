@@ -1,0 +1,4 @@
+Напишите команды SQL для создания пользователя app_insert_update_user,
+роли local_insert_update_role, назначить этой роли права на
+select, insert и update и назначить эту роль
+пользователю app_insert_update_user.

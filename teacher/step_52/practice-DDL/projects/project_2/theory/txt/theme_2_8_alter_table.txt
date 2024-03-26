@@ -1,0 +1,71 @@
+Команда ALTER TABLE в SQL используется для изменения структуры существующей таблицы. С помощью ALTER TABLE можно добавить новые столбцы, изменить существующие столбцы, удалить столбцы, изменить типы данных и добавить ограничения на таблицу. Вот некоторые примеры использования команды ALTER TABLE:
+
+1. Добавление нового столбца:
+```sql
+   ALTER TABLE table_name
+   ADD column_name data_type;
+```
+   Пример:
+```sql
+   ALTER TABLE customers
+   ADD email VARCHAR(100);
+```
+Этот пример добавляет новый столбец "email" типа VARCHAR(100)
+в таблицу "customers".
+
+2. Изменение типа данных существующего столбца:
+```sql
+   ALTER TABLE table_name
+   MODIFY column_name new_data_type;
+```
+   Пример:
+```sql
+   ALTER TABLE products
+   MODIFY price DECIMAL(10, 2);
+```
+Этот пример изменяет тип данных столбца "price" на DECIMAL(10, 2)
+в таблице "products".
+
+3. Переименование столбца:
+```sql
+   ALTER TABLE table_name
+   CHANGE old_column_name new_column_name data_type;
+```
+   Пример:
+```sql
+   ALTER TABLE employees
+   CHANGE emp_name full_name VARCHAR(50);
+```
+Этот пример переименовывает столбец "emp_name" в "full_name"
+и также изменяет его тип данных на VARCHAR(50) в таблице "employees".
+
+4. Удаление столбца:
+```sql
+   ALTER TABLE table_name
+   DROP column_name;
+```
+   Пример:
+```sql
+   ALTER TABLE orders
+   DROP order_date;
+```
+Этот пример удаляет столбец "order_date" из таблицы "orders".
+
+5. Добавление ограничения:
+```sql
+   ALTER TABLE table_name
+   ADD CONSTRAINT constraint_name constraint_definition;
+```
+   Пример:
+```sql
+   ALTER TABLE users
+   ADD CONSTRAINT fk_users_roles
+   FOREIGN KEY (role_id) REFERENCES roles(role_id);
+```
+Этот пример добавляет ограничение FOREIGN KEY на столбец "role_id"
+в таблице "users", связывая его с столбцом "role_id" в таблице "roles".
+
+
+Команда ALTER TABLE предоставляет гибкость для изменения
+структуры существующих таблиц в базе данных, позволяя вносить
+изменения в столбцы, типы данных и ограничения.

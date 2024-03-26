@@ -1,0 +1,28 @@
+
+1. Download all files and place it in one directory on your computer:
+employees.sql
+load_departments.dump
+load_dept_emp.dump
+load_dept_manager.dump
+load_employees.dump
+load_salaries1.dump
+load_salaries2.dump
+load_salaries3.dump
+load_titles.dump
+show_elapsed.sql
+
+
+2. Open MySQL Workbench application and load database data
+to server:
+File -> Run SQL Script ... -> select employees.sql and open it
+
+
+3. Wait until load of database will finish successfully.
+
+
+4. In MySQL refresh schema list and check if "employees" schema exists,
+select it and start using it.
+
+
+5. Database diagram can be found: employees-schema.png.
+https://dev.mysql.com/doc/employee/en/sakila-structure.html

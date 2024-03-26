@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Удаление базы данных и схемы в MySQL</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #666;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    code {
+      background-color: #f5f5f5;
+      color: #333;
+      font-family: "Courier New", monospace;
+      padding: 2px 4px;
+    }
+  </style>
+</head>
+<body>
+<h1>Удаление базы данных и схемы в MySQL</h1>
+
+<p>В MySQL команды DROP DATABASE и DROP SCHEMA используются для удаления базы данных или схемы из сервера базы данных.</p>
+
+<ol>
+    <li>
+        <p><strong>DROP DATABASE:</strong> Команда DROP DATABASE используется для удаления существующей базы данных в MySQL. Это означает, что все данные, таблицы, представления, хранимые процедуры и другие объекты, связанные с этой базой данных, будут удалены и недоступны. Поэтому будьте осторожны при использовании этой команды, чтобы не потерять важные данные.</p>
+
+        <p>Пример использования DROP DATABASE:</p>
+
+        <code>DROP DATABASE my_database;</code>
+    </li>
+    <li>
+        <p><strong>DROP SCHEMA:</strong> Команда DROP SCHEMA используется для удаления существующей схемы в MySQL. В контексте MySQL, схема и база данных являются практически синонимами. Поэтому DROP SCHEMA выполняет ту же функцию, что и DROP DATABASE - удаляет все данные и объекты, связанные с данной схемой.</p>
+
+        <p>Пример использования DROP SCHEMA:</p>
+
+        <code>DROP SCHEMA my_schema;</code>
+    </li>
+</ol>
+
+<p>В обоих случаях, DROP DATABASE и DROP SCHEMA приведут к удалению всех объектов и данных, связанных с указанной базой данных или схемой. Поэтому убедитесь, что вы осознаете последствия удаления и создайте резервные копии данных, если необходимо.</p>
+
+</body>
+</html>

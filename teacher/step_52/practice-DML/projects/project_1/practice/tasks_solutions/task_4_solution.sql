@@ -1,0 +1,1 @@
+SELECT title, year_of_issue FROM movies;

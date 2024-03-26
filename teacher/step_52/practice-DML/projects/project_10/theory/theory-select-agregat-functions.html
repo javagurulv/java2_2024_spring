@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Агрегатные функции и оператор GROUP BY в SQL</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    h2 {
+      color: #666;
+    }
+
+    p {
+      color: #666;
+    }
+
+    code {
+      background-color: #f5f5f5;
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+<h1>Агрегатные функции и оператор GROUP BY в SQL</h1>
+<p>
+    В SQL можно использовать различные агрегатные функции в сочетании
+    с оператором GROUP BY для выполнения вычислений на группах строк.
+</p>
+<h2>Пример 1. COUNT</h2>
+<pre><code>SELECT category, COUNT(*) as count
+FROM products
+GROUP BY category;</code></pre>
+<p>
+    В этом примере используется функция COUNT для подсчета количества строк в каждой группе по категориям в таблице "products".
+</p>
+<h2>Пример 2. SUM</h2>
+<pre><code>SELECT department, SUM(salary) as total_salary
+FROM employees
+GROUP BY department;</code></pre>
+<p>
+    В этом примере используется функция SUM для суммирования значений столбца "salary" в каждой группе по отделам в таблице "employees".
+</p>
+<h2>Пример 3. AVG</h2>
+<pre><code>SELECT department, AVG(salary) as average_salary
+FROM employees
+GROUP BY department;</code></pre>
+<p>
+    В этом примере используется функция AVG для вычисления среднего значения столбца "salary" в каждой группе по отделам в таблице "employees".
+</p>
+<h2>Пример 4. MIN</h2>
+<pre><code>SELECT department, MIN(salary) as min_salary
+FROM employees
+GROUP BY department;</code></pre>
+<p>
+    В этом примере используется функция MIN для нахождения минимального значения столбца "salary" в каждой группе по отделам в таблице "employees".
+</p>
+<h2>Пример 5. MAX</h2>
+<pre><code>SELECT department, MAX(salary) as max_salary
+FROM employees
+GROUP BY department;</code></pre>
+<p>
+    В этом примере используется функция MAX для нахождения максимального значения столбца "salary" в каждой группе по отделам в таблице "employees".
+</p>
+<p>
+    Это только несколько примеров агрегатных функций, которые можно использовать с оператором GROUP BY.
+</p>
+<p>
+    В SQL существует и другие агрегатные функции, такие как STDDEV, VARIANCE, GROUP_CONCAT и другие, которые также могут быть полезными в различных ситуациях.
+</p>
+<h2>Заключение</h2>
+<p>
+    Агрегатные функции позволяют выполнять вычисления на группах строк и получать сводные данные для каждой группы. Они широко используются для анализа данных и вычислений в SQL.
+</p>
+</body>
+</html>

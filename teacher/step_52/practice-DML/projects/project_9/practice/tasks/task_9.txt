@@ -1,0 +1,7 @@
+Вывести информацию про всех клиентов
+дав в результате названия колонкам:
+first_name -> firstName
+last_name -> lastName
+email -> clientEmail
+phone -> clientCellPhone
+(воспользуйтесь SQL командой AS).

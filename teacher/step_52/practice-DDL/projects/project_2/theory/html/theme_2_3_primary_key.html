@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>PRIMARY KEY в SQL</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #666;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    code {
+      background-color: #f5f5f5;
+      color: #333;
+      font-family: "Courier New", monospace;
+      padding: 2px 4px;
+    }
+  </style>
+</head>
+<body>
+<h1>PRIMARY KEY в SQL</h1>
+
+<p>Понятие PRIMARY KEY (первичный ключ) в базе данных представляет
+    собой столбец или группу столбцов, которые однозначно идентифицируют
+    каждую запись в таблице.</p>
+
+<p>Вот несколько ключевых моментов, которые следует помнить о PRIMARY KEY:</p>
+
+<ol>
+    <li>Уникальность: Каждое значение первичного ключа в столбце (или столбцах) должно быть уникальным в пределах таблицы.</li>
+    <li>Не может быть NULL: Значения первичного ключа не могут быть пустыми (NULL).</li>
+    <li>Идентификация записей: PRIMARY KEY позволяет идентифицировать каждую запись в таблице.</li>
+    <li>Уникальный индекс: По умолчанию, создание PRIMARY KEY также создает уникальный индекс в таблице.</li>
+</ol>
+
+<p>Пример использования PRIMARY KEY:</p>
+
+<code>CREATE TABLE users (<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;id INT PRIMARY KEY,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;name VARCHAR(50),<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;email VARCHAR(100)<br>
+    );</code>
+
+<p>В этом примере каждая строка в таблице "users" будет иметь уникальное значение в столбце "id".</p>
+
+<p>В SQL есть несколько способов объявления первичного ключа в таблице.
+    Вот несколько разных вариантов:</p>
+
+<br>
+
+<code>CREATE TABLE users (<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;id INT PRIMARY KEY,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;name VARCHAR(50),<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;email VARCHAR(100)<br>
+    );</code>
+
+<br>
+<br>
+
+<code>CREATE TABLE orders (<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;order_id INT,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;customer_id INT,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;order_date DATE,<br>
+
+
+    &nbsp;&nbsp;&nbsp;&nbsp;PRIMARY KEY (order_id, customer_id)<br>
+    );
+</code>
+
+<br>
+<br>
+
+<code>CREATE TABLE products (<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;id INT AUTO_INCREMENT PRIMARY KEY,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;name VARCHAR(50),<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;price DECIMAL(10, 2)<br>
+    );
+</code>
+
+<br>
+<br>
+
+<code>CREATE TABLE employees (<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;id INT,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;name VARCHAR(50),<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;email VARCHAR(100),<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;CONSTRAINT pk_employees PRIMARY KEY (id)<br>
+    );</code>
+
+<p>Это лишь несколько примеров различных способов объявления
+    первичного ключа в таблице. Выбор конкретного способа зависит
+    от требований вашей базы данных и предпочтений разработчика.</p>
+
+</body>
+</html>

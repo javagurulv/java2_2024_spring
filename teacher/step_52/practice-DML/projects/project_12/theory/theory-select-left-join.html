@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Команда SELECT с операторами LEFT JOIN и RIGHT JOIN</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    h2 {
+      color: #666;
+    }
+
+    p {
+      color: #666;
+    }
+
+    code {
+      background-color: #f5f5f5;
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+<h1>Команда SELECT с операторами LEFT JOIN и RIGHT JOIN</h1>
+<p>
+    Команда SELECT с операторами LEFT JOIN и RIGHT JOIN используется для объединения строк из двух или более таблиц на основе совпадающих значений в указанных столбцах.
+</p>
+<h2>Пример 1: LEFT JOIN</h2>
+<pre><code>SELECT customers.customer_name, orders.order_id
+FROM customers
+LEFT JOIN orders
+ON customers.customer_id = orders.customer_id;</code></pre>
+<p>
+    В этом примере мы выбираем столбцы "customer_name" из таблицы "customers" и "order_id" из таблицы "orders" и объединяем их с помощью оператора LEFT JOIN. Условие ON <code>customers.customer_id = orders.customer_id</code> указывает, что строки должны быть объединены по значениям столбцов "customer_id" в обеих таблицах. Результат будет содержать имена клиентов и идентификаторы соответствующих заказов. Все строки из левой таблицы (customers) будут включены в результат, даже если для них нет соответствующих записей в правой таблице (orders).
+</p>
+<h2>Пример 2: RIGHT JOIN</h2>
+<pre><code>SELECT customers.customer_name, orders.order_id
+FROM customers
+RIGHT JOIN orders
+ON customers.customer_id = orders.customer_id;</code></pre>
+<p>
+    В этом примере мы выбираем столбцы "customer_name" из таблицы "customers" и "order_id" из таблицы "orders" и объединяем их с помощью оператора RIGHT JOIN. Условие ON <code>customers.customer_id = orders.customer_id</code> указывает, что строки должны быть объединены по значениям столбцов "customer_id" в обеих таблицах. Результат будет содержать имена клиентов и идентификаторы соответствующих заказов. Все строки из правой таблицы (orders) будут включены в результат, даже если для них нет соответствующих записей в левой таблице (customers).
+</p>
+<h2>Заключение</h2>
+<p>
+    Команда SELECT с операторами LEFT JOIN и RIGHT JOIN позволяет
+    объединять строки из двух таблиц на основе совпадающих значений
+    в указанных столбцах.
+</p>
+<p>
+    LEFT JOIN возвращает все строки из левой
+    таблицы и соответствующие строки из правой таблицы
+</p>
+
+<p>
+    RIGHT JOIN возвращает все строки из правой таблицы
+    и соответствующие строки из левой таблицы.
+</p>
+
+</body>
+</html>

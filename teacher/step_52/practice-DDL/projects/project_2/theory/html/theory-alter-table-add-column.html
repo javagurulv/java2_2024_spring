@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Команда ALTER TABLE ADD Column в SQL</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+    }
+    h1 {
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    p {
+      color: #666;
+      font-size: 16px;
+    }
+    code {
+      background-color: #f5f5f5;
+      padding: 2px 4px;
+      color: #333;
+      font-size: 14px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+<h1>Команда ALTER TABLE ADD Column в SQL</h1>
+<p>Команда ALTER TABLE ADD Column используется для добавления нового столбца в существующую таблицу базы данных. Она позволяет расширять схему таблицы, добавляя новые поля для хранения дополнительных данных.</p>
+<p>Основной синтаксис команды ALTER TABLE ADD Column выглядит следующим образом:</p>
+<pre><code>ALTER TABLE table_name
+ADD column_name data_type constraints;</code></pre>
+<p>Где:</p>
+<ul>
+    <li><code>ALTER TABLE</code>: ключевые слова, указывающие на изменение существующей таблицы.</li>
+    <li><code>table_name</code>: название таблицы, в которую вы хотите добавить новый столбец.</li>
+    <li><code>ADD column_name data_type constraints</code>: описание нового столбца, включая его название, тип данных и возможные ограничения.</li>
+</ul>
+<p>Пример команды ALTER TABLE ADD Column:</p>
+<pre><code>ALTER TABLE customers
+ADD age INT NOT NULL;</code></pre>
+<p>В этом примере мы добавляем новый столбец "age" типа INT в таблицу "customers". Ключевое слово NOT NULL указывает, что для каждой строки в таблице должно быть указано значение в этом столбце.</p>
+<p>При использовании команды ALTER TABLE ADD Column можно также указывать различные ограничения для нового столбца, такие как PRIMARY KEY, FOREIGN KEY, UNIQUE и другие, чтобы задать правила для значений в столбце.</p>
+<p>Важно отметить, что при добавлении нового столбца в таблицу, существующие строки будут иметь значение NULL в этом столбце, если не указано другое значение или ограничение NOT NULL.</p>
+<p>Команда ALTER TABLE ADD Column позволяет добавлять новые столбцы в существующую таблицу базы данных. Она является одной из команд DDL (Data Definition Language) в SQL, используемых для изменения структуры таблицы.</p>
+</body>
+</html>

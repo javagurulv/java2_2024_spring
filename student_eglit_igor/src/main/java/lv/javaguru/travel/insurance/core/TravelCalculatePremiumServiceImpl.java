@@ -16,25 +16,28 @@ import java.math.BigDecimal;
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
     @Autowired
-    AgreementPriceCalculator agreementPriceCalculator;
+    private AgreementPriceCalculator agreementPriceCalculator;
     @Autowired
-    TravelCalculatePremiumRequestValidator travelCalculatePremiumRequestValidator;
+    private TravelCalculatePremiumRequestValidator validate;
 
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
-        TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();
-        CoreResponse coreResponse = new CoreResponse(new TravelCalculatePremiumRequestValidator().validate(request));
-
+        CoreResponse coreResponse = new CoreResponse(validate.validate(request));
         if (coreResponse.hasErrors()) {
             return new TravelCalculatePremiumResponse(coreResponse.getErrors());
         } else {
-            response.setPersonFirstName(request.getPersonFirstName());
-            response.setPersonLastName(request.getPersonLastName());
-            response.setAgreementDateFrom(request.getAgreementDateFrom());
-            response.setAgreementDateTo(request.getAgreementDateTo());
-            response.setAgreementPrice(calculateAgreementPrice(request));
-            return response;
+            return getResponse(request);
         }
+    }
+
+    private TravelCalculatePremiumResponse getResponse(TravelCalculatePremiumRequest request) {
+        TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();
+        response.setPersonFirstName(request.getPersonFirstName());
+        response.setPersonLastName(request.getPersonLastName());
+        response.setAgreementDateFrom(request.getAgreementDateFrom());
+        response.setAgreementDateTo(request.getAgreementDateTo());
+        response.setAgreementPrice(calculateAgreementPrice(request));
+        return response;
     }
 
     public BigDecimal calculateAgreementPrice(TravelCalculatePremiumRequest request) {
