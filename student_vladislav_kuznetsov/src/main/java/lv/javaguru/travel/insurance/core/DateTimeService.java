@@ -3,11 +3,12 @@ package lv.javaguru.travel.insurance.core;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 @Component
 public class DateTimeService {
     public long calculateDaysBetweenDates(Date startDate, Date endDate) {
-
-        return (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24);
+        long diff = endDate.getTime() - startDate.getTime();
+        return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
     }
 }
