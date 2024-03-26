@@ -86,10 +86,10 @@ public class TravelCalculatePremiumRequestValidatorTest {
         var request = new TravelCalculatePremiumRequest();
         errors = requestValidator.validate(request);
         assertEquals(4,requestValidator.validate(request).size());
-        assertEquals(null, request.getPersonFirstName());
-        assertEquals(null, request.getPersonLastName());
-        assertEquals(null, request.getAgreementDateFrom());
-        assertEquals(null, request.getAgreementDateTo());
+        assertNull(request.getPersonFirstName());
+        assertNull(request.getPersonLastName());
+        assertNull(request.getAgreementDateFrom());
+        assertNull(request.getAgreementDateTo());
     }
 
     @Test
