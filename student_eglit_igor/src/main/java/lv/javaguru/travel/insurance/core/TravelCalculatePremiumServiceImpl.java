@@ -17,10 +17,12 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
 
     @Autowired
     private AgreementPriceCalculator agreementPriceCalculator;
+    @Autowired
+    private TravelCalculatePremiumRequestValidator validate;
 
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
-        CoreResponse coreResponse = new CoreResponse(new TravelCalculatePremiumRequestValidator().validate(request));
+        CoreResponse coreResponse = new CoreResponse(validate.validate(request));
         if (coreResponse.hasErrors()) {
             return new TravelCalculatePremiumResponse(coreResponse.getErrors());
         } else {
