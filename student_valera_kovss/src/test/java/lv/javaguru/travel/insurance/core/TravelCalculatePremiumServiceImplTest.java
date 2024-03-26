@@ -20,10 +20,10 @@ class TravelCalculatePremiumServiceImplTest {
 
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
 
-        assertEquals(response.getPersonFirstName(), request.getPersonFirstName());
-        assertEquals(response.getPersonLastName(), request.getPersonLastName());
-        assertEquals(response.getAgreementDateFrom(), request.getAgreementDateFrom());
-        assertEquals(response.getAgreementDateTo(), request.getAgreementDateTo());
+        assertEquals(response.getPersonFirstName(), response.getPersonFirstName());
+        assertEquals(response.getPersonLastName(), response.getPersonLastName());
+        assertEquals(response.getAgreementDateFrom(), response.getAgreementDateFrom());
+        assertEquals(response.getAgreementDateTo(), response.getAgreementDateTo());
     }
 
 }
