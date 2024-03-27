@@ -76,8 +76,8 @@ class TravelCalculatePremiumServiceImplTest {
         Date agreementDateTo = request.getAgreementDateTo();
 
         when(validateMock.validate(request)).thenReturn(emptyList());
-        when(calculateUnderwritingMock.calculateAgreementPrice(agreementDateFrom, agreementDateTo)).
-                thenReturn(BigDecimal.valueOf(1));
+        when(calculateUnderwritingMock.calculateAgreementPrice(agreementDateFrom, agreementDateTo))
+                .thenReturn(BigDecimal.valueOf(1));
         TravelCalculatePremiumResponse response = calculatePremiumTest();
 
         ObjectMapper mapper = new ObjectMapper();

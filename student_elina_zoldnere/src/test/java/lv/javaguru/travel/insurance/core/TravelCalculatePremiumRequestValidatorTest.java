@@ -130,10 +130,22 @@ public class TravelCalculatePremiumRequestValidatorTest {
         assertTrue(result.isEmpty());
     }
 
+    @Test
+    public void validate_ShouldReturnErrorWhenAgreementDateFromHasWrongFormat() {
+        // Set up the mock to return a date with the wrong format
+        when(requestMock.getAgreementDateFrom()).thenReturn(new Date());
+
+        List<ValidationError> result = requestValidator.validate(requestMock);
+
+        assertEquals(1, result.size());
+        assertEquals("agreementDateFrom", result.get(0).getField());
+        assertEquals("Date format must be \"yyyy-MM-dd\"!", result.get(0).getMessage());
+    }
+
     private void setUpRequestMockWithAllValues() {
         Mockito.lenient().when(requestMock.getPersonFirstName()).thenReturn("Jānis");
         Mockito.lenient().when(requestMock.getPersonLastName()).thenReturn("Bērziņš");
-        Mockito.lenient().when(requestMock.getAgreementDateFrom()).thenReturn(new Date(124, 2, 10));
+        Mockito.lenient().when(requestMock.getAgreementDateFrom()).thenReturn(new Date(124, 2, 11));
         Mockito.lenient().when(requestMock.getAgreementDateTo()).thenReturn(new Date(124, 2, 11));
     }
 
