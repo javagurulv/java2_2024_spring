@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core;
 
+import lv.javaguru.travel.insurance.dto.CoreResponse;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,7 +26,8 @@ class TravelCalculatePremiumServiceImplModuleTest {
 
     @Mock
     AgreementPriceCalculator mockAgreementPriceCalculator;
-
+    @Mock
+    TravelCalculatePremiumRequestValidator validate;
     @InjectMocks
     private TravelCalculatePremiumServiceImpl travelCalculatePremiumServiceImpl;
     private TravelCalculatePremiumRequest request;
@@ -40,6 +42,7 @@ class TravelCalculatePremiumServiceImplModuleTest {
         MockitoAnnotations.openMocks(this);
         when(mockAgreementPriceCalculator.calculateAgreementPrice(request.getAgreementDateFrom(), request.getAgreementDateTo()))
                 .thenReturn(new BigDecimal(2));
+        when(validate.validate(request)).thenReturn(null);
 
     }
 
