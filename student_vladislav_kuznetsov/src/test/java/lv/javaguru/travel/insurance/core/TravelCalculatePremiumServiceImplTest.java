@@ -10,8 +10,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
@@ -25,6 +25,8 @@ ValidationError validationError = new ValidationError();
     @Mock
     private DateTimeService dateTimeService;
     @Mock TravelCalculatePremiumRequestValidator requestValidator;
+
+    @Mock TravelPremiumUnderwriting underwriting;
 
     @InjectMocks
     private TravelCalculatePremiumServiceImpl service;
@@ -66,10 +68,9 @@ ValidationError validationError = new ValidationError();
     @Test
     public void checkCalculatedAgreementPrice()
     {
-        when(dateTimeService.calculateDaysBetweenDates(request.getAgreementDateFrom(), request.getAgreementDateTo())).thenReturn(10L);
+        when(underwriting.calculatePremiumPrice(request)).thenReturn(BigDecimal.valueOf(10L));
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
-        BigDecimal agreementPrice = new BigDecimal(10);
-        assertEquals(response.getAgreementPrice(),agreementPrice);
+        assertEquals(response.getAgreementPrice(),new BigDecimal(10L));
     }
 
     @Test
@@ -90,6 +91,26 @@ ValidationError validationError = new ValidationError();
         assertEquals(response.getErrors().size(), 1);
     }
 
+    @Test
+    public void checkThatResponseIsCreatedWithNoErrorsWhenRequestFieldsAreNotEmpty(){
+        var request = createRequestWithAllFields();
+        var response = service.calculatePremium(request);
+        assertEquals(request.getPersonFirstName(), response.getPersonFirstName());
+        assertEquals(request.getPersonLastName(), response.getPersonLastName());
+        assertEquals(request.getAgreementDateFrom(), response.getAgreementDateFrom());
+        assertEquals(request.getAgreementDateTo(), response.getAgreementDateTo());
+        assertFalse(response.hasErrors());
+    }
+
+    @Test
+    public void checkThatThereAreNoInteractionsWithDateTimeServiceWhenResponseContainError() {
+        var request = new TravelCalculatePremiumRequest();
+        var validationError = new ValidationError("field", "message");
+        when(requestValidator.validate(request)).thenReturn(List.of(validationError));
+        var response = service.calculatePremium(request);
+        verifyNoInteractions(dateTimeService);
+    }
+
     public TravelCalculatePremiumRequest createRequestWithAllFields (){
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
         request.setAgreementDateTo(new Date(2024, 3, 11));
@@ -98,6 +119,7 @@ ValidationError validationError = new ValidationError();
         request.setPersonLastName("Kuznetsov");
         return request;
     }
+
 
 
 }

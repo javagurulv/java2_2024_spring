@@ -6,11 +6,10 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 @Component
-public class DateTimeService {
+class DateTimeService {
 
     public long calculateDifferenceBetweenDays(Date dateFrom, Date dateTo) {
         long differenceInMillis = dateTo.getTime() - dateFrom.getTime();
-        long differenceInDays = TimeUnit.DAYS.convert(differenceInMillis, TimeUnit.MILLISECONDS);
-        return differenceInDays;
+        return TimeUnit.DAYS.convert(differenceInMillis, TimeUnit.MILLISECONDS);
     }
 }

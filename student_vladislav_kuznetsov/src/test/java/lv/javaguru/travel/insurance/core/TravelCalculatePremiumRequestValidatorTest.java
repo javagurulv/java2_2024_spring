@@ -1,22 +1,18 @@
 package lv.javaguru.travel.insurance.core;
 
+import ch.qos.logback.classic.spi.ILoggingEvent;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.internal.matchers.Null;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 public class TravelCalculatePremiumRequestValidatorTest {
 
@@ -69,8 +65,11 @@ public class TravelCalculatePremiumRequestValidatorTest {
     public void checkValidatorErrorResponseWhenRequestAgreementDateFromIsNull(){
         request.setAgreementDateFrom(null);
         validationError.setField("agreementDateFrom");
+        NullPointerException exception = new NullPointerException();
         assertEquals(errors.get(0).getField(), requestValidator.validate(request).get(2).getField());
         assertEquals(errors.get(0).getMessage(), requestValidator.validate(request).get(2).getMessage());
+        assertNull(exception.getMessage());
+
     }
 
     @Test
@@ -87,6 +86,10 @@ public class TravelCalculatePremiumRequestValidatorTest {
         var request = new TravelCalculatePremiumRequest();
         errors = requestValidator.validate(request);
         assertEquals(4,requestValidator.validate(request).size());
+        assertNull(request.getPersonFirstName());
+        assertNull(request.getPersonLastName());
+        assertNull(request.getAgreementDateFrom());
+        assertNull(request.getAgreementDateTo());
     }
 
     @Test
@@ -105,7 +108,6 @@ public class TravelCalculatePremiumRequestValidatorTest {
         request.setAgreementDateTo(new Date(System.currentTimeMillis()+60000));
         request.setPersonFirstName("V");
         request.setPersonLastName("K");
-        var requestValidator = new TravelCalculatePremiumRequestValidator();
         assertEquals(0,requestValidator.validate(request).size());
     }
     @Test
@@ -153,10 +155,6 @@ public class TravelCalculatePremiumRequestValidatorTest {
         request.setPersonLastName("K");
         assertEquals(2,requestValidator.validate((request)).size());
     }
-
-
-
-
 
 }
 
