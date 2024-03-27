@@ -11,20 +11,35 @@ class TravelCalculatePremiumServiceImplTest {
 
     private TravelCalculatePremiumServiceImpl service = new TravelCalculatePremiumServiceImpl();
     @Test
-    public void shouldPopulateResponse() {
+    public void shouldPopulatePersonFirstName() {
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
         request.setPersonFirstName("Valera");
-        request.setPersonLastName("Kovss");
-        request.setAgreementDateFrom(new Date());
-        request.setAgreementDateTo(new Date());
-
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
-
         assertEquals(response.getPersonFirstName(), response.getPersonFirstName());
-        assertEquals(response.getPersonLastName(), response.getPersonLastName());
-        assertEquals(response.getAgreementDateFrom(), response.getAgreementDateFrom());
-        assertEquals(response.getAgreementDateTo(), response.getAgreementDateTo());
+    }
+
+    @Test
+    public void shouldPopulatePersonLastName() {
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+        request.setPersonLastName("Kovss");
+        TravelCalculatePremiumResponse response = service.calculatePremium(request);
+        assertEquals(response.getPersonLastName(), request.getPersonLastName());
+    }
+
+    @Test
+    public void shouldPopulateAgreementDateFrom() {
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+        request.setAgreementDateFrom(new Date());
+        TravelCalculatePremiumResponse response = service.calculatePremium(request);
+        assertEquals(response.getAgreementDateFrom(), request.getAgreementDateFrom());
+    }
+
+    @Test
+    public void shouldPopulateAgreementDateTo() {
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+        request.setAgreementDateTo(new Date());
+        TravelCalculatePremiumResponse response = service.calculatePremium(request);
+        assertEquals(response.getAgreementDateTo(), request.getAgreementDateTo());
     }
 
 }
-
