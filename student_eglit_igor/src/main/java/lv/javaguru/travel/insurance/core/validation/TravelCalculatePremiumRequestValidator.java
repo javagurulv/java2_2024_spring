@@ -1,5 +1,6 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.validation;
 
+import lv.javaguru.travel.insurance.core.validation.*;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class TravelCalculatePremiumRequestValidator {
         requestValidation_agreementDateTo.validateAgreementDateTo(request).ifPresent(errors::add);
         requestValidation_agreementDateToIsAfterDateFrom.validateAgreementDateToIsAfterDateFrom(request).ifPresent(errors::add);
         requestValidator_agreementDateFromNotInThePast.validateAgreementDateFromNotInThePast(request).ifPresent(errors::add);
-        requestValidator_agreementDateToNotInThePast.validateAgreementDateToNotInThePast(request).ifPresent(e -> errors.add(e));
+        requestValidator_agreementDateToNotInThePast.validateAgreementDateToNotInThePast(request).ifPresent(errors::add);
         return errors;
     }
 
