@@ -1,0 +1,17 @@
+Test cases for TravelCalculatePremiumControllerTest.java
+
+1. Missing required fields
+    1.1 personFirstName missing
+    1.2 personLastName missing
+    1.3 personFirstName empty
+    1.4 personLastName empty
+    1.5 agreementDateFrom missing
+    1.6 agreementDateTo missing
+    1.7 all fields missing or empty
+
+2. Wrong date chronology
+    2.1 agreementDateTo is less than agreementDateFrom
+    2.2 agreementDateTo is equal with agreementDateFrom
+
+3. Valid request
+    3.1 all fields are present and valid
