@@ -1,17 +1,273 @@
 Test cases for TravelCalculatePremiumControllerTest.java
 
 1. Missing required fields
+
     1.1 personFirstName missing
+
+    REQUEST:
+    {
+      "personFirstName" : null,
+      "personLastName" : "Bērziņš",
+      "agreementDateFrom" : "2024-03-10",
+      "agreementDateTo" : "2024-03-11"
+    }
+
+    RESPONSE:
+    {
+      "errors": [
+        {
+          "field": "personFirstName",
+          "message": "Must not be empty!"
+        }
+      ],
+      "personFirstName": null,
+      "personLastName": null,
+      "agreementDateFrom": null,
+      "agreementDateTo": null,
+      "agreementPrice": null
+    }
+
+    -----
     1.2 personLastName missing
+
+    REQUEST:
+    {
+      "personFirstName" : "Jānis",
+      "personLastName" : null,
+      "agreementDateFrom" : "2024-03-10",
+      "agreementDateTo" : "2024-03-11"
+    }
+
+    RESPONSE:
+    {
+      "errors": [
+        {
+          "field": "personLastName",
+          "message": "Must not be empty!"
+        }
+      ],
+      "personFirstName": null,
+      "personLastName": null,
+      "agreementDateFrom": null,
+      "agreementDateTo": null,
+      "agreementPrice": null
+    }
+
+    -----
     1.3 personFirstName empty
+
+    REQUEST:
+    {
+      "personFirstName" : "   "
+      "personLastName" : "Bērziņš",
+      "agreementDateFrom" : "2024-03-10",
+      "agreementDateTo" : "2024-03-11"
+    }
+
+    RESPONSE:
+    {
+      "errors": [
+        {
+          "field": "personFirstName",
+          "message": "Must not be empty!"
+        }
+      ],
+      "personFirstName": null,
+      "personLastName": null,
+      "agreementDateFrom": null,
+      "agreementDateTo": null,
+      "agreementPrice": null
+    }
+
+    -----
     1.4 personLastName empty
+
+    REQUEST:
+    {
+      "personFirstName" : "Jānis",
+      "personLastName" : "   ",
+      "agreementDateFrom" : "2024-03-10",
+      "agreementDateTo" : "2024-03-11"
+    }
+
+    RESPONSE:
+    {
+      "errors": [
+        {
+          "field": "personLastName",
+          "message": "Must not be empty!"
+        }
+      ],
+      "personFirstName": null,
+      "personLastName": null,
+      "agreementDateFrom": null,
+      "agreementDateTo": null,
+      "agreementPrice": null
+    }
+
+    -----
     1.5 agreementDateFrom missing
+
+    REQUEST:
+    {
+      "personFirstName" : "Jānis",
+      "personLastName" : "Bērziņš",
+      "agreementDateFrom" : null,
+      "agreementDateTo" : "2024-03-11"
+    }
+
+    RESPONSE:
+    {
+      "errors": [
+        {
+          "field": "agreementDateFrom",
+          "message": "Must not be empty!"
+        }
+      ],
+      "personFirstName": null,
+      "personLastName": null,
+      "agreementDateFrom": null,
+      "agreementDateTo": null,
+      "agreementPrice": null
+    }
+
+    -----
     1.6 agreementDateTo missing
+
+    REQUEST:
+    {
+      "personFirstName" : "Jānis",
+      "personLastName" : "Bērziņš",
+      "agreementDateFrom" : "2024-03-11",
+      "agreementDateTo" : null
+    }
+
+    RESPONSE:
+    {
+      "errors": [
+        {
+          "field": "agreementDateTo",
+          "message": "Must not be empty!"
+        }
+      ],
+      "personFirstName": null,
+      "personLastName": null,
+      "agreementDateFrom": null,
+      "agreementDateTo": null,
+      "agreementPrice": null
+    }
+
+    -----
     1.7 all fields missing or empty
 
+    REQUEST:
+    {
+      "personFirstName" : "",
+      "personLastName" : null,
+      "agreementDateFrom" : null,
+      "agreementDateTo" : null
+    }
+
+    RESPONSE:
+    {
+      "errors": [
+        {
+          "field": "personFirstName",
+          "message": "Must not be empty!"
+        },
+        {
+          "field": "personLastName",
+          "message": "Must not be empty!"
+        },
+        {
+          "field": "agreementDateFrom",
+          "message": "Must not be empty!"
+        },
+        {
+          "field": "agreementDateTo",
+          "message": "Must not be empty!"
+        },
+      ],
+      "personFirstName": null,
+      "personLastName": null,
+      "agreementDateFrom": null,
+      "agreementDateTo": null,
+      "agreementPrice": null
+    }
+
+--------------------
 2. Wrong date chronology
+
     2.1 agreementDateTo is less than agreementDateFrom
+
+    REQUEST:
+    {
+      "personFirstName" : "Jānis",
+      "personLastName" : "Bērziņš",
+      "agreementDateFrom" : "2024-03-10",
+      "agreementDateTo" : "2024-03-09"
+    }
+
+    RESPONSE:
+    {
+      "errors": [
+        {
+          "field": "agreementDateFrom",
+          "message": "Must be before agreementDateTo!"
+        }
+      ],
+      "personFirstName": null,
+      "personLastName": null,
+      "agreementDateFrom": null,
+      "agreementDateTo": null,
+      "agreementPrice": null
+    }
+
+    -----
     2.2 agreementDateTo is equal with agreementDateFrom
 
+    REQUEST:
+    {
+      "personFirstName" : "Jānis",
+      "personLastName" : "Bērziņš",
+      "agreementDateFrom" : "2024-03-10",
+      "agreementDateTo" : "2024-03-10"
+    }
+
+    RESPONSE:
+    {
+      "errors": [
+        {
+          "field": "agreementDateFrom",
+          "message": "Must be before agreementDateTo!"
+        }
+      ],
+      "personFirstName": null,
+      "personLastName": null,
+      "agreementDateFrom": null,
+      "agreementDateTo": null,
+      "agreementPrice": null
+    }
+
+----------------
 3. Valid request
+
     3.1 all fields are present and valid
+
+    REQUEST:
+    {
+      "personFirstName" : "Jānis",
+      "personLastName" : "Bērziņš",
+      "agreementDateFrom" : "2024-03-10",
+      "agreementDateTo" : "2024-03-11"
+    }
+
+    RESPONSE:
+    {
+      "errors": null,
+      "personFirstName" : "Jānis",
+      "personLastName" : "Bērziņš",
+      "agreementDateFrom" : "2024-03-10",
+      "agreementDateTo" : "2024-03-11",
+      "agreementPrice": "1"
+    }

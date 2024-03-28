@@ -55,6 +55,17 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
 
     @Test
+    public void validate_ShouldReturnErrorWhenPersonFirstNameIsBlank() {
+        when(requestMock.getPersonFirstName()).thenReturn("     ");
+
+        List<ValidationError> result = requestValidator.validate(requestMock);
+
+        assertEquals(1, result.size());
+        assertEquals("personFirstName", result.get(0).getField());
+        assertEquals("Must not be empty!", result.get(0).getMessage());
+    }
+
+    @Test
     public void validate_ShouldReturnErrorWhenPersonLastNameIsNull() {
         when(requestMock.getPersonLastName()).thenReturn(null);
 
@@ -68,6 +79,17 @@ public class TravelCalculatePremiumRequestValidatorTest {
     @Test
     public void validate_ShouldReturnErrorWhenPersonLastNameIsEmpty() {
         when(requestMock.getPersonLastName()).thenReturn("");
+
+        List<ValidationError> result = requestValidator.validate(requestMock);
+
+        assertEquals(1, result.size());
+        assertEquals("personLastName", result.get(0).getField());
+        assertEquals("Must not be empty!", result.get(0).getMessage());
+    }
+
+    @Test
+    public void validate_ShouldReturnErrorWhenPersonLastNameIsBlank() {
+        when(requestMock.getPersonLastName()).thenReturn("   ");
 
         List<ValidationError> result = requestValidator.validate(requestMock);
 

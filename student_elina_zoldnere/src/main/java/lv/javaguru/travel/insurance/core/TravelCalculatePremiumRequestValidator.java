@@ -23,13 +23,13 @@ class TravelCalculatePremiumRequestValidator {
     }
 
     private Optional<ValidationError> validatePersonFirstName(TravelCalculatePremiumRequest request) {
-        return (request.getPersonFirstName() == null || request.getPersonFirstName().isEmpty())
+        return (request.getPersonFirstName() == null || request.getPersonFirstName().isBlank())
                 ? Optional.of(new ValidationError("personFirstName", "Must not be empty!"))
                 : Optional.empty();
     }
 
     private Optional<ValidationError> validatePersonLastName(TravelCalculatePremiumRequest request) {
-        return (request.getPersonLastName() == null || request.getPersonLastName().isEmpty())
+        return (request.getPersonLastName() == null || request.getPersonLastName().isBlank())
                 ? Optional.of(new ValidationError("personLastName", "Must not be empty!"))
                 : Optional.empty();
     }
