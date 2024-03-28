@@ -58,7 +58,7 @@ Test cases for TravelCalculatePremiumControllerTest.java
 
     REQUEST:
     {
-      "personFirstName" : "   "
+      "personFirstName" : ""
       "personLastName" : "Bērziņš",
       "agreementDateFrom" : "2024-03-10",
       "agreementDateTo" : "2024-03-11"
@@ -85,7 +85,7 @@ Test cases for TravelCalculatePremiumControllerTest.java
     REQUEST:
     {
       "personFirstName" : "Jānis",
-      "personLastName" : "   ",
+      "personLastName" : "",
       "agreementDateFrom" : "2024-03-10",
       "agreementDateTo" : "2024-03-11"
     }
@@ -106,7 +106,59 @@ Test cases for TravelCalculatePremiumControllerTest.java
     }
 
     -----
-    1.5 agreementDateFrom missing
+    1.5 personFirstName blank
+
+    REQUEST:
+    {
+      "personFirstName" : "     "
+      "personLastName" : "Bērziņš",
+      "agreementDateFrom" : "2024-03-10",
+      "agreementDateTo" : "2024-03-11"
+    }
+
+    RESPONSE:
+    {
+      "errors": [
+        {
+          "field": "personFirstName",
+          "message": "Must not be empty!"
+        }
+      ],
+      "personFirstName": null,
+      "personLastName": null,
+      "agreementDateFrom": null,
+      "agreementDateTo": null,
+      "agreementPrice": null
+    }
+
+    -----
+    1.6 personLastName blank
+
+    REQUEST:
+    {
+      "personFirstName" : "Jānis",
+      "personLastName" : "      ",
+      "agreementDateFrom" : "2024-03-10",
+      "agreementDateTo" : "2024-03-11"
+    }
+
+    RESPONSE:
+    {
+      "errors": [
+        {
+          "field": "personLastName",
+          "message": "Must not be empty!"
+        }
+      ],
+      "personFirstName": null,
+      "personLastName": null,
+      "agreementDateFrom": null,
+      "agreementDateTo": null,
+      "agreementPrice": null
+    }
+
+    -----
+    1.7 agreementDateFrom missing
 
     REQUEST:
     {
@@ -132,7 +184,7 @@ Test cases for TravelCalculatePremiumControllerTest.java
     }
 
     -----
-    1.6 agreementDateTo missing
+    1.8 agreementDateTo missing
 
     REQUEST:
     {
@@ -158,12 +210,12 @@ Test cases for TravelCalculatePremiumControllerTest.java
     }
 
     -----
-    1.7 all fields missing or empty
+    1.9 all fields missing or empty or blank
 
     REQUEST:
     {
       "personFirstName" : "",
-      "personLastName" : null,
+      "personLastName" : "   ",
       "agreementDateFrom" : null,
       "agreementDateTo" : null
     }
