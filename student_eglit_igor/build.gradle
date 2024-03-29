@@ -14,4 +14,7 @@ dependencies {
 	testAnnotationProcessor('org.projectlombok:lombok:1.18.24')
 
 	implementation 'ch.qos.logback:logback-classic:1.2.6'
+
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.12.3'
 }
+
