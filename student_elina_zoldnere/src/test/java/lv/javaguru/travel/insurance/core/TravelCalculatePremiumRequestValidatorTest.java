@@ -121,9 +121,9 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
 
     @Test
-    public void validate_ShouldReturnErrorWhenAgreementDatesAreEqual() {
-        // requestMock.getAgreementDateFrom() returns (new Date (2024 - 1900, 2, 10))
-        when(requestMock.getAgreementDateTo()).thenReturn(new Date(2024 - 1900, 2, 10));
+    public void validate_ShouldReturnErrorWhenAgreementDateToIsEqualsAgreementDateFrom() {
+        // requestMock.getAgreementDateFrom() returns (new Date (2025 - 1900, 2, 10))
+        when(requestMock.getAgreementDateTo()).thenReturn(new Date(2025 - 1900, 2, 10));
 
         List<ValidationError> result = requestValidator.validate(requestMock);
 
@@ -133,15 +133,37 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
 
     @Test
-    public void validate_ShouldReturnErrorAgreementDatesInWrongOrder() {
-        // requestMock.getAgreementDateFrom() returns (new Date (2024 - 1900, 2, 10))
-        when(requestMock.getAgreementDateTo()).thenReturn(new Date(2024 - 1900, 2, 9));
+    public void validate_ShouldReturnErrorWhenAgreementDateToIsLessThanAgreementDateFrom() {
+        // requestMock.getAgreementDateFrom() returns (new Date (2025 - 1900, 2, 10))
+        when(requestMock.getAgreementDateTo()).thenReturn(new Date(2025 - 1900, 2, 9));
 
         List<ValidationError> result = requestValidator.validate(requestMock);
 
         assertEquals(1, result.size());
         assertEquals("agreementDateFrom", result.get(0).getField());
         assertEquals("Must be before agreementDateTo!", result.get(0).getMessage());
+    }
+
+    @Test
+    public void validate_ShouldReturnErrorWhenAgreementDateFromIsLessThanToday() {
+        when(requestMock.getAgreementDateFrom()).thenReturn(new Date(2024 - 1900, 2, 10));
+
+        List<ValidationError> result = requestValidator.validate(requestMock);
+
+        assertEquals(1, result.size());
+        assertEquals("agreementDateFrom", result.get(0).getField());
+        assertEquals("Must not be in past!", result.get(0).getMessage());
+    }
+
+    @Test
+    public void validate_ShouldReturnErrorWhenAgreementDateToLessThanToday() {
+        when(requestMock.getAgreementDateTo()).thenReturn(new Date(2024 - 1900, 2, 11));
+
+        List<ValidationError> result = requestValidator.validate(requestMock);
+
+        assertEquals(2, result.size()); // also wrong date order error
+        assertEquals("agreementDateTo", result.get(1).getField());
+        assertEquals("Must not be in past!", result.get(1).getMessage());
     }
 
     @Test
@@ -155,8 +177,8 @@ public class TravelCalculatePremiumRequestValidatorTest {
     private void setUpRequestMockWithAllValues() {
         Mockito.lenient().when(requestMock.getPersonFirstName()).thenReturn("Jānis");
         Mockito.lenient().when(requestMock.getPersonLastName()).thenReturn("Bērziņš");
-        Mockito.lenient().when(requestMock.getAgreementDateFrom()).thenReturn(new Date(124, 2, 10));
-        Mockito.lenient().when(requestMock.getAgreementDateTo()).thenReturn(new Date(124, 2, 11));
+        Mockito.lenient().when(requestMock.getAgreementDateFrom()).thenReturn(new Date(125, 2, 10));
+        Mockito.lenient().when(requestMock.getAgreementDateTo()).thenReturn(new Date(125, 2, 11));
     }
 
 }

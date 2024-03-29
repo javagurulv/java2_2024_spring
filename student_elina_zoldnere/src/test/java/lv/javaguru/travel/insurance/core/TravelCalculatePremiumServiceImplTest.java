@@ -42,8 +42,8 @@ class TravelCalculatePremiumServiceImplTest {
         request = new TravelCalculatePremiumRequest();
         request.setPersonFirstName("Jānis");
         request.setPersonLastName("Bērziņš");
-        request.setAgreementDateFrom(new Date(2024 - 1900, 2, 10)); // March 10, 2024
-        request.setAgreementDateTo(new Date(2024 - 1900, 2, 11)); // March 11, 2024
+        request.setAgreementDateFrom(new Date(2025 - 1900, 2, 10)); // March 10, 2025
+        request.setAgreementDateTo(new Date(2025 - 1900, 2, 11)); // March 11, 2025
     }
 
     @Test
@@ -84,7 +84,7 @@ class TravelCalculatePremiumServiceImplTest {
         mapper.setTimeZone(TimeZone.getTimeZone("EET"));
         String responseToJson = mapper.writeValueAsString(response);
         String expectedJson = "{\"errors\":null,\"personFirstName\":\"Jānis\",\"personLastName\":\"Bērziņš\"," +
-                "\"agreementDateFrom\":\"2024-03-10\",\"agreementDateTo\":\"2024-03-11\",\"agreementPrice\":1}";
+                "\"agreementDateFrom\":\"2025-03-10\",\"agreementDateTo\":\"2025-03-11\",\"agreementPrice\":1}";
         assertEquals(expectedJson, responseToJson);
     }
 

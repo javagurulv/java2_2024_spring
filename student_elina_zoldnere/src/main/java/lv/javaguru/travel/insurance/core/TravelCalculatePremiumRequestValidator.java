@@ -4,10 +4,7 @@ import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Component
 class TravelCalculatePremiumRequestValidator {
@@ -19,6 +16,8 @@ class TravelCalculatePremiumRequestValidator {
         validateAgreementDateFrom(request).ifPresent(errors::add);
         validateAgreementDateTo(request).ifPresent(errors::add);
         validateAgreementDateChronology(request).ifPresent(errors::add);
+        validateAgreementDateFromNotLessThanToday(request).ifPresent(errors::add);
+        validateAgreementDateToNotLessThanToday(request).ifPresent(errors::add);
         return errors;
     }
 
@@ -56,4 +55,33 @@ class TravelCalculatePremiumRequestValidator {
                 : Optional.empty();
     }
 
+    private Optional<ValidationError> validateAgreementDateFromNotLessThanToday(TravelCalculatePremiumRequest request) {
+        Date agreementDateFrom = request.getAgreementDateFrom();
+        Date agreementDateTo = request.getAgreementDateTo();
+
+        return (agreementDateFrom != null && agreementDateTo != null
+                && agreementDateFrom.before(midnightToday()))
+                ? Optional.of(new ValidationError("agreementDateFrom", "Must not be in past!"))
+                : Optional.empty();
+    }
+
+    private Optional<ValidationError> validateAgreementDateToNotLessThanToday(TravelCalculatePremiumRequest request) {
+        Date agreementDateFrom = request.getAgreementDateFrom();
+        Date agreementDateTo = request.getAgreementDateTo();
+
+        return (agreementDateFrom != null && agreementDateTo != null
+                && agreementDateTo.before(midnightToday()))
+                ? Optional.of(new ValidationError("agreementDateTo", "Must not be in past!"))
+                : Optional.empty();
+    }
+
+    private Date midnightToday() { // today 00:00:00 EET
+        Calendar today = Calendar.getInstance();
+        today.setTime(new Date());
+        today.set(Calendar.HOUR_OF_DAY, 0);
+        today.set(Calendar.MINUTE, 0);
+        today.set(Calendar.SECOND, 0);
+        today.set(Calendar.MILLISECOND, 0);
+        return today.getTime();
+    }
 }

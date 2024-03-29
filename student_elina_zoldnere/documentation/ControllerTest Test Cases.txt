@@ -8,8 +8,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
     {
       "personFirstName" : null,
       "personLastName" : "Bērziņš",
-      "agreementDateFrom" : "2024-03-10",
-      "agreementDateTo" : "2024-03-11"
+      "agreementDateFrom" : "2025-03-10",
+      "agreementDateTo" : "2025-03-11"
     }
 
     RESPONSE:
@@ -34,8 +34,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
     {
       "personFirstName" : "Jānis",
       "personLastName" : null,
-      "agreementDateFrom" : "2024-03-10",
-      "agreementDateTo" : "2024-03-11"
+      "agreementDateFrom" : "2025-03-10",
+      "agreementDateTo" : "2025-03-11"
     }
 
     RESPONSE:
@@ -60,8 +60,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
     {
       "personFirstName" : ""
       "personLastName" : "Bērziņš",
-      "agreementDateFrom" : "2024-03-10",
-      "agreementDateTo" : "2024-03-11"
+      "agreementDateFrom" : "2025-03-10",
+      "agreementDateTo" : "2025-03-11"
     }
 
     RESPONSE:
@@ -86,8 +86,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
     {
       "personFirstName" : "Jānis",
       "personLastName" : "",
-      "agreementDateFrom" : "2024-03-10",
-      "agreementDateTo" : "2024-03-11"
+      "agreementDateFrom" : "2025-03-10",
+      "agreementDateTo" : "2025-03-11"
     }
 
     RESPONSE:
@@ -112,8 +112,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
     {
       "personFirstName" : "     "
       "personLastName" : "Bērziņš",
-      "agreementDateFrom" : "2024-03-10",
-      "agreementDateTo" : "2024-03-11"
+      "agreementDateFrom" : "2025-03-10",
+      "agreementDateTo" : "2025-03-11"
     }
 
     RESPONSE:
@@ -138,8 +138,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
     {
       "personFirstName" : "Jānis",
       "personLastName" : "      ",
-      "agreementDateFrom" : "2024-03-10",
-      "agreementDateTo" : "2024-03-11"
+      "agreementDateFrom" : "2025-03-10",
+      "agreementDateTo" : "2025-03-11"
     }
 
     RESPONSE:
@@ -165,7 +165,7 @@ Test cases for TravelCalculatePremiumControllerTest.java
       "personFirstName" : "Jānis",
       "personLastName" : "Bērziņš",
       "agreementDateFrom" : null,
-      "agreementDateTo" : "2024-03-11"
+      "agreementDateTo" : "2025-03-11"
     }
 
     RESPONSE:
@@ -190,7 +190,7 @@ Test cases for TravelCalculatePremiumControllerTest.java
     {
       "personFirstName" : "Jānis",
       "personLastName" : "Bērziņš",
-      "agreementDateFrom" : "2024-03-11",
+      "agreementDateFrom" : "2025-03-11",
       "agreementDateTo" : null
     }
 
@@ -256,8 +256,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
     {
       "personFirstName" : "Jānis",
       "personLastName" : "Bērziņš",
-      "agreementDateFrom" : "2024-03-10",
-      "agreementDateTo" : "2024-03-09"
+      "agreementDateFrom" : "2025-03-10",
+      "agreementDateTo" : "2025-03-09"
     }
 
     RESPONSE:
@@ -276,14 +276,14 @@ Test cases for TravelCalculatePremiumControllerTest.java
     }
 
     -----
-    2.2 agreementDateTo is equal with agreementDateFrom
+    2.2 agreementDateTo is equals agreementDateFrom
 
     REQUEST:
     {
       "personFirstName" : "Jānis",
       "personLastName" : "Bērziņš",
-      "agreementDateFrom" : "2024-03-10",
-      "agreementDateTo" : "2024-03-10"
+      "agreementDateFrom" : "2025-03-10",
+      "agreementDateTo" : "2025-03-10"
     }
 
     RESPONSE:
@@ -301,6 +301,63 @@ Test cases for TravelCalculatePremiumControllerTest.java
       "agreementPrice": null
     }
 
+    -----
+    2.3 agreementDateFrom is less than current date
+
+    REQUEST:
+    {
+      "personFirstName" : "Jānis",
+      "personLastName" : "Bērziņš",
+      "agreementDateFrom" : "2024-03-10",
+      "agreementDateTo" : "2025-03-11"
+    }
+
+    RESPONSE:
+    {
+      "errors": [
+        {
+          "field": "agreementDateFrom",
+          "message": "Must not be in past!"
+        }
+      ],
+      "personFirstName": null,
+      "personLastName": null,
+      "agreementDateFrom": null,
+      "agreementDateTo": null,
+      "agreementPrice": null
+    }
+
+    -----
+    2.4 agreementDateTo is less than current date
+
+    REQUEST:
+    {
+      "personFirstName" : "Jānis",
+      "personLastName" : "Bērziņš",
+      "agreementDateFrom" : "2025-03-10",
+      "agreementDateTo" : "2024-03-11"
+    }
+
+    RESPONSE:
+    {
+      "errors": [
+        {
+          "field": "agreementDateFrom",
+          "message": "Must be before agreementDateTo!"
+        },
+        {
+          "field": "agreementDateTo",
+          "message": "Must not be in past!"
+        }
+      ],
+      "personFirstName": null,
+      "personLastName": null,
+      "agreementDateFrom": null,
+      "agreementDateTo": null,
+      "agreementPrice": null
+    }
+
+
 ----------------
 3. Valid request
 
@@ -310,8 +367,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
     {
       "personFirstName" : "Jānis",
       "personLastName" : "Bērziņš",
-      "agreementDateFrom" : "2024-03-10",
-      "agreementDateTo" : "2024-03-11"
+      "agreementDateFrom" : "2025-03-10",
+      "agreementDateTo" : "2025-03-11"
     }
 
     RESPONSE:

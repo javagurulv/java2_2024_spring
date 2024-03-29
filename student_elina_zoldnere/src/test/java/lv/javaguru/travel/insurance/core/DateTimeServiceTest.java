@@ -12,8 +12,8 @@ public class DateTimeServiceTest {
 
     @Test
     public void calculateDifferenceBetweenDays_ShouldCalculateCorrectResult() {
-        Date sampleDateFrom = new Date(2024 - 1900, 2, 10); // March 10, 2024
-        Date sampleDateTo = new Date(2024 - 1900, 2, 11); // March 11, 2024
+        Date sampleDateFrom = new Date(2025 - 1900, 2, 10); // March 10, 2025
+        Date sampleDateTo = new Date(2025 - 1900, 2, 11); // March 11, 2025
         long difference = service.calculateDifferenceBetweenDays(sampleDateFrom, sampleDateTo);
         assertEquals(difference, 1);
     }
