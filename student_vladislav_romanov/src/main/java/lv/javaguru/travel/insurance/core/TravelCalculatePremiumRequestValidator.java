@@ -35,13 +35,13 @@ class TravelCalculatePremiumRequestValidator {
 
     private Optional<ValidationError> validateDateFrom(TravelCalculatePremiumRequest request) {
         return (request.getAgreementDateFrom() == null)
-                ? Optional.of(new ValidationError("personDateFrom", "must exist and not to be empty!"))
+                ? Optional.of(new ValidationError("agreementDateFrom", "must exist and not to be empty!"))
                 : Optional.empty();
     }
 
     private Optional<ValidationError> validateDateTo(TravelCalculatePremiumRequest request) {
         return (request.getAgreementDateTo() == null)
-                ? Optional.of(new ValidationError("personDateTo", "must exist and not to be empty!"))
+                ? Optional.of(new ValidationError("agreementDateTo", "must exist and not to be empty!"))
                 : Optional.empty();
     }
 

@@ -64,7 +64,7 @@ class TravelCalculatePremiumRequestValidatorTest {
         when(request.getAgreementDateTo()).thenReturn(LocalDate.of(2024, 3, 18));
         List<ValidationError> errors = requestValidator.validate(request);
         assertEquals(errors.size(), 2);
-        assertEquals(errors.get(0).getField(), "personDateFrom");
+        assertEquals(errors.get(0).getField(), "agreementDateFrom");
         assertEquals(errors.get(0).getMessage(), "must exist and not to be empty!");
         assertEquals(errors.get(1).getField(), "Travel Period");
         assertEquals(errors.get(1).getMessage(), "contain incorrect data!");
@@ -79,7 +79,7 @@ class TravelCalculatePremiumRequestValidatorTest {
         when(request.getAgreementDateTo()).thenReturn(null);
         List<ValidationError> errors = requestValidator.validate(request);
         assertEquals(errors.size(), 2);
-        assertEquals(errors.get(0).getField(), "personDateTo");
+        assertEquals(errors.get(0).getField(), "agreementDateTo");
         assertEquals(errors.get(0).getMessage(), "must exist and not to be empty!");
         assertEquals(errors.get(1).getField(), "Travel Period");
         assertEquals(errors.get(1).getMessage(), "contain incorrect data!");
