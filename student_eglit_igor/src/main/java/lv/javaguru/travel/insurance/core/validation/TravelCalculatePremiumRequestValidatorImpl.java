@@ -11,11 +11,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class TravelCalculatePremiumRequestValidator {
+class TravelCalculatePremiumRequestValidatorImpl implements TravelCalculatePremiumRequestValidatorInterface {
     @Autowired
     private List<RequestValidationInterface> travelValidations;
 
-    public TravelCalculatePremiumRequestValidator(List<RequestValidationInterface> travelValidations) {
+    public TravelCalculatePremiumRequestValidatorImpl(List<RequestValidationInterface> travelValidations) {
         this.travelValidations = travelValidations;
     }
 
