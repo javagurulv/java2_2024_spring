@@ -15,7 +15,7 @@
     {
       "field": "agreementDateTo",
       "message": "Must not be empty!"
-    },
+    }
   ],
   "personFirstName": null,
   "personLastName": null,
