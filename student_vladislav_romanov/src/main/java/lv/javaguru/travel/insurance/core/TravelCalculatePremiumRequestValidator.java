@@ -23,25 +23,25 @@ class TravelCalculatePremiumRequestValidator {
 
     private Optional<ValidationError> validatePersonFirstName(TravelCalculatePremiumRequest request) {
         return (request.getPersonFirstName() == null || request.getPersonFirstName().isEmpty())
-                ? Optional.of(new ValidationError("personFirstName", "Must not be empty!"))
+                ? Optional.of(new ValidationError("personFirstName", "must exist and not to be empty!"))
                 : Optional.empty();
     }
 
     private Optional<ValidationError> validatePersonLastName(TravelCalculatePremiumRequest request) {
         return (request.getPersonLastName() == null || request.getPersonLastName().isEmpty())
-                ? Optional.of(new ValidationError("personLastName", "Must not be empty!"))
+                ? Optional.of(new ValidationError("personLastName", "must exist and not to be empty!"))
                 : Optional.empty();
     }
 
     private Optional<ValidationError> validateDateFrom(TravelCalculatePremiumRequest request) {
         return (request.getAgreementDateFrom() == null)
-                ? Optional.of(new ValidationError("personDateFrom", "Must not be empty!"))
+                ? Optional.of(new ValidationError("personDateFrom", "must exist and not to be empty!"))
                 : Optional.empty();
     }
 
     private Optional<ValidationError> validateDateTo(TravelCalculatePremiumRequest request) {
         return (request.getAgreementDateTo() == null)
-                ? Optional.of(new ValidationError("personDateTo", "Must not be empty!"))
+                ? Optional.of(new ValidationError("personDateTo", "must exist and not to be empty!"))
                 : Optional.empty();
     }
 
