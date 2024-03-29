@@ -28,12 +28,11 @@ public class TravelCalculatePremiumControllerTest {
     @DisplayName("1.1 personFirstName missing")
     public void controller_ShouldReturnCorrectResponseWhenPersonFirstNameIsMissing() throws Exception {
         mockMvc.perform(post("/insurance/travel/")
-                        .content("""
-                                {"personFirstName" : null,
-                                "personLastName" : "Bērziņš",
-                                "agreementDateFrom" : "2025-03-10",
-                                "agreementDateTo" : "2025-03-11"
-                                }""")
+                        .content("{\"personFirstName\" : null,\n" +
+                                 "\"personLastName\" : \"Bērziņš\",\n" +
+                                 "\"agreementDateFrom\" : \"2025-03-10\",\n" +
+                                 "\"agreementDateTo\" : \"2025-03-11\"\n" +
+                                 "}")
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("errors", is(notNullValue())))
