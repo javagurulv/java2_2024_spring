@@ -17,7 +17,7 @@ class TravelCalculatePremiumRequestValidator {
 
           validateAgreementDateFrom(request).ifPresent(errors::add);
           validateAgreementDateTo(request).ifPresent(errors::add);
-          validateAgreementDateFromNotBeforeCurrentDate(request).ifPresent(errors::add);
+          validateAgreementDateFromIsNotBeforeCurrentDate(request).ifPresent(errors::add);
           validateAgreementDateToIsNotBeforeAgreementDateFrom(request).ifPresent(errors::add);
         return errors;
     }
@@ -44,7 +44,7 @@ class TravelCalculatePremiumRequestValidator {
                 : Optional.empty();
     }
 
-    private Optional <ValidationError> validateAgreementDateFromNotBeforeCurrentDate(TravelCalculatePremiumRequest request){
+    private Optional <ValidationError> validateAgreementDateFromIsNotBeforeCurrentDate(TravelCalculatePremiumRequest request){
         Date currentDate = new Date(System.currentTimeMillis());
         if (request.getAgreementDateFrom() != null) {
             return (request.getAgreementDateFrom().before(currentDate))

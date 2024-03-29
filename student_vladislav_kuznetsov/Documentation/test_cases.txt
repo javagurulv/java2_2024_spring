@@ -1,0 +1,355 @@
+Test scenarios:
+
+1) Given: personFirstName is not entered.
+Expected result: User is notified with the message: "Must not be empty!"
+
+Input:
+{
+"personFirstName" : "",
+"personLastName" : "Pupkin",
+"agreementDateFrom" : "2024-05-26",
+"agreementDateTo" : "2024-05-31"
+}
+
+Output:
+{
+    "errors": [
+        {
+            "field": "personFirstName",
+            "message": "Must not be empty!"
+        }
+    ],
+    "personFirstName": null,
+    "personLastName": null,
+    "agreementDateFrom": null,
+    "agreementDateTo": null,
+    "agreementPrice": null
+}
+
+2) Given: personLastName is not entered.
+Expected result: User is notified with the message: "Must not be empty!"
+
+Input:
+{
+"personFirstName" : "Vasja",
+"personLastName" : "",
+"agreementDateFrom" : "2024-05-26",
+"agreementDateTo" : "2024-05-31"
+}
+
+Output:
+{
+    "errors": [
+        {
+            "field": "personLastName",
+            "message": "Must not be empty!"
+        }
+    ],
+    "personFirstName": null,
+    "personLastName": null,
+    "agreementDateFrom": null,
+    "agreementDateTo": null,
+    "agreementPrice": null
+}
+
+3) Given: personFirstName and personLastName is not entered.
+Expected result: User is notified with the message: "Must not be empty!"
+
+Input:
+{
+"personFirstName" : "",
+"personLastName" : "",
+"agreementDateFrom" : "2024-05-26",
+"agreementDateTo" : "2024-05-31"
+}
+
+Output:
+{
+    "errors": [
+        {
+            "field": "personFirstName",
+            "message": "Must not be empty!"
+        },
+        {
+            "field": "personLastName",
+            "message": "Must not be empty!"
+        }
+    ],
+    "personFirstName": null,
+    "personLastName": null,
+    "agreementDateFrom": null,
+    "agreementDateTo": null,
+    "agreementPrice": null
+}
+
+
+4) Given: agreementDateFrom is not entered.
+Expected result: User is notified with the message: "Must not be empty!"
+
+Input:
+{
+"personFirstName" : "Vasja",
+"personLastName" : "Pupkin",
+"agreementDateFrom" : "",
+"agreementDateTo" : "2024-05-31"
+}
+
+Output:
+{
+    "errors": [
+        {
+            "field": "agreementDateFrom",
+            "message": "Must not be empty!"
+        }
+    ],
+    "personFirstName": null,
+    "personLastName": null,
+    "agreementDateFrom": null,
+    "agreementDateTo": null,
+    "agreementPrice": null
+}
+
+5) Given: agreementDateTo is not entered.
+Expected result: User is notified with the message: "Must not be empty!"
+
+Input:
+{
+"personFirstName" : "Vasja",
+"personLastName" : "Pupkin",
+"agreementDateFrom" : "2024-05-26",
+"agreementDateTo" : ""
+}
+
+Output:
+{
+    "errors": [
+        {
+            "field": "agreementDateTo",
+            "message": "Must not be empty!"
+        }
+    ],
+    "personFirstName": null,
+    "personLastName": null,
+    "agreementDateFrom": null,
+    "agreementDateTo": null,
+    "agreementPrice": null
+}
+
+6) Given: agreementDateTo and agreementDateFrom is not entered.
+Expected result: User is notified with the message: "Must not be empty!"
+
+Input:
+{
+"personFirstName" : "Vasja",
+"personLastName" : "Pupkin",
+"agreementDateFrom" : "",
+"agreementDateTo" : ""
+}
+
+Output:
+{
+    "errors": [
+        {
+            "field": "agreementDateFrom",
+            "message": "Must not be empty!"
+        },
+        {
+            "field": "agreementDateTo",
+            "message": "Must not be empty!"
+        }
+    ],
+    "personFirstName": null,
+    "personLastName": null,
+    "agreementDateFrom": null,
+    "agreementDateTo": null,
+    "agreementPrice": null
+}
+
+7) Given: agreementDateTo is before agreementDateFrom
+Expected result: User is notified with the message: "Invalid date !"
+
+Input:
+{
+"personFirstName" : "Vasja",
+"personLastName" : "Pupkin",
+"agreementDateFrom" : "2024-05-26",
+"agreementDateTo" : "2024-05-25"
+}
+
+Output:
+{
+    "errors": [
+        {
+            "field": "agreementDateTo",
+            "message": "Invalid date !"
+        }
+    ],
+    "personFirstName": null,
+    "personLastName": null,
+    "agreementDateFrom": null,
+    "agreementDateTo": null,
+    "agreementPrice": null
+}
+
+8) Given: agreementDateTo is equal agreementDateFrom
+Expected result: User is notified with the message: "Invalid date !"
+
+Input:
+{
+"personFirstName" : "Vasja",
+"personLastName" : "Pupkin",
+"agreementDateFrom" : "2024-05-26",
+"agreementDateTo" : "2024-05-26"
+}
+
+Output:
+{
+    "errors": [
+        {
+            "field": "agreementDateTo",
+            "message": "Invalid date !"
+        }
+    ],
+    "personFirstName": null,
+    "personLastName": null,
+    "agreementDateFrom": null,
+    "agreementDateTo": null,
+    "agreementPrice": null
+}
+
+9) Given: agreementDateFrom is before currentDate
+Expected result: User is notified with the message: "Invalid date !"
+
+Input:
+{
+"personFirstName" : "Vasja",
+"personLastName" : "Pupkin",
+"agreementDateFrom" : "2024-03-26",
+"agreementDateTo" : "2024-05-26"
+}
+
+Output:
+{
+    "errors": [
+        {
+            "field": "agreementDateFrom",
+            "message": "Invalid date !"
+        }
+    ],
+    "personFirstName": null,
+    "personLastName": null,
+    "agreementDateFrom": null,
+    "agreementDateTo": null,
+    "agreementPrice": null
+}
+
+10) Given: personFirstName, personLastName, agreementDateFrom, agreementDateTo : is entered.
+Expected: agreementPrice is calculated.
+
+Input:
+{
+"personFirstName" : "Vasja",
+"personLastName" : "Pupkin",
+"agreementDateFrom" : "2024-05-26",
+"agreementDateTo" : "2024-05-30"
+}
+
+Output:
+{
+    "errors": null,
+    "personFirstName": "Vasja",
+    "personLastName": "Pupkin",
+    "agreementDateFrom": "2024-05-26",
+    "agreementDateTo": "2024-05-30",
+    "agreementPrice": 4
+}
+
+11) Given: agreementDateFrom, agreementDateTo entered in wrong Date format.
+Expected result: User is notified with the error message.
+
+Input:
+{
+"personFirstName" : "Vasja",
+"personLastName" : "Pupkin",
+"agreementDateFrom" : "26-05-2024",
+"agreementDateTo" : "27-05-2024"
+}
+
+Output:
+{
+    "errors": [
+        {
+            "field": "agreementDateFrom",
+            "message": "Invalid date !"
+        }
+    ],
+    "personFirstName": null,
+    "personLastName": null,
+    "agreementDateFrom": null,
+    "agreementDateTo": null,
+    "agreementPrice": null
+}
+
+12) Given: personFirstName, personLastName, agreementDateFrom, agreementDateTo : is not entered.
+Expected result: User is notified with the error messages from all fields.
+
+Input:
+{
+"personFirstName" : "",
+"personLastName" : "",
+"agreementDateFrom" : "",
+"agreementDateTo" : ""
+}
+
+Output:
+{
+    "errors": [
+        {
+            "field": "personFirstName",
+            "message": "Must not be empty!"
+        },
+        {
+            "field": "personLastName",
+            "message": "Must not be empty!"
+        },
+        {
+            "field": "agreementDateFrom",
+            "message": "Must not be empty!"
+        },
+        {
+            "field": "agreementDateTo",
+            "message": "Must not be empty!"
+        }
+    ],
+    "personFirstName": null,
+    "personLastName": null,
+    "agreementDateFrom": null,
+    "agreementDateTo": null,
+    "agreementPrice": null
+}
+
+13) Given: PersonFirstName, personLastName, agreementDateFrom is entered. agreementDateTo is entered in wrong Date format.
+Expected result: User is notified with the error message.
+
+Input:
+{
+"personFirstName" : "Vasja",
+"personLastName" : "Pupkin",
+"agreementDateFrom" : "2024-05-30",
+"agreementDateTo" : "31-05-2024"
+}
+
+Output:
+{
+    "errors": [
+        {
+            "field": "agreementDateTo",
+            "message": "Invalid date !"
+        }
+    ],
+    "personFirstName": null,
+    "personLastName": null,
+    "agreementDateFrom": null,
+    "agreementDateTo": null,
+    "agreementPrice": null
+}
