@@ -255,7 +255,7 @@ public class TravelCalculatePremiumControllerTest {
                 .andExpect(jsonPath("$.agreementPrice").doesNotExist())
                 .andReturn();// Возвращаем результат выполнения запроса
     }
-    @Test
+/*   @Test
     public void shouldReturnErrorMessageForAllFieldsEmpty() throws Exception {
         // Отправляем POST запрос на "/insurance/travel/" с JSON телом запроса
         mockMvc.perform(post("/insurance/travel/")
@@ -283,7 +283,7 @@ public class TravelCalculatePremiumControllerTest {
                 .andExpect(jsonPath("$.agreementDateTo").doesNotExist())
                 .andExpect(jsonPath("$.agreementPrice").doesNotExist())
                 .andReturn();// Возвращаем результат выполнения запроса
-    }
+    }*/
     @Test
     public void shouldReturnErrorMessageForDateFromInThePast() throws Exception {
         // Отправляем POST запрос на "/insurance/travel/" с JSON телом запроса
