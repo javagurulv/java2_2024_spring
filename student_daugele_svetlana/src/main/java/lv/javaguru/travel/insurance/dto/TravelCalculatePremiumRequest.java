@@ -1,41 +1,25 @@
-package lv.javaguru.travel.insurance.rest;
+package lv.javaguru.travel.insurance.dto;
 
-import java.math.BigDecimal;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.Temporal;
 import java.util.Date;
 
-public class TravelCalculatePremiumResponse {
+public class TravelCalculatePremiumRequest {
 
     private String personFirstName;
     private String personLastName;
     private Date agreementDateFrom;
     private Date agreementDateTo;
-    private BigDecimal agreementPrice;
 
-    public TravelCalculatePremiumResponse() {
-    }
+    public TravelCalculatePremiumRequest() { }
 
-    public TravelCalculatePremiumResponse(String personFirstName, String personLastName, Date agreementDateFrom, Date agreementDateTo, BigDecimal agreementPrice) {
+    public TravelCalculatePremiumRequest(String personFirstName,
+                                         String personLastName,
+                                         Date agreementDateFrom,
+                                         Date agreementDateTo) {
         this.personFirstName = personFirstName;
         this.personLastName = personLastName;
         this.agreementDateFrom = agreementDateFrom;
         this.agreementDateTo = agreementDateTo;
-        this.agreementPrice = agreementPrice;
     }
-
-
-    public BigDecimal getAgreementPrice() {
-        return agreementPrice;
-    }
-
-    public void setAgreementPrice(BigDecimal agreementPrice) {
-        this.agreementPrice = agreementPrice;
-    }
-
-
-
-
 
     public String getPersonFirstName() {
         return personFirstName;
