@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.core;
 
-import lv.javaguru.travel.insurance.core.validation.TravelCalculatePremiumRequestValidator;
+
+import lv.javaguru.travel.insurance.core.validation.TravelCalculatePremiumRequestValidatorInterface;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,7 +28,7 @@ class TravelCalculatePremiumServiceImplModuleTest {
     @Mock
     AgreementPriceCalculator mockAgreementPriceCalculator;
     @Mock
-    TravelCalculatePremiumRequestValidator validate;
+    TravelCalculatePremiumRequestValidatorInterface validate;
     @InjectMocks
     private TravelCalculatePremiumServiceImpl travelCalculatePremiumServiceImpl;
     private TravelCalculatePremiumRequest request;

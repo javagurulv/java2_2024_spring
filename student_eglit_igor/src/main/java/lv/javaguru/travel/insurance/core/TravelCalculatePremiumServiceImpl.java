@@ -2,7 +2,8 @@ package lv.javaguru.travel.insurance.core;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import lv.javaguru.travel.insurance.core.validation.TravelCalculatePremiumRequestValidator;
+
+import lv.javaguru.travel.insurance.core.validation.TravelCalculatePremiumRequestValidatorInterface;
 import lv.javaguru.travel.insurance.dto.CoreResponse;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
@@ -19,7 +20,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
     @Autowired
     private AgreementPriceCalculator agreementPriceCalculator;
     @Autowired
-    private TravelCalculatePremiumRequestValidator validate;
+    private TravelCalculatePremiumRequestValidatorInterface validate;
 
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
