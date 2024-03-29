@@ -181,7 +181,7 @@ public class TravelCalculatePremiumControllerTest {
                                     "personFirstName" : "",
                                     "personLastName" : null,
                                     "agreementDateFrom" : "2024-03-20",
-                                    "agreementDateTo" : "2024-03-10"
+                                    "agreementDateTo" : null
                                 }
                                 """)
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
@@ -192,13 +192,15 @@ public class TravelCalculatePremiumControllerTest {
                 .andExpect(jsonPath("agreementDateTo", is(nullValue())))
                 .andExpect(jsonPath("agreementPrice", is(nullValue())))
                 .andExpect(jsonPath("errors", is(notNullValue())))
-                .andExpect(jsonPath("errors", hasSize(3)))
+                .andExpect(jsonPath("errors", hasSize(4)))
                 .andExpect(jsonPath("errors[0].field", is("personFirstName")))
                 .andExpect(jsonPath("errors[0].message", is("must exist and not to be empty!")))
                 .andExpect(jsonPath("errors[1].field", is("personLastName")))
                 .andExpect(jsonPath("errors[1].message", is("must exist and not to be empty!")))
-                .andExpect(jsonPath("errors[2].field", is("Travel Period")))
-                .andExpect(jsonPath("errors[2].message", is("contain incorrect data!")))
+                .andExpect(jsonPath("errors[2].field", is("agreementDateTo")))
+                .andExpect(jsonPath("errors[2].message", is("must exist and not to be empty!")))
+                .andExpect(jsonPath("errors[3].field", is("Travel Period")))
+                .andExpect(jsonPath("errors[3].message", is("contain incorrect data!")))
                 .andReturn();
     }
 
