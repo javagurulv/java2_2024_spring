@@ -7,8 +7,11 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class RequestValidationAgreementDateToIsAfterDateFrom {
-    public Optional<ValidationError> validateAgreementDateToIsAfterDateFrom(TravelCalculatePremiumRequest request) {
+class RequestValidationAgreementDateToIsAfterDateFrom implements RequestValidationInterface {
+
+    @Override
+    public Optional<ValidationError> executeValidation(TravelCalculatePremiumRequest request) {
+
         if (request.getAgreementDateTo() == null || request.getAgreementDateFrom() == null) {
             return Optional.empty();
         }
@@ -17,3 +20,4 @@ public class RequestValidationAgreementDateToIsAfterDateFrom {
                 : Optional.empty();
     }
 }
+

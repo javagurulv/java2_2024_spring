@@ -7,8 +7,9 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class RequestValidationAgreementDateFromNotInThePast {
-    public Optional<ValidationError> validateAgreementDateFromNotInThePast(TravelCalculatePremiumRequest request) {
+class RequestValidationAgreementDateFromNotInThePast implements RequestValidationInterface{
+    @Override
+    public Optional<ValidationError> executeValidation(TravelCalculatePremiumRequest request) {
         if (request.getAgreementDateTo() == null || request.getAgreementDateFrom() == null) {
             return Optional.empty();
         }

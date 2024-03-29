@@ -14,7 +14,6 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Component
 public class TravelCalculatePremiumResponse extends CoreResponse {
 
     private String personFirstName;
