@@ -34,8 +34,8 @@ class TravelCalculatePremiumServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        LocalDate dateFrom = LocalDate.of(2024, 3, 8);
-        LocalDate dateTo = LocalDate.of(2024, 3, 18);
+        LocalDate dateFrom = LocalDate.of(2030, 3, 8);
+        LocalDate dateTo = LocalDate.of(2030, 3, 18);
 
         travelCalculatePremiumRequestData = new TravelCalculatePremiumRequest("Vladislav", "Romanov", dateFrom, dateTo);
     }

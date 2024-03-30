@@ -4,6 +4,7 @@ import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -34,14 +35,14 @@ class TravelCalculatePremiumRequestValidator {
     }
 
     private Optional<ValidationError> validateDateFrom(TravelCalculatePremiumRequest request) {
-        return (request.getAgreementDateFrom() == null)
-                ? Optional.of(new ValidationError("agreementDateFrom", "must exist and not to be empty!"))
+        return (request.getAgreementDateFrom() == null || request.getAgreementDateFrom().isBefore(LocalDate.now()))
+                ? Optional.of(new ValidationError("agreementDateFrom", "must exist and cannot be in past!"))
                 : Optional.empty();
     }
 
     private Optional<ValidationError> validateDateTo(TravelCalculatePremiumRequest request) {
-        return (request.getAgreementDateTo() == null)
-                ? Optional.of(new ValidationError("agreementDateTo", "must exist and not to be empty!"))
+        return (request.getAgreementDateTo() == null || request.getAgreementDateTo().isBefore(LocalDate.now()))
+                ? Optional.of(new ValidationError("agreementDateTo", "must exist and cannot be in past!"))
                 : Optional.empty();
     }
 

@@ -23,8 +23,8 @@ class TravelCalculatePremiumRequestValidatorTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("");
         when(request.getPersonLastName()).thenReturn(null);
-        when(request.getAgreementDateFrom()).thenReturn(LocalDate.of(2024, 3, 18));
-        when(request.getAgreementDateTo()).thenReturn(LocalDate.of(2024, 3, 8));
+        when(request.getAgreementDateFrom()).thenReturn(LocalDate.of(2030, 3, 18));
+        when(request.getAgreementDateTo()).thenReturn(LocalDate.of(2030, 3, 8));
         List<ValidationError> errors = requestValidator.validate(request);
         assertEquals(errors.size(), 3);
     }
@@ -34,8 +34,8 @@ class TravelCalculatePremiumRequestValidatorTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn(null);
         when(request.getPersonLastName()).thenReturn("Romanov");
-        when(request.getAgreementDateFrom()).thenReturn(LocalDate.of(2024, 3, 17));
-        when(request.getAgreementDateTo()).thenReturn(LocalDate.of(2024, 3, 18));
+        when(request.getAgreementDateFrom()).thenReturn(LocalDate.of(2030, 3, 17));
+        when(request.getAgreementDateTo()).thenReturn(LocalDate.of(2030, 3, 18));
         List<ValidationError> errors = requestValidator.validate(request);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "personFirstName");
@@ -47,8 +47,8 @@ class TravelCalculatePremiumRequestValidatorTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("Vladislav");
         when(request.getPersonLastName()).thenReturn("");
-        when(request.getAgreementDateFrom()).thenReturn(LocalDate.of(2024, 3, 17));
-        when(request.getAgreementDateTo()).thenReturn(LocalDate.of(2024, 3, 18));
+        when(request.getAgreementDateFrom()).thenReturn(LocalDate.of(2030, 3, 17));
+        when(request.getAgreementDateTo()).thenReturn(LocalDate.of(2030, 3, 18));
         List<ValidationError> errors = requestValidator.validate(request);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "personLastName");
@@ -61,11 +61,11 @@ class TravelCalculatePremiumRequestValidatorTest {
         when(request.getPersonFirstName()).thenReturn("Vladislav");
         when(request.getPersonLastName()).thenReturn("Romanov");
         when(request.getAgreementDateFrom()).thenReturn(null);
-        when(request.getAgreementDateTo()).thenReturn(LocalDate.of(2024, 3, 18));
+        when(request.getAgreementDateTo()).thenReturn(LocalDate.of(2030, 3, 18));
         List<ValidationError> errors = requestValidator.validate(request);
         assertEquals(errors.size(), 2);
         assertEquals(errors.get(0).getField(), "agreementDateFrom");
-        assertEquals(errors.get(0).getMessage(), "must exist and not to be empty!");
+        assertEquals(errors.get(0).getMessage(), "must exist and cannot be in past!");
         assertEquals(errors.get(1).getField(), "Travel Period");
         assertEquals(errors.get(1).getMessage(), "contain incorrect data!");
     }
@@ -75,12 +75,12 @@ class TravelCalculatePremiumRequestValidatorTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("Vladislav");
         when(request.getPersonLastName()).thenReturn("Romanov");
-        when(request.getAgreementDateFrom()).thenReturn(LocalDate.of(2024, 3, 18));
+        when(request.getAgreementDateFrom()).thenReturn(LocalDate.of(2030, 3, 18));
         when(request.getAgreementDateTo()).thenReturn(null);
         List<ValidationError> errors = requestValidator.validate(request);
         assertEquals(errors.size(), 2);
         assertEquals(errors.get(0).getField(), "agreementDateTo");
-        assertEquals(errors.get(0).getMessage(), "must exist and not to be empty!");
+        assertEquals(errors.get(0).getMessage(), "must exist and cannot be in past!");
         assertEquals(errors.get(1).getField(), "Travel Period");
         assertEquals(errors.get(1).getMessage(), "contain incorrect data!");
     }
@@ -90,8 +90,8 @@ class TravelCalculatePremiumRequestValidatorTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("Vladislav");
         when(request.getPersonLastName()).thenReturn("Romanov");
-        when(request.getAgreementDateFrom()).thenReturn(LocalDate.of(2024, 3, 18));
-        when(request.getAgreementDateTo()).thenReturn(LocalDate.of(2024, 3, 8));
+        when(request.getAgreementDateFrom()).thenReturn(LocalDate.of(2030, 3, 18));
+        when(request.getAgreementDateTo()).thenReturn(LocalDate.of(2030, 3, 8));
         List<ValidationError> errors = requestValidator.validate(request);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "Travel Period");
