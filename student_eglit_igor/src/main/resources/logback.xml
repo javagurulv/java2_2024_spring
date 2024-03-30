@@ -7,17 +7,33 @@
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
+
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>logs/premiumcalculatorlog.log</file>
+        <file>student_eglit_igor/src/main/java/lv/javaguru/travel/insurance/logs/applogger.log</file>
         <encoder>
             <pattern>%date [%thread] %-5level %logger{35} - %msg%n</pattern>
         </encoder>
+    </appender>
+
+    <appender name="REQUEST_RESPONSE_FILE_APPENDER"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>student_eglit_igor/src/main/java/lv/javaguru/travel/insurance/logs/request-response-logger.log</file>
+    <encoder>
+        <pattern>%d{ISO8601} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
     </appender>
 
     <root level="debug">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE" />
     </root>
+
+    <logger name="student_eglit_igor/src/main/java/lv/javaguru/travel/insurance/loggers/RequestLogger.java" level="INFO">
+        <appender-ref ref="REQUEST_RESPONSE_FILE_APPENDER" />
+    </logger>
+    <logger name="student_eglit_igor/src/main/java/lv/javaguru/travel/insurance/loggers/ResponseLogger.java" level="INFO">
+        <appender-ref ref="REQUEST_RESPONSE_FILE_APPENDER" />
+    </logger>
 
 </configuration>
 
