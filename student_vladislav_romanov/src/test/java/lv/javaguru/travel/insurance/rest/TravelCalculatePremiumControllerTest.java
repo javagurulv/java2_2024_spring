@@ -26,72 +26,71 @@ public class TravelCalculatePremiumControllerTest {
 
     @Test
     public void simpleRestControllerTest() throws Exception {
-        mockMvc.perform(post("/insurance/travel/")
-                .content(jsonFileReader.readJsonFromFile("rest/simpleRestControllerTest_request.json"))
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andExpect(content().json(jsonFileReader.readJsonFromFile("rest/simpleRestControllerTest_response.json")))
-                .andReturn();
+        executeTest(
+                "rest/simpleRestControllerTest_request.json",
+                "rest/simpleRestControllerTest_response.json"
+        );
     }
 
     @Test
     public void incorrectFirstNameTest() throws Exception {
-        mockMvc.perform(post("/insurance/travel/")
-                .content(jsonFileReader.readJsonFromFile("rest/incorrectFirstNameTest_request.json"))
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andExpect(content().json(jsonFileReader.readJsonFromFile("rest/incorrectFirstNameTest_response.json")))
-                .andReturn();
+        executeTest(
+                "rest/incorrectFirstNameTest_request.json",
+                "rest/incorrectFirstNameTest_response.json"
+        );
     }
 
     @Test
     public void incorrectLastNameTest() throws Exception {
-        mockMvc.perform(post("/insurance/travel/")
-                .content(jsonFileReader.readJsonFromFile("rest/incorrectLastNameTest_request.json"))
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andExpect(content().json(jsonFileReader.readJsonFromFile("rest/incorrectLastNameTest_response.json")))
-                .andReturn();
+        executeTest(
+                "rest/incorrectLastNameTest_request.json",
+                "rest/incorrectLastNameTest_response.json"
+        );
     }
 
     @Test
     public void incorrectDateFromTest() throws Exception {
-        mockMvc.perform(post("/insurance/travel/")
-                .content(jsonFileReader.readJsonFromFile("rest/incorrectDateFromTest_request.json"))
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andExpect(content().json(jsonFileReader.readJsonFromFile("rest/incorrectDateFromTest_response.json")))
-                .andReturn();
+        executeTest(
+                "rest/incorrectDateFromTest_request.json",
+                "rest/incorrectDateFromTest_response.json"
+        );
     }
 
     @Test
     public void incorrectDateToTest() throws Exception {
-        mockMvc.perform(post("/insurance/travel/")
-                .content(jsonFileReader.readJsonFromFile("rest/incorrectDateToTest_request.json"))
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andExpect(content().json(jsonFileReader.readJsonFromFile("rest/incorrectDateToTest_response.json")))
-                .andReturn();
+        executeTest(
+                "rest/incorrectDateToTest_request.json",
+                "rest/incorrectDateToTest_response.json"
+        );
     }
 
     @Test
     public void incorrectPeriodTest() throws Exception {
-        mockMvc.perform(post("/insurance/travel/")
-                .content(jsonFileReader.readJsonFromFile("rest/incorrectPeriodTest_request.json"))
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andExpect(content().json(jsonFileReader.readJsonFromFile("rest/incorrectPeriodTest_response.json")))
-                .andReturn();
+        executeTest(
+                "rest/incorrectPeriodTest_request.json",
+                "rest/incorrectPeriodTest_response.json"
+        );
     }
 
     @Test
     public void incorrectRequestTest() throws Exception {
+        executeTest(
+                "rest/incorrectRequestTest_request.json",
+                "rest/incorrectRequestTest_response.json"
+        );
+    }
+
+    private void executeTest(String requestJsonPath, String responseJsonPath) throws Exception {
         mockMvc.perform(post("/insurance/travel/")
-                .content(jsonFileReader.readJsonFromFile("rest/incorrectRequestTest_request.json"))
+                .content(getDataFromJson(requestJsonPath))
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
-                .andExpect(content().json(jsonFileReader.readJsonFromFile("rest/incorrectRequestTest_response.json")))
+                .andExpect(content().json(getDataFromJson(responseJsonPath)))
                 .andReturn();
+    }
+
+    private String getDataFromJson(String path) {
+        return jsonFileReader.readJsonFromFile(path);
     }
 
 }
