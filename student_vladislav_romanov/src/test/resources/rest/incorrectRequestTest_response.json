@@ -9,6 +9,10 @@
       "message": "must exist and not to be empty!"
     },
     {
+      "field": "agreementDateTo",
+      "message": "must exist and not to be empty!"
+    },
+    {
       "field": "Travel Period",
       "message": "contain incorrect data!"
     }

@@ -10,10 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -29,132 +27,70 @@ public class TravelCalculatePremiumControllerTest {
     @Test
     public void simpleRestControllerTest() throws Exception {
         mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("rest/simpleRestControllerTest_request.json"))
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
+                .content(jsonFileReader.readJsonFromFile("rest/simpleRestControllerTest_request.json"))
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("personFirstName", is("Vladislav")))
-                .andExpect(jsonPath("personLastName", is("Romanov")))
-                .andExpect(jsonPath("agreementDateFrom", is("2024-03-10")))
-                .andExpect(jsonPath("agreementDateTo", is("2024-03-20")))
-                .andExpect(jsonPath("agreementPrice", is(10)))
+                .andExpect(content().json(jsonFileReader.readJsonFromFile("rest/simpleRestControllerTest_response.json")))
                 .andReturn();
     }
 
     @Test
     public void incorrectFirstNameTest() throws Exception {
         mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("rest/incorrectFirstNameTest_request.json"))
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
+                .content(jsonFileReader.readJsonFromFile("rest/incorrectFirstNameTest_request.json"))
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("personFirstName", is(nullValue())))
-                .andExpect(jsonPath("personLastName", is(nullValue())))
-                .andExpect(jsonPath("agreementDateFrom", is(nullValue())))
-                .andExpect(jsonPath("agreementDateTo", is(nullValue())))
-                .andExpect(jsonPath("agreementPrice", is(nullValue())))
-                .andExpect(jsonPath("errors", is(notNullValue())))
-                .andExpect(jsonPath("errors", hasSize(1)))
-                .andExpect(jsonPath("errors[0].field", is("personFirstName")))
-                .andExpect(jsonPath("errors[0].message", is("must exist and not to be empty!")))
+                .andExpect(content().json(jsonFileReader.readJsonFromFile("rest/incorrectFirstNameTest_response.json")))
                 .andReturn();
     }
 
     @Test
     public void incorrectLastNameTest() throws Exception {
         mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("rest/incorrectLastNameTest_request.json"))
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
+                .content(jsonFileReader.readJsonFromFile("rest/incorrectLastNameTest_request.json"))
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("personFirstName", is(nullValue())))
-                .andExpect(jsonPath("personLastName", is(nullValue())))
-                .andExpect(jsonPath("agreementDateFrom", is(nullValue())))
-                .andExpect(jsonPath("agreementDateTo", is(nullValue())))
-                .andExpect(jsonPath("agreementPrice", is(nullValue())))
-                .andExpect(jsonPath("errors", is(notNullValue())))
-                .andExpect(jsonPath("errors", hasSize(1)))
-                .andExpect(jsonPath("errors[0].field", is("personLastName")))
-                .andExpect(jsonPath("errors[0].message", is("must exist and not to be empty!")))
+                .andExpect(content().json(jsonFileReader.readJsonFromFile("rest/incorrectLastNameTest_response.json")))
                 .andReturn();
     }
 
     @Test
     public void incorrectDateFromTest() throws Exception {
         mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("rest/incorrectDateFromTest_request.json"))
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
+                .content(jsonFileReader.readJsonFromFile("rest/incorrectDateFromTest_request.json"))
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("personFirstName", is(nullValue())))
-                .andExpect(jsonPath("personLastName", is(nullValue())))
-                .andExpect(jsonPath("agreementDateFrom", is(nullValue())))
-                .andExpect(jsonPath("agreementDateTo", is(nullValue())))
-                .andExpect(jsonPath("agreementPrice", is(nullValue())))
-                .andExpect(jsonPath("errors", is(notNullValue())))
-                .andExpect(jsonPath("errors", hasSize(2)))
-                .andExpect(jsonPath("errors[0].field", is("agreementDateFrom")))
-                .andExpect(jsonPath("errors[0].message", is("must exist and not to be empty!")))
-                .andExpect(jsonPath("errors[1].field", is("Travel Period")))
-                .andExpect(jsonPath("errors[1].message", is("contain incorrect data!")))
+                .andExpect(content().json(jsonFileReader.readJsonFromFile("rest/incorrectDateFromTest_response.json")))
                 .andReturn();
     }
 
     @Test
     public void incorrectDateToTest() throws Exception {
         mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("rest/incorrectDateToTest_request.json"))
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
+                .content(jsonFileReader.readJsonFromFile("rest/incorrectDateToTest_request.json"))
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("personFirstName", is(nullValue())))
-                .andExpect(jsonPath("personLastName", is(nullValue())))
-                .andExpect(jsonPath("agreementDateFrom", is(nullValue())))
-                .andExpect(jsonPath("agreementDateTo", is(nullValue())))
-                .andExpect(jsonPath("agreementPrice", is(nullValue())))
-                .andExpect(jsonPath("errors", is(notNullValue())))
-                .andExpect(jsonPath("errors", hasSize(2)))
-                .andExpect(jsonPath("errors[0].field", is("agreementDateTo")))
-                .andExpect(jsonPath("errors[0].message", is("must exist and not to be empty!")))
-                .andExpect(jsonPath("errors[1].field", is("Travel Period")))
-                .andExpect(jsonPath("errors[1].message", is("contain incorrect data!")))
+                .andExpect(content().json(jsonFileReader.readJsonFromFile("rest/incorrectDateToTest_response.json")))
                 .andReturn();
     }
 
     @Test
     public void incorrectPeriodTest() throws Exception {
         mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("rest/incorrectPeriodTest_request.json"))
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
+                .content(jsonFileReader.readJsonFromFile("rest/incorrectPeriodTest_request.json"))
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("personFirstName", is(nullValue())))
-                .andExpect(jsonPath("personLastName", is(nullValue())))
-                .andExpect(jsonPath("agreementDateFrom", is(nullValue())))
-                .andExpect(jsonPath("agreementDateTo", is(nullValue())))
-                .andExpect(jsonPath("agreementPrice", is(nullValue())))
-                .andExpect(jsonPath("errors", is(notNullValue())))
-                .andExpect(jsonPath("errors", hasSize(1)))
-                .andExpect(jsonPath("errors[0].field", is("Travel Period")))
-                .andExpect(jsonPath("errors[0].message", is("contain incorrect data!")))
+                .andExpect(content().json(jsonFileReader.readJsonFromFile("rest/incorrectPeriodTest_response.json")))
                 .andReturn();
     }
 
     @Test
     public void incorrectRequestTest() throws Exception {
         mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("rest/incorrectRequestTest_request.json"))
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
+                .content(jsonFileReader.readJsonFromFile("rest/incorrectRequestTest_request.json"))
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("personFirstName", is(nullValue())))
-                .andExpect(jsonPath("personLastName", is(nullValue())))
-                .andExpect(jsonPath("agreementDateFrom", is(nullValue())))
-                .andExpect(jsonPath("agreementDateTo", is(nullValue())))
-                .andExpect(jsonPath("agreementPrice", is(nullValue())))
-                .andExpect(jsonPath("errors", is(notNullValue())))
-                .andExpect(jsonPath("errors", hasSize(4)))
-                .andExpect(jsonPath("errors[0].field", is("personFirstName")))
-                .andExpect(jsonPath("errors[0].message", is("must exist and not to be empty!")))
-                .andExpect(jsonPath("errors[1].field", is("personLastName")))
-                .andExpect(jsonPath("errors[1].message", is("must exist and not to be empty!")))
-                .andExpect(jsonPath("errors[2].field", is("agreementDateTo")))
-                .andExpect(jsonPath("errors[2].message", is("must exist and not to be empty!")))
-                .andExpect(jsonPath("errors[3].field", is("Travel Period")))
-                .andExpect(jsonPath("errors[3].message", is("contain incorrect data!")))
+                .andExpect(content().json(jsonFileReader.readJsonFromFile("rest/incorrectRequestTest_response.json")))
                 .andReturn();
     }
 
