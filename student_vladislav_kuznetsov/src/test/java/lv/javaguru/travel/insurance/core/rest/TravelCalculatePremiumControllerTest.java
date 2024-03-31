@@ -1,6 +1,5 @@
 package lv.javaguru.travel.insurance.core.rest;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,7 +12,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -147,6 +145,34 @@ public class TravelCalculatePremiumControllerTest {
         String jsonResponse = jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumResponse_when_only_agreementDateTo_is_wrong_date_format.json");
         assertTrue(jsonFileComparator.compareJsonFile(responseBodyContent,jsonResponse));
     }
+
+    @Test
+    @DisplayName("Test case 14: agreementDateFrom and agreementDateTo is before current date and equal")
+    public void agreementDateToAndAgreementDateFromIsBeforeCurrentTimeAndEqual() throws Exception {
+        String jsonRequest = "rest/TravelCalculatePremiumRequest_agreementDateFrom_agreementDateTo_is_before_current_date_and_equal.json";
+        String responseBodyContent = performJsonPostRequest(jsonRequest).getResponse().getContentAsString();
+        String jsonResponse = jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumResponse_when_agreementDateFrom_and_agreementDateTo_is_in_the_past.json");
+        assertTrue(jsonFileComparator.compareJsonFile(responseBodyContent,jsonResponse));
+    }
+
+    @Test
+    @DisplayName("Test case 15: agreementDateTo is before current date")
+    public void agreementDateToIsBeforeCurrentDate() throws Exception {
+        String jsonRequest = "rest/TravelCalculatePremiumRequest_agreementDateTo_is_before_current_date.json";
+        String responseBodyContent = performJsonPostRequest(jsonRequest).getResponse().getContentAsString();
+        String jsonResponse = jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumResponse_when_agreementDateTo_is_before_current_time.json");
+        assertTrue(jsonFileComparator.compareJsonFile(responseBodyContent,jsonResponse));
+    }
+
+    @Test
+    @DisplayName("Test case 16: agreementDateFrom and agreementDateTo is before current date and agreementDateFrom is before agreementDateTo")
+    public void agreementDateFromAndAgreementDateToIsBeforeCurrentDateAndAgreementDateFromIsBeforeAgreementDateTo() throws Exception {
+        String jsonRequest = "rest/TravelCalculatePremiumRequest_agreementDateFrom_and_agreementDateTo_is_before_current_time_and_agreementDateFrom_is_before_agreementDateTo.json";
+        String responseBodyContent = performJsonPostRequest(jsonRequest).getResponse().getContentAsString();
+        String jsonResponse = jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumResponse_TravelCalculatePremiumRequest_agreementDateFrom_and_agreementDateTo_is_before_current_time_and_agreementDateFrom_is_before_agreementDateTo.json");
+        assertTrue(jsonFileComparator.compareJsonFile(responseBodyContent,jsonResponse));
+    }
+
 
     public MvcResult performJsonPostRequest (String jsonRequestPath) throws Exception {
         return mockMvc.perform(post("/insurance/travel/")
