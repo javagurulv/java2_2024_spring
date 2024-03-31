@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 @Component
+public
 class DateTimeService {
 
     public long calculateDifferenceBetweenDays(Date dateFrom, Date dateTo) {

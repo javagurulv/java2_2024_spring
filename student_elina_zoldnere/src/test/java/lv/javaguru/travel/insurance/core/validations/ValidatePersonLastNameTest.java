@@ -1,5 +1,6 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.validations;
 
+import lv.javaguru.travel.insurance.core.ValidateHelper;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,13 +18,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class ValidatePersonFirstNameTest {
+public class ValidatePersonLastNameTest {
 
     @Mock
     private TravelCalculatePremiumRequest requestMock;
 
     @InjectMocks
-    private ValidatePersonFirstName validate;
+    private ValidatePersonLastName validate;
 
     @Autowired
     @InjectMocks
@@ -35,35 +36,35 @@ public class ValidatePersonFirstNameTest {
     }
 
     @Test
-    public void validate_ShouldReturnErrorWhenPersonFirstNameIsNull() {
-        when(requestMock.getPersonFirstName()).thenReturn(null);
+    public void validate_ShouldReturnErrorWhenPersonLastNameIsNull() {
+        when(requestMock.getPersonLastName()).thenReturn(null);
 
-        Optional<ValidationError> result = validate.validatePersonFirstName(requestMock);
+        Optional<ValidationError> result = validate.validatePersonLastName(requestMock);
 
         assertTrue(result.isPresent());
-        assertEquals("personFirstName", result.get().getField());
+        assertEquals("personLastName", result.get().getField());
         assertEquals("Must not be empty!", result.get().getMessage());
     }
 
     @Test
-    public void validate_ShouldReturnErrorWhenPersonFirstNameIsEmpty() {
-        when(requestMock.getPersonFirstName()).thenReturn("");
+    public void validate_ShouldReturnErrorWhenPersonLastNameIsEmpty() {
+        when(requestMock.getPersonLastName()).thenReturn("");
 
-        Optional<ValidationError> result = validate.validatePersonFirstName(requestMock);
+        Optional<ValidationError> result = validate.validatePersonLastName(requestMock);
 
         assertTrue(result.isPresent());
-        assertEquals("personFirstName", result.get().getField());
+        assertEquals("personLastName", result.get().getField());
         assertEquals("Must not be empty!", result.get().getMessage());
     }
 
     @Test
-    public void validate_ShouldReturnErrorWhenPersonFirstNameIsBlank() {
-        when(requestMock.getPersonFirstName()).thenReturn("     ");
+    public void validate_ShouldReturnErrorWhenPersonLastNameIsBlank() {
+        when(requestMock.getPersonLastName()).thenReturn("     ");
 
-        Optional<ValidationError> result = validate.validatePersonFirstName(requestMock);
+        Optional<ValidationError> result = validate.validatePersonLastName(requestMock);
 
         assertTrue(result.isPresent());
-        assertEquals("personFirstName", result.get().getField());
+        assertEquals("personLastName", result.get().getField());
         assertEquals("Must not be empty!", result.get().getMessage());
     }
 
