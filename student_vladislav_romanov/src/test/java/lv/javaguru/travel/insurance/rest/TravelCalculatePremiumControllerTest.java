@@ -33,42 +33,58 @@ public class TravelCalculatePremiumControllerTest {
     }
 
     @Test
-    public void incorrectFirstNameTest() throws Exception {
+    public void firstNameValidityTest() throws Exception {
         executeTest(
-                "rest/incorrectFirstNameTest_request.json",
-                "rest/incorrectFirstNameTest_response.json"
+                "rest/firstNameValidityTest_request.json",
+                "rest/firstNameValidityTest_response.json"
         );
     }
 
     @Test
-    public void incorrectLastNameTest() throws Exception {
+    public void lastNameValidityTest() throws Exception {
         executeTest(
-                "rest/incorrectLastNameTest_request.json",
-                "rest/incorrectLastNameTest_response.json"
+                "rest/lastNameValidityTest_request.json",
+                "rest/lastNameValidityTest_response.json"
         );
     }
 
     @Test
-    public void incorrectDateFromTest() throws Exception {
+    public void dateFromExistenceTest() throws Exception {
         executeTest(
-                "rest/incorrectDateFromTest_request.json",
-                "rest/incorrectDateFromTest_response.json"
+                "rest/dateFromExistenceTest_request.json",
+                "rest/dateFromExistenceTest_response.json"
         );
     }
 
     @Test
-    public void incorrectDateToTest() throws Exception {
+    public void dateFromIsNotInPastTest() throws Exception {
         executeTest(
-                "rest/incorrectDateToTest_request.json",
-                "rest/incorrectDateToTest_response.json"
+                "rest/dateFromExistenceTest_request.json",
+                "rest/dateFromExistenceTest_response.json"
         );
     }
 
     @Test
-    public void incorrectPeriodTest() throws Exception {
+    public void dateToExistenceTest() throws Exception {
         executeTest(
-                "rest/incorrectPeriodTest_request.json",
-                "rest/incorrectPeriodTest_response.json"
+                "rest/dateToExistenceTest_request.json",
+                "rest/dateToExistenceTest_response.json"
+        );
+    }
+
+    @Test
+    public void dateToIsNotInPastTest() throws Exception {
+        executeTest(
+                "rest/dateFromExistenceTest_request.json",
+                "rest/dateFromExistenceTest_response.json"
+        );
+    }
+
+    @Test
+    public void periodValidityTest() throws Exception {
+        executeTest(
+                "rest/periodValidityTest_request.json",
+                "rest/periodValidityTest_response.json"
         );
     }
 

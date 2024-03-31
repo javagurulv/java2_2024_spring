@@ -2,7 +2,7 @@
   "errors": [
     {
       "field": "agreementDateTo",
-      "message": "must exist and cannot be in past!"
+      "message": "must exist!"
     },
     {
       "field": "Travel Period",

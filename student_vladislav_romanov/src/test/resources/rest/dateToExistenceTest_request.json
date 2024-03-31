@@ -2,5 +2,5 @@
   "personFirstName" : "Vladislav",
   "personLastName" : "Romanov",
   "agreementDateFrom" : "2030-03-10",
-  "agreementDateTo" : ""
+  "agreementDateTo" : null
 }

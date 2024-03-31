@@ -1,13 +1,16 @@
 package lv.javaguru.travel.insurance.core;
 
+import lv.javaguru.travel.insurance.core.validator.*;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -16,86 +19,56 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class TravelCalculatePremiumRequestValidatorTest {
 
-    private TravelCalculatePremiumRequestValidator requestValidator = new TravelCalculatePremiumRequestValidator();
+    @Mock
+    private PersonFirstNameIsExistAndNotEmpty personFirstNameIsExistAndNotEmpty;
+
+    @Mock
+    private PersonLastNameIsExistAndNotEmpty personLastNameIsExistAndNotEmpty;
+
+    @Mock
+    private DateFromIsExist dateFromIsExist;
+
+    @Mock
+    private DateFromIsNotInPast dateFromIsNotInPast;
+
+    @Mock
+    private DateToIsExist dateToIsExist;
+
+    @Mock
+    private DateToIsNotInPast dateToIsNotInPast;
+
+    @Mock
+    private TravelPeriodIsValid travelPeriodIsValid;
+
+    @InjectMocks
+    private TravelCalculatePremiumRequestValidator requestValidator;
 
     @Test
-    void validateTest() {
+    void validationSucceedTest() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getPersonFirstName()).thenReturn("");
-        when(request.getPersonLastName()).thenReturn(null);
-        when(request.getAgreementDateFrom()).thenReturn(LocalDate.of(2030, 3, 18));
-        when(request.getAgreementDateTo()).thenReturn(LocalDate.of(2030, 3, 8));
+        when(personFirstNameIsExistAndNotEmpty.validatePersonFirstName(request)).thenReturn(Optional.empty());
+        when(personLastNameIsExistAndNotEmpty.validatePersonLastName(request)).thenReturn(Optional.empty());
+        when(dateFromIsExist.validateDateFrom(request)).thenReturn(Optional.empty());
+        when(dateToIsExist.validateDateTo(request)).thenReturn(Optional.empty());
+        when(dateFromIsNotInPast.validateDateFromIsNotInPast(request)).thenReturn(Optional.empty());
+        when(dateToIsNotInPast.validateDateToIsNotInPast(request)).thenReturn(Optional.empty());
+        when(travelPeriodIsValid.validateTravelPeriod(request)).thenReturn(Optional.empty());
         List<ValidationError> errors = requestValidator.validate(request);
-        assertEquals(errors.size(), 3);
+        assertTrue(errors.isEmpty());
     }
 
     @Test
-    void validatePersonFirstNameTest() {
+    void validationFailedTest() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getPersonFirstName()).thenReturn(null);
-        when(request.getPersonLastName()).thenReturn("Romanov");
-        when(request.getAgreementDateFrom()).thenReturn(LocalDate.of(2030, 3, 17));
-        when(request.getAgreementDateTo()).thenReturn(LocalDate.of(2030, 3, 18));
+        when(personFirstNameIsExistAndNotEmpty.validatePersonFirstName(request)).thenReturn(Optional.of(new ValidationError()));
+        when(personLastNameIsExistAndNotEmpty.validatePersonLastName(request)).thenReturn(Optional.of(new ValidationError()));
+        when(dateFromIsExist.validateDateFrom(request)).thenReturn(Optional.of(new ValidationError()));
+        when(dateToIsExist.validateDateTo(request)).thenReturn(Optional.of(new ValidationError()));
+        when(dateFromIsNotInPast.validateDateFromIsNotInPast(request)).thenReturn(Optional.of(new ValidationError()));
+        when(dateToIsNotInPast.validateDateToIsNotInPast(request)).thenReturn(Optional.of(new ValidationError()));
+        when(travelPeriodIsValid.validateTravelPeriod(request)).thenReturn(Optional.of(new ValidationError()));
         List<ValidationError> errors = requestValidator.validate(request);
-        assertEquals(errors.size(), 1);
-        assertEquals(errors.get(0).getField(), "personFirstName");
-        assertEquals(errors.get(0).getMessage(), "must exist and not to be empty!");
-    }
-
-    @Test
-    void validatePersonLastNameTest() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getPersonFirstName()).thenReturn("Vladislav");
-        when(request.getPersonLastName()).thenReturn("");
-        when(request.getAgreementDateFrom()).thenReturn(LocalDate.of(2030, 3, 17));
-        when(request.getAgreementDateTo()).thenReturn(LocalDate.of(2030, 3, 18));
-        List<ValidationError> errors = requestValidator.validate(request);
-        assertEquals(errors.size(), 1);
-        assertEquals(errors.get(0).getField(), "personLastName");
-        assertEquals(errors.get(0).getMessage(), "must exist and not to be empty!");
-    }
-
-    @Test
-    void validateDateFromTest() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getPersonFirstName()).thenReturn("Vladislav");
-        when(request.getPersonLastName()).thenReturn("Romanov");
-        when(request.getAgreementDateFrom()).thenReturn(null);
-        when(request.getAgreementDateTo()).thenReturn(LocalDate.of(2030, 3, 18));
-        List<ValidationError> errors = requestValidator.validate(request);
-        assertEquals(errors.size(), 2);
-        assertEquals(errors.get(0).getField(), "agreementDateFrom");
-        assertEquals(errors.get(0).getMessage(), "must exist and cannot be in past!");
-        assertEquals(errors.get(1).getField(), "Travel Period");
-        assertEquals(errors.get(1).getMessage(), "contain incorrect data!");
-    }
-
-    @Test
-    void validateDateToTest() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getPersonFirstName()).thenReturn("Vladislav");
-        when(request.getPersonLastName()).thenReturn("Romanov");
-        when(request.getAgreementDateFrom()).thenReturn(LocalDate.of(2030, 3, 18));
-        when(request.getAgreementDateTo()).thenReturn(null);
-        List<ValidationError> errors = requestValidator.validate(request);
-        assertEquals(errors.size(), 2);
-        assertEquals(errors.get(0).getField(), "agreementDateTo");
-        assertEquals(errors.get(0).getMessage(), "must exist and cannot be in past!");
-        assertEquals(errors.get(1).getField(), "Travel Period");
-        assertEquals(errors.get(1).getMessage(), "contain incorrect data!");
-    }
-
-    @Test
-    void validateTravelPeriodTest() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getPersonFirstName()).thenReturn("Vladislav");
-        when(request.getPersonLastName()).thenReturn("Romanov");
-        when(request.getAgreementDateFrom()).thenReturn(LocalDate.of(2030, 3, 18));
-        when(request.getAgreementDateTo()).thenReturn(LocalDate.of(2030, 3, 8));
-        List<ValidationError> errors = requestValidator.validate(request);
-        assertEquals(errors.size(), 1);
-        assertEquals(errors.get(0).getField(), "Travel Period");
-        assertEquals(errors.get(0).getMessage(), "contain incorrect data!");
+        assertEquals(errors.size(), 7);
     }
 
 
