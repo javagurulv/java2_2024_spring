@@ -3,7 +3,7 @@ Test scenarios:
 1) Given: personFirstName is not entered.
 Expected result: User is notified with the message: "Must not be empty!"
 
-Input:
+Request:
 {
 "personFirstName" : "",
 "personLastName" : "Pupkin",
@@ -11,7 +11,7 @@ Input:
 "agreementDateTo" : "2024-05-31"
 }
 
-Output:
+Response:
 {
     "errors": [
         {
@@ -29,7 +29,7 @@ Output:
 2) Given: personLastName is not entered.
 Expected result: User is notified with the message: "Must not be empty!"
 
-Input:
+Request:
 {
 "personFirstName" : "Vasja",
 "personLastName" : "",
@@ -37,7 +37,7 @@ Input:
 "agreementDateTo" : "2024-05-31"
 }
 
-Output:
+Response:
 {
     "errors": [
         {
@@ -55,7 +55,7 @@ Output:
 3) Given: personFirstName and personLastName is not entered.
 Expected result: User is notified with the message: "Must not be empty!"
 
-Input:
+Request:
 {
 "personFirstName" : "",
 "personLastName" : "",
@@ -63,7 +63,7 @@ Input:
 "agreementDateTo" : "2024-05-31"
 }
 
-Output:
+Response:
 {
     "errors": [
         {
@@ -86,7 +86,7 @@ Output:
 4) Given: agreementDateFrom is not entered.
 Expected result: User is notified with the message: "Must not be empty!"
 
-Input:
+Request:
 {
 "personFirstName" : "Vasja",
 "personLastName" : "Pupkin",
@@ -94,7 +94,7 @@ Input:
 "agreementDateTo" : "2024-05-31"
 }
 
-Output:
+Response:
 {
     "errors": [
         {
@@ -112,7 +112,7 @@ Output:
 5) Given: agreementDateTo is not entered.
 Expected result: User is notified with the message: "Must not be empty!"
 
-Input:
+Request:
 {
 "personFirstName" : "Vasja",
 "personLastName" : "Pupkin",
@@ -120,7 +120,7 @@ Input:
 "agreementDateTo" : ""
 }
 
-Output:
+Response:
 {
     "errors": [
         {
@@ -138,7 +138,7 @@ Output:
 6) Given: agreementDateTo and agreementDateFrom is not entered.
 Expected result: User is notified with the message: "Must not be empty!"
 
-Input:
+Request:
 {
 "personFirstName" : "Vasja",
 "personLastName" : "Pupkin",
@@ -146,7 +146,7 @@ Input:
 "agreementDateTo" : ""
 }
 
-Output:
+Response:
 {
     "errors": [
         {
@@ -168,7 +168,7 @@ Output:
 7) Given: agreementDateTo is before agreementDateFrom
 Expected result: User is notified with the message: "Invalid date !"
 
-Input:
+Request:
 {
 "personFirstName" : "Vasja",
 "personLastName" : "Pupkin",
@@ -176,7 +176,7 @@ Input:
 "agreementDateTo" : "2024-05-25"
 }
 
-Output:
+Response:
 {
     "errors": [
         {
@@ -194,7 +194,7 @@ Output:
 8) Given: agreementDateTo is equal agreementDateFrom
 Expected result: User is notified with the message: "Invalid date !"
 
-Input:
+Request:
 {
 "personFirstName" : "Vasja",
 "personLastName" : "Pupkin",
@@ -202,7 +202,7 @@ Input:
 "agreementDateTo" : "2024-05-26"
 }
 
-Output:
+Response:
 {
     "errors": [
         {
@@ -220,7 +220,7 @@ Output:
 9) Given: agreementDateFrom is before currentDate
 Expected result: User is notified with the message: "Invalid date !"
 
-Input:
+Request:
 {
 "personFirstName" : "Vasja",
 "personLastName" : "Pupkin",
@@ -228,7 +228,7 @@ Input:
 "agreementDateTo" : "2024-05-26"
 }
 
-Output:
+Response:
 {
     "errors": [
         {
@@ -246,7 +246,7 @@ Output:
 10) Given: personFirstName, personLastName, agreementDateFrom, agreementDateTo : is entered.
 Expected: agreementPrice is calculated.
 
-Input:
+Request:
 {
 "personFirstName" : "Vasja",
 "personLastName" : "Pupkin",
@@ -254,7 +254,7 @@ Input:
 "agreementDateTo" : "2024-05-30"
 }
 
-Output:
+Response:
 {
     "errors": null,
     "personFirstName": "Vasja",
@@ -267,7 +267,7 @@ Output:
 11) Given: agreementDateFrom, agreementDateTo entered in wrong Date format.
 Expected result: User is notified with the error message.
 
-Input:
+Request:
 {
 "personFirstName" : "Vasja",
 "personLastName" : "Pupkin",
@@ -275,7 +275,7 @@ Input:
 "agreementDateTo" : "27-05-2024"
 }
 
-Output:
+Response:
 {
     "errors": [
         {
@@ -293,7 +293,7 @@ Output:
 12) Given: personFirstName, personLastName, agreementDateFrom, agreementDateTo : is not entered.
 Expected result: User is notified with the error messages from all fields.
 
-Input:
+Request:
 {
 "personFirstName" : "",
 "personLastName" : "",
@@ -301,7 +301,7 @@ Input:
 "agreementDateTo" : ""
 }
 
-Output:
+Response:
 {
     "errors": [
         {
@@ -331,7 +331,7 @@ Output:
 13) Given: PersonFirstName, personLastName, agreementDateFrom is entered. agreementDateTo is entered in wrong Date format.
 Expected result: User is notified with the error message.
 
-Input:
+Request:
 {
 "personFirstName" : "Vasja",
 "personLastName" : "Pupkin",
@@ -339,7 +339,7 @@ Input:
 "agreementDateTo" : "31-05-2024"
 }
 
-Output:
+Response:
 {
     "errors": [
         {
