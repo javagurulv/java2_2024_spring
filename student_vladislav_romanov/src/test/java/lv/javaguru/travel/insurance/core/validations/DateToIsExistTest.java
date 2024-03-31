@@ -17,7 +17,7 @@ public class DateToIsExistTest {
     private final DateToIsExist validation = new DateToIsExist();
 
     @Test
-    void dateToIsExistFalse() {
+    void dateToIsNotExist() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateTo()).thenReturn(null);
         Optional<ValidationError> errors = validation.execute(request);
@@ -28,7 +28,7 @@ public class DateToIsExistTest {
     }
 
     @Test
-    void dateToIsExistTrue() {
+    void dateToIsExist() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateTo()).thenReturn(LocalDate.of(2030, 3, 31));
         Optional<ValidationError> errors = validation.execute(request);

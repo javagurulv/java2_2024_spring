@@ -17,7 +17,7 @@ public class DateFromIsExistTest {
     private final DateFromIsExist validation = new DateFromIsExist();
 
     @Test
-    void dateFromDontExist() {
+    void dateFromIsNotExist() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(null);
         Optional<ValidationError> errors = validation.execute(request);
