@@ -1,0 +1,91 @@
+class TravelPolicyPremiumCalculator:
+
+    Метод BigDecimal calculatePremium(request)
+    return CountryDefaultDayPremium * DayCount * AgeCoefficient * InsuranceLimitCoefficient
+
+Компоненты системы:
+
+CountryPremiumService - интерфейс для получения CountryDefaultDayPremium по стране.
+
+public interface CountryPremiumService {
+    Double getCountryCoefficient(String country);
+}
+    структура имплементации:
+
+    класс CountryPremiumServiceImpl implements CountryPremiumService {
+        @Override
+        public Double getCountryCoefficient(String country) {
+        return countryPremiumMap.stream()
+        .filter(countryPremiumMap.containsKey(country))
+        .findFirst().orElseThrow(() -> new RuntimeException("Country not found"));
+        }
+    }
+
+        private Map<String, Double> countryPremiumMap = new HashMap<>
+        (Map.of("Latvia", 1.0, "Estonia", 2.0, "Lithuania", 3.0));
+
+            где 1.0,2.0, 3.0 - коэффициенты для страны.
+
+
+AgeCoefficientService - интерфейс для получения коэффициента в зависимости от возраста.
+
+public interface AgeCoefficientService {
+    Double getAgeCoefficient(LocalDate birthDate, LocalDate insuranceStartDate);
+}
+
+    структура имплементации:
+
+    класс AgeCoefficientServiceImpl implements AgeCoefficientService {
+    @Override
+    public Double getAgeCoefficient(LocalDate birthDate, LocalDate insuranceStartDate) {
+
+        long age = ChronoUnit.YEARS.between(birthDate, insuranceStartDate);
+        if (age < 10) {
+            return 0.5;
+        } else if (11 < age < 17) {
+            return 0.8;
+        } else if { 18 < age < 25
+            return 1.2;
+        } else if { 26 < age < 50
+            return 1.3;
+        } else if { 50 < age < 75
+            return 1.5;
+        } else {
+            return 2.0;
+        }
+    }
+}
+
+
+InsuranceLimitCoefficientService - интерфейс для получения коэффициента в зависимости от страховой суммы.
+
+public interface InsuranceLimitCoefficientService {
+    Double getInsuranceLimitCoefficient(Integer insuranceLimit);
+}
+    структура имплементации:
+    класс InsuranceLimitCoefficientServiceImpl implements InsuranceLimitCoefficientService {
+    @Override
+    public Double getInsuranceLimitCoefficient(Integer insuranceLimit) {
+        case(insuranceLimit) {
+            10000: return 1.0;
+            15000: return 1.5;
+            20000: return 2.0;
+            25000: return 2.5;
+            30000: return 3.0;
+            default: return 4.0;
+        }
+}
+
+DayCount - интерфейс для получения количества дней страхования.
+
+public interface DayCount {
+    Integer getDayCount(LocalDate insuranceStartDate, LocalDate insuranceEndDate);
+}
+    структура имплементации:
+
+    класс DayCountImpl implements DayCount {
+    @Override
+    public Integer getDayCount(LocalDate insuranceStartDate, LocalDate insuranceEndDate) {
+        return (int) ChronoUnit.DAYS.between(insuranceStartDate, insuranceEndDate).plus(1);
+    }
+}
