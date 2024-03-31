@@ -10,6 +10,7 @@
 
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <file>student_eglit_igor/src/main/java/lv/javaguru/travel/insurance/logs/applogger.log</file>
+        <append>false</append>
         <encoder>
             <pattern>%date [%thread] %-5level %logger{35} - %msg%n</pattern>
         </encoder>
@@ -28,10 +29,10 @@
         <appender-ref ref="FILE" />
     </root>
 
-    <logger name="student_eglit_igor/src/main/java/lv/javaguru/travel/insurance/loggers/RequestLogger.java" level="INFO">
+    <logger name="loggers/RequestLogger" level="INFO">
         <appender-ref ref="REQUEST_RESPONSE_FILE_APPENDER" />
     </logger>
-    <logger name="student_eglit_igor/src/main/java/lv/javaguru/travel/insurance/loggers/ResponseLogger.java" level="INFO">
+    <logger name="loggers/ResponseLogger" level="INFO">
         <appender-ref ref="REQUEST_RESPONSE_FILE_APPENDER" />
     </logger>
 
