@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core.validator;
+package lv.javaguru.travel.insurance.core.validations;
 
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
@@ -8,9 +8,9 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 @Component
-public class DateFromIsNotInPast {
+class DateFromIsNotInPast implements TravelRequestValidator {
 
-    public Optional<ValidationError> validateDateFromIsNotInPast(TravelCalculatePremiumRequest request) {
+    public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
         return (request.getAgreementDateFrom() != null && request.getAgreementDateFrom().isBefore(LocalDate.now()))
                 ? Optional.of(new ValidationError("agreementDateFrom", "date cannot be in past!"))
                 : Optional.empty();

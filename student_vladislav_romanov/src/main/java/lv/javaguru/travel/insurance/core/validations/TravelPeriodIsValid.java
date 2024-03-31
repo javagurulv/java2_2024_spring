@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core.validator;
+package lv.javaguru.travel.insurance.core.validations;
 
 import lv.javaguru.travel.insurance.core.DateTimeService;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class TravelPeriodIsValid {
+class TravelPeriodIsValid implements TravelRequestValidator {
 
     @Autowired
     public DateTimeService dateTimeService;
 
-    public Optional<ValidationError> validateTravelPeriod(TravelCalculatePremiumRequest request) {
+    public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
         return (dateTimeService.calculateTravelPeriod(request.getAgreementDateFrom(), request.getAgreementDateTo()) < 1)
                 ? Optional.of(new ValidationError("Travel Period", "contain incorrect data!"))
                 : Optional.empty();
