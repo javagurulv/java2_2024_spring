@@ -2,86 +2,41 @@ package lv.javaguru.travel.insurance.core;
 
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Component
 class TravelCalculatePremiumRequestValidator {
 
+    @Autowired
+    private ValidatePersonFirstName validatePersonFirstName;
+    @Autowired
+    private ValidatePersonLastName validatePersonLastName;
+    @Autowired
+    private ValidateAgreementDateFrom validateAgreementDateFrom;
+    @Autowired
+    private ValidateAgreementDateTo validateAgreementDateTo;
+    @Autowired
+    private ValidateAgreementDateChronology validateAgreementDateChronology;
+    @Autowired
+    private ValidateAgreementDateFromNotLessThanToday validateAgreementDateFromNotLessThanToday;
+    @Autowired
+    private ValidateAgreementDateToNotLessThanToday validateAgreementDateToNotLessThanToday;
+
     public List<ValidationError> validate(TravelCalculatePremiumRequest request) {
         List<ValidationError> errors = new ArrayList<>();
-        validatePersonFirstName(request).ifPresent(errors::add);
-        validatePersonLastName(request).ifPresent(errors::add);
-        validateAgreementDateFrom(request).ifPresent(errors::add);
-        validateAgreementDateTo(request).ifPresent(errors::add);
-        validateAgreementDateChronology(request).ifPresent(errors::add);
-        validateAgreementDateFromNotLessThanToday(request).ifPresent(errors::add);
-        validateAgreementDateToNotLessThanToday(request).ifPresent(errors::add);
+        validatePersonFirstName.validatePersonFirstName(request).ifPresent(errors::add);
+        validatePersonLastName.validatePersonLastName(request).ifPresent(errors::add);
+        validateAgreementDateFrom.validateAgreementDateFrom(request).ifPresent(errors::add);
+        validateAgreementDateTo.validateAgreementDateTo(request).ifPresent(errors::add);
+        validateAgreementDateChronology.validateAgreementDateChronology(request).ifPresent(errors::add);
+        validateAgreementDateFromNotLessThanToday.validateAgreementDateFromNotLessThanToday(request).ifPresent(errors::add);
+        validateAgreementDateToNotLessThanToday.validateAgreementDateToNotLessThanToday(request).ifPresent(errors::add);
         return errors;
     }
 
-    private Optional<ValidationError> validatePersonFirstName(TravelCalculatePremiumRequest request) {
-        return (request.getPersonFirstName() == null || request.getPersonFirstName().isBlank())
-                ? Optional.of(new ValidationError("personFirstName", "Must not be empty!"))
-                : Optional.empty();
-    }
-
-    private Optional<ValidationError> validatePersonLastName(TravelCalculatePremiumRequest request) {
-        return (request.getPersonLastName() == null || request.getPersonLastName().isBlank())
-                ? Optional.of(new ValidationError("personLastName", "Must not be empty!"))
-                : Optional.empty();
-    }
-
-    private Optional<ValidationError> validateAgreementDateFrom(TravelCalculatePremiumRequest request) {
-        return (request.getAgreementDateFrom() == null)
-                ? Optional.of(new ValidationError("agreementDateFrom", "Must not be empty!"))
-                : Optional.empty();
-    }
-
-    private Optional<ValidationError> validateAgreementDateTo(TravelCalculatePremiumRequest request) {
-        return (request.getAgreementDateTo() == null)
-                ? Optional.of(new ValidationError("agreementDateTo", "Must not be empty!"))
-                : Optional.empty();
-    }
-
-    private Optional<ValidationError> validateAgreementDateChronology(TravelCalculatePremiumRequest request) {
-        Date agreementDateFrom = request.getAgreementDateFrom();
-        Date agreementDateTo = request.getAgreementDateTo();
-
-        return (agreementDateFrom != null && agreementDateTo != null
-                && !agreementDateFrom.before(agreementDateTo))
-                ? Optional.of(new ValidationError("agreementDateFrom", "Must be before agreementDateTo!"))
-                : Optional.empty();
-    }
-
-    private Optional<ValidationError> validateAgreementDateFromNotLessThanToday(TravelCalculatePremiumRequest request) {
-        Date agreementDateFrom = request.getAgreementDateFrom();
-        Date agreementDateTo = request.getAgreementDateTo();
-
-        return (agreementDateFrom != null && agreementDateTo != null
-                && agreementDateFrom.before(midnightToday()))
-                ? Optional.of(new ValidationError("agreementDateFrom", "Must not be in past!"))
-                : Optional.empty();
-    }
-
-    private Optional<ValidationError> validateAgreementDateToNotLessThanToday(TravelCalculatePremiumRequest request) {
-        Date agreementDateFrom = request.getAgreementDateFrom();
-        Date agreementDateTo = request.getAgreementDateTo();
-
-        return (agreementDateFrom != null && agreementDateTo != null
-                && agreementDateTo.before(midnightToday()))
-                ? Optional.of(new ValidationError("agreementDateTo", "Must not be in past!"))
-                : Optional.empty();
-    }
-
-    private Date midnightToday() { // today 00:00:00 EET
-        Calendar today = Calendar.getInstance();
-        today.setTime(new Date());
-        today.set(Calendar.HOUR_OF_DAY, 0);
-        today.set(Calendar.MINUTE, 0);
-        today.set(Calendar.SECOND, 0);
-        today.set(Calendar.MILLISECOND, 0);
-        return today.getTime();
-    }
 }

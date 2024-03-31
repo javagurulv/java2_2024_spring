@@ -3,19 +3,17 @@ package lv.javaguru.travel.insurance.core;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Date;
-import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -23,162 +21,64 @@ public class TravelCalculatePremiumRequestValidatorTest {
 
     @Mock
     private TravelCalculatePremiumRequest requestMock;
+    @Mock
+    private ValidatePersonFirstName validatePersonFirstNameMock;
+    @Mock
+    private ValidatePersonLastName validatePersonLastNameMock;
+    @Mock
+    private ValidateAgreementDateFrom validateAgreementDateFromMock;
+    @Mock
+    private ValidateAgreementDateTo validateAgreementDateToMock;
+    @Mock
+    private ValidateAgreementDateChronology validateAgreementDateChronologyMock;
+    @Mock
+    private ValidateAgreementDateFromNotLessThanToday validateAgreementDateFromNotLessThanTodayMock;
+    @Mock
+    private ValidateAgreementDateToNotLessThanToday validateAgreementDateToNotLessThanTodayMock;
 
     @InjectMocks
     private TravelCalculatePremiumRequestValidator requestValidator;
 
-    @BeforeEach
-    public void setUp() {
-        setUpRequestMockWithAllValues();
+
+    @Test
+    public void validate_ShouldPassWhenAllValidationsSucceed() {
+        when(validatePersonFirstNameMock.validatePersonFirstName(requestMock))
+                .thenReturn(Optional.empty());
+        when(validatePersonLastNameMock.validatePersonLastName(requestMock))
+                .thenReturn(Optional.empty());
+        when(validateAgreementDateFromMock.validateAgreementDateFrom(requestMock))
+                .thenReturn(Optional.empty());
+        when(validateAgreementDateToMock.validateAgreementDateTo(requestMock))
+                .thenReturn(Optional.empty());
+        when(validateAgreementDateChronologyMock.validateAgreementDateChronology(requestMock))
+                .thenReturn(Optional.empty());
+        when(validateAgreementDateFromNotLessThanTodayMock.validateAgreementDateFromNotLessThanToday(requestMock))
+                .thenReturn(Optional.empty());
+        when(validateAgreementDateToNotLessThanTodayMock.validateAgreementDateToNotLessThanToday(requestMock))
+                .thenReturn(Optional.empty());
+        List<ValidationError> errors = requestValidator.validate(requestMock);
+        assertTrue(errors.isEmpty());
     }
 
     @Test
-    public void validate_ShouldReturnErrorWhenPersonFirstNameIsNull() {
-        when(requestMock.getPersonFirstName()).thenReturn(null);
-
-        List<ValidationError> result = requestValidator.validate(requestMock);
-
-        assertEquals(1, result.size());
-        assertEquals("personFirstName", result.get(0).getField());
-        assertEquals("Must not be empty!", result.get(0).getMessage());
-    }
-
-    @Test
-    public void validate_ShouldReturnErrorWhenPersonFirstNameIsEmpty() {
-        when(requestMock.getPersonFirstName()).thenReturn("");
-
-        List<ValidationError> result = requestValidator.validate(requestMock);
-
-        assertEquals(1, result.size());
-        assertEquals("personFirstName", result.get(0).getField());
-        assertEquals("Must not be empty!", result.get(0).getMessage());
-    }
-
-    @Test
-    public void validate_ShouldReturnErrorWhenPersonFirstNameIsBlank() {
-        when(requestMock.getPersonFirstName()).thenReturn("     ");
-
-        List<ValidationError> result = requestValidator.validate(requestMock);
-
-        assertEquals(1, result.size());
-        assertEquals("personFirstName", result.get(0).getField());
-        assertEquals("Must not be empty!", result.get(0).getMessage());
-    }
-
-    @Test
-    public void validate_ShouldReturnErrorWhenPersonLastNameIsNull() {
-        when(requestMock.getPersonLastName()).thenReturn(null);
-
-        List<ValidationError> result = requestValidator.validate(requestMock);
-
-        assertEquals(1, result.size());
-        assertEquals("personLastName", result.get(0).getField());
-        assertEquals("Must not be empty!", result.get(0).getMessage());
-    }
-
-    @Test
-    public void validate_ShouldReturnErrorWhenPersonLastNameIsEmpty() {
-        when(requestMock.getPersonLastName()).thenReturn("");
-
-        List<ValidationError> result = requestValidator.validate(requestMock);
-
-        assertEquals(1, result.size());
-        assertEquals("personLastName", result.get(0).getField());
-        assertEquals("Must not be empty!", result.get(0).getMessage());
-    }
-
-    @Test
-    public void validate_ShouldReturnErrorWhenPersonLastNameIsBlank() {
-        when(requestMock.getPersonLastName()).thenReturn("   ");
-
-        List<ValidationError> result = requestValidator.validate(requestMock);
-
-        assertEquals(1, result.size());
-        assertEquals("personLastName", result.get(0).getField());
-        assertEquals("Must not be empty!", result.get(0).getMessage());
-    }
-
-    @Test
-    public void validate_ShouldReturnErrorWhenAgreementDateFromIsNull() {
-        when(requestMock.getAgreementDateFrom()).thenReturn(null);
-
-        List<ValidationError> result = requestValidator.validate(requestMock);
-
-        assertEquals(1, result.size());
-        assertEquals("agreementDateFrom", result.get(0).getField());
-        assertEquals("Must not be empty!", result.get(0).getMessage());
-    }
-
-    @Test
-    public void validate_ShouldReturnErrorWhenAgreementDateToIsNull() {
-        when(requestMock.getAgreementDateTo()).thenReturn(null);
-
-        List<ValidationError> result = requestValidator.validate(requestMock);
-
-        assertEquals(1, result.size());
-        assertEquals("agreementDateTo", result.get(0).getField());
-        assertEquals("Must not be empty!", result.get(0).getMessage());
-    }
-
-    @Test
-    public void validate_ShouldReturnErrorWhenAgreementDateToIsEqualsAgreementDateFrom() {
-        // requestMock.getAgreementDateFrom() returns (new Date (2025 - 1900, 2, 10))
-        when(requestMock.getAgreementDateTo()).thenReturn(new Date(2025 - 1900, 2, 10));
-
-        List<ValidationError> result = requestValidator.validate(requestMock);
-
-        assertEquals(1, result.size());
-        assertEquals("agreementDateFrom", result.get(0).getField());
-        assertEquals("Must be before agreementDateTo!", result.get(0).getMessage());
-    }
-
-    @Test
-    public void validate_ShouldReturnErrorWhenAgreementDateToIsLessThanAgreementDateFrom() {
-        // requestMock.getAgreementDateFrom() returns (new Date (2025 - 1900, 2, 10))
-        when(requestMock.getAgreementDateTo()).thenReturn(new Date(2025 - 1900, 2, 9));
-
-        List<ValidationError> result = requestValidator.validate(requestMock);
-
-        assertEquals(1, result.size());
-        assertEquals("agreementDateFrom", result.get(0).getField());
-        assertEquals("Must be before agreementDateTo!", result.get(0).getMessage());
-    }
-
-    @Test
-    public void validate_ShouldReturnErrorWhenAgreementDateFromIsLessThanToday() {
-        when(requestMock.getAgreementDateFrom()).thenReturn(new Date(2024 - 1900, 2, 10));
-
-        List<ValidationError> result = requestValidator.validate(requestMock);
-
-        assertEquals(1, result.size());
-        assertEquals("agreementDateFrom", result.get(0).getField());
-        assertEquals("Must not be in past!", result.get(0).getMessage());
-    }
-
-    @Test
-    public void validate_ShouldReturnErrorWhenAgreementDateToLessThanToday() {
-        when(requestMock.getAgreementDateTo()).thenReturn(new Date(2024 - 1900, 2, 11));
-
-        List<ValidationError> result = requestValidator.validate(requestMock);
-
-        assertEquals(2, result.size()); // also wrong date order error
-        assertEquals("agreementDateTo", result.get(1).getField());
-        assertEquals("Must not be in past!", result.get(1).getMessage());
-    }
-
-    @Test
-    public void validate_ShouldPassWhenAllFieldsAreValid() {
-
-        List<ValidationError> result = requestValidator.validate(requestMock);
-
-        assertTrue(result.isEmpty());
-    }
-
-    private void setUpRequestMockWithAllValues() {
-        Mockito.lenient().when(requestMock.getPersonFirstName()).thenReturn("Jānis");
-        Mockito.lenient().when(requestMock.getPersonLastName()).thenReturn("Bērziņš");
-        Mockito.lenient().when(requestMock.getAgreementDateFrom()).thenReturn(new Date(125, 2, 10));
-        Mockito.lenient().when(requestMock.getAgreementDateTo()).thenReturn(new Date(125, 2, 11));
+    public void validate_ShouldReturnErrorsWhenAllValidationsFail() {
+        when(validatePersonFirstNameMock.validatePersonFirstName(requestMock))
+                .thenReturn(Optional.of(new ValidationError()));
+        when(validatePersonLastNameMock.validatePersonLastName(requestMock))
+                .thenReturn(Optional.of(new ValidationError()));
+        when(validateAgreementDateFromMock.validateAgreementDateFrom(requestMock))
+                .thenReturn(Optional.of(new ValidationError()));
+        when(validateAgreementDateToMock.validateAgreementDateTo(requestMock))
+                .thenReturn(Optional.of(new ValidationError()));
+        when(validateAgreementDateChronologyMock.validateAgreementDateChronology(requestMock))
+                .thenReturn(Optional.of(new ValidationError()));
+        when(validateAgreementDateFromNotLessThanTodayMock.validateAgreementDateFromNotLessThanToday(requestMock))
+                .thenReturn(Optional.of(new ValidationError()));
+        when(validateAgreementDateToNotLessThanTodayMock.validateAgreementDateToNotLessThanToday(requestMock))
+                .thenReturn(Optional.of(new ValidationError()));
+        List<ValidationError> errors = requestValidator.validate(requestMock);
+        assertFalse(errors.isEmpty());
+        assertEquals(errors.size(), 7);
     }
 
 }
