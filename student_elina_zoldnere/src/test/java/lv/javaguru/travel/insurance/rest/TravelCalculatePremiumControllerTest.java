@@ -1,6 +1,8 @@
 package lv.javaguru.travel.insurance.rest;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,6 +17,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -159,10 +164,26 @@ public class TravelCalculatePremiumControllerTest {
                 .andReturn()
                 .getResponse();
 
-        String calculatedResponseAsString = calculatedResponse.getContentAsString(StandardCharsets.UTF_8);
         String expectedResponseAsString = reader.readJsonFromFile(expectedResponseFile);
+        String calculatedResponseAsString = calculatedResponse.getContentAsString(StandardCharsets.UTF_8);
 
-        assertEquals(mapper.readTree(expectedResponseAsString), mapper.readTree(calculatedResponseAsString));
+        assertEquals(sortJsonArray(expectedResponseAsString), sortJsonArray(calculatedResponseAsString));
+    }
+
+    private JsonNode sortJsonArray(String json) throws Exception {
+        JsonNode node = mapper.readTree(json);
+
+        JsonNode errorsNode = node.get("errors");
+        if (errorsNode != null && errorsNode.isArray() && !errorsNode.isEmpty()) {
+            ArrayNode errorsArray = (ArrayNode) errorsNode;
+            List<JsonNode> errorsList = new ArrayList<>();
+            errorsArray.forEach(errorsList::add);
+            errorsList.sort(Comparator.comparing(o -> o.get("field").asText()));
+            errorsArray.removeAll();
+            errorsList.forEach(errorsArray::add);
+        }
+        return node;
     }
 
 }
+

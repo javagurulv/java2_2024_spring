@@ -44,7 +44,7 @@ public class ValidateAgreementDateToNotLessThanTodayTest {
         when(requestMock.getAgreementDateTo()).thenReturn(new Date(2024 - 1900, 2, 11));
         when(dateTimeService.midnightToday()).thenReturn(helper.midnightToday());
 
-        Optional<ValidationError> result = validate.validateAgreementDateToNotLessThanToday(requestMock);
+        Optional<ValidationError> result = validate.execute(requestMock);
 
         assertTrue(result.isPresent());
         assertEquals("agreementDateTo", result.get().getField());

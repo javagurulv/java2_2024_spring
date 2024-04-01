@@ -8,8 +8,8 @@ import java.util.Date;
 import java.util.Optional;
 
 @Component
-public class ValidateAgreementDateChronology {
-    public Optional<ValidationError> validateAgreementDateChronology(TravelCalculatePremiumRequest request) {
+class ValidateAgreementDateChronology implements RequestFieldValidation {
+    public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
         Date agreementDateFrom = request.getAgreementDateFrom();
         Date agreementDateTo = request.getAgreementDateTo();
 
