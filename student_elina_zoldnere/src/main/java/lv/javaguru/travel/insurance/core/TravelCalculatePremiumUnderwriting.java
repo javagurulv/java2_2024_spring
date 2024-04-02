@@ -16,4 +16,5 @@ class TravelCalculatePremiumUnderwriting {
         long differenceBetweenDays = dateTimeService.calculateDifferenceBetweenDays(agreementDateFrom, agreementDateTo);
         return BigDecimal.valueOf(differenceBetweenDays);
     }
+
 }

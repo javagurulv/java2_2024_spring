@@ -1,6 +1,5 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.validations.*;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 
@@ -10,7 +9,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -19,19 +17,19 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class TravelCalculatePremiumRequestValidatorTest {
+public class TravelCalculatePremiumRequestValidatorImplTest {
 
     @Mock
     private TravelCalculatePremiumRequest requestMock;
     @Mock
-    List <RequestFieldValidation> fieldValidationMock;
+    private List<RequestFieldValidation> fieldValidationMock;
     @Mock
-    RequestFieldValidation validation1;
+    private RequestFieldValidation validation1;
     @Mock
-    RequestFieldValidation validation2;
+    private RequestFieldValidation validation2;
 
     @InjectMocks
-    private TravelCalculatePremiumRequestValidator requestValidator;
+    private TravelCalculatePremiumRequestValidatorImpl requestValidator;
 
     @Test
     public void validate_ShouldPassWhenAllValidationsSucceed() {
@@ -54,7 +52,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
         when(fieldValidationMock.stream()).thenReturn(Stream.of(validation1, validation2));
 
         List<ValidationError> errors = requestValidator.validate(requestMock);
-        assertEquals( 2, errors.size());
+        assertEquals(2, errors.size());
     }
 
 }

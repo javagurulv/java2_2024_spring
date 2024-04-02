@@ -32,7 +32,6 @@ public class TravelCalculatePremiumControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-
     @Autowired
     private JsonFileReader reader;
 

@@ -1,9 +1,9 @@
 package lv.javaguru.travel.insurance.core.validations;
 
 import lv.javaguru.travel.insurance.core.DateTimeService;
-
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -51,4 +51,5 @@ public class ValidateAgreementDateFromNotLessThanTodayTest {
         assertEquals("agreementDateFrom", result.get().getField());
         assertEquals("Must not be in past!", result.get().getMessage());
     }
+
 }

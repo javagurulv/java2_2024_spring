@@ -1,8 +1,10 @@
 package lv.javaguru.travel.insurance.core;
 
+import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,10 +16,8 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
 
     @Autowired
     private TravelCalculatePremiumRequestValidator requestValidator;
-
     @Autowired
     private TravelCalculatePremiumUnderwriting calculateUnderwriting;
-
     @Autowired
     private DateTimeService dateTimeService;
 
