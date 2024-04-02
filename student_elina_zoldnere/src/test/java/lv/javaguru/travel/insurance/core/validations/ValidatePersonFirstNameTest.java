@@ -38,7 +38,7 @@ public class ValidatePersonFirstNameTest {
     public void validate_ShouldReturnErrorWhenPersonFirstNameIsNull() {
         when(requestMock.getPersonFirstName()).thenReturn(null);
 
-        Optional<ValidationError> result = validate.validatePersonFirstName(requestMock);
+        Optional<ValidationError> result = validate.execute(requestMock);
 
         assertTrue(result.isPresent());
         assertEquals("personFirstName", result.get().getField());
@@ -49,7 +49,7 @@ public class ValidatePersonFirstNameTest {
     public void validate_ShouldReturnErrorWhenPersonFirstNameIsEmpty() {
         when(requestMock.getPersonFirstName()).thenReturn("");
 
-        Optional<ValidationError> result = validate.validatePersonFirstName(requestMock);
+        Optional<ValidationError> result = validate.execute(requestMock);
 
         assertTrue(result.isPresent());
         assertEquals("personFirstName", result.get().getField());
@@ -60,7 +60,7 @@ public class ValidatePersonFirstNameTest {
     public void validate_ShouldReturnErrorWhenPersonFirstNameIsBlank() {
         when(requestMock.getPersonFirstName()).thenReturn("     ");
 
-        Optional<ValidationError> result = validate.validatePersonFirstName(requestMock);
+        Optional<ValidationError> result = validate.execute(requestMock);
 
         assertTrue(result.isPresent());
         assertEquals("personFirstName", result.get().getField());

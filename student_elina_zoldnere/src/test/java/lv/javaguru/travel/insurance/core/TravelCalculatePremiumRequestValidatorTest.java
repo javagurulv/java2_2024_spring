@@ -13,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -23,63 +24,37 @@ public class TravelCalculatePremiumRequestValidatorTest {
     @Mock
     private TravelCalculatePremiumRequest requestMock;
     @Mock
-    private ValidatePersonFirstName validatePersonFirstNameMock;
+    List <RequestFieldValidation> fieldValidationMock;
     @Mock
-    private ValidatePersonLastName validatePersonLastNameMock;
+    RequestFieldValidation validation1;
     @Mock
-    private ValidateAgreementDateFrom validateAgreementDateFromMock;
-    @Mock
-    private ValidateAgreementDateTo validateAgreementDateToMock;
-    @Mock
-    private ValidateAgreementDateChronology validateAgreementDateChronologyMock;
-    @Mock
-    private ValidateAgreementDateFromNotLessThanToday validateAgreementDateFromNotLessThanTodayMock;
-    @Mock
-    private ValidateAgreementDateToNotLessThanToday validateAgreementDateToNotLessThanTodayMock;
+    RequestFieldValidation validation2;
 
     @InjectMocks
     private TravelCalculatePremiumRequestValidator requestValidator;
 
-
     @Test
     public void validate_ShouldPassWhenAllValidationsSucceed() {
-        when(validatePersonFirstNameMock.validatePersonFirstName(requestMock))
+        when(validation1.execute(requestMock))
                 .thenReturn(Optional.empty());
-        when(validatePersonLastNameMock.validatePersonLastName(requestMock))
+        when(validation2.execute(requestMock))
                 .thenReturn(Optional.empty());
-        when(validateAgreementDateFromMock.validateAgreementDateFrom(requestMock))
-                .thenReturn(Optional.empty());
-        when(validateAgreementDateToMock.validateAgreementDateTo(requestMock))
-                .thenReturn(Optional.empty());
-        when(validateAgreementDateChronologyMock.validateAgreementDateChronology(requestMock))
-                .thenReturn(Optional.empty());
-        when(validateAgreementDateFromNotLessThanTodayMock.validateAgreementDateFromNotLessThanToday(requestMock))
-                .thenReturn(Optional.empty());
-        when(validateAgreementDateToNotLessThanTodayMock.validateAgreementDateToNotLessThanToday(requestMock))
-                .thenReturn(Optional.empty());
+        when(fieldValidationMock.stream()).thenReturn(Stream.of(validation1, validation2));
+
         List<ValidationError> errors = requestValidator.validate(requestMock);
         assertTrue(errors.isEmpty());
     }
 
     @Test
     public void validate_ShouldReturnErrorsWhenAllValidationsFail() {
-        when(validatePersonFirstNameMock.validatePersonFirstName(requestMock))
+        when(validation1.execute(requestMock))
                 .thenReturn(Optional.of(new ValidationError()));
-        when(validatePersonLastNameMock.validatePersonLastName(requestMock))
+        when(validation2.execute(requestMock))
                 .thenReturn(Optional.of(new ValidationError()));
-        when(validateAgreementDateFromMock.validateAgreementDateFrom(requestMock))
-                .thenReturn(Optional.of(new ValidationError()));
-        when(validateAgreementDateToMock.validateAgreementDateTo(requestMock))
-                .thenReturn(Optional.of(new ValidationError()));
-        when(validateAgreementDateChronologyMock.validateAgreementDateChronology(requestMock))
-                .thenReturn(Optional.of(new ValidationError()));
-        when(validateAgreementDateFromNotLessThanTodayMock.validateAgreementDateFromNotLessThanToday(requestMock))
-                .thenReturn(Optional.of(new ValidationError()));
-        when(validateAgreementDateToNotLessThanTodayMock.validateAgreementDateToNotLessThanToday(requestMock))
-                .thenReturn(Optional.of(new ValidationError()));
+        when(fieldValidationMock.stream()).thenReturn(Stream.of(validation1, validation2));
+
         List<ValidationError> errors = requestValidator.validate(requestMock);
-        assertFalse(errors.isEmpty());
-        assertEquals(errors.size(), 7);
+        assertEquals( 2, errors.size());
     }
 
 }

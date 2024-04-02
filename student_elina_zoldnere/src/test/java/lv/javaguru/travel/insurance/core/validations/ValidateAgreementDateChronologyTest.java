@@ -40,7 +40,7 @@ public class ValidateAgreementDateChronologyTest {
         // requestMock.getAgreementDateFrom() returns (new Date (2025 - 1900, 2, 10))
         when(requestMock.getAgreementDateTo()).thenReturn(new Date(2025 - 1900, 2, 10));
 
-        Optional<ValidationError> result = validate.validateAgreementDateChronology(requestMock);
+        Optional<ValidationError> result = validate.execute(requestMock);
 
         assertTrue(result.isPresent());
         assertEquals("agreementDateFrom", result.get().getField());
@@ -52,7 +52,7 @@ public class ValidateAgreementDateChronologyTest {
         // requestMock.getAgreementDateFrom() returns (new Date (2025 - 1900, 2, 10))
         when(requestMock.getAgreementDateTo()).thenReturn(new Date(2025 - 1900, 2, 9));
 
-        Optional<ValidationError> result = validate.validateAgreementDateChronology(requestMock);
+        Optional<ValidationError> result = validate.execute(requestMock);
 
         assertTrue(result.isPresent());
         assertEquals("agreementDateFrom", result.get().getField());

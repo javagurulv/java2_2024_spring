@@ -10,12 +10,12 @@ import java.util.Date;
 import java.util.Optional;
 
 @Component
-public class ValidateAgreementDateToNotLessThanToday {
+class ValidateAgreementDateToNotLessThanToday implements RequestFieldValidation {
 
     @Autowired
     private DateTimeService dateTimeService;
 
-    public Optional<ValidationError> validateAgreementDateToNotLessThanToday(TravelCalculatePremiumRequest request) {
+    public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
         Date agreementDateFrom = request.getAgreementDateFrom();
         Date agreementDateTo = request.getAgreementDateTo();
 

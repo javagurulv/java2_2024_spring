@@ -38,7 +38,7 @@ public class ValidateAgreementDateToTest {
     public void validate_ShouldReturnErrorWhenAgreementDateToIsNull() {
         when(requestMock.getAgreementDateTo()).thenReturn(null);
 
-        Optional<ValidationError> result = validate.validateAgreementDateTo(requestMock);
+        Optional<ValidationError> result = validate.execute(requestMock);
 
         assertTrue(result.isPresent());
         assertEquals("agreementDateTo", result.get().getField());
