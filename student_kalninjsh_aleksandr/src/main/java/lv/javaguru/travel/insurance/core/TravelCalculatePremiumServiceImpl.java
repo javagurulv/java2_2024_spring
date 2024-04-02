@@ -21,20 +21,20 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setPersonLastName(request.getPersonLastName());
         response.setAgreementDateFrom(request.getAgreementDateFrom());
         response.setAgreementDateTo(request.getAgreementDateTo());
-        response.setAgreementPrice(daysBetweenDates(request));
+        response.setAgreementPrice(calculateAgreementDaysBetweenDates(request));
 
         return response;
     }
 
-    public BigDecimal daysBetweenDates(TravelCalculatePremiumRequest request) {
+    private BigDecimal calculateAgreementDaysBetweenDates(TravelCalculatePremiumRequest request) {
         if (request.getAgreementDateFrom() != null && request.getAgreementDateTo() != null) {
-            long difference = request.getAgreementDateTo().getTime() - request.getAgreementDateFrom().getTime();
-            long daysBetween = TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS);
-            return BigDecimal.valueOf(daysBetween);
-        }
-        else {
-            return null;
-        }
+                long difference = request.getAgreementDateTo().getTime() - request.getAgreementDateFrom().getTime();
+                long numberOfDatesBetweenDates = TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS);
+                return BigDecimal.valueOf(numberOfDatesBetweenDates);
+            } else {
+                return null;
+            }
+
     }
 
 

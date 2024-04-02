@@ -55,6 +55,19 @@ class TravelCalculatePremiumServiceImplTest {
         assertEquals(premiumResponse.getAgreementPrice(), BigDecimal.valueOf(5));
     }
 
+    private DateTimeService dateTimeService = new DateTimeService();
+
+    @Test
+    public void shouldAgreementTimeService() {
+        TravelCalculatePremiumRequest travelRequest= new TravelCalculatePremiumRequest();
+        travelRequest.setAgreementDateFrom(new Date());
+        travelRequest.setAgreementDateTo(new Date());
+        long travelCalculatePremiumRequest = travelRequest.getAgreementDateFrom().getTime() - travelRequest.getAgreementDateTo().getTime();
+        long travelCalculatePremiumResponse = dateTimeService.calculateDateFromTo(travelRequest);
+
+        assertEquals(travelCalculatePremiumResponse, travelCalculatePremiumRequest);
+
+    }
 
 
 }
