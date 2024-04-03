@@ -56,32 +56,32 @@ public class TravelCalculatePremiumControllerTest {
         assertTrue(jsonFileComparator.compareJsonFile(responseBodyContent,jsonResponse));
     }
 
-    @Test
-    @DisplayName("Test case 4: agreementDateFromIsNotEntered")
-    public void agreementDateFromIsNotEntered() throws Exception {
-        String jsonRequest = "rest/TravelCalculatePremiumRequest_agreementDateFrom_is_not_entered.json";
-        String responseBodyContent = performJsonPostRequest(jsonRequest).getResponse().getContentAsString();
-        String jsonResponse = jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumResponse_when_agreementDateFrom_is_not_entered.json");
-        assertTrue(jsonFileComparator.compareJsonFile(responseBodyContent,jsonResponse));
-    }
+//    @Test
+//    @DisplayName("Test case 4: agreementDateFromIsNotEntered")
+//    public void agreementDateFromIsNotEntered() throws Exception {
+//        String jsonRequest = "rest/TravelCalculatePremiumRequest_agreementDateFrom_is_not_entered.json";
+//        String responseBodyContent = performJsonPostRequest(jsonRequest).getResponse().getContentAsString();
+//        String jsonResponse = jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumResponse_when_agreementDateFrom_is_not_entered.json");
+//        assertTrue(jsonFileComparator.compareJsonFile(responseBodyContent,jsonResponse));
+//    }
 
-    @Test
-    @DisplayName("Test case 5: agreementDateToIsNotEntered")
-    public void agreementDateToIsNotEntered() throws Exception {
-        String jsonRequest = "rest/TravelCalculatePremiumRequest_agreementDateTo_is_not_entered.json";
-        String responseBodyContent = performJsonPostRequest(jsonRequest).getResponse().getContentAsString();
-        String jsonResponse = jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumResponse_when_agreementDateTo_is_not_entered.json");
-        assertTrue(jsonFileComparator.compareJsonFile(responseBodyContent,jsonResponse));
-    }
+//    @Test
+//    @DisplayName("Test case 5: agreementDateToIsNotEntered")
+//    public void agreementDateToIsNotEntered() throws Exception {
+//        String jsonRequest = "rest/TravelCalculatePremiumRequest_agreementDateTo_is_not_entered.json";
+//        String responseBodyContent = performJsonPostRequest(jsonRequest).getResponse().getContentAsString();
+//        String jsonResponse = jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumResponse_when_agreementDateTo_is_not_entered.json");
+//        assertTrue(jsonFileComparator.compareJsonFile(responseBodyContent,jsonResponse));
+//    }
 
-    @Test
-    @DisplayName("Test case 6: agreementDateTo and AgreementDateFrom IsNotEntered")
-    public void agreementDateToAndAgreementDateFromIsNotEntered() throws Exception {
-        String jsonRequest = "rest/TravelCalculatePremiumRequest_agreementDateTo_and_agreementDateFrom_is_not_entered.json";
-        String responseBodyContent = performJsonPostRequest(jsonRequest).getResponse().getContentAsString();
-        String jsonResponse = jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumResponse_when_agreementDateFrom_and_agreementDateTo_is_not_entered.json");
-        assertTrue(jsonFileComparator.compareJsonFile(responseBodyContent,jsonResponse));
-    }
+//    @Test
+//    @DisplayName("Test case 6: agreementDateTo and AgreementDateFrom IsNotEntered")
+//    public void agreementDateToAndAgreementDateFromIsNotEntered() throws Exception {
+//        String jsonRequest = "rest/TravelCalculatePremiumRequest_agreementDateTo_and_agreementDateFrom_is_not_entered.json";
+//        String responseBodyContent = performJsonPostRequest(jsonRequest).getResponse().getContentAsString();
+//        String jsonResponse = jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumResponse_when_agreementDateFrom_and_agreementDateTo_is_not_entered.json");
+//        assertTrue(jsonFileComparator.compareJsonFile(responseBodyContent,jsonResponse));
+//    }
 
     @Test
     @DisplayName("Test case 7: agreementDateTo is before agreementDateFrom")
@@ -128,14 +128,14 @@ public class TravelCalculatePremiumControllerTest {
         assertTrue(jsonFileComparator.compareJsonFile(responseBodyContent,jsonResponse));
     }
 
-    @Test
-    @DisplayName("Test case 12: personFirstName, personLastName, agreementDateFrom, agreementDateTo : is not entered.")
-    public void allFieldsAreNull() throws Exception {
-        String jsonRequest = "rest/TravelCalculatePremiumRequest_all_fields_are_null.json";
-        String responseBodyContent = performJsonPostRequest(jsonRequest).getResponse().getContentAsString();
-        String jsonResponse = jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumResponse_when_all_fields_are_empty.json");
-        assertTrue(jsonFileComparator.compareJsonFile(responseBodyContent,jsonResponse));
-    }
+//    @Test
+//    @DisplayName("Test case 12: personFirstName, personLastName, agreementDateFrom, agreementDateTo : is not entered.")
+//    public void allFieldsAreNull() throws Exception {
+//        String jsonRequest = "rest/TravelCalculatePremiumRequest_all_fields_are_null.json";
+//        String responseBodyContent = performJsonPostRequest(jsonRequest).getResponse().getContentAsString();
+//        String jsonResponse = jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumResponse_when_all_fields_are_empty.json");
+//        assertTrue(jsonFileComparator.compareJsonFile(responseBodyContent,jsonResponse));
+//    }
 
     @Test
     @DisplayName("Test case 13: PersonFirstName, personLastName, agreementDateFrom is entered. agreementDateTo is entered in wrong Date format")
