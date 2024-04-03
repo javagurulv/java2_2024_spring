@@ -3,6 +3,10 @@
     {
       "field": "agreementDateTo",
       "message": "Must not be empty!"
+    },
+    {
+      "field": "agreementDateTo and agreementDateTo",
+      "message": "Must not be empty!"
     }
   ],
   "personFirstName": null,

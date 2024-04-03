@@ -21,6 +21,8 @@ class TravelCalculatePremiumRequestValidator {
     ValidateAgreementDateFromIsNotBeforeCurrentDate validateAgreementDateFromIsNotBeforeCurrentDate;
     @Autowired
     ValidateAgreementDateToIsNotBeforeAgreementDateFrom validateAgreementDateToIsNotBeforeAgreementDateFrom;
+    @Autowired
+    ValidateAgreementDateToIsNotBeforeCurrentDate validateAgreementDateToIsNotBeforeCurrentDate;
 
     public List<ValidationError> validate(TravelCalculatePremiumRequest request) {
         List<ValidationError> errors = new ArrayList<>();
@@ -30,6 +32,7 @@ class TravelCalculatePremiumRequestValidator {
         validateAgreementDateTo.validateAgreementDateTo(request).ifPresent(errors::add);
         validateAgreementDateFromIsNotBeforeCurrentDate.validateAgreementDateFromIsNotBeforeCurrentDate(request).ifPresent(errors::add);
         validateAgreementDateToIsNotBeforeAgreementDateFrom.validateAgreementDateToIsNotBeforeAgreementDateFrom(request).ifPresent(errors::add);
+        validateAgreementDateToIsNotBeforeCurrentDate.validateAgreementDateToIsNotBeforeCurrentDate(request).ifPresent(errors::add);
         return errors;
     }
 }

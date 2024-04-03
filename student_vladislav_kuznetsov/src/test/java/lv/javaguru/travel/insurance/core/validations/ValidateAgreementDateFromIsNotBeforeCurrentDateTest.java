@@ -1,4 +1,5 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.validations;
+import lv.javaguru.travel.insurance.core.ValidateAgreementDateFromIsNotBeforeCurrentDate;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
@@ -9,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class ValidateAgreementDateFromIsNotBeforeCurrentTimeTest {
+public class ValidateAgreementDateFromIsNotBeforeCurrentDateTest {
     ValidateAgreementDateFromIsNotBeforeCurrentDate validate = new ValidateAgreementDateFromIsNotBeforeCurrentDate();
     @Test
     public void checkIfErrorMessageIsPresentWhenAgreementDateFromIsInThePast(){
@@ -29,12 +30,11 @@ public class ValidateAgreementDateFromIsNotBeforeCurrentTimeTest {
         assertFalse(error.isPresent());
     }
 
-//    @Test
-//    public void checkIfNoErrorIsPresentWhenAgreementDateFromIsCurrentTime(){
-//        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-//        when(request.getAgreementDateFrom()).thenReturn(new Date(System.currentTimeMillis()));
-//        Optional<ValidationError> error = validate.validateAgreementDateFromIsNotBeforeCurrentDate(request);
-//        assertFalse(error.isPresent());
-//    }
-
+    @Test
+    public void checkIfNoErrorIsPresentWhenAgreementDateFromIsCurrentTime(){
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getAgreementDateFrom()).thenReturn(new Date(System.currentTimeMillis()+60));
+        Optional<ValidationError> error = validate.validateAgreementDateFromIsNotBeforeCurrentDate(request);
+        assertFalse(error.isPresent());
+    }
 }
