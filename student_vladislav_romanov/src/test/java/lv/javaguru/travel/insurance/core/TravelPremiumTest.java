@@ -24,9 +24,9 @@ public class TravelPremiumTest {
 
     @Test
     void travelPremiumTest() {
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Vladislav", "Romanov", LocalDate.of(2024, 3, 8), LocalDate.of(2024, 3, 18));
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Vladislav", "Romanov", LocalDate.of(2030, 3, 8), LocalDate.of(2030, 3, 18));
 
-        doReturn(10).when(dateTimeServiceMock).calculateTravelPeriod(LocalDate.of(2024, 3, 8), LocalDate.of(2024, 3, 18));
+        doReturn(10).when(dateTimeServiceMock).calculateTravelPeriod(LocalDate.of(2030, 3, 8), LocalDate.of(2030, 3, 18));
 
         BigDecimal expected = new BigDecimal(10);
         BigDecimal actual = travelPremium.calculatePremium(request);
