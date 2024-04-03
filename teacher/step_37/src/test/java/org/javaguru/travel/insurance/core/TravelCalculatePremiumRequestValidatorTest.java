@@ -15,7 +15,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class TravelCalculatePremiumRequestValidatorTest {
+public class  TravelCalculatePremiumRequestValidatorTest {
 
     @Mock private PersonFirstNameValidation personFirstNameValidation;
     @Mock private PersonLastNameValidation personLastNameValidation;
