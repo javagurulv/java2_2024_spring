@@ -8,6 +8,7 @@ dependencies {
 	implementation('org.springframework.boot:spring-boot-starter-web:2.7.5')
 	implementation('com.fasterxml.jackson.core:jackson-core:2.14.2')
 	implementation 'ch.qos.logback:logback-classic:1.2.3'
+	implementation 'org.aspectj:aspectjweaver:1.9.7'
 
     testImplementation 'junit:junit:4.13.1'
     testImplementation 'junit:junit:4.13.1'
