@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.time.Period;
 
 @Component
-public class DateTimeService {
+class DateTimeService {
 
     public int calculateTravelPeriod(LocalDate agreementDateFrom, LocalDate agreementDateTo) {
         if (agreementDateFrom == null || agreementDateTo == null) {

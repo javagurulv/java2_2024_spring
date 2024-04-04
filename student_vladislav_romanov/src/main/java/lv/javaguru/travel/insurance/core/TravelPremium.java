@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 
 @Component
-public class TravelPremium {
+class TravelPremium {
 
     @Autowired
     private DateTimeService dateTimeService;
