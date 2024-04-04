@@ -5,21 +5,22 @@ tasks.withType(Test).configureEach {defaultCharacterEncoding = "UTF-8"}
 
 dependencies {
 
-	implementation('org.springframework.boot:spring-boot-starter-web:2.7.5')
-	implementation('com.fasterxml.jackson.core:jackson-core:2.14.2')
+	implementation'org.springframework.boot:spring-boot-starter-web:2.7.5'
+	implementation 'com.fasterxml.jackson.core:jackson-core:2.14.2'
 	implementation 'ch.qos.logback:logback-classic:1.2.3'
 	implementation 'org.aspectj:aspectjweaver:1.9.7'
+	implementation 'com.google.guava:guava:33.0.0-jre'
 
     testImplementation 'junit:junit:4.13.1'
     testImplementation 'junit:junit:4.13.1'
 
-    compileOnly('org.projectlombok:lombok:1.18.24')
-	annotationProcessor('org.projectlombok:lombok:1.18.24')
+    compileOnly'org.projectlombok:lombok:1.18.24'
+	annotationProcessor'org.projectlombok:lombok:1.18.24'
 
-	testCompileOnly('org.projectlombok:lombok:1.18.24')
-	testAnnotationProcessor('org.projectlombok:lombok:1.18.24')
+	testCompileOnly'org.projectlombok:lombok:1.18.24'
+	testAnnotationProcessor'org.projectlombok:lombok:1.18.24'
 
-	testImplementation('org.springframework.boot:spring-boot-starter-test:2.7.5')
+	testImplementation'org.springframework.boot:spring-boot-starter-test:2.7.5'
 
 	test {
 		useJUnitPlatform()
