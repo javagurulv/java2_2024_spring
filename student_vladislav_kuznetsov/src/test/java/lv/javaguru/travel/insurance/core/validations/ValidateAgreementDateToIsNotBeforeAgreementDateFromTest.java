@@ -1,6 +1,5 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.ValidateAgreementDateToIsNotBeforeAgreementDateFrom;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
@@ -21,7 +20,7 @@ public class ValidateAgreementDateToIsNotBeforeAgreementDateFromTest {
         when(request.getAgreementDateFrom()).thenReturn(null);
         when(request.getAgreementDateTo()).thenReturn(null);
         NullPointerException exception = new NullPointerException();
-        Optional<ValidationError> error = validate.validateAgreementDateToIsNotBeforeAgreementDateFrom(request);
+        Optional<ValidationError> error = validate.execute(request);
         assertNull(exception.getMessage());
         assertTrue(error.isPresent());
         assertEquals(error.get().getField(), "agreementDateTo and agreementDateTo");
@@ -34,7 +33,7 @@ public class ValidateAgreementDateToIsNotBeforeAgreementDateFromTest {
         Date date = new Date();
         when(request.getAgreementDateFrom()).thenReturn(date);
         when(request.getAgreementDateTo()).thenReturn(date);
-        Optional<ValidationError> error = validate.validateAgreementDateToIsNotBeforeAgreementDateFrom(request);
+        Optional<ValidationError> error = validate.execute(request);
         assertTrue(error.isPresent());
         assertEquals(error.get().getField(), "agreementDateTo");
         assertEquals(error.get().getMessage(),"Invalid date !");
@@ -45,7 +44,7 @@ public class ValidateAgreementDateToIsNotBeforeAgreementDateFromTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(new Date(System.currentTimeMillis()+60000));
         when(request.getAgreementDateTo()).thenReturn(new Date());
-        Optional<ValidationError> error = validate.validateAgreementDateToIsNotBeforeAgreementDateFrom(request);
+        Optional<ValidationError> error = validate.execute(request);
         assertTrue(error.isPresent());
         assertEquals(error.get().getField(), "agreementDateTo");
         assertEquals(error.get().getMessage(),"Invalid date !");

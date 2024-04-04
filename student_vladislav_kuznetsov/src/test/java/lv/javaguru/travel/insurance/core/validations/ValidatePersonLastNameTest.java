@@ -1,6 +1,5 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.ValidatePersonLastName;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
@@ -17,7 +16,7 @@ public class ValidatePersonLastNameTest {
     public void checkValidatorErrorResponseWhenRequestLastNameIsEmpty(){
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonLastName()).thenReturn("");
-        Optional<ValidationError> error = validate.validatePersonLastName(request);
+        Optional<ValidationError> error = validate.execute(request);
         assertTrue(error.isPresent());
         assertEquals(error.get().getField(), "personLastName");
         assertEquals(error.get().getMessage(),"Must not be empty!");
@@ -27,7 +26,7 @@ public class ValidatePersonLastNameTest {
     public void checkValidatorErrorResponseWhenRequestLastNameIsNull(){
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonLastName()).thenReturn(null);
-        Optional<ValidationError> error = validate.validatePersonLastName(request);
+        Optional<ValidationError> error = validate.execute(request);
         assertTrue(error.isPresent());
         assertEquals(error.get().getField(), "personLastName");
         assertEquals(error.get().getMessage(),"Must not be empty!");
@@ -37,7 +36,7 @@ public class ValidatePersonLastNameTest {
     public void checkValidatorErrorResponseWhenRequestLastNameIsCorrect(){
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonLastName()).thenReturn("Kuznetsov");
-        Optional<ValidationError> error = validate.validatePersonLastName(request);
+        Optional<ValidationError> error = validate.execute(request);
         assertTrue(error.isEmpty());
     }
 }

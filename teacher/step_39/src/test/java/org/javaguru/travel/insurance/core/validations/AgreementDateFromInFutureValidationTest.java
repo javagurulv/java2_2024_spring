@@ -54,5 +54,4 @@ class AgreementDateFromInFutureValidationTest {
             throw new RuntimeException(e);
         }
     }
-
 }
