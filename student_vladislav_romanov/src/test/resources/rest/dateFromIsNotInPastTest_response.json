@@ -2,15 +2,11 @@
   "errors": [
     {
       "field": "agreementDateFrom",
-      "message": "Invalid date !"
+      "message": "cannot be in past!"
     },
     {
-      "field": "agreementDateTo",
-      "message": "Invalid date !"
-    },
-    {
-      "field": "agreementDateTo",
-      "message": "Invalid date !"
+      "field": "Travel Period",
+      "message": "contain incorrect data!"
     }
   ],
   "personFirstName": null,
