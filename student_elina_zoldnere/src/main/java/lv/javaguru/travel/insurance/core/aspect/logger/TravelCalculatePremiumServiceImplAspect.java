@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.logger;
+package lv.javaguru.travel.insurance.core.aspect.logger;
 
 import com.google.common.base.Stopwatch;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -11,9 +11,9 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-public class CalculatePremiumLoggingAspect {
+public class TravelCalculatePremiumServiceImplAspect {
 
-    private static final Logger logger = LoggerFactory.getLogger(CalculatePremiumLoggingAspect.class);
+    private static final Logger logger = LoggerFactory.getLogger(TravelCalculatePremiumServiceImplAspect.class);
 
     @Pointcut("execution(* lv.javaguru.travel.insurance.core.TravelCalculatePremiumServiceImpl.calculatePremium(..))")
     public void calculatePremiumMethod() {
@@ -28,9 +28,9 @@ public class CalculatePremiumLoggingAspect {
         stopwatch.stop();
         long executionTime = stopwatch.elapsed().toMillis();
 
-        LogRequest.log(joinPoint);
-        LogResponse.log(response);
-        LogExecutionTime.log(executionTime);
+        CalculatePremiumLogRequest.log(joinPoint);
+        CalculatePremiumLogResponse.log(response);
+        CalculatePremiumLogExecutionTime.log(executionTime);
 
         return response;
     }

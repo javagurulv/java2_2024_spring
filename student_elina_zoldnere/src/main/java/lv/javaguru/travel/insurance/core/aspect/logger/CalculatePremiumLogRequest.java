@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.logger;
+package lv.javaguru.travel.insurance.core.aspect.logger;
 
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 
@@ -10,9 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
-class LogRequest {
+class CalculatePremiumLogRequest {
 
-    private static final Logger logger = LoggerFactory.getLogger(LogRequest.class);
+    private static final Logger logger = LoggerFactory.getLogger(CalculatePremiumLogRequest.class);
     private static final ObjectMapper mapper = new ObjectMapper();
 
     public static void log(ProceedingJoinPoint joinPoint) {

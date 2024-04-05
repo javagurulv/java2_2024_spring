@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.logger;
+package lv.javaguru.travel.insurance.core.aspect.logger;
 
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 
@@ -9,9 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
-class LogResponse {
+class CalculatePremiumLogResponse {
 
-    private static final Logger logger = LoggerFactory.getLogger(LogResponse.class);
+    private static final Logger logger = LoggerFactory.getLogger(CalculatePremiumLogResponse.class);
     private static final ObjectMapper mapper = new ObjectMapper();
 
     public static void log(Object response) {
