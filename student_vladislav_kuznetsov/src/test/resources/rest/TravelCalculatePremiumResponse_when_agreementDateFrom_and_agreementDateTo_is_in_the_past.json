@@ -7,6 +7,10 @@
     {
       "field": "agreementDateTo",
       "message": "Invalid date !"
+    },
+    {
+      "field": "agreementDateTo",
+      "message": "Invalid date !"
     }
   ],
   "personFirstName": null,

@@ -24,4 +24,5 @@ class DateTimeService {
         today.set(Calendar.MILLISECOND, 0);
         return today.getTime();
     }
+
 }

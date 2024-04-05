@@ -2,6 +2,7 @@ package lv.javaguru.travel.insurance.core.validations;
 
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -38,10 +39,11 @@ public class ValidateAgreementDateFromTest {
     public void validate_ShouldReturnErrorWhenAgreementDateFromIsNull() {
         when(requestMock.getAgreementDateFrom()).thenReturn(null);
 
-        Optional<ValidationError> result = validate.validateAgreementDateFrom(requestMock);
+        Optional<ValidationError> result = validate.execute(requestMock);
 
         assertTrue(result.isPresent());
         assertEquals("agreementDateFrom", result.get().getField());
         assertEquals("Must not be empty!", result.get().getMessage());
     }
+
 }

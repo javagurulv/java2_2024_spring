@@ -1,0 +1,25 @@
+{
+  "errors": [
+    {
+      "field": "personFirstName",
+      "message": "must exist and not to be empty!"
+    },
+    {
+      "field": "personLastName",
+      "message": "must exist and not to be empty!"
+    },
+    {
+      "field": "agreementDateTo",
+      "message": "must exist!"
+    },
+    {
+      "field": "Travel Period",
+      "message": "contain incorrect data!"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPrice": null
+}

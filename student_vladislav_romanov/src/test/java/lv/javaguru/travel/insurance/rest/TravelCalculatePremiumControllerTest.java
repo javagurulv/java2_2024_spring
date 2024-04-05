@@ -10,10 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -23,25 +21,92 @@ public class TravelCalculatePremiumControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @Autowired
+    private JsonFileReader jsonFileReader;
+
     @Test
     public void simpleRestControllerTest() throws Exception {
+        executeTest(
+                "rest/simpleRestControllerTest_request.json",
+                "rest/simpleRestControllerTest_response.json"
+        );
+    }
+
+    @Test
+    public void firstNameValidityTest() throws Exception {
+        executeTest(
+                "rest/firstNameValidityTest_request.json",
+                "rest/firstNameValidityTest_response.json"
+        );
+    }
+
+    @Test
+    public void lastNameValidityTest() throws Exception {
+        executeTest(
+                "rest/lastNameValidityTest_request.json",
+                "rest/lastNameValidityTest_response.json"
+        );
+    }
+
+    @Test
+    public void dateFromExistenceTest() throws Exception {
+        executeTest(
+                "rest/dateFromExistenceTest_request.json",
+                "rest/dateFromExistenceTest_response.json"
+        );
+    }
+
+    @Test
+    public void dateFromIsNotInPastTest() throws Exception {
+        executeTest(
+                "rest/dateFromExistenceTest_request.json",
+                "rest/dateFromExistenceTest_response.json"
+        );
+    }
+
+    @Test
+    public void dateToExistenceTest() throws Exception {
+        executeTest(
+                "rest/dateToExistenceTest_request.json",
+                "rest/dateToExistenceTest_response.json"
+        );
+    }
+
+    @Test
+    public void dateToIsNotInPastTest() throws Exception {
+        executeTest(
+                "rest/dateFromExistenceTest_request.json",
+                "rest/dateFromExistenceTest_response.json"
+        );
+    }
+
+    @Test
+    public void periodValidityTest() throws Exception {
+        executeTest(
+                "rest/periodValidityTest_request.json",
+                "rest/periodValidityTest_response.json"
+        );
+    }
+
+    @Test
+    public void incorrectRequestTest() throws Exception {
+        executeTest(
+                "rest/incorrectRequestTest_request.json",
+                "rest/incorrectRequestTest_response.json"
+        );
+    }
+
+    private void executeTest(String requestJsonPath, String responseJsonPath) throws Exception {
         mockMvc.perform(post("/insurance/travel/")
-                        .content("""
-                                {
-                                    "personFirstName" : "Vladislav",
-                                    "personLastName" : "Romanov",
-                                    "agreementDateFrom" : "2024-03-10",
-                                    "agreementDateTo" : "2024-03-20"
-                                }
-                                """)
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
+                .content(getDataFromJson(requestJsonPath))
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("personFirstName", is("Vladislav")))
-                .andExpect(jsonPath("personLastName", is("Romanov")))
-                .andExpect(jsonPath("agreementDateFrom", is("2024-03-10")))
-                .andExpect(jsonPath("agreementDateTo", is("2024-03-20")))
-                .andExpect(jsonPath("agreementPrice", is(10)))
+                .andExpect(content().json(getDataFromJson(responseJsonPath)))
                 .andReturn();
+    }
+
+    private String getDataFromJson(String path) {
+        return jsonFileReader.readJsonFromFile(path);
     }
 
 }

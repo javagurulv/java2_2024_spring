@@ -1,9 +1,11 @@
 package lv.javaguru.travel.insurance.core;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,10 +27,8 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Mock
     private TravelCalculatePremiumRequestValidator validateMock;
-
     @Mock
     private TravelCalculatePremiumUnderwriting calculateUnderwritingMock;
-
     @Mock
     private DateTimeService dateTimeServiceMock;
 

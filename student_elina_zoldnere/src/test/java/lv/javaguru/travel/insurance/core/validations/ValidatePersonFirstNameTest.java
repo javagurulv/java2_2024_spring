@@ -2,6 +2,7 @@ package lv.javaguru.travel.insurance.core.validations;
 
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -38,7 +39,7 @@ public class ValidatePersonFirstNameTest {
     public void validate_ShouldReturnErrorWhenPersonFirstNameIsNull() {
         when(requestMock.getPersonFirstName()).thenReturn(null);
 
-        Optional<ValidationError> result = validate.validatePersonFirstName(requestMock);
+        Optional<ValidationError> result = validate.execute(requestMock);
 
         assertTrue(result.isPresent());
         assertEquals("personFirstName", result.get().getField());
@@ -49,7 +50,7 @@ public class ValidatePersonFirstNameTest {
     public void validate_ShouldReturnErrorWhenPersonFirstNameIsEmpty() {
         when(requestMock.getPersonFirstName()).thenReturn("");
 
-        Optional<ValidationError> result = validate.validatePersonFirstName(requestMock);
+        Optional<ValidationError> result = validate.execute(requestMock);
 
         assertTrue(result.isPresent());
         assertEquals("personFirstName", result.get().getField());
@@ -60,7 +61,7 @@ public class ValidatePersonFirstNameTest {
     public void validate_ShouldReturnErrorWhenPersonFirstNameIsBlank() {
         when(requestMock.getPersonFirstName()).thenReturn("     ");
 
-        Optional<ValidationError> result = validate.validatePersonFirstName(requestMock);
+        Optional<ValidationError> result = validate.execute(requestMock);
 
         assertTrue(result.isPresent());
         assertEquals("personFirstName", result.get().getField());
