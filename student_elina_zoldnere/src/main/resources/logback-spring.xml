@@ -8,14 +8,30 @@
         </encoder>
     </appender>
 
-    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="APPLICATION_FILE_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOGS}/application.log</file>
         <encoder>
             <pattern>%d %-5level [%t] %logger{55}: %m%n</pattern>
         </encoder>
 
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOGS}/archived/application-logger-%d{yyyy-MM-dd}.%i.log
+            <fileNamePattern>${LOGS}/archived/application-%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>1MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="REQUEST_RESPONSE_FILE_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS}/request-response.log</file>
+        <encoder>
+            <pattern>%d %-5level [%t] %logger{55}: %m%n</pattern>
+        </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOGS}/archived/request-response-%d{yyyy-MM-dd}.%i.log
             </fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy
                     class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
@@ -26,7 +42,15 @@
 
     <root level="INFO">
         <appender-ref ref="CONSOLE"/>
-        <appender-ref ref="FILE"/>
+        <appender-ref ref="APPLICATION_FILE_APPENDER"/>
     </root>
+
+    <logger name="lv.javaguru.travel.insurance.core.aspect.logger.CalculatePremiumLogRequest" level="INFO">
+        <appender-ref ref="REQUEST_RESPONSE_FILE_APPENDER" />
+    </logger>
+
+    <logger name="lv.javaguru.travel.insurance.core.aspect.logger.CalculatePremiumLogResponse" level="INFO">
+        <appender-ref ref="REQUEST_RESPONSE_FILE_APPENDER" />
+    </logger>
 
 </configuration>
