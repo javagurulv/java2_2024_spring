@@ -1,6 +1,5 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.ValidateAgreementDateFrom;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
@@ -20,7 +19,7 @@ public class ValidateAgreementDateFromTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(null);
         NullPointerException exception = new NullPointerException();
-        Optional<ValidationError> error = validate.validateAgreementDateFrom(request);
+        Optional<ValidationError> error = validate.execute(request);
         assertNull(exception.getMessage());
         assertEquals(error.get().getField(), "agreementDateFrom");
         assertEquals(error.get().getMessage(),"Must not be empty!");
@@ -30,7 +29,7 @@ public class ValidateAgreementDateFromTest {
     public void checkThatNoErrorIsPresentWhenAgreementDateFromIsNotNull(){
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(new Date());
-        Optional<ValidationError> error = validate.validateAgreementDateFrom(request);
+        Optional<ValidationError> error = validate.execute(request);
         assertFalse(error.isPresent());
     }
 }
