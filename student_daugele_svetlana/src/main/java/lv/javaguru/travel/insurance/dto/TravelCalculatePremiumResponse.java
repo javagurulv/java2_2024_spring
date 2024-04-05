@@ -1,72 +1,34 @@
 package lv.javaguru.travel.insurance.dto;
 
-import java.math.BigDecimal;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.Temporal;
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-public class TravelCalculatePremiumResponse {
+import java.math.BigDecimal;
+
+import java.util.Date;
+import java.util.List;
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class TravelCalculatePremiumResponse extends CoreResponse {
 
     private String personFirstName;
     private String personLastName;
+
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date agreementDateFrom;
+
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date agreementDateTo;
+
     private BigDecimal agreementPrice;
 
-    public TravelCalculatePremiumResponse() {
-    }
-
-    public TravelCalculatePremiumResponse(String personFirstName, String personLastName, Date agreementDateFrom, Date agreementDateTo, BigDecimal agreementPrice) {
-        this.personFirstName = personFirstName;
-        this.personLastName = personLastName;
-        this.agreementDateFrom = agreementDateFrom;
-        this.agreementDateTo = agreementDateTo;
-        this.agreementPrice = agreementPrice;
-    }
-
-
-    public BigDecimal getAgreementPrice() {
-        return agreementPrice;
-    }
-
-    public void setAgreementPrice(BigDecimal agreementPrice) {
-        this.agreementPrice = agreementPrice;
-    }
-
-
-
-
-
-    public String getPersonFirstName() {
-        return personFirstName;
-    }
-
-    public void setPersonFirstName(String personFirstName) {
-        this.personFirstName = personFirstName;
-    }
-
-    public String getPersonLastName() {
-        return personLastName;
-    }
-
-    public void setPersonLastName(String personLastName) {
-        this.personLastName = personLastName;
-    }
-
-    public Date getAgreementDateFrom() {
-        return agreementDateFrom;
-    }
-
-    public void setAgreementDateFrom(Date agreementDateFrom) {
-        this.agreementDateFrom = agreementDateFrom;
-    }
-
-    public Date getAgreementDateTo() {
-        return agreementDateTo;
-    }
-
-    public void setAgreementDateTo(Date agreementDateTo) {
-        this.agreementDateTo = agreementDateTo;
+    public TravelCalculatePremiumResponse(List<ValidationError> errors) {
+        super(errors);
     }
 
 }
