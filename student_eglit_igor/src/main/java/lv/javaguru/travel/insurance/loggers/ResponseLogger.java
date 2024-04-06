@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ResponseLogger {
-    private static final Logger logger = LoggerFactory.getLogger(RequestLogger.class);
+    private static final Logger logger = LoggerFactory.getLogger(ResponseLogger.class);
 
     private static final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
@@ -20,7 +20,7 @@ public class ResponseLogger {
             String jsonRequest = objectMapper.writeValueAsString(response);
             logger.info("Response: {}", jsonRequest);
         } catch (JsonProcessingException e) {
-            logger.error("Error converting res to JSON", e);
+            logger.error("Error converting response to JSON", e);
         }
     }
 }
