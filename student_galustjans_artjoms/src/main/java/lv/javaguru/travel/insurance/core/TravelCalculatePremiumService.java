@@ -8,3 +8,4 @@ public interface TravelCalculatePremiumService {
     TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request);
 
 }
+//lol
