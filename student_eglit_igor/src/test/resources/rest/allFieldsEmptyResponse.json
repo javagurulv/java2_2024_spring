@@ -1,6 +1,14 @@
 {
   "errors": [
     {
+      "field": "agreementDateFrom",
+      "message": "Must not be empty!"
+    },
+    {
+      "field": "agreementDateTo",
+      "message": "Must not be empty!"
+    },
+    {
       "field": "personFirstName",
       "message": "Must not be empty!"
     },
@@ -9,11 +17,7 @@
       "message": "Must not be empty!"
     },
     {
-      "field": "agreementDateFrom",
-      "message": "Must not be empty!"
-    },
-    {
-      "field": "agreementDateTo",
+      "field": "selected_risks",
       "message": "Must not be empty!"
     }
   ],
@@ -21,5 +25,6 @@
   "personLastName": null,
   "agreementDateFrom": null,
   "agreementDateTo": null,
+  "selected_risks": null,
   "agreementPrice": null
 }

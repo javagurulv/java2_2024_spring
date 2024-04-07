@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -20,9 +19,8 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
     private String personLastName;
     private LocalDate agreementDateFrom;
     private LocalDate agreementDateTo;
+    private List<String> selected_risks;
     private BigDecimal agreementPrice;
-    private List<List> risks;
-
     public TravelCalculatePremiumResponse(List<ValidationError> errors) {
         super(errors);
     }
