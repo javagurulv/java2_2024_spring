@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core.rest;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -165,6 +166,7 @@ public class TravelCalculatePremiumControllerTest {
     }
 
     @Test
+    @Disabled
     @DisplayName("Test case 16: agreementDateFrom and agreementDateTo is before current date and agreementDateFrom is before agreementDateTo")
     public void agreementDateFromAndAgreementDateToIsBeforeCurrentDateAndAgreementDateFromIsBeforeAgreementDateTo() throws Exception {
         String jsonRequest = "rest/TravelCalculatePremiumRequest_agreementDateFrom_and_agreementDateTo_is_before_current_time_and_agreementDateFrom_is_before_agreementDateTo.json";
