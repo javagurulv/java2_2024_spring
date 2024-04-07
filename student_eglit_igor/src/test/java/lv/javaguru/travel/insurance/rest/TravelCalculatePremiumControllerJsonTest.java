@@ -48,6 +48,18 @@ public class TravelCalculatePremiumControllerJsonTest {
         var expectedJson = getExpectedJson("rest/allFieldsEmptyResponse.json");
         JSONAssert.assertEquals(expectedJson, actualJson, false);
     }
+    @Test
+    public void shouldReturnErrorMessageForEmptySelectedRisks() throws Exception {
+        var actualJson = getActualJson("rest/selected_risksFieldEmptyRequest.json");
+        var expectedJson = getExpectedJson("rest/selected_risksFieldEmptyResponse.json");
+        JSONAssert.assertEquals(expectedJson, actualJson, false);
+    }
+    @Test
+    public void shouldReturnErrorMessageForNullSelectedRisks() throws Exception {
+        var actualJson = getActualJson("rest/selected_risksFieldNullRequest.json");
+        var expectedJson = getExpectedJson("rest/selected_risksFieldNullResponse.json");
+        JSONAssert.assertEquals(expectedJson, actualJson, false);
+    }
 
     @Test
     public void shouldReturnErrorMessageForEmptyFirstName() throws Exception {

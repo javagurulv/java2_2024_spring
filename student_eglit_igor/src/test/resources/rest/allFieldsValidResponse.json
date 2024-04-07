@@ -4,5 +4,10 @@
   "personLastName": "Pupkin",
   "agreementDateFrom": "2025-01-01",
   "agreementDateTo": "2025-01-02",
+  "selected_risks":
+  ["TRAVEL_MEDICAL",
+    "TRAVEL_CANCELLATION",
+    "TRAVEL_LOSS_BAGGAGE"
+  ],
   "agreementPrice": 2
 }
