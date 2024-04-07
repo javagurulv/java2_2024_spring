@@ -21,6 +21,7 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
     private LocalDate agreementDateFrom;
     private LocalDate agreementDateTo;
     private BigDecimal agreementPrice;
+    private List<List> risks;
 
     public TravelCalculatePremiumResponse(List<ValidationError> errors) {
         super(errors);

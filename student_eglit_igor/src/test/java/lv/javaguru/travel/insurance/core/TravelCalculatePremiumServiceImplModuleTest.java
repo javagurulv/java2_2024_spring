@@ -15,6 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -39,7 +40,9 @@ class TravelCalculatePremiumServiceImplModuleTest {
                 "Igor",
                 "Eglit",
                 LocalDate.of(2024, 12, 12),
-                LocalDate.of(2024, 12, 22));
+                LocalDate.of(2024, 12, 22),
+                List.of("risk1", "risk2"));
+
         MockitoAnnotations.openMocks(this);
         when(mockAgreementPriceCalculator.calculateAgreementPrice(request.getAgreementDateFrom(), request.getAgreementDateTo()))
                 .thenReturn(new BigDecimal(2));
