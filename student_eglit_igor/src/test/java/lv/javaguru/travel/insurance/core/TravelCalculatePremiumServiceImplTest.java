@@ -13,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -25,7 +26,8 @@ class TravelCalculatePremiumServiceImplTest {
             "Igor",
             "Eglit",
             LocalDate.of(2024, 12, 12),
-            LocalDate.of(2024, 12, 13));
+            LocalDate.of(2024, 12, 13),
+            List.of("risk1", "risk2"));
 
     @Mock
     private AgreementPriceCalculator mockAgreementPriceCalculator;

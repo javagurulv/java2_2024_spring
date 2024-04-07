@@ -1,11 +1,13 @@
 package lv.javaguru.travel.insurance.dto;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Setter
@@ -18,5 +20,6 @@ public class TravelCalculatePremiumRequest {
     private String personLastName;
     private LocalDate agreementDateFrom;
     private LocalDate agreementDateTo;
-
+    @JsonAlias("selected_risks")
+    private List<String> risks;
 }

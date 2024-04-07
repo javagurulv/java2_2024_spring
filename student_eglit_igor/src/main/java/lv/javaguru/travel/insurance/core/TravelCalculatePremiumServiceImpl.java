@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -39,6 +40,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setAgreementDateFrom(request.getAgreementDateFrom());
         response.setAgreementDateTo(request.getAgreementDateTo());
         response.setAgreementPrice(calculateAgreementPrice(request));
+        response.setRisks(Collections.singletonList(request.getRisks()));
         return response;
     }
 
