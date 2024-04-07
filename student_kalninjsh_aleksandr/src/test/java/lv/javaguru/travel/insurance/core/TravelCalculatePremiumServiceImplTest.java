@@ -11,47 +11,50 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TravelCalculatePremiumServiceImplTest {
 
-    private TravelCalculatePremiumServiceImpl premiumService = new TravelCalculatePremiumServiceImpl();
+
+    DateTimeService service = new DateTimeService();
+    TravelCalculatePremiumServiceImpl premiumService = new TravelCalculatePremiumServiceImpl(service);
 
     @Test
     public void personFirstName() {
-        TravelCalculatePremiumRequest premiumRequest = new TravelCalculatePremiumRequest();
-        premiumRequest.setPersonFirstName("Tom");
-        TravelCalculatePremiumResponse premiumResponse = premiumService.calculatePremium(premiumRequest);
-        assertEquals(premiumResponse.getPersonFirstName(), premiumRequest.getPersonFirstName());
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+        request.setPersonFirstName("Tom");
+        TravelCalculatePremiumResponse response = premiumService.calculatePremium(request);
+        assertEquals(response.getPersonFirstName(), request.getPersonFirstName());
     }
 
     @Test
     public void personLastName() {
-        TravelCalculatePremiumRequest premiumRequest = new TravelCalculatePremiumRequest();
-        premiumRequest.setPersonLastName("Sawyer");
-        TravelCalculatePremiumResponse premiumResponse = premiumService.calculatePremium(premiumRequest);
-        assertEquals(premiumResponse.getPersonLastName(), premiumRequest.getPersonLastName());
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+        request.setPersonLastName("Sawyer");
+        TravelCalculatePremiumResponse response = premiumService.calculatePremium(request);
+        assertEquals(response.getPersonLastName(), request.getPersonLastName());
     }
 
     @Test
     public void agreementDateFrom() {
-        TravelCalculatePremiumRequest premiumRequest = new TravelCalculatePremiumRequest();
-        premiumRequest.setAgreementDateFrom(new Date());
-        TravelCalculatePremiumResponse premiumResponse = premiumService.calculatePremium(premiumRequest);
-        assertEquals(premiumResponse.getAgreementDateFrom(), premiumRequest.getAgreementDateFrom());
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+        request.setAgreementDateFrom(new Date());
+        TravelCalculatePremiumResponse response = premiumService.calculatePremium(request);
+        assertEquals(response.getAgreementDateFrom(), request.getAgreementDateFrom());
     }
 
     @Test
     public void agreementDateTo() {
-        TravelCalculatePremiumRequest premiumRequest = new TravelCalculatePremiumRequest();
-        premiumRequest.setAgreementDateTo(new Date());
-        TravelCalculatePremiumResponse premiumResponse = premiumService.calculatePremium(premiumRequest);
-        assertEquals(premiumResponse.getAgreementDateTo(), premiumRequest.getAgreementDateTo());
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+        request.setAgreementDateTo(new Date());
+        TravelCalculatePremiumResponse response = premiumService.calculatePremium(request);
+        assertEquals(response.getAgreementDateTo(), request.getAgreementDateTo());
     }
 
     @Test
-    public void agreementPrice() {
-        TravelCalculatePremiumRequest premiumRequest = new TravelCalculatePremiumRequest();
-        premiumRequest.setAgreementDateFrom(new Date(2005, 05, 15));
-        premiumRequest.setAgreementDateTo(new Date(2005, 05, 20));
-        TravelCalculatePremiumResponse premiumResponse = premiumService.calculatePremium(premiumRequest);
-        assertEquals(premiumResponse.getAgreementPrice(), BigDecimal.valueOf(5));
+    public void calculateAgreementDaysBetweenDates() {
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+        request.setAgreementDateFrom(new Date(2005, 05, 15));
+        request.setAgreementDateTo(new Date(2005, 05, 20));
+        TravelCalculatePremiumResponse response = premiumService.calculatePremium(request);
+        assertEquals(response.getAgreementPrice(), BigDecimal.valueOf(5));
+
     }
 
 
