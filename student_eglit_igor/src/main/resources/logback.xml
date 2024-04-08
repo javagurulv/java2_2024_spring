@@ -8,7 +8,8 @@
         </encoder>
     </appender>
 
-    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <appender name="FILE"
+              class="ch.qos.logback.core.FileAppender">
         <file>./logs/applogger.log</file>
         <append>false</append>
         <encoder>
@@ -17,7 +18,7 @@
     </appender>
 
     <appender name="REQUEST_RESPONSE_FILE_APPENDER"
-              class="ch.qos.logback.core.rolling.RollingFileAppender">
+              class="ch.qos.logback.core.FileAppender">
     <file>./logs/request-response-logger.log</file>
     <encoder>
         <pattern>%d{ISO8601} [%thread] %-5level %logger{36} - %msg%n</pattern>

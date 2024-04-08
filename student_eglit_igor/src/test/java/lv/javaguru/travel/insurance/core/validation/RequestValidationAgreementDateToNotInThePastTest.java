@@ -1,24 +1,33 @@
 package lv.javaguru.travel.insurance.core.validation;
 
+import lv.javaguru.travel.insurance.core.ErrorCodeService;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDate;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.when;
 
 class RequestValidationAgreementDateToNotInThePastTest {
+    @Mock
+    private ErrorCodeService errorCodeService;
+    @InjectMocks
     private RequestValidationAgreementDateToNotInThePast requestValidationAgreementDateToNotInThePast;
     private TravelCalculatePremiumRequest request;
 
     @BeforeEach
     void setUp() {
-        requestValidationAgreementDateToNotInThePast = new RequestValidationAgreementDateToNotInThePast();
+        MockitoAnnotations.openMocks(this);
         request = new TravelCalculatePremiumRequest();
+        when(errorCodeService.getErrorCodeDescription("ERROR_CODE_6")).thenReturn("Field agreementDateTo is in the past!");
     }
 
     @Test
@@ -27,8 +36,8 @@ class RequestValidationAgreementDateToNotInThePastTest {
         request.setAgreementDateTo(LocalDate.now().minusDays(3));
         Optional<ValidationError> result = requestValidationAgreementDateToNotInThePast.executeValidation(request);
         assertTrue(result.isPresent());
-        assertEquals("agreementDateTo", result.get().getField());
-        assertEquals("Must not be in the past!", result.get().getMessage());
+        assertEquals("ERROR_CODE_6", result.get().getErrorCode());
+        assertEquals("Field agreementDateTo is in the past!", result.get().getDescription());
     }
 
     @Test
