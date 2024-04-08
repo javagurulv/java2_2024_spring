@@ -1,12 +1,12 @@
 {
   "errors": [
     {
-      "field": "agreementDateTo",
-      "message": "agreementDateTo must be after agreementDateFrom!"
+      "errorCode": "ERROR_CODE_7",
+      "description": "Field agreementDateFrom is after agreementDateTo!"
     },
     {
-      "field": "agreementDateTo",
-      "message": "Must not be in the past!"
+      "errorCode": "ERROR_CODE_6",
+      "description": "Field agreementDateTo is in the past!"
     }
   ],
   "personFirstName": null,

@@ -1,42 +1,53 @@
 package lv.javaguru.travel.insurance.core.validation;
 
+import lv.javaguru.travel.insurance.core.ErrorCodeService;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 class RequestValidationPersonFirstNameTest {
+    @Mock
+    private ErrorCodeService errorCodeService;
+    @InjectMocks
     private RequestValidationPersonFirstName requestValidationPersonFirstName;
-    private TravelCalculatePremiumRequest travelCalculatePremiumRequest;
+    private TravelCalculatePremiumRequest request;
+
     @BeforeEach
     void setUp(){
-        requestValidationPersonFirstName = new RequestValidationPersonFirstName();
-        travelCalculatePremiumRequest = new TravelCalculatePremiumRequest();
+        MockitoAnnotations.openMocks(this);
+        request = new TravelCalculatePremiumRequest();
+        when(errorCodeService.getErrorCodeDescription("ERROR_CODE_1")).thenReturn("Field personFirstName is empty!");
     }
+
     @Test
     void shouldReturnErrorWhenPersonFirstNameIsNull(){
-        travelCalculatePremiumRequest.setPersonFirstName(null);
-        Optional<ValidationError> error = requestValidationPersonFirstName.executeValidation(travelCalculatePremiumRequest);
+        request.setPersonFirstName(null);
+        Optional<ValidationError> error = requestValidationPersonFirstName.executeValidation(request);
         assert error.isPresent();
-        assertEquals("personFirstName", error.get().getField());
-        assertEquals("Must not be empty!", error.get().getMessage());
+        assertEquals("ERROR_CODE_1", error.get().getErrorCode());
+        assertEquals("Field personFirstName is empty!", error.get().getDescription());
     }
     @Test
     void shouldReturnErrorWhenPersonFirstNameIsEmptty(){
-        travelCalculatePremiumRequest.setPersonFirstName("");
-        Optional<ValidationError> error = requestValidationPersonFirstName.executeValidation(travelCalculatePremiumRequest);
+        request.setPersonFirstName("");
+        Optional<ValidationError> error = requestValidationPersonFirstName.executeValidation(request);
         assert error.isPresent();
-        assertEquals("personFirstName", error.get().getField());
-        assertEquals("Must not be empty!", error.get().getMessage());
+        assertEquals("ERROR_CODE_1", error.get().getErrorCode());
+        assertEquals("Field personFirstName is empty!", error.get().getDescription());
     }
     @Test
     void shouldReturnEmptyWhenPersonFirstNameIsNotNull(){
-        travelCalculatePremiumRequest.setPersonFirstName("Igor");
-        Optional<ValidationError> error = requestValidationPersonFirstName.executeValidation(travelCalculatePremiumRequest);
+        request.setPersonFirstName("Igor");
+        Optional<ValidationError> error = requestValidationPersonFirstName.executeValidation(request);
         assert error.isEmpty();
     }
 }
