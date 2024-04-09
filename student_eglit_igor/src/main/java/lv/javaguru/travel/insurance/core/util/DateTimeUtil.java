@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.util;
 
 import org.springframework.stereotype.Component;
 
@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import static java.time.temporal.ChronoUnit.DAYS;
 
 @Component
-class DateTimeService {
+public class DateTimeUtil {
 
     public long daysCalculator(LocalDate dateFrom, LocalDate dateTo) {
 
