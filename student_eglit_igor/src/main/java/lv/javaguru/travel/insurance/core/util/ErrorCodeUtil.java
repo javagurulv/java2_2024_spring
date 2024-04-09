@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.util;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 @Component
 @Configuration
 
-class ErrorCodeService {
+public class ErrorCodeUtil {
 
     public String getErrorCodeDescription(String errorCode) {
 
