@@ -1,0 +1,12 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_21",
+      "description": "Personal code [1234567890] does not match the pattern XXXXXX-XXXXX!"
+    },
+    {
+      "errorCode": "ERROR_CODE_21",
+      "description": "Personal code [0987654321] does not match the pattern XXXXXX-XXXXX!"
+    }
+  ]
+}

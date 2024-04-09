@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+
+    <changeSet author="javaguru" id="46">
+        <createTable tableName="agreements_xml_export">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="agreement_uuid" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="already_exported" type="BOOL">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="javaguru" id="47">
+        <addForeignKeyConstraint baseTableName="agreements_xml_export"
+                                 baseColumnNames="agreement_uuid"
+                                 constraintName="fk_agreements_xml_export_agreement_uuid"
+                                 referencedTableName="agreements"
+                                 referencedColumnNames="uuid"/>
+    </changeSet>
+
+</databaseChangeLog>
