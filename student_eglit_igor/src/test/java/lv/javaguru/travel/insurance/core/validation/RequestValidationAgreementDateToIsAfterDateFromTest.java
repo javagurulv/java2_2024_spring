@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.validation;
 
-import lv.javaguru.travel.insurance.core.ErrorCodeService;
+import lv.javaguru.travel.insurance.core.ValidationErrorFactory;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 
 class RequestValidationAgreementDateToIsAfterDateFromTest {
     @Mock
-    private ErrorCodeService errorCodeService;
+    private ValidationErrorFactory validationErrorFactory;
     @InjectMocks
     private RequestValidationAgreementDateToIsAfterDateFrom requestValidationAgreementDateToIsAfterDateFrom;
     private TravelCalculatePremiumRequest request;
@@ -27,7 +27,7 @@ class RequestValidationAgreementDateToIsAfterDateFromTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
         request = new TravelCalculatePremiumRequest();
-        when(errorCodeService.getErrorCodeDescription("ERROR_CODE_7")).thenReturn("Field agreementDateFrom is after agreementDateTo!");
+        when(validationErrorFactory.buildError("ERROR_CODE_7")).thenReturn(new ValidationError("ERROR_CODE_7","Field agreementDateFrom is after agreementDateTo!"));
     }
 
     @Test

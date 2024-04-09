@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 @Component
 @Configuration
 
-public class ErrorCodeService {
+class ErrorCodeService {
 
     public String getErrorCodeDescription(String errorCode) {
 

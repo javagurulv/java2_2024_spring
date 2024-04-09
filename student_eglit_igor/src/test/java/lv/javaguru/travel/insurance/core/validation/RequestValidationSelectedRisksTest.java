@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.validation;
 
-import lv.javaguru.travel.insurance.core.ErrorCodeService;
+import lv.javaguru.travel.insurance.core.ValidationErrorFactory;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 
 class RequestValidationSelectedRisksTest {
     @Mock
-    private ErrorCodeService errorCodeService;
+    private ValidationErrorFactory validationErrorFactory;
     @InjectMocks
     private RequestValidationSelectedRisks requestValidationSelectedRisks;
     private TravelCalculatePremiumRequest request;
@@ -25,7 +25,7 @@ class RequestValidationSelectedRisksTest {
     void setup(){
         MockitoAnnotations.openMocks(this);
         request = new TravelCalculatePremiumRequest();
-        when(errorCodeService.getErrorCodeDescription("ERROR_CODE_8")).thenReturn("Field selected_risks is empty!");
+        when(validationErrorFactory.buildError("ERROR_CODE_8")).thenReturn(new ValidationError("ERROR_CODE_8","Field selected_risks is empty!"));
 
     }
     @Test

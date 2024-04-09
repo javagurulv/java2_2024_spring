@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.validation;
 
-import lv.javaguru.travel.insurance.core.ErrorCodeService;
+import lv.javaguru.travel.insurance.core.ValidationErrorFactory;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +16,7 @@ import static org.mockito.Mockito.when;
 
 class RequestValidationPersonFirstNameTest {
     @Mock
-    private ErrorCodeService errorCodeService;
+    private ValidationErrorFactory validationErrorFactory;
     @InjectMocks
     private RequestValidationPersonFirstName requestValidationPersonFirstName;
     private TravelCalculatePremiumRequest request;
@@ -25,7 +25,7 @@ class RequestValidationPersonFirstNameTest {
     void setUp(){
         MockitoAnnotations.openMocks(this);
         request = new TravelCalculatePremiumRequest();
-        when(errorCodeService.getErrorCodeDescription("ERROR_CODE_1")).thenReturn("Field personFirstName is empty!");
+        when(validationErrorFactory.buildError("ERROR_CODE_1")).thenReturn(new ValidationError("ERROR_CODE_1","Field personFirstName is empty!"));
     }
 
     @Test
