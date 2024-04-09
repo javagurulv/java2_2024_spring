@@ -8,16 +8,16 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DateTimeServiceTest {
+class DateTimeServiceUtilTest {
 
 
-    private DateTimeService dateTimeService = new DateTimeService();
+    private DateTimeServiceUtil dateTimeServiceUtil = new DateTimeServiceUtil();
 
     @Test
     public void shouldDaysBetweenBeZero() {
         Date date1 = createDate("01.01.2023");
         Date date2 = createDate("01.01.2023");
-        var daysBetween = dateTimeService.getDaysBetween(date1, date2);
+        var daysBetween = dateTimeServiceUtil.getDaysBetween(date1, date2);
         assertEquals(daysBetween, 0L);
     }
 
@@ -25,7 +25,7 @@ class DateTimeServiceTest {
     public void shouldDaysBetweenBePositive() {
         Date date1 = createDate("01.01.2023");
         Date date2 = createDate("10.01.2023");
-        var daysBetween = dateTimeService.getDaysBetween(date1, date2);
+        var daysBetween = dateTimeServiceUtil.getDaysBetween(date1, date2);
         assertEquals(daysBetween, 9L);
     }
 
@@ -33,7 +33,7 @@ class DateTimeServiceTest {
     public void shouldDaysBetweenBeNegative() {
         Date date1 = createDate("10.01.2023");
         Date date2 = createDate("01.01.2023");
-        var daysBetween = dateTimeService.getDaysBetween(date1, date2);
+        var daysBetween = dateTimeServiceUtil.getDaysBetween(date1, date2);
         assertEquals(daysBetween, -9L);
     }
 
