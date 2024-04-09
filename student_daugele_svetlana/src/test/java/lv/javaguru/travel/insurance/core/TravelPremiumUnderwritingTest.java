@@ -19,7 +19,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class TravelPremiumUnderwritingTest {
-    @Mock private DateTimeService dateTimeService;
+    @Mock private DateTimeServiceUtil dateTimeServiceUtil;
 
     @InjectMocks
     private TravelPremiumUnderwriting premiumUnderwriting;
@@ -29,7 +29,7 @@ class TravelPremiumUnderwritingTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(createDate("01.01.2023"));
         when(request.getAgreementDateTo()).thenReturn(createDate("10.01.2023"));
-        when(dateTimeService.getDaysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo())).thenReturn(9L);
+        when(dateTimeServiceUtil.getDaysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo())).thenReturn(9L);
         BigDecimal premium = premiumUnderwriting.calculatePremium(request);
         assertEquals(premium, new BigDecimal(9));
     }
