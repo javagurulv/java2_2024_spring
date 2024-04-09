@@ -1,0 +1,8 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_24",
+      "description": "Person field [personLastName] validation error: size must be between 0 and 200!"
+    }
+  ]
+}
