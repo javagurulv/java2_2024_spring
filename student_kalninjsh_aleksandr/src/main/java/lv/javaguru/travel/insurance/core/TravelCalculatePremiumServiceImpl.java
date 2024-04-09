@@ -14,6 +14,12 @@ import java.util.concurrent.TimeUnit;
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
+    private DateTimeService dateTimeService;
+    public TravelCalculatePremiumServiceImpl(DateTimeService dateTimeService) {
+        this.dateTimeService = dateTimeService;
+    }
+
+
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
         TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();
@@ -21,21 +27,12 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setPersonLastName(request.getPersonLastName());
         response.setAgreementDateFrom(request.getAgreementDateFrom());
         response.setAgreementDateTo(request.getAgreementDateTo());
-        response.setAgreementPrice(calculateAgreementDaysBetweenDates(request));
+        response.setAgreementPrice(dateTimeService.calculateAgreementDaysBetweenDates(request));
 
         return response;
     }
 
-    private BigDecimal calculateAgreementDaysBetweenDates(TravelCalculatePremiumRequest request) {
-        if (request.getAgreementDateFrom() != null && request.getAgreementDateTo() != null) {
-                long difference = request.getAgreementDateTo().getTime() - request.getAgreementDateFrom().getTime();
-                long numberOfDatesBetweenDates = TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS);
-                return BigDecimal.valueOf(numberOfDatesBetweenDates);
-            } else {
-                return null;
-            }
 
-    }
 
 
 }

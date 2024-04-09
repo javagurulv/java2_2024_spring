@@ -1,19 +1,15 @@
 package lv.javaguru.travel.insurance.rest;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-
-public class TravelCalculatePremiumRequestLogger {
-
-    @Autowired
-    public TravelCalculatePremiumRequest request;
+@Component
+class TravelCalculatePremiumRequestLogger {
 
     private static final Logger logger = LoggerFactory.getLogger(TravelCalculatePremiumRequestLogger.class);
-    public void log(TravelCalculatePremiumRequest request){
+    void log(TravelCalculatePremiumRequest request){
         ObjectMapper mapper = new ObjectMapper();
         try {
             String jsonRequestString = mapper.writeValueAsString(request);

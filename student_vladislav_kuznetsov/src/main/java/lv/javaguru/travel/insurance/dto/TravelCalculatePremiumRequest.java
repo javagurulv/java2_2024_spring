@@ -8,7 +8,7 @@ import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
-@Component
+
 @Getter
 @Setter
 @NoArgsConstructor

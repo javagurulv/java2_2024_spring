@@ -1,8 +1,8 @@
 {
   "errors": [
     {
-      "field": "agreementDateFrom",
-      "message": "Must not be in the past!"
+      "errorCode": "ERROR_CODE_5",
+      "description": "Field agreementDateFrom is in the past!"
     }
   ],
   "personFirstName": null,

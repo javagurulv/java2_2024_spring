@@ -1,37 +1,48 @@
 package lv.javaguru.travel.insurance.core.validation;
 
+import lv.javaguru.travel.insurance.core.ValidationErrorFactory;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDate;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.when;
 
 class RequestValidationAgreementDateToTest {
+    @Mock
+    private ValidationErrorFactory validationErrorFactory;
+    @InjectMocks
     private RequestValidationAgreementDateTo requestValidationAgreementDateTo;
-@BeforeEach
-    void setUp(){
-    requestValidationAgreementDateTo = new RequestValidationAgreementDateTo();
-}
-@Test
-    void shouldReturnErrorWhenAgreementDateToIsNull(){
-    var request = new TravelCalculatePremiumRequest();
-    request.setAgreementDateTo(null);
-    Optional<ValidationError> error = requestValidationAgreementDateTo.executeValidation(request);
+    private TravelCalculatePremiumRequest request;
 
-    assertTrue(error.isPresent());
-    assertEquals("agreementDateTo", error.get().getField());
-    assertEquals("Must not be empty!", error.get().getMessage());
-}
-@Test
-    void shouldReturnEmptyWhenAgreementDateToIsNotNull(){
-    var request = new TravelCalculatePremiumRequest();
-    request.setAgreementDateTo(LocalDate.now());
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+        request = new TravelCalculatePremiumRequest();
+        when(validationErrorFactory.buildError("ERROR_CODE_4")).thenReturn(new ValidationError("ERROR_CODE_4","Field agreementDateTo is empty!"));
+    }
 
-    Optional<ValidationError> error = requestValidationAgreementDateTo.executeValidation(request);
-    assertTrue(error.isEmpty());
+    @Test
+    void shouldReturnErrorWhenAgreementDateToIsNull() {
+        request.setAgreementDateTo(null);
+        Optional<ValidationError> error = requestValidationAgreementDateTo.executeValidation(request);
+        assertTrue(error.isPresent());
+        assertEquals("ERROR_CODE_4", error.get().getErrorCode());
+        assertEquals("Field agreementDateTo is empty!", error.get().getDescription());
+    }
+
+    @Test
+    void shouldReturnEmptyWhenAgreementDateToIsNotNull() {
+        request.setAgreementDateTo(LocalDate.now().plusDays(1));
+        Optional<ValidationError> error = requestValidationAgreementDateTo.executeValidation(request);
+        assertTrue(error.isEmpty());
     }
 }
