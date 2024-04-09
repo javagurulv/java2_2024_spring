@@ -11,11 +11,10 @@ public class JsonFileReader {
 
     public String readJsonFromFile(String filePath) {
         try {
-            File file = ResourceUtils.getFile("classpath:" + filePath);
+            File file = ResourceUtils.getFile("classpath:rest/" + filePath);
             return new String(Files.readAllBytes(file.toPath()));
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
     }
-
 }
