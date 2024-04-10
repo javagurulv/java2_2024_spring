@@ -14,8 +14,8 @@ class JsonFileReaderTest {
         String expectedJson = """
                 {"personFirstName" : null,
                 "personLastName" : "Pupkin",
-                "agreementDateFrom" : "2021-05-25",
-                "agreementDateTo" : "2021-05-29"
+                "agreementDateFrom" : "2025-05-25",
+                "agreementDateTo" : "2025-05-29"
                 }""";
 
         String actualJson = reader.readJsonFromFile("TravelCalculatePremiumRequest_firstName_not_provided.json");
