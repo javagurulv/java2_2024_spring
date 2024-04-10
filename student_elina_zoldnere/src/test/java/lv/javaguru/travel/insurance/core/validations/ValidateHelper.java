@@ -6,6 +6,7 @@ import org.mockito.Mockito;
 import org.springframework.stereotype.Component;
 
 
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -17,6 +18,8 @@ public class ValidateHelper {
         Mockito.lenient().when(requestMock.getPersonLastName()).thenReturn("Bērziņš");
         Mockito.lenient().when(requestMock.getAgreementDateFrom()).thenReturn(new Date(125, 2, 10));
         Mockito.lenient().when(requestMock.getAgreementDateTo()).thenReturn(new Date(125, 2, 11));
+        Mockito.lenient().when(requestMock.getSelectedRisks())
+                .thenReturn(Arrays.asList("TRAVEL_MEDICAL","TRAVEL_CANCELLATION","TRAVEL_LOSS_BAGGAGE"));
     }
 
     public Date midnightToday() { // today 00:00:00 EET

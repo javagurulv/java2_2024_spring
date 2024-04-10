@@ -9,7 +9,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
       "personFirstName" : null,
       "personLastName" : "Bērziņš",
       "agreementDateFrom" : "2025-03-10",
-      "agreementDateTo" : "2025-03-11"
+      "agreementDateTo" : "2025-03-11",
+      "selectedRisks" : ["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
     }
 
     RESPONSE:
@@ -35,7 +36,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
       "personFirstName" : "Jānis",
       "personLastName" : null,
       "agreementDateFrom" : "2025-03-10",
-      "agreementDateTo" : "2025-03-11"
+      "agreementDateTo" : "2025-03-11",
+      "selectedRisks" : ["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
     }
 
     RESPONSE:
@@ -61,7 +63,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
       "personFirstName" : "",
       "personLastName" : "Bērziņš",
       "agreementDateFrom" : "2025-03-10",
-      "agreementDateTo" : "2025-03-11"
+      "agreementDateTo" : "2025-03-11",
+      "selectedRisks" : ["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
     }
 
     RESPONSE:
@@ -87,7 +90,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
       "personFirstName" : "Jānis",
       "personLastName" : "",
       "agreementDateFrom" : "2025-03-10",
-      "agreementDateTo" : "2025-03-11"
+      "agreementDateTo" : "2025-03-11",
+      "selectedRisks" : ["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
     }
 
     RESPONSE:
@@ -113,7 +117,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
       "personFirstName" : "     ",
       "personLastName" : "Bērziņš",
       "agreementDateFrom" : "2025-03-10",
-      "agreementDateTo" : "2025-03-11"
+      "agreementDateTo" : "2025-03-11",
+      "selectedRisks" : ["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
     }
 
     RESPONSE:
@@ -139,7 +144,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
       "personFirstName" : "Jānis",
       "personLastName" : "      ",
       "agreementDateFrom" : "2025-03-10",
-      "agreementDateTo" : "2025-03-11"
+      "agreementDateTo" : "2025-03-11",
+      "selectedRisks" : ["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
     }
 
     RESPONSE:
@@ -165,7 +171,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
       "personFirstName" : "Jānis",
       "personLastName" : "Bērziņš",
       "agreementDateFrom" : null,
-      "agreementDateTo" : "2025-03-11"
+      "agreementDateTo" : "2025-03-11",
+      "selectedRisks" : ["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
     }
 
     RESPONSE:
@@ -190,8 +197,9 @@ Test cases for TravelCalculatePremiumControllerTest.java
     {
       "personFirstName" : "Jānis",
       "personLastName" : "Bērziņš",
-      "agreementDateFrom" : "2025-03-11",
-      "agreementDateTo" : null
+      "agreementDateFrom" : "2025-03-10",
+      "agreementDateTo" : null,
+      "selectedRisks" : ["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
     }
 
     RESPONSE:
@@ -210,14 +218,69 @@ Test cases for TravelCalculatePremiumControllerTest.java
     }
 
     -----
-    1.9 all fields missing or empty or blank
+    1.9 selectedRisks missing
+
+    REQUEST:
+    {
+      "personFirstName" : "Jānis",
+      "personLastName" : "Bērziņš",
+      "agreementDateFrom" : "2025-03-10",
+      "agreementDateTo" : "2025-03-11",
+      "selectedRisks" : null
+    }
+
+    RESPONSE:
+    {
+      "errors": [
+        {
+          "field": "selectedRisks",
+          "message": "Must not be empty!"
+        }
+      ],
+      "personFirstName": null,
+      "personLastName": null,
+      "agreementDateFrom": null,
+      "agreementDateTo": null,
+      "agreementPrice": null
+    }
+
+    -----
+    1.10 selectedRisks empty
+
+    REQUEST:
+    {
+      "personFirstName" : "Jānis",
+      "personLastName" : "Bērziņš",
+      "agreementDateFrom" : "2025-03-10",
+      "agreementDateTo" : "2025-03-11",
+      "selectedRisks" : []
+    }
+
+    RESPONSE:
+    {
+      "errors": [
+        {
+          "field": "selectedRisks",
+          "message": "Must not be empty!"
+        }
+      ],
+      "personFirstName": null,
+      "personLastName": null,
+      "agreementDateFrom": null,
+      "agreementDateTo": null,
+      "agreementPrice": null
+    }
+
+    -----
+    1.99 all fields missing or empty or blank
 
     REQUEST:
     {
       "personFirstName" : "",
       "personLastName" : "   ",
       "agreementDateFrom" : null,
-      "agreementDateTo" : null
+      "agreementDateTo" : null,
+      "selectedRisks" : ["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
     }
 
     RESPONSE:
@@ -247,6 +310,7 @@ Test cases for TravelCalculatePremiumControllerTest.java
       "agreementPrice": null
     }
 
+
 --------------------
 2. Wrong date chronology
 
@@ -257,7 +321,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
       "personFirstName" : "Jānis",
       "personLastName" : "Bērziņš",
       "agreementDateFrom" : "2025-03-10",
-      "agreementDateTo" : "2025-03-09"
+      "agreementDateTo" : "2025-03-09",
+      "selectedRisks" : ["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
     }
 
     RESPONSE:
@@ -283,7 +348,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
       "personFirstName" : "Jānis",
       "personLastName" : "Bērziņš",
       "agreementDateFrom" : "2025-03-10",
-      "agreementDateTo" : "2025-03-10"
+      "agreementDateTo" : "2025-03-10",
+      "selectedRisks" : ["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
     }
 
     RESPONSE:
@@ -309,7 +375,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
       "personFirstName" : "Jānis",
       "personLastName" : "Bērziņš",
       "agreementDateFrom" : "2024-03-10",
-      "agreementDateTo" : "2025-03-11"
+      "agreementDateTo" : "2025-03-11",
+      "selectedRisks" : ["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
     }
 
     RESPONSE:
@@ -335,7 +402,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
       "personFirstName" : "Jānis",
       "personLastName" : "Bērziņš",
       "agreementDateFrom" : "2025-03-10",
-      "agreementDateTo" : "2024-03-11"
+      "agreementDateTo" : "2024-03-11",
+      "selectedRisks" : ["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
     }
 
     RESPONSE:
@@ -359,16 +427,17 @@ Test cases for TravelCalculatePremiumControllerTest.java
 
 
 ----------------
-3. Valid request
+9. Valid request
 
-    3.1 all fields are present and valid
+    9.1 all fields are present and valid
 
     REQUEST:
     {
       "personFirstName" : "Jānis",
       "personLastName" : "Bērziņš",
       "agreementDateFrom" : "2025-03-10",
-      "agreementDateTo" : "2025-03-11"
+      "agreementDateTo" : "2025-03-11",
+      "selectedRisks" : ["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
     }
 
     RESPONSE:
