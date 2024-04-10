@@ -5,9 +5,9 @@ src _ (..)  _   core      _ underwriting _ interface TravelCalculatePremiumUnder
 |          |             |              |_ class TravelCalculatePremiumUnderwritingImpl
 |          |             |              |_ calculations _ interface RiskCalculation
 |          |             |                             |_ class MedicalRiskCalculation impl RiskCalculation
-|          |             |                             |_ class TravelCancelRiskCalculation impl RiskCalculation
-|          |             |                             |_ class LostLuggageRiskCalculation impl RiskCalculation
-|          |             |                             |_ class CivilLiabilityRiskCalculation impl RiskCalculation
+|          |             |                             |_ class CancellationRiskCalculation impl RiskCalculation
+|          |             |                             |_ class LossBaggageRiskCalculation impl RiskCalculation
+|          |             |                             |_ class ThirdPartyLiabilityRiskCalculation impl RiskCalculation
 |          |             |                             |_ class EvacuationRepatriationRiskCalculation impl RiskCalculation
 |          |             |                             |_ class AdventureRecreationRiskCalculation impl RiskCalculation
 |          |             |
@@ -27,7 +27,7 @@ src _ (..)  _   core      _ underwriting _ interface TravelCalculatePremiumUnder
 |          |_ class InsuranceApplication
 |
 |_ logs (..)
-|_ database(.. raw data?)
+|_ database(scripts)
 
 
 -- Not sure where to put AgeCoefficient, CountryDefaultDayPremium, InsuranceLimitCoefficient -

@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.validation;
 
-import lv.javaguru.travel.insurance.core.ErrorCodeService;
+import lv.javaguru.travel.insurance.core.ValidationErrorFactory;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 
 class RequestValidationAgreementDateFromTest {
     @Mock
-    private ErrorCodeService errorCodeService;
+    private ValidationErrorFactory validationErrorFactory;
     @InjectMocks
     private RequestValidationAgreementDateFrom requestValidationAgreementDateFrom;
     private TravelCalculatePremiumRequest request;
@@ -26,7 +26,7 @@ class RequestValidationAgreementDateFromTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
         request = new TravelCalculatePremiumRequest();
-        when(errorCodeService.getErrorCodeDescription("ERROR_CODE_3")).thenReturn("Field agreementDateFrom is empty!");
+        when(validationErrorFactory.buildError("ERROR_CODE_3")).thenReturn(new ValidationError("ERROR_CODE_3","Field agreementDateFrom is empty!"));
     }
 
     @Test
