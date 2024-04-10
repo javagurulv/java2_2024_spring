@@ -24,6 +24,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -182,22 +183,11 @@ public class TravelCalculatePremiumControllerTest {
         String expectedResponseAsString = reader.readJsonFromFile(expectedResponseFile);
         String calculatedResponseAsString = calculatedResponse.getContentAsString(StandardCharsets.UTF_8);
 
-        assertEquals(sortJsonArray(expectedResponseAsString), sortJsonArray(calculatedResponseAsString));
-    }
-
-    private JsonNode sortJsonArray(String json) throws Exception {
-        JsonNode node = mapper.readTree(json);
-
-        JsonNode errorsNode = node.get("errors");
-        if (errorsNode != null && errorsNode.isArray() && !errorsNode.isEmpty()) {
-            ArrayNode errorsArray = (ArrayNode) errorsNode;
-            List<JsonNode> errorsList = new ArrayList<>();
-            errorsArray.forEach(errorsList::add);
-            errorsList.sort(Comparator.comparing(o -> o.get("field").asText()));
-            errorsArray.removeAll();
-            errorsList.forEach(errorsArray::add);
-        }
-        return node;
+        assertJson(calculatedResponseAsString)
+                .where()
+                .keysInAnyOrder()
+                .arrayInAnyOrder()
+                .isEqualTo(expectedResponseAsString);
     }
 
 }
