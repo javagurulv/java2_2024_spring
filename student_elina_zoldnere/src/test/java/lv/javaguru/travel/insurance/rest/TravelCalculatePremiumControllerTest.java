@@ -107,10 +107,26 @@ public class TravelCalculatePremiumControllerTest {
     }
 
     @Test
-    @DisplayName("1.9 all fields missing or empty or blank")
+    @DisplayName("1.9 selectedRisks missing")
+    public void controller_ShouldReturnCorrectResponseWhenSelectedRisksIsMissing() throws Exception {
+        String requestFile = "ControllerTest_1.9_Request_selectedRisks_missing.json";
+        String expectedResponseFile = "ControllerTest_1.9_Response_selectedRisks_missing.json";
+        calculateAndCompareResponse(requestFile, expectedResponseFile);
+    }
+
+    @Test
+    @DisplayName("1.10 selectedRisks empty")
+    public void controller_ShouldReturnCorrectResponseWhenSelectedRisksIsEmpty() throws Exception {
+        String requestFile = "ControllerTest_1.10_Request_selectedRisks_empty.json";
+        String expectedResponseFile = "ControllerTest_1.10_Response_selectedRisks_empty.json";
+        calculateAndCompareResponse(requestFile, expectedResponseFile);
+    }
+
+    @Test
+    @DisplayName("1.99 all fields missing or empty or blank")
     public void controller_ShouldReturnCorrectResponseWhenAllFieldsMissingOrEmptyOrBlank() throws Exception {
-        String requestFile = "ControllerTest_1.9_Request_all_fields_missing_or_empty_or_blank.json";
-        String expectedResponseFile = "ControllerTest_1.9_Response_all_fields_missing_or_empty_or_blank.json";
+        String requestFile = "ControllerTest_1.99_Request_all_fields_missing_or_empty_or_blank.json";
+        String expectedResponseFile = "ControllerTest_1.99_Response_all_fields_missing_or_empty_or_blank.json";
         calculateAndCompareResponse(requestFile, expectedResponseFile);
     }
 
@@ -147,10 +163,10 @@ public class TravelCalculatePremiumControllerTest {
     }
 
     @Test
-    @DisplayName("3.1 all fields are present and valid")
+    @DisplayName("9.1 all fields are present and valid")
     public void controller_ShouldReturnCorrectResponseWhenAllFieldsAreValid() throws Exception {
-        String requestFile = "ControllerTest_3.1_Request_all_fields_present_and_valid.json";
-        String expectedResponseFile = "ControllerTest_3.1_Response_all_fields_present_and_valid.json";
+        String requestFile = "ControllerTest_9.1_Request_all_fields_present_and_valid.json";
+        String expectedResponseFile = "ControllerTest_9.1_Response_all_fields_present_and_valid.json";
         calculateAndCompareResponse(requestFile, expectedResponseFile);
     }
 
