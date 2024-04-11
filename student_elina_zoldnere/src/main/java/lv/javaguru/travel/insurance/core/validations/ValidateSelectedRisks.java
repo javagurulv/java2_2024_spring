@@ -11,11 +11,11 @@ import java.util.Optional;
 class ValidateSelectedRisks implements RequestFieldValidation {
 
     @Autowired
-    private BuildError buildError;
+    private ValidationErrorFactory validationErrorFactory;
 
     public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
         return (request.getSelectedRisks() == null || request.getSelectedRisks().isEmpty())
-                ? Optional.of(buildError.buildError("ERROR_CODE_5"))
+                ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_5"))
                 : Optional.empty();
     }
 

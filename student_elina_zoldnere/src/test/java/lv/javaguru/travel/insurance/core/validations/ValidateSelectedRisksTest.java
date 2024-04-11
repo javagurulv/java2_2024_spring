@@ -23,7 +23,7 @@ public class ValidateSelectedRisksTest {
     @Mock
     private TravelCalculatePremiumRequest requestMock;
     @Mock
-    private BuildError errorMock;
+    private ValidationErrorFactory errorMock;
 
     @InjectMocks
     private ValidateSelectedRisks validate;

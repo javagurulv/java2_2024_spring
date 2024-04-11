@@ -12,11 +12,11 @@ import java.util.Optional;
 class ValidatePersonLastName implements RequestFieldValidation {
 
     @Autowired
-    private BuildError buildError;
+    private ValidationErrorFactory validationErrorFactory;
 
     public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
         return (request.getPersonLastName() == null || request.getPersonLastName().isBlank())
-                ? Optional.of(buildError.buildError("ERROR_CODE_2"))
+                ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_2"))
                 : Optional.empty();
     }
 

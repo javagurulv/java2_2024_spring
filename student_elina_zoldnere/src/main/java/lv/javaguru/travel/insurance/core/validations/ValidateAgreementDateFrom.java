@@ -12,11 +12,11 @@ import java.util.Optional;
 class ValidateAgreementDateFrom implements RequestFieldValidation {
 
     @Autowired
-    private BuildError buildError;
+    private ValidationErrorFactory validationErrorFactory;
 
     public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
         return (request.getAgreementDateFrom() == null)
-                ? Optional.of(buildError.buildError("ERROR_CODE_3"))
+                ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_3"))
                 : Optional.empty();
     }
 

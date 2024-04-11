@@ -23,7 +23,7 @@ public class ValidateAgreementDateFromTest {
     @Mock
     private TravelCalculatePremiumRequest requestMock;
     @Mock
-    private BuildError errorMock;
+    private ValidationErrorFactory errorMock;
 
     @InjectMocks
     private ValidateAgreementDateFrom validate;

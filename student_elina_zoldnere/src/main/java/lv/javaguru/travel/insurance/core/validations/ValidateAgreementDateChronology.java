@@ -13,7 +13,7 @@ import java.util.Optional;
 class ValidateAgreementDateChronology implements RequestFieldValidation {
 
     @Autowired
-    private BuildError buildError;
+    private ValidationErrorFactory validationErrorFactory;
 
     public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
         Date agreementDateFrom = request.getAgreementDateFrom();
@@ -21,7 +21,7 @@ class ValidateAgreementDateChronology implements RequestFieldValidation {
 
         return (agreementDateFrom != null && agreementDateTo != null
                 && !agreementDateFrom.before(agreementDateTo))
-                ? Optional.of(buildError.buildError("ERROR_CODE_13"))
+                ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_13"))
                 : Optional.empty();
     }
 

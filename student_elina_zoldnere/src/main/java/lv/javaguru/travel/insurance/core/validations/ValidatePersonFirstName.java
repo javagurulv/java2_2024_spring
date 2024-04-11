@@ -12,11 +12,11 @@ import java.util.*;
 public class ValidatePersonFirstName implements RequestFieldValidation {
 
     @Autowired
-    private BuildError buildError;
+    private ValidationErrorFactory validationErrorFactory;
 
     public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
         return (request.getPersonFirstName() == null || request.getPersonFirstName().isBlank())
-                ? Optional.of(buildError.buildError("ERROR_CODE_1"))
+                ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_1"))
                 : Optional.empty();
     }
 
