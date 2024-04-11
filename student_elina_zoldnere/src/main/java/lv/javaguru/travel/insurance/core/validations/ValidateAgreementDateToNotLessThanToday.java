@@ -15,6 +15,8 @@ class ValidateAgreementDateToNotLessThanToday implements RequestFieldValidation 
 
     @Autowired
     private DateTimeService dateTimeService;
+    @Autowired
+    private BuildError buildError;
 
     public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
         Date agreementDateFrom = request.getAgreementDateFrom();
@@ -22,7 +24,7 @@ class ValidateAgreementDateToNotLessThanToday implements RequestFieldValidation 
 
         return (agreementDateFrom != null && agreementDateTo != null
                 && agreementDateTo.before(dateTimeService.midnightToday()))
-                ? Optional.of(new ValidationError("agreementDateTo", "Must not be in past!"))
+                ? Optional.of(buildError.buildError("ERROR_CODE_12"))
                 : Optional.empty();
     }
 

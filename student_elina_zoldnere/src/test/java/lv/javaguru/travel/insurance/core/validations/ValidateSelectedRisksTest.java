@@ -22,6 +22,8 @@ public class ValidateSelectedRisksTest {
 
     @Mock
     private TravelCalculatePremiumRequest requestMock;
+    @Mock
+    private BuildError errorMock;
 
     @InjectMocks
     private ValidateSelectedRisks validate;
@@ -38,23 +40,27 @@ public class ValidateSelectedRisksTest {
     @Test
     public void validate_ShouldReturnErrorWhenSelectedRisksIsNull() {
         when(requestMock.getSelectedRisks()).thenReturn(null);
+        when(errorMock.buildError("ERROR_CODE_5"))
+                .thenReturn(new ValidationError("ERROR_CODE_5", "Field selectedRisks is empty!"));
 
         Optional<ValidationError> result = validate.execute(requestMock);
 
         assertTrue(result.isPresent());
-        assertEquals("selectedRisks", result.get().getField());
-        assertEquals("Must not be empty!", result.get().getMessage());
+        assertEquals("ERROR_CODE_5", result.get().getErrorCode());
+        assertEquals("Field selectedRisks is empty!", result.get().getDescription());
     }
 
     @Test
     public void validate_ShouldReturnErrorWhenSelectedRisksIsEmpty() {
         when(requestMock.getSelectedRisks()).thenReturn(Collections.emptyList());
+        when(errorMock.buildError("ERROR_CODE_5"))
+                .thenReturn(new ValidationError("ERROR_CODE_5", "Field selectedRisks is empty!"));
 
         Optional<ValidationError> result = validate.execute(requestMock);
 
         assertTrue(result.isPresent());
-        assertEquals("selectedRisks", result.get().getField());
-        assertEquals("Must not be empty!", result.get().getMessage());
+        assertEquals("ERROR_CODE_5", result.get().getErrorCode());
+        assertEquals("Field selectedRisks is empty!", result.get().getDescription());
     }
 
 }
