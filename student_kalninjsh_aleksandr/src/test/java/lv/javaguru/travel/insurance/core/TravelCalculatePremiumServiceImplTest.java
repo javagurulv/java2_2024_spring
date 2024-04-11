@@ -4,6 +4,10 @@ import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -13,19 +17,22 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class TravelCalculatePremiumServiceImplTest {
 
 
+    @Mock
     private DateTimeService service;
+    @InjectMocks
     private TravelCalculatePremiumServiceImpl premiumService;
+
     private TravelCalculatePremiumRequest request;
 
     @BeforeEach
     public void setUp() {
         request = checkingTheRequestForAllFields();
-        service = mock(DateTimeService.class);
         when(service.calculateAgreementDaysBetweenDates(request)).thenReturn(new BigDecimal(5));
-        premiumService = new TravelCalculatePremiumServiceImpl(service);
+
 
     }
 
