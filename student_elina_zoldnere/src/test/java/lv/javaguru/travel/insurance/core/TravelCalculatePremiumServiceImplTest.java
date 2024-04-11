@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core;
 
+import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
@@ -30,7 +31,7 @@ class TravelCalculatePremiumServiceImplTest {
     @Mock
     private TravelCalculatePremiumUnderwriting calculateUnderwritingMock;
     @Mock
-    private DateTimeService dateTimeServiceMock;
+    private DateTimeUtil dateTimeUtilMock;
 
     @InjectMocks
     private TravelCalculatePremiumServiceImpl calculate;

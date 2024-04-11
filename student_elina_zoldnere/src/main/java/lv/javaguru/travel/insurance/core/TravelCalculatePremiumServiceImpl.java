@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core;
 
+import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
@@ -19,7 +20,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
     @Autowired
     private TravelCalculatePremiumUnderwriting calculateUnderwriting;
     @Autowired
-    private DateTimeService dateTimeService;
+    private DateTimeUtil dateTimeService;
 
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {

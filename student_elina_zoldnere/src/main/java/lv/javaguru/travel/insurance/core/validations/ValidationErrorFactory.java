@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.PropertyResolver;
+import lv.javaguru.travel.insurance.core.util.PropertyResolver;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 
 import org.springframework.beans.factory.annotation.Autowired;
