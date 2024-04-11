@@ -17,8 +17,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
     {
       "errors": [
         {
-          "field": "personFirstName",
-          "message": "Must not be empty!"
+          "errorCode": "ERROR_CODE_1",
+          "description": "Field personFirstName is empty!"
         }
       ],
       "personFirstName": null,
@@ -44,8 +44,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
     {
       "errors": [
         {
-          "field": "personLastName",
-          "message": "Must not be empty!"
+          "errorCode": "ERROR_CODE_2",
+          "description": "Field personLastName is empty!"
         }
       ],
       "personFirstName": null,
@@ -71,8 +71,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
     {
       "errors": [
         {
-          "field": "personFirstName",
-          "message": "Must not be empty!"
+          "errorCode": "ERROR_CODE_1",
+          "description": "Field personFirstName is empty!"
         }
       ],
       "personFirstName": null,
@@ -98,8 +98,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
     {
       "errors": [
         {
-          "field": "personLastName",
-          "message": "Must not be empty!"
+          "errorCode": "ERROR_CODE_2",
+          "description": "Field personLastName is empty!"
         }
       ],
       "personFirstName": null,
@@ -125,8 +125,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
     {
       "errors": [
         {
-          "field": "personFirstName",
-          "message": "Must not be empty!"
+          "errorCode": "ERROR_CODE_1",
+          "description": "Field personFirstName is empty!"
         }
       ],
       "personFirstName": null,
@@ -152,8 +152,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
     {
       "errors": [
         {
-          "field": "personLastName",
-          "message": "Must not be empty!"
+          "errorCode": "ERROR_CODE_2",
+          "description": "Field personLastName is empty!"
         }
       ],
       "personFirstName": null,
@@ -179,8 +179,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
     {
       "errors": [
         {
-          "field": "agreementDateFrom",
-          "message": "Must not be empty!"
+          "errorCode": "ERROR_CODE_3",
+          "description": "Field agreementDateFrom is empty!"
         }
       ],
       "personFirstName": null,
@@ -206,8 +206,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
     {
       "errors": [
         {
-          "field": "agreementDateTo",
-          "message": "Must not be empty!"
+          "errorCode": "ERROR_CODE_4",
+          "description": "Field agreementDateTo is empty!"
         }
       ],
       "personFirstName": null,
@@ -233,8 +233,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
     {
       "errors": [
         {
-          "field": "selectedRisks",
-          "message": "Must not be empty!"
+          "errorCode": "ERROR_CODE_5",
+          "description": "Field selectedRisks is empty!"
         }
       ],
       "personFirstName": null,
@@ -260,8 +260,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
     {
       "errors": [
         {
-          "field": "selectedRisks",
-          "message": "Must not be empty!"
+          "errorCode": "ERROR_CODE_5",
+          "description": "Field selectedRisks is empty!"
         }
       ],
       "personFirstName": null,
@@ -287,21 +287,25 @@ Test cases for TravelCalculatePremiumControllerTest.java
     {
       "errors": [
         {
-          "field": "personFirstName",
-          "message": "Must not be empty!"
+          "errorCode": "ERROR_CODE_1",
+          "description": "Field personFirstName is empty!"
         },
         {
-          "field": "personLastName",
-          "message": "Must not be empty!"
+          "errorCode": "ERROR_CODE_2",
+          "description": "Field personLastName is empty!"
         },
         {
-          "field": "agreementDateFrom",
-          "message": "Must not be empty!"
+          "errorCode": "ERROR_CODE_3",
+          "description": "Field agreementDateFrom is empty!"
         },
         {
-          "field": "agreementDateTo",
-          "message": "Must not be empty!"
+          "errorCode": "ERROR_CODE_4",
+          "description": "Field agreementDateTo is empty!"
         },
+        {
+          "errorCode": "ERROR_CODE_5",
+          "description": "Field selectedRisks is empty!"
+        }
       ],
       "personFirstName": null,
       "personLastName": null,
@@ -329,8 +333,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
     {
       "errors": [
         {
-          "field": "agreementDateFrom",
-          "message": "Must be before agreementDateTo!"
+          "errorCode": "ERROR_CODE_13",
+          "description": "AgreementDateTo must be after AgreementDateFrom!"
         }
       ],
       "personFirstName": null,
@@ -356,8 +360,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
     {
       "errors": [
         {
-          "field": "agreementDateFrom",
-          "message": "Must be before agreementDateTo!"
+          "errorCode": "ERROR_CODE_13",
+          "description": "AgreementDateTo must be after AgreementDateFrom!"
         }
       ],
       "personFirstName": null,
@@ -383,8 +387,8 @@ Test cases for TravelCalculatePremiumControllerTest.java
     {
       "errors": [
         {
-          "field": "agreementDateFrom",
-          "message": "Must not be in past!"
+          "errorCode": "ERROR_CODE_11",
+          "description": "Field agreementDateFrom is in the past!"
         }
       ],
       "personFirstName": null,
@@ -410,12 +414,12 @@ Test cases for TravelCalculatePremiumControllerTest.java
     {
       "errors": [
         {
-          "field": "agreementDateFrom",
-          "message": "Must be before agreementDateTo!"
+          "errorCode": "ERROR_CODE_13",
+          "description": "AgreementDateTo must be after AgreementDateFrom!"
         },
         {
-          "field": "agreementDateTo",
-          "message": "Must not be in past!"
+          "errorCode": "ERROR_CODE_12",
+          "description": "Field agreementDateTo is in the past!"
         }
       ],
       "personFirstName": null,

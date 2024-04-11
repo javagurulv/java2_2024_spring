@@ -22,6 +22,8 @@ public class ValidatePersonLastNameTest {
 
     @Mock
     private TravelCalculatePremiumRequest requestMock;
+    @Mock
+    private BuildError errorMock;
 
     @InjectMocks
     private ValidatePersonLastName validate;
@@ -38,34 +40,40 @@ public class ValidatePersonLastNameTest {
     @Test
     public void validate_ShouldReturnErrorWhenPersonLastNameIsNull() {
         when(requestMock.getPersonLastName()).thenReturn(null);
+        when(errorMock.buildError("ERROR_CODE_2"))
+                .thenReturn(new ValidationError("ERROR_CODE_2", "Field personLastName is empty!"));
 
         Optional<ValidationError> result = validate.execute(requestMock);
 
         assertTrue(result.isPresent());
-        assertEquals("personLastName", result.get().getField());
-        assertEquals("Must not be empty!", result.get().getMessage());
+        assertEquals("ERROR_CODE_2", result.get().getErrorCode());
+        assertEquals("Field personLastName is empty!", result.get().getDescription());
     }
 
     @Test
     public void validate_ShouldReturnErrorWhenPersonLastNameIsEmpty() {
         when(requestMock.getPersonLastName()).thenReturn("");
+        when(errorMock.buildError("ERROR_CODE_2"))
+                .thenReturn(new ValidationError("ERROR_CODE_2", "Field personLastName is empty!"));
 
         Optional<ValidationError> result = validate.execute(requestMock);
 
         assertTrue(result.isPresent());
-        assertEquals("personLastName", result.get().getField());
-        assertEquals("Must not be empty!", result.get().getMessage());
+        assertEquals("ERROR_CODE_2", result.get().getErrorCode());
+        assertEquals("Field personLastName is empty!", result.get().getDescription());
     }
 
     @Test
     public void validate_ShouldReturnErrorWhenPersonLastNameIsBlank() {
         when(requestMock.getPersonLastName()).thenReturn("     ");
+        when(errorMock.buildError("ERROR_CODE_2"))
+                .thenReturn(new ValidationError("ERROR_CODE_2", "Field personLastName is empty!"));
 
         Optional<ValidationError> result = validate.execute(requestMock);
 
         assertTrue(result.isPresent());
-        assertEquals("personLastName", result.get().getField());
-        assertEquals("Must not be empty!", result.get().getMessage());
+        assertEquals("ERROR_CODE_2", result.get().getErrorCode());
+        assertEquals("Field personLastName is empty!", result.get().getDescription());
     }
 
 }

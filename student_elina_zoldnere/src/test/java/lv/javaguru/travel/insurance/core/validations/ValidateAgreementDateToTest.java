@@ -22,6 +22,8 @@ public class ValidateAgreementDateToTest {
 
     @Mock
     private TravelCalculatePremiumRequest requestMock;
+    @Mock
+    private BuildError errorMock;
 
     @InjectMocks
     private ValidateAgreementDateTo validate;
@@ -38,12 +40,14 @@ public class ValidateAgreementDateToTest {
     @Test
     public void validate_ShouldReturnErrorWhenAgreementDateToIsNull() {
         when(requestMock.getAgreementDateTo()).thenReturn(null);
+        when(errorMock.buildError("ERROR_CODE_4"))
+                .thenReturn(new ValidationError("ERROR_CODE_4", "Field agreementDateTo is empty!"));
 
         Optional<ValidationError> result = validate.execute(requestMock);
 
         assertTrue(result.isPresent());
-        assertEquals("agreementDateTo", result.get().getField());
-        assertEquals("Must not be empty!", result.get().getMessage());
+        assertEquals("ERROR_CODE_4", result.get().getErrorCode());
+        assertEquals("Field agreementDateTo is empty!", result.get().getDescription());
     }
 
 }

@@ -26,6 +26,8 @@ public class ValidateAgreementDateToNotLessThanTodayTest {
     private TravelCalculatePremiumRequest requestMock;
     @Mock
     private DateTimeService dateTimeService;
+    @Mock
+    private BuildError errorMock;
 
     @InjectMocks
     private ValidateAgreementDateToNotLessThanToday validate;
@@ -43,12 +45,14 @@ public class ValidateAgreementDateToNotLessThanTodayTest {
     public void validate_ShouldReturnErrorWhenAgreementDateToLessThanToday() {
         when(requestMock.getAgreementDateTo()).thenReturn(new Date(2024 - 1900, 2, 11));
         when(dateTimeService.midnightToday()).thenReturn(helper.midnightToday());
+        when(errorMock.buildError("ERROR_CODE_12"))
+                .thenReturn(new ValidationError("ERROR_CODE_12", "Field agreementDateTo is in the past!"));
 
         Optional<ValidationError> result = validate.execute(requestMock);
 
         assertTrue(result.isPresent());
-        assertEquals("agreementDateTo", result.get().getField());
-        assertEquals("Must not be in past!", result.get().getMessage());
+        assertEquals("ERROR_CODE_12", result.get().getErrorCode());
+        assertEquals("Field agreementDateTo is in the past!", result.get().getDescription());
     }
 
 }

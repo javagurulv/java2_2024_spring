@@ -23,6 +23,8 @@ public class ValidateAgreementDateChronologyTest {
 
     @Mock
     private TravelCalculatePremiumRequest requestMock;
+    @Mock
+    private BuildError errorMock;
 
     @InjectMocks
     private ValidateAgreementDateChronology validate;
@@ -40,24 +42,30 @@ public class ValidateAgreementDateChronologyTest {
     public void validate_ShouldReturnErrorWhenAgreementDateToIsEqualsAgreementDateFrom() {
         // requestMock.getAgreementDateFrom() returns (new Date (2025 - 1900, 2, 10))
         when(requestMock.getAgreementDateTo()).thenReturn(new Date(2025 - 1900, 2, 10));
+        when(errorMock.buildError("ERROR_CODE_13"))
+                .thenReturn(new ValidationError("ERROR_CODE_13",
+                        "AgreementDateTo must be after AgreementDateFrom!"));
 
         Optional<ValidationError> result = validate.execute(requestMock);
 
         assertTrue(result.isPresent());
-        assertEquals("agreementDateFrom", result.get().getField());
-        assertEquals("Must be before agreementDateTo!", result.get().getMessage());
+        assertEquals("ERROR_CODE_13", result.get().getErrorCode());
+        assertEquals("AgreementDateTo must be after AgreementDateFrom!", result.get().getDescription());
     }
 
     @Test
     public void validate_ShouldReturnErrorWhenAgreementDateToIsLessThanAgreementDateFrom() {
         // requestMock.getAgreementDateFrom() returns (new Date (2025 - 1900, 2, 10))
         when(requestMock.getAgreementDateTo()).thenReturn(new Date(2025 - 1900, 2, 9));
+        when(errorMock.buildError("ERROR_CODE_13"))
+                .thenReturn(new ValidationError("ERROR_CODE_13",
+                        "AgreementDateTo must be after AgreementDateFrom!"));
 
         Optional<ValidationError> result = validate.execute(requestMock);
 
         assertTrue(result.isPresent());
-        assertEquals("agreementDateFrom", result.get().getField());
-        assertEquals("Must be before agreementDateTo!", result.get().getMessage());
+        assertEquals("ERROR_CODE_13", result.get().getErrorCode());
+        assertEquals("AgreementDateTo must be after AgreementDateFrom!", result.get().getDescription());
     }
 
 }
