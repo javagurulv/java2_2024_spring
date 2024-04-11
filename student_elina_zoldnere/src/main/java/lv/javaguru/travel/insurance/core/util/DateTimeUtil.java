@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.util;
 
 import org.springframework.stereotype.Component;
 
@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 @Component
 public
-class DateTimeService {
+class DateTimeUtil {
 
     public long calculateDifferenceBetweenDays(Date dateFrom, Date dateTo) {
         long differenceInMillis = dateTo.getTime() - dateFrom.getTime();

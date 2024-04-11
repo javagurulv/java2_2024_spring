@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.DateTimeService;
+import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 
@@ -25,7 +25,7 @@ public class ValidateAgreementDateFromNotLessThanTodayTest {
     @Mock
     private TravelCalculatePremiumRequest requestMock;
     @Mock
-    private DateTimeService dateTimeService;
+    private DateTimeUtil dateTimeUtil;
     @Mock
     private ValidationErrorFactory errorMock;
 
@@ -44,7 +44,7 @@ public class ValidateAgreementDateFromNotLessThanTodayTest {
     @Test
     public void validate_ShouldReturnErrorWhenAgreementDateFromLessThanToday() {
         when(requestMock.getAgreementDateFrom()).thenReturn(new Date(2024 - 1900, 2, 11));
-        when(dateTimeService.midnightToday()).thenReturn(helper.midnightToday());
+        when(dateTimeUtil.midnightToday()).thenReturn(helper.midnightToday());
         when(errorMock.buildError("ERROR_CODE_11"))
                 .thenReturn(new ValidationError("ERROR_CODE_11", "Field agreementDateFrom is in the past!"));
 

@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core;
 
+import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -16,14 +17,14 @@ import static org.mockito.Mockito.when;
 public class TravelCalculatePremiumUnderwritingTest {
 
     @Mock
-    private DateTimeService dateTimeServiceMock;
+    private DateTimeUtil dateTimeUtilMock;
 
     @InjectMocks
     private TravelCalculatePremiumUnderwriting calculateUnderwriting;
 
     @Test
     public void calculateAgreementPrice_ShouldReturnCorrectResult() {
-        when(dateTimeServiceMock.calculateDifferenceBetweenDays(any(), any())).thenReturn(1L);
+        when(dateTimeUtilMock.calculateDifferenceBetweenDays(any(), any())).thenReturn(1L);
 
         // Date calculation logic is anyway mocked one step before
         BigDecimal result = calculateUnderwriting.calculateAgreementPrice(null, null);
