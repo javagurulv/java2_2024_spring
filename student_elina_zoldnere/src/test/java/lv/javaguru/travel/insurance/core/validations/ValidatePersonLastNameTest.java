@@ -23,7 +23,7 @@ public class ValidatePersonLastNameTest {
     @Mock
     private TravelCalculatePremiumRequest requestMock;
     @Mock
-    private BuildError errorMock;
+    private ValidationErrorFactory errorMock;
 
     @InjectMocks
     private ValidatePersonLastName validate;

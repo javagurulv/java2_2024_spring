@@ -24,7 +24,7 @@ public class ValidateAgreementDateChronologyTest {
     @Mock
     private TravelCalculatePremiumRequest requestMock;
     @Mock
-    private BuildError errorMock;
+    private ValidationErrorFactory errorMock;
 
     @InjectMocks
     private ValidateAgreementDateChronology validate;

@@ -27,7 +27,7 @@ public class ValidateAgreementDateFromNotLessThanTodayTest {
     @Mock
     private DateTimeService dateTimeService;
     @Mock
-    private BuildError errorMock;
+    private ValidationErrorFactory errorMock;
 
     @InjectMocks
     private ValidateAgreementDateFromNotLessThanToday validate;
