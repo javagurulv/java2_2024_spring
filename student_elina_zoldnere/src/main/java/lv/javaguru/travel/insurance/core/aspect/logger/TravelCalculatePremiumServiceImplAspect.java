@@ -15,7 +15,7 @@ public class TravelCalculatePremiumServiceImplAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(TravelCalculatePremiumServiceImplAspect.class);
 
-    @Pointcut("execution(* lv.javaguru.travel.insurance.core.TravelCalculatePremiumServiceImpl.calculatePremium(..))")
+    @Pointcut("execution(* lv.javaguru.travel.insurance.core.services.TravelCalculatePremiumServiceImpl.calculatePremium(..))")
     public void calculatePremiumMethod() {
     }
 
