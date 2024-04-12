@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.underwriting;
 
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,13 +8,14 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Component
-class TravelCalculatePremiumUnderwriting {
+class TravelCalculatePremiumUnderwritingImpl implements TravelCalculatePremiumUnderwriting {
 
     @Autowired
-    private DateTimeUtil dateTimeService;
+    private DateTimeUtil dateTimeUtil;
 
+    @Override
     public BigDecimal calculateAgreementPrice(Date agreementDateFrom, Date agreementDateTo) {
-        long differenceBetweenDays = dateTimeService.calculateDifferenceBetweenDays(agreementDateFrom, agreementDateTo);
+        long differenceBetweenDays = dateTimeUtil.calculateDifferenceBetweenDays(agreementDateFrom, agreementDateTo);
         return BigDecimal.valueOf(differenceBetweenDays);
     }
 
