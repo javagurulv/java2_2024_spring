@@ -2,6 +2,7 @@ package lv.javaguru.travel.insurance.core;
 
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.xml.crypto.Data;
@@ -14,10 +15,9 @@ import java.util.concurrent.TimeUnit;
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
-    private DateTimeService dateTimeService;
-    public TravelCalculatePremiumServiceImpl(DateTimeService dateTimeService) {
-        this.dateTimeService = dateTimeService;
-    }
+    @Autowired
+    private DateTimeService service;
+
 
 
     @Override
@@ -27,7 +27,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setPersonLastName(request.getPersonLastName());
         response.setAgreementDateFrom(request.getAgreementDateFrom());
         response.setAgreementDateTo(request.getAgreementDateTo());
-        response.setAgreementPrice(dateTimeService.calculateAgreementDaysBetweenDates(request));
+        response.setAgreementPrice(service.calculateAgreementDaysBetweenDates(request));
 
         return response;
     }

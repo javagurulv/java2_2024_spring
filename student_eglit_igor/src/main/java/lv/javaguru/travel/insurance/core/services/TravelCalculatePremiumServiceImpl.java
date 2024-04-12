@@ -1,8 +1,9 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.services;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+import lv.javaguru.travel.insurance.core.underwriting.AgreementPriceCalculatorInterface;
 import lv.javaguru.travel.insurance.core.validation.TravelCalculatePremiumRequestValidatorInterface;
 import lv.javaguru.travel.insurance.dto.CoreResponse;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
@@ -11,15 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.Collections;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Service
-class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
+public class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
     @Autowired
-    private AgreementPriceCalculator agreementPriceCalculator;
+    private AgreementPriceCalculatorInterface agreementPriceCalculator;
     @Autowired
     private TravelCalculatePremiumRequestValidatorInterface validate;
 
@@ -46,7 +46,6 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
 
     public BigDecimal calculateAgreementPrice(TravelCalculatePremiumRequest request) {
         return agreementPriceCalculator.calculateAgreementPrice(
-                request.getAgreementDateFrom(),
-                request.getAgreementDateTo());
+                request);
     }
 }
