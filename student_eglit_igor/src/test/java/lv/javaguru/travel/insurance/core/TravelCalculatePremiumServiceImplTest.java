@@ -1,6 +1,8 @@
 package lv.javaguru.travel.insurance.core;
 
 
+import lv.javaguru.travel.insurance.core.services.TravelCalculatePremiumServiceImpl;
+import lv.javaguru.travel.insurance.core.underwriting.AgreementPriceCalculatorInterface;
 import lv.javaguru.travel.insurance.core.validation.TravelCalculatePremiumRequestValidatorInterface;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
@@ -30,7 +32,7 @@ class TravelCalculatePremiumServiceImplTest {
             List.of("risk1", "risk2"));
 
     @Mock
-    private AgreementPriceCalculator mockAgreementPriceCalculator;
+    private AgreementPriceCalculatorInterface mockAgreementPriceCalculator;
     @Mock
     private TravelCalculatePremiumRequestValidatorInterface validator;
     @InjectMocks
@@ -39,7 +41,7 @@ class TravelCalculatePremiumServiceImplTest {
 
     @BeforeEach
     public void setUp() {
-        when(mockAgreementPriceCalculator.calculateAgreementPrice(request.getAgreementDateFrom(), request.getAgreementDateTo()))
+        when(mockAgreementPriceCalculator.calculateAgreementPrice(request))
                 .thenReturn(new BigDecimal(2));
         when(validator.validate(request)).thenReturn(null);
         response = service.calculatePremium(request);

@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.validation;
 
 import lv.javaguru.travel.insurance.core.util.ErrorCodeUtil;
 import lv.javaguru.travel.insurance.dto.ValidationError;
