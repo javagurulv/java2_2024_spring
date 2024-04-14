@@ -27,7 +27,7 @@ class ClassifierRepositoryTest {
     public void shouldFindRiskTypeClassifier() {
         Optional<Classifier> riskTypeOpt = classifierRepository.findByTitle("RISK_TYPE");
         assertTrue(riskTypeOpt.isPresent());
-        assertEquals(riskTypeOpt.get().getTitle(), "RISK_TYPE");
+        assertEquals("RISK_TYPE", riskTypeOpt.get().getTitle());
     }
 
     @Test
