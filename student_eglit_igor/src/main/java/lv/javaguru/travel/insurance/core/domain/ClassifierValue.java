@@ -23,7 +23,7 @@ public class ClassifierValue {
     private Classifier classifier;
 
     @Column(name = "ic", nullable=false)
-    private String is;
+    private String ic;
 
     @Column(name = "description", nullable=false)
     private String description;
