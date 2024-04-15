@@ -9,12 +9,13 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-class ValidateAgreementDateTo implements RequestFieldValidation {
+class ValidateAgreementDateTo extends RequestFieldValidationImpl {
 
     @Autowired
     private ValidationErrorFactory validationErrorFactory;
 
-    public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
+    @Override
+    public Optional<ValidationError> validateSingle(TravelCalculatePremiumRequest request) {
         return (request.getAgreementDateTo() == null)
                 ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_4"))
                 : Optional.empty();

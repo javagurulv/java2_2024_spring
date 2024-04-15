@@ -9,12 +9,13 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 
 @Component
-public class ValidatePersonFirstName implements RequestFieldValidation {
+class ValidatePersonFirstName extends RequestFieldValidationImpl {
 
     @Autowired
     private ValidationErrorFactory validationErrorFactory;
 
-    public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
+    @Override
+    public Optional<ValidationError> validateSingle(TravelCalculatePremiumRequest request) {
         return (request.getPersonFirstName() == null || request.getPersonFirstName().isBlank())
                 ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_1"))
                 : Optional.empty();

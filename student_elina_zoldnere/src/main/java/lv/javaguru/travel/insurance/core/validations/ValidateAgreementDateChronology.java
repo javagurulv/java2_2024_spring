@@ -10,12 +10,13 @@ import java.util.Date;
 import java.util.Optional;
 
 @Component
-class ValidateAgreementDateChronology implements RequestFieldValidation {
+class ValidateAgreementDateChronology extends RequestFieldValidationImpl {
 
     @Autowired
     private ValidationErrorFactory validationErrorFactory;
 
-    public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
+    @Override
+    public Optional<ValidationError> validateSingle(TravelCalculatePremiumRequest request) {
         Date agreementDateFrom = request.getAgreementDateFrom();
         Date agreementDateTo = request.getAgreementDateTo();
 

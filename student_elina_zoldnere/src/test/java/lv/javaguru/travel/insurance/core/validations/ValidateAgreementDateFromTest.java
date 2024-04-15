@@ -43,7 +43,7 @@ public class ValidateAgreementDateFromTest {
         when(errorMock.buildError("ERROR_CODE_3"))
                 .thenReturn(new ValidationError("ERROR_CODE_3", "Field agreementDateFrom is empty!"));
 
-        Optional<ValidationError> result = validate.execute(requestMock);
+        Optional<ValidationError> result = validate.validateSingle(requestMock);
 
         assertTrue(result.isPresent());
         assertEquals("ERROR_CODE_3", result.get().getErrorCode());

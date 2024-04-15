@@ -46,7 +46,7 @@ public class ValidateAgreementDateChronologyTest {
                 .thenReturn(new ValidationError("ERROR_CODE_13",
                         "AgreementDateTo must be after AgreementDateFrom!"));
 
-        Optional<ValidationError> result = validate.execute(requestMock);
+        Optional<ValidationError> result = validate.validateSingle(requestMock);
 
         assertTrue(result.isPresent());
         assertEquals("ERROR_CODE_13", result.get().getErrorCode());
@@ -61,7 +61,7 @@ public class ValidateAgreementDateChronologyTest {
                 .thenReturn(new ValidationError("ERROR_CODE_13",
                         "AgreementDateTo must be after AgreementDateFrom!"));
 
-        Optional<ValidationError> result = validate.execute(requestMock);
+        Optional<ValidationError> result = validate.validateSingle(requestMock);
 
         assertTrue(result.isPresent());
         assertEquals("ERROR_CODE_13", result.get().getErrorCode());
