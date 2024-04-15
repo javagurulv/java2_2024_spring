@@ -43,7 +43,7 @@ public class ValidateSelectedRisksTest {
         when(errorMock.buildError("ERROR_CODE_5"))
                 .thenReturn(new ValidationError("ERROR_CODE_5", "Field selectedRisks is empty!"));
 
-        Optional<ValidationError> result = validate.execute(requestMock);
+        Optional<ValidationError> result = validate.validateSingle(requestMock);
 
         assertTrue(result.isPresent());
         assertEquals("ERROR_CODE_5", result.get().getErrorCode());
@@ -56,7 +56,7 @@ public class ValidateSelectedRisksTest {
         when(errorMock.buildError("ERROR_CODE_5"))
                 .thenReturn(new ValidationError("ERROR_CODE_5", "Field selectedRisks is empty!"));
 
-        Optional<ValidationError> result = validate.execute(requestMock);
+        Optional<ValidationError> result = validate.validateSingle(requestMock);
 
         assertTrue(result.isPresent());
         assertEquals("ERROR_CODE_5", result.get().getErrorCode());

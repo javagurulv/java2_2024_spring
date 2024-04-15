@@ -43,7 +43,7 @@ public class ValidatePersonFirstNameTest {
         when(errorMock.buildError("ERROR_CODE_1"))
                 .thenReturn(new ValidationError("ERROR_CODE_1", "Field personFirstName is empty!"));
 
-        Optional<ValidationError> result = validate.execute(requestMock);
+        Optional<ValidationError> result = validate.validateSingle(requestMock);
 
         assertTrue(result.isPresent());
         assertEquals("ERROR_CODE_1", result.get().getErrorCode());
@@ -56,7 +56,7 @@ public class ValidatePersonFirstNameTest {
         when(errorMock.buildError("ERROR_CODE_1"))
                 .thenReturn(new ValidationError("ERROR_CODE_1", "Field personFirstName is empty!"));
 
-        Optional<ValidationError> result = validate.execute(requestMock);
+        Optional<ValidationError> result = validate.validateSingle(requestMock);
 
         assertTrue(result.isPresent());
         assertEquals("ERROR_CODE_1", result.get().getErrorCode());
@@ -70,7 +70,7 @@ public class ValidatePersonFirstNameTest {
                 .thenReturn(new ValidationError("ERROR_CODE_1", "Field personFirstName is empty!"));
 
 
-        Optional<ValidationError> result = validate.execute(requestMock);
+        Optional<ValidationError> result = validate.validateSingle(requestMock);
 
         assertTrue(result.isPresent());
         assertEquals("ERROR_CODE_1", result.get().getErrorCode());

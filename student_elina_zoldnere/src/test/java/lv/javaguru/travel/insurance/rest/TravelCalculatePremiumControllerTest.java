@@ -2,10 +2,10 @@ package lv.javaguru.travel.insurance.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,6 +15,7 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import java.nio.charset.StandardCharsets;
+import java.util.stream.Stream;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -37,132 +38,80 @@ public class TravelCalculatePremiumControllerTest {
         mapper = new ObjectMapper();
     }
 
-    @Test
-    @DisplayName("1.1 personFirstName missing")
-    public void controller_ShouldReturnCorrectResponseWhenPersonFirstNameIsMissing() throws Exception {
-        String requestFile = "ControllerTest_1.1_Request_personFirstName_missing.json";
-        String expectedResponseFile = "ControllerTest_1.1_Response_personFirstName_missing.json";
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("testNameAndFileNameProvider")
+    public void controller_ShouldReturnCorrectResponses
+            (String testName, String requestFile, String expectedResponseFile) throws Exception {
         calculateAndCompareResponse(requestFile, expectedResponseFile);
     }
 
-    @Test
-    @DisplayName("1.2 personLastName missing")
-    public void controller_ShouldReturnCorrectResponseWhenPersonLastNameIsMissing() throws Exception {
-        String requestFile = "ControllerTest_1.2_Request_personLastName_missing.json";
-        String expectedResponseFile = "ControllerTest_1.2_Response_personLastName_missing.json";
-        calculateAndCompareResponse(requestFile, expectedResponseFile);
-    }
+    private static Stream<Arguments> testNameAndFileNameProvider() {
+        return Stream.of(
 
-    @Test
-    @DisplayName("1.3 personFirstName empty")
-    public void controller_ShouldReturnCorrectResponseWhenPersonFirstNameIsEmpty() throws Exception {
-        String requestFile = "ControllerTest_1.3_Request_personFirstName_empty.json";
-        String expectedResponseFile = "ControllerTest_1.3_Response_personFirstName_empty.json";
-        calculateAndCompareResponse(requestFile, expectedResponseFile);
-    }
+                Arguments.of("1.1 personFirstName missing",
+                        "ControllerTest_1.1_Request_personFirstName_missing.json",
+                        "ControllerTest_1.1_Response_personFirstName_missing.json"),
 
-    @Test
-    @DisplayName("1.4 personLastName empty")
-    public void controller_ShouldReturnCorrectResponseWhenPersonLastNameIsEmpty() throws Exception {
-        String requestFile = "ControllerTest_1.4_Request_personLastName_empty.json";
-        String expectedResponseFile = "ControllerTest_1.4_Response_personLastName_empty.json";
-        calculateAndCompareResponse(requestFile, expectedResponseFile);
-    }
+                Arguments.of("1.2 personLastName missing",
+                        "ControllerTest_1.2_Request_personLastName_missing.json",
+                        "ControllerTest_1.2_Response_personLastName_missing.json"),
 
-    @Test
-    @DisplayName("1.5 personFirstName blank")
-    public void controller_ShouldReturnCorrectResponseWhenPersonFirstNameIsBlank() throws Exception {
-        String requestFile = "ControllerTest_1.5_Request_personFirstName_blank.json";
-        String expectedResponseFile = "ControllerTest_1.5_Response_personFirstName_blank.json";
-        calculateAndCompareResponse(requestFile, expectedResponseFile);
-    }
+                Arguments.of("1.3 personFirstName empty",
+                        "ControllerTest_1.3_Request_personFirstName_empty.json",
+                        "ControllerTest_1.3_Response_personFirstName_empty.json"),
 
-    @Test
-    @DisplayName("1.6 personLastName blank")
-    public void controller_ShouldReturnCorrectResponseWhenPersonLastNameIsBlank() throws Exception {
-        String requestFile = "ControllerTest_1.6_Request_personLastName_blank.json";
-        String expectedResponseFile = "ControllerTest_1.6_Response_personLastName_blank.json";
-        calculateAndCompareResponse(requestFile, expectedResponseFile);
-    }
+                Arguments.of("1.4 personLastName empty",
+                        "ControllerTest_1.4_Request_personLastName_empty.json",
+                        "ControllerTest_1.4_Response_personLastName_empty.json"),
 
-    @Test
-    @DisplayName("1.7 agreementDateFrom missing")
-    public void controller_ShouldReturnCorrectResponseWhenAgreementDateFromIsMissing() throws Exception {
-        String requestFile = "ControllerTest_1.7_Request_agreementDateFrom_missing.json";
-        String expectedResponseFile = "ControllerTest_1.7_Response_agreementDateFrom_missing.json";
-        calculateAndCompareResponse(requestFile, expectedResponseFile);
-    }
+                Arguments.of("1.5 personFirstName blank",
+                        "ControllerTest_1.5_Request_personFirstName_blank.json",
+                        "ControllerTest_1.5_Response_personFirstName_blank.json"),
 
-    @Test
-    @DisplayName("1.8 agreementDateTo missing")
-    public void controller_ShouldReturnCorrectResponseWhenAgreementDateToIsMissing() throws Exception {
-        String requestFile = "ControllerTest_1.8_Request_agreementDateTo_missing.json";
-        String expectedResponseFile = "ControllerTest_1.8_Response_agreementDateTo_missing.json";
-        calculateAndCompareResponse(requestFile, expectedResponseFile);
-    }
+                Arguments.of("1.6 personLastName blank",
+                        "ControllerTest_1.6_Request_personLastName_blank.json",
+                        "ControllerTest_1.6_Response_personLastName_blank.json"),
 
-    @Test
-    @DisplayName("1.9 selectedRisks missing")
-    public void controller_ShouldReturnCorrectResponseWhenSelectedRisksIsMissing() throws Exception {
-        String requestFile = "ControllerTest_1.9_Request_selectedRisks_missing.json";
-        String expectedResponseFile = "ControllerTest_1.9_Response_selectedRisks_missing.json";
-        calculateAndCompareResponse(requestFile, expectedResponseFile);
-    }
+                Arguments.of("1.7 agreementDateFrom missing",
+                        "ControllerTest_1.7_Request_agreementDateFrom_missing.json",
+                        "ControllerTest_1.7_Response_agreementDateFrom_missing.json"),
 
-    @Test
-    @DisplayName("1.10 selectedRisks empty")
-    public void controller_ShouldReturnCorrectResponseWhenSelectedRisksIsEmpty() throws Exception {
-        String requestFile = "ControllerTest_1.10_Request_selectedRisks_empty.json";
-        String expectedResponseFile = "ControllerTest_1.10_Response_selectedRisks_empty.json";
-        calculateAndCompareResponse(requestFile, expectedResponseFile);
-    }
+                Arguments.of("1.8 agreementDateTo missing",
+                        "ControllerTest_1.8_Request_agreementDateTo_missing.json",
+                        "ControllerTest_1.8_Response_agreementDateTo_missing.json"),
 
-    @Test
-    @DisplayName("1.99 all fields missing or empty or blank")
-    public void controller_ShouldReturnCorrectResponseWhenAllFieldsMissingOrEmptyOrBlank() throws Exception {
-        String requestFile = "ControllerTest_1.99_Request_all_fields_missing_or_empty_or_blank.json";
-        String expectedResponseFile = "ControllerTest_1.99_Response_all_fields_missing_or_empty_or_blank.json";
-        calculateAndCompareResponse(requestFile, expectedResponseFile);
-    }
+                Arguments.of("1.9 selectedRisks missing",
+                        "ControllerTest_1.9_Request_selectedRisks_missing.json",
+                        "ControllerTest_1.9_Response_selectedRisks_missing.json"),
 
-    @Test
-    @DisplayName("2.1 agreementDateTo is less than agreementDateFrom")
-    public void controller_ShouldReturnCorrectResponseWhenAgreementDateToLessThanAgreementDateFrom() throws Exception {
-        String requestFile = "ControllerTest_2.1_Request_wrong_date_chronology.json";
-        String expectedResponseFile = "ControllerTest_2.1_Response_wrong_date_chronology.json";
-        calculateAndCompareResponse(requestFile, expectedResponseFile);
-    }
+                Arguments.of("1.10 selectedRisks empty",
+                        "ControllerTest_1.10_Request_selectedRisks_empty.json",
+                        "ControllerTest_1.10_Response_selectedRisks_empty.json"),
 
-    @Test
-    @DisplayName("2.2 agreementDateTo is equals agreementDateFrom")
-    public void controller_ShouldReturnCorrectResponseWhenAgreementDateToIsEqualsAgreementDateFrom() throws Exception {
-        String requestFile = "ControllerTest_2.2_Request_agreementDateTo_equals_agreementDateFrom.json";
-        String expectedResponseFile = "ControllerTest_2.2_Response_agreementDateTo_equals_agreementDateFrom.json";
-        calculateAndCompareResponse(requestFile, expectedResponseFile);
-    }
+                Arguments.of("1.99 all fields missing or empty or blank",
+                        "ControllerTest_1.99_Request_all_fields_missing_or_empty_or_blank.json",
+                        "ControllerTest_1.99_Response_all_fields_missing_or_empty_or_blank.json"),
 
-    @Test
-    @DisplayName("2.3 agreementDateFrom is less than current date")
-    public void controller_ShouldReturnCorrectResponseWhenAgreementDateFromIsLessThanToday() throws Exception {
-        String requestFile = "ControllerTest_2.3_Request_agreementDateFrom_less_than_current_date.json";
-        String expectedResponseFile = "ControllerTest_2.3_Response_agreementDateFrom_less_than_current_date.json";
-        calculateAndCompareResponse(requestFile, expectedResponseFile);
-    }
+                Arguments.of("2.1 agreementDateTo is less than agreementDateFrom",
+                        "ControllerTest_2.1_Request_wrong_date_chronology.json",
+                        "ControllerTest_2.1_Response_wrong_date_chronology.json"),
 
-    @Test
-    @DisplayName("2.4 agreementDateTo is less than current date")
-    public void controller_ShouldReturnCorrectResponseWhenAgreementDateToIsLessThanToday() throws Exception {
-        String requestFile = "ControllerTest_2.4_Request_agreementDateTo_less_than_current_date.json";
-        String expectedResponseFile = "ControllerTest_2.4_Response_agreementDateTo_less_than_current_date.json";
-        calculateAndCompareResponse(requestFile, expectedResponseFile);
-    }
+                Arguments.of("2.2 agreementDateTo is equals agreementDateFrom",
+                        "ControllerTest_2.2_Request_agreementDateTo_equals_agreementDateFrom.json",
+                        "ControllerTest_2.2_Response_agreementDateTo_equals_agreementDateFrom.json"),
 
-    @Test
-    @DisplayName("9.1 all fields are present and valid")
-    public void controller_ShouldReturnCorrectResponseWhenAllFieldsAreValid() throws Exception {
-        String requestFile = "ControllerTest_9.1_Request_all_fields_present_and_valid.json";
-        String expectedResponseFile = "ControllerTest_9.1_Response_all_fields_present_and_valid.json";
-        calculateAndCompareResponse(requestFile, expectedResponseFile);
+                Arguments.of("2.3 agreementDateFrom is less than current date",
+                        "ControllerTest_2.3_Request_agreementDateFrom_less_than_current_date.json",
+                        "ControllerTest_2.3_Response_agreementDateFrom_less_than_current_date.json"),
+
+                Arguments.of("2.4 agreementDateTo is less than current date",
+                        "ControllerTest_2.4_Request_agreementDateTo_less_than_current_date.json",
+                        "ControllerTest_2.4_Response_agreementDateTo_less_than_current_date.json"),
+
+                Arguments.of("9.1 all fields are present and valid",
+                        "ControllerTest_9.1_Request_all_fields_present_and_valid.json",
+                        "ControllerTest_9.1_Response_all_fields_present_and_valid.json")
+        );
     }
 
     private void calculateAndCompareResponse(String requestFile, String expectedResponseFile) throws Exception {

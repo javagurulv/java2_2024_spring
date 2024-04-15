@@ -19,7 +19,7 @@ class TravelCalculatePremiumRequestValidatorImpl implements TravelCalculatePremi
 
     public List<ValidationError> validate(TravelCalculatePremiumRequest request) {
         return fieldValidation.stream()
-                .map(validation -> validation.execute(request))
+                .map(validation -> validation.validateSingle(request))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toList());

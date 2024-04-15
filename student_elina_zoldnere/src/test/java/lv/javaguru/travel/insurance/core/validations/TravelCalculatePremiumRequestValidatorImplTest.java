@@ -33,9 +33,9 @@ public class TravelCalculatePremiumRequestValidatorImplTest {
 
     @Test
     public void validate_ShouldPassWhenAllValidationsSucceed() {
-        when(validation1.execute(requestMock))
+        when(validation1.validateSingle(requestMock))
                 .thenReturn(Optional.empty());
-        when(validation2.execute(requestMock))
+        when(validation2.validateSingle(requestMock))
                 .thenReturn(Optional.empty());
         when(fieldValidationMock.stream()).thenReturn(Stream.of(validation1, validation2));
 
@@ -45,9 +45,9 @@ public class TravelCalculatePremiumRequestValidatorImplTest {
 
     @Test
     public void validate_ShouldReturnErrorsWhenAllValidationsFail() {
-        when(validation1.execute(requestMock))
+        when(validation1.validateSingle(requestMock))
                 .thenReturn(Optional.of(new ValidationError()));
-        when(validation2.execute(requestMock))
+        when(validation2.validateSingle(requestMock))
                 .thenReturn(Optional.of(new ValidationError()));
         when(fieldValidationMock.stream()).thenReturn(Stream.of(validation1, validation2));
 

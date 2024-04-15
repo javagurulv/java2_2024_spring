@@ -48,7 +48,7 @@ public class ValidateAgreementDateFromNotLessThanTodayTest {
         when(errorMock.buildError("ERROR_CODE_11"))
                 .thenReturn(new ValidationError("ERROR_CODE_11", "Field agreementDateFrom is in the past!"));
 
-        Optional<ValidationError> result = validate.execute(requestMock);
+        Optional<ValidationError> result = validate.validateSingle(requestMock);
 
         assertTrue(result.isPresent());
         assertEquals("ERROR_CODE_11", result.get().getErrorCode());
