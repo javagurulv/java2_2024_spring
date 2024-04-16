@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-class DateFromIsExist implements TravelRequestValidator {
+class AgreementDateFromExistValidator implements TravelRequestValidator {
 
     public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
         return (request.getAgreementDateFrom() == null)

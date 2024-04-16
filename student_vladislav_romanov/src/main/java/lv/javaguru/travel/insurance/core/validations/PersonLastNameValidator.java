@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-class PersonLastNameIsExistAndNotEmpty implements TravelRequestValidator {
+class PersonLastNameValidator implements TravelRequestValidator {
 
     public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
         return (request.getPersonLastName() == null || request.getPersonLastName().isEmpty())

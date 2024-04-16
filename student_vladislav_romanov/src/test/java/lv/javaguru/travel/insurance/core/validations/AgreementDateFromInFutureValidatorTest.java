@@ -12,9 +12,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class DateFromIsNotInPastTest {
+public class AgreementDateFromInFutureValidatorTest {
 
-    private final DateFromIsNotInPast validation = new DateFromIsNotInPast();
+    private final AgreementDateFromInFutureValidator validation = new AgreementDateFromInFutureValidator();
 
     @Test
     void dateFromIsInPast() {

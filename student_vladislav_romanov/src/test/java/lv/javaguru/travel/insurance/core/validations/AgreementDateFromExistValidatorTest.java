@@ -12,26 +12,28 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class DateToIsExistTest {
+public class AgreementDateFromExistValidatorTest {
 
-    private final DateToIsExist validation = new DateToIsExist();
+    private final AgreementDateFromExistValidator validation = new AgreementDateFromExistValidator();
 
     @Test
-    void dateToIsNotExist() {
+    void dateFromIsNotExist() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getAgreementDateTo()).thenReturn(null);
+        when(request.getAgreementDateFrom()).thenReturn(null);
         Optional<ValidationError> errors = validation.execute(request);
         assertTrue(errors.isPresent());
-        assertEquals(errors.get().getField(), "agreementDateTo");
+        assertEquals(errors.get().getField(), "agreementDateFrom");
         assertEquals(errors.get().getMessage(), "must exist!");
 
     }
 
     @Test
-    void dateToIsExist() {
+    void dateFromIsExist() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getAgreementDateTo()).thenReturn(LocalDate.of(2030, 3, 31));
+        when(request.getAgreementDateFrom()).thenReturn(LocalDate.of(2030, 3, 31));
         Optional<ValidationError> errors = validation.execute(request);
         assertTrue(errors.isEmpty());
     }
+
+
 }
