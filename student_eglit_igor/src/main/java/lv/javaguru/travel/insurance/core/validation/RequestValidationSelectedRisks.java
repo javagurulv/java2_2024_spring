@@ -8,13 +8,13 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-class RequestValidationSelectedRisks implements RequestValidationInterface {
+class RequestValidationSelectedRisks extends RequestValidationIntImpl{
 
     @Autowired
     private ValidationErrorFactory validationErrorFactory;
 
     @Override
-    public Optional<ValidationError> executeValidation(TravelCalculatePremiumRequest request) {
+    public Optional<ValidationError> validateReq(TravelCalculatePremiumRequest request) {
         String errorCode = "ERROR_CODE_8";
         return (request.getInsuranceRisks() == null || request.getInsuranceRisks().isEmpty())
                 ? Optional.of(validationErrorFactory.buildError(errorCode))

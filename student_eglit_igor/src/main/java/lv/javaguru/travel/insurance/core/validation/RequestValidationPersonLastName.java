@@ -8,13 +8,13 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-class RequestValidationPersonLastName implements RequestValidationInterface{
+class RequestValidationPersonLastName extends RequestValidationIntImpl{
 
     @Autowired
     private ValidationErrorFactory validationErrorFactory;
 
     @Override
-    public Optional<ValidationError> executeValidation(TravelCalculatePremiumRequest request) {
+    public Optional<ValidationError> validateReq(TravelCalculatePremiumRequest request) {
         String errorCode = "ERROR_CODE_2";
         return (request.getPersonLastName() == null || request.getPersonLastName().isEmpty())
                 ? Optional.of(validationErrorFactory.buildError(errorCode))

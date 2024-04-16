@@ -6,9 +6,9 @@ import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component
 class TravelCalculatePremiumRequestValidatorImpl implements TravelCalculatePremiumRequestValidatorInterface {
@@ -20,14 +20,36 @@ class TravelCalculatePremiumRequestValidatorImpl implements TravelCalculatePremi
     }
 
     public List<ValidationError> validate(TravelCalculatePremiumRequest request) {
+        List<ValidationError> singleErrors = collectSingleErrors(request);
+        List<ValidationError> listErrors = collectListErrors(request);
+        return concatenateLists(singleErrors, listErrors);
+    }
+
+    public List<ValidationError> collectSingleErrors(TravelCalculatePremiumRequest request) {
         List<ValidationError> errors = new ArrayList<>();
         travelValidations.stream()
-                .map(validation -> validation.executeValidation(request))
+                .map(validation -> validation.validateReq(request))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .forEach(errors::add);
         return errors;
     }
+
+    public List<ValidationError> collectListErrors(TravelCalculatePremiumRequest request) {
+        return travelValidations.stream()
+                .map(validation -> validation.validateList(request))
+                .filter(Objects::nonNull)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+
+    }
+
+    private List<ValidationError> concatenateLists(List<ValidationError> singleErrors,
+                                                   List<ValidationError> listErrors) {
+        return Stream.concat(singleErrors.stream(), listErrors.stream())
+                .collect(Collectors.toList());
+    }
+
 
 }
        /*requestValidator_personFirstName.validatePersonFirstName(request).ifPresent(errors::add);

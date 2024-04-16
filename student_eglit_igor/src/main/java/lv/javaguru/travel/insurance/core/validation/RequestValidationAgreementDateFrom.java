@@ -8,13 +8,13 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-class RequestValidationAgreementDateFrom implements RequestValidationInterface{
+class RequestValidationAgreementDateFrom extends RequestValidationIntImpl{
 
     @Autowired
     private ValidationErrorFactory validationErrorFactory;
 
     @Override
-    public Optional<ValidationError> executeValidation(TravelCalculatePremiumRequest request) {
+    public Optional<ValidationError> validateReq(TravelCalculatePremiumRequest request) {
         String errorCode = "ERROR_CODE_3";
         return (request.getAgreementDateFrom() == null)
                 ? Optional.of( validationErrorFactory.buildError(errorCode))
