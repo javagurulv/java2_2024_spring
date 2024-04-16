@@ -7,11 +7,11 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-class DateToIsExist implements TravelRequestValidator {
+class PersonFirstNameValidator implements TravelRequestValidator {
 
     public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
-        return (request.getAgreementDateTo() == null)
-                ? Optional.of(new ValidationError("agreementDateTo", "must exist!"))
+        return (request.getPersonFirstName() == null || request.getPersonFirstName().isEmpty())
+                ? Optional.of(new ValidationError("personFirstName", "must exist and not to be empty!"))
                 : Optional.empty();
     }
 

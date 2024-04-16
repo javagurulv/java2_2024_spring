@@ -11,36 +11,35 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class PersonFirstNameIsExistAndNotEmptyTest {
+public class PersonLastNameValidatorTest {
 
-    private final PersonFirstNameIsExistAndNotEmpty validation = new PersonFirstNameIsExistAndNotEmpty();
+    private final PersonLastNameValidator validation = new PersonLastNameValidator();
 
     @Test
-    void personFirstNameDoNotExist() {
+    void personLastNameDoNotExist() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getPersonFirstName()).thenReturn(null);
+        when(request.getPersonLastName()).thenReturn(null);
         Optional<ValidationError> errors = validation.execute(request);
         assertTrue(errors.isPresent());
-        assertEquals(errors.get().getField(), "personFirstName");
+        assertEquals(errors.get().getField(), "personLastName");
         assertEquals(errors.get().getMessage(), "must exist and not to be empty!");
     }
 
     @Test
-    void personFirstNameIsEmpty() {
+    void personLastNameIsEmpty() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getPersonFirstName()).thenReturn("");
+        when(request.getPersonLastName()).thenReturn("");
         Optional<ValidationError> errors = validation.execute(request);
         assertTrue(errors.isPresent());
-        assertEquals(errors.get().getField(), "personFirstName");
+        assertEquals(errors.get().getField(), "personLastName");
         assertEquals(errors.get().getMessage(), "must exist and not to be empty!");
     }
 
     @Test
-    void personFirstNameIsExist() {
+    void personLastNameIsExist() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getPersonFirstName()).thenReturn("Vladislav");
+        when(request.getPersonLastName()).thenReturn("Romanov");
         Optional<ValidationError> errors = validation.execute(request);
         assertTrue(errors.isEmpty());
     }
-
 }
