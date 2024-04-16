@@ -12,7 +12,7 @@ import java.util.List;
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
     @Autowired
-    TravelCalculatePremiumRequestValidator requestValidator;
+    private TravelCalculatePremiumRequestValidator requestValidator;
 
     @Autowired
     private DateTimeService service;
@@ -22,7 +22,6 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         List<ValidationError> errors = requestValidator.validate(request);
         if (!errors.isEmpty()) {
             return new TravelCalculatePremiumResponse(errors);
-
         }
 
         TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();
