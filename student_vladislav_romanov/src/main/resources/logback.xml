@@ -5,10 +5,18 @@
         </encoder>
     </appender>
 
-    <property name="LOG_FILE" value="log" />
-    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>logs/vladislav_romanov.log</file>
-        <append>true</append>
+    <property name="LOGS" value="logs/vladislav_romanov/" />
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS}/vladislav_romanov.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${LOGS}/archive/vladislav_romanov.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+            <!-- keep 30 days' worth of history capped at 3GB total size -->
+            <maxHistory>1</maxHistory>
+            <totalSizeCap>1MB</totalSizeCap>
+
+        </rollingPolicy>
         <encoder>
             <pattern>%d{ISO8601} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
