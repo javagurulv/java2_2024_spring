@@ -5,6 +5,8 @@ import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 class ErrorCodeDescriptionConstructor implements ValidationErrorFactory {
     @Autowired
@@ -13,6 +15,11 @@ class ErrorCodeDescriptionConstructor implements ValidationErrorFactory {
     @Override
     public ValidationError buildError(String errorCode) {
         var errorCodeDescription = errorCodeUtil.getErrorCodeDescription(errorCode);
+        return new ValidationError(errorCode, errorCodeDescription);
+    }
+    @Override
+    public ValidationError buildError(String errorCode, List<Placeholder> placeholders) {
+        var errorCodeDescription = errorCodeUtil.getErrorCodeDescription(errorCode, placeholders);
         return new ValidationError(errorCode, errorCodeDescription);
     }
 }
