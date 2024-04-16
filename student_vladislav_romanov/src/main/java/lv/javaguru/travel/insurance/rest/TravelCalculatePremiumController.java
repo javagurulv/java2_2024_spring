@@ -14,12 +14,16 @@ import org.springframework.web.bind.annotation.RestController;
 class TravelCalculatePremiumController {
 
 	@Autowired
+	private TravelCalculatePremiumRequestLogger requestLogger;
+
+	@Autowired
 	private TravelCalculatePremiumService calculatePremiumService;
 
 	@PostMapping(path = "/",
 			consumes = "application/json",
 			produces = "application/json")
 	public TravelCalculatePremiumResponse calculatePremium(@RequestBody TravelCalculatePremiumRequest request) {
+		requestLogger.log(request);
 		return calculatePremiumService.calculatePremium(request);
 	}
 

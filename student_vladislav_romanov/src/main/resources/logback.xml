@@ -5,7 +5,17 @@
         </encoder>
     </appender>
 
+    <property name="LOG_FILE" value="log" />
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/vladislav_romanov.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{ISO8601} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
     <root level="INFO">
         <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE"/>
     </root>
 </configuration>
