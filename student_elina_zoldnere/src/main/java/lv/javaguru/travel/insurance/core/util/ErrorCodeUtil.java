@@ -16,15 +16,15 @@ public class ErrorCodeUtil {
     }
 
     public String getErrorDescription(String errorCode, List<Placeholder> placeholders) {
-      String descriptionWithPlaceholders = resolver.getPropertyDescription(errorCode);
-      return replacePlaceholders(descriptionWithPlaceholders, placeholders);
+        String descriptionWithPlaceholders = resolver.getPropertyDescription(errorCode);
+        return replacePlaceholders(descriptionWithPlaceholders, placeholders);
     }
 
     private String replacePlaceholders(String descriptionWithPlaceholders, List<Placeholder> placeholders) {
         for (Placeholder placeholder : placeholders) {
             String placeholderName = placeholder.getPlaceholderName();
             String placeholderValue = placeholder.getPlaceholderValue();
-            descriptionWithPlaceholders= descriptionWithPlaceholders.replace("{" + placeholderName + "}", placeholderValue);
+            descriptionWithPlaceholders = descriptionWithPlaceholders.replace("{" + placeholderName + "}", placeholderValue);
         }
         return descriptionWithPlaceholders;
     }
