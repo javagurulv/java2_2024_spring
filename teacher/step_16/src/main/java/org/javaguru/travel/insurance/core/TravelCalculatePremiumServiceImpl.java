@@ -12,8 +12,10 @@ import java.util.List;
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
-    @Autowired private TravelCalculatePremiumRequestValidator requestValidator;
-    @Autowired private DateTimeService dateTimeService;
+    @Autowired
+    private TravelCalculatePremiumRequestValidator requestValidator;
+    @Autowired
+    private DateTimeService dateTimeService;
 
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
@@ -33,5 +35,5 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
 
         return response;
     }
-
 }
+
