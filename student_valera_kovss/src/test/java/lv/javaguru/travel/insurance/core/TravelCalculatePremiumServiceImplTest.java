@@ -1,8 +1,8 @@
 package lv.javaguru.travel.insurance.core;
 
 
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,7 +10,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
