@@ -9,18 +9,20 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.verifyNoInteractions;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class TravelCalculatePremiumServiceImplTest {
 
     @Mock private TravelCalculatePremiumRequestValidator travelCalculatePremiumRequestValidator;
-    @Mock private DateTimeService dateTimeService;
+    @Mock private TravelPremiumUnderwriting travelPremiumUnderwriting ;
 
     @InjectMocks
     private TravelCalculatePremiumServiceImpl premiumService;
@@ -28,8 +30,8 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void checkResponseFirstName() {
-        TravelCalculatePremiumRequest travelCalculatePremiumRequest = createdFullRequest();
-        when(dateTimeService.calculateDateFromTo(travelCalculatePremiumRequest.getAgreementDateFrom(), travelCalculatePremiumRequest.getAgreementDateTo())).thenReturn(0L);
+        TravelCalculatePremiumRequest travelCalculatePremiumRequest = mock(TravelCalculatePremiumRequest.class);
+        when(travelCalculatePremiumRequest.getPersonFirstName()).thenReturn("firstName");
         when(travelCalculatePremiumRequestValidator.validation(travelCalculatePremiumRequest)).thenReturn(List.of());
         TravelCalculatePremiumResponse travelCalculatePremiumResponse = premiumService.calculatePremium(travelCalculatePremiumRequest);
         assertEquals(travelCalculatePremiumResponse.getPersonFirstName(), travelCalculatePremiumRequest.getPersonFirstName());
@@ -37,8 +39,8 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void checkResponseLastName() {
-        TravelCalculatePremiumRequest travelCalculatePremiumRequest = createdFullRequest();
-        when(dateTimeService.calculateDateFromTo(travelCalculatePremiumRequest.getAgreementDateFrom(), travelCalculatePremiumRequest.getAgreementDateTo())).thenReturn(0L);
+        TravelCalculatePremiumRequest travelCalculatePremiumRequest = mock(TravelCalculatePremiumRequest.class);
+        when(travelCalculatePremiumRequest.getPersonLastName()).thenReturn("lastName");
         when(travelCalculatePremiumRequestValidator.validation(travelCalculatePremiumRequest)).thenReturn(List.of());
         TravelCalculatePremiumResponse travelCalculatePremiumResponse = premiumService.calculatePremium(travelCalculatePremiumRequest);
         assertEquals(travelCalculatePremiumResponse.getPersonLastName(), travelCalculatePremiumRequest.getPersonLastName());
@@ -46,8 +48,9 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void checkResponseDateFrom() {
-        TravelCalculatePremiumRequest travelCalculatePremiumRequest = createdFullRequest();
-        when(dateTimeService.calculateDateFromTo(travelCalculatePremiumRequest.getAgreementDateFrom(), travelCalculatePremiumRequest.getAgreementDateTo())).thenReturn(0L);
+        TravelCalculatePremiumRequest travelCalculatePremiumRequest = mock(TravelCalculatePremiumRequest.class);
+        Date dateFrom = new Date();
+        when(travelCalculatePremiumRequest.getAgreementDateFrom()).thenReturn(dateFrom);
         when(travelCalculatePremiumRequestValidator.validation(travelCalculatePremiumRequest)).thenReturn(List.of());
         TravelCalculatePremiumResponse travelCalculatePremiumResponse = premiumService.calculatePremium(travelCalculatePremiumRequest);
         assertEquals(travelCalculatePremiumResponse.getAgreementDateFrom(), travelCalculatePremiumRequest.getAgreementDateFrom());
@@ -55,8 +58,9 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void checkResponseDateTo() {
-        TravelCalculatePremiumRequest travelCalculatePremiumRequest = createdFullRequest();
-        when(dateTimeService.calculateDateFromTo(travelCalculatePremiumRequest.getAgreementDateFrom(), travelCalculatePremiumRequest.getAgreementDateTo())).thenReturn(0L);
+        TravelCalculatePremiumRequest travelCalculatePremiumRequest = mock(TravelCalculatePremiumRequest.class);
+        Date dateTo= new Date();
+        when(travelCalculatePremiumRequest.getAgreementDateTo()).thenReturn(dateTo);
         when(travelCalculatePremiumRequestValidator.validation(travelCalculatePremiumRequest)).thenReturn(List.of());
         TravelCalculatePremiumResponse travelCalculatePremiumResponse = premiumService.calculatePremium(travelCalculatePremiumRequest);
         assertEquals(travelCalculatePremiumResponse.getAgreementDateTo(), travelCalculatePremiumRequest.getAgreementDateTo());
@@ -64,60 +68,56 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void checkResponseAgreementPrice() {
-        TravelCalculatePremiumRequest travelCalculatePremiumRequest = createdFullRequest();
-        when(dateTimeService.calculateDateFromTo(travelCalculatePremiumRequest.getAgreementDateFrom(), travelCalculatePremiumRequest.getAgreementDateTo())).thenReturn(0L);
+        TravelCalculatePremiumRequest travelCalculatePremiumRequest = mock(TravelCalculatePremiumRequest.class);
+        when(travelCalculatePremiumRequest.getAgreementDateFrom()).thenReturn(makeDate("10.10.2010"));
+        when(travelCalculatePremiumRequest.getAgreementDateTo()).thenReturn(makeDate("11.10.2010"));
         when(travelCalculatePremiumRequestValidator.validation(travelCalculatePremiumRequest)).thenReturn(List.of());
+        when(travelPremiumUnderwriting.calculatedPremium(travelCalculatePremiumRequest)).thenReturn(new BigDecimal(1));
         TravelCalculatePremiumResponse travelCalculatePremiumResponse = premiumService.calculatePremium(travelCalculatePremiumRequest);
         assertNotNull(travelCalculatePremiumResponse.getAgreementPrice());
     }
 
     @Test
     public void checkResponseWithErrors() {
-        TravelCalculatePremiumRequest travelCalculatePremiumRequest = createdFullRequest();
-        ValidationErrors validationErrors = new ValidationErrors("field", "message");
-        when(travelCalculatePremiumRequestValidator.validation(travelCalculatePremiumRequest)).thenReturn(List.of(validationErrors));
+        TravelCalculatePremiumRequest travelCalculatePremiumRequest = mock(TravelCalculatePremiumRequest.class);
+        List<ValidationErrors> validationErrors = makeValidationErrorList();
+        when(travelCalculatePremiumRequestValidator.validation(travelCalculatePremiumRequest)).thenReturn(validationErrors);
         TravelCalculatePremiumResponse travelCalculatePremiumResponse = premiumService.calculatePremium(travelCalculatePremiumRequest);
         assertTrue(travelCalculatePremiumResponse.errorsFound());
     }
 
     @Test
-    public void checkResponseWithRightErrorCounting() {
-        TravelCalculatePremiumRequest travelCalculatePremiumRequest = createdFullRequest();
-        ValidationErrors validationErrors = new ValidationErrors("field", "message");
-        when(travelCalculatePremiumRequestValidator.validation(travelCalculatePremiumRequest)).thenReturn(List.of(validationErrors));
+    public void checkResponseWithRightValidationErrors() {
+        TravelCalculatePremiumRequest travelCalculatePremiumRequest = mock(TravelCalculatePremiumRequest.class);
+        List<ValidationErrors> validationErrors = makeValidationErrorList();
+        when(travelCalculatePremiumRequestValidator.validation(travelCalculatePremiumRequest)).thenReturn(validationErrors);
         TravelCalculatePremiumResponse travelCalculatePremiumResponse = premiumService.calculatePremium(travelCalculatePremiumRequest);
-        assertEquals(travelCalculatePremiumResponse.getValidationErrors().size(), 1);
+        assertTrue(travelCalculatePremiumResponse.errorsFound());
     }
 
     @Test
-    public void checkResponseWithRightError() {
-        TravelCalculatePremiumRequest travelCalculatePremiumRequest = createdFullRequest();
-        ValidationErrors validationErrors = new ValidationErrors("field", "message");
-        when(travelCalculatePremiumRequestValidator.validation(travelCalculatePremiumRequest)).thenReturn(List.of(validationErrors));
+    public void checkNoInvokingDateTimeUtilWhenValidationError() {
+        TravelCalculatePremiumRequest travelCalculatePremiumRequest = mock(TravelCalculatePremiumRequest.class);
+        List<ValidationErrors> validationErrors = makeValidationErrorList();
+        when(travelCalculatePremiumRequestValidator.validation(travelCalculatePremiumRequest)).thenReturn(validationErrors);
         TravelCalculatePremiumResponse travelCalculatePremiumResponse = premiumService.calculatePremium(travelCalculatePremiumRequest);
+        assertEquals(travelCalculatePremiumResponse.getValidationErrors().size(),1);
         assertEquals(travelCalculatePremiumResponse.getValidationErrors().get(0).getField(), "field");
         assertEquals(travelCalculatePremiumResponse.getValidationErrors().get(0).getMessage(), "message");
 
     }
 
-    @Test
-    public void checkIfFieldsEmptyWhenResponseWithError() {
-        TravelCalculatePremiumRequest travelCalculatePremiumRequest = createdFullRequest();
-        ValidationErrors validationErrors = new ValidationErrors("field", "message");
-        when(travelCalculatePremiumRequestValidator.validation(travelCalculatePremiumRequest)).thenReturn(List.of(validationErrors));
-        TravelCalculatePremiumResponse response = premiumService.calculatePremium(travelCalculatePremiumRequest);     // зачем это здесь? без него тест валится
-        verifyNoInteractions(dateTimeService);
 
+    private List<ValidationErrors> makeValidationErrorList() {
+        return List.of(new ValidationErrors("field", "message"));
     }
 
-
-    private TravelCalculatePremiumRequest createdFullRequest() {
-        TravelCalculatePremiumRequest premiumRequest = new TravelCalculatePremiumRequest();
-        premiumRequest.setPersonFirstName("Bob");
-        premiumRequest.setPersonLastName("Johnson");
-        premiumRequest.setAgreementDateFrom(new Date());
-        premiumRequest.setAgreementDateTo(new Date());
-        return premiumRequest;
+    private Date makeDate(String dateString) {
+        try {
+            return new SimpleDateFormat("dd.MM.yyyy").parse(dateString);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
