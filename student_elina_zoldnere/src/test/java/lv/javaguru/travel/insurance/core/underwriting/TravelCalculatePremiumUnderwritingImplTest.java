@@ -32,19 +32,19 @@ public class TravelCalculatePremiumUnderwritingImplTest {
     private TravelCalculatePremiumUnderwritingImpl calculateUnderwriting;
 
     @Test
-    public void calculateAgreementPrice_ShouldReturnCorrectResultForOneValidRisk() {
+    public void calculateagreementPremium_ShouldReturnCorrectResultForOneValidRisk() {
         when(requestMock.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
         when(riskPremiumCalculators.stream()).thenReturn(Stream.of(calculatorMock1));
 
         when(calculatorMock1.getRiskIc()).thenReturn("TRAVEL_MEDICAL");
         when(calculatorMock1.calculateRiskPremium(requestMock)).thenReturn(BigDecimal.ONE);
 
-        BigDecimal result = calculateUnderwriting.calculateAgreementPrice(requestMock);
+        BigDecimal result = calculateUnderwriting.calculateAgreementPremium(requestMock);
         assertEquals(BigDecimal.ONE, result);
     }
 
     @Test
-    public void calculateAgreementPrice_ShouldReturnCorrectResultForTwoValidRisks() {
+    public void calculateagreementPremium_ShouldReturnCorrectResultForTwoValidRisks() {
         when(requestMock.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION"));
         when(riskPremiumCalculators.stream()).thenAnswer(invocation -> Stream.of(calculatorMock1, calculatorMock2));
 
@@ -54,19 +54,19 @@ public class TravelCalculatePremiumUnderwritingImplTest {
         when(calculatorMock1.calculateRiskPremium(requestMock)).thenReturn(BigDecimal.ONE);
         when(calculatorMock2.calculateRiskPremium(requestMock)).thenReturn(BigDecimal.ONE);
 
-        BigDecimal result = calculateUnderwriting.calculateAgreementPrice(requestMock);
+        BigDecimal result = calculateUnderwriting.calculateAgreementPremium(requestMock);
         assertEquals(BigDecimal.valueOf(2), result);
     }
 
     @Test
-    public void calculateAgreementPrice_ThrowsRuntimeExceptionWhenOnlyNotSupportedRisk() {
+    public void calculateagreementPremium_ThrowsRuntimeExceptionWhenOnlyNotSupportedRisk() {
         when(requestMock.getSelectedRisks()).thenReturn(List.of("NOT_SUPPORTED_RISK"));
 
-        assertThrows(RuntimeException.class, () -> calculateUnderwriting.calculateAgreementPrice(requestMock));
+        assertThrows(RuntimeException.class, () -> calculateUnderwriting.calculateAgreementPremium(requestMock));
     }
 
     @Test
-    public void calculateAgreementPrice_ThrowsRuntimeExceptionWhenSelectedRisksContainNonSupportedRisk() {
+    public void calculateagreementPremium_ThrowsRuntimeExceptionWhenSelectedRisksContainNonSupportedRisk() {
         when(requestMock.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL", "NOT_SUPPORTED_RISK"));
         when(riskPremiumCalculators.stream()).thenAnswer(invocation -> Stream.of(calculatorMock1, calculatorMock2));
 
@@ -74,7 +74,7 @@ public class TravelCalculatePremiumUnderwritingImplTest {
         when(calculatorMock2.getRiskIc()).thenReturn("NOT_SUPPORTED_RISK");
 
         when(calculatorMock1.calculateRiskPremium(requestMock)).thenReturn(BigDecimal.ONE);
-        assertThrows(RuntimeException.class, () -> calculateUnderwriting.calculateAgreementPrice(requestMock));
+        assertThrows(RuntimeException.class, () -> calculateUnderwriting.calculateAgreementPremium(requestMock));
     }
 
 }
