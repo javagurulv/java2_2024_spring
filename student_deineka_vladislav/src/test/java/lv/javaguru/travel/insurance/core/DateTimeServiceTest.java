@@ -45,16 +45,4 @@ public class DateTimeServiceTest {
 
     }
 
-
-   //  @Test
-   // public void checkDateTimeService() {
-   //     TravelCalculatePremiumRequest travelRequest= new TravelCalculatePremiumRequest();
-   //     travelRequest.setAgreementDateFrom(new Date());
-   //     travelRequest.setAgreementDateTo(new Date());
-   //     long travelCalculatePremiumRequest = travelRequest.getAgreementDateFrom().getTime() - travelRequest.getAgreementDateTo().getTime();
-   //     long travelCalculatePremiumResponse = dateTimeService.calculateDateFromTo(travelRequest);
-//
-   //     assertEquals(travelCalculatePremiumResponse, travelCalculatePremiumRequest);
-//
-   //
 }

@@ -5,6 +5,7 @@ import lv.javaguru.travel.insurance.dto.ValidationErrors;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,7 @@ class TravelCalculatePremiumRequestValidator {
         validateLastName(request).ifPresent(validationErrors::add);
         validateDateFrom(request).ifPresent(validationErrors::add);
         validateDateTo(request).ifPresent(validationErrors::add);
+        validateDateFromSmallerThanDateTo(request).ifPresent(validationErrors::add);
 
         return validationErrors;
     }
@@ -49,4 +51,12 @@ class TravelCalculatePremiumRequestValidator {
 
     }
 
+    private Optional<ValidationErrors> validateDateFromSmallerThanDateTo(TravelCalculatePremiumRequest request) {
+        Date dateFrom = request.getAgreementDateFrom();
+        Date dateTo = request.getAgreementDateTo();
+        return (dateFrom != null && dateTo != null
+                && (dateFrom.equals(dateTo) || dateTo.before(dateFrom)))
+                ? Optional.of(new ValidationErrors("dateTo", "Cannot be smaller than dateFrom"))
+                : Optional.empty();
+    }
 }
