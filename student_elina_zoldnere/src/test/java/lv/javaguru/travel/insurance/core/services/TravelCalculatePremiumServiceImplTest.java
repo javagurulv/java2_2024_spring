@@ -80,7 +80,7 @@ class TravelCalculatePremiumServiceImplTest {
         Date agreementDateTo = request.getAgreementDateTo();
 
         when(validateMock.validate(request)).thenReturn(emptyList());
-        when(calculateUnderwritingMock.calculateAgreementPrice(request))
+        when(calculateUnderwritingMock.calculateAgreementPremium(request))
                 .thenReturn(BigDecimal.valueOf(1));
         TravelCalculatePremiumResponse response = calculatePremiumTest();
 
@@ -88,7 +88,7 @@ class TravelCalculatePremiumServiceImplTest {
         mapper.setTimeZone(TimeZone.getTimeZone("EET"));
         String responseToJson = mapper.writeValueAsString(response);
         String expectedJson = "{\"errors\":null,\"personFirstName\":\"Jānis\",\"personLastName\":\"Bērziņš\"," +
-                "\"agreementDateFrom\":\"2025-03-10\",\"agreementDateTo\":\"2025-03-11\",\"agreementPrice\":1}";
+                "\"agreementDateFrom\":\"2025-03-10\",\"agreementDateTo\":\"2025-03-11\",\"agreementPremium\":1}";
         assertEquals(expectedJson, responseToJson);
     }
 

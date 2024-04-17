@@ -14,7 +14,7 @@ class TravelCalculatePremiumUnderwritingImpl implements TravelCalculatePremiumUn
     List<TravelRiskPremiumCalculator> riskPremiumCalculators;
 
     @Override
-    public BigDecimal calculateAgreementPrice(TravelCalculatePremiumRequest request) {
+    public BigDecimal calculateAgreementPremium(TravelCalculatePremiumRequest request) {
         List<String> selectedRisks = request.getSelectedRisks();
 
         return selectedRisks.stream()
