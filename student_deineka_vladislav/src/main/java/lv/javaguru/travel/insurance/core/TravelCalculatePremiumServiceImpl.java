@@ -12,27 +12,32 @@ import java.util.List;
 @Component
 class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
-    @Autowired private TravelCalculatePremiumRequestValidator travelCalculatePremiumRequestValidator;
-    @Autowired private DateTimeService dateTimeService;
+    @Autowired
+    private TravelCalculatePremiumRequestValidator travelCalculatePremiumRequestValidator;
+    @Autowired
+    private TravelPremiumUnderwriting travelPremiumUnderwriting;
 
 
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
         List<ValidationErrors> validationErrors = travelCalculatePremiumRequestValidator.validation(request);
-        if (!validationErrors.isEmpty()) {
-            return new TravelCalculatePremiumResponse(validationErrors);
-        }
+        return validationErrors.isEmpty()
+                ? makeResponse(request, travelPremiumUnderwriting.calculatedPremium(request)) : makeResponse(validationErrors);
+    }
 
+    private TravelCalculatePremiumResponse makeResponse(List<ValidationErrors> validationErrors) {
+        return new TravelCalculatePremiumResponse(validationErrors);
+    }
+
+    private TravelCalculatePremiumResponse makeResponse(TravelCalculatePremiumRequest request, BigDecimal calculatedPremium) {
         TravelCalculatePremiumResponse travelCalculatePremiumResponse = new TravelCalculatePremiumResponse();
         travelCalculatePremiumResponse.setPersonFirstName(request.getPersonFirstName());
         travelCalculatePremiumResponse.setPersonLastName(request.getPersonLastName());
         travelCalculatePremiumResponse.setAgreementDateFrom(request.getAgreementDateFrom());
         travelCalculatePremiumResponse.setAgreementDateTo(request.getAgreementDateTo());
-
-        long daysFromTo = dateTimeService.calculateDateFromTo(request.getAgreementDateFrom(), request.getAgreementDateTo());
-        travelCalculatePremiumResponse.setAgreementPrice(new BigDecimal(daysFromTo));
-
+        travelCalculatePremiumResponse.setAgreementPrice(calculatedPremium);
         return travelCalculatePremiumResponse;
     }
+
 
 }
