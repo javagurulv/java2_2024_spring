@@ -6,7 +6,6 @@ import java.nio.file.Files;
 
 @Component
 public class JsonFileReader {
-    String filePath = "resources/rest/TravelCalculatePremiumRequest_personLastName_is_not_entered.json";
     public String readJsonFromFile(String filePath) {
         try {
             File file = ResourceUtils.getFile("classpath:" + filePath);
