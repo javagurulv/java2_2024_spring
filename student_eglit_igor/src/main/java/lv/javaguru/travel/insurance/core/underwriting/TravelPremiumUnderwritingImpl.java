@@ -9,35 +9,25 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.util.List;
 
-
-@AllArgsConstructor
-
 @Component
 class TravelPremiumUnderwritingImpl implements TravelPremiumUnderwriting {
 
     @Autowired
-    private List<TravelRiskPremiumCalculator> travelRiskPremiumCalculator;
+    private SelectedRisksPremiumCalculator selectedRisksPremiumCalculator;
 
     @Override
     public TravelPremiumCalculationResult calculateAgreementPremium(TravelCalculatePremiumRequest request) {
-        List<RiskPremium> riskPremiums = request.getSelectedRisks().stream()
-                .map(riskIc -> {
-                    BigDecimal riskPremium = calculatePremiumForRisk(riskIc, request);
-                    return new RiskPremium(riskIc, riskPremium);
-                })
-                .toList();
-        BigDecimal totalPremium = riskPremiums.stream()
-                .map(RiskPremium::getPremium)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        List<RiskPremium> riskPremiums = calculateSelectedRisksPremium(request);
+        BigDecimal totalPremium = calculateTotalPremium(riskPremiums);
         return new TravelPremiumCalculationResult(totalPremium, riskPremiums);
 
     }
-
-    private BigDecimal calculatePremiumForRisk(String riskIc, TravelCalculatePremiumRequest request) {
-        return travelRiskPremiumCalculator.stream()
-                .filter(riskOutOfTypeCalculator -> riskOutOfTypeCalculator.getRiskIc().equals(riskIc))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Not supported riskIc = " + riskIc))
-                .calculatePremium(request);
+    private List<RiskPremium> calculateSelectedRisksPremium(TravelCalculatePremiumRequest request) {
+        return selectedRisksPremiumCalculator.calculatePremiumForAllRisks(request);
+    }
+    private static BigDecimal calculateTotalPremium(List<RiskPremium> riskPremiums) {
+        return riskPremiums.stream()
+                .map(RiskPremium::getPremium)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }
