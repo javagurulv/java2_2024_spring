@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core;
 
 
 import lv.javaguru.travel.insurance.core.services.TravelCalculatePremiumServiceImpl;
-import lv.javaguru.travel.insurance.core.underwriting.AgreementPriceCalculatorInterface;
+import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwriting;
 import lv.javaguru.travel.insurance.core.validation.TravelCalculatePremiumRequestValidatorInterface;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
@@ -29,7 +29,7 @@ import static org.mockito.Mockito.when;
 class TravelCalculatePremiumServiceImplModuleTest {
 
     @Mock
-    AgreementPriceCalculatorInterface mockAgreementPriceCalculator;
+    TravelPremiumUnderwriting mockAgreementPriceCalculator;
     @Mock
     TravelCalculatePremiumRequestValidatorInterface validate;
     @InjectMocks

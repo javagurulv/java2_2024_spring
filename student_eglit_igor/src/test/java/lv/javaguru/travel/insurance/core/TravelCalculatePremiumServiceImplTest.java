@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core;
 
 
 import lv.javaguru.travel.insurance.core.services.TravelCalculatePremiumServiceImpl;
-import lv.javaguru.travel.insurance.core.underwriting.AgreementPriceCalculatorInterface;
+import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwriting;
 import lv.javaguru.travel.insurance.core.validation.TravelCalculatePremiumRequestValidatorInterface;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
@@ -32,7 +32,7 @@ class TravelCalculatePremiumServiceImplTest {
             List.of("risk1", "risk2"));
 
     @Mock
-    private AgreementPriceCalculatorInterface mockAgreementPriceCalculator;
+    private TravelPremiumUnderwriting mockAgreementPriceCalculator;
     @Mock
     private TravelCalculatePremiumRequestValidatorInterface validator;
     @InjectMocks

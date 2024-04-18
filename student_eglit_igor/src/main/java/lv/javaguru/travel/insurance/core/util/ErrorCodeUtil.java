@@ -1,6 +1,5 @@
 package lv.javaguru.travel.insurance.core.util;
 
-import lv.javaguru.travel.insurance.core.validation.Placeholder;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
@@ -11,7 +10,6 @@ import org.springframework.core.io.Resource;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
-import java.util.ResourceBundle;
 
 @Component
 @Configuration
