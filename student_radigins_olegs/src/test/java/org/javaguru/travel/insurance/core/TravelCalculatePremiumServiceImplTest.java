@@ -4,6 +4,7 @@ import org.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import org.javaguru.travel.insurance.rest.TravelCalculatePremiumResponse;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -63,6 +64,20 @@ private TravelCalculatePremiumServiceImpl travelCalculatePremiumService = new Tr
         TravelCalculatePremiumResponse response = travelCalculatePremiumService.calculatePremium(request);
 
         assertEquals(response.getAgreementDateTo(),agreementDateTo);
+
+    }
+
+
+    @Test
+    public void shouldTestResponseAgreementPrice() {
+        String personFirstName = "Olegs";
+        String personLastName = "Radigins";
+        Date agreementDateFrom = new Date(2000, Calendar.JANUARY,1);
+        Date agreementDateTo = new Date(2000, Calendar.FEBRUARY,1);
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(personFirstName,personLastName,agreementDateFrom,agreementDateTo);
+        TravelCalculatePremiumResponse response = travelCalculatePremiumService.calculatePremium(request);
+
+        assertEquals(response.getAgreementPrice(),new BigDecimal(31));
 
     }
 
