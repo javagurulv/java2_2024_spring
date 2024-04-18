@@ -1,34 +1,24 @@
-package lv.javaguru.travel.insurance.rest;
+package org.javaguru.travel.insurance.rest;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.Temporal;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
-public class TravelCalculatePremiumResponse {
+public class TravelCalculatePremiumRequest {
 
     private String personFirstName;
     private String personLastName;
     private Date agreementDateFrom;
     private Date agreementDateTo;
-    private BigDecimal agreementPrice;
 
+    public TravelCalculatePremiumRequest() { }
 
-
-
-
-    public TravelCalculatePremiumResponse() {}
-
-
-
-    public TravelCalculatePremiumResponse(String personFirstName, String personLastName, Date agreementDateFrom, Date agreementDateTo, BigDecimal agreementPrice) {
+    public TravelCalculatePremiumRequest(String personFirstName,
+                                         String personLastName,
+                                         Date agreementDateFrom,
+                                         Date agreementDateTo) {
         this.personFirstName = personFirstName;
         this.personLastName = personLastName;
         this.agreementDateFrom = agreementDateFrom;
         this.agreementDateTo = agreementDateTo;
-        this.agreementPrice = agreementPrice;
     }
 
     public String getPersonFirstName() {
@@ -61,21 +51,6 @@ public class TravelCalculatePremiumResponse {
 
     public void setAgreementDateTo(Date agreementDateTo) {
         this.agreementDateTo = agreementDateTo;
-    }
-
-    public BigDecimal getAgreementPrice() {
-        return agreementPrice;
-    }
-
-    public void setAgreementPrice(BigDecimal agreementPrice) {
-        this.agreementPrice = agreementPrice;
-    }
-
-
-    public long calculateAgreementPrice(Date date1, Date date2) {
-       long timeDifferent = date1.getTime() - date2.getTime();
-
-        return TimeUnit.DAYS.convert(timeDifferent, TimeUnit.MILLISECONDS);
     }
 
 }
