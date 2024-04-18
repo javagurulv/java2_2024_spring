@@ -10,24 +10,26 @@ import java.util.Calendar;
 import java.util.Date;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class TravelCalculatePremiumServiceImplTest {
-   private DateTimeService dateTimeService;
-   private TravelCalculatePremiumServiceImpl travelCalculatePremiumService;
-   private TravelCalculatePremiumRequest request;
+   @Mock private DateTimeService dateTimeService;
+   @InjectMocks private TravelCalculatePremiumServiceImpl travelCalculatePremiumService;
+   @InjectMocks private TravelCalculatePremiumRequest request;
    private TravelCalculatePremiumResponse response;
 
     @BeforeEach
     public void setUp(){
          request = createReadyMadeRequest();
-         //dateTimeService = new DateTimeService();
-        dateTimeService = mock(DateTimeService.class);
         when(dateTimeService.daysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo())).thenReturn(31L);
-         travelCalculatePremiumService = new TravelCalculatePremiumServiceImpl(dateTimeService);
          response = travelCalculatePremiumService.calculatePremium(request);
 }
 
@@ -63,7 +65,7 @@ class TravelCalculatePremiumServiceImplTest {
 
     }
     private TravelCalculatePremiumRequest createReadyMadeRequest(){
-        var request = new TravelCalculatePremiumRequest();
+        //var request = new TravelCalculatePremiumRequest();
         request.setPersonFirstName("Olegs");
         request.setPersonLastName("Radigins");
         request.setAgreementDateFrom(new Date(2000,0,1));
