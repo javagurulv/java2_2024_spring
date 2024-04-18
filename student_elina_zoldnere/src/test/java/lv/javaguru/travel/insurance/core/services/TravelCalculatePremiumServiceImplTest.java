@@ -1,13 +1,11 @@
 package lv.javaguru.travel.insurance.core.services;
 
 import lv.javaguru.travel.insurance.core.underwriting.TravelCalculatePremiumUnderwriting;
-import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
+import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumCalculationResult;
 import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
+import lv.javaguru.travel.insurance.dto.RiskPremium;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -23,9 +21,8 @@ import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.TimeZone;
+import java.util.List;
 
-@Disabled
 @ExtendWith(MockitoExtension.class)
 class TravelCalculatePremiumServiceImplTest {
 
@@ -33,8 +30,6 @@ class TravelCalculatePremiumServiceImplTest {
     private TravelCalculatePremiumRequestValidator validateMock;
     @Mock
     private TravelCalculatePremiumUnderwriting calculateUnderwritingMock;
-    @Mock
-    private DateTimeUtil dateTimeUtilMock;
 
     @InjectMocks
     private TravelCalculatePremiumServiceImpl calculate;
@@ -48,48 +43,60 @@ class TravelCalculatePremiumServiceImplTest {
         request.setPersonLastName("Bērziņš");
         request.setAgreementDateFrom(new Date(2025 - 1900, 2, 10)); // March 10, 2025
         request.setAgreementDateTo(new Date(2025 - 1900, 2, 11)); // March 11, 2025
+        request.setSelectedRisks(List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION"));
+
+        when(validateMock.validate(request)).thenReturn(emptyList());
+        when(calculateUnderwritingMock.calculateAgreementPremium(request))
+                .thenReturn(new TravelPremiumCalculationResult(BigDecimal.ONE,
+                        List.of(new RiskPremium("TRAVEL_MEDICAL", BigDecimal.ZERO),
+                                new RiskPremium("TRAVEL_CANCELLATION", BigDecimal.ZERO))));
     }
 
     @Test
     public void calculatePremium_ShouldReturnCorrectPersonFirstName() {
         TravelCalculatePremiumResponse response = calculatePremiumTest();
-        assertEquals(response.getPersonFirstName(), request.getPersonFirstName());
+        assertEquals(request.getPersonFirstName(), response.getPersonFirstName());
     }
 
     @Test
     public void calculatePremium_ShouldReturnCorrectPersonLastName() {
         TravelCalculatePremiumResponse response = calculatePremiumTest();
-        assertEquals(response.getPersonLastName(), request.getPersonLastName());
+        assertEquals(request.getPersonLastName(), response.getPersonLastName());
     }
 
     @Test
     public void calculatePremium_ShouldReturnCorrectAgreementDateFrom() {
         TravelCalculatePremiumResponse response = calculatePremiumTest();
-        assertEquals(response.getAgreementDateFrom(), request.getAgreementDateFrom());
+        assertEquals(request.getAgreementDateFrom(), response.getAgreementDateFrom());
     }
 
     @Test
     public void calculatePremium_ShouldReturnCorrectAgreementDateTo() {
         TravelCalculatePremiumResponse response = calculatePremiumTest();
-        assertEquals(response.getAgreementDateTo(), request.getAgreementDateTo());
+        assertEquals(request.getAgreementDateTo(), response.getAgreementDateTo());
     }
 
     @Test
-    public void calculatePremium_ShouldReturnCorrectAgreementDateFormat() throws JsonProcessingException {
-        Date agreementDateFrom = request.getAgreementDateFrom();
-        Date agreementDateTo = request.getAgreementDateTo();
-
-        when(validateMock.validate(request)).thenReturn(emptyList());
-        when(calculateUnderwritingMock.calculateAgreementPremium(request))
-                .thenReturn(BigDecimal.valueOf(1));
+    public void calculatePremium_ShouldReturnCorrectAgreementPremium() {
         TravelCalculatePremiumResponse response = calculatePremiumTest();
+        assertEquals(BigDecimal.ONE, response.getAgreementPremium());
+    }
 
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.setTimeZone(TimeZone.getTimeZone("EET"));
-        String responseToJson = mapper.writeValueAsString(response);
-        String expectedJson = "{\"errors\":null,\"personFirstName\":\"Jānis\",\"personLastName\":\"Bērziņš\"," +
-                "\"agreementDateFrom\":\"2025-03-10\",\"agreementDateTo\":\"2025-03-11\",\"agreementPremium\":1}";
-        assertEquals(expectedJson, responseToJson);
+    @Test
+    public void calculatePremium_ShouldReturnCorrectRiskDetails() {
+        TravelCalculatePremiumResponse response = calculatePremiumTest();
+        List<RiskPremium> riskPremiums = response.getRiskPremiums();
+
+        assertEquals(2, riskPremiums.size());
+
+        RiskPremium medicalRisk = riskPremiums.get(0);
+        assertEquals("TRAVEL_MEDICAL", medicalRisk.getRiskIc());
+        assertEquals(BigDecimal.ZERO, medicalRisk.getPremium());
+
+        RiskPremium cancellationRisk = riskPremiums.get(1);
+        assertEquals("TRAVEL_CANCELLATION", cancellationRisk.getRiskIc());
+        assertEquals(BigDecimal.ZERO, cancellationRisk.getPremium());
+
     }
 
     private TravelCalculatePremiumResponse calculatePremiumTest() {
