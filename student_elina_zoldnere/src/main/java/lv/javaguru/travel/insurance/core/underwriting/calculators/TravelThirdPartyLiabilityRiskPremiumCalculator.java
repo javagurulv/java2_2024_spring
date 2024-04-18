@@ -1,12 +1,13 @@
-package lv.javaguru.travel.insurance.core.underwriting;
+package lv.javaguru.travel.insurance.core.underwriting.calculators;
 
+import lv.javaguru.travel.insurance.core.underwriting.TravelRiskPremiumCalculator;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
 @Component
-class TravelLossBaggageRiskPremiumCalculator implements TravelRiskPremiumCalculator {
+class TravelThirdPartyLiabilityRiskPremiumCalculator implements TravelRiskPremiumCalculator {
 
     @Override
     public BigDecimal calculateRiskPremium(TravelCalculatePremiumRequest request) {
@@ -15,7 +16,7 @@ class TravelLossBaggageRiskPremiumCalculator implements TravelRiskPremiumCalcula
 
     @Override
     public String getRiskIc() {
-        return "TRAVEL_LOSS_BAGGAGE";
+        return "TRAVEL_THIRD_PARTY_LIABILITY";
     }
 
 }
