@@ -12,82 +12,63 @@ import java.util.Date;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class TravelCalculatePremiumServiceImplTest {
    private DateTimeService dateTimeService;
    private TravelCalculatePremiumServiceImpl travelCalculatePremiumService;
+   private TravelCalculatePremiumRequest request;
+   private TravelCalculatePremiumResponse response;
 
     @BeforeEach
     public void setUp(){
-         dateTimeService = new DateTimeService();
+         request = createReadyMadeRequest();
+         //dateTimeService = new DateTimeService();
+        dateTimeService = mock(DateTimeService.class);
+        when(dateTimeService.daysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo())).thenReturn(31L);
          travelCalculatePremiumService = new TravelCalculatePremiumServiceImpl(dateTimeService);
+         response = travelCalculatePremiumService.calculatePremium(request);
 }
 
 
     @Test
     public void shouldTestResponseFirstName() {
-        String personFirstName = "Olegs";
-        String personLastName = "Radigins";
-        Date agreementDateFrom = new Date(2000, Calendar.JANUARY,1);
-        Date agreementDateTo = new Date(2000, Calendar.FEBRUARY,1);
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(personFirstName,personLastName,agreementDateFrom,agreementDateTo);
-        TravelCalculatePremiumResponse response = travelCalculatePremiumService.calculatePremium(request);
-
-        assertEquals(response.getPersonFirstName(), personFirstName);
+        assertEquals(response.getPersonFirstName(), request.getPersonFirstName());
 
     }
 
     @Test
     public void shouldTestResponseLastname() {
-        String personFirstName = "Olegs";
-        String personLastName = "Radigins";
-        Date agreementDateFrom = new Date(2000, Calendar.JANUARY,1);
-        Date agreementDateTo = new Date(2000, Calendar.FEBRUARY,1);
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(personFirstName,personLastName,agreementDateFrom,agreementDateTo);
-        TravelCalculatePremiumResponse response = travelCalculatePremiumService.calculatePremium(request);
-
-        assertEquals(response.getPersonLastName(), personLastName);
+        assertEquals(response.getPersonLastName(), request.getPersonLastName());
 
     }
 
     @Test
     public void shouldTestResponseDateFrom() {
-        String personFirstName = "Olegs";
-        String personLastName = "Radigins";
-        Date agreementDateFrom = new Date(2000, Calendar.JANUARY,1);
-        Date agreementDateTo = new Date(2000, Calendar.FEBRUARY,1);
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(personFirstName,personLastName,agreementDateFrom,agreementDateTo);
-        TravelCalculatePremiumResponse response = travelCalculatePremiumService.calculatePremium(request);
-
-        assertEquals(response.getAgreementDateFrom(),agreementDateFrom);
+        assertEquals(response.getAgreementDateFrom(),request.getAgreementDateFrom());
 
     }
 
     @Test
     public void shouldTestResponseDateTo() {
-        String personFirstName = "Olegs";
-        String personLastName = "Radigins";
-        Date agreementDateFrom = new Date(2000, Calendar.JANUARY,1);
-        Date agreementDateTo = new Date(2000, Calendar.FEBRUARY,1);
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(personFirstName,personLastName,agreementDateFrom,agreementDateTo);
-        TravelCalculatePremiumResponse response = travelCalculatePremiumService.calculatePremium(request);
-
-        assertEquals(response.getAgreementDateTo(),agreementDateTo);
+        assertEquals(response.getAgreementDateTo(),request.getAgreementDateTo());
 
     }
 
 
     @Test
     public void shouldTestResponseAgreementPrice() {
-        String personFirstName = "Olegs";
-        String personLastName = "Radigins";
-        Date agreementDateFrom = new Date(2000, Calendar.JANUARY,1);
-        Date agreementDateTo = new Date(2000, Calendar.FEBRUARY,1);
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest(personFirstName,personLastName,agreementDateFrom,agreementDateTo);
-        TravelCalculatePremiumResponse response = travelCalculatePremiumService.calculatePremium(request);
-
         assertEquals(response.getAgreementPrice(),new BigDecimal(31));
 
+    }
+    private TravelCalculatePremiumRequest createReadyMadeRequest(){
+        var request = new TravelCalculatePremiumRequest();
+        request.setPersonFirstName("Olegs");
+        request.setPersonLastName("Radigins");
+        request.setAgreementDateFrom(new Date(2000,0,1));
+        request.setAgreementDateTo(new Date(2000,1,1));
+        return request;
     }
 
 
