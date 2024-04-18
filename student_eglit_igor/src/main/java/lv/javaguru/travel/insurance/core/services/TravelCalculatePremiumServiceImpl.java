@@ -3,7 +3,7 @@ package lv.javaguru.travel.insurance.core.services;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-import lv.javaguru.travel.insurance.core.underwriting.AgreementPriceCalculatorInterface;
+import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwriting;
 import lv.javaguru.travel.insurance.core.validation.TravelCalculatePremiumRequestValidatorInterface;
 import lv.javaguru.travel.insurance.dto.CoreResponse;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
@@ -19,7 +19,7 @@ import java.math.BigDecimal;
 public class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
     @Autowired
-    private AgreementPriceCalculatorInterface agreementPriceCalculator;
+    private TravelPremiumUnderwriting agreementPriceCalculator;
     @Autowired
     private TravelCalculatePremiumRequestValidatorInterface validate;
 
