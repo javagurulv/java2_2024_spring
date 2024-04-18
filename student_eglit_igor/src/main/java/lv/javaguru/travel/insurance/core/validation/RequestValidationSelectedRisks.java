@@ -18,13 +18,13 @@ class RequestValidationSelectedRisks extends RequestValidationIntImpl {
 
     @Override
     public List<ValidationError> validateList(TravelCalculatePremiumRequest request) {
-        return request.getInsuranceRisks() != null
+        return request.getSelectedRisks() != null
                 ? validateSelectedRisks(request)
                 : List.of();
     }
 
     private List<ValidationError> validateSelectedRisks(TravelCalculatePremiumRequest request) {
-        return request.getInsuranceRisks().stream()
+        return request.getSelectedRisks().stream()
                 .map(this::validateRiskIc)
                 .filter(Optional::isPresent)
                 .map(Optional::get)

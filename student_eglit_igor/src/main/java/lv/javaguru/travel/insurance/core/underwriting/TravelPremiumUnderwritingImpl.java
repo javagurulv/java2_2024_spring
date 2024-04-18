@@ -20,9 +20,9 @@ class TravelPremiumUnderwritingImpl implements TravelPremiumUnderwriting {
     private List<TravelRiskPremiumCalculator> travelRiskPremiumCalculator;
 
     @Override
-    public BigDecimal calculateAgreementPrice(TravelCalculatePremiumRequest request) {
-        return request.getInsuranceRisks().stream()
-                .map(riskIc -> calculatePremiumForRisk(riskIc, request))
+    public BigDecimal calculateAgreementPremium(TravelCalculatePremiumRequest request) {
+        return request.getSelectedRisks().stream()
+                .map(riskIc -> calculatePremiumForRisk(String.valueOf(riskIc), request))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
     }

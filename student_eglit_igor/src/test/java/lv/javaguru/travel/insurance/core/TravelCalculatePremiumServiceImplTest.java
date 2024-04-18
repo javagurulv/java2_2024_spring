@@ -41,7 +41,7 @@ class TravelCalculatePremiumServiceImplTest {
 
     @BeforeEach
     public void setUp() {
-        when(mockAgreementPriceCalculator.calculateAgreementPrice(request))
+        when(mockAgreementPriceCalculator.calculateAgreementPremium(request))
                 .thenReturn(new BigDecimal(2));
         when(validator.validate(request)).thenReturn(null);
         response = service.calculatePremium(request);
@@ -77,7 +77,7 @@ class TravelCalculatePremiumServiceImplTest {
     @Test
     public void shouldCheckResponseAgreementPrice() {
 
-        assertEquals(new BigDecimal(2), response.getAgreementPrice());
+        assertEquals(new BigDecimal(2), response.getAgreementPremium());
     }
 
 }
