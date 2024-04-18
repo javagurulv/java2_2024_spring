@@ -4,10 +4,19 @@
   "personLastName": "Pupkin",
   "agreementDateFrom": "2025-01-01",
   "agreementDateTo": "2025-01-02",
-  "selected_risks":
-  ["TRAVEL_MEDICAL",
-    "TRAVEL_CANCELLATION",
-    "TRAVEL_LOSS_BAGGAGE"
+  "selected_risks": [
+    {
+      "riskIc": "TRAVEL_MEDICAL",
+      "premium": 0
+    },
+    {
+      "riskIc": "TRAVEL_CANCELLATION",
+      "premium": 0
+    },
+    {
+      "riskIc": "TRAVEL_LOSS_BAGGAGE",
+      "premium": 0
+    }
   ],
-  "agreementPrice": 0
+  "agreementPremium": 0
 }

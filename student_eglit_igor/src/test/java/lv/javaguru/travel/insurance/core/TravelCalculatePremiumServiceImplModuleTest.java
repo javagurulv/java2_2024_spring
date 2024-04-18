@@ -46,7 +46,7 @@ class TravelCalculatePremiumServiceImplModuleTest {
                 List.of("risk1", "risk2"));
 
         MockitoAnnotations.openMocks(this);
-        when(mockAgreementPriceCalculator.calculateAgreementPrice(request))
+        when(mockAgreementPriceCalculator.calculateAgreementPremium(request))
                 .thenReturn(new BigDecimal(2));
         when(validate.validate(request)).thenReturn(null);
 
@@ -55,6 +55,6 @@ class TravelCalculatePremiumServiceImplModuleTest {
     @Test
     public void shouldCheckResponseAgreementPrice() {
         TravelCalculatePremiumResponse response = travelCalculatePremiumServiceImpl.calculatePremium(request);
-        assertEquals(new BigDecimal(2), response.getAgreementPrice());
+        assertEquals(new BigDecimal(2), response.getAgreementPremium());
     }
 }

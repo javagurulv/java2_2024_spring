@@ -14,7 +14,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-class RequestValidationEmptySelectedRisksTest {
+class RequestValidationEmptyRiskPremiumTest {
     @Mock
     private ValidationErrorFactory validationErrorFactory;
     @InjectMocks
@@ -29,7 +29,7 @@ class RequestValidationEmptySelectedRisksTest {
     }
     @Test
     void shouldReturnErrorWhenInsuranceRisksIsNull(){
-        request.setInsuranceRisks(null);
+        request.setSelectedRisks(null);
         Optional<ValidationError> error = requestValidationEmptySelectedRisks.validateReq(request);
         assertTrue(error.isPresent());
         assertEquals("ERROR_CODE_8", error.get().getErrorCode());
@@ -37,7 +37,7 @@ class RequestValidationEmptySelectedRisksTest {
     }
     @Test
     void shouldReturnErrorWhenInsuranceRisksIsEmpty(){
-        request.setInsuranceRisks(List.of());
+        request.setSelectedRisks(List.of());
         Optional<ValidationError> error = requestValidationEmptySelectedRisks.validateReq(request);
         assertTrue(error.isPresent());
         assertEquals("ERROR_CODE_8", error.get().getErrorCode());

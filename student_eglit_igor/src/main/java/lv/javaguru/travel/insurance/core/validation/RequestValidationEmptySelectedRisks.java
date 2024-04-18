@@ -19,7 +19,7 @@ class RequestValidationEmptySelectedRisks extends RequestValidationIntImpl {
     @Override
     public Optional<ValidationError> validateReq(TravelCalculatePremiumRequest request) {
         String errorCode = "ERROR_CODE_8";
-        return (request.getInsuranceRisks() == null || request.getInsuranceRisks().isEmpty())
+        return (request.getSelectedRisks() == null || request.getSelectedRisks().isEmpty())
                 ? Optional.of(validationErrorFactory.buildError(errorCode))
                 : Optional.empty();
     }
