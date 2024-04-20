@@ -178,11 +178,8 @@ public class TravelCalculatePremiumControllerTest {
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andReturn();
-
         String responseBodyContent = result.getResponse().getContentAsString();
-
         String jsonResponse = jsonFileReader.readJsonFromFile(jsonResponseFilePath);
-
         assertJson(responseBodyContent)
                 .where()
                 .keysInAnyOrder()

@@ -1,16 +1,16 @@
 {
   "errors": [
     {
-      "field": "agreementDateFrom",
-      "message": "Invalid date !"
+      "errorCode": "agreementDateFrom",
+      "description": "Invalid date !"
     },
     {
-      "field": "agreementDateTo",
-      "message": "Invalid date !"
+      "errorCode": "agreementDateTo",
+      "description": "Invalid date !"
     },
     {
-      "field": "agreementDateTo",
-      "message": "Invalid date !"
+      "errorCode": "agreementDateTo",
+      "description": "Invalid date !"
     }
   ],
   "personFirstName": null,
