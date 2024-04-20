@@ -4,15 +4,15 @@
   "personLastName" : "Bērziņš",
   "agreementDateFrom" : "2025-03-10",
   "agreementDateTo" : "2025-03-11",
-  "agreementPremium": 0,
+  "agreementPremium": 0.00,
   "riskPremiums" : [
     {
       "riskIc" : "TRAVEL_CANCELLATION",
-      "premium" : 0
+      "premium" : 0.00
     },
     {
       "riskIc" : "TRAVEL_LOSS_BAGGAGE",
-      "premium" : 0
+      "premium" : 0.00
     }
   ],
   "country" : null

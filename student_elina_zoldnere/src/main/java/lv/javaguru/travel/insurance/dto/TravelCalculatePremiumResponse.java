@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lv.javaguru.travel.insurance.core.util.BigDecimalSerializer;
 
 @Getter
 @Setter
@@ -26,6 +28,7 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date agreementDateTo;
 
+    @JsonSerialize(using = BigDecimalSerializer.class)
     private BigDecimal agreementPremium;
 
     private List<RiskPremium> riskPremiums;
