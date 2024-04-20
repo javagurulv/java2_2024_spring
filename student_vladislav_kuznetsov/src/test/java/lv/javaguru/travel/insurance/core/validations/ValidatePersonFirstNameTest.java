@@ -20,8 +20,8 @@ public class ValidatePersonFirstNameTest {
         when(request.getPersonFirstName()).thenReturn("");
         Optional<ValidationError> error = validate.execute(request);
         assertTrue(error.isPresent());
-        assertEquals(error.get().getField(), "personFirstName");
-        assertEquals(error.get().getMessage(),"Must not be empty!");
+        assertEquals(error.get().getErrorCode(), "personFirstName");
+        assertEquals(error.get().getDescription(),"Must not be empty!");
     }
     @Test
     public void checkValidatorErrorResponseWhenRequestFirstNameIsNull(){
@@ -29,8 +29,8 @@ public class ValidatePersonFirstNameTest {
         when(request.getPersonFirstName()).thenReturn(null);
         Optional<ValidationError> error = validate.execute(request);
         assertTrue(error.isPresent());
-        assertEquals(error.get().getField(), "personFirstName");
-        assertEquals(error.get().getMessage(),"Must not be empty!");
+        assertEquals(error.get().getErrorCode(), "personFirstName");
+        assertEquals(error.get().getDescription(),"Must not be empty!");
     }
 
     @Test

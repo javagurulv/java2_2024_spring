@@ -21,8 +21,8 @@ public class ValidateAgreementDateFromTest {
         NullPointerException exception = new NullPointerException();
         Optional<ValidationError> error = validate.execute(request);
         assertNull(exception.getMessage());
-        assertEquals(error.get().getField(), "agreementDateFrom");
-        assertEquals(error.get().getMessage(),"Must not be empty!");
+        assertEquals(error.get().getErrorCode(), "agreementDateFrom");
+        assertEquals(error.get().getDescription(),"Must not be empty!");
     }
 
     @Test

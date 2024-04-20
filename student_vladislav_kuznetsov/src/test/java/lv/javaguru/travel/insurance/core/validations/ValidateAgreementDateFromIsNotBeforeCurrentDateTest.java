@@ -17,8 +17,8 @@ public class ValidateAgreementDateFromIsNotBeforeCurrentDateTest {
         when(request.getAgreementDateFrom()).thenReturn(new Date(0));
         Optional<ValidationError> error = validate.execute(request);
         assertTrue(error.isPresent());
-        assertEquals(error.get().getField(), "agreementDateFrom");
-        assertEquals(error.get().getMessage(),"Invalid date !");
+        assertEquals(error.get().getErrorCode(), "agreementDateFrom");
+        assertEquals(error.get().getDescription(),"Invalid date !");
     }
 
     @Test

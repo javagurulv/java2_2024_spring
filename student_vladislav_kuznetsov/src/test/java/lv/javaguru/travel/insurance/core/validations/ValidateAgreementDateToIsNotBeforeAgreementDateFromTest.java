@@ -23,8 +23,8 @@ public class ValidateAgreementDateToIsNotBeforeAgreementDateFromTest {
         Optional<ValidationError> error = validate.execute(request);
         assertNull(exception.getMessage());
         assertTrue(error.isPresent());
-        assertEquals(error.get().getField(), "agreementDateTo and agreementDateTo");
-        assertEquals(error.get().getMessage(),"Must not be empty!");
+        assertEquals(error.get().getErrorCode(), "agreementDateTo and agreementDateTo");
+        assertEquals(error.get().getDescription(),"Must not be empty!");
     }
 
     @Test
@@ -35,8 +35,8 @@ public class ValidateAgreementDateToIsNotBeforeAgreementDateFromTest {
         when(request.getAgreementDateTo()).thenReturn(date);
         Optional<ValidationError> error = validate.execute(request);
         assertTrue(error.isPresent());
-        assertEquals(error.get().getField(), "agreementDateTo");
-        assertEquals(error.get().getMessage(),"Invalid date !");
+        assertEquals(error.get().getErrorCode(), "agreementDateTo");
+        assertEquals(error.get().getDescription(),"Invalid date !");
     }
 
     @Test
@@ -46,8 +46,8 @@ public class ValidateAgreementDateToIsNotBeforeAgreementDateFromTest {
         when(request.getAgreementDateTo()).thenReturn(new Date());
         Optional<ValidationError> error = validate.execute(request);
         assertTrue(error.isPresent());
-        assertEquals(error.get().getField(), "agreementDateTo");
-        assertEquals(error.get().getMessage(),"Invalid date !");
+        assertEquals(error.get().getErrorCode(), "agreementDateTo");
+        assertEquals(error.get().getDescription(),"Invalid date !");
     }
 
 }
