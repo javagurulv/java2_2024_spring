@@ -8,3 +8,11 @@ VALUES ((SELECT id FROM classifiers WHERE title = 'RISK_TYPE'), 'TRAVEL_MEDICAL'
        ((SELECT id FROM classifiers WHERE title = 'RISK_TYPE'), 'TRAVEL_THIRD_PARTY_LIABILITY', 'travel policy third party liability risk'),
        ((SELECT id FROM classifiers WHERE title = 'RISK_TYPE'), 'TRAVEL_EVACUATION', 'travel policy evacuation risk'),
        ((SELECT id FROM classifiers WHERE title = 'RISK_TYPE'), 'TRAVEL_SPORT_ACTIVITIES', 'travel policy sport activities risk');
+
+ INSERT INTO classifiers (title, description)
+ VALUES ('COUNTRY', 'travel policy country classifier');
+
+ INSERT INTO classifier_values (classifier_id, ic, description)
+ VALUES((SELECT id FROM classifiers WHERE title = 'COUNTRY'), 'LATVIA', 'Latvia'),
+      ((SELECT id FROM classifiers WHERE title = 'COUNTRY'), 'SPAIN', 'Spain'),
+      ((SELECT id FROM classifiers WHERE title = 'COUNTRY'), 'JAPAN', 'Japan');
