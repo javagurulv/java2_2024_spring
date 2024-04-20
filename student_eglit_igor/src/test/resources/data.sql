@@ -69,5 +69,41 @@ SELECT
 	cl.id,
     'TRAVEL_SPORT_ACTIVITIES',
     'Travel policy sport activities risk type'
- FROM classifiers as cl
- WHERE cl.title = 'RISK_TYPE';
+    FROM classifiers as cl
+    WHERE cl.title = 'RISK_TYPE';
+
+INSERT INTO classifiers(title, description)
+    VALUES('COUNTRY', 'Country classifier');
+
+INSERT INTO classifier_values(
+    classifier_id,
+    ic,
+    description)
+    SELECT
+        cl.id,
+        'LATVIA',
+        'Latvia'
+    FROM classifiers as cl
+    WHERE cl.title = 'COUNTRY';
+
+INSERT INTO classifier_values(
+    classifier_id,
+    ic,
+    description)
+    SELECT
+        cl.id,
+        'SPAIN',
+        'Spain'
+    FROM classifiers as cl
+    WHERE cl.title = 'COUNTRY';
+
+INSERT INTO classifier_values(
+    classifier_id,
+    ic,
+    description)
+    SELECT
+        cl.id,
+        'JAPAN',
+        'Japan'
+    FROM classifiers as cl
+    WHERE cl.title= 'COUNTRY';
