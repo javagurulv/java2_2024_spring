@@ -1,8 +1,5 @@
 package lv.javaguru.travel.insurance.rest;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -23,7 +20,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
 
-@Disabled
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -33,13 +29,6 @@ public class TravelCalculatePremiumControllerTest {
     private MockMvc mockMvc;
     @Autowired
     private JsonFileReader reader;
-
-    private ObjectMapper mapper;
-
-    @BeforeEach
-    public void setUp() {
-        mapper = new ObjectMapper();
-    }
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("testNameAndFileNameProvider")
@@ -91,6 +80,18 @@ public class TravelCalculatePremiumControllerTest {
                         "ControllerTest_1.10_Request_selectedRisks_empty.json",
                         "ControllerTest_1.10_Response_selectedRisks_empty.json"),
 
+                Arguments.of("1.11 country missing when TRAVEL_MEDICAL risk selected",
+                        "ControllerTest_1.11_Request_country_missing_when_TRAVEL_MEDICAL_selected.json",
+                        "ControllerTest_1.11_Response_country_missing_when_TRAVEL_MEDICAL_selected.json"),
+
+                Arguments.of("1.12 country blank when TRAVEL_MEDICAL risk selected",
+                        "ControllerTest_1.12_Request_country_blank_when_TRAVEL_MEDICAL_selected.json",
+                        "ControllerTest_1.12_Response_country_blank_when_TRAVEL_MEDICAL_selected.json"),
+
+                Arguments.of("1.13 country missing when TRAVEL_MEDICAL risk not selected",
+                        "ControllerTest_1.13_Request_country_missing_when_TRAVEL_MEDICAL_not_selected.json",
+                        "ControllerTest_1.13_Response_country_missing_when_TRAVEL_MEDICAL_not_selected.json"),
+
                 Arguments.of("1.99 all fields missing or empty or blank",
                         "ControllerTest_1.99_Request_all_fields_missing_or_empty_or_blank.json",
                         "ControllerTest_1.99_Response_all_fields_missing_or_empty_or_blank.json"),
@@ -114,6 +115,10 @@ public class TravelCalculatePremiumControllerTest {
                 Arguments.of("3.1 selectedRisks not supported",
                         "ControllerTest_3.1_Request_selectedRisks_not_supported.json",
                         "ControllerTest_3.1_Response_selectedRisks_not_supported.json"),
+
+                Arguments.of("3.2 country not supported",
+                        "ControllerTest_3.2_Request_country_not_supported.json",
+                        "ControllerTest_3.2_Response_country_not_supported.json"),
 
                 Arguments.of("9.1 all fields are present and valid",
                         "ControllerTest_9.1_Request_all_fields_present_and_valid.json",

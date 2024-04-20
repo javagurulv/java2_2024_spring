@@ -20,6 +20,7 @@ public class ValidateHelper {
         Mockito.lenient().when(requestMock.getAgreementDateTo()).thenReturn(new Date(125, 2, 11));
         Mockito.lenient().when(requestMock.getSelectedRisks())
                 .thenReturn(Arrays.asList("TRAVEL_MEDICAL","TRAVEL_CANCELLATION","TRAVEL_LOSS_BAGGAGE"));
+        Mockito.lenient().when(requestMock.getCountry()).thenReturn("SPAIN");
     }
 
     public Date midnightToday() { // today 00:00:00 EET

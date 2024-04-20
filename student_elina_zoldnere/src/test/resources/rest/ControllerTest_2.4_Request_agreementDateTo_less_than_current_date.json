@@ -3,5 +3,6 @@
   "personLastName" : "Bērziņš",
   "agreementDateFrom" : "2025-03-10",
   "agreementDateTo" : "2024-03-11",
-  "selectedRisks" : ["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
+  "selectedRisks" : ["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"],
+  "country" : "SPAIN"
 }

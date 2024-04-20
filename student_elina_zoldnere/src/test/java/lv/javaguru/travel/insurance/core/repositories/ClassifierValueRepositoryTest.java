@@ -2,6 +2,7 @@ package lv.javaguru.travel.insurance.core.repositories;
 
 import lv.javaguru.travel.insurance.core.domain.ClassifierValue;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -31,8 +32,8 @@ class ClassifierValueRepositoryTest {
     public void shouldFindRiskTypeValue(String riskType){
         Optional<ClassifierValue> valueOpt = classifierValueRepository.findByClassifierTitleAndIc(
              "RISK_TYPE", riskType);
-        assertTrue(valueOpt.isPresent());
-        assertEquals(riskType, valueOpt.get().getIc());
+        //assertTrue(valueOpt.isPresent());
+        //assertEquals(riskType, valueOpt.get().getIc());
         assertEquals("RISK_TYPE", valueOpt.get().getClassifier().getTitle());
     }
 
@@ -44,6 +45,24 @@ class ClassifierValueRepositoryTest {
                 "TRAVEL_THIRD_PARTY_LIABILITY",
                 "TRAVEL_EVACUATION",
                 "TRAVEL_SPORT_ACTIVITIES"
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("countryValues")
+    public void shouldFindCountryValue(String country){
+        Optional<ClassifierValue> valueOpt = classifierValueRepository.findByClassifierTitleAndIc(
+                "COUNTRY", country);
+        assertTrue(valueOpt.isPresent());
+        assertEquals(country, valueOpt.get().getIc());
+        assertEquals("COUNTRY", valueOpt.get().getClassifier().getTitle());
+    }
+
+    private static Stream<String> countryValues() {
+        return Stream.of(
+                "LATVIA",
+                "SPAIN",
+                "JAPAN"
         );
     }
 

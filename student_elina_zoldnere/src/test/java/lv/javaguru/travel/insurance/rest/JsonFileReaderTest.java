@@ -17,7 +17,8 @@ public class JsonFileReaderTest {
                 "personLastName" : "Bērziņš",
                 "agreementDateFrom" : "2025-03-10",
                 "agreementDateTo" : "2025-03-11",
-                "selectedRisks" : ["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
+                "selectedRisks" : ["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"],
+                "country" : "SPAIN"
                 }""";
 
         String actualJson = reader.readJsonFromFile("ControllerTest_1.1_Request_personFirstName_missing.json");
