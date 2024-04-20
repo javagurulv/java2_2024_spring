@@ -30,6 +30,8 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
 
     private List<RiskPremium> riskPremiums;
 
+    private String country;
+
     public TravelCalculatePremiumResponse(List<ValidationError> errors) {
         super(errors);
     }

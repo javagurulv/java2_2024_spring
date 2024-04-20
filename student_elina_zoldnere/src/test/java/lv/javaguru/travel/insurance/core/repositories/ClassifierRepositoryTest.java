@@ -2,6 +2,7 @@ package lv.javaguru.travel.insurance.core.repositories;
 
 import lv.javaguru.travel.insurance.core.domain.Classifier;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,13 @@ class ClassifierRepositoryTest {
         Optional<Classifier> riskTypeOpt = classifierRepository.findByTitle("RISK_TYPE");
         assertTrue(riskTypeOpt.isPresent());
         assertEquals("RISK_TYPE", riskTypeOpt.get().getTitle());
+    }
+
+    @Test
+    public void shouldFindCountryClassifier() {
+        Optional<Classifier> riskTypeOpt = classifierRepository.findByTitle("COUNTRY");
+        assertTrue(riskTypeOpt.isPresent());
+        assertEquals("COUNTRY", riskTypeOpt.get().getTitle());
     }
 
     @Test

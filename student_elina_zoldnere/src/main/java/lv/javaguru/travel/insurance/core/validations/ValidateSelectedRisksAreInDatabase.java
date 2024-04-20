@@ -8,23 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
-class ValidateSelectedRisks extends RequestFieldValidationImpl {
+class ValidateSelectedRisksAreInDatabase extends RequestFieldValidationImpl {
 
     @Autowired
     private ClassifierValueRepository classifierValueRepository;
     @Autowired
     private ValidationErrorFactory validationErrorFactory;
-
-    @Override
-    public Optional<ValidationError> validateSingle(TravelCalculatePremiumRequest request) {
-        return (request.getSelectedRisks() == null || request.getSelectedRisks().isEmpty())
-                ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_5"))
-                : Optional.empty();
-    }
 
     @Override
     public List<ValidationError> validateList(TravelCalculatePremiumRequest request) {
@@ -35,12 +27,12 @@ class ValidateSelectedRisks extends RequestFieldValidationImpl {
 
     private List<ValidationError> validateRisks(TravelCalculatePremiumRequest request) {
         return request.getSelectedRisks().stream()
-                .filter(risk -> !existsInDatabase(risk))
+                .filter(risk -> !isInDatabase(risk))
                 .map(this::buildValidationError)
                 .collect(Collectors.toList());
     }
 
-    private boolean existsInDatabase(String riskIc) {
+    private boolean isInDatabase(String riskIc) {
         return classifierValueRepository.findByClassifierTitleAndIc("RISK_TYPE", riskIc).isPresent();
     }
 

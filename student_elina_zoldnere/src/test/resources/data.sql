@@ -1,73 +1,18 @@
-INSERT INTO classifiers(title, description)
-VALUES('RISK_TYPE', 'Risk type classifier');
+INSERT INTO classifiers (title, description)
+VALUES ('RISK_TYPE', 't.p. risk type');
 
-INSERT INTO classifier_values(
-	classifier_id,
-    ic,
-    description)
-SELECT
-	cl.id,
-    'TRAVEL_MEDICAL',
-    'Travel policy medical risk type'
- FROM classifiers as cl
- WHERE cl.title = 'RISK_TYPE';
+INSERT INTO classifier_values (classifier_id, ic, description)
+VALUES ((SELECT id FROM classifiers WHERE title = 'RISK_TYPE'), 'TRAVEL_MEDICAL', 't.p. medical risk'),
+       ((SELECT id FROM classifiers WHERE title = 'RISK_TYPE'), 'TRAVEL_CANCELLATION', 't.p. trip cancellation risk'),
+       ((SELECT id FROM classifiers WHERE title = 'RISK_TYPE'), 'TRAVEL_LOSS_BAGGAGE', 't.p. baggage loss risk'),
+       ((SELECT id FROM classifiers WHERE title = 'RISK_TYPE'), 'TRAVEL_THIRD_PARTY_LIABILITY', 't.p. third party liability risk'),
+       ((SELECT id FROM classifiers WHERE title = 'RISK_TYPE'), 'TRAVEL_EVACUATION', 't.p. evacuation or repatriation risk'),
+       ((SELECT id FROM classifiers WHERE title = 'RISK_TYPE'), 'TRAVEL_SPORT_ACTIVITIES', 't.p. sport activities');
 
+INSERT INTO  classifiers (title, description)
+VALUES ('COUNTRY', 'country');
 
-INSERT INTO classifier_values(
-	classifier_id,
-    ic,
-    description)
-SELECT
-	cl.id,
-    'TRAVEL_CANCELLATION',
-    'Travel policy trip cancellation risk type'
- FROM classifiers as cl
- WHERE cl.title = 'RISK_TYPE';
-
-
-INSERT INTO classifier_values(
-	classifier_id,
-    ic,
-    description)
-SELECT
-	cl.id,
-    'TRAVEL_LOSS_BAGGAGE',
-    'Travel policy baggage lose risk type'
- FROM classifiers as cl
- WHERE cl.title = 'RISK_TYPE';
-
-
-INSERT INTO classifier_values(
-	classifier_id,
-    ic,
-    description)
-SELECT
-	cl.id,
-    'TRAVEL_THIRD_PARTY_LIABILITY',
-    'Travel policy third party liability risk type'
- FROM classifiers as cl
- WHERE cl.title = 'RISK_TYPE';
-
-
-INSERT INTO classifier_values(
-	classifier_id,
-    ic,
-    description)
-SELECT
-	cl.id,
-    'TRAVEL_EVACUATION',
-    'Travel policy evacuation risk type'
- FROM classifiers as cl
- WHERE cl.title = 'RISK_TYPE';
-
-
-INSERT INTO classifier_values(
-	classifier_id,
-    ic,
-    description)
-SELECT
-	cl.id,
-    'TRAVEL_SPORT_ACTIVITIES',
-    'Travel policy sport activities risk type'
- FROM classifiers as cl
- WHERE cl.title = 'RISK_TYPE';
+INSERT INTO classifier_values (classifier_id, ic, description)
+VALUES ((SELECT id FROM classifiers WHERE title = 'COUNTRY'), 'LATVIA', 'country Latvia'),
+        ((SELECT id FROM classifiers WHERE title = 'COUNTRY'), 'SPAIN', 'country Spain'),
+        ((SELECT id FROM classifiers WHERE title = 'COUNTRY'), 'JAPAN', 'country Japan');

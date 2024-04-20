@@ -4,12 +4,8 @@
   "personLastName" : "Bērziņš",
   "agreementDateFrom" : "2025-03-10",
   "agreementDateTo" : "2025-03-11",
-  "agreementPremium": 1,
+  "agreementPremium": 0,
   "riskPremiums" : [
-    {
-      "riskIc" : "TRAVEL_MEDICAL",
-      "premium" : 1
-    },
     {
       "riskIc" : "TRAVEL_CANCELLATION",
       "premium" : 0
@@ -19,5 +15,5 @@
       "premium" : 0
     }
   ],
-  "country" : "SPAIN"
+  "country" : null
 }
