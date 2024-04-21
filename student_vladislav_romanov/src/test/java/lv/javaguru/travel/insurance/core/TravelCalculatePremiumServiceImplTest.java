@@ -35,8 +35,9 @@ class TravelCalculatePremiumServiceImplTest {
     void setUp() {
         LocalDate dateFrom = LocalDate.of(2030, 3, 8);
         LocalDate dateTo = LocalDate.of(2030, 3, 18);
+        List<String> selectedRisks = List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE");
 
-        travelCalculatePremiumRequestData = new TravelCalculatePremiumRequest("Vladislav", "Romanov", dateFrom, dateTo);
+        travelCalculatePremiumRequestData = new TravelCalculatePremiumRequest("Vladislav", "Romanov", dateFrom, dateTo, selectedRisks);
     }
 
     @Test

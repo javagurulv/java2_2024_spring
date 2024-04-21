@@ -9,6 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -24,7 +25,7 @@ public class TravelPremiumTest {
 
     @Test
     void travelPremiumTest() {
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Vladislav", "Romanov", LocalDate.of(2030, 3, 8), LocalDate.of(2030, 3, 18));
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Vladislav", "Romanov", LocalDate.of(2030, 3, 8), LocalDate.of(2030, 3, 18), List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"));
 
         doReturn(10).when(dateTimeServiceMock).calculateTravelPeriod(LocalDate.of(2030, 3, 8), LocalDate.of(2030, 3, 18));
 
