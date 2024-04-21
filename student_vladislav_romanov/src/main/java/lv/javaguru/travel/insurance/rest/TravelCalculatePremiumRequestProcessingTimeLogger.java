@@ -12,4 +12,5 @@ public class TravelCalculatePremiumRequestProcessingTimeLogger {
     void log(long time) {
         logger.info("Request processing time (ms): " + time);
     }
+
 }
