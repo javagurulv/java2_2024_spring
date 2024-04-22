@@ -136,10 +136,37 @@ public class TravelCalculatePremiumControllerJsonTest {
         JSONAssert.assertEquals(expectedJson, actualJson, false);
     }
 
+    @Test
+    public void shouldReturnErrorMessageForNotSupportedSelected_Risks() throws Exception {
+        var actualJson = getActualJson("rest/selectedRisksNotSupportedRequest.json");
+        var expectedJson = getExpectedJson("rest/selectedRisksNotSupportedResponse.json");
+        JSONAssert.assertEquals(expectedJson, actualJson, false);
+    }
+
+    @Test
+    public void shouldReturnErrorMessageForEmptyCountryFieldAndTRAVEL_MEDICAL() throws Exception {
+        var actualJson = getActualJson("rest/countryIsEmpty_travel_medicalRequest.json");
+        var expectedJson = getExpectedJson("rest/countryIsEmpty_travel_medicalResponse.json");
+        JSONAssert.assertEquals(expectedJson, actualJson, false);
+    }
+    @Test
+    public void shouldReturnErrorMessageForNullCountryFieldAndTRAVEL_MEDICAL() throws Exception {
+        var actualJson = getActualJson("rest/countryIsNull_travel_medicalRequest.json");
+        var expectedJson = getExpectedJson("rest/countryIsNull_travel_medicalResponse.json");
+        JSONAssert.assertEquals(expectedJson, actualJson, false);
+    }
+    @Test
+    public void shouldReturnErrorMessageThenCountryIsNotSupported() throws Exception {
+        var actualJson = getActualJson("rest/countryNotSupportedRequest.json");
+        var expectedJson = getExpectedJson("rest/countryNotSupportedResponse.json");
+        JSONAssert.assertEquals(expectedJson, actualJson, false);
+    }
+
     private String getActualJson(String filePath) throws Exception {
         return mockMvc.perform(post("/insurance/travel/")
                         .content(jsonFileReader.readJsonFromFile(filePath))
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))// Устанавливаем заголовок Content-Type для запроса в виде JSON данных
+                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
+                // Устанавливаем заголовок Content-Type для запроса в виде JSON данных
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
     }

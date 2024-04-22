@@ -3,5 +3,6 @@
   "personLastName" : "Pupkin",
   "agreementDateFrom" : "2025-01-01",
   "agreementDateTo" : "2025-01-02",
-  "selected_risks": null
-}
+  "country" : "LATVIA",
+  "selected_risks": []
+  }

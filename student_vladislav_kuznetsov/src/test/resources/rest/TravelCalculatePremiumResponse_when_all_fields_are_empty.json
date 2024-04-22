@@ -1,28 +1,24 @@
 {
   "errors": [
     {
-      "errorCode": "selectedRisks",
-      "description": "Must not be empty!"
+      "errorCode": "ERROR_CODE_8",
+      "description": "Field selected risks must not be empty!"
     },
     {
-      "errorCode": "agreementDateFrom",
-      "description": "Must not be empty!"
+      "errorCode": "ERROR_CODE_3",
+      "description": "Field agreementDateFrom must not be empty!"
     },
     {
-      "errorCode": "agreementDateTo",
-      "description": "Must not be empty!"
+      "errorCode": "ERROR_CODE_5",
+      "description": "Field agreementDateTo must not be empty!"
     },
     {
-      "errorCode": "agreementDateTo and agreementDateTo",
-      "description": "Must not be empty!"
+      "errorCode": "ERROR_CODE_1",
+      "description": "Field personFirstName is empty!"
     },
     {
-      "errorCode": "personFirstName",
-      "description": "Must not be empty!"
-    },
-    {
-      "errorCode": "personLastName",
-      "description": "Must not be empty!"
+      "errorCode": "ERROR_CODE_2",
+      "description": "Field personLastName is empty!"
     }
   ],
   "personFirstName": null,

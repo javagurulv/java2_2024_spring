@@ -3,40 +3,50 @@ package lv.javaguru.travel.insurance.core.validations;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
 import java.util.Optional;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
+@ExtendWith(MockitoExtension.class)
 public class ValidatePersonLastNameTest {
-    ValidatePersonLastName validate = new ValidatePersonLastName();
+    @Mock
+    private ValidationErrorFactory errorFactory;
+    @InjectMocks
+    private ValidatePersonLastName validation;
 
     @Test
     public void checkValidatorErrorResponseWhenRequestLastNameIsEmpty(){
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonLastName()).thenReturn("");
-        Optional<ValidationError> error = validate.execute(request);
+        ValidationError validationError = mock(ValidationError.class);
+        when(errorFactory.buildError("ERROR_CODE_2")).thenReturn(validationError);
+        Optional<ValidationError> error = validation.execute(request);
         assertTrue(error.isPresent());
-        assertEquals(error.get().getErrorCode(), "personLastName");
-        assertEquals(error.get().getDescription(),"Must not be empty!");
+        assertSame(error.get(), validationError);
     }
 
     @Test
     public void checkValidatorErrorResponseWhenRequestLastNameIsNull(){
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonLastName()).thenReturn(null);
-        Optional<ValidationError> error = validate.execute(request);
+        ValidationError validationError = mock(ValidationError.class);
+        when(errorFactory.buildError("ERROR_CODE_2")).thenReturn(validationError);
+        Optional<ValidationError> error = validation.execute(request);
         assertTrue(error.isPresent());
-        assertEquals(error.get().getErrorCode(), "personLastName");
-        assertEquals(error.get().getDescription(),"Must not be empty!");
+        assertSame(error.get(), validationError);
     }
 
     @Test
     public void checkValidatorErrorResponseWhenRequestLastNameIsCorrect(){
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonLastName()).thenReturn("Kuznetsov");
-        Optional<ValidationError> error = validate.execute(request);
+        Optional<ValidationError> error = validation.execute(request);
         assertTrue(error.isEmpty());
     }
 }

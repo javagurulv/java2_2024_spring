@@ -1,16 +1,12 @@
 {
   "errors": [
     {
-      "errorCode": "agreementDateFrom",
-      "description": "Must not be empty!"
+      "errorCode": "ERROR_CODE_3",
+      "description": "Field agreementDateFrom must not be empty!"
     },
     {
-      "errorCode": "agreementDateTo",
-      "description": "Must not be empty!"
-    },
-    {
-      "errorCode": "agreementDateTo and agreementDateTo",
-      "description": "Must not be empty!"
+      "errorCode": "ERROR_CODE_5",
+      "description": "Field agreementDateTo must not be empty!"
     }
   ],
   "personFirstName": null,

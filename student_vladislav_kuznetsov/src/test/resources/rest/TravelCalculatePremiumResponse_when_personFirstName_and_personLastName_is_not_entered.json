@@ -1,12 +1,12 @@
 {
   "errors": [
     {
-      "errorCode": "personFirstName",
-      "description": "Must not be empty!"
+      "errorCode": "ERROR_CODE_1",
+      "description": "Field personFirstName is empty!"
     },
     {
-      "errorCode": "personLastName",
-      "description": "Must not be empty!"
+      "errorCode": "ERROR_CODE_2",
+      "description": "Field personLastName is empty!"
     }
   ],
   "personFirstName": null,

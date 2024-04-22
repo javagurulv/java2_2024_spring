@@ -1,4 +1,4 @@
-package org.javaguru.travel.insurance.rest;
+package org.javaguru.travel.insurance.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

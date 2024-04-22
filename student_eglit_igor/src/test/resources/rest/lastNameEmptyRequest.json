@@ -3,6 +3,7 @@
   "personLastName" : "",
   "agreementDateFrom" : "2025-01-01",
   "agreementDateTo" : "2025-01-02",
+  "country" : "LATVIA",
   "selected_risks":
   ["TRAVEL_MEDICAL",
     "TRAVEL_CANCELLATION",

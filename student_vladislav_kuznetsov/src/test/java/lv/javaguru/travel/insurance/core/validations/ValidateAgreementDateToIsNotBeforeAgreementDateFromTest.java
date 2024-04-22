@@ -3,6 +3,10 @@ package lv.javaguru.travel.insurance.core.validations;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Date;
 import java.util.Optional;
@@ -10,22 +14,12 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
+@ExtendWith(MockitoExtension.class)
 public class ValidateAgreementDateToIsNotBeforeAgreementDateFromTest {
-    ValidateAgreementDateToIsNotBeforeAgreementDateFrom validate = new ValidateAgreementDateToIsNotBeforeAgreementDateFrom();
-
-    @Test
-    public void checkThatErrorIsPresentWhenAgreementDateFromAndAgreementDateToIsNull(){
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getAgreementDateFrom()).thenReturn(null);
-        when(request.getAgreementDateTo()).thenReturn(null);
-        NullPointerException exception = new NullPointerException();
-        Optional<ValidationError> error = validate.execute(request);
-        assertNull(exception.getMessage());
-        assertTrue(error.isPresent());
-        assertEquals(error.get().getErrorCode(), "agreementDateTo and agreementDateTo");
-        assertEquals(error.get().getDescription(),"Must not be empty!");
-    }
+    @Mock
+    private ValidationErrorFactory errorFactory;
+    @InjectMocks
+    private ValidateAgreementDateToIsNotBeforeAgreementDateFrom validation;
 
     @Test
     public void checkIfErrorIsPresentWhenAgreementDateToEqualsAgreementDateFrom(){
@@ -33,10 +27,11 @@ public class ValidateAgreementDateToIsNotBeforeAgreementDateFromTest {
         Date date = new Date();
         when(request.getAgreementDateFrom()).thenReturn(date);
         when(request.getAgreementDateTo()).thenReturn(date);
-        Optional<ValidationError> error = validate.execute(request);
+        ValidationError validationError = mock(ValidationError.class);
+        when(errorFactory.buildError("ERROR_CODE_6")).thenReturn(validationError);
+        Optional<ValidationError> error = validation.execute(request);
         assertTrue(error.isPresent());
-        assertEquals(error.get().getErrorCode(), "agreementDateTo");
-        assertEquals(error.get().getDescription(),"Invalid date !");
+        assertSame(error.get(), validationError);
     }
 
     @Test
@@ -44,10 +39,10 @@ public class ValidateAgreementDateToIsNotBeforeAgreementDateFromTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(new Date(System.currentTimeMillis()+60000));
         when(request.getAgreementDateTo()).thenReturn(new Date());
-        Optional<ValidationError> error = validate.execute(request);
+        ValidationError validationError = mock(ValidationError.class);
+        when(errorFactory.buildError("ERROR_CODE_6")).thenReturn(validationError);
+        Optional<ValidationError> error = validation.execute(request);
         assertTrue(error.isPresent());
-        assertEquals(error.get().getErrorCode(), "agreementDateTo");
-        assertEquals(error.get().getDescription(),"Invalid date !");
+        assertSame(error.get(), validationError);
     }
-
 }

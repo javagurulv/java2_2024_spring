@@ -4,10 +4,11 @@
   "personLastName": "Pupkin",
   "agreementDateFrom": "2025-01-01",
   "agreementDateTo": "2025-01-02",
+  "country" : "LATVIA",
   "selected_risks": [
     {
       "riskIc": "TRAVEL_MEDICAL",
-      "premium": 0
+      "premium": 2.0
     },
     {
       "riskIc": "TRAVEL_CANCELLATION",
@@ -18,5 +19,5 @@
       "premium": 0
     }
   ],
-  "agreementPremium": 0
+  "agreementPremium": 2.0
 }
