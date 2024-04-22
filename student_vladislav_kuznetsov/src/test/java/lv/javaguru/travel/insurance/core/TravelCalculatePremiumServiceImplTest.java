@@ -1,5 +1,8 @@
 package lv.javaguru.travel.insurance.core;
 
+import lv.javaguru.travel.insurance.core.services.TravelCalculatePremiumServiceImpl;
+import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwriting;
+import lv.javaguru.travel.insurance.core.util.DateTimeService;
 import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
@@ -27,8 +30,8 @@ ValidationError validationError = new ValidationError();
     private DateTimeService dateTimeService;
     @Mock
     TravelCalculatePremiumRequestValidator requestValidator;
-
-    @Mock TravelPremiumUnderwriting underwriting;
+    @Mock
+    TravelPremiumUnderwriting underwriting;
 
     @InjectMocks
     private TravelCalculatePremiumServiceImpl service;
@@ -70,7 +73,7 @@ ValidationError validationError = new ValidationError();
     @Test
     public void checkCalculatedAgreementPrice()
     {
-        when(underwriting.calculatePremiumPrice(request)).thenReturn(BigDecimal.valueOf(10L));
+        when(underwriting.calculatePremium(request)).thenReturn(BigDecimal.valueOf(10L));
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertEquals(response.getAgreementPrice(),new BigDecimal(10L));
     }

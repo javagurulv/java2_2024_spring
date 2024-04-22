@@ -1,6 +1,5 @@
 package org.javaguru.travel.insurance.core;
 
-import org.javaguru.travel.insurance.rest.TravelCalculatePremiumRequest;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;

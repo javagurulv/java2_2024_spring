@@ -3,5 +3,6 @@
   "personLastName" : "",
   "agreementDateFrom" : "",
   "agreementDateTo" : "",
+  "country" : "",
   "selected_risks": []
 }

@@ -59,6 +59,18 @@ class ClassifierValueRepositoryTest {
                 "RISK_TYPE", "FAKE");
         assertTrue(valueOpt.isEmpty());
     }
+    @Test
+    public void shouldFind_COUNTY_LATVIA(){
+        checksTitleAndIc("COUNTRY","LATVIA");
+    }
+    @Test
+    public void shouldFind_COUNTRY_SPAIN(){
+        checksTitleAndIc("COUNTRY","SPAIN");
+    }
+    @Test
+    public void shouldFind_COUNTRY_JAPAN(){
+        checksTitleAndIc("COUNTRY","JAPAN");
+    }
 
     private void checksTitleAndIc(String classifierTitle, String ic) {
         Optional<ClassifierValue> valueOpt = classifierValueRepository.findByClassifierTitleAndIc(

@@ -1,9 +1,11 @@
 package lv.javaguru.travel.insurance.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lv.javaguru.travel.insurance.core.util.BigDecimalSerializer;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -19,7 +21,9 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
     private String personLastName;
     private LocalDate agreementDateFrom;
     private LocalDate agreementDateTo;
+    private String country;
     private List<RiskPremium> selected_risks;
+    @JsonSerialize(using = BigDecimalSerializer.class)
     private BigDecimal agreementPremium;
     public TravelCalculatePremiumResponse(List<ValidationError> errors) {
         super(errors);

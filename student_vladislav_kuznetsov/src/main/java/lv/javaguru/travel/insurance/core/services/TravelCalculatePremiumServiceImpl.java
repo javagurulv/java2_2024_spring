@@ -1,5 +1,8 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.services;
 
+import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwriting;
+import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwritingImpl;
+import lv.javaguru.travel.insurance.core.util.DateTimeService;
 import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
@@ -10,7 +13,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Component
-class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
+public class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
     @Autowired
     private DateTimeService dateTimeService;
@@ -23,7 +26,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
         List<ValidationError> errors = requestValidator.validate(request);
 
-        return (errors.isEmpty() ? buildResponse(request, underWriting.calculatePremiumPrice(request)) : buildResponse(errors));
+        return (errors.isEmpty() ? buildResponse(request, underWriting.calculatePremium(request)) : buildResponse(errors));
     }
 
     private TravelCalculatePremiumResponse buildResponse(List<ValidationError> errors) {

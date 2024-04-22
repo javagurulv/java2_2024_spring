@@ -3,6 +3,7 @@
   "personLastName" : "Pupkin",
   "agreementDateFrom" : null,
   "agreementDateTo" : "2025-01-02",
+  "country" : "LATVIA",
   "selected_risks":
   ["TRAVEL_MEDICAL",
     "TRAVEL_CANCELLATION",

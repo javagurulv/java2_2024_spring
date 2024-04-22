@@ -1,10 +1,10 @@
 package lv.javaguru.travel.insurance.core;
 
+import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwritingImpl;
+import lv.javaguru.travel.insurance.core.util.DateTimeService;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class TravelPremiumUnderwritingTest {
 
-    TravelPremiumUnderwriting premiumUnderwriting = new TravelPremiumUnderwriting();
+    TravelPremiumUnderwritingImpl premiumUnderwriting = new TravelPremiumUnderwritingImpl();
 
     DateTimeService dateTimeService = new DateTimeService();
 
@@ -29,7 +29,7 @@ public class TravelPremiumUnderwritingTest {
         when(request.getAgreementDateFrom()).thenReturn(createDate("25.03.2024"));
         when(request.getAgreementDateTo()).thenReturn(createDate("30.03.2024"));
         dateTimeService.calculateDaysBetweenDates(request.getAgreementDateFrom(), request.getAgreementDateTo());
-        BigDecimal premium = premiumUnderwriting.calculatePremiumPrice(request);
+        BigDecimal premium = premiumUnderwriting.calculatePremium(request);
         assertEquals(premium, new BigDecimal(5));
 
     }
