@@ -1,8 +1,8 @@
 {
   "errors": [
     {
-      "field": "personFirstName",
-      "message": "must exist and not to be empty!"
+      "errorCode": 1,
+      "description": "Person first name must exist and not to be empty!"
     }
   ],
   "personFirstName": null,
