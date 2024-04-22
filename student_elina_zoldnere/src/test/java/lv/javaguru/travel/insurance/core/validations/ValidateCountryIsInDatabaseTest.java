@@ -12,8 +12,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -36,7 +34,7 @@ public class ValidateCountryIsInDatabaseTest {
 
     @Autowired
     @InjectMocks
-    private ValidateHelper helper;
+    private ValidateSetUpRequestHelper helper;
 
     @BeforeEach
     public void setUp() {

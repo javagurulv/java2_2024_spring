@@ -1,6 +1,5 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 
@@ -12,7 +11,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Date;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,17 +18,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class ValidateAgreementDateToNotLessThanTodayTest {
+public class ValidateAgreementDateFromNotNullTest {
 
     @Mock
     private TravelCalculatePremiumRequest requestMock;
     @Mock
-    private DateTimeUtil dateTimeUtil;
-    @Mock
     private ValidationErrorFactory errorMock;
 
     @InjectMocks
-    private ValidateAgreementDateToNotLessThanToday validate;
+    private ValidateAgreementDateFromNotNull validate;
 
     @Autowired
     @InjectMocks
@@ -42,17 +38,16 @@ public class ValidateAgreementDateToNotLessThanTodayTest {
     }
 
     @Test
-    public void validate_ShouldReturnErrorWhenAgreementDateToLessThanToday() {
-        when(requestMock.getAgreementDateTo()).thenReturn(new Date(2025 - 1900, 2, 11));
-        when(dateTimeUtil.midnightToday()).thenReturn(new Date(2025 - 1900, 3, 11));
-        when(errorMock.buildError("ERROR_CODE_12"))
-                .thenReturn(new ValidationError("ERROR_CODE_12", "Field agreementDateTo is in the past!"));
+    public void validate_ShouldReturnErrorWhenAgreementDateFromIsNull() {
+        when(requestMock.getAgreementDateFrom()).thenReturn(null);
+        when(errorMock.buildError("ERROR_CODE_3"))
+                .thenReturn(new ValidationError("ERROR_CODE_3", "Field agreementDateFrom is empty!"));
 
         Optional<ValidationError> result = validate.validateSingle(requestMock);
 
         assertTrue(result.isPresent());
-        assertEquals("ERROR_CODE_12", result.get().getErrorCode());
-        assertEquals("Field agreementDateTo is in the past!", result.get().getDescription());
+        assertEquals("ERROR_CODE_3", result.get().getErrorCode());
+        assertEquals("Field agreementDateFrom is empty!", result.get().getDescription());
     }
 
 }

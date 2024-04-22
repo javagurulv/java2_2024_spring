@@ -31,7 +31,7 @@ public class ValidateSelectedRisksNotEmptyOrNullTest {
 
     @Autowired
     @InjectMocks
-    private ValidateHelper helper;
+    private ValidateSetUpRequestHelper helper;
 
     @BeforeEach
     public void setUp() {

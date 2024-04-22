@@ -34,7 +34,7 @@ public class ValidateAgreementDateFromNotLessThanTodayTest {
 
     @Autowired
     @InjectMocks
-    private ValidateHelper helper;
+    private ValidateSetUpRequestHelper helper;
 
     @BeforeEach
     public void setUp() {
@@ -43,8 +43,8 @@ public class ValidateAgreementDateFromNotLessThanTodayTest {
 
     @Test
     public void validate_ShouldReturnErrorWhenAgreementDateFromLessThanToday() {
-        when(requestMock.getAgreementDateFrom()).thenReturn(new Date(2024 - 1900, 2, 11));
-        when(dateTimeUtil.midnightToday()).thenReturn(helper.midnightToday());
+        when(requestMock.getAgreementDateFrom()).thenReturn(new Date(2025 - 1900, 2, 11));
+        when(dateTimeUtil.midnightToday()).thenReturn(new Date(2025 - 1900, 3, 11));
         when(errorMock.buildError("ERROR_CODE_11"))
                 .thenReturn(new ValidationError("ERROR_CODE_11", "Field agreementDateFrom is in the past!"));
 

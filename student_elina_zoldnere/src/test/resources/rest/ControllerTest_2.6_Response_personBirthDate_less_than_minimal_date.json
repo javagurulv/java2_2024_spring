@@ -1,12 +1,8 @@
 {
   "errors": [
     {
-      "errorCode": "ERROR_CODE_13",
-      "description": "AgreementDateTo must be after AgreementDateFrom!"
-    },
-    {
-      "errorCode": "ERROR_CODE_12",
-      "description": "Field agreementDateTo is in the past!"
+      "errorCode": "ERROR_CODE_14",
+      "description": "PersonBirthDate is not a valid date!"
     }
   ],
   "personFirstName": null,

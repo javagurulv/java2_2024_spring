@@ -92,6 +92,10 @@ public class TravelCalculatePremiumControllerTest {
                         "ControllerTest_1.13_Request_country_missing_when_TRAVEL_MEDICAL_not_selected.json",
                         "ControllerTest_1.13_Response_country_missing_when_TRAVEL_MEDICAL_not_selected.json"),
 
+                Arguments.of("1.14 personBirthDate missing",
+                        "ControllerTest_1.14_Request_personBirthDate_missing.json",
+                        "ControllerTest_1.14_Response_personBirthDate_missing.json"),
+
                 Arguments.of("1.99 all fields missing or empty or blank",
                         "ControllerTest_1.99_Request_all_fields_missing_or_empty_or_blank.json",
                         "ControllerTest_1.99_Response_all_fields_missing_or_empty_or_blank.json"),
@@ -111,6 +115,14 @@ public class TravelCalculatePremiumControllerTest {
                 Arguments.of("2.4 agreementDateTo is less than current date",
                         "ControllerTest_2.4_Request_agreementDateTo_less_than_current_date.json",
                         "ControllerTest_2.4_Response_agreementDateTo_less_than_current_date.json"),
+
+                Arguments.of("2.5 personBirthDate is after the current date",
+                        "ControllerTest_2.5_Request_personBirthDate_after_current_date.json",
+                        "ControllerTest_2.5_Response_personBirthDate_after_current_date.json"),
+
+                Arguments.of("2.6 personBirthDate is less than minimal date",
+                        "ControllerTest_2.6_Request_personBirthDate_less_than_minimal_date.json",
+                        "ControllerTest_2.6_Response_personBirthDate_less_than_minimal_date.json"),
 
                 Arguments.of("3.1 selectedRisks not supported",
                         "ControllerTest_3.1_Request_selectedRisks_not_supported.json",
