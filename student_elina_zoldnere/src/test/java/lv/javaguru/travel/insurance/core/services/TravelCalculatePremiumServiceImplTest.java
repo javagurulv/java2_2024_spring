@@ -41,15 +41,18 @@ class TravelCalculatePremiumServiceImplTest {
         request = new TravelCalculatePremiumRequest();
         request.setPersonFirstName("Jānis");
         request.setPersonLastName("Bērziņš");
+        request.setPersonBirthDate(new Date(90, 1, 1));
         request.setAgreementDateFrom(new Date(2025 - 1900, 2, 10)); // March 10, 2025
         request.setAgreementDateTo(new Date(2025 - 1900, 2, 11)); // March 11, 2025
-        request.setSelectedRisks(List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION"));
+        request.setSelectedRisks(List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"));
+        request.setCountry("SPAIN");
 
         when(validateMock.validate(request)).thenReturn(emptyList());
         when(calculateUnderwritingMock.calculateAgreementPremium(request))
-                .thenReturn(new TravelPremiumCalculationResult(BigDecimal.ONE,
-                        List.of(new RiskPremium("TRAVEL_MEDICAL", BigDecimal.ZERO),
-                                new RiskPremium("TRAVEL_CANCELLATION", BigDecimal.ZERO))));
+                .thenReturn(new TravelPremiumCalculationResult(BigDecimal.valueOf(2.50),
+                        List.of(new RiskPremium("TRAVEL_MEDICAL", BigDecimal.valueOf(2.50)),
+                                new RiskPremium("TRAVEL_CANCELLATION", BigDecimal.ZERO),
+                                new RiskPremium("TRAVEL_LOSS_BAGGAGE", BigDecimal.ZERO))));
     }
 
     @Test
@@ -62,6 +65,12 @@ class TravelCalculatePremiumServiceImplTest {
     public void calculatePremium_ShouldReturnCorrectPersonLastName() {
         TravelCalculatePremiumResponse response = calculatePremiumTest();
         assertEquals(request.getPersonLastName(), response.getPersonLastName());
+    }
+
+    @Test
+    public void calculatePremium_ShouldReturnCorrectPersonBirthDate() {
+        TravelCalculatePremiumResponse response = calculatePremiumTest();
+        assertEquals(request.getPersonBirthDate(), response.getPersonBirthDate());
     }
 
     @Test
@@ -79,7 +88,7 @@ class TravelCalculatePremiumServiceImplTest {
     @Test
     public void calculatePremium_ShouldReturnCorrectAgreementPremium() {
         TravelCalculatePremiumResponse response = calculatePremiumTest();
-        assertEquals(BigDecimal.ONE, response.getAgreementPremium());
+        assertEquals(BigDecimal.valueOf(2.50), response.getAgreementPremium());
     }
 
     @Test
@@ -87,16 +96,19 @@ class TravelCalculatePremiumServiceImplTest {
         TravelCalculatePremiumResponse response = calculatePremiumTest();
         List<RiskPremium> riskPremiums = response.getRiskPremiums();
 
-        assertEquals(2, riskPremiums.size());
+        assertEquals(3, riskPremiums.size());
 
         RiskPremium medicalRisk = riskPremiums.get(0);
         assertEquals("TRAVEL_MEDICAL", medicalRisk.getRiskIc());
-        assertEquals(BigDecimal.ZERO, medicalRisk.getPremium());
+        assertEquals(BigDecimal.valueOf(2.50), medicalRisk.getPremium());
 
         RiskPremium cancellationRisk = riskPremiums.get(1);
         assertEquals("TRAVEL_CANCELLATION", cancellationRisk.getRiskIc());
         assertEquals(BigDecimal.ZERO, cancellationRisk.getPremium());
 
+        RiskPremium lossBaggageRisk = riskPremiums.get(2);
+        assertEquals("TRAVEL_LOSS_BAGGAGE", lossBaggageRisk.getRiskIc());
+        assertEquals(BigDecimal.ZERO, lossBaggageRisk.getPremium());
     }
 
     private TravelCalculatePremiumResponse calculatePremiumTest() {

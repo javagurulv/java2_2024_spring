@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-class ValidateAgreementDateFrom extends RequestFieldValidationImpl {
+class ValidateAgreementDateFromNotNull extends RequestFieldValidationImpl {
 
     @Autowired
     private ValidationErrorFactory validationErrorFactory;

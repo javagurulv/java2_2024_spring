@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class ValidateAgreementDateFromTest {
+public class ValidateAgreementDateToNotNullTest {
 
     @Mock
     private TravelCalculatePremiumRequest requestMock;
@@ -26,11 +26,11 @@ public class ValidateAgreementDateFromTest {
     private ValidationErrorFactory errorMock;
 
     @InjectMocks
-    private ValidateAgreementDateFrom validate;
+    private ValidateAgreementDateToNotNull validate;
 
     @Autowired
     @InjectMocks
-    private ValidateHelper helper;
+    private ValidateSetUpRequestHelper helper;
 
     @BeforeEach
     public void setUp() {
@@ -38,16 +38,16 @@ public class ValidateAgreementDateFromTest {
     }
 
     @Test
-    public void validate_ShouldReturnErrorWhenAgreementDateFromIsNull() {
-        when(requestMock.getAgreementDateFrom()).thenReturn(null);
-        when(errorMock.buildError("ERROR_CODE_3"))
-                .thenReturn(new ValidationError("ERROR_CODE_3", "Field agreementDateFrom is empty!"));
+    public void validate_ShouldReturnErrorWhenAgreementDateToIsNull() {
+        when(requestMock.getAgreementDateTo()).thenReturn(null);
+        when(errorMock.buildError("ERROR_CODE_4"))
+                .thenReturn(new ValidationError("ERROR_CODE_4", "Field agreementDateTo is empty!"));
 
         Optional<ValidationError> result = validate.validateSingle(requestMock);
 
         assertTrue(result.isPresent());
-        assertEquals("ERROR_CODE_3", result.get().getErrorCode());
-        assertEquals("Field agreementDateFrom is empty!", result.get().getDescription());
+        assertEquals("ERROR_CODE_4", result.get().getErrorCode());
+        assertEquals("Field agreementDateTo is empty!", result.get().getDescription());
     }
 
 }

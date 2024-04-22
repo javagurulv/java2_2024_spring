@@ -25,4 +25,11 @@ class DateTimeUtil {
         return today.getTime();
     }
 
+    public Date subtractYears(Date date, int years) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.YEAR, -years);
+        return cal.getTime();
+    }
+
 }

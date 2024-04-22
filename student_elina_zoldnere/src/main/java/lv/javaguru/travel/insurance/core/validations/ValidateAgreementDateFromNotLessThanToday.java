@@ -14,7 +14,7 @@ import java.util.Optional;
 class ValidateAgreementDateFromNotLessThanToday extends RequestFieldValidationImpl {
 
     @Autowired
-    private DateTimeUtil dateTimeService;
+    private DateTimeUtil dateTimeUtil;
     @Autowired
     private ValidationErrorFactory validationErrorFactory;
 
@@ -22,7 +22,7 @@ class ValidateAgreementDateFromNotLessThanToday extends RequestFieldValidationIm
     public Optional<ValidationError> validateSingle(TravelCalculatePremiumRequest request) {
         Date agreementDateFrom = request.getAgreementDateFrom();
         Date agreementDateTo = request.getAgreementDateTo();
-        Date currentDate = dateTimeService.midnightToday();
+        Date currentDate = dateTimeUtil.midnightToday();
 
         return (agreementDateFrom != null && agreementDateTo != null
                 && agreementDateFrom.before(currentDate))

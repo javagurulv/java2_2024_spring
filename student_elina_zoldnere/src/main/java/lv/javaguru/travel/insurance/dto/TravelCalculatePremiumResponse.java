@@ -20,7 +20,11 @@ import lv.javaguru.travel.insurance.core.util.BigDecimalSerializer;
 public class TravelCalculatePremiumResponse extends CoreResponse {
 
     private String personFirstName;
+
     private String personLastName;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private Date personBirthDate;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date agreementDateFrom;
