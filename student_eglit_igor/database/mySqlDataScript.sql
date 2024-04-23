@@ -21,3 +21,11 @@ INSERT INTO classifier_values (classifier_id, ic, description)
     VALUES ('LATVIA', 1.00),
             ('SPAIN', 2.50),
             ('JAPAN', 3.50);
+
+ INSERT INTO age_coefficient (age_from, age_to, coefficient)
+    VALUES (0, 5, 1.10),
+            (6, 10, 0.70),
+            (11, 17, 1.00),
+            (18, 40, 1.10),
+            (41, 65, 1.20),
+            (66, 150, 1.50);
