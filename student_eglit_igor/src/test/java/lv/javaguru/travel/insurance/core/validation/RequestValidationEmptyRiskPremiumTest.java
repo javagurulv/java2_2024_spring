@@ -30,7 +30,7 @@ class RequestValidationEmptyRiskPremiumTest {
     @Test
     void shouldReturnErrorWhenInsuranceRisksIsNull(){
         request.setSelectedRisks(null);
-        Optional<ValidationError> error = requestValidationEmptySelectedRisks.validateReq(request);
+        Optional<ValidationError> error = requestValidationEmptySelectedRisks.validateSingle(request);
         assertTrue(error.isPresent());
         assertEquals("ERROR_CODE_8", error.get().getErrorCode());
         assertEquals("Field selected_risks is empty!", error.get().getDescription());
@@ -38,7 +38,7 @@ class RequestValidationEmptyRiskPremiumTest {
     @Test
     void shouldReturnErrorWhenInsuranceRisksIsEmpty(){
         request.setSelectedRisks(List.of());
-        Optional<ValidationError> error = requestValidationEmptySelectedRisks.validateReq(request);
+        Optional<ValidationError> error = requestValidationEmptySelectedRisks.validateSingle(request);
         assertTrue(error.isPresent());
         assertEquals("ERROR_CODE_8", error.get().getErrorCode());
         assertEquals("Field selected_risks is empty!", error.get().getDescription());

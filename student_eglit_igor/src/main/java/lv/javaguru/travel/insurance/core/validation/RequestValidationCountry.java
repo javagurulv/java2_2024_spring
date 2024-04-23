@@ -18,7 +18,7 @@ class RequestValidationCountry extends RequestValidationIntImpl{
     private ValidationErrorFactory validationErrorFactory;
 
     @Override
-    public Optional<ValidationError> validateReq(TravelCalculatePremiumRequest request) {
+    public Optional<ValidationError> validateSingle(TravelCalculatePremiumRequest request) {
         return (request.getCountry() != null && !request.getCountry().isBlank())
                 ? validateCountry(request)
                 : Optional.empty();

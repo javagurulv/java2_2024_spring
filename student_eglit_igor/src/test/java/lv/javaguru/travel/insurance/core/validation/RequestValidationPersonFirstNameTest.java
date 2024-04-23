@@ -30,7 +30,7 @@ class RequestValidationPersonFirstNameTest {
     @Test
     void shouldReturnErrorWhenPersonFirstNameIsNull(){
         request.setPersonFirstName(null);
-        Optional<ValidationError> error = requestValidationPersonFirstName.validateReq(request);
+        Optional<ValidationError> error = requestValidationPersonFirstName.validateSingle(request);
         assert error.isPresent();
         assertEquals("ERROR_CODE_1", error.get().getErrorCode());
         assertEquals("Field personFirstName is empty!", error.get().getDescription());
@@ -38,7 +38,7 @@ class RequestValidationPersonFirstNameTest {
     @Test
     void shouldReturnErrorWhenPersonFirstNameIsEmptty(){
         request.setPersonFirstName("");
-        Optional<ValidationError> error = requestValidationPersonFirstName.validateReq(request);
+        Optional<ValidationError> error = requestValidationPersonFirstName.validateSingle(request);
         assert error.isPresent();
         assertEquals("ERROR_CODE_1", error.get().getErrorCode());
         assertEquals("Field personFirstName is empty!", error.get().getDescription());
@@ -46,7 +46,7 @@ class RequestValidationPersonFirstNameTest {
     @Test
     void shouldReturnEmptyWhenPersonFirstNameIsNotNull(){
         request.setPersonFirstName("Igor");
-        Optional<ValidationError> error = requestValidationPersonFirstName.validateReq(request);
+        Optional<ValidationError> error = requestValidationPersonFirstName.validateSingle(request);
         assert error.isEmpty();
     }
 }

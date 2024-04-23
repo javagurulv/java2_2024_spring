@@ -19,6 +19,7 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
 
     private String personFirstName;
     private String personLastName;
+    private LocalDate personBirthDate;
     private LocalDate agreementDateFrom;
     private LocalDate agreementDateTo;
     private String country;

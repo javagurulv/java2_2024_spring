@@ -33,7 +33,7 @@ class RequestValidationAgreementDateToIsAfterDateFromTest {
     void shouldReturnErrorWhenAgreementDateToIsBeforeAgreementDateFrom() {
         request.setAgreementDateTo(LocalDate.now().minusDays(1));
         request.setAgreementDateFrom(LocalDate.now().plusDays(1));
-        Optional<ValidationError> error = requestValidationAgreementDateToIsAfterDateFrom.validateReq(request);
+        Optional<ValidationError> error = requestValidationAgreementDateToIsAfterDateFrom.validateSingle(request);
         assertTrue(error.isPresent());
         assertEquals("ERROR_CODE_7", error.get().getErrorCode());
         assertEquals("Field agreementDateFrom is after agreementDateTo!", error.get().getDescription());
@@ -43,7 +43,7 @@ class RequestValidationAgreementDateToIsAfterDateFromTest {
     void shouldReturnEmptyWhenAgreementDateToIsAfterAgreementDateFrom() {
         request.setAgreementDateTo(LocalDate.now().plusDays(3));
         request.setAgreementDateFrom((LocalDate.now().plusDays(1)));
-        Optional<ValidationError> error = requestValidationAgreementDateToIsAfterDateFrom.validateReq(request);
+        Optional<ValidationError> error = requestValidationAgreementDateToIsAfterDateFrom.validateSingle(request);
         assertTrue(error.isEmpty());
     }
 }

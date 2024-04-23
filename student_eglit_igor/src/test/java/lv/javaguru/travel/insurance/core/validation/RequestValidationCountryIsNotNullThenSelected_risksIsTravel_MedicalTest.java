@@ -8,7 +8,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,7 +32,7 @@ class RequestValidationCountryIsNotNullThenSelected_risksIsTravel_MedicalTest {
         request.setCountry("Latvia");
         request.setSelectedRisks(List.of("TRAVEL_MEDICAL"));
 
-        Optional<ValidationError> result = validator.validateReq(request);
+        Optional<ValidationError> result = validator.validateSingle(request);
 
         assertTrue(result.isEmpty());
     }
@@ -46,7 +45,7 @@ class RequestValidationCountryIsNotNullThenSelected_risksIsTravel_MedicalTest {
         ValidationError error = new ValidationError("ERROR_CODE_10","Field Country is empty!");
         when(errorFactory.buildError("ERROR_CODE_10")).thenReturn(error);
 
-        Optional<ValidationError> result = validator.validateReq(request);
+        Optional<ValidationError> result = validator.validateSingle(request);
 
         assertTrue(result.isPresent());
         assertEquals(error, result.get());
@@ -58,7 +57,7 @@ class RequestValidationCountryIsNotNullThenSelected_risksIsTravel_MedicalTest {
         request.setCountry("Latvia");
         request.setSelectedRisks(List.of("TRAVEL_CANCELLATION"));
 
-        Optional<ValidationError> result = validator.validateReq(request);
+        Optional<ValidationError> result = validator.validateSingle(request);
 
         assertTrue(result.isEmpty());
     }

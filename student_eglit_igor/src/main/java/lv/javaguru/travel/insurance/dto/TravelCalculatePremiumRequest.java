@@ -18,6 +18,7 @@ public class TravelCalculatePremiumRequest {
 
     private String personFirstName;
     private String personLastName;
+    private LocalDate personBirthDate;
     private LocalDate agreementDateFrom;
     private LocalDate agreementDateTo;
     @JsonAlias("selected_risks")

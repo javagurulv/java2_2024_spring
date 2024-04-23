@@ -35,8 +35,8 @@ class TravelCalculatePremiumRequestValidatorImplTest {
         @Test
         void shouldReturnNoErrorsWhenAllValidationsPass() {
             TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-            when(validation1.validateReq(request)).thenReturn(Optional.empty());
-            when(validation2.validateReq(request)).thenReturn(Optional.empty());
+            when(validation1.validateSingle(request)).thenReturn(Optional.empty());
+            when(validation2.validateSingle(request)).thenReturn(Optional.empty());
 
             List<ValidationError> errors = validator.validate(request);
 
@@ -47,8 +47,8 @@ class TravelCalculatePremiumRequestValidatorImplTest {
         void shouldReturnErrorsWhenOneValidationFails() {
             TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
             ValidationError error = new ValidationError();
-            when(validation1.validateReq(request)).thenReturn(Optional.of(error));
-            when(validation2.validateReq(request)).thenReturn(Optional.empty());
+            when(validation1.validateSingle(request)).thenReturn(Optional.of(error));
+            when(validation2.validateSingle(request)).thenReturn(Optional.empty());
 
             List<ValidationError> errors = validator.validate(request);
 
@@ -61,8 +61,8 @@ class TravelCalculatePremiumRequestValidatorImplTest {
             TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
             ValidationError error1 = new ValidationError();
             ValidationError error2 = new ValidationError();
-            when(validation1.validateReq(request)).thenReturn(Optional.of(error1));
-            when(validation2.validateReq(request)).thenReturn(Optional.of(error2));
+            when(validation1.validateSingle(request)).thenReturn(Optional.of(error1));
+            when(validation2.validateSingle(request)).thenReturn(Optional.of(error2));
 
             List<ValidationError> errors = validator.validate(request);
 
