@@ -1,6 +1,8 @@
 package lv.javaguru.travel.insurance.core.underwriting.calculators;
 
 import lv.javaguru.travel.insurance.core.domain.CountryDefaultDayRate;
+import lv.javaguru.travel.insurance.core.repositories.AgeCoefficientRepository;
+import lv.javaguru.travel.insurance.core.domain.AgeCoefficient;
 import lv.javaguru.travel.insurance.core.repositories.CountryDefaultDayRateRepository;
 import lv.javaguru.travel.insurance.core.underwriting.TravelRiskPremiumCalculator;
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.Period;
 
 @Component
 class TravelMedicalRiskPremiumCalculator implements TravelRiskPremiumCalculator {
@@ -17,13 +20,29 @@ class TravelMedicalRiskPremiumCalculator implements TravelRiskPremiumCalculator 
     DateTimeUtil dateTimeUtil;
     @Autowired
     private CountryDefaultDayRateRepository countryDefaultDayRateRepository;
+    @Autowired
+    private AgeCoefficientRepository ageCoefficientRepository;
 
     @Override
     public BigDecimal calculatePremium(TravelCalculatePremiumRequest request) {
         var daysCount = calculateDayCount(request);
         var countryDefaultRate = findCountryDefaultDayRate(request);
-        return countryDefaultRate.multiply(daysCount)
+        var ageCoefficient = findAgeCoefficient(request);
+        return countryDefaultRate
+                .multiply(daysCount)
+                .multiply(ageCoefficient)
                 .setScale(2, RoundingMode.HALF_UP);
+    }
+
+    private BigDecimal findAgeCoefficient(TravelCalculatePremiumRequest request) {
+       return ageCoefficientRepository.findAgeCoefficientByAge(calculateAge(request))
+               .map(AgeCoefficient::getCoefficient)
+               .orElseThrow(() -> new RuntimeException("Age coefficient not found for age = " + calculateAge(request)));
+    }
+
+    private Integer calculateAge(TravelCalculatePremiumRequest request) {
+        Period period = Period.between(request.getPersonBirthDate(), request.getAgreementDateFrom());
+        return period.getYears();
     }
 
     private BigDecimal findCountryDefaultDayRate(TravelCalculatePremiumRequest request) {

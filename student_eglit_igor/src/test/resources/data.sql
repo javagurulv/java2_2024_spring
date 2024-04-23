@@ -116,3 +116,11 @@ INSERT INTO classifier_values(
 
  INSERT INTO country_default_day_rate(country_ic, default_day_rate)
  VALUES('JAPAN', 3.50);
+
+ INSERT INTO age_coefficient (age_from, age_to, coefficient)
+     VALUES (0, 5, 1.10),
+             (6, 10, 0.70),
+             (11, 17, 1.00),
+             (18, 40, 1.10),
+             (41, 65, 1.20),
+             (66, 150, 1.50);
