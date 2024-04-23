@@ -31,7 +31,7 @@ class RequestValidationAgreementDateFromTest {
     @Test
     void shouldReturnValidationErrorWhenAgreementDateFromIsNull() {
         request.setAgreementDateFrom(null);
-        Optional<ValidationError> result = requestValidationAgreementDateFrom.validateReq(request);
+        Optional<ValidationError> result = requestValidationAgreementDateFrom.validateSingle(request);
         assertTrue(result.isPresent());
         assertEquals("ERROR_CODE_3", result.get().getErrorCode());
         assertEquals("Field agreementDateFrom is empty!", result.get().getDescription());
@@ -40,7 +40,7 @@ class RequestValidationAgreementDateFromTest {
     @Test
     void shouldReturnEmptyWhenAgreementDateFromIsNotNull() {
         request.setAgreementDateFrom(LocalDate.now().plusDays(1));
-        Optional<ValidationError> result = requestValidationAgreementDateFrom.validateReq(request);
+        Optional<ValidationError> result = requestValidationAgreementDateFrom.validateSingle(request);
         assertTrue(result.isEmpty());
     }
 }

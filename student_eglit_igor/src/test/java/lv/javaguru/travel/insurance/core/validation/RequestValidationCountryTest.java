@@ -2,7 +2,6 @@ package lv.javaguru.travel.insurance.core.validation;
 
 import lv.javaguru.travel.insurance.core.domain.ClassifierValue;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
-import lv.javaguru.travel.insurance.core.util.Placeholder;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,9 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.OngoingStubbing;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -44,7 +41,7 @@ class RequestValidationCountryTest {
         when(classifierValueRepository.findByClassifierTitleAndIc("COUNTRY", "Latvia"))
                 .thenReturn(Optional.of(new ClassifierValue()));
 
-        Optional<ValidationError> result = validator.validateReq(request);
+        Optional<ValidationError> result = validator.validateSingle(request);
 
         assertTrue(result.isEmpty());
     }
@@ -59,7 +56,7 @@ class RequestValidationCountryTest {
         ValidationError error = mock(ValidationError.class);
         lenient().when(errorFactory.buildError(eq("ERROR_CODE_11"), anyList())).thenReturn(error);
 
-        Optional<ValidationError> result = validator.validateReq(request);
+        Optional<ValidationError> result = validator.validateSingle(request);
 
         assertTrue(result.isPresent());
     }
@@ -67,7 +64,7 @@ class RequestValidationCountryTest {
     public void shouldReturnEmptyWhenCountryIsNull() {
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
 
-        Optional<ValidationError> result = validator.validateReq(request);
+        Optional<ValidationError> result = validator.validateSingle(request);
 
         assertTrue(result.isEmpty());
     }

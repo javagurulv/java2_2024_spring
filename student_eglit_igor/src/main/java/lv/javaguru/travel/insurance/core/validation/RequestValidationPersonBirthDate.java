@@ -8,16 +8,15 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-class RequestValidationAgreementDateFrom extends RequestValidationIntImpl{
-
+class RequestValidationPersonBirthDate extends RequestValidationIntImpl {
     @Autowired
     private ValidationErrorFactory validationErrorFactory;
 
     @Override
     public Optional<ValidationError> validateSingle(TravelCalculatePremiumRequest request) {
-        String errorCode = "ERROR_CODE_3";
-        return (request.getAgreementDateFrom() == null)
-                ? Optional.of( validationErrorFactory.buildError(errorCode))
+        String errorCode = "ERROR_CODE_12";
+        return (request.getPersonBirthDate() == null)
+                ? Optional.of(validationErrorFactory.buildError(errorCode))
                 : Optional.empty();
     }
 }

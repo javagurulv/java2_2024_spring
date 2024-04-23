@@ -14,7 +14,7 @@ class RequestValidationCountryIsNotNullThenSelected_risksIsTravel_Medical extend
     @Autowired private ValidationErrorFactory errorFactory;
 
     @Override
-    public Optional<ValidationError> validateReq(TravelCalculatePremiumRequest request) {
+    public Optional<ValidationError> validateSingle(TravelCalculatePremiumRequest request) {
         return (containsTravelMedical(request) && countryIsNullOrBlank(request))
                 ? Optional.of(errorFactory.buildError("ERROR_CODE_10"))
                 : Optional.empty();

@@ -13,7 +13,7 @@ class RequestValidationAgreementDateFromNotInThePast extends RequestValidationIn
     private ValidationErrorFactory validationErrorFactory;
 
     @Override
-    public Optional<ValidationError> validateReq(TravelCalculatePremiumRequest request) {
+    public Optional<ValidationError> validateSingle(TravelCalculatePremiumRequest request) {
         String errorCode = "ERROR_CODE_5";
         if (request.getAgreementDateTo() == null || request.getAgreementDateFrom() == null) {
             return Optional.empty();

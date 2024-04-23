@@ -14,7 +14,7 @@ class RequestValidationPersonLastName extends RequestValidationIntImpl{
     private ValidationErrorFactory validationErrorFactory;
 
     @Override
-    public Optional<ValidationError> validateReq(TravelCalculatePremiumRequest request) {
+    public Optional<ValidationError> validateSingle(TravelCalculatePremiumRequest request) {
         String errorCode = "ERROR_CODE_2";
         return (request.getPersonLastName() == null || request.getPersonLastName().isEmpty())
                 ? Optional.of(validationErrorFactory.buildError(errorCode))

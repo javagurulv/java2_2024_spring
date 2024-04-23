@@ -8,7 +8,7 @@ import java.util.Optional;
 
 abstract class RequestValidationIntImpl implements RequestValidationInterface{
     @Override
-    public Optional<ValidationError> validateReq(TravelCalculatePremiumRequest request) {
+    public Optional<ValidationError> validateSingle(TravelCalculatePremiumRequest request) {
         return Optional.empty();
     }
 
