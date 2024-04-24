@@ -32,6 +32,7 @@ class ClassifierRepositoryTest {
         assertTrue(riskTypeOpt.isPresent());
         assertEquals("COUNTRY", riskTypeOpt.get().getTitle());
     }
+
     @Test
     public void shouldNotFindFakeClassifier(){
         Optional<Classifier> riskTypeOpt = classifierRepository.findByTitle("FAKE");
