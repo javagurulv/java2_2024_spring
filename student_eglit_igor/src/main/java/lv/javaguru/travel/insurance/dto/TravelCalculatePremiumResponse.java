@@ -24,6 +24,7 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
     private LocalDate agreementDateTo;
     private String country;
     private List<RiskPremium> selected_risks;
+    private String medicalRiskLimitLevel;
     @JsonSerialize(using = BigDecimalSerializer.class)
     private BigDecimal agreementPremium;
     public TravelCalculatePremiumResponse(List<ValidationError> errors) {
