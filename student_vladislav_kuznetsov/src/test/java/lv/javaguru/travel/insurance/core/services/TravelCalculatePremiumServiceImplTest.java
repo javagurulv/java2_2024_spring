@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.services;
 
 import lv.javaguru.travel.insurance.core.services.TravelCalculatePremiumServiceImpl;
 import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwriting;
@@ -25,13 +25,12 @@ import java.util.List;
 @ExtendWith(MockitoExtension.class)
 class TravelCalculatePremiumServiceImplTest {
 
-ValidationError validationError = new ValidationError();
     @Mock
     private DateTimeService dateTimeService;
     @Mock
-    TravelCalculatePremiumRequestValidator requestValidator;
+    private TravelCalculatePremiumRequestValidator requestValidator;
     @Mock
-    TravelPremiumUnderwriting underwriting;
+    private TravelPremiumUnderwriting underwriting;
 
     @InjectMocks
     private TravelCalculatePremiumServiceImpl service;
@@ -49,30 +48,25 @@ ValidationError validationError = new ValidationError();
     }
 
     @Test
-    public void checkPersonLastName()
-    {
+    public void checkPersonLastName(){
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertEquals(request.getPersonLastName(),response.getPersonLastName());
     }
 
     @Test
-    public void checkAgreementDateFrom()
-    {
+    public void checkAgreementDateFrom(){
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertEquals(request.getAgreementDateFrom(),response.getAgreementDateFrom());
-
     }
 
     @Test
-    public void checkAgreementDateTo()
-    {
+    public void checkAgreementDateTo(){
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertEquals(request.getAgreementDateTo(),response.getAgreementDateTo());
     }
 
     @Test
-    public void checkCalculatedAgreementPrice()
-    {
+    public void checkCalculatedAgreementPrice(){
         when(underwriting.calculatePremium(request)).thenReturn(BigDecimal.valueOf(10L));
         TravelCalculatePremiumResponse response = service.calculatePremium(request);
         assertEquals(response.getAgreementPrice(),new BigDecimal(10L));
@@ -108,7 +102,7 @@ ValidationError validationError = new ValidationError();
     }
 
     @Test
-    public void checkThatThereAreNoInteractionsWithDateTimeServiceWhenResponseContainError() {
+    public void checkThatThereAreNoInteractionsWithDateTimeServiceWhenResponseContainError(){
         var request = new TravelCalculatePremiumRequest();
         var validationError = new ValidationError("field", "message");
         when(requestValidator.validate(request)).thenReturn(List.of(validationError));
@@ -116,7 +110,7 @@ ValidationError validationError = new ValidationError();
         verifyNoInteractions(dateTimeService);
     }
 
-    public TravelCalculatePremiumRequest createRequestWithAllFields (){
+    private TravelCalculatePremiumRequest createRequestWithAllFields (){
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
         request.setAgreementDateTo(new Date(2024, 3, 11));
         request.setAgreementDateFrom(new Date(2024, 3, 1));
@@ -124,7 +118,4 @@ ValidationError validationError = new ValidationError();
         request.setPersonLastName("Kuznetsov");
         return request;
     }
-
-
-
 }

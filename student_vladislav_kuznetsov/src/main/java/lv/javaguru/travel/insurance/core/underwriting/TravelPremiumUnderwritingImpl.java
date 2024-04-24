@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 
 @Component
-public class TravelPremiumUnderwritingImpl implements TravelPremiumUnderwriting{
+class TravelPremiumUnderwritingImpl implements TravelPremiumUnderwriting{
     @Autowired
     DateTimeService dateTimeService = new DateTimeService();
 

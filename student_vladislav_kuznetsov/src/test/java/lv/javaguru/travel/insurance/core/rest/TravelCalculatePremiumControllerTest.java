@@ -21,8 +21,6 @@ public class TravelCalculatePremiumControllerTest {
 
     @Autowired private MockMvc mockMvc;
     @Autowired private JsonFileReader jsonFileReader;
-    @Autowired private JsonFileComparator jsonFileComparator;
-
 
     @Test
     @DisplayName("Test case 1: personFirstName is not entered")
