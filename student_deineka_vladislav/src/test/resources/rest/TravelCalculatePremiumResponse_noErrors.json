@@ -1,0 +1,8 @@
+{
+  "personFirstName": "Bob",
+  "personLastName": "Johnson",
+  "agreementDateFrom": "2030-10-10",
+  "agreementDateTo": "2030-10-11",
+  "agreementPrice": 1,
+  "validationErrors": null
+}
