@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class ValidateAgreementDateToNotLessThanTodayTest {
+class ValidateAgreementDateToNotLessThanTodayTest {
 
     @Mock
     private TravelCalculatePremiumRequest requestMock;
@@ -44,7 +44,7 @@ public class ValidateAgreementDateToNotLessThanTodayTest {
     @Test
     public void validate_ShouldReturnErrorWhenAgreementDateToLessThanToday() {
         when(requestMock.getAgreementDateTo()).thenReturn(new Date(2025 - 1900, 2, 11));
-        when(dateTimeUtil.midnightToday()).thenReturn(new Date(2025 - 1900, 3, 11));
+        when(dateTimeUtil.startOfToday()).thenReturn(new Date(2025 - 1900, 3, 11));
         when(errorMock.buildError("ERROR_CODE_12"))
                 .thenReturn(new ValidationError("ERROR_CODE_12", "Field agreementDateTo is in the past!"));
 

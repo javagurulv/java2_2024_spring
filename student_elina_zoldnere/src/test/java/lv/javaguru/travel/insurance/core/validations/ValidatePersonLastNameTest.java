@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class ValidatePersonLastNameTest {
+class ValidatePersonLastNameTest {
 
     @Mock
     private TravelCalculatePremiumRequest requestMock;

@@ -11,7 +11,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 @Component
-public class ValidateSetUpRequestHelper {
+class ValidateSetUpRequestHelper {
 
     public void setUpRequestMockWithAllValues(TravelCalculatePremiumRequest requestMock) {
         Mockito.lenient().when(requestMock.getPersonFirstName()).thenReturn("Jānis");

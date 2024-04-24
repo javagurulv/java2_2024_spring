@@ -20,7 +20,7 @@ class ValidatePersonBirthDateIsValid extends RequestFieldValidationImpl {
     @Override
     public Optional<ValidationError> validateSingle(TravelCalculatePremiumRequest request) {
         Date birthDate = request.getPersonBirthDate();
-        Date currentDate = dateTimeUtil.midnightToday();
+        Date currentDate = dateTimeUtil.startOfToday();
         Date minPossibleBirthDate = dateTimeUtil.subtractYears(currentDate, 150);
 
         return (birthDate != null && (birthDate.after(currentDate) || birthDate.before(minPossibleBirthDate)))

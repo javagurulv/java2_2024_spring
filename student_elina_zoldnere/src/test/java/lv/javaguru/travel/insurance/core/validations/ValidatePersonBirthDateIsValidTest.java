@@ -21,7 +21,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class ValidatePersonBirthDateIsValidTest {
+class ValidatePersonBirthDateIsValidTest {
 
     @Mock
     private TravelCalculatePremiumRequest requestMock;
@@ -45,7 +45,7 @@ public class ValidatePersonBirthDateIsValidTest {
     @Test
     public void validate_ShouldReturnErrorWhenPersonBirthDateAfterCurrentDate() {
         when(requestMock.getPersonBirthDate()).thenReturn(new Date(2030 - 1900, 2, 11));
-        when(dateTimeUtil.midnightToday()).thenReturn(new Date(2025 - 1900, 2, 11));
+        when(dateTimeUtil.startOfToday()).thenReturn(new Date(2025 - 1900, 2, 11));
         when(errorMock.buildError("ERROR_CODE_14"))
                 .thenReturn(new ValidationError("ERROR_CODE_14", "PersonBirthDate is not a valid date!"));
 
@@ -59,7 +59,7 @@ public class ValidatePersonBirthDateIsValidTest {
     @Test
     public void validate_ShouldReturnErrorWhenPersonBirthDateLessThanMinimal() {
         when(requestMock.getPersonBirthDate()).thenReturn(new Date(1800 - 1900, 2, 11));
-        when(dateTimeUtil.midnightToday()).thenReturn(new Date(2024 - 1900, 2, 11));
+        when(dateTimeUtil.startOfToday()).thenReturn(new Date(2024 - 1900, 2, 11));
         when(dateTimeUtil.subtractYears(any(Date.class), eq(150))).thenReturn(new Date(1874 - 1900, 2, 11));
         when(errorMock.buildError("ERROR_CODE_14"))
                 .thenReturn(new ValidationError("ERROR_CODE_14", "PersonBirthDate is not a valid date!"));

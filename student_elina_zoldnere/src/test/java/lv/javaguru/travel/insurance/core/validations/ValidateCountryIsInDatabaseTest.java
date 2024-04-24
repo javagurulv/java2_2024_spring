@@ -20,7 +20,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class ValidateCountryIsInDatabaseTest {
+class ValidateCountryIsInDatabaseTest {
 
     @Mock
     private TravelCalculatePremiumRequest requestMock;

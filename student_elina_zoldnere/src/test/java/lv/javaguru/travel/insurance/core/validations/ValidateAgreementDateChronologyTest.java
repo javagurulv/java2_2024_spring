@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class ValidateAgreementDateChronologyTest {
+class ValidateAgreementDateChronologyTest {
 
     @Mock
     private TravelCalculatePremiumRequest requestMock;

@@ -15,7 +15,7 @@ public class DateTimeUtilTest {
         Date sampleDateFrom = new Date(2025 - 1900, 2, 10); // March 10, 2025
         Date sampleDateTo = new Date(2025 - 1900, 2, 11); // March 11, 2025
 
-        long difference = timeUtil.calculateDifferenceBetweenDays(sampleDateFrom, sampleDateTo);
+        long difference = timeUtil.calculateDifferenceBetweenDatesInDays(sampleDateFrom, sampleDateTo);
 
         assertEquals(difference, 1);
     }

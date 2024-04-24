@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class ErrorCodeUtilTest {
+class ErrorCodeUtilTest {
 
     @Mock
     private PropertyResolver resolverMock;
