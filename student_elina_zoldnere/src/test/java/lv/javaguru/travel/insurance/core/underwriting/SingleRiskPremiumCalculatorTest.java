@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class SingleRiskPremiumCalculatorTest {
+class SingleRiskPremiumCalculatorTest {
 
     @Mock
     private TravelCalculatePremiumRequest requestMock;

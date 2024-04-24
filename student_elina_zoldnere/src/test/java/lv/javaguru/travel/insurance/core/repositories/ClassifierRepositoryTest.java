@@ -17,7 +17,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 class ClassifierRepositoryTest {
 
-    @Autowired private ClassifierRepository classifierRepository;
+    @Autowired
+    private ClassifierRepository classifierRepository;
 
     @Test
     public void injectedRepositoryAreNotNull() {

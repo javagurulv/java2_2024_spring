@@ -13,7 +13,7 @@ public interface ClassifierValueRepository extends JpaRepository<ClassifierValue
             "left join cv.classifier c " +
             "where c.title = :classifierTitle " +
             "and cv.ic = :ic")
-    Optional<ClassifierValue>findByClassifierTitleAndIc(
+    Optional<ClassifierValue> findByClassifierTitleAndIc(
             @Param("classifierTitle") String classifierTitle,
             @Param("ic") String ic
     );

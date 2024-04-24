@@ -24,7 +24,7 @@ class ValidateAgreementDateToNotLessThanToday extends RequestFieldValidationImpl
         Date agreementDateTo = request.getAgreementDateTo();
 
         return (agreementDateFrom != null && agreementDateTo != null
-                && agreementDateTo.before(dateTimeUtil.midnightToday()))
+                && agreementDateTo.before(dateTimeUtil.startOfToday()))
                 ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_12"))
                 : Optional.empty();
     }

@@ -24,7 +24,7 @@ import java.util.Date;
 import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
-class TravelCalculatePremiumServiceImplTest {
+public class TravelCalculatePremiumServiceImplTest {
 
     @Mock
     private TravelCalculatePremiumRequestValidator validateMock;

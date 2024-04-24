@@ -20,7 +20,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 class ClassifierValueRepositoryTest {
 
-    @Autowired private ClassifierValueRepository classifierValueRepository;
+    @Autowired
+    private ClassifierValueRepository classifierValueRepository;
 
     @Test
     public void injectedRepositoryAreNotNull() {
@@ -29,11 +30,11 @@ class ClassifierValueRepositoryTest {
 
     @ParameterizedTest
     @MethodSource("riskTypeValues")
-    public void shouldFindRiskTypeValue(String riskType){
+    public void shouldFindRiskTypeValue(String riskType) {
         Optional<ClassifierValue> valueOpt = classifierValueRepository.findByClassifierTitleAndIc(
-             "RISK_TYPE", riskType);
-        //assertTrue(valueOpt.isPresent());
-        //assertEquals(riskType, valueOpt.get().getIc());
+                "RISK_TYPE", riskType);
+        assertTrue(valueOpt.isPresent());
+        assertEquals(riskType, valueOpt.get().getIc());
         assertEquals("RISK_TYPE", valueOpt.get().getClassifier().getTitle());
     }
 
@@ -50,7 +51,7 @@ class ClassifierValueRepositoryTest {
 
     @ParameterizedTest
     @MethodSource("countryValues")
-    public void shouldFindCountryValue(String country){
+    public void shouldFindCountryValue(String country) {
         Optional<ClassifierValue> valueOpt = classifierValueRepository.findByClassifierTitleAndIc(
                 "COUNTRY", country);
         assertTrue(valueOpt.isPresent());

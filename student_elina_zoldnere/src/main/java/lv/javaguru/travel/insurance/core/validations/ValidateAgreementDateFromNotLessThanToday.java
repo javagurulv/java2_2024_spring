@@ -22,7 +22,7 @@ class ValidateAgreementDateFromNotLessThanToday extends RequestFieldValidationIm
     public Optional<ValidationError> validateSingle(TravelCalculatePremiumRequest request) {
         Date agreementDateFrom = request.getAgreementDateFrom();
         Date agreementDateTo = request.getAgreementDateTo();
-        Date currentDate = dateTimeUtil.midnightToday();
+        Date currentDate = dateTimeUtil.startOfToday();
 
         return (agreementDateFrom != null && agreementDateTo != null
                 && agreementDateFrom.before(currentDate))
