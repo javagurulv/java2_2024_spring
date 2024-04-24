@@ -33,3 +33,15 @@ VALUES (0, 5, 1.1),
        (18, 40, 1.1),
        (41, 65, 1.2),
        (66, 150, 1.5);
+
+INSERT INTO classifiers (title, description)
+VALUES ('MEDICAL_RISK_LIMIT_LEVEL', 'medical risk limit level classifier' );
+
+SET @classifier_id = LAST_INSERT_ID();
+
+INSERT INTO classifier_values (classifier_id, ic, description)
+VALUES (@classifier_id, 'LEVEL_10000', 't.p. medical risk limit level 10 000 EUR'),
+       (@classifier_id, 'LEVEL_15000', 't.p. medical risk limit level 15 000 EUR'),
+       (@classifier_id, 'LEVEL_20000', 't.p. medical risk limit level 20 000 EUR'),
+       (@classifier_id, 'LEVEL_50000', 't.p. medical risk limit level 50 000 EUR');
+
