@@ -6,12 +6,12 @@
 Ментор внёс изменения в приложение и создал требуемую веб страницу.
 
 Изменения коснулись:
-teacher/step_85/build.gradle - добавлена зависимость Thymeleaf
-teacher/step_85/src/main/resources/application.properties - добавлена конфигурация Thymeleaf
-teacher/step_85/src/main/resources/templates - добавлен шаблон страницы на Thymeleaf
-teacher/step_85/src/main/java/lv/javaguru/java2/insurance/web - добавлен контроллер веб страницы
-teacher/step_85/src/main/java/lv/javaguru/java2/insurance/rest/TravelCalculatePremiumController.java - изменён URL
-teacher/step_85/src/test/java/lv/javaguru/java2/insurance/rest/TravelCalculatePremiumControllerTestCase.java - изменён URL
+build.gradle - добавлена зависимость Thymeleaf
+src/main/resources/application.properties - добавлена конфигурация Thymeleaf
+src/main/resources/templates - добавлен шаблон страницы на Thymeleaf
+src/main/java/org/javaguru/java2/insurance/web - добавлен контроллер веб страницы
+src/main/java/org/javaguru/java2/insurance/rest/TravelCalculatePremiumController.java - изменён URL
+src/test/java/org/javaguru/java2/insurance/rest/TravelCalculatePremiumControllerTestCase.java - изменён URL
 
 Ваша задача:
 
