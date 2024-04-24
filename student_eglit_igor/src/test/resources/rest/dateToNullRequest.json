@@ -5,6 +5,7 @@
   "agreementDateFrom" : "2025-01-01",
   "agreementDateTo" : null,
   "country" : "LATVIA",
+  "medicalRiskLimitLevel" : "LEVEL_10000",
   "selected_risks":
   ["TRAVEL_MEDICAL",
     "TRAVEL_CANCELLATION",
