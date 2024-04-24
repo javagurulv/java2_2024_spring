@@ -1,7 +1,6 @@
 package lv.javaguru.travel.insurance.core.services;
 
 import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwriting;
-import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwritingImpl;
 import lv.javaguru.travel.insurance.core.util.DateTimeService;
 import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
@@ -13,7 +12,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Component
-public class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
+class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService {
 
     @Autowired
     private DateTimeService dateTimeService;

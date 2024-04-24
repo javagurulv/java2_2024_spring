@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.util;
 
 import lv.javaguru.travel.insurance.core.util.DateTimeService;
 import org.junit.jupiter.api.Test;
@@ -29,14 +29,14 @@ public class DateTimeServiceTest {
     }
 
 
-        public Date createDate(String dateString) {
-            SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
-            try {
-                dateFormatter.setLenient(true);
-                return dateFormatter.parse(dateString);
-            } catch (ParseException e) {
-                System.out.println("Error parsing date string: " + e.getMessage());
-                return null;
-            }
+    public Date createDate(String dateString) {
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
+        try {
+            dateFormatter.setLenient(true);
+            return dateFormatter.parse(dateString);
+        } catch (ParseException e) {
+            System.out.println("Error parsing date string: " + e.getMessage());
+            return null;
         }
+    }
 }

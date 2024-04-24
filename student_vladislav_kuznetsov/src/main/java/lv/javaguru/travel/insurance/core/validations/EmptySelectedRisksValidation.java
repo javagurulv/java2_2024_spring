@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 @Component
-public class EmptySelectedRisksValidation implements TravelRequestValidation{
+class EmptySelectedRisksValidation implements TravelRequestValidation{
 
     @Autowired private ValidationErrorFactory errorFactory;
 
