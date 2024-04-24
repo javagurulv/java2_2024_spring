@@ -12,19 +12,21 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 public class TravelPremiumUnderwritingTest {
 
-    @Mock private DateTimeService dateTimeService;
+    @Mock
+    private DateTimeService dateTimeService;
 
-    @InjectMocks private TravelPremiumUnderwriting premiumUnderwriting;
+    @InjectMocks
+    private TravelPremiumUnderwriting premiumUnderwriting;
 
     @Test
-        public void checkResponseWithCorrectAgreementPrice() {
+    public void checkResponseWithCorrectAgreementPrice() {
         TravelCalculatePremiumRequest travelCalculatePremiumRequest = mock(TravelCalculatePremiumRequest.class);
         when(travelCalculatePremiumRequest.getAgreementDateFrom()).thenReturn(makeDate("10.10.2010"));
         when(travelCalculatePremiumRequest.getAgreementDateTo()).thenReturn(makeDate("11.10.2010"));
@@ -43,3 +45,4 @@ public class TravelPremiumUnderwritingTest {
 
 
 }
+

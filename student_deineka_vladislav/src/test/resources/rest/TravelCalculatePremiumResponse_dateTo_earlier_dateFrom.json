@@ -1,0 +1,13 @@
+{
+  "validationErrors": [
+    {
+      "field": "dateFrom",
+      "message": "Cannot be bigger or equal to dateTo"
+    }
+  ],
+  "personFirstName" : null,
+  "personLastName" : null,
+  "agreementDateFrom" : null,
+  "agreementDateTo" : null,
+  "agreementPrice" : null
+}
