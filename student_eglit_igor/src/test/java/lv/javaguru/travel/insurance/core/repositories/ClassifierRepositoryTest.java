@@ -32,6 +32,12 @@ class ClassifierRepositoryTest {
         assertTrue(riskTypeOpt.isPresent());
         assertEquals("COUNTRY", riskTypeOpt.get().getTitle());
     }
+    @Test
+    public void shouldFindMEDICAL_LIMIT_LEVELClassifier(){
+        Optional<Classifier> riskTypeOpt = classifierRepository.findByTitle("MEDICAL_RISK_LIMIT_LEVEL");
+        assertTrue(riskTypeOpt.isPresent());
+        assertEquals("MEDICAL_RISK_LIMIT_LEVEL", riskTypeOpt.get().getTitle());
+    }
 
     @Test
     public void shouldNotFindFakeClassifier(){
