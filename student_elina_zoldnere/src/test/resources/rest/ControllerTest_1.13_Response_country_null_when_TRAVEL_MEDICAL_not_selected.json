@@ -16,5 +16,6 @@
       "premium" : 0.00
     }
   ],
-  "country" : null
+  "country" : null,
+  "medicalRiskLimitLevel" : null
 }

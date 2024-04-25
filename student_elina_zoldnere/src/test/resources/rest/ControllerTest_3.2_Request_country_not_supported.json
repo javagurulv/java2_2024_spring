@@ -5,5 +5,6 @@
   "agreementDateFrom" : "2025-03-10",
   "agreementDateTo" : "2025-03-11",
   "selectedRisks" : ["TRAVEL_MEDICAL","TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"],
-  "country" : "NOT_SUPPORTED"
+  "country" : "NOT_SUPPORTED",
+  "medicalRiskLimitLevel" : "LEVEL_10000"
 }

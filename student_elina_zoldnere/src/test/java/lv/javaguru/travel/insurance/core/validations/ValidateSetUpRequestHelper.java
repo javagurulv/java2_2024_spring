@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 
 @Component
@@ -22,6 +21,7 @@ class ValidateSetUpRequestHelper {
         Mockito.lenient().when(requestMock.getSelectedRisks())
                 .thenReturn(Arrays.asList("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"));
         Mockito.lenient().when(requestMock.getCountry()).thenReturn("SPAIN");
+        Mockito.lenient().when(requestMock.getMedicalRiskLimitLevel()).thenReturn("LEVEL_10000");
     }
 
 }

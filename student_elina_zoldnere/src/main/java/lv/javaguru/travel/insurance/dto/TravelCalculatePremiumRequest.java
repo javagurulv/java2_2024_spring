@@ -32,4 +32,6 @@ public class TravelCalculatePremiumRequest {
 
     private String country;
 
+    private String medicalRiskLimitLevel;
+
 }
