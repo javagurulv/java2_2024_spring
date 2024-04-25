@@ -5,5 +5,6 @@
   "agreementDateFrom" : "2025-03-10",
   "agreementDateTo" : "2025-03-11",
   "selectedRisks" : ["NOT_SUPPORTED_1", "NOT_SUPPORTED_2"],
-  "country" : "SPAIN"
+  "country" : "SPAIN",
+  "medicalRiskLimitLevel" : "LEVEL_10000"
 }

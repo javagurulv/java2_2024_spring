@@ -39,6 +39,8 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
 
     private String country;
 
+    private String medicalRiskLimitLevel;
+
     public TravelCalculatePremiumResponse(List<ValidationError> errors) {
         super(errors);
     }

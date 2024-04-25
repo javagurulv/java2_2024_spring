@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.rest;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -40,13 +41,13 @@ public class TravelCalculatePremiumControllerTest {
     private static Stream<Arguments> testNameAndFileNameProvider() {
         return Stream.of(
 
-                Arguments.of("1.1 personFirstName missing",
-                        "ControllerTest_1.1_Request_personFirstName_missing.json",
-                        "ControllerTest_1.1_Response_personFirstName_missing.json"),
+                Arguments.of("1.1 personFirstName null",
+                        "ControllerTest_1.1_Request_personFirstName_null.json",
+                        "ControllerTest_1.1_Response_personFirstName_null.json"),
 
-                Arguments.of("1.2 personLastName missing",
-                        "ControllerTest_1.2_Request_personLastName_missing.json",
-                        "ControllerTest_1.2_Response_personLastName_missing.json"),
+                Arguments.of("1.2 personLastName null",
+                        "ControllerTest_1.2_Request_personLastName_null.json",
+                        "ControllerTest_1.2_Response_personLastName_null.json"),
 
                 Arguments.of("1.3 personFirstName empty",
                         "ControllerTest_1.3_Request_personFirstName_empty.json",
@@ -64,41 +65,53 @@ public class TravelCalculatePremiumControllerTest {
                         "ControllerTest_1.6_Request_personLastName_blank.json",
                         "ControllerTest_1.6_Response_personLastName_blank.json"),
 
-                Arguments.of("1.7 agreementDateFrom missing",
-                        "ControllerTest_1.7_Request_agreementDateFrom_missing.json",
-                        "ControllerTest_1.7_Response_agreementDateFrom_missing.json"),
+                Arguments.of("1.7 agreementDateFrom null",
+                        "ControllerTest_1.7_Request_agreementDateFrom_null.json",
+                        "ControllerTest_1.7_Response_agreementDateFrom_null.json"),
 
-                Arguments.of("1.8 agreementDateTo missing",
-                        "ControllerTest_1.8_Request_agreementDateTo_missing.json",
-                        "ControllerTest_1.8_Response_agreementDateTo_missing.json"),
+                Arguments.of("1.8 agreementDateTo null",
+                        "ControllerTest_1.8_Request_agreementDateTo_null.json",
+                        "ControllerTest_1.8_Response_agreementDateTo_null.json"),
 
-                Arguments.of("1.9 selectedRisks missing",
-                        "ControllerTest_1.9_Request_selectedRisks_missing.json",
-                        "ControllerTest_1.9_Response_selectedRisks_missing.json"),
+                Arguments.of("1.9 selectedRisks null",
+                        "ControllerTest_1.9_Request_selectedRisks_null.json",
+                        "ControllerTest_1.9_Response_selectedRisks_null.json"),
 
                 Arguments.of("1.10 selectedRisks empty",
                         "ControllerTest_1.10_Request_selectedRisks_empty.json",
                         "ControllerTest_1.10_Response_selectedRisks_empty.json"),
 
-                Arguments.of("1.11 country missing when TRAVEL_MEDICAL risk selected",
-                        "ControllerTest_1.11_Request_country_missing_when_TRAVEL_MEDICAL_selected.json",
-                        "ControllerTest_1.11_Response_country_missing_when_TRAVEL_MEDICAL_selected.json"),
+                Arguments.of("1.11 country null when TRAVEL_MEDICAL risk selected",
+                        "ControllerTest_1.11_Request_country_null_when_TRAVEL_MEDICAL_selected.json",
+                        "ControllerTest_1.11_Response_country_null_when_TRAVEL_MEDICAL_selected.json"),
 
                 Arguments.of("1.12 country blank when TRAVEL_MEDICAL risk selected",
                         "ControllerTest_1.12_Request_country_blank_when_TRAVEL_MEDICAL_selected.json",
                         "ControllerTest_1.12_Response_country_blank_when_TRAVEL_MEDICAL_selected.json"),
 
-                Arguments.of("1.13 country missing when TRAVEL_MEDICAL risk not selected",
-                        "ControllerTest_1.13_Request_country_missing_when_TRAVEL_MEDICAL_not_selected.json",
-                        "ControllerTest_1.13_Response_country_missing_when_TRAVEL_MEDICAL_not_selected.json"),
+                Arguments.of("1.13 country null when TRAVEL_MEDICAL risk not selected",
+                        "ControllerTest_1.13_Request_country_null_when_TRAVEL_MEDICAL_not_selected.json",
+                        "ControllerTest_1.13_Response_country_null_when_TRAVEL_MEDICAL_not_selected.json"),
 
-                Arguments.of("1.14 personBirthDate missing",
-                        "ControllerTest_1.14_Request_personBirthDate_missing.json",
-                        "ControllerTest_1.14_Response_personBirthDate_missing.json"),
+                Arguments.of("1.14 personBirthDate null",
+                        "ControllerTest_1.14_Request_personBirthDate_null.json",
+                        "ControllerTest_1.14_Response_personBirthDate_null.json"),
 
-                Arguments.of("1.99 all fields missing or empty or blank",
-                        "ControllerTest_1.99_Request_all_fields_missing_or_empty_or_blank.json",
-                        "ControllerTest_1.99_Response_all_fields_missing_or_empty_or_blank.json"),
+                Arguments.of("1.15 medicalRiskLimitLevel null when TRAVEL_MEDICAL risk selected",
+                        "ControllerTest_1.15_Request_medicalRiskLimitLevel_null_when_TRAVEL_MEDICAL_selected.json",
+                        "ControllerTest_1.15_Response_medicalRiskLimitLevel_null_when_TRAVEL_MEDICAL_selected.json"),
+
+                Arguments.of("1.16 medicalRiskLimitLevel blank when TRAVEL_MEDICAL risk selected",
+                        "ControllerTest_1.16_Request_medicalRiskLimitLevel_blank_when_TRAVEL_MEDICAL_selected.json",
+                        "ControllerTest_1.16_Response_medicalRiskLimitLevel_blank_when_TRAVEL_MEDICAL_selected.json"),
+
+                Arguments.of("1.17 medicalRiskLimitLevel null when TRAVEL_MEDICAL risk not selected",
+                        "ControllerTest_1.17_Request_medicalRiskLimitLevel_null_when_TRAVEL_MEDICAL_not_selected.json",
+                        "ControllerTest_1.17_Response_medicalRiskLimitLevel_null_when_TRAVEL_MEDICAL_not_selected.json"),
+
+                Arguments.of("1.99 all fields null or empty or blank",
+                        "ControllerTest_1.99_Request_all_fields_null_or_empty_or_blank.json",
+                        "ControllerTest_1.99_Response_all_fields_null_or_empty_or_blank.json"),
 
                 Arguments.of("2.1 agreementDateTo is less than agreementDateFrom",
                         "ControllerTest_2.1_Request_wrong_date_chronology.json",
@@ -131,6 +144,10 @@ public class TravelCalculatePremiumControllerTest {
                 Arguments.of("3.2 country not supported",
                         "ControllerTest_3.2_Request_country_not_supported.json",
                         "ControllerTest_3.2_Response_country_not_supported.json"),
+
+                Arguments.of("3.3 medical risk limit level not supported",
+                        "ControllerTest_3.3_Request_medicalRiskLimitLevel_not_supported.json",
+                        "ControllerTest_3.3_Response_medicalRiskLimitLevel_not_supported.json"),
 
                 Arguments.of("9.1 all fields are present and valid",
                         "ControllerTest_9.1_Request_all_fields_present_and_valid.json",

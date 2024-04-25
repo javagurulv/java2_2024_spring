@@ -19,10 +19,11 @@ public class JsonFileReaderTest {
                 "agreementDateFrom" : "2025-03-10",
                 "agreementDateTo" : "2025-03-11",
                 "selectedRisks" : ["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"],
-                "country" : "SPAIN"
+                "country" : "SPAIN",
+                "medicalRiskLimitLevel" : "LEVEL_10000"
                 }""";
 
-        String actualJson = reader.readJsonFromFile("ControllerTest_1.1_Request_personFirstName_missing.json");
+        String actualJson = reader.readJsonFromFile("ControllerTest_1.1_Request_personFirstName_null.json");
 
         ObjectMapper mapper = new ObjectMapper();
         assertEquals(mapper.readTree(expectedJson), mapper.readTree(actualJson));
