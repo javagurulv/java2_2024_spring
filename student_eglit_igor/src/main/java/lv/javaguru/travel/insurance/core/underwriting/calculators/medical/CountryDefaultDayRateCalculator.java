@@ -1,5 +1,7 @@
 package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
+import lv.javaguru.travel.insurance.core.domain.CountryDefaultDayRate;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +24,7 @@ class CountryDefaultDayRateCalculator {
 
     BigDecimal findCountryDefaultDayRate(TravelCalculatePremiumRequest request) {
         return countryDefaultDayRateRepository.findByCountryIc(request.getCountry())
-                .map(lv.javaguru.travel.insurance.core.domain.CountryDefaultDayRate::getDefaultDayRate)
+                .map(CountryDefaultDayRate::getDefaultDayRate)
                 .orElseThrow(() -> new RuntimeException("Country day rate not found by country id = " + request.getCountry()));
     }
 }

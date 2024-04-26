@@ -40,9 +40,11 @@ CREATE TABLE age_coefficient (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE medical_risk_limit_level (
+CREATE TABLE IF NOT EXISTS medical_risk_limit_level (
   id BIGINT NOT NULL AUTO_INCREMENT,
   medical_risk_limit_level_ic VARCHAR(200) NOT NULL,
   coefficient DECIMAL(10,2) NOT NULL,
   PRIMARY KEY (id)
 );
+CREATE UNIQUE INDEX ix_medical_risk_limit_level_limit_level_ic
+ON medical_risk_limit_level (medical_risk_limit_level_ic);

@@ -5,27 +5,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 import javax.persistence.*;
 import java.math.BigDecimal;
-
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "age_coefficient")
-public class AgeCoefficient {
+@Table(name = "medical_risk_limit_level")
+public class MedicalRiskLimitLevel {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "age_from", nullable = false)
-    private Integer ageFrom;
-
-    @Column(name = "age_to", nullable = false)
-    private Integer ageTo;
+    @Column(name = "medical_risk_limit_level_ic", nullable = false)
+    private String medicalRiskLimitLevelIc;
 
     @Column(name = "coefficient", precision = 10, scale = 2, nullable = false)
     private BigDecimal coefficient;
