@@ -53,6 +53,4 @@ class TravelCalculatePremiumRequestValidator {
                 ? Optional.of(new ValidationError("agreementDateFrom", "Must be less then agreementDateTo"))
                 : Optional.empty();
     }
-
-
 }
