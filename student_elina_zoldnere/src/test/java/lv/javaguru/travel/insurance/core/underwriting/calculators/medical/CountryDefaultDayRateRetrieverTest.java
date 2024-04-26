@@ -45,11 +45,10 @@ class CountryDefaultDayRateRetrieverTest {
 
     @Test
     public void findCountryDefaultDayRate_shouldThrowExceptionWhenRateDoesNotExist() {
+        when(requestMock.getCountry()).thenReturn("INVALID");
         when(countryDefaultDayRateRepositoryMock.findByCountryIc(any()))
                 .thenReturn(Optional.empty());
-        when(requestMock.getCountry()).thenReturn("INVALID");
 
-        String country_ic = requestMock.getCountry();
         RuntimeException exception = assertThrows(RuntimeException.class, () -> countryDefaultDayRateRetriever
                 .findCountryDefaultDayRate(requestMock));
         assertEquals("Country ic = INVALID default day rate not found!", exception.getMessage());
