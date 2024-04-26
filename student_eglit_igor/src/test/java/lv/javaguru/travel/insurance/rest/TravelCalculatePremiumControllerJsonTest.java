@@ -161,6 +161,12 @@ public class TravelCalculatePremiumControllerJsonTest {
         var expectedJson = getExpectedJson("rest/countryNotSupportedResponse.json");
         JSONAssert.assertEquals(expectedJson, actualJson, false);
     }
+    @Test
+    public void shouldReturnErrorMessageThenMedicalRiskLimitLevelNullWithSelectedRiskTravel_Medical() throws Exception {
+        var actualJson = getActualJson("rest/medicalRiskLevelNullThenSelectedRisks_TravelMedicalExistsRequest.json");
+        var expectedJson = getExpectedJson("rest/medicalRiskLevelNullThenSelectedRisks_TravelMedicalExistsResponse.json");
+        JSONAssert.assertEquals(expectedJson, actualJson, false);
+    }
 
     private String getActualJson(String filePath) throws Exception {
         return mockMvc.perform(post("/insurance/travel/")

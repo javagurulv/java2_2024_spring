@@ -1,0 +1,14 @@
+{
+  "personFirstName" : "Vasja",
+  "personLastName" : "Pupkin",
+  "personBirthDate" : "1990-01-01",
+  "agreementDateFrom" : "2025-01-01",
+  "agreementDateTo" : "2025-01-02",
+  "country" : "LATVIA",
+  "medicalRiskLimitLevel" : null,
+  "selected_risks":
+  ["TRAVEL_MEDICAL",
+    "TRAVEL_CANCELLATION",
+    "TRAVEL_LOSS_BAGGAGE"
+  ]
+}
