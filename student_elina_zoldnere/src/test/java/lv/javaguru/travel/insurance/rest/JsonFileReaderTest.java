@@ -20,7 +20,7 @@ public class JsonFileReaderTest {
                 "agreementDateTo" : "2025-03-11",
                 "selectedRisks" : ["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"],
                 "country" : "SPAIN",
-                "medicalRiskLimitLevel" : "LEVEL_10000"
+                "medicalRiskLimitLevel" : "LEVEL_15000"
                 }""";
 
         String actualJson = reader.readJsonFromFile("ControllerTest_1.1_Request_personFirstName_null.json");

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Component
 class TravelMedicalRiskPremiumCalculator implements TravelRiskPremiumCalculator {
@@ -17,15 +18,20 @@ class TravelMedicalRiskPremiumCalculator implements TravelRiskPremiumCalculator 
     private CountryDefaultDayRateRetriever countryDefaultDayRateRetriever;
     @Autowired
     private AgeCoefficientRetriever ageCoefficientRetriever;
+    @Autowired
+    private MedicalRiskLimitLevelCoefficientRetriever limitLevelCoefficientRetriever;
 
     @Override
     public BigDecimal calculateRiskPremium(TravelCalculatePremiumRequest request) {
         BigDecimal dayCount = dayCountCalculator.calculateDayCount(request);
         BigDecimal countryDefaultDayRate = countryDefaultDayRateRetriever.findCountryDefaultDayRate(request);
         BigDecimal ageCoefficient = ageCoefficientRetriever.findAgeCoefficient(request);
+        BigDecimal limitLevelCoefficient = limitLevelCoefficientRetriever.findLimitLevelCoefficient(request);
         return countryDefaultDayRate
                 .multiply(dayCount)
-                .multiply(ageCoefficient);
+                .multiply(ageCoefficient)
+                .multiply(limitLevelCoefficient)
+                .setScale(2, RoundingMode.HALF_UP);
     }
 
     @Override

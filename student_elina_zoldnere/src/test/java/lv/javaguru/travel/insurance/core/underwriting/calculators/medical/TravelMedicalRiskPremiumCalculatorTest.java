@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -24,6 +25,8 @@ class TravelMedicalRiskPremiumCalculatorTest {
     private CountryDefaultDayRateRetriever countryDefaultDayRateRetrieverMock;
     @Mock
     private AgeCoefficientRetriever ageCoefficientRetrieverMock;
+    @Mock
+    private MedicalRiskLimitLevelCoefficientRetriever limitLevelCoefficientRetrieverMock;
 
     @InjectMocks
     private TravelMedicalRiskPremiumCalculator medicalRiskPremiumCalculator;
@@ -33,13 +36,20 @@ class TravelMedicalRiskPremiumCalculatorTest {
         BigDecimal dayCount = BigDecimal.ONE;
         BigDecimal countryDefaultDayRate = BigDecimal.valueOf(2.5);
         BigDecimal ageCoefficient = BigDecimal.valueOf(1.1);
+        BigDecimal limitLevelCoefficient = BigDecimal.valueOf(1.2);
 
         when(dayCountCalculatorMock.calculateDayCount(requestMock)).thenReturn(dayCount);
         when(countryDefaultDayRateRetrieverMock.findCountryDefaultDayRate(requestMock))
                 .thenReturn(countryDefaultDayRate);
         when(ageCoefficientRetrieverMock.findAgeCoefficient(requestMock)).thenReturn(ageCoefficient);
+        when(limitLevelCoefficientRetrieverMock.findLimitLevelCoefficient(requestMock))
+                .thenReturn(limitLevelCoefficient);
 
-        BigDecimal expectedPremium = countryDefaultDayRate.multiply(dayCount).multiply(ageCoefficient);
+        BigDecimal expectedPremium = countryDefaultDayRate
+                .multiply(dayCount)
+                .multiply(ageCoefficient)
+                .multiply(limitLevelCoefficient)
+                .setScale(2, RoundingMode.HALF_UP);;
         BigDecimal actualPremium = medicalRiskPremiumCalculator.calculateRiskPremium(requestMock);
 
         assertEquals(expectedPremium, actualPremium);
