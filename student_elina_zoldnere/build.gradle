@@ -1,10 +1,8 @@
-tasks.withType(JavaCompile).configureEach {options.encoding = "UTF-8"}
-tasks.withType(JavaExec).configureEach {defaultCharacterEncoding = "UTF-8"}
-tasks.withType(Javadoc).configureEach {options.encoding = "UTF-8"}
-tasks.withType(Test).configureEach {defaultCharacterEncoding = "UTF-8"}
+plugins {
+	id 'org.springframework.boot' version "2.7.5"
+}
 
 dependencies {
-
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.7.5'
 	implementation 'org.springframework.boot:spring-boot-starter-web:2.7.5'
 
@@ -16,9 +14,6 @@ dependencies {
 	implementation 'mysql:mysql-connector-java:8.0.22'
 	implementation 'org.hibernate:hibernate-core:5.4.25.Final'
 
-    compileOnly 'org.projectlombok:lombok:1.18.24'
-	annotationProcessor 'org.projectlombok:lombok:1.18.24'
-
 	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.5'
 	testImplementation 'junit:junit:4.13.1'
 
@@ -26,11 +21,28 @@ dependencies {
 	testImplementation 'org.hamcrest:hamcrest:2.2'
 	testImplementation 'com.h2database:h2:1.4.200'
 
+	compileOnly 'org.projectlombok:lombok:1.18.24'
+	annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
 	testCompileOnly 'org.projectlombok:lombok:1.18.24'
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+}
 
-	test {
-		useJUnitPlatform()
-	}
+tasks.withType(JavaCompile).configureEach {options.encoding = "UTF-8"}
+tasks.withType(JavaExec).configureEach {defaultCharacterEncoding = "UTF-8"}
+tasks.withType(Javadoc).configureEach {options.encoding = "UTF-8"}
+tasks.withType(Test).configureEach {defaultCharacterEncoding = "UTF-8"}
 
+jar {
+	enabled = false
+}
+
+bootJar {
+	enabled = true
+	archiveBaseName = 'insurance-calculator'
+	archiveVersion = '1.0.0'
+}
+
+test {
+	useJUnitPlatform()
 }
