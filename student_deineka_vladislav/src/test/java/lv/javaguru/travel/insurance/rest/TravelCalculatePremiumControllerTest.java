@@ -32,7 +32,7 @@ public class TravelCalculatePremiumControllerTest {
     @DisplayName("Test 1: no errors")
     public void premiumControllerTestNoErrors() throws Exception {
         generalizingAndComparing("rest/TravelCalculatePremiumRequest_noErrors.json",
-                "rest/TravelCalculatePremiumResponse_noErrors.json");
+                                "rest/TravelCalculatePremiumResponse_noErrors.json");
 
     }
 
@@ -40,42 +40,42 @@ public class TravelCalculatePremiumControllerTest {
     @DisplayName("Test 2: first name field is empty")
     public void firstNameFieldIsEmpty() throws Exception {
         generalizingAndComparing("rest/TravelCalculatePremiumRequest_firstName_empty.json",
-                "rest/TravelCalculatePremiumResponse_firstName_empty.json");
+                                "rest/TravelCalculatePremiumResponse_firstName_empty.json");
     }
 
     @Test
     @DisplayName("Test 3: last name field is empty")
     public void lastNameFieldIsEmpty() throws Exception {
         generalizingAndComparing("rest/TravelCalculatePremiumRequest_lastName_empty.json",
-                "rest/TravelCalculatePremiumResponse_lastName_empty.json");
+                                "rest/TravelCalculatePremiumResponse_lastName_empty.json");
     }
 
     @Test
     @DisplayName("Test 4: date from field is empty")
     public void dateFromFieldIsEmpty() throws Exception {
         generalizingAndComparing("rest/TravelCalculatePremiumRequest_dateFrom_empty.json",
-                "rest/TravelCalculatePremiumResponse_dateFrom_empty.json");
+                                "rest/TravelCalculatePremiumResponse_dateFrom_empty.json");
     }
 
     @Test
     @DisplayName("Test 5: date to field is empty")
     public void dateToFieldIsEmpty() throws Exception {
         generalizingAndComparing("rest/TravelCalculatePremiumRequest_dateTo_empty.json",
-                "rest/TravelCalculatePremiumResponse_dateTo_empty.json");
+                                "rest/TravelCalculatePremiumResponse_dateTo_empty.json");
     }
 
     @Test
     @DisplayName("Test 6: date to is equal to date from")
     public void dateToIsEqualToDateFrom() throws Exception {
         generalizingAndComparing("rest/TravelCalculatePremiumRequest_dateFrom_equals_dateTo.json",
-                "rest/TravelCalculatePremiumResponse_dateFrom_equals_dateTo.json");
+                                "rest/TravelCalculatePremiumResponse_dateFrom_equals_dateTo.json");
     }
 
     @Test
     @DisplayName("Test 7: date to is earlier than date from")
     public void dateToIsEarlierThanDateFrom() throws Exception {
         generalizingAndComparing("rest/TravelCalculatePremiumRequest_dateTo_earlier_dateFrom.json",
-                "rest/TravelCalculatePremiumResponse_dateTo_earlier_dateFrom.json");
+                                "rest/TravelCalculatePremiumResponse_dateTo_earlier_dateFrom.json");
     }
 
     private void generalizingAndComparing(String jsonRequestFilePath, String jsonResponseFilePath) throws Exception {
