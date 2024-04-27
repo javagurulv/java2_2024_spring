@@ -34,14 +34,14 @@ class SingleRiskPremiumCalculatorTest {
     private SingleRiskPremiumCalculator singleRiskCalculator;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         when(riskPremiumCalculators.stream()).thenReturn(Stream.of(calculatorMock1, calculatorMock2));
         when(calculatorMock1.getRiskIc()).thenReturn("TRAVEL_CANCELLATION");
         when(calculatorMock2.getRiskIc()).thenReturn("TRAVEL_MEDICAL");
     }
 
     @Test
-    public void calculatePremium_ShouldReturnRiskPremium() {
+    void calculatePremium_ShouldReturnRiskPremium() {
         String riskIc = "TRAVEL_MEDICAL";
         when(calculatorMock2.calculateRiskPremium(requestMock)).thenReturn(BigDecimal.ONE);
 
@@ -52,7 +52,7 @@ class SingleRiskPremiumCalculatorTest {
     }
 
     @Test
-    public void calculatePremium_ThrowsRuntimeExceptionWhenOnlyNotSupportedRisk() {
+    void calculatePremium_ThrowsRuntimeExceptionWhenOnlyNotSupportedRisk() {
         String riskIc = "NOT_SUPPORTED_RISK";
 
         assertThrows(RuntimeException.class, () -> singleRiskCalculator.calculatePremium(riskIc, requestMock));

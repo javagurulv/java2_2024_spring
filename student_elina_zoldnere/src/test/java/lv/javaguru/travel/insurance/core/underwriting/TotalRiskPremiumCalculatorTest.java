@@ -28,7 +28,7 @@ class TotalRiskPremiumCalculatorTest {
     private TotalRiskPremiumCalculator totalRiskCalculator;
 
     @Test
-    public void calculatePremium_ShouldReturnCorrectResult() {
+    void calculatePremium_ShouldReturnCorrectResult() {
         when(listRiskPremiumMock.stream()).thenReturn(Stream.of(riskPremiumMock1, riskPremiumMock2));
         when(riskPremiumMock1.getPremium()).thenReturn(BigDecimal.ONE);
         when(riskPremiumMock2.getPremium()).thenReturn(BigDecimal.TEN);
