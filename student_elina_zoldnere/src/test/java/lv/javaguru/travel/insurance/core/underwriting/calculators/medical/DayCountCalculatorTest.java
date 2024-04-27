@@ -27,7 +27,7 @@ class DayCountCalculatorTest {
     private DayCountCalculator dayCountCalculator;
 
     @Test
-    public void calculateDayCount_shouldCalculateCorrectResult() {
+    void calculateDayCount_shouldCalculateCorrectResult() {
         when(dateTimeUtilMock.calculateDifferenceBetweenDatesInDays(any(), any())).thenReturn(1L);
 
         BigDecimal expectedDayCount = BigDecimal.ONE;

@@ -31,7 +31,7 @@ class CountryDefaultDayRateRetrieverTest {
     private CountryDefaultDayRateRetriever countryDefaultDayRateRetriever;
 
     @Test
-    public void findCountryDefaultDayRate_shouldFindRateWhenRateExists() {
+    void findCountryDefaultDayRate_shouldFindRateWhenRateExists() {
         BigDecimal countryDefaultDayRate = BigDecimal.valueOf(2.5);
 
         CountryDefaultDayRate countryDefaultDayRateMock = mock(CountryDefaultDayRate.class);
@@ -44,7 +44,7 @@ class CountryDefaultDayRateRetrieverTest {
     }
 
     @Test
-    public void findCountryDefaultDayRate_shouldThrowExceptionWhenRateDoesNotExist() {
+    void findCountryDefaultDayRate_shouldThrowExceptionWhenRateDoesNotExist() {
         when(requestMock.getCountry()).thenReturn("INVALID");
         when(countryDefaultDayRateRepositoryMock.findByCountryIc(any()))
                 .thenReturn(Optional.empty());

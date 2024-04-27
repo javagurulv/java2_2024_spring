@@ -9,6 +9,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.math.BigDecimal;
 import java.util.Optional;
@@ -31,27 +33,37 @@ class MedicalRiskLimitLevelCoefficientRetrieverTest {
     private MedicalRiskLimitLevelCoefficientRetriever limitLevelCoefficientRetriever;
 
     @Test
-    public void findCoefficient_shouldFindCoefficientWhenCoefficientExists() {
-        BigDecimal limitLevelCoefficient = BigDecimal.valueOf(1.0);
+    void setLimitLevelCoefficient_shouldFindCoefficientWhenCoefficientExists() {
+        ReflectionTestUtils.setField(limitLevelCoefficientRetriever, "medicalRiskLimitLevelEnabled", Boolean.TRUE);
+        BigDecimal limitLevelCoefficient = BigDecimal.valueOf(1.2);
 
         MedicalRiskLimitLevel limitLevelMock = mock(MedicalRiskLimitLevel.class);
         when(limitLevelRepositoryMock.findByMedicalRiskLimitLevelIc(any()))
                 .thenReturn(Optional.of(limitLevelMock));
         when(limitLevelMock.getCoefficient()).thenReturn(limitLevelCoefficient);
 
-        BigDecimal actualLimitLevelCoefficient = limitLevelCoefficientRetriever.findLimitLevelCoefficient(requestMock);
+        BigDecimal actualLimitLevelCoefficient = limitLevelCoefficientRetriever.setLimitLevelCoefficient(requestMock);
         assertEquals(limitLevelCoefficient, actualLimitLevelCoefficient);
     }
 
     @Test
-    public void findCoefficient_shouldThrowExceptionWhenCoefficientDoesNotExist() {
+    void setLimitLevelCoefficient_shouldThrowExceptionWhenCoefficientDoesNotExist() {
+        ReflectionTestUtils.setField(limitLevelCoefficientRetriever, "medicalRiskLimitLevelEnabled", Boolean.TRUE);
         when(requestMock.getMedicalRiskLimitLevel()).thenReturn("INVALID");
         when(limitLevelRepositoryMock.findByMedicalRiskLimitLevelIc(any()))
                 .thenReturn(Optional.empty());
 
         RuntimeException exception = assertThrows(RuntimeException.class, () -> limitLevelCoefficientRetriever
-                .findLimitLevelCoefficient(requestMock));
+                .setLimitLevelCoefficient(requestMock));
         assertEquals("Medical risk limit level = INVALID coefficient not found!", exception.getMessage());
+    }
+
+    @Test
+    void seLimitLevelCoefficient_shouldReturnDefaultValueWhenRiskLimitLevelDisabled() {
+        ReflectionTestUtils.setField(limitLevelCoefficientRetriever, "medicalRiskLimitLevelEnabled", Boolean.FALSE);
+
+        BigDecimal actualLimitLevelCoefficient = limitLevelCoefficientRetriever.setLimitLevelCoefficient(requestMock);
+        assertEquals(BigDecimal.ONE, actualLimitLevelCoefficient);
     }
 
 }

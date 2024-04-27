@@ -33,7 +33,7 @@ public class TravelCalculatePremiumUnderwritingImplTest {
     private TravelCalculatePremiumUnderwritingImpl calculateUnderwriting;
 
     @Test
-    public void calculateAgreementPremium_ShouldReturnCorrectResultForOneValidRisk() {
+    void calculateAgreementPremium_ShouldReturnCorrectResultForOneValidRisk() {
         when(requestMock.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
         when(singleRiskCalculatorMock.calculatePremium("TRAVEL_MEDICAL", requestMock))
                 .thenReturn(riskPremiumMock1);
@@ -46,7 +46,7 @@ public class TravelCalculatePremiumUnderwritingImplTest {
     }
 
     @Test
-    public void calculateAgreementPremium_ShouldReturnCorrectResultForTwoValidRisks() {
+    void calculateAgreementPremium_ShouldReturnCorrectResultForTwoValidRisks() {
         when(requestMock.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION"));
         when(singleRiskCalculatorMock.calculatePremium("TRAVEL_MEDICAL", requestMock))
                 .thenReturn(riskPremiumMock1);

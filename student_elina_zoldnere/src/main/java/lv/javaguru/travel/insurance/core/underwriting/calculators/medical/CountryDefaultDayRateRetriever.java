@@ -15,7 +15,7 @@ class CountryDefaultDayRateRetriever {
     @Autowired
     private CountryDefaultDayRateRepository countryDefaultDayRateRepository;
 
-    public BigDecimal findCountryDefaultDayRate(TravelCalculatePremiumRequest request) {
+    BigDecimal findCountryDefaultDayRate(TravelCalculatePremiumRequest request) {
         String country_ic = request.getCountry();
         return countryDefaultDayRateRepository.findByCountryIc(country_ic)
                 .map(CountryDefaultDayRate::getDefaultDayRate)

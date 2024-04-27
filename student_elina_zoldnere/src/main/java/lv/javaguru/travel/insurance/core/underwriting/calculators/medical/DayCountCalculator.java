@@ -15,7 +15,7 @@ class DayCountCalculator {
     @Autowired
     private DateTimeUtil dateTimeUtil;
 
-    public BigDecimal calculateDayCount(TravelCalculatePremiumRequest request) {
+    BigDecimal calculateDayCount(TravelCalculatePremiumRequest request) {
         Date agreementDateFrom = request.getAgreementDateFrom();
         Date agreementDateTo = request.getAgreementDateTo();
         long differenceBetweenDays = dateTimeUtil
