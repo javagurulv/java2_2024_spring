@@ -130,4 +130,29 @@ class TravelCalculatePremiumRequestValidatorTest {
         assertEquals("Must not be empty!",errors.get(0).getMessage());
     }
 
+
+    @Test
+    public void shouldTestCorrectDateNegative() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getPersonFirstName()).thenReturn("Olegs");
+        when(request.getPersonLastName()).thenReturn("Radigins");
+        when(request.getAgreementDateFrom()).thenReturn(new Date(2000,1,1));
+        when(request.getAgreementDateTo()).thenReturn(new Date(2000,0,1));
+        List<ValidationError> errors = requestValidator.validate(request);
+        assertFalse(errors.isEmpty());
+        assertEquals(1,errors.size());
+        assertEquals("agreement date to",errors.get(0).getField());
+        assertEquals("Must be after!",errors.get(0).getMessage());
+    }
+
+    @Test
+    public void shouldTestCorrectDatePositive() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getPersonFirstName()).thenReturn("Olegs");
+        when(request.getPersonLastName()).thenReturn("Radigins");
+        when(request.getAgreementDateFrom()).thenReturn(new Date(2000,0,1));
+        when(request.getAgreementDateTo()).thenReturn(new Date(2000,1,1));
+        List<ValidationError> errors = requestValidator.validate(request);
+        assertTrue(errors.isEmpty());
+    }
 }
