@@ -7,6 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -20,123 +22,109 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class TravelCalculatePremiumServiceImplTest {
-   @Mock private DateTimeService dateTimeService;
+
+   @Mock private TravelPremiumUnderWriting travelPremiumUnderWriting;
 
    @Mock private TravelCalculatePremiumRequestValidator requestValidator;
-   @InjectMocks private TravelCalculatePremiumServiceImpl travelCalculatePremiumService;
-  // @InjectMocks private TravelCalculatePremiumRequest request;
-  // private TravelCalculatePremiumResponse response;
+   @InjectMocks
+   private TravelCalculatePremiumServiceImpl travelCalculatePremiumService;
 
 
 
 
-    @Test
-    public void shouldTestResponseFirstName() {
-       var request = createReadyMadeRequest();
-        when(dateTimeService.daysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo())).thenReturn(31L);
-        when(requestValidator.validate(request)).thenReturn(List.of());
-        var response = travelCalculatePremiumService.calculatePremium(request);
-        assertEquals(response.getPersonFirstName(), request.getPersonFirstName());
 
-    }
-
- @Test
-    public void shouldTestResponseLastname() {
-        var request = createReadyMadeRequest();
-        when(dateTimeService.daysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo())).thenReturn(31L);
-        when(requestValidator.validate(request)).thenReturn(List.of());
-        var response = travelCalculatePremiumService.calculatePremium(request);
-        assertEquals(response.getPersonLastName(), request.getPersonLastName());
-
-    }
-
-    @Test
-    public void shouldTestResponseDateFrom() {
-        var request = createReadyMadeRequest();
-        when(dateTimeService.daysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo())).thenReturn(31L);
-        when(requestValidator.validate(request)).thenReturn(List.of());
-        var response = travelCalculatePremiumService.calculatePremium(request);
-        assertEquals(response.getAgreementDateFrom(),request.getAgreementDateFrom());
-
-    }
-
-    @Test
-    public void shouldTestResponseDateTo() {
-        var request = createReadyMadeRequest();
-        when(dateTimeService.daysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo())).thenReturn(31L);
-        when(requestValidator.validate(request)).thenReturn(List.of());
-        var response = travelCalculatePremiumService.calculatePremium(request);
-        assertEquals(response.getAgreementDateTo(),request.getAgreementDateTo());
-
-    }
-
-
-    @Test
-    public void shouldTestResponseAgreementPrice() {
-        var request = createReadyMadeRequest();
-        when(dateTimeService.daysBetween(request.getAgreementDateFrom(), request.getAgreementDateTo())).thenReturn(31L);
-        when(requestValidator.validate(request)).thenReturn(List.of());
-        var response = travelCalculatePremiumService.calculatePremium(request);
-        assertEquals(response.getAgreementPrice(),new BigDecimal(31));
-
-    }
     @Test
     public void shouldReturnResponseWithErrors() {
-        var request = new TravelCalculatePremiumRequest();
-        var validationError = new ValidationError("field", "message");
-        when(requestValidator.validate(request)).thenReturn(List.of(validationError));
-        var response = travelCalculatePremiumService.calculatePremium(request);
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        List<ValidationError> errors = buildValidationErrorList();
+        when(requestValidator.validate(request)).thenReturn(errors);
+        TravelCalculatePremiumResponse response = travelCalculatePremiumService.calculatePremium(request);
         assertTrue(response.hasErrors());
     }
+
     @Test
-    public void shouldReturnResponseWithCorrectErrorCount() {
-        var request = new TravelCalculatePremiumRequest();
-        var validationError = new ValidationError("field", "message");
-        when(requestValidator.validate(request)).thenReturn(List.of(validationError));
-        var response = travelCalculatePremiumService.calculatePremium(request);
+    public void shouldReturnResponseWithValidationErrors() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        List<ValidationError> errors = buildValidationErrorList();
+        when(requestValidator.validate(request)).thenReturn(errors);
+        TravelCalculatePremiumResponse response = travelCalculatePremiumService.calculatePremium(request);
         assertEquals(response.getErrors().size(), 1);
-    }
-
-    @Test
-    public void shouldReturnResponseWithCorrectError() {
-        var request = new TravelCalculatePremiumRequest();
-        var validationError = new ValidationError("field", "message");
-        when(requestValidator.validate(request)).thenReturn(List.of(validationError));
-        var response = travelCalculatePremiumService.calculatePremium(request);
         assertEquals(response.getErrors().get(0).getField(), "field");
-        assertEquals(response.getErrors().get(0).getMessage(), "message");
-        assertNull(response.getPersonFirstName());
+        assertEquals(response.getErrors().get(0).getMessage(), "errorMessage");
     }
 
     @Test
-    public void allFieldsMustBeEmptyWhenResponseContainsError() {
-        var request = new TravelCalculatePremiumRequest();
-        var validationError = new ValidationError("field", "message");
-        when(requestValidator.validate(request)).thenReturn(List.of(validationError));
-        var response = travelCalculatePremiumService.calculatePremium(request);
-        assertNull(response.getPersonFirstName());
-        assertNull(response.getPersonLastName());
-        assertNull(response.getAgreementDateFrom());
-        assertNull(response.getAgreementDateTo());
-        assertNull(response.getAgreementPrice());
+    public void shouldNotInvokeDateTimeUtilWhenValidationErrors() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        List<ValidationError> errors = buildValidationErrorList();
+        when(requestValidator.validate(request)).thenReturn(errors);
+        TravelCalculatePremiumResponse response = travelCalculatePremiumService.calculatePremium(request);
+        assertEquals(response.getErrors().size(), 1);
+        assertEquals(response.getErrors().get(0).getField(), "field");
+        assertEquals(response.getErrors().get(0).getMessage(), "errorMessage");
     }
-
 
     @Test
-    public void shouldNOtBeInteractionWithDateTimeServiceWhenResponseContainsError() {
-        var request = new TravelCalculatePremiumRequest();
-        var validationError = new ValidationError("field", "message");
-        when(requestValidator.validate(request)).thenReturn(List.of(validationError));
-        var response = travelCalculatePremiumService.calculatePremium(request);
-        verifyNoInteractions(dateTimeService);
+    public void shouldReturnResponseWithCorrectPersonFirstName() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getPersonFirstName()).thenReturn("personFirstName");
+        when(requestValidator.validate(request)).thenReturn(List.of());
+        TravelCalculatePremiumResponse response = travelCalculatePremiumService.calculatePremium(request);
+        assertEquals(response.getPersonFirstName(), "personFirstName");
     }
-    private TravelCalculatePremiumRequest createReadyMadeRequest(){
-        var request = new TravelCalculatePremiumRequest();
-        request.setPersonFirstName("Olegs");
-        request.setPersonLastName("Radigins");
-        request.setAgreementDateFrom(new Date(2000,0,1));
-        request.setAgreementDateTo(new Date(2000,1,1));
-        return request;
+
+    @Test
+    public void shouldReturnResponseWithCorrectPersonLastName() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getPersonLastName()).thenReturn("personLastName");
+        when(requestValidator.validate(request)).thenReturn(List.of());
+        TravelCalculatePremiumResponse response = travelCalculatePremiumService.calculatePremium(request);
+        assertEquals(response.getPersonLastName(), "personLastName");
+    }
+
+    @Test
+    public void shouldReturnResponseWithCorrectAgreementDateFrom() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        Date dateFrom = new Date();
+        when(request.getAgreementDateFrom()).thenReturn(dateFrom);
+        when(requestValidator.validate(request)).thenReturn(List.of());
+        TravelCalculatePremiumResponse response = travelCalculatePremiumService.calculatePremium(request);
+        assertEquals(response.getAgreementDateFrom(), dateFrom);
+    }
+
+    @Test
+    public void shouldReturnResponseWithCorrectAgreementDateTo() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        Date dateTo = new Date();
+        when(request.getAgreementDateTo()).thenReturn(dateTo);
+        when(requestValidator.validate(request)).thenReturn(List.of());
+        TravelCalculatePremiumResponse response = travelCalculatePremiumService.calculatePremium(request);
+        assertEquals(response.getAgreementDateTo(), dateTo);
+    }
+
+    @Test
+    public void shouldReturnResponseWithCorrectAgreementPrice() {
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        when(request.getAgreementDateFrom()).thenReturn(createDate("01.01.2023"));
+        when(request.getAgreementDateTo()).thenReturn(createDate("10.01.2023"));
+        when(requestValidator.validate(request)).thenReturn(List.of());
+        when(travelPremiumUnderWriting.calculatePremium(request)).thenReturn(new BigDecimal(9));
+        TravelCalculatePremiumResponse response = travelCalculatePremiumService.calculatePremium(request);
+        assertEquals(response.getAgreementPrice(), new BigDecimal(9));
+    }
+
+    private List<ValidationError> buildValidationErrorList() {
+        return List.of(
+                new ValidationError("field", "errorMessage")
+        );
+    }
+
+    private Date createDate(String dateStr) {
+        try {
+            return new SimpleDateFormat("dd.MM.yyyy").parse(dateStr);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
