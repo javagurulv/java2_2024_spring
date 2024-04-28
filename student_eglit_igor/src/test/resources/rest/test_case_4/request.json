@@ -6,5 +6,5 @@
   "agreementDateTo" : "2025-05-29",
   "country" : null,
   "medicalRiskLimitLevel" : "LEVEL_10000",
-  "selected_risks":["TRAVEL_MEDICAL"]
+  "selected_risks":["TRAVEL_EVACUATION"]
 }

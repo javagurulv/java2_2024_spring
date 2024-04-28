@@ -1,45 +1,36 @@
 package lv.javaguru.travel.insurance.core.validation;
 
-import lv.javaguru.travel.insurance.core.domain.ClassifierValue;
-import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyList;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
-@ExtendWith(MockitoExtension.class)
 class RequestValidationCountryTest {
-    @Mock
-    private ClassifierValueRepository classifierValueRepository;
+    @InjectMocks
+    private RequestValidationCountry validator;
 
     @Mock
     private ValidationErrorFactory errorFactory;
-    @InjectMocks
-    private RequestValidationCountry validator;
+
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    public void shouldReturnEmptyWhenCountryExists() {
+    public void shouldReturnEmptyWhenCountryIsNotNullOrEmpty() {
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
         request.setCountry("Latvia");
-
-        when(classifierValueRepository.findByClassifierTitleAndIc("COUNTRY", "Latvia"))
-                .thenReturn(Optional.of(new ClassifierValue()));
+        request.setSelectedRisks(List.of("TRAVEL_EVACUATION"));
 
         Optional<ValidationError> result = validator.validateSingle(request);
 
@@ -47,25 +38,32 @@ class RequestValidationCountryTest {
     }
 
     @Test
-    public void shouldReturnErrorWhenCountryDoesNotExist() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getCountry()).thenReturn("INVALID");
-        when(classifierValueRepository.findByClassifierTitleAndIc("COUNTRY", "INVALID"))
-                .thenReturn(Optional.empty());
+    public void shouldReturnErrorWhenCountryIsEmpty() {
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+        request.setSelectedRisks(List.of("TRAVEL_EVACUATION"));
+        request.setCountry("");
 
-        ValidationError error = mock(ValidationError.class);
-        lenient().when(errorFactory.buildError(eq("ERROR_CODE_11"), anyList())).thenReturn(error);
+        ValidationError error = new ValidationError("ERROR_CODE_10","Field Country is empty!");
+        when(errorFactory.buildError("ERROR_CODE_10")).thenReturn(error);
 
         Optional<ValidationError> result = validator.validateSingle(request);
 
         assertTrue(result.isPresent());
+        assertEquals(error, result.get());
     }
+
     @Test
-    public void shouldReturnEmptyWhenCountryIsNull() {
+    public void shouldReturnErrorThenCountryIsNull() {
         TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+        request.setCountry(null);
+        request.setSelectedRisks(List.of("TRAVEL_CANCELLATION"));
+
+        ValidationError error = new ValidationError("ERROR_CODE_10","Field Country is empty!");
+        when(errorFactory.buildError("ERROR_CODE_10")).thenReturn(error);
 
         Optional<ValidationError> result = validator.validateSingle(request);
 
-        assertTrue(result.isEmpty());
+        assertTrue(result.isPresent());
+        assertEquals(error, result.get());
     }
 }
