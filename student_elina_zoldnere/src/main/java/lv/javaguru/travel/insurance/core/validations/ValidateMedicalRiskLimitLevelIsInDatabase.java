@@ -15,9 +15,6 @@ import java.util.Optional;
 @Component
 class ValidateMedicalRiskLimitLevelIsInDatabase extends RequestFieldValidationImpl {
 
-    @Value("${medical.risk.limit.level.enabled:false}")
-    private Boolean medicalRiskLimitLevelEnabled;
-
     @Autowired
     private ClassifierValueRepository classifierValueRepository;
     @Autowired
@@ -25,14 +22,10 @@ class ValidateMedicalRiskLimitLevelIsInDatabase extends RequestFieldValidationIm
 
     @Override
     public Optional<ValidationError> validateSingle(TravelCalculatePremiumRequest request) {
-        return (isMedicalRiskLevelEnabled() && request.getMedicalRiskLimitLevel() != null
+        return (request.getMedicalRiskLimitLevel() != null
                 && !request.getMedicalRiskLimitLevel().isBlank())
                 ? validateMedicalRiskLimitLevel(request)
                 : Optional.empty();
-    }
-
-    private boolean isMedicalRiskLevelEnabled() {
-        return medicalRiskLimitLevelEnabled;
     }
 
     private Optional<ValidationError> validateMedicalRiskLimitLevel(TravelCalculatePremiumRequest request) {

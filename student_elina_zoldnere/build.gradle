@@ -1,5 +1,6 @@
 plugins {
-	id 'org.springframework.boot' version "2.7.5"
+	id 'org.springframework.boot' version '2.7.5'
+	id 'maven-publish'
 }
 
 dependencies {
@@ -40,9 +41,40 @@ jar {
 bootJar {
 	enabled = true
 	archiveBaseName = 'insurance-calculator'
-	archiveVersion = '1.0.0'
+	archiveVersion = '1.0.1'
 }
 
 test {
 	useJUnitPlatform()
+}
+
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			// Identify the artifact
+			artifact bootJar  // This refers to the Spring Boot's bootJar task
+
+			// Project coordinates
+			groupId = 'lv.javaguru'
+			artifactId = 'insurance-calculator'
+			version = '1.0.1'
+
+			// Add other metadata as needed
+			pom {
+				name = 'Insurance Calculator Application'
+				description = 'Application to calculate travel insurance premium'
+				licenses {
+					license {
+						name = 'The Apache License, Version 2.0'
+						url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+					}
+				}
+			}
+		}
+	}
+
+	// Configure the repository location (local Maven repository)
+	repositories {
+		mavenLocal()
+	}
 }
