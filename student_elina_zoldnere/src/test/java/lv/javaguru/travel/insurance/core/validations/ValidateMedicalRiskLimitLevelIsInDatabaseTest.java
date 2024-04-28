@@ -45,7 +45,6 @@ class ValidateMedicalRiskLimitLevelIsInDatabaseTest {
 
     @Test
     public void validateSingle_ShouldReturnCorrectResponseWhenMedicalRiskLimitLevelIsNotSupported() {
-        ReflectionTestUtils.setField(validateRiskLimitLevel, "medicalRiskLimitLevelEnabled", Boolean.TRUE);
         when(requestMock.getMedicalRiskLimitLevel()).thenReturn("INVALID");
         when(repositoryMock.findByClassifierTitleAndIc("MEDICAL_RISK_LIMIT_LEVEL", "INVALID"))
                 .thenReturn(Optional.empty());
@@ -60,7 +59,6 @@ class ValidateMedicalRiskLimitLevelIsInDatabaseTest {
 
     @Test
     public void validateSingle_ShouldNotReturnErrorWhenMedicalRiskLimitLevelExists() {
-        ReflectionTestUtils.setField(validateRiskLimitLevel, "medicalRiskLimitLevelEnabled", Boolean.TRUE);
         when(repositoryMock.findByClassifierTitleAndIc("MEDICAL_RISK_LIMIT_LEVEL", "LEVEL_10000"))
                 .thenReturn(Optional.of(new ClassifierValue()));
 
