@@ -11,6 +11,7 @@ public class DateTimeService {
         long diff = request.getAgreementDateFrom().getTime() - request.getAgreementDateTo().getTime();
         return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 
+
     }
 
 }
