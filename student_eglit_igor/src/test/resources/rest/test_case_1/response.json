@@ -20,6 +20,10 @@
       "description": "Field personFirstName is empty!"
     },
     {
+      "errorCode": "ERROR_CODE_10",
+      "description": "Field Country is empty!"
+    },
+    {
       "errorCode": "ERROR_CODE_8",
       "description": "Field selected_risks is empty!"
     }
