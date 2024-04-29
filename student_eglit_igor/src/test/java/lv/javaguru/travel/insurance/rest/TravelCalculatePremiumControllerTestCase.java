@@ -41,7 +41,7 @@ public abstract class TravelCalculatePremiumControllerTestCase {
     }
 
     private String getActualJson(String filePath) throws Exception {
-        return mockMvc.perform(post("/insurance/travel/")
+        return mockMvc.perform(post("/insurance/travel/api/")
                         .content(jsonFileReader.readJsonFromFile(filePath))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 // Устанавливаем заголовок Content-Type для запроса в виде JSON данных

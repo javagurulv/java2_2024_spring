@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.concurrent.TimeUnit;
 
 @RestController
-@RequestMapping("/insurance/travel")
+@RequestMapping("/insurance/travel/api")
 public class TravelCalculatePremiumController {
 
 	@Autowired
