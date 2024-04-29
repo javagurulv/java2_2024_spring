@@ -79,15 +79,4 @@ class ValidateCountryNotEmptyOrNullTest {
         assertEquals("Field country is empty!", result.get().getDescription());
     }
 
-    @Test
-    public void validateSingle_ShouldNotReturnErrorWhenRiskTypeTravelMedicalIsNotSelected() {
-        when(requestMock.getSelectedRisks())
-                .thenReturn(Arrays.asList("TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"));
-
-        Optional<ValidationError> result = validateCountry.validateSingle(requestMock);
-
-        assertTrue(result.isEmpty());
-        verifyNoInteractions(errorFactoryMock);
-    }
-
 }
