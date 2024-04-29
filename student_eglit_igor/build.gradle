@@ -4,13 +4,17 @@ plugins {
 }
 
 dependencies {
-	implementation('mysql:mysql-connector-java:8.0.33')
-	implementation('org.hibernate:hibernate-core:5.4.25.Final')
 
-	implementation('org.springframework.boot:spring-boot-starter-web:2.7.5')
+	implementation('mysql:mysql-connector-java:8.0.22')
+	implementation('org.hibernate:hibernate-core:5.4.25.Final')
+	implementation ('org.liquibase:liquibase-core:4.2.2')
+
 	implementation('org.springframework.boot:spring-boot-starter-data-jpa:2.7.5')
 
-	testImplementation('org.springframework.boot:spring-boot-starter-test:2.7.5')
+	implementation('org.springframework.boot:spring-boot-starter-web:2.7.5')
+
+	implementation('com.fasterxml.jackson.core:jackson-core:2.14.2')
+	implementation('com.google.guava:guava:31.0.1-jre')
 
 	compileOnly('org.projectlombok:lombok:1.18.24')
 	annotationProcessor('org.projectlombok:lombok:1.18.24')
@@ -18,19 +22,18 @@ dependencies {
 	testCompileOnly('org.projectlombok:lombok:1.18.24')
 	testAnnotationProcessor('org.projectlombok:lombok:1.18.24')
 
-	implementation 'ch.qos.logback:logback-classic:1.2.9'
-
-	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.12.3'
-
-	implementation 'com.google.guava:guava:33.0.0-jre'
+	testImplementation('org.springframework.boot:spring-boot-starter-test:2.7.5')
 
 	testImplementation('org.hamcrest:hamcrest:2.2')
 
-	testImplementation('com.h2database:h2:2.2.222')
+	testImplementation('uk.org.webcompere:model-assert:1.0.0')
+
+	testImplementation('com.h2database:h2:1.4.200')
 
 	test {
 		useJUnitPlatform()
 	}
+
 }
 
 jar {
@@ -40,7 +43,7 @@ jar {
 bootJar {
 	enabled = true
 	archiveBaseName = 'insurance-calculator'
-	archiveVersion = '1.0.1'
+	archiveVersion = '1.0.2'
 }
 
 publishing {
@@ -52,7 +55,7 @@ publishing {
 			// Project coordinates
 			groupId = 'org.javaguru'
 			artifactId = 'insurance-calculator'
-			version = '1.0.1'
+			version = '1.0.0'
 
 			// Add other metadata as needed
 			pom {
