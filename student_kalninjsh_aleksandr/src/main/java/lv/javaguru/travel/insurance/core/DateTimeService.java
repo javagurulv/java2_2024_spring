@@ -4,20 +4,17 @@ import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 @Component
 public class DateTimeService {
 
 
-    public BigDecimal calculateAgreementDaysBetweenDates(TravelCalculatePremiumRequest request) {
-        if (request.getAgreementDateFrom() != null && request.getAgreementDateTo() != null) {
-            long difference = request.getAgreementDateTo().getTime() - request.getAgreementDateFrom().getTime();
-            long numberOfDaysBetweenDates = TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS);
-            return BigDecimal.valueOf(numberOfDaysBetweenDates);
-        } else {
-            return null;
-        }
+    public long calculateAgreementDaysBetweenDates(Date dateFrom, Date dateTo) {
+        long difference = dateTo.getTime() - dateFrom.getTime();
+        return TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS);
+
 
     }
 }

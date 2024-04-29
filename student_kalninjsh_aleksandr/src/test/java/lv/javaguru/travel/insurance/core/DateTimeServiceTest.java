@@ -14,12 +14,13 @@ class DateTimeServiceTest {
     private DateTimeService service = new DateTimeService();
 
     @Test
-    public void calculateAgreementDaysBetweenDates() {
-        TravelCalculatePremiumRequest premiumRequest = new TravelCalculatePremiumRequest();
-        premiumRequest.setAgreementDateFrom(new Date(2005, 05, 15));
-        premiumRequest.setAgreementDateTo(new Date(2005, 05, 20));
-        BigDecimal numberOfDaysBetweenDates = service.calculateAgreementDaysBetweenDates(premiumRequest);
-        assertEquals(numberOfDaysBetweenDates, BigDecimal.valueOf(5));
+    public void daysBetweenDates() {
+        Date dateFrom = new Date(2005, 05, 15);
+        Date dateTo = new Date(2005, 05, 20);
+        long numberOfDays = service.calculateAgreementDaysBetweenDates(dateFrom, dateTo);
+        assertEquals(numberOfDays, 5);
+
+
     }
 
 }
