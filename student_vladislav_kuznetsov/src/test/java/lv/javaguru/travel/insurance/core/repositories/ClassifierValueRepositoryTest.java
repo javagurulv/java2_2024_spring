@@ -26,44 +26,31 @@ class ClassifierValueRepositoryTest {
 
     @Test
     public void shouldFind_RiskType_TRAVEL_MEDICAL() {
-        Optional<ClassifierValue> valueOpt = classifierValueRepository.findByClassifierTitleAndIc(
-                "RISK_TYPE", "TRAVEL_MEDICAL");
-        performAssertions(valueOpt,"RISK_TYPE","TRAVEL_MEDICAL");
+        performAssertions("RISK_TYPE","TRAVEL_MEDICAL");
     }
 
     @Test
     public void shouldFind_RiskType_TRAVEL_CANCELLATION() {
-        Optional<ClassifierValue> valueOpt = classifierValueRepository.findByClassifierTitleAndIc(
-                "RISK_TYPE", "TRAVEL_CANCELLATION");
-        performAssertions(valueOpt, "RISK_TYPE", "TRAVEL_CANCELLATION");
+        performAssertions("RISK_TYPE", "TRAVEL_CANCELLATION");
     }
 
     @Test
     public void shouldFind_RiskType_TRAVEL_LOSS_BAGGAGE() {
-        Optional<ClassifierValue> valueOpt = classifierValueRepository.findByClassifierTitleAndIc(
-                "RISK_TYPE", "TRAVEL_LOSS_BAGGAGE");
-        performAssertions(valueOpt,"RISK_TYPE", "TRAVEL_LOSS_BAGGAGE");
+        performAssertions("RISK_TYPE", "TRAVEL_LOSS_BAGGAGE");
     }
 
     @Test
     public void shouldFind_RiskType_TRAVEL_THIRD_PARTY_LIABILITY() {
-        Optional<ClassifierValue> valueOpt = classifierValueRepository.findByClassifierTitleAndIc(
-                "RISK_TYPE", "TRAVEL_THIRD_PARTY_LIABILITY");
-        performAssertions(valueOpt,"RISK_TYPE", "TRAVEL_THIRD_PARTY_LIABILITY");
+        performAssertions("RISK_TYPE", "TRAVEL_THIRD_PARTY_LIABILITY");
     }
 
     @Test
     public void shouldFind_RiskType_TRAVEL_EVACUATION() {
-        Optional<ClassifierValue> valueOpt = classifierValueRepository.findByClassifierTitleAndIc(
-                "RISK_TYPE", "TRAVEL_EVACUATION");
-        performAssertions(valueOpt,"RISK_TYPE", "TRAVEL_EVACUATION");
+        performAssertions("RISK_TYPE", "TRAVEL_EVACUATION");
     }
-
     @Test
     public void shouldFind_RiskType_TRAVEL_SPORT_ACTIVITIES() {
-        Optional<ClassifierValue> valueOpt = classifierValueRepository.findByClassifierTitleAndIc(
-                "RISK_TYPE", "TRAVEL_SPORT_ACTIVITIES");
-        performAssertions(valueOpt,"RISK_TYPE", "TRAVEL_SPORT_ACTIVITIES");
+        performAssertions("RISK_TYPE", "TRAVEL_SPORT_ACTIVITIES");
     }
 
     @Test
@@ -73,7 +60,9 @@ class ClassifierValueRepositoryTest {
         assertTrue(valueOpt.isEmpty());
     }
 
-    private static void performAssertions(Optional<ClassifierValue> valueOpt, String classifierTitle, String ic) {
+    private void performAssertions(String classifierTitle, String ic) {
+        Optional<ClassifierValue> valueOpt = classifierValueRepository.findByClassifierTitleAndIc(
+                classifierTitle, ic);
         assertTrue(valueOpt.isPresent());
         assertEquals(valueOpt.get().getIc(), ic);
         assertEquals(valueOpt.get().getClassifier().getTitle(), classifierTitle);

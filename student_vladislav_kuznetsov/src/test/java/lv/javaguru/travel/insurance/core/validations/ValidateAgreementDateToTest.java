@@ -28,7 +28,7 @@ public class ValidateAgreementDateToTest {
         NullPointerException exception = new NullPointerException();
         ValidationError validationError = mock(ValidationError.class);
         when(errorFactory.buildError("ERROR_CODE_5")).thenReturn(validationError);
-        Optional<ValidationError> error = validation.execute(request);
+        Optional<ValidationError> error = validation.validate(request);
         assertNull(exception.getMessage());
         assertSame(error.get(), validationError);
     }
@@ -37,7 +37,7 @@ public class ValidateAgreementDateToTest {
     public void checkThatNoErrorIsPresentWhenAgreementDateToIsNotNull(){
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateTo()).thenReturn(new Date());
-        Optional<ValidationError> error = validation.execute(request);
+        Optional<ValidationError> error = validation.validate(request);
         assertFalse(error.isPresent());
     }
 }

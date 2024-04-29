@@ -26,7 +26,7 @@ public class ValidateAgreementDateFromIsNotBeforeCurrentDateTest {
         when(request.getAgreementDateFrom()).thenReturn(new Date(0));
         ValidationError validationError = mock(ValidationError.class);
         when(errorFactory.buildError("ERROR_CODE_4")).thenReturn(validationError);
-        Optional<ValidationError> error = validation.execute(request);
+        Optional<ValidationError> error = validation.validate(request);
         assertTrue(error.isPresent());
         assertSame(error.get(), validationError);
     }
@@ -35,7 +35,7 @@ public class ValidateAgreementDateFromIsNotBeforeCurrentDateTest {
     public void checkIfNoErrorMessageIsPresentWhenAgreementDateFromIsInTheFuture(){
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(new Date(System.currentTimeMillis()+60000));
-        Optional<ValidationError> error = validation.execute(request);
+        Optional<ValidationError> error = validation.validate(request);
         assertFalse(error.isPresent());
     }
 
@@ -43,7 +43,7 @@ public class ValidateAgreementDateFromIsNotBeforeCurrentDateTest {
     public void checkIfNoErrorIsPresentWhenAgreementDateFromIsCurrentTime(){
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(new Date(System.currentTimeMillis()+60));
-        Optional<ValidationError> error = validation.execute(request);
+        Optional<ValidationError> error = validation.validate(request);
         assertFalse(error.isPresent());
     }
 }

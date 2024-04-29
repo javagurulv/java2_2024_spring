@@ -29,7 +29,7 @@ public class ValidateAgreementDateFromTest {
         NullPointerException exception = new NullPointerException();
         ValidationError validationError = mock(ValidationError.class);
         when(errorFactory.buildError("ERROR_CODE_3")).thenReturn(validationError);
-        Optional<ValidationError> error = validation.execute(request);
+        Optional<ValidationError> error = validation.validate(request);
         assertNull(exception.getMessage());
         assertTrue(error.isPresent());
         assertSame(error.get(), validationError);
@@ -39,7 +39,7 @@ public class ValidateAgreementDateFromTest {
     public void checkThatNoErrorIsPresentWhenAgreementDateFromIsNotNull(){
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(new Date());
-        Optional<ValidationError> error = validation.execute(request);
+        Optional<ValidationError> error = validation.validate(request);
         assertFalse(error.isPresent());
     }
 }
