@@ -33,7 +33,7 @@ class TravelCalculatePremiumServiceImplTest {
     @BeforeEach
     public void setUp() {
         request = checkingTheRequestForAllFields();
-        when(service.calculateAgreementDaysBetweenDates(request)).thenReturn(new BigDecimal(5));
+        when(service.calculateAgreementDaysBetweenDates(request.getAgreementDateFrom(), request.getAgreementDateTo())).thenReturn(5L);
         when(requestValidator.validate(request)).thenReturn(List.of());
     }
 
