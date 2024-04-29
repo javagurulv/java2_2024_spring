@@ -137,4 +137,4 @@ INSERT INTO age_coefficient(age_from, age_to, coefficient)
 VALUES(41, 65, 1.2);
 
 INSERT INTO age_coefficient(age_from, age_to, coefficient)
-VALUES(65, 150, 1.5);
+VALUES(66, 150, 1.5);
