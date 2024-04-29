@@ -41,7 +41,7 @@ jar {
 bootJar {
 	enabled = true
 	archiveBaseName = 'insurance-calculator'
-	archiveVersion = '1.0.1'
+	archiveVersion = '1.0.2'
 }
 
 test {
@@ -57,7 +57,7 @@ publishing {
 			// Project coordinates
 			groupId = 'lv.javaguru'
 			artifactId = 'insurance-calculator'
-			version = '1.0.1'
+			version = '1.0.2'
 
 			// Add other metadata as needed
 			pom {

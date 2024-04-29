@@ -2,7 +2,7 @@
   "errors": [
     {
       "errorCode": "ERROR_CODE_6",
-      "description": "Field country is empty when TRAVEL_MEDICAL risk is selected!"
+      "description": "Field country is empty!"
     }
   ],
   "personFirstName": null,
