@@ -81,17 +81,13 @@ public class TravelCalculatePremiumControllerTest {
                         "ControllerTest_1.10_Request_selectedRisks_empty.json",
                         "ControllerTest_1.10_Response_selectedRisks_empty.json"),
 
-                Arguments.of("1.11 country null when TRAVEL_MEDICAL risk selected",
-                        "ControllerTest_1.11_Request_country_null_when_TRAVEL_MEDICAL_selected.json",
-                        "ControllerTest_1.11_Response_country_null_when_TRAVEL_MEDICAL_selected.json"),
+                Arguments.of("1.11 country null",
+                        "ControllerTest_1.11_Request_country_null.json",
+                        "ControllerTest_1.11_Response_country_null.json"),
 
-                Arguments.of("1.12 country blank when TRAVEL_MEDICAL risk selected",
-                        "ControllerTest_1.12_Request_country_blank_when_TRAVEL_MEDICAL_selected.json",
-                        "ControllerTest_1.12_Response_country_blank_when_TRAVEL_MEDICAL_selected.json"),
-
-                Arguments.of("1.13 country null when TRAVEL_MEDICAL risk not selected",
-                        "ControllerTest_1.13_Request_country_null_when_TRAVEL_MEDICAL_not_selected.json",
-                        "ControllerTest_1.13_Response_country_null_when_TRAVEL_MEDICAL_not_selected.json"),
+                Arguments.of("1.12 country blank",
+                        "ControllerTest_1.12_Request_country_blank.json",
+                        "ControllerTest_1.12_Response_country_blank.json"),
 
                 Arguments.of("1.14 personBirthDate null",
                         "ControllerTest_1.14_Request_personBirthDate_null.json",

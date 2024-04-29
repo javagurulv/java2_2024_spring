@@ -15,17 +15,9 @@ class ValidateCountryNotEmptyOrNull extends RequestFieldValidationImpl {
 
     @Override
     public Optional<ValidationError> validateSingle(TravelCalculatePremiumRequest request) {
-        return (containsRisk("TRAVEL_MEDICAL", request)
-                && (request.getCountry() == null || request.getCountry().isBlank()))
+        return (request.getCountry() == null || request.getCountry().isBlank())
                 ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_6"))
                 : Optional.empty();
-    }
-
-    private boolean containsRisk(String riskType, TravelCalculatePremiumRequest request) {
-        if (request.getSelectedRisks() == null || request.getSelectedRisks().isEmpty()) {
-            return false;
-        }
-        return request.getSelectedRisks().contains(riskType);
     }
 
 }
