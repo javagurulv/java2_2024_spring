@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 import java.util.Optional;
 @Component
-class ValidateAgreementDateToIsNotBeforeCurrentDate implements TravelRequestValidation{
+class ValidateAgreementDateToIsNotBeforeCurrentDate extends TravelRequestValidationImpl{
 
     @Autowired private ValidationErrorFactory errorFactory;
 
-        public Optional<ValidationError> execute(TravelCalculatePremiumRequest request){
+        public Optional<ValidationError> validate(TravelCalculatePremiumRequest request){
             Date currentDate = new Date(System.currentTimeMillis());
             if (request.getAgreementDateTo() != null) {
                 return (request.getAgreementDateTo().before(currentDate))
