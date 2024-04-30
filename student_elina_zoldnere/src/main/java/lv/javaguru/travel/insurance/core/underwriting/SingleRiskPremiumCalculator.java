@@ -12,7 +12,7 @@ import java.util.List;
 class SingleRiskPremiumCalculator {
 
     @Autowired
-    List<TravelRiskPremiumCalculator> riskPremiumCalculators;
+    private List<TravelRiskPremiumCalculator> riskPremiumCalculators;
 
     RiskPremium calculatePremium(String riskIc, TravelCalculatePremiumRequest request) {
         var riskPremiumCalculator = findRiskPremiumCalculator(riskIc);

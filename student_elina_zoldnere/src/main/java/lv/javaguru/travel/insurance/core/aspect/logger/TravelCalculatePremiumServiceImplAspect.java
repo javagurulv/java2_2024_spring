@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-public class TravelCalculatePremiumServiceImplAspect {
+class TravelCalculatePremiumServiceImplAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(TravelCalculatePremiumServiceImplAspect.class);
 

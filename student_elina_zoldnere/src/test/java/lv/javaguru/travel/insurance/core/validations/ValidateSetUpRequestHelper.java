@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 @Component
-class ValidateSetUpRequestHelper {
+public class ValidateSetUpRequestHelper {
 
     public void setUpRequestMockWithAllValues(TravelCalculatePremiumRequest requestMock) {
         Mockito.lenient().when(requestMock.getPersonFirstName()).thenReturn("Jānis");

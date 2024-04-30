@@ -1,6 +1,5 @@
 package lv.javaguru.travel.insurance.rest;
-
-import org.junit.jupiter.api.Disabled;
+;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -24,7 +23,7 @@ import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class TravelCalculatePremiumControllerTest {
+class TravelCalculatePremiumControllerTest {
 
     @Autowired
     private MockMvc mockMvc;

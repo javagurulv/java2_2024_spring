@@ -1,6 +1,5 @@
 package lv.javaguru.travel.insurance.core.repositories;
 
-import lv.javaguru.travel.insurance.core.domain.CountryDefaultDayRate;
 import lv.javaguru.travel.insurance.core.domain.MedicalRiskLimitLevel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
