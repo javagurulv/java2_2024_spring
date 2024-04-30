@@ -1,6 +1,5 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.ErrorCodeUtil;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
@@ -21,7 +20,7 @@ import static org.mockito.Mockito.when;
 public class TravelPeriodIsValidTest {
 
     @Mock
-    private ErrorCodeUtil errorCodeUtil;
+    private ValidationErrorFactory validationErrorFactory;
     @InjectMocks
     private final TravelPeriodIsValid validation = new TravelPeriodIsValid();
 
@@ -30,11 +29,11 @@ public class TravelPeriodIsValidTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(LocalDate.of(2030, 3, 31));
         when(request.getAgreementDateTo()).thenReturn(LocalDate.of(2030, 3, 21));
-        when(errorCodeUtil.getErrorDescription(7)).thenReturn("Travel period contain incorrect data!");
+        ValidationError validationError = mock(ValidationError.class);
+        when(validationErrorFactory.buildError(7)).thenReturn(validationError);
         Optional<ValidationError> errors = validation.execute(request);
         assertTrue(errors.isPresent());
-        assertEquals(errors.get().getErrorCode(), 7);
-        assertEquals(errors.get().getDescription(), "Travel period contain incorrect data!");
+        assertEquals(errors.get(), validationError);
     }
 
     @Test

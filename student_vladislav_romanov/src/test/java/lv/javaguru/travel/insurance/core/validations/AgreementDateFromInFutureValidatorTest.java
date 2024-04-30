@@ -1,6 +1,5 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.ErrorCodeUtil;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
@@ -21,7 +20,7 @@ import static org.mockito.Mockito.when;
 public class AgreementDateFromInFutureValidatorTest {
 
     @Mock
-    private ErrorCodeUtil errorCodeUtil;
+    private ValidationErrorFactory validationErrorFactory;
     @InjectMocks
     private AgreementDateFromInFutureValidator validation;
 
@@ -29,11 +28,11 @@ public class AgreementDateFromInFutureValidatorTest {
     void dateFromIsInPast() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(LocalDate.of(2019, 3, 31));
-        when(errorCodeUtil.getErrorDescription(4)).thenReturn("Agreement date from cannot be in past!");
+        ValidationError validationError = mock(ValidationError.class);
+        when(validationErrorFactory.buildError(4)).thenReturn(validationError);
         Optional<ValidationError> errors = validation.execute(request);
         assertTrue(errors.isPresent());
-        assertEquals(errors.get().getErrorCode(), 4);
-        assertEquals(errors.get().getDescription(), "Agreement date from cannot be in past!");
+        assertEquals(errors.get(), validationError);
     }
 
     @Test
