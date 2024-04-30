@@ -152,7 +152,7 @@ class TravelCalculatePremiumControllerTest {
 
     private void calculateAndCompareResponse(String requestFile, String expectedResponseFile) throws Exception {
 
-        MockHttpServletResponse calculatedResponse = mockMvc.perform(post("/insurance/travel/")
+        MockHttpServletResponse calculatedResponse = mockMvc.perform(post("/insurance/travel/api/")
                         .content(reader.readJsonFromFile(requestFile))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
