@@ -18,13 +18,19 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
     private String personLastName;
     private Date agreementDateFrom;
     private Date agreementDateTo;
-
+    private BigDecimal agreementPrice;
 
 
     public TravelCalculatePremiumResponse(List<ValidationError> errors) {
         super(errors);
     }
-}
+
+
+    }
+
+
+
+
 
 
 

@@ -16,7 +16,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
     private TravelCalculatePremiumRequestValidator requestValidator = new TravelCalculatePremiumRequestValidator();
 
     @Test
-    public void shouldReturnErrorWhenPersonFirstNameIsNull() {
+    public void shouldPersonFirstNameIsNull() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn(null);
         when(request.getPersonLastName()).thenReturn("lastName");
@@ -30,7 +30,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
 
     @Test
-    public void shouldReturnErrorWhenPersonFirstNameIsEmpty() {
+    public void shouldPersonFirstNameIsEmpty() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("");
         when(request.getPersonLastName()).thenReturn("lastName");
@@ -44,7 +44,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
 
     @Test
-    public void shouldReturnErrorWhenPersonLastNameIsNull() {
+    public void shouldPersonLastNameIsNull() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("firstName");
         when(request.getPersonLastName()).thenReturn(null);
@@ -58,7 +58,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
 
     @Test
-    public void shouldReturnErrorWhenPersonLastNameIsEmpty() {
+    public void shouldPersonLastNameIsEmpty() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("firstName");
         when(request.getPersonLastName()).thenReturn("");
@@ -72,7 +72,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
 
     @Test
-    public void shouldReturnErrorWhenAgreementDateFromIsNull() {
+    public void shouldAgreementDateFromIsNull() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("firstName");
         when(request.getPersonLastName()).thenReturn("lastName");
@@ -86,7 +86,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
 
     @Test
-    public void shouldReturnErrorWhenAgreementDateToIsNull() {
+    public void shouldAgreementDateToIsNull() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("firstName");
         when(request.getPersonLastName()).thenReturn("lastName");
@@ -100,7 +100,7 @@ public class TravelCalculatePremiumRequestValidatorTest {
     }
 
     @Test
-    public void shouldNotReturnErrorWhenPersonFirstNameIsPresent() {
+    public void shouldPersonFirstNameIsPresent() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("firstName");
         when(request.getPersonLastName()).thenReturn("lastName");
