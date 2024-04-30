@@ -1,12 +1,12 @@
 {
   "errors": [
     {
-      "field": "agreementDateTo",
-      "message": "must exist!"
+      "errorCode": 5,
+      "description": "Agreement date to must exist!"
     },
     {
-      "field": "Travel Period",
-      "message": "contain incorrect data!"
+      "errorCode": 7,
+      "description": "Travel period contain incorrect data!"
     }
   ],
   "personFirstName": null,

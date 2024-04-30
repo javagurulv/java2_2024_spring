@@ -17,29 +17,27 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class TravelPeriodIsValidTest {
-
+public class AgreementDateToExistValidatorTest {
     @Mock
     private ValidationErrorFactory validationErrorFactory;
     @InjectMocks
-    private final TravelPeriodIsValid validation = new TravelPeriodIsValid();
+    private AgreementDateToExistValidator validation;
 
     @Test
-    void travelPeriodIsNotValid() {
+    void dateToIsNotExist() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getAgreementDateFrom()).thenReturn(LocalDate.of(2030, 3, 31));
-        when(request.getAgreementDateTo()).thenReturn(LocalDate.of(2030, 3, 21));
+        when(request.getAgreementDateTo()).thenReturn(null);
         ValidationError validationError = mock(ValidationError.class);
-        when(validationErrorFactory.buildError(7)).thenReturn(validationError);
+        when(validationErrorFactory.buildError(5)).thenReturn(validationError);
         Optional<ValidationError> errors = validation.execute(request);
         assertTrue(errors.isPresent());
         assertEquals(errors.get(), validationError);
+
     }
 
     @Test
-    void travelPeriodIsValid() {
+    void dateToIsExist() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getAgreementDateFrom()).thenReturn(LocalDate.of(2030, 3, 21));
         when(request.getAgreementDateTo()).thenReturn(LocalDate.of(2030, 3, 31));
         Optional<ValidationError> errors = validation.execute(request);
         assertTrue(errors.isEmpty());

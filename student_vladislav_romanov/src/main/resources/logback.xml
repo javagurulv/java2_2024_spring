@@ -1,0 +1,52 @@
+<configuration>
+    <appender name="CONSOLE_APPENDER" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{ISO8601} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <property name="LOGS" value="logs/vladislav_romanov/" />
+    <appender name="FILE_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS}/vladislav_romanov/info.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${LOGS}/archive/vladislav_romanov/%d{yyyy-MM-dd}.info.log</fileNamePattern>
+
+            <!-- keep 30 days' worth of history capped at 3GB total size -->
+            <maxHistory>1</maxHistory>
+            <totalSizeCap>1MB</totalSizeCap>
+
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{ISO8601} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="REST_FILE_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS}/vladislav_romanov/rest.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${LOGS}/archive/vladislav_romanov/%d{yyyy-MM-dd}.rest.log</fileNamePattern>
+
+            <!-- keep 30 days' worth of history capped at 3GB total size -->
+            <maxHistory>1</maxHistory>
+            <totalSizeCap>1MB</totalSizeCap>
+
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{ISO8601} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE_APPENDER" />
+        <appender-ref ref="FILE_APPENDER"/>
+    </root>
+
+    <logger name="lv.javaguru.travel.insurance.rest.TravelCalculatePremiumRequestLogger" level="INFO">
+        <appender-ref ref="REST_FILE_APPENDER" />
+    </logger>
+    <logger name="lv.javaguru.travel.insurance.rest.TravelCalculatePremiumResponseLogger" level="INFO">
+        <appender-ref ref="REST_FILE_APPENDER" />
+    </logger>
+
+</configuration>

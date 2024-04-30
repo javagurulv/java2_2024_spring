@@ -35,8 +35,9 @@ class TravelCalculatePremiumServiceImplTest {
     void setUp() {
         LocalDate dateFrom = LocalDate.of(2030, 3, 8);
         LocalDate dateTo = LocalDate.of(2030, 3, 18);
+        List<String> selectedRisks = List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE");
 
-        travelCalculatePremiumRequestData = new TravelCalculatePremiumRequest("Vladislav", "Romanov", dateFrom, dateTo);
+        travelCalculatePremiumRequestData = new TravelCalculatePremiumRequest("Vladislav", "Romanov", dateFrom, dateTo, selectedRisks);
     }
 
     @Test
@@ -78,7 +79,7 @@ class TravelCalculatePremiumServiceImplTest {
     @Test
     void responseWithErrorsTest() {
         TravelCalculatePremiumRequest request = travelCalculatePremiumRequestData;
-        ValidationError validationError = new ValidationError("field", "message");
+        ValidationError validationError = new ValidationError(1, "message");
         doReturn(List.of(validationError)).when(requestValidatorMock).validate(request);
         TravelCalculatePremiumResponse response = createResponse();
 
@@ -88,7 +89,7 @@ class TravelCalculatePremiumServiceImplTest {
     @Test
     void responseWithErrorCountTest() {
         TravelCalculatePremiumRequest request = travelCalculatePremiumRequestData;
-        ValidationError validationError = new ValidationError("field", "message");
+        ValidationError validationError = new ValidationError(1, "message");
         doReturn(List.of(validationError)).when(requestValidatorMock).validate(request);
         TravelCalculatePremiumResponse response = createResponse();
 
@@ -98,18 +99,18 @@ class TravelCalculatePremiumServiceImplTest {
     @Test
     void responseWithCorrectErrorMessageTest() {
         TravelCalculatePremiumRequest request = travelCalculatePremiumRequestData;
-        ValidationError validationError = new ValidationError("field", "message");
+        ValidationError validationError = new ValidationError(1, "message");
         doReturn(List.of(validationError)).when(requestValidatorMock).validate(request);
         TravelCalculatePremiumResponse response = createResponse();
 
-        assertEquals(response.getErrors().get(0).getField(), "field");
-        assertEquals(response.getErrors().get(0).getMessage(), "message");
+        assertEquals(response.getErrors().get(0).getErrorCode(), 1);
+        assertEquals(response.getErrors().get(0).getDescription(), "message");
     }
 
     @Test
     void emptyResponseFieldsInCaseOfErrorsTest() {
         TravelCalculatePremiumRequest request = travelCalculatePremiumRequestData;
-        ValidationError validationError = new ValidationError("field", "message");
+        ValidationError validationError = new ValidationError(1, "message");
         doReturn(List.of(validationError)).when(requestValidatorMock).validate(request);
         TravelCalculatePremiumResponse response = createResponse();
 

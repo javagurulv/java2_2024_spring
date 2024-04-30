@@ -1,20 +1,20 @@
 {
   "errors": [
     {
-      "field": "personFirstName",
-      "message": "must exist and not to be empty!"
+      "errorCode": 1,
+      "description": "Person first name must exist and not to be empty!"
     },
     {
-      "field": "personLastName",
-      "message": "must exist and not to be empty!"
+      "errorCode": 2,
+      "description": "Person last name must exist and not to be empty!"
     },
     {
-      "field": "agreementDateTo",
-      "message": "must exist!"
+      "errorCode": 5,
+      "description": "Agreement date to must exist!"
     },
     {
-      "field": "Travel Period",
-      "message": "contain incorrect data!"
+      "errorCode": 7,
+      "description": "Travel period contain incorrect data!"
     }
   ],
   "personFirstName": null,
