@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.underwriting;
 
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
@@ -10,28 +10,29 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class TravelPremiumTest {
+public class TravelPremiumUnderwritingImplTest {
 
     @Mock
-    DateTimeUtil dateTimeServiceMock;
+    DateTimeUtil dateTimeUtil;
 
     @InjectMocks
-    private TravelPremium travelPremium;
+    private TravelPremiumUnderwritingImpl travelPremiumUnderwriting;
 
     @Test
     void travelPremiumTest() {
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Vladislav", "Romanov", LocalDate.of(2030, 3, 8), LocalDate.of(2030, 3, 18), List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"));
+        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
 
-        doReturn(10).when(dateTimeServiceMock).calculateTravelPeriod(LocalDate.of(2030, 3, 8), LocalDate.of(2030, 3, 18));
+        when(request.getAgreementDateFrom()).thenReturn(LocalDate.of(2030, 3, 8));
+        when(request.getAgreementDateTo()).thenReturn(LocalDate.of(2030, 3, 18));
+        when(dateTimeUtil.calculateTravelPeriod(request.getAgreementDateFrom(), request.getAgreementDateTo())).thenReturn(10);
 
         BigDecimal expected = new BigDecimal(10);
-        BigDecimal actual = travelPremium.calculatePremium(request);
+        BigDecimal actual = travelPremiumUnderwriting.calculatePremium(request);
 
         assertEquals(expected, actual);
     }

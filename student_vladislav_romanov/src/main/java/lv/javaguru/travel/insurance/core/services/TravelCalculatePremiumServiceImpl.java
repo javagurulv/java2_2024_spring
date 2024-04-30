@@ -1,5 +1,6 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.services;
 
+import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwriting;
 import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
@@ -17,7 +18,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
     private TravelCalculatePremiumRequestValidator requestValidator;
 
     @Autowired
-    private TravelPremium travelPremium;
+    private TravelPremiumUnderwriting travelPremiumUnderwriting;
 
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
@@ -41,7 +42,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setPersonLastName(request.getPersonLastName());
         response.setAgreementDateFrom(agreementDateFrom);
         response.setAgreementDateTo(agreementDateTo);
-        response.setAgreementPrice(travelPremium.calculatePremium(request));
+        response.setAgreementPrice(travelPremiumUnderwriting.calculatePremium(request));
 
         return response;
     }
