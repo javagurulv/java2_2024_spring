@@ -1,6 +1,5 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.ErrorCodeUtil;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
@@ -20,7 +19,7 @@ import static org.mockito.Mockito.when;
 public class PersonLastNameValidatorTest {
 
     @Mock
-    private ErrorCodeUtil errorCodeUtil;
+    private ValidationErrorFactory validationErrorFactory;
     @InjectMocks
     private PersonLastNameValidator validation;
 
@@ -28,22 +27,22 @@ public class PersonLastNameValidatorTest {
     void personLastNameDoNotExist() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonLastName()).thenReturn(null);
-        when(errorCodeUtil.getErrorDescription(2)).thenReturn("Person last name must exist and not to be empty!");
+        ValidationError validationError = mock(ValidationError.class);
+        when(validationErrorFactory.buildError(2)).thenReturn(validationError);
         Optional<ValidationError> errors = validation.execute(request);
         assertTrue(errors.isPresent());
-        assertEquals(errors.get().getErrorCode(), 2);
-        assertEquals(errors.get().getDescription(), "Person last name must exist and not to be empty!");
+        assertEquals(errors.get(), validationError);
     }
 
     @Test
     void personLastNameIsEmpty() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonLastName()).thenReturn("");
-        when(errorCodeUtil.getErrorDescription(2)).thenReturn("Person last name must exist and not to be empty!");
+        ValidationError validationError = mock(ValidationError.class);
+        when(validationErrorFactory.buildError(2)).thenReturn(validationError);
         Optional<ValidationError> errors = validation.execute(request);
         assertTrue(errors.isPresent());
-        assertEquals(errors.get().getErrorCode(), 2);
-        assertEquals(errors.get().getDescription(), "Person last name must exist and not to be empty!");
+        assertEquals(errors.get(), validationError);
     }
 
     @Test

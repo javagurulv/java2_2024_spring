@@ -1,6 +1,5 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.ErrorCodeUtil;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
@@ -21,7 +20,7 @@ import static org.mockito.Mockito.when;
 public class SelectedRisksValidatorTest {
 
     @Mock
-    private ErrorCodeUtil errorCodeUtil;
+    private ValidationErrorFactory validationErrorFactory;
     @InjectMocks
     private SelectedRisksValidator validation;
 
@@ -29,11 +28,11 @@ public class SelectedRisksValidatorTest {
     void risksDoNotExist() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getSelectedRisks()).thenReturn(null);
-        when(errorCodeUtil.getErrorDescription(8)).thenReturn("At least one risk must be chosen!");
+        ValidationError validationError = mock(ValidationError.class);
+        when(validationErrorFactory.buildError(8)).thenReturn(validationError);
         Optional<ValidationError> errors = validation.execute(request);
         assertTrue(errors.isPresent());
-        assertEquals(errors.get().getErrorCode(), 8);
-        assertEquals(errors.get().getDescription(), "At least one risk must be chosen!");
+        assertEquals(errors.get(), validationError);
     }
 
     @Test

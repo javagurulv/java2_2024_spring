@@ -13,7 +13,7 @@ public class ErrorCodeUtil {
 
     private final Properties props;
 
-    ErrorCodeUtil() throws IOException {
+    public ErrorCodeUtil() throws IOException {
         Resource resource = new ClassPathResource("errorCodes.properties");
         props = PropertiesLoaderUtils.loadProperties(resource);
     }

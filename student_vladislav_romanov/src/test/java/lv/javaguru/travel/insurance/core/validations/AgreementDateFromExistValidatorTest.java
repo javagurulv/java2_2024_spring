@@ -1,6 +1,5 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.ErrorCodeUtil;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,9 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class AgreementDateFromExistValidatorTest {
-    @Mock private ErrorCodeUtil errorCodeUtil;
+
+    @Mock
+    private ValidationErrorFactory validationErrorFactory;
     @InjectMocks
     private AgreementDateFromExistValidator validation;
 
@@ -27,11 +28,11 @@ public class AgreementDateFromExistValidatorTest {
     void dateFromIsNotExist() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(null);
-        when(errorCodeUtil.getErrorDescription(3)).thenReturn("Agreement date from must exist!");
+        ValidationError validationError = mock(ValidationError.class);
+        when(validationErrorFactory.buildError(3)).thenReturn(validationError);
         Optional<ValidationError> errors = validation.execute(request);
         assertTrue(errors.isPresent());
-        assertEquals(errors.get().getErrorCode(), 3);
-        assertEquals(errors.get().getDescription(), "Agreement date from must exist!");
+        assertEquals(errors.get(), validationError);
 
     }
 

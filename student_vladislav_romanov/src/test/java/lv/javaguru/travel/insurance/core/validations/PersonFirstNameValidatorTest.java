@@ -1,6 +1,5 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.ErrorCodeUtil;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
@@ -11,8 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -20,7 +18,7 @@ import static org.mockito.Mockito.when;
 public class PersonFirstNameValidatorTest {
 
     @Mock
-    private ErrorCodeUtil errorCodeUtil;
+    private ValidationErrorFactory validationErrorFactory;
     @InjectMocks
     private PersonFirstNameValidator validation;
 
@@ -28,22 +26,22 @@ public class PersonFirstNameValidatorTest {
     void personFirstNameDoNotExist() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn(null);
-        when(errorCodeUtil.getErrorDescription(1)).thenReturn("Person first name must exist and not to be empty!");
+        ValidationError validationError = mock(ValidationError.class);
+        when(validationErrorFactory.buildError(1)).thenReturn(validationError);
         Optional<ValidationError> errors = validation.execute(request);
         assertTrue(errors.isPresent());
-        assertEquals(errors.get().getErrorCode(), 1);
-        assertEquals(errors.get().getDescription(), "Person first name must exist and not to be empty!");
+        assertSame(errors.get(), validationError);
     }
 
     @Test
     void personFirstNameIsEmpty() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("");
-        when(errorCodeUtil.getErrorDescription(1)).thenReturn("Person first name must exist and not to be empty!");
+        ValidationError validationError = mock(ValidationError.class);
+        when(validationErrorFactory.buildError(1)).thenReturn(validationError);
         Optional<ValidationError> errors = validation.execute(request);
         assertTrue(errors.isPresent());
-        assertEquals(errors.get().getErrorCode(), 1);
-        assertEquals(errors.get().getDescription(), "Person first name must exist and not to be empty!");
+        assertSame(errors.get(), validationError);
     }
 
     @Test
