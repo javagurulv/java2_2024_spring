@@ -3,61 +3,44 @@ package lv.javaguru.travel.insurance.core.repositories;
 import lv.javaguru.travel.insurance.core.domain.MedicalRiskLimitLevel;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.math.BigDecimal;
 import java.util.Optional;
+import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
+import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
 class MedicalRiskLimitLevelRepositoryTest {
     @Autowired
-    private MedicalRiskLimitLevelRepository medicalRiskLimitLevelRepository;
+    private MedicalRiskLimitLevelRepository limitLevelRepository;
 
     @Test
-    public void injectedRepositoryIsNotNull() {
-        assertNotNull(medicalRiskLimitLevelRepository);
-    }
-
-    @Test
-    public void findByMedicalRiskLimitLevelIc_LEVEL_10000() {
-        Optional<MedicalRiskLimitLevel> coefficientOpt = medicalRiskLimitLevelRepository.findByMedicalRiskLimitLevelIc("LEVEL_10000");
-        assertNotNull(coefficientOpt);
-        assertEquals("LEVEL_10000", coefficientOpt.get().getMedicalRiskLimitLevelIc());
-        assertEquals(new BigDecimal("1.00"), coefficientOpt.get().getCoefficient());
-    }
-
-    @Test
-    public void findByMedicalRiskLimitLevelIc_LEVEL_15000() {
-        Optional<MedicalRiskLimitLevel> coefficientOpt = medicalRiskLimitLevelRepository.findByMedicalRiskLimitLevelIc("LEVEL_15000");
-        assertNotNull(coefficientOpt);
-        assertEquals("LEVEL_15000", coefficientOpt.get().getMedicalRiskLimitLevelIc());
-        assertEquals(new BigDecimal("1.20"), coefficientOpt.get().getCoefficient());
-    }
-
-    @Test
-    public void findByMedicalRiskLimitLevelIc_LEVEL_20000() {
-        Optional<MedicalRiskLimitLevel> coefficientOpt = medicalRiskLimitLevelRepository.findByMedicalRiskLimitLevelIc("LEVEL_20000");
-        assertNotNull(coefficientOpt);
-        assertEquals("LEVEL_20000", coefficientOpt.get().getMedicalRiskLimitLevelIc());
-        assertEquals(new BigDecimal("1.50"), coefficientOpt.get().getCoefficient());
+    public void injectedRepositoryAreNotNull() {
+        assertNotNull(limitLevelRepository);
     }
     @Test
-    public void findByMedicalRiskLimitLevelIc_LEVEL_50000() {
-        Optional<MedicalRiskLimitLevel> coefficientOpt = medicalRiskLimitLevelRepository.findByMedicalRiskLimitLevelIc("LEVEL_50000");
-        assertNotNull(coefficientOpt);
-        assertEquals("LEVEL_50000", coefficientOpt.get().getMedicalRiskLimitLevelIc());
-        assertEquals(new BigDecimal("2.00"), coefficientOpt.get().getCoefficient());
+    public void shouldNotFindForUnknownMedicalRiskLimitLevel() {
+        assertTrue(limitLevelRepository.findByMedicalRiskLimitLevelIc("FAKE_LEVEL").isEmpty());
     }
-    @Test
-    public void noValidMedicalRiskReturnsNoCoefficient(){
-        Optional<MedicalRiskLimitLevel> coefficientOpt = medicalRiskLimitLevelRepository.findByMedicalRiskLimitLevelIc("INVALID_IC");
-        assertNotNull(coefficientOpt);
-        assertEquals(Optional.empty(), coefficientOpt);
+    @ParameterizedTest
+    @MethodSource("medicalRiskLimitLevelValues")
+    public void searchMedicalRiskLimitLevel(String level, String coefficient) {
+        Optional<MedicalRiskLimitLevel> limitLevelOpt = limitLevelRepository.findByMedicalRiskLimitLevelIc(level);
+        assertEquals(level, limitLevelOpt.get().getMedicalRiskLimitLevelIc());
+        assertEquals(coefficient, limitLevelOpt.get().getCoefficient().toString());
+    }
+    public static Stream<Arguments> medicalRiskLimitLevelValues() {
+        return Stream.of(
+                Arguments.of("LEVEL_10000", "1.00"),
+                Arguments.of("LEVEL_15000", "1.20"),
+                Arguments.of("LEVEL_20000", "1.50"),
+                Arguments.of("LEVEL_50000", "2.00")
+        );
     }
 }
