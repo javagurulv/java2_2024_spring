@@ -23,5 +23,4 @@ class TravelMedicalRiskPremiumCalculator implements TravelRiskPremiumCalculator 
     public String getRiskIc() {
         return "TRAVEL_MEDICAL";
     }
-
 }

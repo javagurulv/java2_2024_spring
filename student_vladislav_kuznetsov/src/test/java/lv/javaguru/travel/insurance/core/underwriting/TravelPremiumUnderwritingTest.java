@@ -45,7 +45,7 @@ public class TravelPremiumUnderwritingTest {
 
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
-        BigDecimal premium = premiumUnderwriting.calculatePremium(request);
+        BigDecimal premium = premiumUnderwriting.calculatePremium(request).getTotalPremium();
         assertEquals(premium, BigDecimal.ONE);
     }
 
@@ -59,7 +59,7 @@ public class TravelPremiumUnderwritingTest {
 
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL", "TRAVEL_EVACUATION"));
-        BigDecimal premium = premiumUnderwriting.calculatePremium(request);
+        BigDecimal premium = premiumUnderwriting.calculatePremium(request).getTotalPremium();
         assertEquals(premium, new BigDecimal(2));
     }
 }

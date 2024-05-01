@@ -22,11 +22,13 @@ public class TravelCalculatePremiumResponse extends CoreResponse{
     private Date agreementDateFrom;
     private Date agreementDateTo;
     private BigDecimal agreementPremium;
+    private List<RiskPremium> risks;
 
 
     public TravelCalculatePremiumResponse(List<ValidationError> errors) {
         super(errors);
     }
+
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     public Date getAgreementDateFrom() {
