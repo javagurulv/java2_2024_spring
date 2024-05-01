@@ -19,11 +19,13 @@
         </createTable>
     </changeSet>
 
+    <!-- Does not work for H2
     <changeSet author = "elina.zoldnere InsuranceApplication" id = "6.1">
         <sql>
             ALTER TABLE country_default_day_rate AUTO_INCREMENT = 1002;
         </sql>
     </changeSet>
+    -->
 
     <changeSet author="elina.zoldnere InsuranceApplication" id="7">
         <createIndex indexName="ix_country_default_day_rate_country_ic"

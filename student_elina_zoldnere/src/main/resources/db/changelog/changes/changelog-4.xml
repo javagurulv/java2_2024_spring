@@ -22,10 +22,12 @@
         </createTable>
     </changeSet>
 
+    <!-- Does not work for H2
     <changeSet author = "elina.zoldnere InsuranceApplication" id = "8.1">
         <sql>
             ALTER TABLE age_coefficient AUTO_INCREMENT = 1002;
         </sql>
     </changeSet>
+    -->
 
 </databaseChangeLog>

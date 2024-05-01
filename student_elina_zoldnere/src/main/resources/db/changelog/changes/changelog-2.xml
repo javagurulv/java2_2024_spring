@@ -30,11 +30,13 @@
                                  referencedColumnNames="id"/>
     </changeSet>
 
+    <!-- Does not work for H2
     <changeSet author = "elina.zoldnere InsuranceApplication" id = "4.1">
         <sql>
             ALTER TABLE classifier_values AUTO_INCREMENT = 1002;
         </sql>
     </changeSet>
+    -->
 
     <changeSet author="elina.zoldnere InsuranceApplication" id="5">
         <createIndex indexName="ix_classifier_values_ic"

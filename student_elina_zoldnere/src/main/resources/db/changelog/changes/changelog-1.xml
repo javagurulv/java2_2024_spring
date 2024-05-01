@@ -19,11 +19,13 @@
         </createTable>
     </changeSet>
 
+    <!-- Does not work for H2
     <changeSet author = "elina.zoldnere InsuranceApplication" id = "1.1">
         <sql>
             ALTER TABLE classifiers AUTO_INCREMENT = 1002;
         </sql>
     </changeSet>
+    -->
 
     <changeSet author="elina.zoldnere InsuranceApplication" id="2">
         <createIndex indexName="ix_classifiers_title"
