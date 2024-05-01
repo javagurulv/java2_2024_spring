@@ -31,7 +31,7 @@ public class TravelPeriodValidatorTest {
         when(request.getAgreementDateTo()).thenReturn(LocalDate.of(2030, 3, 21));
         ValidationError validationError = mock(ValidationError.class);
         when(validationErrorFactory.buildError(7)).thenReturn(validationError);
-        Optional<ValidationError> errors = validation.execute(request);
+        Optional<ValidationError> errors = validation.validate(request);
         assertTrue(errors.isPresent());
         assertEquals(errors.get(), validationError);
     }
@@ -41,7 +41,7 @@ public class TravelPeriodValidatorTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(LocalDate.of(2030, 3, 21));
         when(request.getAgreementDateTo()).thenReturn(LocalDate.of(2030, 3, 31));
-        Optional<ValidationError> errors = validation.execute(request);
+        Optional<ValidationError> errors = validation.validate(request);
         assertTrue(errors.isEmpty());
     }
 }

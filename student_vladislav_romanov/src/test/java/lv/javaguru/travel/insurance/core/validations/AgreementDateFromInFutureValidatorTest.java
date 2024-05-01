@@ -30,7 +30,7 @@ public class AgreementDateFromInFutureValidatorTest {
         when(request.getAgreementDateFrom()).thenReturn(LocalDate.of(2019, 3, 31));
         ValidationError validationError = mock(ValidationError.class);
         when(validationErrorFactory.buildError(4)).thenReturn(validationError);
-        Optional<ValidationError> errors = validation.execute(request);
+        Optional<ValidationError> errors = validation.validate(request);
         assertTrue(errors.isPresent());
         assertEquals(errors.get(), validationError);
     }
@@ -39,7 +39,7 @@ public class AgreementDateFromInFutureValidatorTest {
     void dateFromIsNotInPast() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(LocalDate.of(2030, 3, 31));
-        Optional<ValidationError> errors = validation.execute(request);
+        Optional<ValidationError> errors = validation.validate(request);
         assertTrue(errors.isEmpty());
     }
 

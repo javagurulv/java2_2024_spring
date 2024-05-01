@@ -8,12 +8,12 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-class AgreementDateToExistValidator implements TravelRequestValidator {
+class AgreementDateToExistValidator extends TravelRequestValidatorImpl {
 
     @Autowired
     private ValidationErrorFactory validationErrorFactory;
 
-    public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
+    public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
         return (request.getAgreementDateTo() == null)
                 ? Optional.of(validationErrorFactory.buildError(5))
                 : Optional.empty();
