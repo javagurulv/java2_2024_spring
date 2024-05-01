@@ -9,7 +9,7 @@ import java.time.Period;
 import java.util.Optional;
 
 @Component
-class TravelPeriodIsValid implements TravelRequestValidator {
+class TravelPeriodValidator implements TravelRequestValidator {
 
     @Autowired
     private ValidationErrorFactory validationErrorFactory;

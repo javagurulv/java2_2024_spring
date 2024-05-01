@@ -17,12 +17,12 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class TravelPeriodIsValidTest {
+public class TravelPeriodValidatorTest {
 
     @Mock
     private ValidationErrorFactory validationErrorFactory;
     @InjectMocks
-    private final TravelPeriodIsValid validation = new TravelPeriodIsValid();
+    private final TravelPeriodValidator validation = new TravelPeriodValidator();
 
     @Test
     void travelPeriodIsNotValid() {
