@@ -1,7 +1,8 @@
-package lv.javaguru.travel.insurance.dto;
+package lv.javaguru.travel.insurance.dto.util;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
+import lv.javaguru.travel.insurance.dto.util.BigDecimalSerializer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -26,7 +27,7 @@ public class BigDecimalSerializerTest {
     private SerializerProvider serializersMock;
 
     @InjectMocks
-    private  BigDecimalSerializer serializer;
+    private BigDecimalSerializer serializer;
 
     @Test
     void serialize_ShouldSerializeBigDecimalCorrectly() throws IOException {

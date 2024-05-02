@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lv.javaguru.travel.insurance.dto.BigDecimalSerializer;
+import lv.javaguru.travel.insurance.dto.util.BigDecimalSerializer;
 import lv.javaguru.travel.insurance.dto.CoreResponse;
 import lv.javaguru.travel.insurance.dto.RiskPremium;
 import lv.javaguru.travel.insurance.dto.ValidationError;
