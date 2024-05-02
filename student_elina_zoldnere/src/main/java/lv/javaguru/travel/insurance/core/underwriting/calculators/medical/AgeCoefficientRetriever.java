@@ -3,7 +3,7 @@ package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 import lv.javaguru.travel.insurance.core.domain.AgeCoefficient;
 import lv.javaguru.travel.insurance.core.repositories.AgeCoefficientRepository;
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,13 +23,13 @@ class AgeCoefficientRetriever {
     @Autowired
     private AgeCoefficientRepository ageCoefficientRepository;
 
-    BigDecimal setAgeCoefficient(TravelCalculatePremiumRequest request) {
+    BigDecimal setAgeCoefficient(TravelCalculatePremiumRequestV1 request) {
         return ageCoefficientEnabled
                 ? findAgeCoefficient(request)
                 : setDefaultValue();
     }
 
-    private BigDecimal findAgeCoefficient(TravelCalculatePremiumRequest request) {
+    private BigDecimal findAgeCoefficient(TravelCalculatePremiumRequestV1 request) {
         Date personBirthDate = request.getPersonBirthDate();
         Date currentDate = dateTimeUtil.currentTimeToday(); // hours and seconds does not matter
         Integer age = dateTimeUtil.calculateDifferenceBetweenDatesInYears(personBirthDate, currentDate);

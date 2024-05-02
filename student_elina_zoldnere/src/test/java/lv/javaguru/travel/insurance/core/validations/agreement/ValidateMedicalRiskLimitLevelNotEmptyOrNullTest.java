@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core.validations.agreement;
 
 import lv.javaguru.travel.insurance.core.validations.ValidateSetUpRequestHelper;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
 class ValidateMedicalRiskLimitLevelNotEmptyOrNullTest {
 
     @Mock
-    private TravelCalculatePremiumRequest requestMock;
+    private TravelCalculatePremiumRequestV1 requestMock;
     @Mock
     private ValidationErrorFactory errorFactoryMock;
 

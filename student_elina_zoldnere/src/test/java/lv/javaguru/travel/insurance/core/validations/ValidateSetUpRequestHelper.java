@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 
 import org.mockito.Mockito;
 import org.springframework.stereotype.Component;
@@ -12,7 +12,7 @@ import java.util.Date;
 @Component
 public class ValidateSetUpRequestHelper {
 
-    public void setUpRequestMockWithAllValues(TravelCalculatePremiumRequest requestMock) {
+    public void setUpRequestMockWithAllValues(TravelCalculatePremiumRequestV1 requestMock) {
         Mockito.lenient().when(requestMock.getPersonFirstName()).thenReturn("Jānis");
         Mockito.lenient().when(requestMock.getPersonLastName()).thenReturn("Bērziņš");
         Mockito.lenient().when(requestMock.getPersonBirthDate()).thenReturn(new Date(90, 1, 1));

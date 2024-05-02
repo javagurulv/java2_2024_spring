@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.core.validations.agreement;
 
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,7 +19,7 @@ class ValidateMedicalRiskLimitLevelNotEmpty extends RequestAgreementFieldValidat
     private ValidationErrorFactory validationErrorFactory;
 
     @Override
-    public Optional<ValidationError> validateSingle(TravelCalculatePremiumRequest request) {
+    public Optional<ValidationError> validateSingle(TravelCalculatePremiumRequestV1 request) {
         return (isMedicalRiskEnabled() && containsRisk("TRAVEL_MEDICAL", request)
                 && (request.getMedicalRiskLimitLevel() == null || request.getMedicalRiskLimitLevel().isBlank()))
                 ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_8"))
@@ -30,7 +30,7 @@ class ValidateMedicalRiskLimitLevelNotEmpty extends RequestAgreementFieldValidat
         return medicalRiskLimitLevelEnabled;
     }
 
-    private boolean containsRisk(String riskType, TravelCalculatePremiumRequest request) {
+    private boolean containsRisk(String riskType, TravelCalculatePremiumRequestV1 request) {
         if (request.getSelectedRisks() == null || request.getSelectedRisks().isEmpty()) {
             return false;
         }

@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 @JsonComponent
-class BigDecimalSerializer extends JsonSerializer<BigDecimal> {
+public class BigDecimalSerializer extends JsonSerializer<BigDecimal> {
 
     @Override
     public void serialize(BigDecimal value, JsonGenerator gen, SerializerProvider serializers) throws IOException {

@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core.validations.person;
 
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,7 +19,7 @@ class ValidatePersonBirthDateIsValid extends RequestPersonFieldValidationImpl {
     private ValidationErrorFactory validationErrorFactory;
 
     @Override
-    public Optional<ValidationError> validateSingle(TravelCalculatePremiumRequest request) {
+    public Optional<ValidationError> validateSingle(TravelCalculatePremiumRequestV1 request) {
         Date birthDate = request.getPersonBirthDate();
         Date currentDate = dateTimeUtil.startOfToday();
         Date minPossibleBirthDate = dateTimeUtil.subtractYears(currentDate, 150);

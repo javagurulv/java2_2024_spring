@@ -4,7 +4,7 @@ import lv.javaguru.travel.insurance.core.domain.ClassifierValue;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
 import lv.javaguru.travel.insurance.core.validations.ValidateSetUpRequestHelper;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -30,7 +30,7 @@ import static org.mockito.Mockito.when;
 class ValidateSelectedRisksAreInDatabaseTest {
 
     @Mock
-    private TravelCalculatePremiumRequest requestMock;
+    private TravelCalculatePremiumRequestV1 requestMock;
     @Mock
     private ClassifierValueRepository repositoryMock;
     @Mock

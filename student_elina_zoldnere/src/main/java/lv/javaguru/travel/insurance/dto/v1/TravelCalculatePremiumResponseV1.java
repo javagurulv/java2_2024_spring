@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.dto;
+package lv.javaguru.travel.insurance.dto.v1;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
@@ -11,12 +11,16 @@ import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lv.javaguru.travel.insurance.dto.BigDecimalSerializer;
+import lv.javaguru.travel.insurance.dto.CoreResponse;
+import lv.javaguru.travel.insurance.dto.RiskPremium;
+import lv.javaguru.travel.insurance.dto.ValidationError;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TravelCalculatePremiumResponse extends CoreResponse {
+public class TravelCalculatePremiumResponseV1 extends CoreResponse {
 
     private String personFirstName;
 
@@ -40,7 +44,7 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
 
     private String medicalRiskLimitLevel;
 
-    public TravelCalculatePremiumResponse(List<ValidationError> errors) {
+    public TravelCalculatePremiumResponseV1(List<ValidationError> errors) {
         super(errors);
     }
 

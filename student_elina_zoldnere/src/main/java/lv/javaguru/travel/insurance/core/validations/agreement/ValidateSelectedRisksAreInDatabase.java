@@ -3,7 +3,7 @@ package lv.javaguru.travel.insurance.core.validations.agreement;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
 import lv.javaguru.travel.insurance.core.util.Placeholder;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,13 +20,13 @@ class ValidateSelectedRisksAreInDatabase extends RequestAgreementFieldValidation
     private ValidationErrorFactory validationErrorFactory;
 
     @Override
-    public List<ValidationError> validateList(TravelCalculatePremiumRequest request) {
+    public List<ValidationError> validateList(TravelCalculatePremiumRequestV1 request) {
         return request.getSelectedRisks() != null
                 ? validateRisks(request)
                 : List.of();
     }
 
-    private List<ValidationError> validateRisks(TravelCalculatePremiumRequest request) {
+    private List<ValidationError> validateRisks(TravelCalculatePremiumRequestV1 request) {
         return request.getSelectedRisks().stream()
                 .filter(risk -> !isInDatabase(risk))
                 .map(this::buildValidationError)

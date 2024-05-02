@@ -4,8 +4,8 @@ import lv.javaguru.travel.insurance.core.underwriting.TravelCalculatePremiumUnde
 import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumCalculationResult;
 import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.dto.RiskPremium;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumResponseV1;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,11 +33,11 @@ public class TravelCalculatePremiumServiceImplTest {
     @InjectMocks
     private TravelCalculatePremiumServiceImpl calculate;
 
-    private TravelCalculatePremiumRequest request;
+    private TravelCalculatePremiumRequestV1 request;
 
     @BeforeEach
     public void setUp() {
-        request = new TravelCalculatePremiumRequest();
+        request = new TravelCalculatePremiumRequestV1();
         request.setPersonFirstName("Jānis");
         request.setPersonLastName("Bērziņš");
         request.setPersonBirthDate(new Date(90, 1, 1));
@@ -56,43 +56,43 @@ public class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void calculatePremium_ShouldReturnCorrectPersonFirstName() {
-        TravelCalculatePremiumResponse response = calculatePremiumTest();
+        TravelCalculatePremiumResponseV1 response = calculatePremiumTest();
         assertEquals(request.getPersonFirstName(), response.getPersonFirstName());
     }
 
     @Test
     public void calculatePremium_ShouldReturnCorrectPersonLastName() {
-        TravelCalculatePremiumResponse response = calculatePremiumTest();
+        TravelCalculatePremiumResponseV1 response = calculatePremiumTest();
         assertEquals(request.getPersonLastName(), response.getPersonLastName());
     }
 
     @Test
     public void calculatePremium_ShouldReturnCorrectPersonBirthDate() {
-        TravelCalculatePremiumResponse response = calculatePremiumTest();
+        TravelCalculatePremiumResponseV1 response = calculatePremiumTest();
         assertEquals(request.getPersonBirthDate(), response.getPersonBirthDate());
     }
 
     @Test
     public void calculatePremium_ShouldReturnCorrectAgreementDateFrom() {
-        TravelCalculatePremiumResponse response = calculatePremiumTest();
+        TravelCalculatePremiumResponseV1 response = calculatePremiumTest();
         assertEquals(request.getAgreementDateFrom(), response.getAgreementDateFrom());
     }
 
     @Test
     public void calculatePremium_ShouldReturnCorrectAgreementDateTo() {
-        TravelCalculatePremiumResponse response = calculatePremiumTest();
+        TravelCalculatePremiumResponseV1 response = calculatePremiumTest();
         assertEquals(request.getAgreementDateTo(), response.getAgreementDateTo());
     }
 
     @Test
     public void calculatePremium_ShouldReturnCorrectAgreementPremium() {
-        TravelCalculatePremiumResponse response = calculatePremiumTest();
+        TravelCalculatePremiumResponseV1 response = calculatePremiumTest();
         assertEquals(BigDecimal.valueOf(2.50), response.getAgreementPremium());
     }
 
     @Test
     public void calculatePremium_ShouldReturnCorrectRiskDetails() {
-        TravelCalculatePremiumResponse response = calculatePremiumTest();
+        TravelCalculatePremiumResponseV1 response = calculatePremiumTest();
         List<RiskPremium> riskPremiums = response.getRiskPremiums();
 
         assertEquals(3, riskPremiums.size());
@@ -110,7 +110,7 @@ public class TravelCalculatePremiumServiceImplTest {
         assertEquals(BigDecimal.ZERO, lossBaggageRisk.getPremium());
     }
 
-    private TravelCalculatePremiumResponse calculatePremiumTest() {
+    private TravelCalculatePremiumResponseV1 calculatePremiumTest() {
         return calculate.calculatePremium(request);
     }
 

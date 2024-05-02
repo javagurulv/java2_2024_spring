@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.core.underwriting.calculators;
 
 import lv.javaguru.travel.insurance.core.underwriting.TravelRiskPremiumCalculator;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 class TravelLossBaggageRiskPremiumCalculator implements TravelRiskPremiumCalculator {
 
     @Override
-    public BigDecimal calculateRiskPremium(TravelCalculatePremiumRequest request) {
+    public BigDecimal calculateRiskPremium(TravelCalculatePremiumRequestV1 request) {
         return BigDecimal.ZERO;
     }
 

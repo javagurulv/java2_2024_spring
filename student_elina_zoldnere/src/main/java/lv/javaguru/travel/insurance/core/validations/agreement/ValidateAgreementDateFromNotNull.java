@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.core.validations.agreement;
 
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ class ValidateAgreementDateFromNotNull extends RequestAgreementFieldValidationIm
     private ValidationErrorFactory validationErrorFactory;
 
     @Override
-    public Optional<ValidationError> validateSingle(TravelCalculatePremiumRequest request) {
+    public Optional<ValidationError> validateSingle(TravelCalculatePremiumRequestV1 request) {
         return (request.getAgreementDateFrom() == null)
                 ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_3"))
                 : Optional.empty();

@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 class TravelMedicalRiskPremiumCalculatorTest {
 
     @Mock
-    private TravelCalculatePremiumRequest requestMock;
+    private TravelCalculatePremiumRequestV1 requestMock;
     @Mock
     private DayCountCalculator dayCountCalculatorMock;
     @Mock

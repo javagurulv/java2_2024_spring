@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.core.underwriting;
 
 import lv.javaguru.travel.insurance.dto.RiskPremium;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +17,7 @@ class TravelCalculatePremiumUnderwritingImpl implements TravelCalculatePremiumUn
     private TotalRiskPremiumCalculator totalRiskCalculator;
 
     @Override
-    public TravelPremiumCalculationResult calculateAgreementPremium(TravelCalculatePremiumRequest request) {
+    public TravelPremiumCalculationResult calculateAgreementPremium(TravelCalculatePremiumRequestV1 request) {
         List<String> selectedRisks = request.getSelectedRisks();
 
         List<RiskPremium> riskPremiums = selectedRisks.stream()
