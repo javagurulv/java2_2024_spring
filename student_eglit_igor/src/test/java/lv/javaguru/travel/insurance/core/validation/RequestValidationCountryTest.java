@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.validation;
 
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,7 +28,7 @@ class RequestValidationCountryTest {
 
     @Test
     public void shouldReturnEmptyWhenCountryIsNotNullOrEmpty() {
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+        TravelCalculatePremiumRequestV1 request = new TravelCalculatePremiumRequestV1();
         request.setCountry("Latvia");
         request.setSelectedRisks(List.of("TRAVEL_EVACUATION"));
 
@@ -39,7 +39,7 @@ class RequestValidationCountryTest {
 
     @Test
     public void shouldReturnErrorWhenCountryIsEmpty() {
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+        TravelCalculatePremiumRequestV1 request = new TravelCalculatePremiumRequestV1();
         request.setSelectedRisks(List.of("TRAVEL_EVACUATION"));
         request.setCountry("");
 
@@ -54,7 +54,7 @@ class RequestValidationCountryTest {
 
     @Test
     public void shouldReturnErrorThenCountryIsNull() {
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+        TravelCalculatePremiumRequestV1 request = new TravelCalculatePremiumRequestV1();
         request.setCountry(null);
         request.setSelectedRisks(List.of("TRAVEL_CANCELLATION"));
 

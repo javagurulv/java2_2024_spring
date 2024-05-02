@@ -4,8 +4,8 @@ import lv.javaguru.travel.insurance.core.services.TravelCalculatePremiumServiceI
 import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumCalculationResult;
 import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwriting;
 import lv.javaguru.travel.insurance.core.validation.TravelCalculatePremiumRequestValidatorInterface;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumResponseV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,11 +37,11 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     void shouldReturnPremiumResponseWhenNoValidationErrors() {
-        when(requestValidator.validate(any(TravelCalculatePremiumRequest.class))).thenReturn(Collections.emptyList());
-        when(premiumUnderwriting.calculateAgreementPremium(any(TravelCalculatePremiumRequest.class))).thenReturn(new TravelPremiumCalculationResult(BigDecimal.ZERO, Collections.emptyList()));
+        when(requestValidator.validate(any(TravelCalculatePremiumRequestV1.class))).thenReturn(Collections.emptyList());
+        when(premiumUnderwriting.calculateAgreementPremium(any(TravelCalculatePremiumRequestV1.class))).thenReturn(new TravelPremiumCalculationResult(BigDecimal.ZERO, Collections.emptyList()));
 
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
-        TravelCalculatePremiumResponse response = service.calculatePremium(request);
+        TravelCalculatePremiumRequestV1 request = new TravelCalculatePremiumRequestV1();
+        TravelCalculatePremiumResponseV1 response = service.calculatePremium(request);
 
         assertNotNull(response);
         assertEquals(BigDecimal.ZERO, response.getAgreementPremium());
@@ -51,10 +51,10 @@ class TravelCalculatePremiumServiceImplTest {
     @Test
     void shouldReturnErrorResponseWhenValidationErrorsExist() {
         List<ValidationError> errors = List.of(new ValidationError("field", "error message"));
-        when(requestValidator.validate(any(TravelCalculatePremiumRequest.class))).thenReturn(errors);
+        when(requestValidator.validate(any(TravelCalculatePremiumRequestV1.class))).thenReturn(errors);
 
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
-        TravelCalculatePremiumResponse response = service.calculatePremium(request);
+        TravelCalculatePremiumRequestV1 request = new TravelCalculatePremiumRequestV1();
+        TravelCalculatePremiumResponseV1 response = service.calculatePremium(request);
 
         assertNotNull(response);
         assertTrue(response.hasErrors());

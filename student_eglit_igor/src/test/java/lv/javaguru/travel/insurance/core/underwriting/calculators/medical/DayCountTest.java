@@ -1,7 +1,7 @@
 package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,11 +25,11 @@ class DayCountTest {
     @InjectMocks
     private DayCount dayCount;
 
-    private TravelCalculatePremiumRequest request;
+    private TravelCalculatePremiumRequestV1 request;
 
     @BeforeEach
     void setUp() {
-        request = new TravelCalculatePremiumRequest();
+        request = new TravelCalculatePremiumRequestV1();
         request.setAgreementDateFrom(LocalDate.of(2025, 1, 1));
         request.setAgreementDateTo(LocalDate.of(2025, 1, 10));
     }

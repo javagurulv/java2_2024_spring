@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.validation;
 
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,11 +21,11 @@ class RequestValidationPersonBirthDateIsNotInTheFutureTest {
 
     @InjectMocks
     private RequestValidationPersonBirthDateIsNotInTheFuture validator;
-private TravelCalculatePremiumRequest request;
+private TravelCalculatePremiumRequestV1 request;
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        request = new TravelCalculatePremiumRequest();
+        request = new TravelCalculatePremiumRequestV1();
     }
 
     @Test
@@ -43,7 +43,7 @@ private TravelCalculatePremiumRequest request;
 
     @Test
     void shouldReturnEmptyWhenPersonBirthDateIsToday() {
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+        TravelCalculatePremiumRequestV1 request = new TravelCalculatePremiumRequestV1();
         request.setPersonBirthDate(LocalDate.now());
 
         Optional<ValidationError> result = validator.validateSingle(request);
@@ -53,7 +53,7 @@ private TravelCalculatePremiumRequest request;
 
     @Test
     void shouldReturnEmptyWhenPersonBirthDateIsInThePast() {
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+        TravelCalculatePremiumRequestV1 request = new TravelCalculatePremiumRequestV1();
         request.setPersonBirthDate(LocalDate.now().minusDays(1));
 
         Optional<ValidationError> result = validator.validateSingle(request);

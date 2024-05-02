@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.validation;
 
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,7 +34,7 @@ class TravelCalculatePremiumRequestValidatorImplTest {
 
         @Test
         void shouldReturnNoErrorsWhenAllValidationsPass() {
-            TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+            TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
             when(validation1.validateSingle(request)).thenReturn(Optional.empty());
             when(validation2.validateSingle(request)).thenReturn(Optional.empty());
 
@@ -45,7 +45,7 @@ class TravelCalculatePremiumRequestValidatorImplTest {
 
         @Test
         void shouldReturnErrorsWhenOneValidationFails() {
-            TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+            TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
             ValidationError error = new ValidationError();
             when(validation1.validateSingle(request)).thenReturn(Optional.of(error));
             when(validation2.validateSingle(request)).thenReturn(Optional.empty());
@@ -58,7 +58,7 @@ class TravelCalculatePremiumRequestValidatorImplTest {
 
         @Test
         void shouldReturnErrorsWhenMultipleValidationsFail() {
-            TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+            TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
             ValidationError error1 = new ValidationError();
             ValidationError error2 = new ValidationError();
             when(validation1.validateSingle(request)).thenReturn(Optional.of(error1));
@@ -73,7 +73,7 @@ class TravelCalculatePremiumRequestValidatorImplTest {
         @Test
         void shouldReturnNoErrorsWhenNoValidations() {
             validator = new TravelCalculatePremiumRequestValidatorImpl(Collections.emptyList());
-            TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+            TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
 
             List<ValidationError> errors = validator.validate(request);
 

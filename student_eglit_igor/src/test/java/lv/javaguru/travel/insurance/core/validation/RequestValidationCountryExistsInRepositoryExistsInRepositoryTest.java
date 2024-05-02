@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core.validation;
 
 import lv.javaguru.travel.insurance.core.domain.ClassifierValue;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,7 +35,7 @@ class RequestValidationCountryExistsInRepositoryExistsInRepositoryTest {
 
     @Test
     public void shouldReturnEmptyWhenCountryExists() {
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+        TravelCalculatePremiumRequestV1 request = new TravelCalculatePremiumRequestV1();
         request.setCountry("Latvia");
 
         when(classifierValueRepository.findByClassifierTitleAndIc("COUNTRY", "Latvia"))
@@ -48,7 +48,7 @@ class RequestValidationCountryExistsInRepositoryExistsInRepositoryTest {
 
     @Test
     public void shouldReturnErrorWhenCountryDoesNotExist() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
+        TravelCalculatePremiumRequestV1 request = mock(TravelCalculatePremiumRequestV1.class);
         when(request.getCountry()).thenReturn("INVALID");
         when(classifierValueRepository.findByClassifierTitleAndIc("COUNTRY", "INVALID"))
                 .thenReturn(Optional.empty());
@@ -62,7 +62,7 @@ class RequestValidationCountryExistsInRepositoryExistsInRepositoryTest {
     }
     @Test
     public void shouldReturnEmptyWhenCountryIsNull() {
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest();
+        TravelCalculatePremiumRequestV1 request = new TravelCalculatePremiumRequestV1();
 
         Optional<ValidationError> result = validator.validateSingle(request);
 

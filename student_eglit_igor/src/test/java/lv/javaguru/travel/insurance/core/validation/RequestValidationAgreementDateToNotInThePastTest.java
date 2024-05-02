@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.validation;
 
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,12 +20,12 @@ class RequestValidationAgreementDateToNotInThePastTest {
     private ValidationErrorFactory validationErrorFactory;
     @InjectMocks
     private RequestValidationAgreementDateToNotInThePast requestValidationAgreementDateToNotInThePast;
-    private TravelCalculatePremiumRequest request;
+    private TravelCalculatePremiumRequestV1 request;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        request = new TravelCalculatePremiumRequest();
+        request = new TravelCalculatePremiumRequestV1();
         when(validationErrorFactory.buildError("ERROR_CODE_6")).thenReturn(new ValidationError("ERROR_CODE_6","Field agreementDateTo is in the past!"));
     }
 

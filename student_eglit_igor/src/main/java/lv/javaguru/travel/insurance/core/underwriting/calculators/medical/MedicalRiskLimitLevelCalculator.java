@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lv.javaguru.travel.insurance.core.domain.MedicalRiskLimitLevel;
 import lv.javaguru.travel.insurance.core.repositories.MedicalRiskLimitLevelRepository;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +22,7 @@ class MedicalRiskLimitLevelCalculator {
     @Autowired
     private MedicalRiskLimitLevelRepository medicalRiskLimitLevelRepository;
 
-    public BigDecimal calculateRiskLimitLevel(TravelCalculatePremiumRequest request) {
+    public BigDecimal calculateRiskLimitLevel(TravelCalculatePremiumRequestV1 request) {
         return medicalRiskLimitLevelRepository.findByMedicalRiskLimitLevelIc(
                 request.getMedicalRiskLimitLevel())
                 .map(MedicalRiskLimitLevel::getCoefficient)

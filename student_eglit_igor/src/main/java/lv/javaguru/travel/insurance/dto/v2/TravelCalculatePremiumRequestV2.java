@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.dto;
+package lv.javaguru.travel.insurance.dto.v2;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.AllArgsConstructor;
@@ -14,15 +14,16 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TravelCalculatePremiumRequest {
+public class TravelCalculatePremiumRequestV2 {
 
-    private String personFirstName;
-    private String personLastName;
-    private LocalDate personBirthDate;
-    private LocalDate agreementDateFrom;
+    @JsonAlias("persons")
+    private List<PersonRequestDTO> persons;
+
     private LocalDate agreementDateTo;
     @JsonAlias("selected_risks")
     private List<String> selectedRisks;
     private String country;
     private String medicalRiskLimitLevel;
+
+
 }
