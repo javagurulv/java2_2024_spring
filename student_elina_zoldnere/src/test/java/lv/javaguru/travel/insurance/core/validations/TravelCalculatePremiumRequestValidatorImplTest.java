@@ -7,70 +7,108 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.junit.jupiter.MockitoSettings;
-import org.mockito.quality.Strictness;
 
-import java.util.Arrays;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class TravelCalculatePremiumRequestValidatorImplTest {
+class TravelCalculatePremiumRequestValidatorImplTest {
 
     @Mock
     private TravelCalculatePremiumRequest requestMock;
     @Mock
-    private RequestFieldValidation validation1;
+    private List<RequestAgreementFieldValidation> agreementFieldValidation;
     @Mock
-    private RequestFieldValidation validation2;
-    @Mock
-    private List<RequestFieldValidation> fieldValidationMock;
-
+    private List<RequestPersonFieldValidation> personFieldValidation;
     @InjectMocks
-    private TravelCalculatePremiumRequestValidatorImpl requestValidator;
+    private TravelCalculatePremiumRequestValidatorImpl validator;
 
     @Test
-    @MockitoSettings(strictness = Strictness.LENIENT)
-    public void validate_ShouldPassWhenAllValidationsSucceed() {
-        when(validation1.validateSingle(requestMock)).thenReturn(Optional.empty());
-        when(validation2.validateList(requestMock)).thenReturn(List.of());
+    void validate_ShouldPassWhenAllValidationsSucceed() {
+        when(agreementFieldValidation.stream()).thenAnswer(invocation -> Stream.empty());
+        when(personFieldValidation.stream()).thenAnswer(invocation -> Stream.empty());
 
-        List<ValidationError> errors = requestValidator.validate(requestMock);
+        List<ValidationError> errors = validator.validate(requestMock);
 
-        assertEquals(0, errors.size());
+        assertEquals(Collections.emptyList(), errors);
     }
 
     @Test
-    public void validate_ShouldReturnErrorsWhenAllValidationsFail() {
-        AtomicInteger invocationCount = new AtomicInteger(0);
+    void validate_ShouldReturnErrorWhenPersonSingleValidationFail() {
+        RequestPersonFieldValidation personValidationMock = mock(RequestPersonFieldValidation.class);
+        when(agreementFieldValidation.stream()).thenAnswer(invocation -> Stream.empty());
+        when(personFieldValidation.stream()).thenAnswer(invocation -> Stream.of(personValidationMock));
+        when(personValidationMock.validateSingle(any())).thenReturn(Optional.of(new ValidationError()));
 
-        // It turns out being not so easy to call stream() on the same mock object multiple times AND with
-        // different outputs.
-        when(fieldValidationMock.stream()).thenAnswer(invocation -> {
-            if (invocationCount.getAndIncrement() == 0) {
-                return Stream.of(validation1); // first invocation
-            } else {
-                return Stream.of(validation2); // second invocation
-            }
-        });
+        List<ValidationError> errors = validator.validate(requestMock);
 
-        when(validation1.validateSingle(requestMock))
-                .thenReturn(Optional.of(new ValidationError("ERROR_CODE_1", "Description 1")));
+        assertEquals(1, errors.size());
+    }
 
-        when(validation2.validateList(requestMock))
-                .thenReturn(Arrays.asList(
-                        new ValidationError("ERROR_CODE_2", "Description 2"),
-                        new ValidationError("ERROR_CODE_3", "Description 3")));
+    @Test
+    void validate_ShouldReturnErrorWhenPersonListValidationFail() {
+        RequestPersonFieldValidation personValidationMock = mock(RequestPersonFieldValidation.class);
+        when(agreementFieldValidation.stream()).thenAnswer(invocation -> Stream.empty());
+        when(personFieldValidation.stream()).thenAnswer(invocation -> Stream.of(personValidationMock));
+        when(personValidationMock.validateList(any())).thenReturn(List.of(new ValidationError()));
 
-        List<ValidationError> errors = requestValidator.validate(requestMock);
+        List<ValidationError> errors = validator.validate(requestMock);
 
-        assertEquals(3, errors.size());
+        assertEquals(1, errors.size());
+    }
+
+    @Test
+    void validate_ShouldReturnErrorWhenAgreementSingleValidationFail() {
+        RequestAgreementFieldValidation agreementValidationMock = mock(RequestAgreementFieldValidation.class);
+        when(personFieldValidation.stream()).thenAnswer(invocation -> Stream.empty());
+        when(agreementFieldValidation.stream()).thenAnswer(invocation -> Stream.of(agreementValidationMock));
+        when(agreementValidationMock.validateSingle(any())).thenReturn(Optional.of(new ValidationError()));
+
+        List<ValidationError> errors = validator.validate(requestMock);
+
+        assertEquals(1, errors.size());
+    }
+
+    @Test
+    void validate_ShouldReturnErrorWhenAgreementListValidationFail() {
+        RequestAgreementFieldValidation agreementValidationMock = mock(RequestAgreementFieldValidation.class);
+        when(personFieldValidation.stream()).thenAnswer(invocation -> Stream.empty());
+        when(agreementFieldValidation.stream()).thenAnswer(invocation -> Stream.of(agreementValidationMock));
+        when(agreementValidationMock.validateList(any())).thenReturn(List.of(new ValidationError()));
+
+        List<ValidationError> errors = validator.validate(requestMock);
+
+        assertEquals(1, errors.size());
+    }
+
+    @Test
+    void validate_ShouldReturnErrorWhenSeveralMixedValidationFail() {
+        RequestAgreementFieldValidation agreementValidationMock = mock(RequestAgreementFieldValidation.class);
+        RequestPersonFieldValidation personValidationMock1 = mock(RequestPersonFieldValidation.class);
+        RequestPersonFieldValidation personValidationMock2 = mock(RequestPersonFieldValidation.class);
+
+        when(agreementFieldValidation.stream()).thenAnswer(invocation -> Stream.of(agreementValidationMock));
+        when(personFieldValidation.stream())
+                .thenAnswer(invocation -> Stream.of(personValidationMock1, personValidationMock2));
+
+        when(agreementValidationMock.validateList(any()))
+                .thenReturn(List.of(new ValidationError(), new ValidationError()));
+        when(agreementValidationMock.validateSingle(any())).thenReturn(Optional.of(new ValidationError()));
+        when(personValidationMock1.validateSingle(any())).thenReturn(Optional.of(new ValidationError()));
+        when(personValidationMock2.validateSingle(any())).thenReturn(Optional.of(new ValidationError()));
+
+        List<ValidationError> errors = validator.validate(requestMock);
+
+        assertEquals(5, errors.size());
     }
 
 }

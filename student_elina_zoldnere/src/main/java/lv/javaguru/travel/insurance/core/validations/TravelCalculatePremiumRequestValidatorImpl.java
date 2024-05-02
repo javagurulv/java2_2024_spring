@@ -12,34 +12,70 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component
 class TravelCalculatePremiumRequestValidatorImpl implements TravelCalculatePremiumRequestValidator {
 
     @Autowired
-    List<RequestFieldValidation> fieldValidation;
+    List<RequestAgreementFieldValidation> agreementFieldValidation;
+    @Autowired
+    List<RequestPersonFieldValidation> personFieldValidation;
 
     @Override
     public List<ValidationError> validate(TravelCalculatePremiumRequest request) {
-        List<ValidationError> collectedErrors = new ArrayList<>();
-        collectedErrors.addAll(collectSingleErrors(request));
-        collectedErrors.addAll(collectListErrors(request));
-        return collectedErrors;
+        List<ValidationError> agreementErrors = collectAgreementErrors(request);
+        List<ValidationError> personErrors = collectPersonErrors(request);
+        return concatenateLists(agreementErrors, personErrors);
     }
 
-    private List<ValidationError> collectSingleErrors(TravelCalculatePremiumRequest request) {
-        return fieldValidation.stream()
+    private List<ValidationError> collectAgreementErrors (TravelCalculatePremiumRequest request) {
+        List<ValidationError> singleAgreementErrors = collectSingleAgreementErrors(request);
+        List<ValidationError> listAgreementErrors = collectListAgreementErrors(request);
+        return concatenateLists(singleAgreementErrors, listAgreementErrors);
+    }
+
+    private List<ValidationError> collectPersonErrors (TravelCalculatePremiumRequest request) {
+        List<ValidationError> singlePersonErrors = collectSinglePersonErrors(request);
+        List<ValidationError> listPersonErrors = collectListPersonErrors(request);
+        return concatenateLists(singlePersonErrors, listPersonErrors);
+    }
+
+    private List<ValidationError> collectSingleAgreementErrors(TravelCalculatePremiumRequest request) {
+        return agreementFieldValidation.stream()
                 .map(validation -> validation.validateSingle(request))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toList());
     }
 
-    private List<ValidationError> collectListErrors(TravelCalculatePremiumRequest request) {
-        return fieldValidation.stream()
+    private List<ValidationError> collectListAgreementErrors(TravelCalculatePremiumRequest request) {
+        return agreementFieldValidation.stream()
                 .map(validation -> validation.validateList(request))
                 .filter((Objects::nonNull))
                 .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+    }
+
+    private List<ValidationError> collectSinglePersonErrors(TravelCalculatePremiumRequest request) {
+        return personFieldValidation.stream()
+                .map(validation -> validation.validateSingle(request))
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toList());
+    }
+
+    private List<ValidationError> collectListPersonErrors(TravelCalculatePremiumRequest request) {
+        return personFieldValidation.stream()
+                .map(validation -> validation.validateList(request))
+                .filter((Objects::nonNull))
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+    }
+
+    private List<ValidationError> concatenateLists(List<ValidationError> errorsListOne,
+                                                   List<ValidationError> errorListTwo) {
+        return Stream.concat(errorsListOne.stream(), errorListTwo.stream())
                 .collect(Collectors.toList());
     }
 
