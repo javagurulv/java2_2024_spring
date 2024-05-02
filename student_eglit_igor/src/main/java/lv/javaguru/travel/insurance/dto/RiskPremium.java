@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lv.javaguru.travel.insurance.core.util.BigDecimalSerializer;
+import lv.javaguru.travel.insurance.dto.util.BigDecimalSerializer;
 
 import java.math.BigDecimal;
 
