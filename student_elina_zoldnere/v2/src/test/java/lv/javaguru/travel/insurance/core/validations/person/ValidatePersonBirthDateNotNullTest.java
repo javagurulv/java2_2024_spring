@@ -1,6 +1,6 @@
-package lv.javaguru.travel.insurance.core.validations.agreement;
+package lv.javaguru.travel.insurance.core.validations.person;
 
-import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,36 +18,36 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class ValidateAgreementDateToNotNullTest {
+class ValidatePersonBirthDateNotNullTest {
 
     @Mock
-    private AgreementDTO agreementMock;
+    private PersonDTO personMock;
     @Mock
     private ValidationErrorFactory errorMock;
 
     @InjectMocks
-    private ValidateAgreementDateToNotNull validate;
+    private ValidatePersonBirthDateNotNull validate;
 
     @Autowired
     @InjectMocks
-    private ValidateSetUpAgreementValuesHelper helper;
+    private ValidateSetUpPersonValuesHelper helper;
 
     @BeforeEach
     public void setUp() {
-        helper.setUpAgreementMockWithValues(agreementMock);
+        helper.setUpPersonMockWithValues(personMock);
     }
 
     @Test
-    public void validate_ShouldReturnErrorWhenAgreementDateToIsNull() {
-        when(agreementMock.getAgreementDateTo()).thenReturn(null);
-        when(errorMock.buildError("ERROR_CODE_4"))
-                .thenReturn(new ValidationErrorDTO("ERROR_CODE_4", "Field agreementDateTo is empty!"));
+    public void validate_ShouldReturnErrorWhenAgreementDateFromIsNull() {
+        when(personMock.getPersonBirthDate()).thenReturn(null);
+        when(errorMock.buildError("ERROR_CODE_7"))
+                .thenReturn(new ValidationErrorDTO("ERROR_CODE_7", "Field personBirthDate is empty!"));
 
-        Optional<ValidationErrorDTO> result = validate.validateSingle(agreementMock);
+        Optional<ValidationErrorDTO> result = validate.validateSingle(personMock);
 
         assertTrue(result.isPresent());
-        assertEquals("ERROR_CODE_4", result.get().getErrorCode());
-        assertEquals("Field agreementDateTo is empty!", result.get().getDescription());
+        assertEquals("ERROR_CODE_7", result.get().getErrorCode());
+        assertEquals("Field personBirthDate is empty!", result.get().getDescription());
     }
 
 }

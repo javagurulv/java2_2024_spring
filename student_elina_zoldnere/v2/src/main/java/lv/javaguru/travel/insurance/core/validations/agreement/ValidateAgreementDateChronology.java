@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.Optional;
 
 @Component
-class ValidateAgreementDateChronology extends RequestAgreementFieldValidationImpl {
+class ValidateAgreementDateChronology extends AgreementFieldValidationImpl {
 
     @Autowired
     private ValidationErrorFactory validationErrorFactory;

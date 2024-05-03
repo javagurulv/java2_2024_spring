@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-class ValidateCountryIsInDatabase extends RequestAgreementFieldValidationImpl {
+class ValidateCountryIsInDatabase extends AgreementFieldValidationImpl {
 
     @Autowired
     private ClassifierValueRepository classifierValueRepository;

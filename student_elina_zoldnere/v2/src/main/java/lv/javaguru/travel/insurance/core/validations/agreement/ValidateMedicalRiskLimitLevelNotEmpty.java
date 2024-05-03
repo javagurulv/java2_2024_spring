@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-class ValidateMedicalRiskLimitLevelNotEmpty extends RequestAgreementFieldValidationImpl {
+class ValidateMedicalRiskLimitLevelNotEmpty extends AgreementFieldValidationImpl {
 
     @Value("${medical.risk.limit.level.enabled:false}")
     private Boolean medicalRiskLimitLevelEnabled;

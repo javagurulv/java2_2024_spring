@@ -1,6 +1,6 @@
-package lv.javaguru.travel.insurance.core.validations.agreement;
+package lv.javaguru.travel.insurance.core.validations.person;
 
-import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.Optional;
 
 @Component
-class ValidateAgreementDateFromNotLessThanToday extends AgreementFieldValidationImpl {
+class ValidatePersonBirthDateIsValid extends PersonFieldValidationImpl {
 
     @Autowired
     private DateTimeUtil dateTimeUtil;
@@ -19,14 +19,13 @@ class ValidateAgreementDateFromNotLessThanToday extends AgreementFieldValidation
     private ValidationErrorFactory validationErrorFactory;
 
     @Override
-    public Optional<ValidationErrorDTO> validateSingle(AgreementDTO agreement) {
-        Date agreementDateFrom = agreement.getAgreementDateFrom();
-        Date agreementDateTo = agreement.getAgreementDateTo();
+    public Optional<ValidationErrorDTO> validateSingle(PersonDTO person) {
+        Date birthDate = person.getPersonBirthDate();
         Date currentDate = dateTimeUtil.startOfToday();
+        Date minPossibleBirthDate = dateTimeUtil.subtractYears(currentDate, 150);
 
-        return (agreementDateFrom != null && agreementDateTo != null
-                && agreementDateFrom.before(currentDate))
-                ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_11"))
+        return (birthDate != null && (birthDate.after(currentDate) || birthDate.before(minPossibleBirthDate)))
+                ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_14"))
                 : Optional.empty();
     }
 

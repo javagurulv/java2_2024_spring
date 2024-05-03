@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.Optional;
 
 @Component
-class ValidateAgreementDateToNotLessThanToday extends RequestAgreementFieldValidationImpl {
+class ValidateAgreementDateToNotLessThanToday extends AgreementFieldValidationImpl {
 
     @Autowired
     private DateTimeUtil dateTimeUtil;

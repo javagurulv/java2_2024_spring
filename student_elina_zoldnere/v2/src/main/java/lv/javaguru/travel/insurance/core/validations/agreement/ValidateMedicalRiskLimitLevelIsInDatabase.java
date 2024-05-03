@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-class ValidateMedicalRiskLimitLevelIsInDatabase extends RequestAgreementFieldValidationImpl {
+class ValidateMedicalRiskLimitLevelIsInDatabase extends AgreementFieldValidationImpl {
 
     @Autowired
     private ClassifierValueRepository classifierValueRepository;

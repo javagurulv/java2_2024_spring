@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-class ValidateSelectedRisksNotEmptyOrNull extends RequestAgreementFieldValidationImpl {
+class ValidateSelectedRisksNotEmptyOrNull extends AgreementFieldValidationImpl {
 
     @Autowired
     private ClassifierValueRepository classifierValueRepository;

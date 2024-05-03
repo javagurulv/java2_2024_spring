@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-class ValidateSelectedRisksAreInDatabase extends RequestAgreementFieldValidationImpl {
+class ValidateSelectedRisksAreInDatabase extends AgreementFieldValidationImpl {
 
     @Autowired
     private ClassifierValueRepository classifierValueRepository;
