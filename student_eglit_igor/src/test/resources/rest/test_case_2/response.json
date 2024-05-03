@@ -6,8 +6,8 @@
   "agreementDateFrom": "2025-01-01",
   "agreementDateTo": "2025-01-02",
   "country" : "LATVIA",
-  "medicalRiskLimitLevel" : null,
-  "selected_risks": [
+  "medicalRiskLimitLevel" : "LEVEL_15000",
+  "riskPremiums": [
     {
       "riskIc": "TRAVEL_MEDICAL",
       "premium": 2.64

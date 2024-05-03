@@ -29,7 +29,7 @@ public class TravelCalculatePremiumServiceImpl implements TravelCalculatePremium
     public TravelCalculatePremiumResponseV1 calculatePremium(TravelCalculatePremiumRequestV1 request) {
         List<ValidationError> errors = requestValidator.validate(request);
         return errors.isEmpty()
-                ? buildResponse(request, premiumUnderwriting.calculateAgreementPremium(request))
+                ? buildResponse(request)
                 : buildResponse(errors);
     }
 
@@ -37,16 +37,21 @@ public class TravelCalculatePremiumServiceImpl implements TravelCalculatePremium
         return new TravelCalculatePremiumResponseV1(errors);
     }
 
-    private TravelCalculatePremiumResponseV1 buildResponse(TravelCalculatePremiumRequestV1 request, TravelPremiumCalculationResult travelPremiumCalculationResult) {
+    private TravelCalculatePremiumResponseV1 buildResponse(TravelCalculatePremiumRequestV1 request) {
+        TravelPremiumCalculationResult travelPremiumCalculationResult = premiumUnderwriting.calculateAgreementPremium(request);
         TravelCalculatePremiumResponseV1 response = new TravelCalculatePremiumResponseV1();
+
         response.setPersonFirstName(request.getPersonFirstName());
         response.setPersonLastName(request.getPersonLastName());
         response.setPersonBirthDate(request.getPersonBirthDate());
         response.setAgreementDateFrom(request.getAgreementDateFrom());
         response.setAgreementDateTo(request.getAgreementDateTo());
         response.setCountry(request.getCountry());
+        response.setMedicalRiskLimitLevel(request.getMedicalRiskLimitLevel());
         response.setAgreementPremium(travelPremiumCalculationResult.getTotalPremium());
-        response.setSelected_risks(travelPremiumCalculationResult.getRiskPremiums());
+        response.setRiskPremiums(travelPremiumCalculationResult.getRiskPremiums());
+
+
         return response;
     }
 }

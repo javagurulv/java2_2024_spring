@@ -45,7 +45,7 @@ class TravelCalculatePremiumServiceImplTest {
 
         assertNotNull(response);
         assertEquals(BigDecimal.ZERO, response.getAgreementPremium());
-        assertTrue(response.getSelected_risks().isEmpty());
+        assertTrue(response.getRiskPremiums().isEmpty());
     }
 
     @Test
