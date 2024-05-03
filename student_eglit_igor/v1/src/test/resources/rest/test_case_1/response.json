@@ -1,0 +1,40 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_3",
+      "description": "Field agreementDateFrom is empty!"
+    },
+    {
+      "errorCode": "ERROR_CODE_4",
+      "description": "Field agreementDateTo is empty!"
+    },
+    {
+      "errorCode": "ERROR_CODE_2",
+      "description": "Field personLastName is empty!"
+    },
+    {"errorCode":"ERROR_CODE_12",
+      "description":"Field personBirthDate is empty!"
+    },
+    {
+      "errorCode": "ERROR_CODE_1",
+      "description": "Field personFirstName is empty!"
+    },
+    {
+      "errorCode": "ERROR_CODE_10",
+      "description": "Field Country is empty!"
+    },
+    {
+      "errorCode": "ERROR_CODE_8",
+      "description": "Field selected_risks is empty!"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "personBirthDate": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "country": null,
+  "medicalRiskLimitLevel" : null,
+  "riskPremiums": null,
+  "agreementPremium": null
+}
