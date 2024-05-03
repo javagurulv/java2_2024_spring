@@ -1,0 +1,17 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_14",
+      "description": "PersonBirthDate is not a valid date!"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "personBirthDate" : null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPremium": null,
+  "riskPremiums" : null,
+  "country" : null,
+  "medicalRiskLimitLevel" : null
+}

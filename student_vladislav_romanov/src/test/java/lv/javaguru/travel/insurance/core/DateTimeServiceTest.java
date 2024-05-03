@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core;
 
+import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DateTimeServiceTest {
 
-    DateTimeService dateTimeService;
+    DateTimeUtil dateTimeService;
 
     LocalDate dateFrom, dateTo;
 
@@ -17,7 +18,7 @@ class DateTimeServiceTest {
     void setUp() {
         dateFrom = LocalDate.of(2030, 3, 8);
         dateTo = LocalDate.of(2030, 3, 18);
-        dateTimeService = new DateTimeService();
+        dateTimeService = new DateTimeUtil();
     }
 
     @Test

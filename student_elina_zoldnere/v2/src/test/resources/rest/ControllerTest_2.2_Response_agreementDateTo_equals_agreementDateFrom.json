@@ -1,0 +1,17 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_13",
+      "description": "AgreementDateTo must be after AgreementDateFrom!"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "personBirthDate" : null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPremium": null,
+  "riskPremiums" : null,
+  "country" : null,
+  "medicalRiskLimitLevel" : null
+}

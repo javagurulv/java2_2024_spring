@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core;
 
+import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,6 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -17,14 +19,14 @@ import static org.mockito.Mockito.*;
 public class TravelPremiumTest {
 
     @Mock
-    DateTimeService dateTimeServiceMock;
+    DateTimeUtil dateTimeServiceMock;
 
     @InjectMocks
     private TravelPremium travelPremium;
 
     @Test
     void travelPremiumTest() {
-        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Vladislav", "Romanov", LocalDate.of(2030, 3, 8), LocalDate.of(2030, 3, 18));
+        TravelCalculatePremiumRequest request = new TravelCalculatePremiumRequest("Vladislav", "Romanov", LocalDate.of(2030, 3, 8), LocalDate.of(2030, 3, 18), List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"));
 
         doReturn(10).when(dateTimeServiceMock).calculateTravelPeriod(LocalDate.of(2030, 3, 8), LocalDate.of(2030, 3, 18));
 

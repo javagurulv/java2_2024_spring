@@ -1,0 +1,17 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_11",
+      "description": "Field agreementDateFrom is in the past!"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "personBirthDate" : null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPremium": null,
+  "riskPremiums" : null,
+  "country" : null,
+  "medicalRiskLimitLevel" : null
+}

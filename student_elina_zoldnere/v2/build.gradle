@@ -1,0 +1,84 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.5'
+	id 'maven-publish'
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.7.5'
+	implementation 'org.springframework.boot:spring-boot-starter-web:2.7.5'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.7.5'
+	implementation 'com.h2database:h2:1.4.200'
+
+
+	implementation 'com.fasterxml.jackson.core:jackson-core:2.14.2'
+	implementation 'ch.qos.logback:logback-classic:1.2.3'
+	implementation 'org.aspectj:aspectjweaver:1.9.7'
+	implementation 'com.google.guava:guava:33.0.0-jre'
+
+	implementation 'mysql:mysql-connector-java:8.0.22'
+	implementation 'org.hibernate:hibernate-core:5.4.25.Final'
+	implementation 'org.liquibase:liquibase-core:4.2.2'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.5'
+	testImplementation 'junit:junit:4.13.1'
+
+	testImplementation 'uk.org.webcompere:model-assert:1.0.0'
+	testImplementation 'org.hamcrest:hamcrest:2.2'
+	testImplementation 'com.h2database:h2:1.4.200'
+
+	compileOnly 'org.projectlombok:lombok:1.18.24'
+	annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+	testCompileOnly 'org.projectlombok:lombok:1.18.24'
+	testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+}
+
+tasks.withType(JavaCompile).configureEach {options.encoding = "UTF-8"}
+tasks.withType(JavaExec).configureEach {defaultCharacterEncoding = "UTF-8"}
+tasks.withType(Javadoc).configureEach {options.encoding = "UTF-8"}
+tasks.withType(Test).configureEach {defaultCharacterEncoding = "UTF-8"}
+
+jar {
+	enabled = false
+}
+
+bootJar {
+	enabled = true
+	archiveBaseName = 'insurance-calculator'
+	archiveVersion = '1.0.2'
+}
+
+test {
+	useJUnitPlatform()
+}
+
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			// Identify the artifact
+			artifact bootJar  // This refers to the Spring Boot's bootJar task
+
+			// Project coordinates
+			groupId = 'lv.javaguru'
+			artifactId = 'insurance-calculator'
+			version = '1.0.2'
+
+			// Add other metadata as needed
+			pom {
+				name = 'Insurance Calculator Application'
+				description = 'Application to calculate travel insurance premium'
+				licenses {
+					license {
+						name = 'The Apache License, Version 2.0'
+						url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+					}
+				}
+			}
+		}
+	}
+
+	// Configure the repository location (local Maven repository)
+	repositories {
+		mavenLocal()
+	}
+}
