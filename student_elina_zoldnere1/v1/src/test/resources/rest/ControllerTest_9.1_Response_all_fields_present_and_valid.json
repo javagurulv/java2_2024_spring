@@ -1,0 +1,25 @@
+{
+  "errors": null,
+  "personFirstName" : "Jānis",
+  "personLastName" : "Bērziņš",
+  "personBirthDate" : "1990-01-01",
+  "agreementDateFrom" : "2025-03-10",
+  "agreementDateTo" : "2025-03-11",
+  "agreementPremium": 3.30,
+  "riskPremiums" : [
+    {
+      "riskIc" : "TRAVEL_MEDICAL",
+      "premium" : 3.30
+    },
+    {
+      "riskIc" : "TRAVEL_CANCELLATION",
+      "premium" : 0.00
+    },
+    {
+      "riskIc" : "TRAVEL_LOSS_BAGGAGE",
+      "premium" : 0.00
+    }
+  ],
+  "country" : "SPAIN",
+  "medicalRiskLimitLevel" : "LEVEL_15000"
+}

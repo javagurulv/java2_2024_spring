@@ -1,0 +1,10 @@
+{
+  "personFirstName" : "Jānis",
+  "personLastName" : "Bērziņš",
+  "personBirthDate" : "1990-01-01",
+  "agreementDateFrom" : "2025-03-10",
+  "agreementDateTo" : "2025-03-09",
+  "selectedRisks" : ["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"],
+  "country" : "SPAIN",
+  "medicalRiskLimitLevel" : "LEVEL_15000"
+}

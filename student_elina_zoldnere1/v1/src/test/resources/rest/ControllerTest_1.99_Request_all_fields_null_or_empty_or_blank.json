@@ -1,0 +1,10 @@
+{
+  "personFirstName" : "",
+  "personLastName" : "   ",
+  "personBirthDate" : "1990-01-01",
+  "agreementDateFrom" : null,
+  "agreementDateTo" : null,
+  "selectedRisks" : null,
+  "country" : "SPAIN",
+  "medicalRiskLimitLevel" : "LEVEL_15000"
+}

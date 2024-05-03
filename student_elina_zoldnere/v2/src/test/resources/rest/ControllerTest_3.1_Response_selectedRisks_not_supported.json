@@ -1,0 +1,21 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_91",
+      "description": "Risk type ic = NOT_SUPPORTED_1 is not supported!"
+    },
+    {
+      "errorCode": "ERROR_CODE_91",
+      "description": "Risk type ic = NOT_SUPPORTED_2 is not supported!"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "personBirthDate" : null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPremium": null,
+  "riskPremiums" : null,
+  "country" : null,
+  "medicalRiskLimitLevel" : null
+}
