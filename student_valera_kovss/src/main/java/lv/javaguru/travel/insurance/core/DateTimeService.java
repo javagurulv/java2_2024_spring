@@ -19,5 +19,9 @@ class DateTimeService {
     public long calculateAgreementDaysBetweenDates(Date agreementDateFrom, Date agreementDateTo) {
         return 0;
     }
+
+    public Object getDaysBetween(Date agreementDateFrom, Date agreementDateTo) {
+        return null;
+    }
 }
 
