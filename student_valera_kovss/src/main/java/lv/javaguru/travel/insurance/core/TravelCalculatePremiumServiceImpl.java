@@ -41,7 +41,6 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
 
         return response;
 
-
     }
 
 
