@@ -1,0 +1,81 @@
+Underwriting Structure
+(possible)
+
+src _ (..)  _   core      _ underwriting _ interface TravelCalculatePremiumUnderwriting
+|          |             |              |_ class TravelCalculatePremiumUnderwritingImpl
+|          |             |              |_ calculations _ interface RiskCalculation
+|          |             |                             |_ class MedicalRiskCalculation impl RiskCalculation
+|          |             |                             |_ class CancellationRiskCalculation impl RiskCalculation
+|          |             |                             |_ class LossBaggageRiskCalculation impl RiskCalculation
+|          |             |                             |_ class ThirdPartyLiabilityRiskCalculation impl RiskCalculation
+|          |             |                             |_ class EvacuationRepatriationRiskCalculation impl RiskCalculation
+|          |             |                             |_ class AdventureRecreationRiskCalculation impl RiskCalculation
+|          |             |
+|          |             |_ factors _ class CountryDefaultDayPremium  (-- ?? not sure)
+|          |             |         |_ class AgeCoefficient  (-- ?? not sure)
+|          |             |         |_ class InsuranceLimitCoefficient (-- ?? not sure)
+|          |             |
+|          |             |_ utilities (..dateTimeUtil etc.)
+|          |             |_ validations( .. request validations)
+|          |             |_ aspect.logger(..)
+|          |             |_ interface TravelCalculatePremiumService
+|          |             |_ class TravelCalculatePremiumServiceImpl
+|          |
+|          |_ data (.. processed data? - rate tables, factors etc.)  (?? not sure if the right place for tables etc.?)
+|          |_ dto (.. request, response)
+|          |_ rest (..Controller)
+|          |_ class InsuranceApplication
+|
+|_ logs (..)
+|_ database(scripts)
+
+
+-- Not sure where to put AgeCoefficient, CountryDefaultDayPremium, InsuranceLimitCoefficient -
+   I assume they will be used in several risk calculations ... Not sure,whether they should be an interface
+
+-- I assume that `database` will contain some raw data, but there should be also a place to store processed data
+   (rates, factors etc.) that are further used in calculations. It could be `data` package in `src`.
+
+
+----
+The first task to implement:
+MedicalRiskCalculation = CountryDefaultDayPremium * DayCount * AgeCoefficient * InsuranceLimitCoefficient.
+
+----
+public interface RiskCalculation {
+    BigDecimal calculateRiskPremium(TravelCalculatePremiumRequest request);
+
+}
+----
+@Component
+class MedicalRiskCalculation implements RiskCalculation {
+
+    @Autowired
+    private CountryDefaultDayPremium defaultDayPremium;
+    @Autowired
+    private dateTimeUtil dateTimeUtil;
+    @Autowired
+    private AgeCoefficient ageCoefficient;
+    @Autowired
+    private InsuranceLimitCoefficient limitCoefficient;
+    ..
+
+    @Override
+    public BigDecimal calculateRiskPremium(TravelCalculatePremiumRequest request) {
+        -- logic goes here
+
+        return result;
+    }
+
+}
+
+-- Also have to figure out, how the class TravelCalculatePremiumUnderwritingImpl will collect total of calculated
+   premiums of relevant risks, according to which risks client will choose.
+
+   It could be streams and boolean conditions to collect premiums of relevant risks, based on whether the risk is
+   selected by the client or not. Or maybe even better I could maintain a separate list or map within the
+   TravelCalculatePremiumUnderwritingImpl class to keep track of selected risks and their corresponding premiums as they
+   are calculated.
+
+   Probably the most reasonable approach would be implement simple collecting solution first and refactor later, when I
+   already will have few risk calculations implemented.
