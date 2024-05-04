@@ -10,7 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -25,21 +26,166 @@ class TravelCalculatePremiumControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    public void simpleRestControllerTest() throws Exception {
+    public void shouldReturnWithOutErrors() throws Exception {
         mockMvc.perform(post("/insurance/travel/")
                         .content("{" +
-                                "\"personFirstName\" : \"Vasja\",\n" +
-                                "\"personLastName\" : \"Pupkin\",\n" +
+                                "\"personFirstName\" : \"Olegs\",\n" +
+                                "\"personLastName\" : \"Radigins\",\n" +
                                 "\"agreementDateFrom\" : \"2021-05-25\",\n" +
                                 "\"agreementDateTo\" : \"2021-05-29\"\n" +
                                 "}")
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("personFirstName", is("Vasja")))
-                .andExpect(jsonPath("personLastName", is("Pupkin")))
+                .andExpect(jsonPath("personFirstName", is("Olegs")))
+                .andExpect(jsonPath("personLastName", is("Radigins")))
                 .andExpect(jsonPath("agreementDateFrom", is("2021-05-25")))
                 .andExpect(jsonPath("agreementDateTo", is("2021-05-29")))
                 .andExpect(jsonPath("agreementPrice", is(4)))
                 .andReturn();
     }
+
+    @Test
+    public void shouldReturnWithIncorrectDateError() throws Exception {
+        mockMvc.perform(post("/insurance/travel/")
+                        .content("{" +
+                                "\"personFirstName\" : \"Olegs\",\n" +
+                                "\"personLastName\" : \"Radigins\",\n" +
+                                "\"agreementDateFrom\" : \"2021-05-20\",\n" +
+                                "\"agreementDateTo\" : \"2021-05-10\"\n" +
+                                "}")
+                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("personFirstName", is(nullValue())))
+                .andExpect(jsonPath("personLastName", is(nullValue())))
+                .andExpect(jsonPath("agreementDateFrom", is(nullValue())))
+                .andExpect(jsonPath("agreementDateTo", is(nullValue())))
+                .andExpect(jsonPath("agreementPrice", is(nullValue())))
+                .andExpect(jsonPath("errors", is(notNullValue())))
+                .andExpect(jsonPath("errors", hasSize(1)))
+                .andExpect(jsonPath("errors[0].field", is("agreement date to")))
+                .andExpect(jsonPath("errors[0].message", is("Must be after!")))
+                .andReturn();
+    }
+
+    @Test
+    public void shouldReturnWithNullFirstNameError() throws Exception {
+        mockMvc.perform(post("/insurance/travel/")
+                        .content("{" +
+                                "\"personFirstName\" : null,\n" +
+                                "\"personLastName\" : \"Radigins\",\n" +
+                                "\"agreementDateFrom\" : \"2021-05-25\",\n" +
+                                "\"agreementDateTo\" : \"2021-05-29\"\n" +
+                                "}")
+                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("personFirstName", is(nullValue())))
+                .andExpect(jsonPath("personLastName", is(nullValue())))
+                .andExpect(jsonPath("agreementDateFrom", is(nullValue())))
+                .andExpect(jsonPath("agreementDateTo", is(nullValue())))
+                .andExpect(jsonPath("agreementPrice", is(nullValue())))
+                .andExpect(jsonPath("errors", is(notNullValue())))
+                .andExpect(jsonPath("errors", hasSize(1)))
+                .andExpect(jsonPath("errors[0].field", is("personFirstName")))
+                .andExpect(jsonPath("errors[0].message", is("Must not be empty!")))
+                .andReturn();
+    }
+
+    @Test
+    public void shouldReturnWithNullLastNameError() throws Exception {
+        mockMvc.perform(post("/insurance/travel/")
+                        .content("{" +
+                                "\"personFirstName\" : \"Olegs\",\n" +
+                                "\"personLastName\" : null,\n" +
+                                "\"agreementDateFrom\" : \"2021-05-25\",\n" +
+                                "\"agreementDateTo\" : \"2021-05-29\"\n" +
+                                "}")
+                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("personFirstName", is(nullValue())))
+                .andExpect(jsonPath("personLastName", is(nullValue())))
+                .andExpect(jsonPath("agreementDateFrom", is(nullValue())))
+                .andExpect(jsonPath("agreementDateTo", is(nullValue())))
+                .andExpect(jsonPath("agreementPrice", is(nullValue())))
+                .andExpect(jsonPath("errors", is(notNullValue())))
+                .andExpect(jsonPath("errors", hasSize(1)))
+                .andExpect(jsonPath("errors[0].field", is("personLastName")))
+                .andExpect(jsonPath("errors[0].message", is("Must not be empty!")))
+                .andReturn();
+    }
+
+    @Test
+    public void shouldReturnWithNullDateFromError() throws Exception {
+        mockMvc.perform(post("/insurance/travel/")
+                        .content("{" +
+                                "\"personFirstName\" : \"Olegs\",\n" +
+                                "\"personLastName\" : \"Radigins\",\n" +
+                                "\"agreementDateFrom\" : null,\n" +
+                                "\"agreementDateTo\" : \"2021-05-10\"\n" +
+                                "}")
+                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("personFirstName", is(nullValue())))
+                .andExpect(jsonPath("personLastName", is(nullValue())))
+                .andExpect(jsonPath("agreementDateFrom", is(nullValue())))
+                .andExpect(jsonPath("agreementDateTo", is(nullValue())))
+                .andExpect(jsonPath("agreementPrice", is(nullValue())))
+                .andExpect(jsonPath("errors", is(notNullValue())))
+                .andExpect(jsonPath("errors", hasSize(1)))
+                .andExpect(jsonPath("errors[0].field", is("personDateFrom")))
+                .andExpect(jsonPath("errors[0].message", is("Must not be empty!")))
+                .andReturn();
+    }
+
+    @Test
+    public void shouldReturnWithNullDateToError() throws Exception {
+        mockMvc.perform(post("/insurance/travel/")
+                        .content("{" +
+                                "\"personFirstName\" : \"Olegs\",\n" +
+                                "\"personLastName\" : \"Radigins\",\n" +
+                                "\"agreementDateFrom\" : \"2021-05-20\",\n" +
+                                "\"agreementDateTo\" : null\n" +
+                                "}")
+                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("personFirstName", is(nullValue())))
+                .andExpect(jsonPath("personLastName", is(nullValue())))
+                .andExpect(jsonPath("agreementDateFrom", is(nullValue())))
+                .andExpect(jsonPath("agreementDateTo", is(nullValue())))
+                .andExpect(jsonPath("agreementPrice", is(nullValue())))
+                .andExpect(jsonPath("errors", is(notNullValue())))
+                .andExpect(jsonPath("errors", hasSize(1)))
+                .andExpect(jsonPath("errors[0].field", is("personDateTo")))
+                .andExpect(jsonPath("errors[0].message", is("Must not be empty!")))
+                .andReturn();
+    }
+
+    @Test
+    public void shouldReturnWithAllNullErrors() throws Exception {
+        mockMvc.perform(post("/insurance/travel/")
+                        .content("{" +
+                                "\"personFirstName\" : null,\n" +
+                                "\"personLastName\" : null,\n" +
+                                "\"agreementDateFrom\" : null,\n" +
+                                "\"agreementDateTo\" : null\n" +
+                                "}")
+                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("personFirstName", is(nullValue())))
+                .andExpect(jsonPath("personLastName", is(nullValue())))
+                .andExpect(jsonPath("agreementDateFrom", is(nullValue())))
+                .andExpect(jsonPath("agreementDateTo", is(nullValue())))
+                .andExpect(jsonPath("agreementPrice", is(nullValue())))
+                .andExpect(jsonPath("errors", is(notNullValue())))
+                .andExpect(jsonPath("errors", hasSize(4)))
+                .andExpect(jsonPath("errors[0].field", is("personFirstName")))
+                .andExpect(jsonPath("errors[0].message", is("Must not be empty!")))
+                .andExpect(jsonPath("errors[1].field", is("personLastName")))
+                .andExpect(jsonPath("errors[1].message", is("Must not be empty!")))
+                .andExpect(jsonPath("errors[2].field", is("personDateFrom")))
+                .andExpect(jsonPath("errors[2].message", is("Must not be empty!")))
+                .andExpect(jsonPath("errors[3].field", is("personDateTo")))
+                .andExpect(jsonPath("errors[3].message", is("Must not be empty!")))
+                .andReturn();
+    }
+
 }
