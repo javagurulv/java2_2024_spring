@@ -1,0 +1,7 @@
+{
+  "personFirstName" : "Vladislav",
+  "personLastName" : "Romanov",
+  "agreementDateFrom" : "2030-03-10",
+  "agreementDateTo" : "2030-03-20",
+  "selected_risks" : ["UNKNOWN_RISK_1", "UNKNOWN_RISK_2"]
+}

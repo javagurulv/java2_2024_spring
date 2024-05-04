@@ -1,0 +1,13 @@
+{
+  "errors": [
+    {
+      "errorCode": 8,
+      "description": "At least one risk must be chosen!"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPrice": null
+}
