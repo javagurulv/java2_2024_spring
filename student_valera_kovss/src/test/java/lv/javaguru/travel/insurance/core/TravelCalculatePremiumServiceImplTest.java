@@ -100,4 +100,5 @@ class TravelCalculatePremiumServiceImplTest {
         return List.of(new ValidationError("field", "errorMessage"));
     }
 
+
 }
