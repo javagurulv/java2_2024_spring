@@ -1,0 +1,10 @@
+{
+  "personFirstName" : "",
+  "personLastName" : "",
+  "personBirthDate" : "",
+  "agreementDateFrom" : "",
+  "agreementDateTo" : "",
+  "country" : "",
+  "medicalRiskLimitLevel" : "",
+  "selected_risks": []
+}

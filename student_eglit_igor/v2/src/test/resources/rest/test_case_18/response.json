@@ -1,0 +1,17 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_8",
+      "description": "Field selected_risks is empty!"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "personBirthDate": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "country" : null,
+  "medicalRiskLimitLevel" : null,
+  "riskPremiums": null,
+  "agreementPremium": null
+}
