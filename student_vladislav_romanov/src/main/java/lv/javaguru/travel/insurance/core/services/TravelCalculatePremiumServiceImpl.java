@@ -42,7 +42,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setPersonLastName(request.getPersonLastName());
         response.setAgreementDateFrom(agreementDateFrom);
         response.setAgreementDateTo(agreementDateTo);
-        response.setAgreementPrice(travelPremiumUnderwriting.calculatePremium(request));
+        response.setAgreementPremium(travelPremiumUnderwriting.calculatePremium(request));
 
         return response;
     }
