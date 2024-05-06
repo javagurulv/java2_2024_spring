@@ -1,7 +1,6 @@
 package lv.javaguru.travel.insurance.core.repositories;
 
-import lv.javaguru.travel.insurance.core.api.domain.MedicalRiskLimitLevel;
-import lv.javaguru.travel.insurance.core.api.repositories.MedicalRiskLimitLevelRepository;
+import lv.javaguru.travel.insurance.core.domain.MedicalRiskLimitLevel;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;

@@ -1,7 +1,6 @@
 package lv.javaguru.travel.insurance.core.repositories;
 
-import lv.javaguru.travel.insurance.core.api.domain.ClassifierValue;
-import lv.javaguru.travel.insurance.core.api.repositories.ClassifierValueRepository;
+import lv.javaguru.travel.insurance.core.domain.ClassifierValue;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,6 +1,6 @@
-package lv.javaguru.travel.insurance.core.api.repositories;
+package lv.javaguru.travel.insurance.core.repositories;
 
-import lv.javaguru.travel.insurance.core.api.domain.AgeCoefficient;
+import lv.javaguru.travel.insurance.core.domain.AgeCoefficient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

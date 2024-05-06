@@ -1,6 +1,6 @@
-package lv.javaguru.travel.insurance.core.api.repositories;
+package lv.javaguru.travel.insurance.core.repositories;
 
-import lv.javaguru.travel.insurance.core.api.domain.Classifier;
+import lv.javaguru.travel.insurance.core.domain.Classifier;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

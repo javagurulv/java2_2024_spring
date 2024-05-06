@@ -1,7 +1,6 @@
 package lv.javaguru.travel.insurance.core.repositories;
 
-import lv.javaguru.travel.insurance.core.api.domain.CountryDefaultDayRate;
-import lv.javaguru.travel.insurance.core.api.repositories.CountryDefaultDayRateRepository;
+import lv.javaguru.travel.insurance.core.domain.CountryDefaultDayRate;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
