@@ -16,7 +16,7 @@ class ValidateAgreementDateFromNotNull extends AgreementFieldValidationImpl {
 
     @Override
     public Optional<ValidationErrorDTO> validateSingle(AgreementDTO agreement) {
-        return (agreement.getAgreementDateFrom() == null)
+        return (agreement.agreementDateFrom() == null)
                 ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_3"))
                 : Optional.empty();
     }

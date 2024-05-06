@@ -21,14 +21,14 @@ class ValidateMedicalRiskLimitLevelIsInDatabase extends AgreementFieldValidation
 
     @Override
     public Optional<ValidationErrorDTO> validateSingle(AgreementDTO agreement) {
-        return (agreement.getMedicalRiskLimitLevel() != null
-                && !agreement.getMedicalRiskLimitLevel().isBlank())
+        return (agreement.medicalRiskLimitLevel() != null
+                && !agreement.medicalRiskLimitLevel().isBlank())
                 ? validateMedicalRiskLimitLevel(agreement)
                 : Optional.empty();
     }
 
     private Optional<ValidationErrorDTO> validateMedicalRiskLimitLevel(AgreementDTO agreement) {
-        String limitLevelIc = agreement.getMedicalRiskLimitLevel();
+        String limitLevelIc = agreement.medicalRiskLimitLevel();
         return classifierValueRepository
                 .findByClassifierTitleAndIc("MEDICAL_RISK_LIMIT_LEVEL", limitLevelIc).isPresent()
                 ? Optional.empty()

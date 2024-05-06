@@ -16,7 +16,7 @@ class ValidatePersonLastName extends PersonFieldValidationImpl {
 
     @Override
     public Optional<ValidationErrorDTO> validateSingle(PersonDTO person) {
-        return (person.getPersonLastName() == null || person.getPersonLastName().isBlank())
+        return (person.personLastName() == null || person.personLastName().isBlank())
                 ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_2"))
                 : Optional.empty();
     }

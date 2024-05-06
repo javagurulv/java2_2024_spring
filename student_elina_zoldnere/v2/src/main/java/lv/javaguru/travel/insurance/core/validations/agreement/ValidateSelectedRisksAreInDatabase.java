@@ -21,13 +21,13 @@ class ValidateSelectedRisksAreInDatabase extends AgreementFieldValidationImpl {
 
     @Override
     public List<ValidationErrorDTO> validateList(AgreementDTO agreement) {
-        return agreement.getSelectedRisks() != null
+        return agreement.selectedRisks() != null
                 ? validateRisks(agreement)
                 : List.of();
     }
 
     private List<ValidationErrorDTO> validateRisks(AgreementDTO agreement) {
-        return agreement.getSelectedRisks().stream()
+        return agreement.selectedRisks().stream()
                 .filter(risk -> !isInDatabase(risk))
                 .map(this::buildValidationError)
                 .collect(Collectors.toList());

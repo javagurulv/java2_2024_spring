@@ -20,7 +20,7 @@ class ValidatePersonBirthDateIsValid extends PersonFieldValidationImpl {
 
     @Override
     public Optional<ValidationErrorDTO> validateSingle(PersonDTO person) {
-        Date birthDate = person.getPersonBirthDate();
+        Date birthDate = person.personBirthDate();
         Date currentDate = dateTimeUtil.startOfToday();
         Date minPossibleBirthDate = dateTimeUtil.subtractYears(currentDate, 150);
 

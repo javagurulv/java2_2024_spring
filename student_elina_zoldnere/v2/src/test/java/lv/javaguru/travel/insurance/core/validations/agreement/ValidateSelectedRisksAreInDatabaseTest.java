@@ -4,18 +4,23 @@ import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.domain.ClassifierValue;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
+import lv.javaguru.travel.insurance.core.validations.ValidateSetUpInstancesHelper;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Arrays;
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyList;
@@ -26,8 +31,6 @@ import static org.mockito.Mockito.*;
 class ValidateSelectedRisksAreInDatabaseTest {
 
     @Mock
-    private AgreementDTO agreementMock;
-    @Mock
     private ClassifierValueRepository repositoryMock;
     @Mock
     private ValidationErrorFactory errorFactoryMock;
@@ -37,43 +40,38 @@ class ValidateSelectedRisksAreInDatabaseTest {
 
     @Autowired
     @InjectMocks
-    private ValidateSetUpAgreementValuesHelper helper;
+    private ValidateSetUpInstancesHelper helper;
 
-    @BeforeEach
-    public void setUp() {
-        helper.setUpAgreementMockWithValues(agreementMock);
-    }
-
-    @Test
-    public void validateList_ShouldReturnCorrectResponseWhenOneSelectedRiskIsNotSupported() {
-        when(agreementMock.getSelectedRisks()).thenReturn(Arrays.asList("TRAVEL_MEDICAL", "INVALID"));
-        when(repositoryMock.findByClassifierTitleAndIc("RISK_TYPE", "TRAVEL_MEDICAL"))
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("riskTypeValues")
+    public void validateList_ShouldReturnCorrectResponseWhenSelectedRisksAreNotSupported(
+            String testName, String firstRisk, String secondRisk, int expectedValue) {
+        AgreementDTO agreement = new AgreementDTO(
+                new Date(2025 - 1900, 2, 10),
+                new Date(2025 - 1900, 2, 11),
+                "SPAIN",
+                "LEVEL_10000",
+                List.of(firstRisk, secondRisk),
+                List.of(helper.newPersonDTO()),
+                BigDecimal.ZERO);
+        Mockito.lenient().when(repositoryMock.findByClassifierTitleAndIc("RISK_TYPE", "TRAVEL_MEDICAL"))
                 .thenReturn(Optional.of(new ClassifierValue()));
         when(repositoryMock.findByClassifierTitleAndIc("RISK_TYPE", "INVALID"))
                 .thenReturn(Optional.empty());
 
-        ValidationErrorDTO error = mock(ValidationErrorDTO.class);
+        ValidationErrorDTO error = new ValidationErrorDTO("ERROR_CODE_9", "description");
         lenient().when(errorFactoryMock.buildError(eq("ERROR_CODE_9"), anyList())).thenReturn(error);
 
-        List<ValidationErrorDTO> result = validateRisks.validateList(agreementMock);
+        List<ValidationErrorDTO> result = validateRisks.validateList(agreement);
 
-        assertEquals(1, result.size());
+        assertEquals(expectedValue, result.size());
     }
 
-    @Test
-    public void validateList_ShouldReturnCorrectResponseWhenTwoSelectedRisksAreNotSupported() {
-        when(agreementMock.getSelectedRisks()).thenReturn(Arrays.asList("INVALID1", "INVALID2"));
-        when(repositoryMock.findByClassifierTitleAndIc("RISK_TYPE", "INVALID1"))
-                .thenReturn(Optional.empty());
-        when(repositoryMock.findByClassifierTitleAndIc("RISK_TYPE", "INVALID2"))
-                .thenReturn(Optional.empty());
-
-        ValidationErrorDTO error = mock(ValidationErrorDTO.class);
-        lenient().when(errorFactoryMock.buildError(eq("ERROR_CODE_9"), anyList())).thenReturn(error);
-
-        List<ValidationErrorDTO> result = validateRisks.validateList(agreementMock);
-
-        assertEquals(2, result.size());
+    private static Stream<Arguments> riskTypeValues() {
+        return Stream.of(
+                Arguments.of("one invalid risk", "TRAVEL_MEDICAL", "INVALID", 1),
+                Arguments.of("two invalid risks", "INVALID", "INVALID", 2)
+        );
     }
 
 }

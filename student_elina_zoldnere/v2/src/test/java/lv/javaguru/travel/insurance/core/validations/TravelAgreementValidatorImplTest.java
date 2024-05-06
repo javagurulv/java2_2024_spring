@@ -1,13 +1,13 @@
 package lv.javaguru.travel.insurance.core.validations;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
-import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Collections;
 import java.util.List;
@@ -23,99 +23,105 @@ import static org.mockito.Mockito.when;
 class TravelAgreementValidatorImplTest {
 
     @Mock
-    private AgreementDTO agreementMock;
-    @Mock
-    private PersonDTO personMock1;
-    @Mock
-    private PersonDTO personMock2;
-    @Mock
     private List<AgreementFieldValidation> agreementFieldValidation;
     @Mock
     private List<PersonFieldValidation> personFieldValidation;
     @InjectMocks
     private TravelAgreementValidatorImpl validator;
 
+    @InjectMocks
+    @Autowired
+    private ValidateSetUpInstancesHelper helper;
+
+    private AgreementDTO agreement;
+
     @Test
     void validate_ShouldPassWhenAllValidationsSucceed() {
+        agreement = helper.newAgreementDTO();
         when(agreementFieldValidation.stream()).thenAnswer(invocation -> Stream.empty());
-        when(agreementMock.getPersons()).thenReturn(Collections.emptyList());
+        when(personFieldValidation.stream()).thenAnswer(invocation -> Stream.empty());
 
-        List<ValidationErrorDTO> errors = validator.validate(agreementMock);
+        List<ValidationErrorDTO> errors = validator.validate(agreement);
 
         assertEquals(Collections.emptyList(), errors);
     }
 
     @Test
     void validate_ShouldReturnErrorWhenPersonSingleValidationFail() {
+        agreement = helper.newAgreementDTO();
         PersonFieldValidation personValidationMock = mock(PersonFieldValidation.class);
         when(agreementFieldValidation.stream()).thenAnswer(invocation -> Stream.empty());
-        when(agreementMock.getPersons()).thenReturn(List.of(personMock1));
         when(personFieldValidation.stream()).thenAnswer(invocation -> Stream.of(personValidationMock));
-        when(personValidationMock.validateSingle(any())).thenReturn(Optional.of(new ValidationErrorDTO()));
+        when(personValidationMock.validateSingle(any()))
+                .thenReturn(Optional.of(newValidationErrorDTO()));
 
-        List<ValidationErrorDTO> errors = validator.validate(agreementMock);
+        List<ValidationErrorDTO> errors = validator.validate(agreement);
 
         assertEquals(1, errors.size());
     }
 
     @Test
     void validate_ShouldReturnErrorWhenPersonListValidationFail() {
+        agreement = helper.newAgreementDTO();
         PersonFieldValidation personValidationMock = mock(PersonFieldValidation.class);
         when(agreementFieldValidation.stream()).thenAnswer(invocation -> Stream.empty());
-        when(agreementMock.getPersons()).thenReturn(List.of(personMock1));
         when(personFieldValidation.stream()).thenAnswer(invocation -> Stream.of(personValidationMock));
-        when(personValidationMock.validateList(any())).thenReturn(List.of(new ValidationErrorDTO()));
+        when(personValidationMock.validateList(any())).thenReturn(List.of(newValidationErrorDTO()));
 
-        List<ValidationErrorDTO> errors = validator.validate(agreementMock);
+        List<ValidationErrorDTO> errors = validator.validate(agreement);
 
         assertEquals(1, errors.size());
     }
 
     @Test
     void validate_ShouldReturnErrorWhenAgreementSingleValidationFail() {
+        agreement = helper.newAgreementDTO();
         AgreementFieldValidation agreementValidationMock = mock(AgreementFieldValidation.class);
-        when(agreementMock.getPersons()).thenReturn(Collections.emptyList());
         when(agreementFieldValidation.stream()).thenAnswer(invocation -> Stream.of(agreementValidationMock));
-        when(agreementValidationMock.validateSingle(any())).thenReturn(Optional.of(new ValidationErrorDTO()));
+        when(agreementValidationMock.validateSingle(any())).thenReturn(Optional.of(newValidationErrorDTO()));
 
-        List<ValidationErrorDTO> errors = validator.validate(agreementMock);
+        List<ValidationErrorDTO> errors = validator.validate(agreement);
 
         assertEquals(1, errors.size());
     }
 
     @Test
     void validate_ShouldReturnErrorWhenAgreementListValidationFail() {
+        agreement = helper.newAgreementDTO();
         AgreementFieldValidation agreementValidationMock = mock(AgreementFieldValidation.class);
-        when(agreementMock.getPersons()).thenReturn(Collections.emptyList());
         when(agreementFieldValidation.stream()).thenAnswer(invocation -> Stream.of(agreementValidationMock));
-        when(agreementValidationMock.validateList(any())).thenReturn(List.of(new ValidationErrorDTO()));
+        when(agreementValidationMock.validateList(any())).thenReturn(List.of(newValidationErrorDTO()));
 
-        List<ValidationErrorDTO> errors = validator.validate(agreementMock);
+        List<ValidationErrorDTO> errors = validator.validate(agreement);
 
         assertEquals(1, errors.size());
     }
 
     @Test
     void validate_ShouldReturnErrorWhenSeveralMixedValidationFail() {
+        agreement = helper.newTwoPersonsAgreementDTO();
         AgreementFieldValidation agreementValidationMock = mock(AgreementFieldValidation.class);
         PersonFieldValidation personValidationMock1 = mock(PersonFieldValidation.class);
         PersonFieldValidation personValidationMock2 = mock(PersonFieldValidation.class);
 
         when(agreementFieldValidation.stream()).thenAnswer(invocation -> Stream.of(agreementValidationMock));
-        when(agreementMock.getPersons()).thenReturn(List.of(personMock1, personMock2));
         when(personFieldValidation.stream())
                 .thenAnswer(invocation -> Stream.of(personValidationMock1, personValidationMock2))
                 .thenAnswer(invocation -> Stream.of(personValidationMock1));
 
         when(agreementValidationMock.validateList(any()))
-                .thenReturn(List.of(new ValidationErrorDTO(), new ValidationErrorDTO()));
-        when(agreementValidationMock.validateSingle(any())).thenReturn(Optional.of(new ValidationErrorDTO()));
-        when(personValidationMock1.validateSingle(any())).thenReturn(Optional.of(new ValidationErrorDTO()));
-        when(personValidationMock2.validateSingle(any())).thenReturn(Optional.of(new ValidationErrorDTO()));
+                .thenReturn(List.of(newValidationErrorDTO(), newValidationErrorDTO()));
+        when(agreementValidationMock.validateSingle(any())).thenReturn(Optional.of(newValidationErrorDTO()));
+        when(personValidationMock1.validateSingle(any())).thenReturn(Optional.of(newValidationErrorDTO()));
+        when(personValidationMock2.validateSingle(any())).thenReturn(Optional.of(newValidationErrorDTO()));
 
-        List<ValidationErrorDTO> errors = validator.validate(agreementMock);
+        List<ValidationErrorDTO> errors = validator.validate(agreement);
 
         assertEquals(6, errors.size());
+    }
+
+    private ValidationErrorDTO newValidationErrorDTO() {
+        return new ValidationErrorDTO("errorCode", "description");
     }
 
 }

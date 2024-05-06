@@ -16,7 +16,7 @@ class ValidatePersonBirthDateNotNull extends PersonFieldValidationImpl {
 
     @Override
     public Optional<ValidationErrorDTO> validateSingle(PersonDTO person) {
-        return (person.getPersonBirthDate() == null)
+        return (person.personBirthDate() == null)
                 ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_7"))
                 : Optional.empty();
     }

@@ -1,32 +1,23 @@
 package lv.javaguru.travel.insurance.core.api.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-public class AgreementDTO {
+public record AgreementDTO(
 
-    private Date agreementDateFrom;
+        Date agreementDateFrom,
 
-    private Date agreementDateTo;
+        Date agreementDateTo,
 
-    private String country;
+        String country,
 
-    private String medicalRiskLimitLevel;
+        String medicalRiskLimitLevel,
 
-    private List<String> selectedRisks;
+        List<String> selectedRisks,
 
-    private List<PersonDTO> persons;
+        List<PersonDTO> persons,
 
-    private BigDecimal agreementPremium;
+        BigDecimal agreementPremium) {
 
 }

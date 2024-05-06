@@ -21,7 +21,7 @@ class ValidateMedicalRiskLimitLevelNotEmpty extends AgreementFieldValidationImpl
     @Override
     public Optional<ValidationErrorDTO> validateSingle(AgreementDTO agreement) {
         return (isMedicalRiskEnabled() && containsRisk("TRAVEL_MEDICAL", agreement)
-                && (agreement.getMedicalRiskLimitLevel() == null || agreement.getMedicalRiskLimitLevel().isBlank()))
+                && (agreement.medicalRiskLimitLevel() == null || agreement.medicalRiskLimitLevel().isBlank()))
                 ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_8"))
                 : Optional.empty();
     }
@@ -31,10 +31,10 @@ class ValidateMedicalRiskLimitLevelNotEmpty extends AgreementFieldValidationImpl
     }
 
     private boolean containsRisk(String riskType, AgreementDTO agreement) {
-        if (agreement.getSelectedRisks() == null || agreement.getSelectedRisks().isEmpty()) {
+        if (agreement.selectedRisks() == null || agreement.selectedRisks().isEmpty()) {
             return false;
         }
-        return agreement.getSelectedRisks().contains(riskType);
+        return agreement.selectedRisks().contains(riskType);
     }
 
 }

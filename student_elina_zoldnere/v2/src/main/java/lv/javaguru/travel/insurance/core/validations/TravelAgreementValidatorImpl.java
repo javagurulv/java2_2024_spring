@@ -25,8 +25,9 @@ class TravelAgreementValidatorImpl implements TravelAgreementValidator {
     public List<ValidationErrorDTO> validate(AgreementDTO agreement) {
         List<ValidationErrorDTO> agreementErrors = collectAgreementErrors(agreement);
 
+
         List<ValidationErrorDTO> personErrors =
-                agreement.getPersons().stream()
+                agreement.persons().stream()
                         .map(this::collectPersonErrors)
                         .flatMap(List::stream)
                         .collect(Collectors.toList());
@@ -34,13 +35,13 @@ class TravelAgreementValidatorImpl implements TravelAgreementValidator {
         return concatenateLists(agreementErrors, personErrors);
     }
 
-    private List<ValidationErrorDTO> collectAgreementErrors(AgreementDTO agreement) {
+    private List<ValidationErrorDTO> collectAgreementErrors (AgreementDTO agreement) {
         List<ValidationErrorDTO> singleAgreementErrors = collectSingleAgreementErrors(agreement);
         List<ValidationErrorDTO> listAgreementErrors = collectListAgreementErrors(agreement);
         return concatenateLists(singleAgreementErrors, listAgreementErrors);
     }
 
-    private List<ValidationErrorDTO> collectPersonErrors(PersonDTO person) {
+    private List<ValidationErrorDTO> collectPersonErrors (PersonDTO person) {
         List<ValidationErrorDTO> singlePersonErrors = collectSinglePersonErrors(person);
         List<ValidationErrorDTO> listPersonErrors = collectListPersonErrors(person);
         return concatenateLists(singlePersonErrors, listPersonErrors);
@@ -79,7 +80,7 @@ class TravelAgreementValidatorImpl implements TravelAgreementValidator {
     }
 
     private List<ValidationErrorDTO> concatenateLists(List<ValidationErrorDTO> errorsListOne,
-                                                      List<ValidationErrorDTO> errorListTwo) {
+                                                   List<ValidationErrorDTO> errorListTwo) {
         return Stream.concat(errorsListOne.stream(), errorListTwo.stream())
                 .collect(Collectors.toList());
     }

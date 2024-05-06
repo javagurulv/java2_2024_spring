@@ -19,7 +19,7 @@ class ValidateSelectedRisksNotEmptyOrNull extends AgreementFieldValidationImpl {
 
     @Override
     public Optional<ValidationErrorDTO> validateSingle(AgreementDTO agreement) {
-        return (agreement.getSelectedRisks() == null || agreement.getSelectedRisks().isEmpty())
+        return (agreement.selectedRisks() == null || agreement.selectedRisks().isEmpty())
                 ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_5"))
                 : Optional.empty();
     }

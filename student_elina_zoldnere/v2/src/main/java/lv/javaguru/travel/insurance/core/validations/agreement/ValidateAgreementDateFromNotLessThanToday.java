@@ -20,8 +20,8 @@ class ValidateAgreementDateFromNotLessThanToday extends AgreementFieldValidation
 
     @Override
     public Optional<ValidationErrorDTO> validateSingle(AgreementDTO agreement) {
-        Date agreementDateFrom = agreement.getAgreementDateFrom();
-        Date agreementDateTo = agreement.getAgreementDateTo();
+        Date agreementDateFrom = agreement.agreementDateFrom();
+        Date agreementDateTo = agreement.agreementDateTo();
         Date currentDate = dateTimeUtil.startOfToday();
 
         return (agreementDateFrom != null && agreementDateTo != null

@@ -21,13 +21,13 @@ class ValidateCountryIsInDatabase extends AgreementFieldValidationImpl {
 
     @Override
     public Optional<ValidationErrorDTO> validateSingle(AgreementDTO agreement) {
-        return (agreement.getCountry() != null && !agreement.getCountry().isBlank())
+        return (agreement.country() != null && !agreement.country().isBlank())
                 ? validateCountry(agreement)
                 : Optional.empty();
     }
 
     private Optional<ValidationErrorDTO> validateCountry(AgreementDTO agreement) {
-        String countryIc = agreement.getCountry();
+        String countryIc = agreement.country();
         return classifierValueRepository.findByClassifierTitleAndIc("COUNTRY", countryIc).isPresent()
                 ? Optional.empty()
                 : Optional.of(buildValidationError(countryIc));

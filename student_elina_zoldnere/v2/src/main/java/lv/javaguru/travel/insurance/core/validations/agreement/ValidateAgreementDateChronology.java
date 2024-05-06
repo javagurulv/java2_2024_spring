@@ -17,8 +17,8 @@ class ValidateAgreementDateChronology extends AgreementFieldValidationImpl {
 
     @Override
     public Optional<ValidationErrorDTO> validateSingle(AgreementDTO agreement) {
-        Date agreementDateFrom = agreement.getAgreementDateFrom();
-        Date agreementDateTo = agreement.getAgreementDateTo();
+        Date agreementDateFrom = agreement.agreementDateFrom();
+        Date agreementDateTo = agreement.agreementDateTo();
 
         return (agreementDateFrom != null && agreementDateTo != null
                 && !agreementDateFrom.before(agreementDateTo))

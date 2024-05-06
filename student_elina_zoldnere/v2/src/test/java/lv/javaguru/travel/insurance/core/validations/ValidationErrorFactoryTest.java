@@ -30,8 +30,8 @@ class ValidationErrorFactoryTest {
                 .thenReturn("error description");
 
         ValidationErrorDTO error = errorFactory.buildError("ERROR_CODE");
-        assertEquals("ERROR_CODE", error.getErrorCode());
-        assertEquals("error description", error.getDescription());
+        assertEquals("ERROR_CODE", error.errorCode());
+        assertEquals("error description", error.description());
     }
 
     @Test
@@ -41,8 +41,8 @@ class ValidationErrorFactoryTest {
                 .thenReturn("error description PH");
 
         ValidationErrorDTO error = errorFactory.buildError("ERROR_CODE", List.of(placeholder));
-        assertEquals("ERROR_CODE", error.getErrorCode());
-        assertEquals("error description PH", error.getDescription());
+        assertEquals("ERROR_CODE", error.errorCode());
+        assertEquals("error description PH", error.description());
     }
 
 }

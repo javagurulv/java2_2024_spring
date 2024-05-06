@@ -2,16 +2,22 @@ package lv.javaguru.travel.insurance.core.validations.agreement;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
+import lv.javaguru.travel.insurance.core.validations.ValidateSetUpInstancesHelper;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -21,8 +27,6 @@ import static org.mockito.Mockito.when;
 class ValidateCountryNotEmptyOrNullTest {
 
     @Mock
-    private AgreementDTO agreementMock;
-    @Mock
     private ValidationErrorFactory errorFactoryMock;
 
     @InjectMocks
@@ -30,50 +34,35 @@ class ValidateCountryNotEmptyOrNullTest {
 
     @Autowired
     @InjectMocks
-    private ValidateSetUpAgreementValuesHelper helper;
+    private ValidateSetUpInstancesHelper helper;
 
-    @BeforeEach
-    public void setUp() {
-        helper.setUpAgreementMockWithValues(agreementMock);
-    }
-
-    @Test
-    public void validateSingle_ShouldReturnErrorWhenCountryIsNull() {
-        when(agreementMock.getCountry()).thenReturn(null);
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("countryValue")
+    public void validateSingle_ShouldReturnErrorWhenCountryIsNotValid(String testName, String country) {
+        AgreementDTO agreement = new AgreementDTO(
+                new Date(2025 - 1900, 2, 10),
+                new Date(2025 - 1900, 2, 11),
+                country,
+                "LEVEL_10000",
+                List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"),
+                List.of(helper.newPersonDTO()),
+                BigDecimal.ZERO);
         when(errorFactoryMock.buildError("ERROR_CODE_6"))
                 .thenReturn(new ValidationErrorDTO("ERROR_CODE_6", "Field country is empty!"));
 
-        Optional<ValidationErrorDTO> result = validateCountry.validateSingle(agreementMock);
+        Optional<ValidationErrorDTO> result = validateCountry.validateSingle(agreement);
 
         assertTrue(result.isPresent());
-        assertEquals("ERROR_CODE_6", result.get().getErrorCode());
-        assertEquals("Field country is empty!", result.get().getDescription());
+        assertEquals("ERROR_CODE_6", result.get().errorCode());
+        assertEquals("Field country is empty!", result.get().description());
     }
 
-    @Test
-    public void validateSingle_ShouldReturnErrorWhenCountryIsEmpty() {
-        when(agreementMock.getCountry()).thenReturn("");
-        when(errorFactoryMock.buildError("ERROR_CODE_6"))
-                .thenReturn(new ValidationErrorDTO("ERROR_CODE_6", "Field country is empty!"));
-
-        Optional<ValidationErrorDTO> result = validateCountry.validateSingle(agreementMock);
-
-        assertTrue(result.isPresent());
-        assertEquals("ERROR_CODE_6", result.get().getErrorCode());
-        assertEquals("Field country is empty!", result.get().getDescription());
-    }
-
-    @Test
-    public void validateSingle_ShouldReturnErrorWhenCountryIsBlank() {
-        when(agreementMock.getCountry()).thenReturn("     ");
-        when(errorFactoryMock.buildError("ERROR_CODE_6"))
-                .thenReturn(new ValidationErrorDTO("ERROR_CODE_6", "Field country is empty!"));
-
-        Optional<ValidationErrorDTO> result = validateCountry.validateSingle(agreementMock);
-
-        assertTrue(result.isPresent());
-        assertEquals("ERROR_CODE_6", result.get().getErrorCode());
-        assertEquals("Field country is empty!", result.get().getDescription());
+    private static Stream<Arguments> countryValue() {
+        return Stream.of(
+                Arguments.of("country null", null),
+                Arguments.of("country empty", ""),
+                Arguments.of("country blank", "     ")
+        );
     }
 
 }
