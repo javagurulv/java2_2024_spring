@@ -1,0 +1,20 @@
+1.personFirstName is null or empty
+Response error: field: "personFirstName", message: "Must not be empty".
+
+2.personLastName is null or empty
+Response error: field: "personLastName", message: "Must not be empty".
+
+3.agreementDateFrom is null or empty
+Response error: field: "agreementDateFrom", message: "Must not be empty".
+
+4.agreementDateTo is null or empty
+Response error: field: "agreementDateTo", message: "Must not be empty".
+
+5.All fields is null or empty
+Response error: field: "personFirstName", "personLastName", "agreementDateFrom", "agreementDateTo", message: "Must not be empty".
+
+6.agreementDateTo less than agreementDateFrom
+Response error: field: "agreementDateFrom", message: "Must be less then agreementDateTo".
+
+7.All fields are specified
+Response errors: null.
