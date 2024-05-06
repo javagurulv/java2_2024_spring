@@ -8,17 +8,10 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.List;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-public class PersonDTO {
 
-    private String personFirstName;
-
-    private String personLastName;
-
-    private LocalDate personBirthDate;
-
-    private List<RiskDTO> risks;
-}
+public record PersonDTO (
+        String personFirstName,
+        String personLastName,
+        LocalDate personBirthDate,
+        List<RiskDTO> risks
+){ }
