@@ -18,8 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-/*@RunWith(PowerMockRunner.class)
-@PrepareForTest(PersonDTO.class)*/
 class EmptyPersonBirthDateValidationTest {
 
     @Mock
@@ -30,8 +28,6 @@ class EmptyPersonBirthDateValidationTest {
     @Test
     public void shouldReturnNoErrorWhenPersonBirthDateIsPresent() {
         PersonDTO person = new PersonDTO("John", "Doe", LocalDate.now().minusYears(20), Collections.emptyList());
-        // PersonDTO personMock = PowerMockito.mock(PersonDTO.class);
-        //when(person.personBirthDate()).thenReturn(LocalDate.now().minusYears(20));
         Optional<ValidationErrorDTO> errorOpt = validation.validate(person);
         assertTrue(errorOpt.isEmpty());
     }
