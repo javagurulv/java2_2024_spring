@@ -3,7 +3,7 @@ package lv.javaguru.travel.insurance.core.validations.agreement;
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
-import lv.javaguru.travel.insurance.core.validations.ValidateSetUpInstancesHelper;
+import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -34,7 +34,7 @@ class ValidateAgreementDateFromNotLessThanTodayTest {
 
     @InjectMocks
     @Autowired
-    private ValidateSetUpInstancesHelper helper;
+    private SetUpInstancesHelper helper;
 
     @Test
     public void validate_ShouldReturnErrorWhenAgreementDateFromLessThanToday() {

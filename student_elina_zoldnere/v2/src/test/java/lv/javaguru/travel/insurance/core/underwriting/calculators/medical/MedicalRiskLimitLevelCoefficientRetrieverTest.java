@@ -3,7 +3,7 @@ package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.domain.MedicalRiskLimitLevel;
 import lv.javaguru.travel.insurance.core.repositories.MedicalRiskLimitLevelRepository;
-import lv.javaguru.travel.insurance.core.validations.ValidateSetUpInstancesHelper;
+import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -34,7 +34,7 @@ class MedicalRiskLimitLevelCoefficientRetrieverTest {
 
     @Autowired
     @InjectMocks
-    private ValidateSetUpInstancesHelper helper;
+    private SetUpInstancesHelper helper;
 
     @Test
     void setLimitLevelCoefficient_shouldFindCoefficientWhenCoefficientExists() {

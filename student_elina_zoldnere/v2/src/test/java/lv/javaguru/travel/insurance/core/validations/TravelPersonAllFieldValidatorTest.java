@@ -2,6 +2,7 @@ package lv.javaguru.travel.insurance.core.validations;
 
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
+import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -28,7 +29,7 @@ class TravelPersonAllFieldValidatorTest {
 
     @InjectMocks
     @Autowired
-    private ValidateSetUpInstancesHelper helper;
+    private SetUpInstancesHelper helper;
 
     private List<PersonDTO> persons;
 

@@ -2,7 +2,7 @@ package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
-import lv.javaguru.travel.insurance.core.validations.ValidateSetUpInstancesHelper;
+import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -27,7 +27,7 @@ class DayCountCalculatorTest {
 
     @Autowired
     @InjectMocks
-    private ValidateSetUpInstancesHelper helper;
+    private SetUpInstancesHelper helper;
 
     @Test
     void calculateDayCount_shouldCalculateCorrectResult() {

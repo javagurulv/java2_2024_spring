@@ -1,7 +1,8 @@
-package lv.javaguru.travel.insurance.core.validations;
+package lv.javaguru.travel.insurance.core.util;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
+import lv.javaguru.travel.insurance.core.api.dto.RiskDTO;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -10,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 @Component
-public class ValidateSetUpInstancesHelper {
+public class SetUpInstancesHelper {
 
     public AgreementDTO newAgreementDTO() {
         return new AgreementDTO(
@@ -37,6 +38,10 @@ public class ValidateSetUpInstancesHelper {
     public PersonDTO newPersonDTO() {
         return new PersonDTO("Jānis", "Bērziņš",
                 new Date(1990 - 1900, 0, 1), Collections.emptyList());
+    }
+
+    public RiskDTO newRiskDTO() {
+        return new RiskDTO("TRAVEL_MEDICAL", BigDecimal.ZERO);
     }
 
 }

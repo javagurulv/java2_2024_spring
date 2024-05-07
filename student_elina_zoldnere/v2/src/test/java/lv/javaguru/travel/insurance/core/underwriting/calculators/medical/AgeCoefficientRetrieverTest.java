@@ -4,7 +4,7 @@ import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.domain.AgeCoefficient;
 import lv.javaguru.travel.insurance.core.repositories.AgeCoefficientRepository;
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
-import lv.javaguru.travel.insurance.core.validations.ValidateSetUpInstancesHelper;
+import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -35,7 +35,7 @@ class AgeCoefficientRetrieverTest {
 
     @Autowired
     @InjectMocks
-    private ValidateSetUpInstancesHelper helper;
+    private SetUpInstancesHelper helper;
 
     @Test
     void setAgeCoefficient_shouldFindCoefficientWhenCoefficientExists() {
