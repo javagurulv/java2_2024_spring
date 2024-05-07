@@ -3,6 +3,7 @@ package lv.javaguru.travel.insurance.core.util;
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.RiskDTO;
+import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -41,7 +42,11 @@ public class SetUpInstancesHelper {
     }
 
     public RiskDTO newRiskDTO() {
-        return new RiskDTO("TRAVEL_MEDICAL", BigDecimal.ZERO);
+        return new RiskDTO("TRAVEL_MEDICAL", BigDecimal.TEN);
+    }
+
+    public ValidationErrorDTO newValidationErrorDTO() {
+        return new ValidationErrorDTO("errorCode", "description");
     }
 
 }

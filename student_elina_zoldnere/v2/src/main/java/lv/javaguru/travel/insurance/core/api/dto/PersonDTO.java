@@ -8,4 +8,9 @@ public record PersonDTO(String personFirstName,
                         Date personBirthDate,
                         List<RiskDTO> personRisks) {
 
+    // Copy constructor that allows to add personRisks, effectively copying other values
+    public PersonDTO withRisks(List<RiskDTO> personRisks) {
+        return new PersonDTO(personFirstName, personLastName, personBirthDate, personRisks);
+    }
+
 }

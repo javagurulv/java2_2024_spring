@@ -20,4 +20,15 @@ public record AgreementDTO(
 
         BigDecimal agreementPremium) {
 
+    // Copy constructor that allows to add agreementPremium and updated persons, effectively copying other values
+    public AgreementDTO withPremium(List<PersonDTO> persons, BigDecimal agreementPremium) {
+        return new AgreementDTO(agreementDateFrom,
+                agreementDateTo,
+                country,
+                medicalRiskLimitLevel,
+                selectedRisks,
+                persons,
+                agreementPremium);
+    }
+
 }

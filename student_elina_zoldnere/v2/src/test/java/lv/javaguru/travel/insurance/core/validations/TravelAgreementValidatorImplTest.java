@@ -33,18 +33,13 @@ class TravelAgreementValidatorImplTest {
     void validate_ShouldSumUpErrorsCorrectly() {
         AgreementDTO agreement = helper.newAgreementDTO();
         when(agreementAllFieldValidator.collectAgreementErrors(agreement))
-                .thenReturn(List.of(newValidationErrorDTO(), newValidationErrorDTO()));
+                .thenReturn(List.of(helper.newValidationErrorDTO(), helper.newValidationErrorDTO()));
         when(personAllFieldValidator.collectPersonErrors(agreement.persons()))
-                .thenReturn(List.of(newValidationErrorDTO()));
+                .thenReturn(List.of(helper.newValidationErrorDTO()));
 
         List<ValidationErrorDTO> errors = validator.validate(agreement);
 
         assertEquals(3, errors.size());
-    }
-
-    private ValidationErrorDTO newValidationErrorDTO() {
-
-        return new ValidationErrorDTO("errorCode", "description");
     }
 
 }

@@ -38,7 +38,7 @@ class TravelAgreementAllFieldValidatorTest {
         agreement = helper.newAgreementDTO();
         AgreementFieldValidation agreementValidationMock = mock(AgreementFieldValidation.class);
         when(agreementFieldValidation.stream()).thenAnswer(invocation -> Stream.of(agreementValidationMock));
-        when(agreementValidationMock.validateSingle(any())).thenReturn(Optional.of(newValidationErrorDTO()));
+        when(agreementValidationMock.validateSingle(any())).thenReturn(Optional.of(helper.newValidationErrorDTO()));
 
         List<ValidationErrorDTO> errors = validator.collectAgreementErrors(agreement);
 
@@ -50,15 +50,11 @@ class TravelAgreementAllFieldValidatorTest {
         agreement = helper.newAgreementDTO();
         AgreementFieldValidation agreementValidationMock = mock(AgreementFieldValidation.class);
         when(agreementFieldValidation.stream()).thenAnswer(invocation -> Stream.of(agreementValidationMock));
-        when(agreementValidationMock.validateList(any())).thenReturn(List.of(newValidationErrorDTO()));
+        when(agreementValidationMock.validateList(any())).thenReturn(List.of(helper.newValidationErrorDTO()));
 
         List<ValidationErrorDTO> errors = validator.collectAgreementErrors(agreement);
 
         assertEquals(1, errors.size());
-    }
-
-    private ValidationErrorDTO newValidationErrorDTO() {
-        return new ValidationErrorDTO("errorCode", "description");
     }
 
 }

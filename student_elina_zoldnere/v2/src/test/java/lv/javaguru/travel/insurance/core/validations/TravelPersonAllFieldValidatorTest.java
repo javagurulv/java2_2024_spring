@@ -39,7 +39,7 @@ class TravelPersonAllFieldValidatorTest {
         PersonFieldValidation personValidationMock = mock(PersonFieldValidation.class);
         when(personFieldValidation.stream()).thenAnswer(invocation -> Stream.of(personValidationMock));
         when(personValidationMock.validateSingle(any()))
-                .thenReturn(Optional.of(newValidationErrorDTO()));
+                .thenReturn(Optional.of(helper.newValidationErrorDTO()));
 
         List<ValidationErrorDTO> errors = validator.collectPersonErrors(persons);
 
@@ -51,15 +51,11 @@ class TravelPersonAllFieldValidatorTest {
         persons = List.of(helper.newPersonDTO());
         PersonFieldValidation personValidationMock = mock(PersonFieldValidation.class);
         when(personFieldValidation.stream()).thenAnswer(invocation -> Stream.of(personValidationMock));
-        when(personValidationMock.validateList(any())).thenReturn(List.of(newValidationErrorDTO()));
+        when(personValidationMock.validateList(any())).thenReturn(List.of(helper.newValidationErrorDTO()));
 
         List<ValidationErrorDTO> errors = validator.collectPersonErrors(persons);
 
         assertEquals(1, errors.size());
-    }
-
-    private ValidationErrorDTO newValidationErrorDTO() {
-        return new ValidationErrorDTO("errorCode", "description");
     }
 
 }
