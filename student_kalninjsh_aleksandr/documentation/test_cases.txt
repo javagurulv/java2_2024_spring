@@ -1,20 +1,182 @@
 1.personFirstName is null or empty
 Response error: field: "personFirstName", message: "Must not be empty".
 
+Request
+{
+  "personFirstName" : "",
+  "personLastName" : "Sawyer",
+  "agreementDateFrom" : "2005-07-11",
+  "agreementDateTo" : "2005-11-18"
+}
+Response
+{
+    "errors": [
+        {
+            "field": "personFirstName",
+            "message": "Must not be empty"
+        }
+    ],
+    "personFirstName": null,
+    "personLastName": null,
+    "agreementDateFrom": null,
+    "agreementDateTo": null,
+    "agreementPrice": null
+}
+
 2.personLastName is null or empty
 Response error: field: "personLastName", message: "Must not be empty".
+
+Request
+{
+  "personFirstName" : "Tom",
+  "personLastName" : "",
+  "agreementDateFrom" : "2005-07-11",
+  "agreementDateTo" : "2005-11-18"
+}
+Response
+{
+    "errors": [
+        {
+            "field": "personLastName",
+            "message": "Must not be empty"
+        }
+    ],
+    "personFirstName": null,
+    "personLastName": null,
+    "agreementDateFrom": null,
+    "agreementDateTo": null,
+    "agreementPrice": null
+}
 
 3.agreementDateFrom is null or empty
 Response error: field: "agreementDateFrom", message: "Must not be empty".
 
+Request
+{
+  "personFirstName" : "Tom",
+  "personLastName" : "Sawyer",
+  "agreementDateFrom" : "",
+  "agreementDateTo" : "2005-11-18"
+}
+Response
+{
+    "errors": [
+        {
+            "field": "agreementDateFrom",
+            "message": "Must not be empty"
+        }
+    ],
+    "personFirstName": null,
+    "personLastName": null,
+    "agreementDateFrom": null,
+    "agreementDateTo": null,
+    "agreementPrice": null
+}
+
 4.agreementDateTo is null or empty
 Response error: field: "agreementDateTo", message: "Must not be empty".
+
+Request
+{
+  "personFirstName" : "Tom",
+  "personLastName" : "Sawyer",
+  "agreementDateFrom" : "2005-05-15",
+  "agreementDateTo" : ""
+}
+Response
+{
+    "errors": [
+        {
+            "field": "agreementDateTo",
+            "message": "Must not be empty"
+        }
+    ],
+    "personFirstName": null,
+    "personLastName": null,
+    "agreementDateFrom": null,
+    "agreementDateTo": null,
+    "agreementPrice": null
+}
 
 5.All fields is null or empty
 Response error: field: "personFirstName", "personLastName", "agreementDateFrom", "agreementDateTo", message: "Must not be empty".
 
+Request
+{
+  "personFirstName" : "",
+  "personLastName" : "",
+  "agreementDateFrom" : "",
+  "agreementDateTo" : ""
+}
+Response
+{
+    "errors": [
+        {
+            "field": "personFirstName",
+            "message": "Must not be empty"
+        },
+        {
+            "field": "personLastName",
+            "message": "Must not be empty"
+        },
+        {
+            "field": "agreementDateFrom",
+            "message": "Must not be empty"
+        },
+        {
+            "field": "agreementDateTo",
+            "message": "Must not be empty"
+        }
+    ],
+    "personFirstName": null,
+    "personLastName": null,
+    "agreementDateFrom": null,
+    "agreementDateTo": null,
+    "agreementPrice": null
+}
+
+
 6.agreementDateTo less than agreementDateFrom
 Response error: field: "agreementDateFrom", message: "Must be less then agreementDateTo".
 
+Request
+{
+  "personFirstName" : "Tom",
+  "personLastName" : "Sawyer",
+  "agreementDateFrom" : "2005-11-24",
+  "agreementDateTo" : "2005-05-15"
+}
+Response
+{
+    "errors": [
+        {
+            "field": "agreementDateFrom",
+            "message": "Must be less then agreementDateTo"
+        }
+    ],
+    "personFirstName": null,
+    "personLastName": null,
+    "agreementDateFrom": null,
+    "agreementDateTo": null,
+    "agreementPrice": null
+}
+
 7.All fields are specified
 Response errors: null.
+
+Request
+{
+  "personFirstName" : "Tom",
+  "personLastName" : "Sawyer",
+  "agreementDateFrom" : "2005-02-24",
+  "agreementDateTo" : "2005-05-15"
+}
+Response
+{
+    "errors": null,
+    "personFirstName": "Tom",
+    "personLastName": "Sawyer",
+    "agreementDateFrom": "2005-02-24",
+    "agreementDateTo": "2005-05-15",
+    "agreementPrice": 80
+}
