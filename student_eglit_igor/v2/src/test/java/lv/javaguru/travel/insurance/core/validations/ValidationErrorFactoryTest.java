@@ -12,6 +12,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collections;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -39,13 +40,12 @@ class ValidationErrorFactoryTest {
     @Test
     void shouldReturnValidationErrorDTOWhenErrorCodeAndPlaceholdersAreProvided() {
         String errorCode = "ERROR_CODE";
-        String errorDescription = "Error description";
         Placeholder placeholder = new Placeholder("key", "value");
-        when(errorCodeUtil.getErrorDescription(errorCode, Collections.singletonList(placeholder))).thenReturn(errorDescription);
+        when(errorCodeUtil.getErrorDescription(errorCode, List.of(placeholder))).thenReturn("Error value description");
 
-        ValidationErrorDTO result = validationErrorFactory.buildError(errorCode, Collections.singletonList(placeholder));
+        ValidationErrorDTO result = validationErrorFactory.buildError(errorCode, List.of(placeholder));
 
         assertEquals(errorCode, result.getErrorCode());
-        assertEquals(errorDescription, result.getDescription());
+        assertEquals("Error value description", result.getDescription());
     }
 }
