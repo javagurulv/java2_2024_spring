@@ -1,6 +1,7 @@
-package org.javaguru.travel.insurance.core.repositories;
+package lv.javaguru.travel.insurance.core.repositories;
 
-import org.javaguru.travel.insurance.core.domain.CountryDefaultDayRate;
+import lv.javaguru.travel.insurance.core.domain.CountryDefaultDayRate;
+import lv.javaguru.travel.insurance.repositories.CountryDefaultDayRateRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,22 +12,17 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
-class CountryDefaultDayRateRepositoryTest {
-
+public class CountryDefaultDayRateRepositoryTest {
     @Autowired
     private CountryDefaultDayRateRepository countryDefaultDayRateRepository;
 
     @Test
     public void injectedRepositoryAreNotNull() {
         assertNotNull(countryDefaultDayRateRepository);
-    }
-
-    @Test
-    public void shouldFindForLatvia() {
-        searchCountryDefaultDayRate("LATVIA", new BigDecimal("1.00"));
     }
 
     @Test

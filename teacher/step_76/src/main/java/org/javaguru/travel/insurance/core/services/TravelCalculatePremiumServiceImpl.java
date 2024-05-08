@@ -40,5 +40,4 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setRisks(premiumCalculationResult.getRiskPremiums());
         return response;
     }
-
 }

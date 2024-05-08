@@ -71,3 +71,12 @@ SELECT
     'Travel policy sport activities risk type'
  FROM classifiers as cl
  WHERE cl.title = 'RISK_TYPE';
+
+ INSERT INTO country_default_day_rate(country_ic, default_day_rate)
+ VALUES('LATVIA', 1.00);
+
+ INSERT INTO country_default_day_rate(country_ic, default_day_rate)
+ VALUES('SPAIN', 2.50);
+
+ INSERT INTO country_default_day_rate(country_ic, default_day_rate)
+ VALUES('JAPAN', 3.50);
