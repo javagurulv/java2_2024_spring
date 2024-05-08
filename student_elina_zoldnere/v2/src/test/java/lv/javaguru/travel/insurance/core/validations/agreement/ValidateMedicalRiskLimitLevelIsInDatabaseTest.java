@@ -11,7 +11,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -34,8 +33,6 @@ class ValidateMedicalRiskLimitLevelIsInDatabaseTest {
 
     @InjectMocks
     private ValidateMedicalRiskLimitLevelIsInDatabase validateRiskLimitLevel;
-
-    @Autowired
     @InjectMocks
     private SetUpInstancesHelper helper;
 

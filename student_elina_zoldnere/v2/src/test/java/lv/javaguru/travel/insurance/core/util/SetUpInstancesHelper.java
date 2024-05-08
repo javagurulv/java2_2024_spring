@@ -49,4 +49,9 @@ public class SetUpInstancesHelper {
         return new ValidationErrorDTO("errorCode", "description");
     }
 
+    public PersonDTO newPersonWithRisksDTO() {
+        return new PersonDTO("Jānis", "Bērziņš",
+                new Date(1990 - 1900, 0, 1), List.of(newRiskDTO()));
+    }
+
 }

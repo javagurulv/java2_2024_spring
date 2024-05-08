@@ -12,7 +12,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.math.BigDecimal;
@@ -34,8 +33,6 @@ class ValidateMedicalRiskLimitLevelNotEmptyOrNullTest {
 
     @InjectMocks
     private ValidateMedicalRiskLimitLevelNotEmpty validateRiskLimitLevel;
-
-    @Autowired
     @InjectMocks
     private SetUpInstancesHelper helper;
 

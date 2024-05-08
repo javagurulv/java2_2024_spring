@@ -14,7 +14,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -37,8 +36,6 @@ class ValidateSelectedRisksAreInDatabaseTest {
 
     @InjectMocks
     private ValidateSelectedRisksAreInDatabase validateRisks;
-
-    @Autowired
     @InjectMocks
     private SetUpInstancesHelper helper;
 

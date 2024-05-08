@@ -11,7 +11,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -31,9 +30,7 @@ class ValidateAgreementDateChronologyTest {
 
     @InjectMocks
     private ValidateAgreementDateChronology validate;
-
     @InjectMocks
-    @Autowired
     private SetUpInstancesHelper helper;
 
     @ParameterizedTest(name = "{0}")

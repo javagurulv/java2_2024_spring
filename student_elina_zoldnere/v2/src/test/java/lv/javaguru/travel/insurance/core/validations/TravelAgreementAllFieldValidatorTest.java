@@ -8,7 +8,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,11 +23,10 @@ class TravelAgreementAllFieldValidatorTest {
 
     @Mock
     private List<AgreementFieldValidation> agreementFieldValidation;
-    @InjectMocks
-    private TravelAgreementAllFieldValidator validator;
 
     @InjectMocks
-    @Autowired
+    private TravelAgreementAllFieldValidator validator;
+    @InjectMocks
     private SetUpInstancesHelper helper;
 
     private AgreementDTO agreement;

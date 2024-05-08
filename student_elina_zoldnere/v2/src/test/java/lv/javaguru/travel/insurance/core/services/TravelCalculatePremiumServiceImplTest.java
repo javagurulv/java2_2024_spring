@@ -4,16 +4,14 @@ import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreC
 import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreResult;
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
-import lv.javaguru.travel.insurance.core.underwriting.TravelCalculatePremiumUnderwriting;
-import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumCalculationResult;
 import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.util.Collections;
@@ -28,14 +26,13 @@ public class TravelCalculatePremiumServiceImplTest {
     @Mock
     private TravelAgreementValidator agreementValidatorMock;
     @Mock
-    private TravelCalculatePremiumUnderwriting calculateUnderwritingMock;
+    private CalculateAndUpdateAgreementWithPremiums calculateAndUpdateAgreementMock;
+
     @Mock
     private TravelCalculatePremiumCoreCommand commandMock;
 
     @InjectMocks
     private TravelCalculatePremiumServiceImpl service;
-
-    @Autowired
     @InjectMocks
     private SetUpInstancesHelper helper;
 
@@ -54,32 +51,38 @@ public class TravelCalculatePremiumServiceImplTest {
     @Test
     public void calculatePremium_ShouldReturnCorrectResponseWithOnePerson() {
         AgreementDTO agreement = helper.newAgreementDTO();
-        PersonDTO person = helper.newPersonDTO();
+        List<PersonDTO> personsWithRisks = List.of(helper.newPersonWithRisksDTO());
         TravelCalculatePremiumCoreCommand command = new TravelCalculatePremiumCoreCommand(agreement);
+
         when(agreementValidatorMock.validate(command.getAgreement()))
                 .thenReturn(Collections.emptyList());
-        when(calculateUnderwritingMock.calculateAgreementPremium(agreement, person))
-                .thenReturn(new TravelPremiumCalculationResult(BigDecimal.TEN, List.of(helper.newRiskDTO())));
+        when(calculateAndUpdateAgreementMock.calculateAgreementPremiums(agreement))
+                .thenReturn(agreement.withPremium(personsWithRisks, BigDecimal.TEN));
 
         TravelCalculatePremiumCoreResult result = service.calculatePremium(command);
 
         assertEquals(BigDecimal.TEN, result.getAgreement().agreementPremium());
+        assertEquals(1, result.getAgreement().persons().size());
+        assertEquals(BigDecimal.TEN, result.getAgreement().persons().get(0).personRisks().get(0).premium());
     }
 
     @Test
     public void calculatePremium_ShouldReturnCorrectResponseWithTwoPersons() {
         AgreementDTO agreement = helper.newTwoPersonsAgreementDTO();
-        PersonDTO person = helper.newPersonDTO();
+        List<PersonDTO> personsWithRisks = List.of(helper.newPersonWithRisksDTO(), helper.newPersonWithRisksDTO());
         TravelCalculatePremiumCoreCommand command = new TravelCalculatePremiumCoreCommand(agreement);
+
         when(agreementValidatorMock.validate(command.getAgreement()))
                 .thenReturn(Collections.emptyList());
-        when(calculateUnderwritingMock.calculateAgreementPremium(agreement, person))
-                .thenAnswer(invocation ->
-                        new TravelPremiumCalculationResult(BigDecimal.TEN, List.of(helper.newRiskDTO())));
+        when(calculateAndUpdateAgreementMock.calculateAgreementPremiums(agreement))
+                .thenReturn(agreement.withPremium(personsWithRisks, BigDecimal.valueOf(20)));
 
         TravelCalculatePremiumCoreResult result = service.calculatePremium(command);
 
         assertEquals(BigDecimal.valueOf(20), result.getAgreement().agreementPremium());
+        assertEquals(2, result.getAgreement().persons().size());
+        assertEquals(BigDecimal.TEN, result.getAgreement().persons().get(0).personRisks().get(0).premium());
+        assertEquals(BigDecimal.TEN, result.getAgreement().persons().get(1).personRisks().get(0).premium());
     }
 
 }
