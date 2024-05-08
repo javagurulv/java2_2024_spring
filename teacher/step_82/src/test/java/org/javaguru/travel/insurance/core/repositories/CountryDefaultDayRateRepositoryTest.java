@@ -50,6 +50,7 @@ class CountryDefaultDayRateRepositoryTest {
         assertTrue(valueOpt.isPresent());
         assertEquals(valueOpt.get().getCountryIc(), countryIc);
         assertEquals(valueOpt.get().getDefaultDayRate(), dayRate);
+
         assertEquals(dayRate.stripTrailingZeros(),
                 valueOpt.get().getDefaultDayRate().stripTrailingZeros());
     }
