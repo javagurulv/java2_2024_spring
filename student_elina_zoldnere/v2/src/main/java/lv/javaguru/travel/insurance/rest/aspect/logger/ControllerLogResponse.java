@@ -1,26 +1,30 @@
-package lv.javaguru.travel.insurance.rest.v1.aspect.logger;
+package lv.javaguru.travel.insurance.rest.aspect.logger;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumResponseV1;
+import lv.javaguru.travel.insurance.dto.v2.TravelCalculatePremiumResponseV2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
-class ControllerLogResponseV1 {
+class ControllerLogResponse {
 
-    private static final Logger logger = LoggerFactory.getLogger(ControllerLogResponseV1.class);
+    private static final Logger logger = LoggerFactory.getLogger(ControllerLogResponse.class);
     private static final ObjectMapper mapper = new ObjectMapper();
 
     public static void log(Object response) {
-        if (response instanceof TravelCalculatePremiumResponseV1) {
+        if (response instanceof TravelCalculatePremiumResponseV1
+                || response instanceof TravelCalculatePremiumResponseV2) {
             try {
                 String responseJson = mapper.writeValueAsString(response);
                 logger.info("RESPONSE: {}", responseJson);
             } catch (JsonProcessingException e) {
                 logger.error("Error converting response to JSON", e);
             }
+        } else {
+            logger.warn("Unexpected response object type: {}", response.getClass().getName());
         }
     }
 

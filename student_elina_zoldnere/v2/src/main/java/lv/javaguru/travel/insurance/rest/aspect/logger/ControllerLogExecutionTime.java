@@ -1,11 +1,11 @@
-package lv.javaguru.travel.insurance.rest.common;
+package lv.javaguru.travel.insurance.rest.aspect.logger;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ControllerLogExecutionTime {
+class ControllerLogExecutionTime {
 
     private static final Logger logger = LoggerFactory.getLogger(ControllerLogExecutionTime.class);
 
