@@ -1,23 +1,22 @@
-package lv.javaguru.travel.insurance.aspect.logger;
+package lv.javaguru.travel.insurance.rest.v1.aspect.logger;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreResult;
+import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumResponseV1;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
-class CalculatePremiumLogResponse {
+class ControllerLogResponseV1 {
 
-    private static final Logger logger = LoggerFactory.getLogger(CalculatePremiumLogResponse.class);
+    private static final Logger logger = LoggerFactory.getLogger(ControllerLogResponseV1.class);
     private static final ObjectMapper mapper = new ObjectMapper();
 
     public static void log(Object response) {
-        if (response instanceof TravelCalculatePremiumCoreResult result) {
+        if (response instanceof TravelCalculatePremiumResponseV1) {
             try {
-                // Or should I get errors and agreement and write values separately?
-                String responseJson = mapper.writeValueAsString(result);
+                String responseJson = mapper.writeValueAsString(response);
                 logger.info("RESPONSE: {}", responseJson);
             } catch (JsonProcessingException e) {
                 logger.error("Error converting response to JSON", e);

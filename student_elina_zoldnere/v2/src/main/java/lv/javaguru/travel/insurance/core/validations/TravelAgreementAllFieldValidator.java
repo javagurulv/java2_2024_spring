@@ -9,7 +9,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Component
@@ -29,7 +28,7 @@ class TravelAgreementAllFieldValidator {
                 .map(validation -> validation.validateSingle(agreement))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private List<ValidationErrorDTO> collectListAgreementErrors(AgreementDTO agreement) {
@@ -37,13 +36,13 @@ class TravelAgreementAllFieldValidator {
                 .map(validation -> validation.validateList(agreement))
                 .filter((Objects::nonNull))
                 .flatMap(Collection::stream)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private List<ValidationErrorDTO> concatenateLists(List<ValidationErrorDTO> errorsListOne,
                                                       List<ValidationErrorDTO> errorListTwo) {
         return Stream.concat(errorsListOne.stream(), errorListTwo.stream())
-                .collect(Collectors.toList());
+                .toList();
     }
 
 }

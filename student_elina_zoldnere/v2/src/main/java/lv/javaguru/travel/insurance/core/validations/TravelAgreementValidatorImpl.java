@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Component
@@ -28,7 +27,7 @@ class TravelAgreementValidatorImpl implements TravelAgreementValidator {
     private List<ValidationErrorDTO> concatenateLists(List<ValidationErrorDTO> errorsListOne,
                                                       List<ValidationErrorDTO> errorListTwo) {
         return Stream.concat(errorsListOne.stream(), errorListTwo.stream())
-                .collect(Collectors.toList());
+                .toList();
     }
 
 }

@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 class ValidateSelectedRisksAreInDatabase extends AgreementFieldValidationImpl {
@@ -30,7 +29,7 @@ class ValidateSelectedRisksAreInDatabase extends AgreementFieldValidationImpl {
         return agreement.selectedRisks().stream()
                 .filter(risk -> !isInDatabase(risk))
                 .map(this::buildValidationError)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private boolean isInDatabase(String riskIc) {

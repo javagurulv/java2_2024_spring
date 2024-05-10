@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class DtoV1Converter {
@@ -36,7 +35,7 @@ public class DtoV1Converter {
     private List<ValidationError> transformValidationErrorsToV1(List<ValidationErrorDTO> coreErrors) {
         return coreErrors.stream()
                 .map(error -> new ValidationError(error.errorCode(), error.description()))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private TravelCalculatePremiumResponseV1 buildSuccessfulResponse(TravelCalculatePremiumCoreResult coreResult) {
