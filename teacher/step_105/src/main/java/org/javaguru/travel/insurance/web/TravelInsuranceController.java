@@ -17,6 +17,7 @@ public class TravelInsuranceController {
 
     @GetMapping("/insurance/travel/web")
     public String showForm(ModelMap modelMap) {
+        modelMap.addAttribute("response", new TravelCalculatePremiumResponse());
         modelMap.addAttribute("request", new TravelCalculatePremiumRequest());
         return "travel-calculate-premium";
     }
