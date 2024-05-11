@@ -8,6 +8,7 @@ Request
   "agreementDateFrom" : "2005-07-11",
   "agreementDateTo" : "2005-11-18"
 }
+
 Response
 {
     "errors": [
@@ -33,6 +34,7 @@ Request
   "agreementDateFrom" : "2005-07-11",
   "agreementDateTo" : "2005-11-18"
 }
+
 Response
 {
     "errors": [
@@ -53,11 +55,12 @@ Response error: field: "agreementDateFrom", message: "Must not be empty".
 
 Request
 {
-  "personFirstName" : "Tom",
-  "personLastName" : "Sawyer",
-  "agreementDateFrom" : "",
-  "agreementDateTo" : "2005-11-18"
-}
+   "personFirstName" : "Tom",
+   "personLastName" : "Sawyer",
+   "agreementDateFrom" : "",
+   "agreementDateTo" : "2005-11-18"
+   }
+
 Response
 {
     "errors": [
@@ -80,9 +83,10 @@ Request
 {
   "personFirstName" : "Tom",
   "personLastName" : "Sawyer",
-  "agreementDateFrom" : "2005-05-15",
+  "agreementDateFrom" : "2005-07-11",
   "agreementDateTo" : ""
 }
+
 Response
 {
     "errors": [
@@ -108,6 +112,7 @@ Request
   "agreementDateFrom" : "",
   "agreementDateTo" : ""
 }
+
 Response
 {
     "errors": [
@@ -146,6 +151,7 @@ Request
   "agreementDateFrom" : "2005-11-24",
   "agreementDateTo" : "2005-05-15"
 }
+
 Response
 {
     "errors": [
@@ -171,6 +177,7 @@ Request
   "agreementDateFrom" : "2005-02-24",
   "agreementDateTo" : "2005-05-15"
 }
+
 Response
 {
     "errors": null,
