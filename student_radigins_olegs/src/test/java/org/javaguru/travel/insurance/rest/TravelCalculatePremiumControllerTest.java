@@ -24,16 +24,13 @@ class TravelCalculatePremiumControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+    @Autowired
+    private JsonFileReader jsonFileReader;
 
     @Test
     public void shouldReturnWithOutErrors() throws Exception {
         mockMvc.perform(post("/insurance/travel/")
-                        .content("{" +
-                                "\"personFirstName\" : \"Olegs\",\n" +
-                                "\"personLastName\" : \"Radigins\",\n" +
-                                "\"agreementDateFrom\" : \"2021-05-25\",\n" +
-                                "\"agreementDateTo\" : \"2021-05-29\"\n" +
-                                "}")
+                        .content(jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumRequestWithoutErrors.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("personFirstName", is("Olegs")))
@@ -47,12 +44,7 @@ class TravelCalculatePremiumControllerTest {
     @Test
     public void shouldReturnWithIncorrectDateError() throws Exception {
         mockMvc.perform(post("/insurance/travel/")
-                        .content("{" +
-                                "\"personFirstName\" : \"Olegs\",\n" +
-                                "\"personLastName\" : \"Radigins\",\n" +
-                                "\"agreementDateFrom\" : \"2021-05-20\",\n" +
-                                "\"agreementDateTo\" : \"2021-05-10\"\n" +
-                                "}")
+                        .content(jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumRequestWithIncorrectDate.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("personFirstName", is(nullValue())))
@@ -70,12 +62,7 @@ class TravelCalculatePremiumControllerTest {
     @Test
     public void shouldReturnWithNullFirstNameError() throws Exception {
         mockMvc.perform(post("/insurance/travel/")
-                        .content("{" +
-                                "\"personFirstName\" : null,\n" +
-                                "\"personLastName\" : \"Radigins\",\n" +
-                                "\"agreementDateFrom\" : \"2021-05-25\",\n" +
-                                "\"agreementDateTo\" : \"2021-05-29\"\n" +
-                                "}")
+                        .content(jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumRequestWithFirstNameNull.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("personFirstName", is(nullValue())))
@@ -93,12 +80,7 @@ class TravelCalculatePremiumControllerTest {
     @Test
     public void shouldReturnWithNullLastNameError() throws Exception {
         mockMvc.perform(post("/insurance/travel/")
-                        .content("{" +
-                                "\"personFirstName\" : \"Olegs\",\n" +
-                                "\"personLastName\" : null,\n" +
-                                "\"agreementDateFrom\" : \"2021-05-25\",\n" +
-                                "\"agreementDateTo\" : \"2021-05-29\"\n" +
-                                "}")
+                        .content(jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumRequestWithLastNameNull.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("personFirstName", is(nullValue())))
@@ -116,12 +98,7 @@ class TravelCalculatePremiumControllerTest {
     @Test
     public void shouldReturnWithNullDateFromError() throws Exception {
         mockMvc.perform(post("/insurance/travel/")
-                        .content("{" +
-                                "\"personFirstName\" : \"Olegs\",\n" +
-                                "\"personLastName\" : \"Radigins\",\n" +
-                                "\"agreementDateFrom\" : null,\n" +
-                                "\"agreementDateTo\" : \"2021-05-10\"\n" +
-                                "}")
+                        .content(jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumRequestWithDateFromNull.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("personFirstName", is(nullValue())))
@@ -139,12 +116,7 @@ class TravelCalculatePremiumControllerTest {
     @Test
     public void shouldReturnWithNullDateToError() throws Exception {
         mockMvc.perform(post("/insurance/travel/")
-                        .content("{" +
-                                "\"personFirstName\" : \"Olegs\",\n" +
-                                "\"personLastName\" : \"Radigins\",\n" +
-                                "\"agreementDateFrom\" : \"2021-05-20\",\n" +
-                                "\"agreementDateTo\" : null\n" +
-                                "}")
+                        .content(jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumRequestWithDateToNull.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("personFirstName", is(nullValue())))
@@ -162,12 +134,7 @@ class TravelCalculatePremiumControllerTest {
     @Test
     public void shouldReturnWithAllNullErrors() throws Exception {
         mockMvc.perform(post("/insurance/travel/")
-                        .content("{" +
-                                "\"personFirstName\" : null,\n" +
-                                "\"personLastName\" : null,\n" +
-                                "\"agreementDateFrom\" : null,\n" +
-                                "\"agreementDateTo\" : null\n" +
-                                "}")
+                        .content(jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumRequestWithAllFieldsNull.json"))
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("personFirstName", is(nullValue())))
