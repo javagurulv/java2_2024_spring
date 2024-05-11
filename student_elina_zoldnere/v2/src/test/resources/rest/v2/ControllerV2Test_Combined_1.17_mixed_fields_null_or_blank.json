@@ -1,0 +1,47 @@
+{
+  "request": {
+    "agreementDateFrom": "2025-03-10",
+    "agreementDateTo": "2025-03-11",
+    "selectedRisks": [],
+    "country": null,
+    "medicalRiskLimitLevel": "     ",
+    "persons": [
+      {
+        "personFirstName": null,
+        "personLastName": "Bērziņš",
+        "personBirthDate": "1990-01-01"
+      },
+      {
+        "personFirstName": "Kārlis",
+        "personLastName": "      ",
+        "personBirthDate": "1989-01-01"
+      }
+    ]
+  },
+  "expectedResponse": {
+    "errors": [
+      {
+        "errorCode": "ERROR_CODE_1",
+        "description": "Field personFirstName is empty!"
+      },
+      {
+        "errorCode": "ERROR_CODE_2",
+        "description": "Field personLastName is empty!"
+      },
+      {
+        "errorCode": "ERROR_CODE_6",
+        "description": "Field country is empty!"
+      },
+      {
+        "errorCode": "ERROR_CODE_5",
+        "description": "Field selectedRisks is empty!"
+      }
+    ],
+    "agreementDateFrom": null,
+    "agreementDateTo": null,
+    "country": null,
+    "medicalRiskLimitLevel": null,
+    "persons": null,
+    "agreementPremium" : null
+  }
+}

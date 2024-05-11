@@ -1,0 +1,39 @@
+{
+  "request": {
+    "agreementDateFrom": "2025-03-10",
+    "agreementDateTo": "2025-03-11",
+    "selectedRisks": [
+      "TRAVEL_MEDICAL",
+      "TRAVEL_CANCELLATION",
+      "TRAVEL_LOSS_BAGGAGE"
+    ],
+    "country": "SPAIN",
+    "medicalRiskLimitLevel": "NOT_SUPPORTED",
+    "persons": [
+      {
+        "personFirstName": "Jānis",
+        "personLastName": "Bērziņš",
+        "personBirthDate": "1990-01-01"
+      },
+      {
+        "personFirstName": "Kārlis",
+        "personLastName": "Krūmiņš",
+        "personBirthDate": "1989-01-01"
+      }
+    ]
+  },
+  "expectedResponse": {
+    "errors": [
+      {
+        "errorCode": "ERROR_CODE_93",
+        "description": "Medical Risk Limit Level ic = NOT_SUPPORTED is not supported!"
+      }
+    ],
+    "agreementDateFrom": null,
+    "agreementDateTo": null,
+    "country": null,
+    "medicalRiskLimitLevel": null,
+    "persons": null,
+    "agreementPremium" : null
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "request": {
+    "agreementDateFrom": "2025-03-10",
+    "agreementDateTo": "2025-03-11",
+    "selectedRisks": [
+      "TRAVEL_MEDICAL",
+      "NOT_SUPPORTED_1",
+      "TRAVEL_LOSS_BAGGAGE"
+    ],
+    "country": "NOT_SUPPORTED_2",
+    "medicalRiskLimitLevel": "NOT_SUPPORTED_3",
+    "persons": [
+      {
+        "personFirstName": "Jānis",
+        "personLastName": "Bērziņš",
+        "personBirthDate": "1990-01-01"
+      },
+      {
+        "personFirstName": "Kārlis",
+        "personLastName": "Krūmiņš",
+        "personBirthDate": "1989-01-01"
+      }
+    ]
+  },
+  "expectedResponse": {
+    "errors": [
+      {
+        "errorCode": "ERROR_CODE_91",
+        "description": "Risk type ic = NOT_SUPPORTED_1 is not supported!"
+      },
+      {
+        "errorCode": "ERROR_CODE_92",
+        "description": "Country ic = NOT_SUPPORTED_2 is not supported!"
+      },
+      {
+        "errorCode": "ERROR_CODE_93",
+        "description": "Medical Risk Limit Level ic = NOT_SUPPORTED_3 is not supported!"
+      }
+    ],
+    "agreementDateFrom": null,
+    "agreementDateTo": null,
+    "country": null,
+    "medicalRiskLimitLevel": null,
+    "persons": null,
+    "agreementPremium" : null
+  }
+}

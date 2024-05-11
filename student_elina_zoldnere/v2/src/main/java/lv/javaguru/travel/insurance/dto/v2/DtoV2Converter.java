@@ -4,6 +4,7 @@ import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreC
 import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreResult;
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
+import lv.javaguru.travel.insurance.core.api.dto.RiskDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.dto.RiskPremium;
 import lv.javaguru.travel.insurance.dto.ValidationError;
@@ -62,6 +63,11 @@ public class DtoV2Converter {
         person.setPersonFirstName(personDTO.personFirstName());
         person.setPersonLastName(personDTO.personLastName());
         person.setPersonBirthDate(personDTO.personBirthDate());
+
+        BigDecimal premium = personDTO.personRisks().stream()
+                .map(RiskDTO::premium)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        person.setPersonPremium(premium);
 
         List<RiskPremium> risks = personDTO.personRisks().stream()
                 .map(riskDTO -> new RiskPremium(riskDTO.riskIc(), riskDTO.premium()))

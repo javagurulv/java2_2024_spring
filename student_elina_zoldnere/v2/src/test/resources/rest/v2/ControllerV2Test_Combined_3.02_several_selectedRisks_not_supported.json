@@ -1,0 +1,43 @@
+{
+  "request": {
+    "agreementDateFrom": "2025-03-10",
+    "agreementDateTo": "2025-03-11",
+    "selectedRisks": [
+      "NOT_SUPPORTED_1",
+      "NOT_SUPPORTED_2",
+      "TRAVEL_LOSS_BAGGAGE"
+    ],
+    "country": "SPAIN",
+    "medicalRiskLimitLevel": "LEVEL_15000",
+    "persons": [
+      {
+        "personFirstName": "Jānis",
+        "personLastName": "Bērziņš",
+        "personBirthDate": "1990-01-01"
+      },
+      {
+        "personFirstName": "Kārlis",
+        "personLastName": "Krūmiņš",
+        "personBirthDate": "1989-01-01"
+      }
+    ]
+  },
+  "expectedResponse": {
+    "errors": [
+      {
+        "errorCode": "ERROR_CODE_91",
+        "description": "Risk type ic = NOT_SUPPORTED_1 is not supported!"
+      },
+      {
+        "errorCode": "ERROR_CODE_91",
+        "description": "Risk type ic = NOT_SUPPORTED_2 is not supported!"
+      }
+    ],
+    "agreementDateFrom": null,
+    "agreementDateTo": null,
+    "country": null,
+    "medicalRiskLimitLevel": null,
+    "persons": null,
+    "agreementPremium" : null
+  }
+}
