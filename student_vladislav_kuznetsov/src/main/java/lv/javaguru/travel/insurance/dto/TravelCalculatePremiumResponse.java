@@ -23,10 +23,11 @@ public class TravelCalculatePremiumResponse extends CoreResponse{
     private String personLastName;
     private Date agreementDateFrom;
     private Date agreementDateTo;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private Date personBirthDate;
     @JsonSerialize(using = BigDecimalSerializer.class)
     private BigDecimal agreementPremium;
     private List<RiskPremium> risks;
-
 
     public TravelCalculatePremiumResponse(List<ValidationError> errors) {
         super(errors);

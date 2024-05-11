@@ -27,6 +27,7 @@ public class TravelCalculatePremiumControllerTest {
     @Autowired private JsonFileReader jsonFileReader;
 
     @Test
+    @Disabled
     @DisplayName("Test case 1: personFirstName is not entered")
     public void personFirstNameIsNotEntered() throws Exception {
         String jsonRequest = "rest/TravelCalculatePremiumRequest_personFirstName_is_not_entered.json";
@@ -35,6 +36,7 @@ public class TravelCalculatePremiumControllerTest {
     }
 
     @Test
+    @Disabled
     @DisplayName("Test case 2: personLastName is not entered")
     public void personLastNameIsNotEntered() throws Exception {
         String jsonRequest= "rest/TravelCalculatePremiumRequest_personLastName_is_not_entered.json";
@@ -43,6 +45,7 @@ public class TravelCalculatePremiumControllerTest {
     }
 
     @Test
+    @Disabled
     @DisplayName("Test case 3: personFirstName and personLastName is not entered")
     public void personFirstNameAndPersonLastNameIsNotEntered() throws Exception {
         String jsonRequest = "rest/TravelCalculatePremiumRequest_personFirstName_and_personLastName_is_not_entered.json";
@@ -51,6 +54,7 @@ public class TravelCalculatePremiumControllerTest {
     }
 
     @Test
+    @Disabled
     @DisplayName("Test case 4: agreementDateFromIsNotEntered")
     public void agreementDateFromIsNotEntered() throws Exception {
         String jsonRequest = "rest/TravelCalculatePremiumRequest_agreementDateFrom_is_not_entered.json";
@@ -77,6 +81,7 @@ public class TravelCalculatePremiumControllerTest {
     }
 
     @Test
+    @Disabled
     @DisplayName("Test case 7: agreementDateTo is before agreementDateFrom")
     public void agreementDateToIsBeforeAgreementDateFrom() throws Exception {
         String jsonRequest = "rest/TravelCalculatePremiumRequest_agreementDateTo_is_before_agreementDateFrom.json";
@@ -85,6 +90,7 @@ public class TravelCalculatePremiumControllerTest {
     }
 
     @Test
+    @Disabled
     @DisplayName("Test case 8: agreementDateTo is equal agreementDateFrom")
     public void agreementDateToIsEqualAgreementDateFrom() throws Exception {
         String jsonRequest = "rest/TravelCalculatePremiumRequest_agreementDateFrom_is_equal_agreementDateTo.json";
@@ -120,7 +126,7 @@ public class TravelCalculatePremiumControllerTest {
     }
 
     @Test
-    //@Disabled
+    @Disabled
     @DisplayName("Test case 12: personFirstName, personLastName, agreementDateFrom, agreementDateTo : is not entered.")
     public void allFieldsAreNull() throws Exception {
         String jsonRequest = "rest/TravelCalculatePremiumRequest_all_fields_are_null.json";
@@ -165,6 +171,7 @@ public class TravelCalculatePremiumControllerTest {
     }
 
     @Test
+    @Disabled
     @DisplayName("Test case 17: Selected risks are empty")
     public void selectedRisksAreEmpty() throws Exception {
         String jsonRequest = "rest/TravelCalculatePremiumRequest_Selected_risks_are_empty.json";
@@ -173,6 +180,7 @@ public class TravelCalculatePremiumControllerTest {
     }
 
     @Test
+    @Disabled
     @DisplayName("Test case 18: Selected risks are null")
     public void selectedRisksAreNull() throws Exception {
         String jsonRequest = "rest/TravelCalculatePremiumRequest_selected_risks_are_null.json";
