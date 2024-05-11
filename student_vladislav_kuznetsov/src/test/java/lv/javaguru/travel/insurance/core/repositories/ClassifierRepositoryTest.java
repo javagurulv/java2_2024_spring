@@ -28,7 +28,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
         }
 
         @Test
-
         public void shouldFindRiskTypeClassifier() {
             Optional<Classifier> riskTypeOpt = classifierRepository.findByTitle("RISK_TYPE");
             assertTrue(riskTypeOpt.isPresent());
