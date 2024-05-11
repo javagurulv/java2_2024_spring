@@ -12,6 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TravelCalculatePremiumRequest {
+
     private String personFirstName;
     private String personLastName;
 
@@ -20,6 +21,5 @@ public class TravelCalculatePremiumRequest {
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date agreementDateTo;
-
 
 }
