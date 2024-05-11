@@ -31,97 +31,67 @@ class TravelCalculatePremiumControllerTest {
 
     @Test
     public void shouldReturnWithOutErrors() throws Exception {
-        MvcResult result = mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumRequestWithoutErrors.json"))
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andReturn();
-        String responseBodyContent = result.getResponse().getContentAsString();
-        String jsonResponse = jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumResponseWithoutErrors.json");
+        executeAndCompare("rest/TravelCalculatePremiumRequestWithoutErrors.json",
+                "rest/TravelCalculatePremiumResponseWithoutErrors.json");
 
-        ObjectMapper mapper = new ObjectMapper();
-        assertEquals(mapper.readTree(responseBodyContent), mapper.readTree(jsonResponse));
     }
 
     @Test
     public void shouldReturnWithIncorrectDateError() throws Exception {
-        MvcResult result = mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumRequestWithIncorrectDate.json"))
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andReturn();
-        String responseBodyContent = result.getResponse().getContentAsString();
-        String jsonResponse = jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumResponseWithIncorrectDate.json");
+        executeAndCompare("rest/TravelCalculatePremiumRequestWithIncorrectDate.json",
+                "rest/TravelCalculatePremiumResponseWithIncorrectDate.json");
 
-        ObjectMapper mapper = new ObjectMapper();
-        assertEquals(mapper.readTree(responseBodyContent), mapper.readTree(jsonResponse));
     }
 
     @Test
     public void shouldReturnWithNullFirstNameError() throws Exception {
-        MvcResult result = mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumRequestWithFirstNameNull.json"))
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andReturn();
-        String responseBodyContent = result.getResponse().getContentAsString();
-        String jsonResponse = jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumResponseWithFirstNameNull.json");
+        executeAndCompare("rest/TravelCalculatePremiumRequestWithFirstNameNull.json",
+                "rest/TravelCalculatePremiumResponseWithFirstNameNull.json");
 
-        ObjectMapper mapper = new ObjectMapper();
-        assertEquals(mapper.readTree(responseBodyContent), mapper.readTree(jsonResponse));
     }
 
     @Test
     public void shouldReturnWithNullLastNameError() throws Exception {
-        MvcResult result = mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumRequestWithLastNameNull.json"))
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andReturn();
-        String responseBodyContent = result.getResponse().getContentAsString();
-        String jsonResponse = jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumResponseWithLastNameNull.json");
+        executeAndCompare("rest/TravelCalculatePremiumRequestWithLastNameNull.json",
+                "rest/TravelCalculatePremiumResponseWithLastNameNull.json");
 
-        ObjectMapper mapper = new ObjectMapper();
-        assertEquals(mapper.readTree(responseBodyContent), mapper.readTree(jsonResponse));
     }
 
     @Test
     public void shouldReturnWithNullDateFromError() throws Exception {
-        MvcResult result = mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumRequestWithDateFromNull.json"))
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andReturn();
-        String responseBodyContent = result.getResponse().getContentAsString();
-        String jsonResponse = jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumResponseWithDateFromNull.json");
+        executeAndCompare("rest/TravelCalculatePremiumRequestWithDateFromNull.json",
+                "rest/TravelCalculatePremiumResponseWithDateFromNull.json");
 
-        ObjectMapper mapper = new ObjectMapper();
-        assertEquals(mapper.readTree(responseBodyContent), mapper.readTree(jsonResponse));
     }
 
     @Test
     public void shouldReturnWithNullDateToError() throws Exception {
-        MvcResult result = mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumRequestWithDateToNull.json"))
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andReturn();
-        String responseBodyContent = result.getResponse().getContentAsString();
-        String jsonResponse = jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumResponseWithDateToNull.json");
+        executeAndCompare("rest/TravelCalculatePremiumRequestWithDateToNull.json",
+                "rest/TravelCalculatePremiumResponseWithDateToNull.json" );
 
-        ObjectMapper mapper = new ObjectMapper();
-        assertEquals(mapper.readTree(responseBodyContent), mapper.readTree(jsonResponse));
     }
 
     @Test
     public void shouldReturnWithAllNullErrors() throws Exception {
+        executeAndCompare("rest/TravelCalculatePremiumRequestWithAllFieldsNull.json",
+                "rest/TravelCalculatePremiumResponseWithAllFieldsNull.json");
+
+    }
+
+
+    private void executeAndCompare(String jsonRequestFilePath,
+                                   String jsonResponseFilePath) throws Exception {
+        String jsonRequest = jsonFileReader.readJsonFromFile(jsonRequestFilePath);
+
         MvcResult result = mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumRequestWithAllFieldsNull.json"))
+                        .content(jsonRequest)
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andReturn();
+
         String responseBodyContent = result.getResponse().getContentAsString();
-        String jsonResponse = jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumResponseWithAllFieldsNull.json");
+
+        String jsonResponse = jsonFileReader.readJsonFromFile(jsonResponseFilePath);
 
         ObjectMapper mapper = new ObjectMapper();
         assertEquals(mapper.readTree(responseBodyContent), mapper.readTree(jsonResponse));
