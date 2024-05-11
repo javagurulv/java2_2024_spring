@@ -47,7 +47,6 @@ class ValidateSelectedRisksAreInDatabaseTest {
                 new Date(2025 - 1900, 2, 10),
                 new Date(2025 - 1900, 2, 11),
                 "SPAIN",
-                "LEVEL_10000",
                 List.of(firstRisk, secondRisk),
                 List.of(helper.newPersonDTO()),
                 BigDecimal.ZERO);

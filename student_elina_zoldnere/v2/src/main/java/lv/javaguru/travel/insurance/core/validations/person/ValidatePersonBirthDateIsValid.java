@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations.person;
 
+import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
@@ -19,7 +20,7 @@ class ValidatePersonBirthDateIsValid extends PersonFieldValidationImpl {
     private ValidationErrorFactory validationErrorFactory;
 
     @Override
-    public Optional<ValidationErrorDTO> validateSingle(PersonDTO person) {
+    public Optional<ValidationErrorDTO> validateSingle(AgreementDTO agreement, PersonDTO person) {
         Date birthDate = person.personBirthDate();
         Date currentDate = dateTimeUtil.startOfToday();
         Date minPossibleBirthDate = dateTimeUtil.subtractYears(currentDate, 150);

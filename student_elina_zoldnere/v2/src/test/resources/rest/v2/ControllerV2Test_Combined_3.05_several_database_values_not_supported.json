@@ -8,17 +8,18 @@
       "TRAVEL_LOSS_BAGGAGE"
     ],
     "country": "NOT_SUPPORTED_2",
-    "medicalRiskLimitLevel": "NOT_SUPPORTED_3",
     "persons": [
       {
         "personFirstName": "Jānis",
         "personLastName": "Bērziņš",
-        "personBirthDate": "1990-01-01"
+        "personBirthDate": "1990-01-01",
+        "medicalRiskLimitLevel": "NOT_SUPPORTED_3"
       },
       {
         "personFirstName": "Kārlis",
         "personLastName": "Krūmiņš",
-        "personBirthDate": "1989-01-01"
+        "personBirthDate": "1989-01-01",
+        "medicalRiskLimitLevel": "LEVEL_15000"
       }
     ]
   },
@@ -40,7 +41,6 @@
     "agreementDateFrom": null,
     "agreementDateTo": null,
     "country": null,
-    "medicalRiskLimitLevel": null,
     "persons": null,
     "agreementPremium" : null
   }

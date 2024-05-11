@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations;
 
-import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
+import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
 import org.junit.jupiter.api.Test;
@@ -29,29 +29,27 @@ class TravelPersonAllFieldValidatorTest {
     @InjectMocks
     private SetUpInstancesHelper helper;
 
-    private List<PersonDTO> persons;
-
     @Test
     void collectPersonErrors_ShouldReturnErrorWhenPersonSingleValidationFail() {
-        persons = List.of(helper.newPersonDTO());
+        AgreementDTO agreement = helper.newAgreementDTO();
         PersonFieldValidation personValidationMock = mock(PersonFieldValidation.class);
         when(personFieldValidation.stream()).thenAnswer(invocation -> Stream.of(personValidationMock));
-        when(personValidationMock.validateSingle(any()))
+        when(personValidationMock.validateSingle(any(), any()))
                 .thenReturn(Optional.of(helper.newValidationErrorDTO()));
 
-        List<ValidationErrorDTO> errors = validator.collectPersonErrors(persons);
+        List<ValidationErrorDTO> errors = validator.collectPersonErrors(agreement);
 
         assertEquals(1, errors.size());
     }
 
     @Test
     void collectPersonErrors_ShouldReturnErrorWhenPersonListValidationFail() {
-        persons = List.of(helper.newPersonDTO());
+        AgreementDTO agreement = helper.newAgreementDTO();
         PersonFieldValidation personValidationMock = mock(PersonFieldValidation.class);
         when(personFieldValidation.stream()).thenAnswer(invocation -> Stream.of(personValidationMock));
         when(personValidationMock.validateList(any())).thenReturn(List.of(helper.newValidationErrorDTO()));
 
-        List<ValidationErrorDTO> errors = validator.collectPersonErrors(persons);
+        List<ValidationErrorDTO> errors = validator.collectPersonErrors(agreement);
 
         assertEquals(1, errors.size());
     }

@@ -1,7 +1,9 @@
-package lv.javaguru.travel.insurance.core.validations.agreement;
+package lv.javaguru.travel.insurance.core.validations.person;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
+import lv.javaguru.travel.insurance.core.validations.PersonFieldValidation;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-class ValidateMedicalRiskLimitLevelNotEmpty extends AgreementFieldValidationImpl {
+class ValidateMedicalRiskLimitLevelNotEmpty extends PersonFieldValidationImpl {
 
     @Value("${medical.risk.limit.level.enabled:false}")
     private Boolean medicalRiskLimitLevelEnabled;
@@ -19,9 +21,9 @@ class ValidateMedicalRiskLimitLevelNotEmpty extends AgreementFieldValidationImpl
     private ValidationErrorFactory validationErrorFactory;
 
     @Override
-    public Optional<ValidationErrorDTO> validateSingle(AgreementDTO agreement) {
+    public Optional<ValidationErrorDTO> validateSingle(AgreementDTO agreement, PersonDTO person) {
         return (isMedicalRiskEnabled() && containsRisk("TRAVEL_MEDICAL", agreement)
-                && (agreement.medicalRiskLimitLevel() == null || agreement.medicalRiskLimitLevel().isBlank()))
+                && (person.medicalRiskLimitLevel() == null || person.medicalRiskLimitLevel().isBlank()))
                 ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_8"))
                 : Optional.empty();
     }

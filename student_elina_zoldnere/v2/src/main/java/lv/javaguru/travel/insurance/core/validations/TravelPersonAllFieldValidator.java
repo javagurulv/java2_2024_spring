@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations;
 
+import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,22 +18,22 @@ class TravelPersonAllFieldValidator {
     @Autowired
     List<PersonFieldValidation> personFieldValidation;
 
-    List<ValidationErrorDTO> collectPersonErrors(List<PersonDTO> persons) {
-        return persons.stream()
-                .map(this::collectEachPersonErrors)
-                .flatMap(List::stream)
-                .toList();
-    }
+        List<ValidationErrorDTO> collectPersonErrors(AgreementDTO agreement) {
+            return agreement.persons().stream()
+                    .map(person -> collectEachPersonErrors(agreement, person))
+                    .flatMap(List::stream)
+                    .toList();
+        }
 
-    private List<ValidationErrorDTO> collectEachPersonErrors(PersonDTO person) {
-        List<ValidationErrorDTO> singlePersonErrors = collectSinglePersonErrors(person);
+    private List<ValidationErrorDTO> collectEachPersonErrors(AgreementDTO agreement, PersonDTO person) {
+        List<ValidationErrorDTO> singlePersonErrors = collectSinglePersonErrors(agreement, person);
         List<ValidationErrorDTO> listPersonErrors = collectListPersonErrors(person);
         return concatenateLists(singlePersonErrors, listPersonErrors);
     }
 
-    private List<ValidationErrorDTO> collectSinglePersonErrors(PersonDTO person) {
+    private List<ValidationErrorDTO> collectSinglePersonErrors(AgreementDTO agreement, PersonDTO person) {
         return personFieldValidation.stream()
-                .map(validation -> validation.validateSingle(person))
+                .map(validation -> validation.validateSingle(agreement, person))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .toList();

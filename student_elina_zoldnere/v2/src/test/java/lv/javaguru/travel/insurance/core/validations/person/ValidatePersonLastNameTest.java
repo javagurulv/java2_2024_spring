@@ -1,7 +1,9 @@
 package lv.javaguru.travel.insurance.core.validations.person;
 
+import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
+import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,16 +30,20 @@ class ValidatePersonLastNameTest {
 
     @InjectMocks
     private ValidatePersonLastName validate;
+    @InjectMocks
+    private SetUpInstancesHelper helper;
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("lastNameValue")
     public void validate_ShouldReturnErrorWhenPersonLastNameIsNotValid(String testName, String lastName) {
+        AgreementDTO agreement = helper.newAgreementDTO();
         PersonDTO person = new PersonDTO
-                ("Jānis", lastName, new Date(1990 - 1900, 0, 1), Collections.emptyList());
+                ("Jānis", lastName, new Date(1990 - 1900, 0, 1),
+                        "LEVEL_10000", Collections.emptyList());
         when(errorMock.buildError("ERROR_CODE_2"))
                 .thenReturn(new ValidationErrorDTO("ERROR_CODE_2", "Field personLastName is empty!"));
 
-        Optional<ValidationErrorDTO> result = validate.validateSingle(person);
+        Optional<ValidationErrorDTO> result = validate.validateSingle(agreement, person);
 
         assertTrue(result.isPresent());
         assertEquals("ERROR_CODE_2", result.get().errorCode());

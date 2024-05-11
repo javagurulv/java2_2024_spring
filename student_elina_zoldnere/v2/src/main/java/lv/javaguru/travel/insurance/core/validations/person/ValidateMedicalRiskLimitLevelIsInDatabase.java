@@ -1,6 +1,7 @@
-package lv.javaguru.travel.insurance.core.validations.agreement;
+package lv.javaguru.travel.insurance.core.validations.person;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
 import lv.javaguru.travel.insurance.core.util.Placeholder;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-class ValidateMedicalRiskLimitLevelIsInDatabase extends AgreementFieldValidationImpl {
+class ValidateMedicalRiskLimitLevelIsInDatabase extends PersonFieldValidationImpl {
 
     @Autowired
     private ClassifierValueRepository classifierValueRepository;
@@ -20,15 +21,15 @@ class ValidateMedicalRiskLimitLevelIsInDatabase extends AgreementFieldValidation
     private ValidationErrorFactory validationErrorFactory;
 
     @Override
-    public Optional<ValidationErrorDTO> validateSingle(AgreementDTO agreement) {
-        return (agreement.medicalRiskLimitLevel() != null
-                && !agreement.medicalRiskLimitLevel().isBlank())
-                ? validateMedicalRiskLimitLevel(agreement)
+    public Optional<ValidationErrorDTO> validateSingle(AgreementDTO agreement, PersonDTO person) {
+        return (person.medicalRiskLimitLevel() != null
+                && !person.medicalRiskLimitLevel().isBlank())
+                ? validateMedicalRiskLimitLevel(person)
                 : Optional.empty();
     }
 
-    private Optional<ValidationErrorDTO> validateMedicalRiskLimitLevel(AgreementDTO agreement) {
-        String limitLevelIc = agreement.medicalRiskLimitLevel();
+    private Optional<ValidationErrorDTO> validateMedicalRiskLimitLevel(PersonDTO person) {
+        String limitLevelIc = person.medicalRiskLimitLevel();
         return classifierValueRepository
                 .findByClassifierTitleAndIc("MEDICAL_RISK_LIMIT_LEVEL", limitLevelIc).isPresent()
                 ? Optional.empty()

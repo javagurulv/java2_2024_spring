@@ -48,7 +48,7 @@ class TravelMedicalRiskPremiumCalculatorTest {
         when(countryDefaultDayRateRetrieverMock.findCountryDefaultDayRate(agreement))
                 .thenReturn(countryDefaultDayRate);
         when(ageCoefficientRetrieverMock.setAgeCoefficient(person)).thenReturn(ageCoefficient);
-        when(limitLevelCoefficientRetrieverMock.setLimitLevelCoefficient(agreement))
+        when(limitLevelCoefficientRetrieverMock.setLimitLevelCoefficient(person))
                 .thenReturn(limitLevelCoefficient);
 
         BigDecimal expectedPremium = countryDefaultDayRate

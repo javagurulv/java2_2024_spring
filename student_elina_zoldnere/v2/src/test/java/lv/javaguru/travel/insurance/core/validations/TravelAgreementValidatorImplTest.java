@@ -32,7 +32,7 @@ class TravelAgreementValidatorImplTest {
         AgreementDTO agreement = helper.newAgreementDTO();
         when(agreementAllFieldValidator.collectAgreementErrors(agreement))
                 .thenReturn(List.of(helper.newValidationErrorDTO(), helper.newValidationErrorDTO()));
-        when(personAllFieldValidator.collectPersonErrors(agreement.persons()))
+        when(personAllFieldValidator.collectPersonErrors(agreement))
                 .thenReturn(List.of(helper.newValidationErrorDTO()));
 
         List<ValidationErrorDTO> errors = validator.validate(agreement);

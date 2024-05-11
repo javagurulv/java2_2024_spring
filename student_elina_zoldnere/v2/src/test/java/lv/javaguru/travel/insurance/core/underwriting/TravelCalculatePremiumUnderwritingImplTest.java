@@ -47,7 +47,6 @@ public class TravelCalculatePremiumUnderwritingImplTest {
                 new Date(2025 - 1900, 2, 10),
                 new Date(2025 - 1900, 2, 11),
                 "SPAIN",
-                "LEVEL_10000",
                 selectedRisks,
                 List.of(person),
                 BigDecimal.ZERO);

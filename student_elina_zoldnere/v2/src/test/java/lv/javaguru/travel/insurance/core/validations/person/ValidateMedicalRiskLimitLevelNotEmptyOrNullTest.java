@@ -1,6 +1,7 @@
-package lv.javaguru.travel.insurance.core.validations.agreement;
+package lv.javaguru.travel.insurance.core.validations.person;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
@@ -14,9 +15,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -41,19 +41,14 @@ class ValidateMedicalRiskLimitLevelNotEmptyOrNullTest {
     public void validateSingle_ShouldReturnErrorWhenMedicalRiskLimitLevelIsEnabledAndFieldIsNotValid(
             String testName, String medicalRiskLimitLevel) {
         ReflectionTestUtils.setField(validateRiskLimitLevel, "medicalRiskLimitLevelEnabled", Boolean.TRUE);
-        AgreementDTO agreement = new AgreementDTO(
-                new Date(2025 - 1900, 2, 10),
-                new Date(2025 - 1900, 2, 11),
-                "SPAIN",
-                medicalRiskLimitLevel,
-                List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"),
-                List.of(helper.newPersonDTO()),
-                BigDecimal.ZERO);
+        AgreementDTO agreement = helper.newAgreementDTO();
+        PersonDTO person = new PersonDTO("Jānis", "Bērziņš",
+                new Date(1990 - 1900, 0, 1), medicalRiskLimitLevel, Collections.emptyList());
         when(errorFactoryMock.buildError("ERROR_CODE_8"))
                 .thenReturn(new ValidationErrorDTO("ERROR_CODE_8",
                         "Field medicalRiskLimitLevel is empty when medical risk limit level enabled!"));
 
-        Optional<ValidationErrorDTO> result = validateRiskLimitLevel.validateSingle(agreement);
+        Optional<ValidationErrorDTO> result = validateRiskLimitLevel.validateSingle(agreement, person);
 
         assertTrue(result.isPresent());
         assertEquals("ERROR_CODE_8", result.get().errorCode());
@@ -72,16 +67,11 @@ class ValidateMedicalRiskLimitLevelNotEmptyOrNullTest {
     @Test
     public void validateSingle_ShouldNotReturnErrorWhenMedicalRiskLimitLevelIsDisabled() {
         ReflectionTestUtils.setField(validateRiskLimitLevel, "medicalRiskLimitLevelEnabled", Boolean.FALSE);
-        AgreementDTO agreement = new AgreementDTO(
-                new Date(2025 - 1900, 2, 10),
-                new Date(2025 - 1900, 2, 11),
-                "SPAIN",
-                null,
-                List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"),
-                List.of(helper.newPersonDTO()),
-                BigDecimal.ZERO);
+        AgreementDTO agreement = helper.newAgreementDTO();
+        PersonDTO person =  new PersonDTO("Jānis", "Bērziņš",
+                new Date(1990 - 1900, 0, 1), "LEVEL_10000", Collections.emptyList());
 
-        Optional<ValidationErrorDTO> result = validateRiskLimitLevel.validateSingle(agreement);
+        Optional<ValidationErrorDTO> result = validateRiskLimitLevel.validateSingle(agreement, person);
 
         assertTrue(result.isEmpty());
         verifyNoInteractions(errorFactoryMock);

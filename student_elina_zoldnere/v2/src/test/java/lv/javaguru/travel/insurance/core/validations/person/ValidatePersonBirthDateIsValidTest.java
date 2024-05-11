@@ -1,8 +1,10 @@
 package lv.javaguru.travel.insurance.core.validations.person;
 
+import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
+import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -33,18 +35,21 @@ class ValidatePersonBirthDateIsValidTest {
 
     @InjectMocks
     private ValidatePersonBirthDateIsValid validate;
+    @InjectMocks
+    private SetUpInstancesHelper helper;
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("birthDateValue")
     public void validate_ShouldReturnErrorWhenPersonBirthDateIsNotValid(String testName, Date birthDate) {
-        PersonDTO person = new PersonDTO
-                ("Jānis", "Bērziņš", birthDate, Collections.emptyList());
+        AgreementDTO agreement = helper.newAgreementDTO();
+        PersonDTO person = new PersonDTO(
+                "Jānis", "Bērziņš", birthDate, "LEVEL_10000", Collections.emptyList());
         when(dateTimeUtil.startOfToday()).thenReturn(new Date(2025 - 1900, 2, 11));
         when(dateTimeUtil.subtractYears(any(Date.class), eq(150))).thenReturn(new Date(1874 - 1900, 2, 11));
         when(errorMock.buildError("ERROR_CODE_14"))
                 .thenReturn(new ValidationErrorDTO("ERROR_CODE_14", "PersonBirthDate is not a valid date!"));
 
-        Optional<ValidationErrorDTO> result = validate.validateSingle(person);
+        Optional<ValidationErrorDTO> result = validate.validateSingle(agreement, person);
 
         assertTrue(result.isPresent());
         assertEquals("ERROR_CODE_14", result.get().errorCode());

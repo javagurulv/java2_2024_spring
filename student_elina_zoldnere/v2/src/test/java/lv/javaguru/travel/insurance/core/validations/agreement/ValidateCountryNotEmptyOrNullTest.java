@@ -40,7 +40,6 @@ class ValidateCountryNotEmptyOrNullTest {
                 new Date(2025 - 1900, 2, 10),
                 new Date(2025 - 1900, 2, 11),
                 country,
-                "LEVEL_10000",
                 List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"),
                 List.of(helper.newPersonDTO()),
                 BigDecimal.ZERO);

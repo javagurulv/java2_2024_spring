@@ -12,8 +12,6 @@ public record AgreementDTO(
 
         String country,
 
-        String medicalRiskLimitLevel,
-
         List<String> selectedRisks,
 
         List<PersonDTO> persons,
@@ -25,7 +23,6 @@ public record AgreementDTO(
         return new AgreementDTO(agreementDateFrom,
                 agreementDateTo,
                 country,
-                medicalRiskLimitLevel,
                 selectedRisks,
                 persons,
                 agreementPremium);

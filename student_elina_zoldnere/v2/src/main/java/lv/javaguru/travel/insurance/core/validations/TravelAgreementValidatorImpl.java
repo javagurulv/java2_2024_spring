@@ -19,7 +19,7 @@ class TravelAgreementValidatorImpl implements TravelAgreementValidator {
     @Override
     public List<ValidationErrorDTO> validate(AgreementDTO agreement) {
         List<ValidationErrorDTO> agreementErrors = agreementAllFieldValidator.collectAgreementErrors(agreement);
-        List<ValidationErrorDTO> personErrors = personAllFieldValidator.collectPersonErrors(agreement.persons());
+        List<ValidationErrorDTO> personErrors = personAllFieldValidator.collectPersonErrors(agreement);
 
         return concatenateLists(agreementErrors, personErrors);
     }

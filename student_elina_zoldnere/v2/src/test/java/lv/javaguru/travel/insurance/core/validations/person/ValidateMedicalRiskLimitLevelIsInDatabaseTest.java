@@ -1,6 +1,7 @@
-package lv.javaguru.travel.insurance.core.validations.agreement;
+package lv.javaguru.travel.insurance.core.validations.person;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.domain.ClassifierValue;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
@@ -12,9 +13,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -38,14 +38,10 @@ class ValidateMedicalRiskLimitLevelIsInDatabaseTest {
 
     @Test
     public void validateSingle_ShouldReturnCorrectResponseWhenMedicalRiskLimitLevelIsNotSupported() {
-        AgreementDTO agreement = new AgreementDTO(
-                new Date(2025 - 1900, 2, 10),
-                new Date(2025 - 1900, 2, 11),
-                "SPAIN",
-                "INVALID",
-                List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"),
-                List.of(helper.newPersonDTO()),
-                BigDecimal.ZERO);
+        AgreementDTO agreement = helper.newAgreementDTO();
+        PersonDTO person = new PersonDTO("Jānis", "Bērziņš",
+                new Date(1990 - 1900, 0, 1),
+                "INVALID", Collections.emptyList());
 
         when(repositoryMock.findByClassifierTitleAndIc("MEDICAL_RISK_LIMIT_LEVEL", "INVALID"))
                 .thenReturn(Optional.empty());
@@ -53,25 +49,21 @@ class ValidateMedicalRiskLimitLevelIsInDatabaseTest {
         ValidationErrorDTO error = new ValidationErrorDTO("ERROR_CODE_93", "description");
         lenient().when(errorFactoryMock.buildError(eq("ERROR_CODE_93"), anyList())).thenReturn(error);
 
-        Optional<ValidationErrorDTO> result = validateRiskLimitLevel.validateSingle(agreement);
+        Optional<ValidationErrorDTO> result = validateRiskLimitLevel.validateSingle(agreement, person);
 
         assertTrue(result.isPresent());
     }
 
     @Test
     public void validateSingle_ShouldNotReturnErrorWhenMedicalRiskLimitLevelExists() {
-        AgreementDTO agreement = new AgreementDTO(
-                new Date(2025 - 1900, 2, 10),
-                new Date(2025 - 1900, 2, 11),
-                "SPAIN",
-                "LEVEL_10000",
-                List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"),
-                List.of(helper.newPersonDTO()),
-                BigDecimal.ZERO);
+        AgreementDTO agreement = helper.newAgreementDTO();
+        PersonDTO person = new PersonDTO("Jānis", "Bērziņš",
+                new Date(1990 - 1900, 0, 1),
+                "LEVEL_10000", Collections.emptyList());
         when(repositoryMock.findByClassifierTitleAndIc("MEDICAL_RISK_LIMIT_LEVEL", "LEVEL_10000"))
                 .thenReturn(Optional.of(new ClassifierValue()));
 
-        Optional<ValidationErrorDTO> result = validateRiskLimitLevel.validateSingle(agreement);
+        Optional<ValidationErrorDTO> result = validateRiskLimitLevel.validateSingle(agreement, person);
 
         assertFalse(result.isPresent());
     }

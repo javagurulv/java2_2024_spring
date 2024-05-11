@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
-import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.domain.MedicalRiskLimitLevel;
 import lv.javaguru.travel.insurance.core.repositories.MedicalRiskLimitLevelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +18,14 @@ class MedicalRiskLimitLevelCoefficientRetriever {
     @Autowired
     private MedicalRiskLimitLevelRepository medicalRiskLimitLevelRepository;
 
-    BigDecimal setLimitLevelCoefficient(AgreementDTO agreement) {
+    BigDecimal setLimitLevelCoefficient(PersonDTO person) {
         return medicalRiskLimitLevelEnabled
-                ? findLimitLevelCoefficient(agreement)
+                ? findLimitLevelCoefficient(person)
                 : setDefaultValue();
     }
 
-    private BigDecimal findLimitLevelCoefficient(AgreementDTO agreement) {
-        String medicalRiskLimitLevelIc = agreement.medicalRiskLimitLevel();
+    private BigDecimal findLimitLevelCoefficient(PersonDTO person) {
+        String medicalRiskLimitLevelIc = person.medicalRiskLimitLevel();
         return medicalRiskLimitLevelRepository.findByMedicalRiskLimitLevelIc(medicalRiskLimitLevelIc)
                 .map(MedicalRiskLimitLevel::getCoefficient)
                 .orElseThrow(() -> new RuntimeException

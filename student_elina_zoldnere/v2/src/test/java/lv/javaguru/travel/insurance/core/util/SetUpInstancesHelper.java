@@ -19,7 +19,6 @@ public class SetUpInstancesHelper {
                 new Date(2025 - 1900, 2, 10),
                 new Date(2025 - 1900, 2, 11),
                 "SPAIN",
-                "LEVEL_10000",
                 List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"),
                 List.of(newPersonDTO()),
                 BigDecimal.ZERO);
@@ -30,7 +29,6 @@ public class SetUpInstancesHelper {
                 new Date(2025 - 1900, 2, 10),
                 new Date(2025 - 1900, 2, 11),
                 "SPAIN",
-                "LEVEL_10000",
                 List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"),
                 List.of(newPersonDTO(), newPersonDTO()),
                 BigDecimal.ZERO);
@@ -38,7 +36,7 @@ public class SetUpInstancesHelper {
 
     public PersonDTO newPersonDTO() {
         return new PersonDTO("Jānis", "Bērziņš",
-                new Date(1990 - 1900, 0, 1), Collections.emptyList());
+                new Date(1990 - 1900, 0, 1), "LEVEL_10000", Collections.emptyList());
     }
 
     public RiskDTO newRiskDTO() {
@@ -51,7 +49,7 @@ public class SetUpInstancesHelper {
 
     public PersonDTO newPersonWithRisksDTO() {
         return new PersonDTO("Jānis", "Bērziņš",
-                new Date(1990 - 1900, 0, 1), List.of(newRiskDTO()));
+                new Date(1990 - 1900, 0, 1), "LEVEL_10000", List.of(newRiskDTO()));
     }
 
 }
