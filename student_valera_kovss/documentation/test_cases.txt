@@ -184,4 +184,5 @@ Response:
      "agreementDateFrom": "2021-05-25",
      "agreementDateTo": "2021-05-29",
      "agreementPrice": 0
+
    }
