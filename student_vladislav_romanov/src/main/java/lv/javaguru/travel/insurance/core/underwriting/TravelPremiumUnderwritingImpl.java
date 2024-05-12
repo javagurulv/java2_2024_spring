@@ -12,36 +12,21 @@ import java.util.List;
 class TravelPremiumUnderwritingImpl implements TravelPremiumUnderwriting {
 
     @Autowired
-    private List<TravelRiskPremiumCalculator> travelRiskPremiumCalculators;
+    private SelectedRisksPremiumCalculator selectedRisksPremiumCalculator;
 
     @Override
     public TravelPremiumCalculationResult calculatePremium(TravelCalculatePremiumRequest request) {
-        List<RiskPremium> riskPremiums = request.getSelectedRisks().stream()
-                .map(riskIc -> {
-                    BigDecimal riskPremium = calculateSingleRiskPremium(riskIc, request);
-                    return new RiskPremium(riskIc, riskPremium);
-                })
-                .toList();
+        List<RiskPremium> riskPremiums = selectedRisksPremiumCalculator.calculateSelectedRisksPremiums(request);
 
-        System.out.println(riskPremiums);
-
-        BigDecimal totalPremium = riskPremiums.stream()
-                .map(RiskPremium::getPremium)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal totalPremium = totalPremiumCalculate(riskPremiums);
 
         return new TravelPremiumCalculationResult(totalPremium, riskPremiums);
     }
 
-    private BigDecimal calculateSingleRiskPremium(String riskIc, TravelCalculatePremiumRequest request) {
-        var riskPremiumCalculator = getCurrentRiskCalculator(riskIc);
-        return riskPremiumCalculator.calculatePremium(request);
-    }
-
-    private TravelRiskPremiumCalculator getCurrentRiskCalculator(String riskIc) {
-        return travelRiskPremiumCalculators.stream()
-                .filter(travelRiskPremiumCalculator -> travelRiskPremiumCalculator.getRiskIc().equals(riskIc))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Not supported risk " + riskIc));
+    private BigDecimal totalPremiumCalculate(List<RiskPremium> riskPremiums) {
+        return riskPremiums.stream()
+                .map(RiskPremium::getPremium)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
 }
