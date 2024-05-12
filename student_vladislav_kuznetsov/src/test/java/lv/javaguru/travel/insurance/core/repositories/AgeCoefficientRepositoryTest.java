@@ -42,6 +42,7 @@ public class AgeCoefficientRepositoryTest {
             ageCoefficientRepository.findCoefficient(155).get().getCoefficient();
         } catch (NoSuchElementException e) {
             assertEquals("No value present", e.getMessage());
+
         }
     }
 }
