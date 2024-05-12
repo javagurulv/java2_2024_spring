@@ -92,7 +92,7 @@ class TravelCalculatePremiumServiceImplTest {
 
         TravelCalculatePremiumCoreResult result = premiumService.calculatePremium(new TravelCalculatePremiumCoreCommand(agreement));
 
-        assertEquals(BigDecimal.valueOf(4), result.getAgreement().getAgreementPremium());
+        assertEquals(BigDecimal.valueOf(2), result.getAgreement().getAgreementPremium());
         verify(premiumUnderwriting, times(2)).calculatePremium(eq(agreement), any(PersonDTO.class));
     }
 

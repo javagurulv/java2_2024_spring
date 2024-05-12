@@ -16,11 +16,10 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 class TravelCalculatePremiumServiceImpl
-        implements TravelCalculatePremiumService  {
+        implements TravelCalculatePremiumService {
 
     @Autowired
     private TravelAgreementValidator agreementValidator;
@@ -39,7 +38,7 @@ class TravelCalculatePremiumServiceImpl
         return new TravelCalculatePremiumCoreResult(errors);
     }
 
-    private TravelCalculatePremiumCoreResult buildResponse(AgreementDTO agreement){
+    private TravelCalculatePremiumCoreResult buildResponse(AgreementDTO agreement) {
         calculateRiskPremiumsForAllPersons(agreement);
 
         BigDecimal totalAgreementPremium = calculateTotalAgreementPremium(agreement);
@@ -51,16 +50,15 @@ class TravelCalculatePremiumServiceImpl
     }
 
     private void calculateRiskPremiumsForAllPersons(AgreementDTO agreement) {
-        List<RiskDTO> allRisks = new ArrayList<>();
+        List<PersonDTO> updatedPersons = new ArrayList<>();
         agreement.getPersons().forEach(person -> {
             TravelPremiumCalculationResult calculationResult = premiumUnderwriting.calculatePremium(agreement, person);
-            allRisks.addAll(calculationResult.getRisks());
+            PersonDTO updatedPerson = new PersonDTO(person.personFirstName(),
+                    person.personLastName(),
+                    person.personBirthDate(),
+                    calculationResult.getRisks());
+            updatedPersons.add(updatedPerson);
         });
-
-        List<PersonDTO> updatedPersons = agreement.getPersons().stream()
-                .map(person -> new PersonDTO(person.personFirstName(), person.personLastName(), person.personBirthDate(), allRisks))
-                .collect(Collectors.toList());
-
         agreement.setPersons(updatedPersons);
     }
 
