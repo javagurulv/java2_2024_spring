@@ -27,7 +27,7 @@
     "errors": [
       {
         "errorCode": "ERROR_CODE_91",
-        "description": "Risk type ic = NOT_SUPPORTED_1 is not supported!"
+        "description": "Risk type value NOT_SUPPORTED_1 is not supported!"
       }
     ],
     "agreementDateFrom": null,

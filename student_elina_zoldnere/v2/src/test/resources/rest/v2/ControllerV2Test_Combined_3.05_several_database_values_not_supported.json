@@ -27,15 +27,15 @@
     "errors": [
       {
         "errorCode": "ERROR_CODE_91",
-        "description": "Risk type ic = NOT_SUPPORTED_1 is not supported!"
+        "description": "Risk type value NOT_SUPPORTED_1 is not supported!"
       },
       {
         "errorCode": "ERROR_CODE_92",
-        "description": "Country ic = NOT_SUPPORTED_2 is not supported!"
+        "description": "Country value NOT_SUPPORTED_2 is not supported!"
       },
       {
         "errorCode": "ERROR_CODE_93",
-        "description": "Medical Risk Limit Level ic = NOT_SUPPORTED_3 is not supported!"
+        "description": "Medical Risk Limit Level value NOT_SUPPORTED_3 is not supported!"
       }
     ],
     "agreementDateFrom": null,

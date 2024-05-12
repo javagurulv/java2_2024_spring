@@ -2,7 +2,7 @@
   "errors": [
     {
       "errorCode": "ERROR_CODE_93",
-      "description": "Medical Risk Limit Level ic = NOT_SUPPORTED is not supported!"
+      "description": "Medical Risk Limit Level value NOT_SUPPORTED is not supported!"
     }
   ],
   "personFirstName": null,

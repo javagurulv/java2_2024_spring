@@ -2,7 +2,7 @@
   "errors": [
     {
       "errorCode": "ERROR_CODE_92",
-      "description": "Country ic = NOT_SUPPORTED is not supported!"
+      "description": "Country value NOT_SUPPORTED is not supported!"
     }
   ],
   "personFirstName": null,
