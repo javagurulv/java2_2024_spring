@@ -11,7 +11,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,7 +32,7 @@ class ValidateAgreementDateToNotNullTest {
     @Test
     public void validate_ShouldReturnErrorWhenAgreementDateToIsNull() {
         AgreementDTO agreement = new AgreementDTO(
-                new Date(2025 - 1900, 2, 10),
+                helper.newDate("2025.03.10"),
                 null,
                 "SPAIN",
                 List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"),

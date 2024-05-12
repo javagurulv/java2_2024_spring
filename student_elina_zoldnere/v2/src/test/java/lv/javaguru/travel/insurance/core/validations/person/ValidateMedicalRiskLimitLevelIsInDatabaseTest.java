@@ -14,7 +14,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collections;
-import java.util.Date;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -40,7 +39,7 @@ class ValidateMedicalRiskLimitLevelIsInDatabaseTest {
     public void validateSingle_ShouldReturnCorrectResponseWhenMedicalRiskLimitLevelIsNotSupported() {
         AgreementDTO agreement = helper.newAgreementDTO();
         PersonDTO person = new PersonDTO("Jānis", "Bērziņš",
-                new Date(1990 - 1900, 0, 1),
+                helper.newDate("1990.01.01"),
                 "INVALID", Collections.emptyList());
 
         when(repositoryMock.findByClassifierTitleAndIc("MEDICAL_RISK_LIMIT_LEVEL", "INVALID"))
@@ -58,7 +57,7 @@ class ValidateMedicalRiskLimitLevelIsInDatabaseTest {
     public void validateSingle_ShouldNotReturnErrorWhenMedicalRiskLimitLevelExists() {
         AgreementDTO agreement = helper.newAgreementDTO();
         PersonDTO person = new PersonDTO("Jānis", "Bērziņš",
-                new Date(1990 - 1900, 0, 1),
+                helper.newDate("1990.01.01"),
                 "LEVEL_10000", Collections.emptyList());
         when(repositoryMock.findByClassifierTitleAndIc("MEDICAL_RISK_LIMIT_LEVEL", "LEVEL_10000"))
                 .thenReturn(Optional.of(new ClassifierValue()));

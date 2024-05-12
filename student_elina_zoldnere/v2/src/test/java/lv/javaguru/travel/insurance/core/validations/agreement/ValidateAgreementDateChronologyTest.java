@@ -4,6 +4,7 @@ import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -30,14 +31,20 @@ class ValidateAgreementDateChronologyTest {
 
     @InjectMocks
     private ValidateAgreementDateChronology validate;
-    @InjectMocks
-    private SetUpInstancesHelper helper;
+
+    private static SetUpInstancesHelper helper;
+
+    @BeforeAll
+    static void setUp() {
+        helper = new SetUpInstancesHelper();
+    }
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("agreementDateToValue")
     public void validate_ShouldReturnErrorWhenAgreementDateChronologyIsWrong(String testName, Date agreementDateTo) {
+        helper = new SetUpInstancesHelper();
         AgreementDTO agreement = new AgreementDTO(
-                new Date(2025 - 1900, 2, 10),
+                helper.newDate("2025.03.10"),
                 agreementDateTo,
                 "SPAIN",
                 List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"),
@@ -58,9 +65,9 @@ class ValidateAgreementDateChronologyTest {
     private static Stream<Arguments> agreementDateToValue() {
         return Stream.of(
                 Arguments.of("agreementDateTo equals agreementDateFrom",
-                        new Date(2025 - 1900, 2, 10)),
+                        helper.newDate("2025.03.10")),
                 Arguments.of("agreementDateTo less than agreementDateFrom",
-                        new Date(2025 - 1900, 2, 9))
+                        helper.newDate("2025.03.09"))
         );
     }
 

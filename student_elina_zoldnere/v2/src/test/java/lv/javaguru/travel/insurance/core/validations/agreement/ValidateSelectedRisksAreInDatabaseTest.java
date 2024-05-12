@@ -16,7 +16,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -44,8 +43,8 @@ class ValidateSelectedRisksAreInDatabaseTest {
     public void validateList_ShouldReturnCorrectResponseWhenSelectedRisksAreNotSupported(
             String testName, String firstRisk, String secondRisk, int expectedValue) {
         AgreementDTO agreement = new AgreementDTO(
-                new Date(2025 - 1900, 2, 10),
-                new Date(2025 - 1900, 2, 11),
+                helper.newDate("2025.03.10"),
+                helper.newDate("2025.03.11"),
                 "SPAIN",
                 List.of(firstRisk, secondRisk),
                 List.of(helper.newPersonDTO()),

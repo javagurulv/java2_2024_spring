@@ -14,7 +14,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collections;
-import java.util.Date;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -38,7 +37,7 @@ class ValidatePersonFirstNameTest {
     public void validate_ShouldReturnErrorWhenPersonFirstNameIsNotValid(String testName, String firstName) {
         AgreementDTO agreement = helper.newAgreementDTO();
         PersonDTO person = new PersonDTO(
-                firstName, "Bērziņš", new Date(1990 - 1900, 0, 1),
+                firstName, "Bērziņš", helper.newDate("1990.01.01"),
                 "LEVEL_10000", Collections.emptyList());
         when(errorMock.buildError("ERROR_CODE_1"))
                 .thenReturn(new ValidationErrorDTO("ERROR_CODE_1", "Field personFirstName is empty!"));

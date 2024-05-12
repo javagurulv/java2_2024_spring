@@ -12,7 +12,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,14 +35,14 @@ class ValidateAgreementDateFromNotLessThanTodayTest {
     @Test
     public void validate_ShouldReturnErrorWhenAgreementDateFromLessThanToday() {
         AgreementDTO agreement = new AgreementDTO(
-                new Date(2025 - 1900, 2, 10),
-                new Date(2025 - 1900, 2, 11),
+                helper.newDate("2025.03.10"),
+                helper.newDate("2025.03.11"),
                 "SPAIN",
                 List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"),
                 List.of(helper.newPersonDTO()),
                 BigDecimal.ZERO);
 
-        when(dateTimeUtil.startOfToday()).thenReturn(new Date(2025 - 1900, 3, 11));
+        when(dateTimeUtil.startOfToday()).thenReturn(helper.newDate("2025.03.11"));
         when(errorMock.buildError("ERROR_CODE_11"))
                 .thenReturn(new ValidationErrorDTO("ERROR_CODE_11",
                         "Field agreementDateFrom is in the past!"));

@@ -6,6 +6,7 @@ import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -35,8 +36,13 @@ class ValidatePersonBirthDateIsValidTest {
 
     @InjectMocks
     private ValidatePersonBirthDateIsValid validate;
-    @InjectMocks
-    private SetUpInstancesHelper helper;
+
+    private static SetUpInstancesHelper helper;
+
+    @BeforeAll
+    static void setUp() {
+        helper = new SetUpInstancesHelper();
+    }
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("birthDateValue")
@@ -44,8 +50,8 @@ class ValidatePersonBirthDateIsValidTest {
         AgreementDTO agreement = helper.newAgreementDTO();
         PersonDTO person = new PersonDTO(
                 "Jānis", "Bērziņš", birthDate, "LEVEL_10000", Collections.emptyList());
-        when(dateTimeUtil.startOfToday()).thenReturn(new Date(2025 - 1900, 2, 11));
-        when(dateTimeUtil.subtractYears(any(Date.class), eq(150))).thenReturn(new Date(1874 - 1900, 2, 11));
+        when(dateTimeUtil.startOfToday()).thenReturn(helper.newDate("2025.03.11"));
+        when(dateTimeUtil.subtractYears(any(Date.class), eq(150))).thenReturn(helper.newDate("1875.03.11"));
         when(errorMock.buildError("ERROR_CODE_14"))
                 .thenReturn(new ValidationErrorDTO("ERROR_CODE_14", "PersonBirthDate is not a valid date!"));
 
@@ -58,8 +64,8 @@ class ValidatePersonBirthDateIsValidTest {
 
     private static Stream<Arguments> birthDateValue() {
         return Stream.of(
-                Arguments.of("birthDate after current date", new Date(2030 - 1900, 2, 11)),
-                Arguments.of("birthDate less than minimal", new Date(1800 - 1900, 2, 11))
+                Arguments.of("birthDate after current date", helper.newDate("2030.03.11")),
+                Arguments.of("birthDate less than minimal", helper.newDate("1800.03.11"))
         );
     }
 

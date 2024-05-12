@@ -14,7 +14,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -39,8 +38,8 @@ class ValidateSelectedRisksNotEmptyOrNullTest {
     public void validateSingle_ShouldReturnErrorWhenSelectedRisksAreNotValid(
             String testName, List<String> selectedRisks) {
         AgreementDTO agreement = new AgreementDTO(
-                new Date(2025 - 1900, 2, 10),
-                new Date(2025 - 1900, 2, 11),
+                helper.newDate("2025.03.10"),
+                helper.newDate("2025.03.11"),
                 "SPAIN",
                 selectedRisks,
                 List.of(helper.newPersonDTO()),

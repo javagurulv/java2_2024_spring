@@ -16,7 +16,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.Collections;
-import java.util.Date;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -43,7 +42,7 @@ class ValidateMedicalRiskLimitLevelNotEmptyOrNullTest {
         ReflectionTestUtils.setField(validateRiskLimitLevel, "medicalRiskLimitLevelEnabled", Boolean.TRUE);
         AgreementDTO agreement = helper.newAgreementDTO();
         PersonDTO person = new PersonDTO("Jānis", "Bērziņš",
-                new Date(1990 - 1900, 0, 1), medicalRiskLimitLevel, Collections.emptyList());
+                helper.newDate("1990.01.01"), medicalRiskLimitLevel, Collections.emptyList());
         when(errorFactoryMock.buildError("ERROR_CODE_8"))
                 .thenReturn(new ValidationErrorDTO("ERROR_CODE_8",
                         "Field medicalRiskLimitLevel is empty when medical risk limit level enabled!"));
@@ -68,8 +67,8 @@ class ValidateMedicalRiskLimitLevelNotEmptyOrNullTest {
     public void validateSingle_ShouldNotReturnErrorWhenMedicalRiskLimitLevelIsDisabled() {
         ReflectionTestUtils.setField(validateRiskLimitLevel, "medicalRiskLimitLevelEnabled", Boolean.FALSE);
         AgreementDTO agreement = helper.newAgreementDTO();
-        PersonDTO person =  new PersonDTO("Jānis", "Bērziņš",
-                new Date(1990 - 1900, 0, 1), "LEVEL_10000", Collections.emptyList());
+        PersonDTO person = new PersonDTO("Jānis", "Bērziņš",
+                helper.newDate("1990.01.01"), "LEVEL_10000", Collections.emptyList());
 
         Optional<ValidationErrorDTO> result = validateRiskLimitLevel.validateSingle(agreement, person);
 
