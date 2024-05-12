@@ -1,0 +1,21 @@
+
+1) Given: name not specified.
+   We expect: the error response does not include the name.
+
+2) Given: last name not specified.
+   We expect: in the response there is an error, the last name is not specified.
+
+3) Given: Contract DateFrom not specified.
+   We expect: in response to an error in the agreement Date from is not specified.
+
+4) Given: The date of the agreement is not specified.
+   Expected: in response to an error in the agreement The date is not specified.
+
+5) Given: allFields not specified.
+   We expect: there is an error in the response for each field.
+
+6) Given: agreementDateTo; agreementDateFrom.
+   We expect: the response is an error agreementDateTo; agreementDateFrom.
+
+7) Given: all fields are indicated.
+   We expect: a response without errors.
