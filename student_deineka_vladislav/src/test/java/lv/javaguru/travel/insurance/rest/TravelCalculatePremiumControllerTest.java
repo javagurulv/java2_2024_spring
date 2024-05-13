@@ -78,6 +78,20 @@ public class TravelCalculatePremiumControllerTest {
                                 "rest/TravelCalculatePremiumResponse_dateTo_earlier_dateFrom.json");
     }
 
+    @Test
+    @DisplayName("Test 8: selected risk is null")
+    public void selectedRiskIsNull() throws Exception {
+        generalizingAndComparing("rest/TravelCalculatePremiumRequest_dateTo_earlier_dateFrom.json",
+                                "rest/TravelCalculatePremiumResponse_dateTo_earlier_dateFrom.json");
+    }
+
+    @Test
+    @DisplayName("Test 9: selected risk is empty")
+    public void selectedRiskIsEmpty() throws Exception {
+        generalizingAndComparing("rest/TravelCalculatePremiumRequest_dateTo_earlier_dateFrom.json",
+                                "rest/TravelCalculatePremiumResponse_dateTo_earlier_dateFrom.json");
+    }
+
     private void generalizingAndComparing(String jsonRequestFilePath, String jsonResponseFilePath) throws Exception {
         String jsonRequest = jsonFileReader.getJsonFromFile(jsonRequestFilePath);
 
