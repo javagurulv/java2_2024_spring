@@ -33,6 +33,7 @@ public class ValidatePersonFirstNameIntegrationTest {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName(null)
                 .withPersonLastName("Bērziņš")
+                .withPersonalCode("123456-12345")
                 .withPersonBirthdate(helper.newDate("1990.01.01"))
                 .withMedicalRiskLimitLevel("LEVEL_10000")
                 .build();

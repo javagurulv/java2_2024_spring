@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
 import lv.javaguru.travel.insurance.core.domain.MedicalRiskLimitLevel;
 import lv.javaguru.travel.insurance.core.repositories.MedicalRiskLimitLevelRepository;
 import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
@@ -51,8 +52,14 @@ class MedicalRiskLimitLevelCoefficientRetrieverTest {
     @Test
     void setLimitLevelCoefficient_shouldThrowExceptionWhenCoefficientDoesNotExist() {
         ReflectionTestUtils.setField(limitLevelCoefficientRetriever, "medicalRiskLimitLevelEnabled", Boolean.TRUE);
-        PersonDTO person = new PersonDTO("Jānis", "Bērziņš",
-                new Date(1990 - 1900, 0, 1), "INVALID", Collections.emptyList());
+        PersonDTO person = PersonDTOBuilder.createPerson()
+                .withPersonFirstName("Jānis")
+                .withPersonLastName("Bērziņš")
+                .withPersonalCode("123456-12345")
+                .withPersonBirthdate(helper.newDate("1990.01.01"))
+                .withMedicalRiskLimitLevel("INVALID")
+                .build();
+
         when(limitLevelRepositoryMock.findByMedicalRiskLimitLevelIc("INVALID"))
                 .thenReturn(Optional.empty());
 

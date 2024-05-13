@@ -8,12 +8,14 @@
       {
         "personFirstName": "Jānis",
         "personLastName": "Bērziņš",
+        "personalCode": "123456-12345",
         "personBirthDate": "1990-01-01",
         "medicalRiskLimitLevel": "LEVEL_15000"
       },
       {
         "personFirstName": "Kārlis",
         "personLastName": "Krūmiņš",
+        "personalCode": "234567-23456",
         "personBirthDate": "1989-01-01",
         "medicalRiskLimitLevel": "LEVEL_15000"
       }

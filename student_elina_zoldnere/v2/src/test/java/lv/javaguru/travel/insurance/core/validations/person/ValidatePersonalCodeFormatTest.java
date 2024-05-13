@@ -14,7 +14,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Collections;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -23,43 +22,44 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class ValidatePersonLastNameTest {
+class ValidatePersonalCodeFormatTest {
 
     @Mock
     private ValidationErrorFactory errorMock;
 
     @InjectMocks
-    private ValidatePersonLastName validate;
+    private ValidatePersonalCodeFormat validate;
     @InjectMocks
     private SetUpInstancesHelper helper;
 
     @ParameterizedTest(name = "{0}")
-    @MethodSource("lastNameValue")
-    public void validate_ShouldReturnErrorWhenPersonLastNameIsNotValid(String testName, String lastName) {
+    @MethodSource("personalCodeValue")
+    public void validate_ShouldReturnErrorWhenPersonFirstNameIsNotValid(String testName, String personalCode) {
         AgreementDTO agreement = helper.newAgreementDTO();
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
-                .withPersonLastName(null)
-                .withPersonalCode("123456-12345")
+                .withPersonLastName("Bērziņš")
+                .withPersonalCode(personalCode)
                 .withPersonBirthdate(helper.newDate("1990.01.01"))
                 .withMedicalRiskLimitLevel("LEVEL_10000")
                 .build();
 
-        when(errorMock.buildError("ERROR_CODE_2"))
-                .thenReturn(new ValidationErrorDTO("ERROR_CODE_2", "Field personLastName is empty!"));
+        when(errorMock.buildError("ERROR_CODE_15"))
+                .thenReturn(new ValidationErrorDTO("ERROR_CODE_15",
+                        "Wrong personalCode format! Use 123456-12345."));
 
         Optional<ValidationErrorDTO> result = validate.validateSingle(agreement, person);
 
         assertTrue(result.isPresent());
-        assertEquals("ERROR_CODE_2", result.get().errorCode());
-        assertEquals("Field personLastName is empty!", result.get().description());
+        assertEquals("ERROR_CODE_15", result.get().errorCode());
+        assertEquals("Wrong personalCode format! Use 123456-12345.", result.get().description());
     }
 
-    private static Stream<Arguments> lastNameValue() {
+    private static Stream<Arguments> personalCodeValue() {
         return Stream.of(
-                Arguments.of("personLastName null", null),
-                Arguments.of("personLastName empty", ""),
-                Arguments.of("personLastName blank", "     ")
+                Arguments.of("personalCode wrong format", "12345612345"),
+                Arguments.of("personalCode wrong length", "123456-123456"),
+                Arguments.of("personalCode contains letters", "ABCDEF-12345")
         );
     }
 

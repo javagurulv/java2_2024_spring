@@ -15,6 +15,7 @@ public class JsonFileReaderTest {
         String expectedJson = """
                 {"personFirstName" : null,
                 "personLastName" : "Bērziņš",
+                "personalCode": "123456-12345",
                 "personBirthDate" : "1990-01-01",
                 "agreementDateFrom" : "2025-03-10",
                 "agreementDateTo" : "2025-03-11",

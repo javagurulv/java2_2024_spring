@@ -45,6 +45,7 @@ public class SetUpInstancesHelper {
         return PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
+                .withPersonalCode("123456-12345")
                 .withPersonBirthdate(newDate("1990.01.01"))
                 .withMedicalRiskLimitLevel("LEVEL_10000")
                 .build();
@@ -68,6 +69,7 @@ public class SetUpInstancesHelper {
         return PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
+                .withPersonalCode("123456-12345")
                 .withPersonBirthdate(newDate("1990.01.01"))
                 .withMedicalRiskLimitLevel("LEVEL_10000")
                 .withPersonRisk(newRiskDTO())

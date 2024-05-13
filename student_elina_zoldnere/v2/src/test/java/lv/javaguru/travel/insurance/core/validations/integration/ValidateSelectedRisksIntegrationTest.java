@@ -36,6 +36,7 @@ class ValidateSelectedRisksIntegrationTest {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
+                .withPersonalCode("123456-12345")
                 .withPersonBirthdate(helper.newDate("1990.01.01"))
                 .withMedicalRiskLimitLevel("LEVEL_10000")
                 .build();
@@ -61,6 +62,7 @@ class ValidateSelectedRisksIntegrationTest {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
+                .withPersonalCode("123456-12345")
                 .withPersonBirthdate(helper.newDate("1990.01.01"))
                 .withMedicalRiskLimitLevel("LEVEL_10000")
                 .build();
@@ -96,6 +98,7 @@ class ValidateSelectedRisksIntegrationTest {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
+                .withPersonalCode("123456-12345")
                 .withPersonBirthdate(helper.newDate("1990.01.01"))
                 .withMedicalRiskLimitLevel("LEVEL_10000")
                 .build();

@@ -35,6 +35,7 @@ class ValidatePersonBirthDateNotNullTest {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
+                .withPersonalCode("123456-12345")
                 .withPersonBirthdate(null)
                 .withMedicalRiskLimitLevel("LEVEL_10000")
                 .build();
