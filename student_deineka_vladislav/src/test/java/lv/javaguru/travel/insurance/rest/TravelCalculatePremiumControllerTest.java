@@ -1,6 +1,5 @@
 package lv.javaguru.travel.insurance.rest;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,10 +11,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -33,7 +31,6 @@ public class TravelCalculatePremiumControllerTest {
     public void premiumControllerTestNoErrors() throws Exception {
         generalizingAndComparing("rest/TravelCalculatePremiumRequest_noErrors.json",
                                 "rest/TravelCalculatePremiumResponse_noErrors.json");
-
     }
 
     @Test
@@ -103,8 +100,14 @@ public class TravelCalculatePremiumControllerTest {
 
         String responseOtherValue = mvcResult.getResponse().getContentAsString();
         String responseJsonValue = jsonFileReader.getJsonFromFile(jsonResponseFilePath);
-        ObjectMapper objectMapper = new ObjectMapper();
-        assertEquals(objectMapper.readTree(responseOtherValue), objectMapper.readTree(responseJsonValue));
+
+        assertJson(responseOtherValue)
+                .where()
+                    .keysInAnyOrder()
+                    .arrayInAnyOrder()
+                .isEqualTo(responseJsonValue);
+
+
     }
 
 }
