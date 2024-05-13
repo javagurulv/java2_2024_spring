@@ -68,5 +68,4 @@ public class AgreementDTOBuilder {
         return this;
     }
 
-
 }

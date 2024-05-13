@@ -5,6 +5,7 @@ import java.util.List;
 
 public record PersonDTO(String personFirstName,
                         String personLastName,
+
                         Date personBirthDate,
 
                         String medicalRiskLimitLevel,

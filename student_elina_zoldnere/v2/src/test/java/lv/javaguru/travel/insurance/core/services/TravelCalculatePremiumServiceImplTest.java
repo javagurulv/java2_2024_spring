@@ -51,7 +51,7 @@ public class TravelCalculatePremiumServiceImplTest {
     @Test
     public void calculatePremium_ShouldReturnCorrectResponseWithOnePerson() {
         AgreementDTO agreement = helper.newAgreementDTO();
-        List<PersonDTO> personsWithRisks = List.of(helper.newPersonWithRisksDTO());
+        List<PersonDTO> personsWithRisks = List.of(helper.newPersonWithRiskDTO());
         TravelCalculatePremiumCoreCommand command = new TravelCalculatePremiumCoreCommand(agreement);
 
         when(agreementValidatorMock.validate(command.getAgreement()))
@@ -69,7 +69,7 @@ public class TravelCalculatePremiumServiceImplTest {
     @Test
     public void calculatePremium_ShouldReturnCorrectResponseWithTwoPersons() {
         AgreementDTO agreement = helper.newTwoPersonsAgreementDTO();
-        List<PersonDTO> personsWithRisks = List.of(helper.newPersonWithRisksDTO(), helper.newPersonWithRisksDTO());
+        List<PersonDTO> personsWithRisks = List.of(helper.newPersonWithRiskDTO(), helper.newPersonWithRiskDTO());
         TravelCalculatePremiumCoreCommand command = new TravelCalculatePremiumCoreCommand(agreement);
 
         when(agreementValidatorMock.validate(command.getAgreement()))

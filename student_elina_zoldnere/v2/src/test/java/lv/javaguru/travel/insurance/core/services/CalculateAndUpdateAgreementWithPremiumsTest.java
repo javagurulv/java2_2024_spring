@@ -31,7 +31,7 @@ public class CalculateAndUpdateAgreementWithPremiumsTest {
     @Test
     void calculateAgreementPremiums_ShouldReturnCorrectResult() {
         AgreementDTO agreement = helper.newAgreementDTO();
-        List<PersonDTO> personsWithRiskPremiums = List.of(helper.newPersonWithRisksDTO(), helper.newPersonWithRisksDTO());
+        List<PersonDTO> personsWithRiskPremiums = List.of(helper.newPersonWithRiskDTO(), helper.newPersonWithRiskDTO());
         when(calculateAndUpdatePersonsMock.calculateRiskPremiumsForAllPersons(agreement))
                 .thenReturn(personsWithRiskPremiums);
         when(calculateTotalPremiumMock.calculateTotalAgreementPremium(personsWithRiskPremiums))

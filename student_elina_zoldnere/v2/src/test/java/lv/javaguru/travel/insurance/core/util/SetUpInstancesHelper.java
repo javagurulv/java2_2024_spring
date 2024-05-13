@@ -1,12 +1,16 @@
 package lv.javaguru.travel.insurance.core.util;
 
-import lv.javaguru.travel.insurance.core.api.dto.*;
+import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder;
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
+import lv.javaguru.travel.insurance.core.api.dto.RiskDTO;
+import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -36,8 +40,12 @@ public class SetUpInstancesHelper {
     }
 
     public PersonDTO newPersonDTO() {
-        return new PersonDTO("Jānis", "Bērziņš",
-                newDate("1990.01.01"), "LEVEL_10000", Collections.emptyList());
+        return PersonDTOBuilder.createPerson()
+                .withPersonFirstName("Jānis")
+                .withPersonLastName("Bērziņš")
+                .withPersonBirthdate(newDate("1990.01.01"))
+                .withMedicalRiskLimitLevel("LEVEL_10000")
+                .build();
     }
 
     public RiskDTO newRiskDTO() {
@@ -48,9 +56,14 @@ public class SetUpInstancesHelper {
         return new ValidationErrorDTO("errorCode", "description");
     }
 
-    public PersonDTO newPersonWithRisksDTO() {
-        return new PersonDTO("Jānis", "Bērziņš",
-                newDate("1990.01.01"), "LEVEL_10000", List.of(newRiskDTO()));
+    public PersonDTO newPersonWithRiskDTO() {
+        return PersonDTOBuilder.createPerson()
+                .withPersonFirstName("Jānis")
+                .withPersonLastName("Bērziņš")
+                .withPersonBirthdate(newDate("1990.01.01"))
+                .withMedicalRiskLimitLevel("LEVEL_10000")
+                .withPersonRisk(newRiskDTO())
+                .build();
     }
 
     public Date newDate(String dateStr) {

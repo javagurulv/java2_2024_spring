@@ -23,7 +23,7 @@ public class CalculateTotalAgreementPremiumTest {
 
     @Test
     void calculateTotalAgreementPremium_ReturnsCorrectResult(){
-        List<PersonDTO> personsWithRisks = List.of(helper.newPersonWithRisksDTO(), helper.newPersonWithRisksDTO());
+        List<PersonDTO> personsWithRisks = List.of(helper.newPersonWithRiskDTO(), helper.newPersonWithRiskDTO());
 
         BigDecimal result = calculate.calculateTotalAgreementPremium(personsWithRisks);
 

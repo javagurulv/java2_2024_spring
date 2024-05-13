@@ -3,6 +3,7 @@ package lv.javaguru.travel.insurance.core.validations.integration;
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
@@ -29,12 +30,12 @@ public class AgreementDateFromValidationIntegrationTest {
 
     @Test
     public void validate_ShouldReturnErrorWhenAgreementDateFromIsNull() {
-        PersonDTO person = new PersonDTO(
-                "Jānis",
-                "Bērziņš",
-                helper.newDate("1990.01.01"),
-                "LEVEL_10000",
-                null);
+        PersonDTO person = PersonDTOBuilder.createPerson()
+                .withPersonFirstName("Jānis")
+                .withPersonLastName("Bērziņš")
+                .withPersonBirthdate(helper.newDate("1990.01.01"))
+                .withMedicalRiskLimitLevel("LEVEL_10000")
+                .build();
 
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
                 .withDateFrom(null)
@@ -53,12 +54,12 @@ public class AgreementDateFromValidationIntegrationTest {
 
     @Test
     public void validate_ShouldReturnErrorWhenAgreementDateFromLessThanToday() {
-        PersonDTO person = new PersonDTO(
-                "Jānis",
-                "Bērziņš",
-                helper.newDate("2000.01.01"),
-                "LEVEL_10000",
-                null);
+        PersonDTO person = PersonDTOBuilder.createPerson()
+                .withPersonFirstName("Jānis")
+                .withPersonLastName("Bērziņš")
+                .withPersonBirthdate(helper.newDate("1990.01.01"))
+                .withMedicalRiskLimitLevel("LEVEL_10000")
+                .build();
 
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
                 .withDateFrom(helper.newDate("2020.01.01"))
