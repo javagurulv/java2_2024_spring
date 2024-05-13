@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.core.validations.agreement;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.domain.ClassifierValue;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
@@ -37,13 +38,14 @@ class ValidateCountryIsInDatabaseTest {
 
     @Test
     public void validateSingle_ShouldReturnCorrectResponseWhenCountryIsNotSupported() {
-        AgreementDTO agreement = new AgreementDTO(
-                helper.newDate("2025.03.10"),
-                helper.newDate("2025.03.11"),
-                "INVALID",
-                List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"),
-                List.of(helper.newPersonDTO()),
-                BigDecimal.ZERO);
+        AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
+                .withDateFrom(helper.newDate("2025.03.10"))
+                .withDateTo(helper.newDate("2025.03.11"))
+                .withCountry("INVALID")
+                .withSelectedRisks(List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"))
+                .withPerson(helper.newPersonDTO())
+                .withPremium(BigDecimal.ZERO)
+                .build();
 
         when(repositoryMock.findByClassifierTitleAndIc("COUNTRY", "INVALID"))
                 .thenReturn(Optional.empty());
@@ -58,13 +60,15 @@ class ValidateCountryIsInDatabaseTest {
 
     @Test
     public void validateSingle_ShouldNotReturnErrorWhenCountryExists() {
-        AgreementDTO agreement = new AgreementDTO(
-                helper.newDate("2025.03.10"),
-                helper.newDate("2025.03.11"),
-                "SPAIN",
-                List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"),
-                List.of(helper.newPersonDTO()),
-                BigDecimal.ZERO);
+        AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
+                .withDateFrom(helper.newDate("2025.03.10"))
+                .withDateTo(helper.newDate("2025.03.11"))
+                .withCountry("SPAIN")
+                .withSelectedRisks(List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"))
+                .withPerson(helper.newPersonDTO())
+                .withPremium(BigDecimal.ZERO)
+                .build();
+
         when(repositoryMock.findByClassifierTitleAndIc("COUNTRY", "SPAIN"))
                 .thenReturn(Optional.of(new ClassifierValue()));
 

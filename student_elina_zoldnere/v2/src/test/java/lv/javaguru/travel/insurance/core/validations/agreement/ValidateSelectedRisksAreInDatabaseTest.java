@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.core.validations.agreement;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.domain.ClassifierValue;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
@@ -42,13 +43,15 @@ class ValidateSelectedRisksAreInDatabaseTest {
     @MethodSource("riskTypeValues")
     public void validateList_ShouldReturnCorrectResponseWhenSelectedRisksAreNotSupported(
             String testName, String firstRisk, String secondRisk, int expectedValue) {
-        AgreementDTO agreement = new AgreementDTO(
-                helper.newDate("2025.03.10"),
-                helper.newDate("2025.03.11"),
-                "SPAIN",
-                List.of(firstRisk, secondRisk),
-                List.of(helper.newPersonDTO()),
-                BigDecimal.ZERO);
+        AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
+                .withDateFrom(helper.newDate("2025.03.10"))
+                .withDateTo(helper.newDate("2025.03.11"))
+                .withCountry("SPAIN")
+                .withSelectedRisks(List.of(firstRisk, secondRisk))
+                .withPerson(helper.newPersonDTO())
+                .withPremium(BigDecimal.ZERO)
+                .build();
+
         Mockito.lenient().when(repositoryMock.findByClassifierTitleAndIc("RISK_TYPE", "TRAVEL_MEDICAL"))
                 .thenReturn(Optional.of(new ClassifierValue()));
         when(repositoryMock.findByClassifierTitleAndIc("RISK_TYPE", "INVALID"))

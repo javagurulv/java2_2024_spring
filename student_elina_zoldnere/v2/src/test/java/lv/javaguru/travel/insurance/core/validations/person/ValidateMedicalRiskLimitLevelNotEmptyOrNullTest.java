@@ -2,6 +2,7 @@ package lv.javaguru.travel.insurance.core.validations.person;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
@@ -15,7 +16,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import java.util.Collections;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -41,8 +41,14 @@ class ValidateMedicalRiskLimitLevelNotEmptyOrNullTest {
             String testName, String medicalRiskLimitLevel) {
         ReflectionTestUtils.setField(validateRiskLimitLevel, "medicalRiskLimitLevelEnabled", Boolean.TRUE);
         AgreementDTO agreement = helper.newAgreementDTO();
-        PersonDTO person = new PersonDTO("Jānis", "Bērziņš",
-                helper.newDate("1990.01.01"), medicalRiskLimitLevel, Collections.emptyList());
+
+        PersonDTO person = PersonDTOBuilder.createPerson()
+                .withPersonFirstName("Jānis")
+                .withPersonLastName("Bērziņš")
+                .withPersonBirthdate(helper.newDate("1990.01.01"))
+                .withMedicalRiskLimitLevel(medicalRiskLimitLevel)
+                .build();
+
         when(errorFactoryMock.buildError("ERROR_CODE_8"))
                 .thenReturn(new ValidationErrorDTO("ERROR_CODE_8",
                         "Field medicalRiskLimitLevel is empty when medical risk limit level enabled!"));
@@ -67,8 +73,13 @@ class ValidateMedicalRiskLimitLevelNotEmptyOrNullTest {
     public void validateSingle_ShouldNotReturnErrorWhenMedicalRiskLimitLevelIsDisabled() {
         ReflectionTestUtils.setField(validateRiskLimitLevel, "medicalRiskLimitLevelEnabled", Boolean.FALSE);
         AgreementDTO agreement = helper.newAgreementDTO();
-        PersonDTO person = new PersonDTO("Jānis", "Bērziņš",
-                helper.newDate("1990.01.01"), "LEVEL_10000", Collections.emptyList());
+
+        PersonDTO person = PersonDTOBuilder.createPerson()
+                .withPersonFirstName("Jānis")
+                .withPersonLastName("Bērziņš")
+                .withPersonBirthdate(helper.newDate("1990.01.01"))
+                .withMedicalRiskLimitLevel("LEVEL_10000")
+                .build();
 
         Optional<ValidationErrorDTO> result = validateRiskLimitLevel.validateSingle(agreement, person);
 
