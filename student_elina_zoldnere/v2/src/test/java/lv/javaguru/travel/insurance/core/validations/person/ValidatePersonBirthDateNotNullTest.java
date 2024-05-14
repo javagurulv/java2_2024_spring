@@ -2,6 +2,7 @@ package lv.javaguru.travel.insurance.core.validations.person;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
@@ -11,7 +12,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Collections;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -32,9 +32,14 @@ class ValidatePersonBirthDateNotNullTest {
     @Test
     public void validate_ShouldReturnErrorWhenAgreementDateFromIsNull() {
         AgreementDTO agreement = helper.newAgreementDTO();
-        PersonDTO person = new PersonDTO
-                ("Jānis", "Bērziņš", null,
-                        "LEVEL_10000", Collections.emptyList());
+        PersonDTO person = PersonDTOBuilder.createPerson()
+                .withPersonFirstName("Jānis")
+                .withPersonLastName("Bērziņš")
+                .withPersonalCode("123456-12345")
+                .withPersonBirthdate(null)
+                .withMedicalRiskLimitLevel("LEVEL_10000")
+                .build();
+
         when(errorMock.buildError("ERROR_CODE_7"))
                 .thenReturn(new ValidationErrorDTO("ERROR_CODE_7", "Field personBirthDate is empty!"));
 

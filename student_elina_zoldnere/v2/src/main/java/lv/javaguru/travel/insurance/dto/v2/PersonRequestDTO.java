@@ -19,6 +19,8 @@ public class PersonRequestDTO {
 
     private String personLastName;
 
+    private String personalCode;
+
     @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date personBirthDate;

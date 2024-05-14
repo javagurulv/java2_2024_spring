@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.core.validations.agreement;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
@@ -31,13 +32,15 @@ class ValidateAgreementDateToNotNullTest {
 
     @Test
     public void validate_ShouldReturnErrorWhenAgreementDateToIsNull() {
-        AgreementDTO agreement = new AgreementDTO(
-                helper.newDate("2025.03.10"),
-                null,
-                "SPAIN",
-                List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"),
-                List.of(helper.newPersonDTO()),
-                BigDecimal.ZERO);
+        AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
+                .withDateFrom(helper.newDate("2025.03.10"))
+                .withDateTo(null)
+                .withCountry("SPAIN")
+                .withSelectedRisks(List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"))
+                .withPerson(helper.newPersonDTO())
+                .withPremium(BigDecimal.ZERO)
+                .build();
+
         when(errorMock.buildError("ERROR_CODE_4"))
                 .thenReturn(new ValidationErrorDTO("ERROR_CODE_4", "Field agreementDateTo is empty!"));
 

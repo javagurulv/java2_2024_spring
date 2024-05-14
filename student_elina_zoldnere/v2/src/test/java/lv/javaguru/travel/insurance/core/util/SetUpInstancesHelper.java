@@ -5,7 +5,9 @@ import lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.RiskDTO;
+import lv.javaguru.travel.insurance.core.api.dto.RiskDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
+import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTOBuilder;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -43,23 +45,31 @@ public class SetUpInstancesHelper {
         return PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
+                .withPersonalCode("123456-12345")
                 .withPersonBirthdate(newDate("1990.01.01"))
                 .withMedicalRiskLimitLevel("LEVEL_10000")
                 .build();
     }
 
     public RiskDTO newRiskDTO() {
-        return new RiskDTO("TRAVEL_MEDICAL", BigDecimal.TEN);
+        return RiskDTOBuilder.createRisk()
+                .withRiskIc("TRAVEL_MEDICAL")
+                .withPremium(BigDecimal.TEN)
+                .build();
     }
 
     public ValidationErrorDTO newValidationErrorDTO() {
-        return new ValidationErrorDTO("errorCode", "description");
+        return ValidationErrorDTOBuilder.createValidationError()
+                .withErrorCode("errorCode")
+                .withDescription("description")
+                .build();
     }
 
     public PersonDTO newPersonWithRiskDTO() {
         return PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
+                .withPersonalCode("123456-12345")
                 .withPersonBirthdate(newDate("1990.01.01"))
                 .withMedicalRiskLimitLevel("LEVEL_10000")
                 .withPersonRisk(newRiskDTO())

@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.core.validations.agreement;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
@@ -37,13 +38,15 @@ class ValidateSelectedRisksNotEmptyOrNullTest {
     @MethodSource("selectedRisksValues")
     public void validateSingle_ShouldReturnErrorWhenSelectedRisksAreNotValid(
             String testName, List<String> selectedRisks) {
-        AgreementDTO agreement = new AgreementDTO(
-                helper.newDate("2025.03.10"),
-                helper.newDate("2025.03.11"),
-                "SPAIN",
-                selectedRisks,
-                List.of(helper.newPersonDTO()),
-                BigDecimal.ZERO);
+        AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
+                .withDateFrom(helper.newDate("2025.03.10"))
+                .withDateTo(helper.newDate("2025.03.11"))
+                .withCountry("SPAIN")
+                .withSelectedRisks(selectedRisks)
+                .withPerson(helper.newPersonDTO())
+                .withPremium(BigDecimal.ZERO)
+                .build();
+
         when(errorFactoryMock.buildError("ERROR_CODE_5"))
                 .thenReturn(new ValidationErrorDTO("ERROR_CODE_5", "Field selectedRisks is empty!"));
 

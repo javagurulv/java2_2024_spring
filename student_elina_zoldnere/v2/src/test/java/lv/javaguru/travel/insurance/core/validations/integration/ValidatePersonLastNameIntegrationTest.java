@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class AgreementDateFromValidationIntegrationTest {
+public class ValidatePersonLastNameIntegrationTest {
 
     @Autowired
     private TravelAgreementValidator validator;
@@ -29,51 +29,28 @@ public class AgreementDateFromValidationIntegrationTest {
     private SetUpInstancesHelper helper;
 
     @Test
-    public void validate_ShouldReturnErrorWhenAgreementDateFromIsNull() {
+    public void validate_ShouldReturnErrorWhenPersonLastNameIsNull() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
-                .withPersonLastName("Bērziņš")
+                .withPersonLastName(null)
+                .withPersonalCode("123456-12345")
                 .withPersonBirthdate(helper.newDate("1990.01.01"))
                 .withMedicalRiskLimitLevel("LEVEL_10000")
                 .build();
 
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
-                .withDateFrom(null)
-                .withDateTo(helper.newDate("2025.03.10"))
+                .withDateFrom(helper.newDate("2025.03.10"))
+                .withDateTo(helper.newDate("2025.03.11"))
                 .withCountry("SPAIN")
                 .withSelectedRisk("TRAVEL_MEDICAL")
-                .withPersons(List.of(person))
+                .withPerson(person)
                 .build();
 
         List<ValidationErrorDTO> errors = validator.validate(agreement);
 
-        assertEquals(errors.size(), 1);
-        assertEquals(errors.get(0).errorCode(), "ERROR_CODE_3");
-        assertEquals(errors.get(0).description(), "Field agreementDateFrom is empty!");
-    }
-
-    @Test
-    public void validate_ShouldReturnErrorWhenAgreementDateFromLessThanToday() {
-        PersonDTO person = PersonDTOBuilder.createPerson()
-                .withPersonFirstName("Jānis")
-                .withPersonLastName("Bērziņš")
-                .withPersonBirthdate(helper.newDate("1990.01.01"))
-                .withMedicalRiskLimitLevel("LEVEL_10000")
-                .build();
-
-        AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
-                .withDateFrom(helper.newDate("2020.01.01"))
-                .withDateTo(helper.newDate("2030.01.01"))
-                .withCountry("SPAIN")
-                .withSelectedRisk("TRAVEL_MEDICAL")
-                .withPersons(List.of(person))
-                .build();
-
-        List<ValidationErrorDTO> errors = validator.validate(agreement);
-
-        assertEquals(errors.size(), 1);
-        assertEquals("ERROR_CODE_11", errors.get(0).errorCode());
-        assertEquals("Field agreementDateFrom is in the past!", errors.get(0).description());
+        assertEquals(1, errors.size());
+        assertEquals("ERROR_CODE_2", errors.get(0).errorCode());
+        assertEquals("Field personLastName is empty!", errors.get(0).description());
     }
 
 }

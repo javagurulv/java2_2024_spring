@@ -2,6 +2,7 @@ package lv.javaguru.travel.insurance.core.validations.person;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
@@ -15,7 +16,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Collections;
 import java.util.Date;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -48,8 +48,14 @@ class ValidatePersonBirthDateIsValidTest {
     @MethodSource("birthDateValue")
     public void validate_ShouldReturnErrorWhenPersonBirthDateIsNotValid(String testName, Date birthDate) {
         AgreementDTO agreement = helper.newAgreementDTO();
-        PersonDTO person = new PersonDTO(
-                "Jānis", "Bērziņš", birthDate, "LEVEL_10000", Collections.emptyList());
+        PersonDTO person = PersonDTOBuilder.createPerson()
+                .withPersonFirstName("Jānis")
+                .withPersonLastName("Bērziņš")
+                .withPersonalCode("123456-12345")
+                .withPersonBirthdate(birthDate)
+                .withMedicalRiskLimitLevel("LEVEL_10000")
+                .build();
+
         when(dateTimeUtil.startOfToday()).thenReturn(helper.newDate("2025.03.11"));
         when(dateTimeUtil.subtractYears(any(Date.class), eq(150))).thenReturn(helper.newDate("1875.03.11"));
         when(errorMock.buildError("ERROR_CODE_14"))

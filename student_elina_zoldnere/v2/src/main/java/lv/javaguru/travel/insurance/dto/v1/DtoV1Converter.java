@@ -44,6 +44,7 @@ public class DtoV1Converter {
         TravelCalculatePremiumResponseV1 response = new TravelCalculatePremiumResponseV1();
         response.setPersonFirstName(agreement.persons().get(0).personFirstName());
         response.setPersonLastName(agreement.persons().get(0).personLastName());
+        response.setPersonalCode(agreement.persons().get(0).personalCode());
         response.setPersonBirthDate(agreement.persons().get(0).personBirthDate());
         response.setAgreementDateFrom(agreement.agreementDateFrom());
         response.setAgreementDateTo(agreement.agreementDateTo());
@@ -64,6 +65,7 @@ public class DtoV1Converter {
         return new PersonDTO(
                 request.getPersonFirstName(),
                 request.getPersonLastName(),
+                request.getPersonalCode(),
                 request.getPersonBirthDate(),
                 request.getMedicalRiskLimitLevel(),
                 Collections.emptyList());

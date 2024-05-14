@@ -2,6 +2,7 @@ package lv.javaguru.travel.insurance.core.validations.person;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
@@ -36,9 +37,14 @@ class ValidatePersonLastNameTest {
     @MethodSource("lastNameValue")
     public void validate_ShouldReturnErrorWhenPersonLastNameIsNotValid(String testName, String lastName) {
         AgreementDTO agreement = helper.newAgreementDTO();
-        PersonDTO person = new PersonDTO
-                ("Jānis", lastName, helper.newDate("1990.01.01"),
-                        "LEVEL_10000", Collections.emptyList());
+        PersonDTO person = PersonDTOBuilder.createPerson()
+                .withPersonFirstName("Jānis")
+                .withPersonLastName(null)
+                .withPersonalCode("123456-12345")
+                .withPersonBirthdate(helper.newDate("1990.01.01"))
+                .withMedicalRiskLimitLevel("LEVEL_10000")
+                .build();
+
         when(errorMock.buildError("ERROR_CODE_2"))
                 .thenReturn(new ValidationErrorDTO("ERROR_CODE_2", "Field personLastName is empty!"));
 

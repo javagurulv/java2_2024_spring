@@ -2,6 +2,7 @@ package lv.javaguru.travel.insurance.core.validations.person;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
@@ -13,7 +14,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Collections;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -36,9 +36,14 @@ class ValidatePersonFirstNameTest {
     @MethodSource("firstNameValue")
     public void validate_ShouldReturnErrorWhenPersonFirstNameIsNotValid(String testName, String firstName) {
         AgreementDTO agreement = helper.newAgreementDTO();
-        PersonDTO person = new PersonDTO(
-                firstName, "Bērziņš", helper.newDate("1990.01.01"),
-                "LEVEL_10000", Collections.emptyList());
+        PersonDTO person = PersonDTOBuilder.createPerson()
+                .withPersonFirstName(firstName)
+                .withPersonLastName("Bērziņš")
+                .withPersonalCode("123456-12345")
+                .withPersonBirthdate(helper.newDate("1990.01.01"))
+                .withMedicalRiskLimitLevel("LEVEL_10000")
+                .build();
+
         when(errorMock.buildError("ERROR_CODE_1"))
                 .thenReturn(new ValidationErrorDTO("ERROR_CODE_1", "Field personFirstName is empty!"));
 
