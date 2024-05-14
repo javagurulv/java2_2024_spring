@@ -28,7 +28,7 @@ class FirstNameValidatorTest {
         TravelCalculatePremiumRequest premiumRequest = mock(TravelCalculatePremiumRequest.class);
         when(premiumRequest.getPersonFirstName()).thenReturn(null);
         ValidationErrors validationErrors = mock(ValidationErrors.class);
-        when(validationErrorFactory.createError("ERROR_CODE_2")).thenReturn(validationErrors);
+        when(validationErrorFactory.createError("ERROR_CODE_1")).thenReturn(validationErrors);
         Optional<ValidationErrors> errorsOptional = firstNameValidator.execute(premiumRequest);
         assertTrue(errorsOptional.isPresent());
         assertSame(errorsOptional.get(), validationErrors);
@@ -39,7 +39,7 @@ class FirstNameValidatorTest {
         TravelCalculatePremiumRequest premiumRequest = mock(TravelCalculatePremiumRequest.class);
         when(premiumRequest.getPersonFirstName()).thenReturn("");
         ValidationErrors validationErrors = mock(ValidationErrors.class);
-        when(validationErrorFactory.createError("ERROR_CODE_2")).thenReturn(validationErrors);
+        when(validationErrorFactory.createError("ERROR_CODE_1")).thenReturn(validationErrors);
         Optional<ValidationErrors> errorsOptional = firstNameValidator.execute(premiumRequest);
         assertTrue(errorsOptional.isPresent());
         assertSame(errorsOptional.get(), validationErrors);
