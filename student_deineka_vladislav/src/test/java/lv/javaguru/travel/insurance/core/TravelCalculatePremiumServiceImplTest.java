@@ -26,7 +26,8 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Mock
     private TravelCalculatePremiumRequestValidator travelCalculatePremiumRequestValidator;
-    @Mock private TravelPremiumUnderwriting travelPremiumUnderwriting ;
+    @Mock
+    private TravelPremiumUnderwriting travelPremiumUnderwriting ;
 
     @InjectMocks
     private TravelCalculatePremiumServiceImpl premiumService;
@@ -106,8 +107,8 @@ class TravelCalculatePremiumServiceImplTest {
         when(travelCalculatePremiumRequestValidator.validation(travelCalculatePremiumRequest)).thenReturn(validationErrors);
         TravelCalculatePremiumResponse travelCalculatePremiumResponse = premiumService.calculatePremium(travelCalculatePremiumRequest);
         assertEquals(travelCalculatePremiumResponse.getValidationErrors().size(),1);
-        assertEquals(travelCalculatePremiumResponse.getValidationErrors().get(0).getField(), "field");
-        assertEquals(travelCalculatePremiumResponse.getValidationErrors().get(0).getMessage(), "message");
+        assertEquals(travelCalculatePremiumResponse.getValidationErrors().get(0).getErrorCode(), "field");
+        assertEquals(travelCalculatePremiumResponse.getValidationErrors().get(0).getDescription(), "message");
 
     }
 

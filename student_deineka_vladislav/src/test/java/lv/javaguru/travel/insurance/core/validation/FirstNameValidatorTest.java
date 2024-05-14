@@ -3,37 +3,48 @@ package lv.javaguru.travel.insurance.core.validation;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationErrors;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 class FirstNameValidatorTest {
 
-    private FirstNameValidator firstNameValidator = new FirstNameValidator();
+    @Mock
+    private ValidationErrorFactory validationErrorFactory;
+
+    @InjectMocks
+    private FirstNameValidator firstNameValidator;
+
 
     @Test
     public void errorIfFirstNameIsNull() {
         TravelCalculatePremiumRequest premiumRequest = mock(TravelCalculatePremiumRequest.class);
         when(premiumRequest.getPersonFirstName()).thenReturn(null);
+        ValidationErrors validationErrors = mock(ValidationErrors.class);
+        when(validationErrorFactory.createError("ERROR_CODE_2")).thenReturn(validationErrors);
         Optional<ValidationErrors> errorsOptional = firstNameValidator.execute(premiumRequest);
         assertTrue(errorsOptional.isPresent());
-        assertEquals(errorsOptional.get().getField(), "firstName");
-        assertEquals(errorsOptional.get().getMessage(), "Field cannot be empty");
+        assertSame(errorsOptional.get(), validationErrors);
     }
 
     @Test
     public void errorIfFirstNameIsEmpty() {
         TravelCalculatePremiumRequest premiumRequest = mock(TravelCalculatePremiumRequest.class);
         when(premiumRequest.getPersonFirstName()).thenReturn("");
+        ValidationErrors validationErrors = mock(ValidationErrors.class);
+        when(validationErrorFactory.createError("ERROR_CODE_2")).thenReturn(validationErrors);
         Optional<ValidationErrors> errorsOptional = firstNameValidator.execute(premiumRequest);
         assertTrue(errorsOptional.isPresent());
-        assertEquals(errorsOptional.get().getField(), "firstName");
-        assertEquals(errorsOptional.get().getMessage(), "Field cannot be empty");
+        assertSame(errorsOptional.get(), validationErrors);
     }
+
 
     @Test
     public void noErrorIfFirstNameIsPresent() {
@@ -41,6 +52,7 @@ class FirstNameValidatorTest {
         when(premiumRequest.getPersonFirstName()).thenReturn("Bob");
         Optional<ValidationErrors> errorsOptional = firstNameValidator.execute(premiumRequest);
         assertTrue(errorsOptional.isEmpty());
+        verifyNoInteractions(validationErrorFactory);
     }
 
 }

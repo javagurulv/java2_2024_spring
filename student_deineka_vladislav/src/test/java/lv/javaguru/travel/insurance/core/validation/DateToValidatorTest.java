@@ -4,6 +4,8 @@ import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationErrors;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.text.ParseException;
@@ -11,25 +13,29 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class DateToValidatorTest {
 
-    private DateToValidator dateToValidator = new DateToValidator();
+    @Mock
+    private ValidationErrorFactory validationErrorFactory;
+
+    @InjectMocks
+    private DateToValidator dateToValidator;
 
     @Test
     public void errorIfDateToIsNull() {
         TravelCalculatePremiumRequest premiumRequest = mock(TravelCalculatePremiumRequest.class);
         when(premiumRequest.getAgreementDateTo()).thenReturn(null);
+        ValidationErrors validationErrors = mock(ValidationErrors.class);
+        when(validationErrorFactory.createError("ERROR_CODE_4")).thenReturn(validationErrors);
         Optional<ValidationErrors> errorsOptional = dateToValidator.execute(premiumRequest);
         assertTrue(errorsOptional.isPresent());
-        assertEquals(errorsOptional.get().getField(), "dateTo");
-        assertEquals(errorsOptional.get().getMessage(), "Field cannot be empty");
+        assertSame(errorsOptional.get(), validationErrors);
     }
+
 
     @Test
     public void noErrorIfDateToIsPresent() {
@@ -37,6 +43,7 @@ class DateToValidatorTest {
         when(premiumRequest.getAgreementDateTo()).thenReturn(createNewDate("10.10.2030"));
         Optional<ValidationErrors> errorsOptional = dateToValidator.execute(premiumRequest);
         assertTrue(errorsOptional.isEmpty());
+        verifyNoInteractions(validationErrorFactory);
     }
 
     private Date createNewDate(String dateStr) {

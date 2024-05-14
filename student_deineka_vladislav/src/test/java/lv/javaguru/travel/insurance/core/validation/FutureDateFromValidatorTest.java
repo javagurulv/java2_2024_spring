@@ -14,13 +14,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class FutureDateFromValidatorTest {
+
+    @Mock
+    private ValidationErrorFactory validationErrorFactory;
 
     @Mock
     private DateTimeService dateTimeService;
@@ -33,10 +34,11 @@ class FutureDateFromValidatorTest {
         TravelCalculatePremiumRequest premiumRequest = mock(TravelCalculatePremiumRequest.class);
         when(premiumRequest.getAgreementDateFrom()).thenReturn(createNewDate("10.10.2010"));
         when(dateTimeService.getTodayDateTime()).thenReturn(createNewDate("10.10.2024"));
+        ValidationErrors validationErrors = mock(ValidationErrors.class);
+        when(validationErrorFactory.createError("ERROR_CODE_5")).thenReturn(validationErrors);
         Optional<ValidationErrors> errorsOptional = futureDateFromValidator.execute(premiumRequest);
         assertTrue(errorsOptional.isPresent());
-        assertEquals(errorsOptional.get().getField(), "dateFrom");
-        assertEquals(errorsOptional.get().getMessage(), "Cannot be from the past");
+        assertSame(errorsOptional.get(), validationErrors);
     }
 
     @Test
@@ -46,6 +48,7 @@ class FutureDateFromValidatorTest {
         when(dateTimeService.getTodayDateTime()).thenReturn(createNewDate("10.10.2024"));
         Optional<ValidationErrors> errorsOptional = futureDateFromValidator.execute(premiumRequest);
         assertTrue(errorsOptional.isEmpty());
+        verifyNoInteractions(validationErrorFactory);
     }
 
 
