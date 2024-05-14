@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.util;
 
 import org.springframework.stereotype.Component;
 
@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 @Component
-public class DateTimeService {
+public class DateTimeUtil {
 
     public long calculateDateFromTo(Date dateFrom, Date dateTo) {
         long diff = dateTo.getTime() - dateFrom.getTime();

@@ -14,7 +14,6 @@ class DateFromSmallerThanDateToValidator implements TravelRequestValidation {
     @Autowired
     private ValidationErrorFactory validationErrorFactory;
 
-
     @Override
     public Optional<ValidationErrors> execute(TravelCalculatePremiumRequest request) {
         Date dateFrom = request.getAgreementDateFrom();

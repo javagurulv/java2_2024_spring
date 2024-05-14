@@ -16,7 +16,7 @@ class LastNameValidator implements TravelRequestValidation{
     @Override
     public Optional<ValidationErrors> execute(TravelCalculatePremiumRequest request) {
         return (request.getPersonLastName() == null || request.getPersonLastName().isEmpty())
-                ? Optional.of(validationErrorFactory.createError("ERROR_CODE_1"))
+                ? Optional.of(validationErrorFactory.createError("ERROR_CODE_2"))
                 : Optional.empty();
 
     }

@@ -16,7 +16,7 @@ class FirstNameValidator implements TravelRequestValidation {
     @Override
     public Optional<ValidationErrors> execute(TravelCalculatePremiumRequest travelCalculatePremiumRequest) {
         return (travelCalculatePremiumRequest.getPersonFirstName() == null ||travelCalculatePremiumRequest.getPersonFirstName().isEmpty())
-                ? Optional.of(validationErrorFactory.createError("ERROR_CODE_2"))
+                ? Optional.of(validationErrorFactory.createError("ERROR_CODE_1"))
                 : Optional.empty();
 
     }

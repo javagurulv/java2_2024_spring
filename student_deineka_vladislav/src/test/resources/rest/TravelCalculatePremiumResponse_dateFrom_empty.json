@@ -1,8 +1,8 @@
 {
   "validationErrors": [
     {
-      "field": "dateFrom",
-      "message": "Field cannot be empty"
+      "errorCode": "ERROR_CODE_3",
+      "description": "Field agreementDateFrom cannot be empty!"
     }
   ],
   "personFirstName" : null,

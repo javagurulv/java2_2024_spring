@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.util;
 
 import org.junit.jupiter.api.Test;
 
@@ -8,15 +8,15 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DateTimeServiceTest {
+public class DateTimeUtilTest {
 
-    private DateTimeService dateTimeService = new DateTimeService();
+    private DateTimeUtil dateTimeUtil = new DateTimeUtil();
 
     @Test
     public void noDaysFromTo() {
         Date dateFrom = newDate("01.01.2001");
         Date dateTo = newDate("01.01.2001");
-        long daysFromTo = dateTimeService.calculateDateFromTo(dateFrom,dateTo);
+        long daysFromTo = dateTimeUtil.calculateDateFromTo(dateFrom,dateTo);
         assertEquals(daysFromTo,0L);
     }
 
@@ -24,7 +24,7 @@ public class DateTimeServiceTest {
     public void daysFromToIncrements() {
         Date dateFrom = newDate("01.01.2001");
         Date dateTo = newDate("02.01.2001");
-        long daysFromTo = dateTimeService.calculateDateFromTo(dateFrom,dateTo);
+        long daysFromTo = dateTimeUtil.calculateDateFromTo(dateFrom,dateTo);
         assertEquals(daysFromTo, 1L);
     }
 
@@ -32,7 +32,7 @@ public class DateTimeServiceTest {
     public void daysFromToDecrements() {
         Date dateFrom = newDate("02.01.2001");
         Date dateTo = newDate("01.01.2001");
-        long daysFromTo = dateTimeService.calculateDateFromTo(dateFrom,dateTo);
+        long daysFromTo = dateTimeUtil.calculateDateFromTo(dateFrom,dateTo);
         assertEquals(daysFromTo, -1L);
     }
 

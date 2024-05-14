@@ -1,8 +1,8 @@
 {
   "validationErrors": [
     {
-      "field": "dateFrom",
-      "message": "Cannot be bigger or equal to dateTo"
+      "errorCode": "ERROR_CODE_7",
+      "description": "Field agreementDateFrom cannot be bigger or equal to dateTo!"
     }
   ],
   "personFirstName" : null,

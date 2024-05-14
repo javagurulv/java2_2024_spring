@@ -1,10 +1,12 @@
 package lv.javaguru.travel.insurance.core.validation;
 
-import lv.javaguru.travel.insurance.core.ErrorCodeUtil;
+import lv.javaguru.travel.insurance.core.util.ErrorCodeUtil;
 import lv.javaguru.travel.insurance.dto.ValidationErrors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-public class ValidationErrorFactory {
+@Component
+class ValidationErrorFactory {
 
     @Autowired
     private ErrorCodeUtil errorCodeUtil;

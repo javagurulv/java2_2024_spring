@@ -1,8 +1,8 @@
 {
   "validationErrors": [
     {
-      "field": "lastName",
-      "message": "Field cannot be empty"
+      "errorCode": "ERROR_CODE_2",
+      "description": "Field personLastName cannot be empty!"
     }
   ],
   "personFirstName" : null,

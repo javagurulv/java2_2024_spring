@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.util;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -18,7 +18,7 @@ public class ErrorCodeUtil {
         properties = PropertiesLoaderUtils.loadProperties(resource);
     }
 
-    public String getErrorDescription(String errosrCode) {
-        return properties.getProperty(errosrCode);
+    public String getErrorDescription(String errorCode) {
+        return properties.getProperty(errorCode);
     }
 }
