@@ -7,6 +7,7 @@ import lv.javaguru.travel.insurance.core.sercices.TravelCalculatePremiumService;
 import lv.javaguru.travel.insurance.dto.v1.DtoV1Converter;
 import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
 import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumResponseV1;
+import lv.javaguru.travel.insurance.rest.common.TravelCalculatePremiumRequestExecutionTimeLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
