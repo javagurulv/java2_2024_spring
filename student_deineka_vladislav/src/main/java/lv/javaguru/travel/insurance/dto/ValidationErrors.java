@@ -12,6 +12,6 @@ import lombok.Setter;
 
 public class ValidationErrors {
 
-    private String field;
-    private String message;
+    private String errorCode;
+    private String description;
 }

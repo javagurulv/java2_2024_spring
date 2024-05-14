@@ -14,13 +14,15 @@ class FutureDateFromValidator implements TravelRequestValidation {
 
     @Autowired
     DateTimeService dateTimeService;
+    @Autowired
+    ValidationErrorFactory validationErrorFactory;
 
     @Override
     public Optional<ValidationErrors> execute(TravelCalculatePremiumRequest request) {
         Date dateFrom = request.getAgreementDateFrom();
         Date today = dateTimeService.getTodayDateTime();
         return (dateFrom != null && dateFrom.before(today))
-                ? Optional.of(new ValidationErrors("dateFrom", "Cannot be from the past"))
+                ? Optional.of(validationErrorFactory.createError("ERROR_CODE_5"))
                 : Optional.empty();
     }
 
