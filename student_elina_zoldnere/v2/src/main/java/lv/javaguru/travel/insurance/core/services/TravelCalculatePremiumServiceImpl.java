@@ -17,6 +17,8 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
     private TravelAgreementValidator agreementValidator;
     @Autowired
     private CalculateAndUpdateAgreementWithPremiums calculateAndUpdateAgreement;
+    @Autowired
+    private PersonWriter writer;
 
     @Override
     public TravelCalculatePremiumCoreResult calculatePremium(TravelCalculatePremiumCoreCommand command) {
@@ -28,6 +30,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
 
     private TravelCalculatePremiumCoreResult buildPremiumResponse(AgreementDTO agreement) {
         AgreementDTO agreementWithPremiums = calculateAndUpdateAgreement.calculateAgreementPremiums(agreement);
+        writePersons(agreement);
         TravelCalculatePremiumCoreResult coreResult = new TravelCalculatePremiumCoreResult();
         coreResult.setAgreement(agreementWithPremiums);
         return coreResult;
@@ -35,6 +38,10 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
 
     private TravelCalculatePremiumCoreResult buildErrorResponse(List<ValidationErrorDTO> errors) {
         return new TravelCalculatePremiumCoreResult(errors);
+    }
+
+    private void writePersons(AgreementDTO agreement) {
+        agreement.persons().forEach(person -> writer.writePersonIfNotExists(person));
     }
 
 }

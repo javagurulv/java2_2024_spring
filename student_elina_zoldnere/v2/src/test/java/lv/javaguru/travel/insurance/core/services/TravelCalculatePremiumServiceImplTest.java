@@ -27,7 +27,8 @@ public class TravelCalculatePremiumServiceImplTest {
     private TravelAgreementValidator agreementValidatorMock;
     @Mock
     private CalculateAndUpdateAgreementWithPremiums calculateAndUpdateAgreementMock;
-
+    @Mock
+    private PersonWriter writerMock;
     @Mock
     private TravelCalculatePremiumCoreCommand commandMock;
 
