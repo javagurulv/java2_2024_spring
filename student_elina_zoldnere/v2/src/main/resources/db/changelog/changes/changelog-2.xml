@@ -13,7 +13,7 @@
             <column name="classifier_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
-            <column name="ic" type="VARCHAR(200)">
+            <column name="ic" type="VARCHAR(100)">
                 <constraints nullable="false"/>
             </column>
             <column name="description" type="VARCHAR(500)">

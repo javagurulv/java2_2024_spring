@@ -10,7 +10,7 @@
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="country_ic" type="VARCHAR(200)">
+            <column name="country_ic" type="VARCHAR(100)">
                 <constraints nullable="false"/>
             </column>
             <column name="default_day_rate" type="DECIMAL(10,2)">
