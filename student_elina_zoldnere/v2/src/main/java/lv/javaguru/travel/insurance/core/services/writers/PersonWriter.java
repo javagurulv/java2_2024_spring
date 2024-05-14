@@ -1,20 +1,20 @@
-package lv.javaguru.travel.insurance.core.services;
+package lv.javaguru.travel.insurance.core.services.writers;
 
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
-import lv.javaguru.travel.insurance.core.domain.PersonEntity;
-import lv.javaguru.travel.insurance.core.repositories.PersonEntityRepository;
+import lv.javaguru.travel.insurance.core.domain.entities.PersonEntity;
+import lv.javaguru.travel.insurance.core.repositories.entities.PersonEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 @Component
-class PersonWriter {
+public class PersonWriter {
 
     @Autowired
     private PersonEntityRepository repository;
 
-    PersonEntity writePersonIfNotExists(PersonDTO person) {
+    public PersonEntity writePersonIfNotExists(PersonDTO person) {
         Optional<PersonEntity> personOpt = repository.findBy(
                 person.personFirstName(),
                 person.personLastName(),

@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core.domain;
+package lv.javaguru.travel.insurance.core.domain.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Getter
@@ -18,24 +19,24 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "persons")
-public class PersonEntity {
+@Table(name = "agreements")
+public class AgreementEntity {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "first_name", nullable = false)
-    private String firstName;
+    @Column(name = "date_from", nullable = false)
+    private Date dateFrom;
 
-    @Column(name = "last_name", nullable = false)
-    private String lastName;
+    @Column(name = "date_to", nullable = false)
+    private Date dateTo;
 
-    @Column(name = "personal_code", nullable = false)
-    private String personalCode;
+    @Column(name = "country", nullable = false)
+    private String country;
 
-    @Column(name = "birth_date", nullable = false)
-    private Date birthDate;
+    @Column(name = "premium", nullable = false)
+    private BigDecimal premium;
 
 }

@@ -4,6 +4,8 @@ import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreC
 import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreResult;
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
+import lv.javaguru.travel.insurance.core.services.writers.AgreementWriter;
+import lv.javaguru.travel.insurance.core.services.writers.PersonWriter;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,7 +20,9 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
     @Autowired
     private CalculateAndUpdateAgreementWithPremiums calculateAndUpdateAgreement;
     @Autowired
-    private PersonWriter writer;
+    private PersonWriter personWriter;
+    @Autowired
+    private AgreementWriter agreementWriter;
 
     @Override
     public TravelCalculatePremiumCoreResult calculatePremium(TravelCalculatePremiumCoreCommand command) {
@@ -30,7 +34,8 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
 
     private TravelCalculatePremiumCoreResult buildPremiumResponse(AgreementDTO agreement) {
         AgreementDTO agreementWithPremiums = calculateAndUpdateAgreement.calculateAgreementPremiums(agreement);
-        writePersons(agreement);
+        writePersons(agreementWithPremiums);
+        agreementWriter.writeAgreement(agreementWithPremiums);
         TravelCalculatePremiumCoreResult coreResult = new TravelCalculatePremiumCoreResult();
         coreResult.setAgreement(agreementWithPremiums);
         return coreResult;
@@ -41,7 +46,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
     }
 
     private void writePersons(AgreementDTO agreement) {
-        agreement.persons().forEach(person -> writer.writePersonIfNotExists(person));
+        agreement.persons().forEach(person -> personWriter.writePersonIfNotExists(person));
     }
 
 }
