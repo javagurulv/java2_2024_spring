@@ -29,7 +29,7 @@ public class AgreementDateToExistValidatorTest {
         when(request.getAgreementDateTo()).thenReturn(null);
         ValidationError validationError = mock(ValidationError.class);
         when(validationErrorFactory.buildError(5)).thenReturn(validationError);
-        Optional<ValidationError> errors = validation.execute(request);
+        Optional<ValidationError> errors = validation.validate(request);
         assertTrue(errors.isPresent());
         assertEquals(errors.get(), validationError);
 
@@ -39,7 +39,7 @@ public class AgreementDateToExistValidatorTest {
     void dateToIsExist() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateTo()).thenReturn(LocalDate.of(2030, 3, 31));
-        Optional<ValidationError> errors = validation.execute(request);
+        Optional<ValidationError> errors = validation.validate(request);
         assertTrue(errors.isEmpty());
     }
 }

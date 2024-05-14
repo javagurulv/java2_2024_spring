@@ -26,9 +26,9 @@ class TravelCalculatePremiumRequestValidatorTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
 
         TravelRequestValidator requestValidator1 = mock(TravelRequestValidator.class);
-        when(requestValidator1.execute(request)).thenReturn(Optional.empty());
+        when(requestValidator1.validate(request)).thenReturn(Optional.empty());
         TravelRequestValidator requestValidator2 = mock(TravelRequestValidator.class);
-        when(requestValidator2.execute(request)).thenReturn(Optional.empty());
+        when(requestValidator2.validate(request)).thenReturn(Optional.empty());
 
         List<TravelRequestValidator> travelRequestValidators = List.of(requestValidator1, requestValidator2);
 
@@ -43,9 +43,9 @@ class TravelCalculatePremiumRequestValidatorTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
 
         TravelRequestValidator requestValidator1 = mock(TravelRequestValidator.class);
-        when(requestValidator1.execute(request)).thenReturn(Optional.of(new ValidationError()));
+        when(requestValidator1.validate(request)).thenReturn(Optional.of(new ValidationError()));
         TravelRequestValidator requestValidator2 = mock(TravelRequestValidator.class);
-        when(requestValidator2.execute(request)).thenReturn(Optional.of(new ValidationError()));
+        when(requestValidator2.validate(request)).thenReturn(Optional.of(new ValidationError()));
 
         List<TravelRequestValidator> travelRequestValidators = List.of(requestValidator1, requestValidator2);
 

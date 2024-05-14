@@ -1,0 +1,18 @@
+{
+  "errors": [
+    {
+      "errorCode": 9,
+      "description": "Risk UNKNOWN_RISK_1 is not supported by system."
+    },
+    {
+      "errorCode": 9,
+      "description": "Risk UNKNOWN_RISK_2 is not supported by system."
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "country": null,
+  "agreementPremium": null
+}

@@ -28,7 +28,7 @@ public class PersonFirstNameValidatorTest {
         when(request.getPersonFirstName()).thenReturn(null);
         ValidationError validationError = mock(ValidationError.class);
         when(validationErrorFactory.buildError(1)).thenReturn(validationError);
-        Optional<ValidationError> errors = validation.execute(request);
+        Optional<ValidationError> errors = validation.validate(request);
         assertTrue(errors.isPresent());
         assertSame(errors.get(), validationError);
     }
@@ -39,7 +39,7 @@ public class PersonFirstNameValidatorTest {
         when(request.getPersonFirstName()).thenReturn("");
         ValidationError validationError = mock(ValidationError.class);
         when(validationErrorFactory.buildError(1)).thenReturn(validationError);
-        Optional<ValidationError> errors = validation.execute(request);
+        Optional<ValidationError> errors = validation.validate(request);
         assertTrue(errors.isPresent());
         assertSame(errors.get(), validationError);
     }
@@ -48,7 +48,7 @@ public class PersonFirstNameValidatorTest {
     void personFirstNameIsExist() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("Vladislav");
-        Optional<ValidationError> errors = validation.execute(request);
+        Optional<ValidationError> errors = validation.validate(request);
         assertTrue(errors.isEmpty());
     }
 

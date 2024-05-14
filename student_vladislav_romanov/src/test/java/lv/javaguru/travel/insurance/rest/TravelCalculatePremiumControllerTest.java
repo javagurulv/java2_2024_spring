@@ -96,6 +96,22 @@ public class TravelCalculatePremiumControllerTest {
         );
     }
 
+    @Test
+    public void emptySelectedRisksTest() throws Exception {
+        executeTest(
+                "rest/emptySelectedRisksTest_request.json",
+                "rest/emptySelectedRisksTest_response.json"
+        );
+    }
+
+    @Test
+    public void invalidSelectedRisksTest() throws Exception {
+        executeTest(
+                "rest/invalidSelectedRisksTest_request.json",
+                "rest/invalidSelectedRisksTest_response.json"
+        );
+    }
+
     private void executeTest(String requestJsonPath, String responseJsonPath) throws Exception {
         mockMvc.perform(post("/insurance/travel/")
                 .content(getDataFromJson(requestJsonPath))

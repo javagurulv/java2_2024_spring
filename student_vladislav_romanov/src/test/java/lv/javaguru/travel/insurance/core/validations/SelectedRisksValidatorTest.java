@@ -30,7 +30,7 @@ public class SelectedRisksValidatorTest {
         when(request.getSelectedRisks()).thenReturn(null);
         ValidationError validationError = mock(ValidationError.class);
         when(validationErrorFactory.buildError(8)).thenReturn(validationError);
-        Optional<ValidationError> errors = validation.execute(request);
+        Optional<ValidationError> errors = validation.validate(request);
         assertTrue(errors.isPresent());
         assertEquals(errors.get(), validationError);
     }
@@ -39,7 +39,7 @@ public class SelectedRisksValidatorTest {
     void risksIsExist() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getSelectedRisks()).thenReturn(Collections.singletonList("TRAVEL_MEDICAL"));
-        Optional<ValidationError> errors = validation.execute(request);
+        Optional<ValidationError> errors = validation.validate(request);
         assertTrue(errors.isEmpty());
     }
 

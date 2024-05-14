@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class SelectedRisksValidator implements TravelRequestValidator {
+public class SelectedRisksValidator extends TravelRequestValidatorImpl {
 
     @Autowired
     private ValidationErrorFactory validationErrorFactory;
-    public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
+    public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
         return (request.getSelectedRisks() == null || request.getSelectedRisks().isEmpty())
                 ? Optional.of(validationErrorFactory.buildError(8))
                 : Optional.empty();

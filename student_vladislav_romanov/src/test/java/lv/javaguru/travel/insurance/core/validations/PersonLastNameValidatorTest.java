@@ -29,7 +29,7 @@ public class PersonLastNameValidatorTest {
         when(request.getPersonLastName()).thenReturn(null);
         ValidationError validationError = mock(ValidationError.class);
         when(validationErrorFactory.buildError(2)).thenReturn(validationError);
-        Optional<ValidationError> errors = validation.execute(request);
+        Optional<ValidationError> errors = validation.validate(request);
         assertTrue(errors.isPresent());
         assertEquals(errors.get(), validationError);
     }
@@ -40,7 +40,7 @@ public class PersonLastNameValidatorTest {
         when(request.getPersonLastName()).thenReturn("");
         ValidationError validationError = mock(ValidationError.class);
         when(validationErrorFactory.buildError(2)).thenReturn(validationError);
-        Optional<ValidationError> errors = validation.execute(request);
+        Optional<ValidationError> errors = validation.validate(request);
         assertTrue(errors.isPresent());
         assertEquals(errors.get(), validationError);
     }
@@ -49,7 +49,7 @@ public class PersonLastNameValidatorTest {
     void personLastNameIsExist() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonLastName()).thenReturn("Romanov");
-        Optional<ValidationError> errors = validation.execute(request);
+        Optional<ValidationError> errors = validation.validate(request);
         assertTrue(errors.isEmpty());
     }
 }

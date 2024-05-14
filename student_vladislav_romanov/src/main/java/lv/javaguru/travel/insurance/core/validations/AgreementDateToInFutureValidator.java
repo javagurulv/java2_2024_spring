@@ -9,11 +9,11 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 @Component
-class AgreementDateToInFutureValidator implements TravelRequestValidator {
+class AgreementDateToInFutureValidator extends TravelRequestValidatorImpl {
 
     @Autowired
     private ValidationErrorFactory validationErrorFactory;
-    public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
+    public Optional<ValidationError> validate(TravelCalculatePremiumRequest request) {
         return (request.getAgreementDateTo() != null && request.getAgreementDateTo().isBefore(LocalDate.now()))
                 ? Optional.of(validationErrorFactory.buildError(6))
                 : Optional.empty();

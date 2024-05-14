@@ -1,5 +1,7 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.services;
 
+import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumCalculationResult;
+import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwriting;
 import lv.javaguru.travel.insurance.core.validations.TravelCalculatePremiumRequestValidator;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
@@ -17,14 +19,14 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
     private TravelCalculatePremiumRequestValidator requestValidator;
 
     @Autowired
-    private TravelPremium travelPremium;
+    private TravelPremiumUnderwriting travelPremiumUnderwriting;
 
     @Override
     public TravelCalculatePremiumResponse calculatePremium(TravelCalculatePremiumRequest request) {
         List<ValidationError> errors = requestValidator.validate(request);
 
         return errors.isEmpty()
-                ? buildResponse(request)
+                ? buildResponse(request, travelPremiumUnderwriting.calculatePremium(request))
                 : buildResponse(errors);
     }
 
@@ -32,7 +34,7 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         return new TravelCalculatePremiumResponse(errors);
     }
 
-    private TravelCalculatePremiumResponse buildResponse(TravelCalculatePremiumRequest request) {
+    private TravelCalculatePremiumResponse buildResponse(TravelCalculatePremiumRequest request, TravelPremiumCalculationResult premiumCalculationResult) {
         TravelCalculatePremiumResponse response = new TravelCalculatePremiumResponse();
         LocalDate agreementDateFrom = request.getAgreementDateFrom();
         LocalDate agreementDateTo = request.getAgreementDateTo();
@@ -41,7 +43,9 @@ class TravelCalculatePremiumServiceImpl implements TravelCalculatePremiumService
         response.setPersonLastName(request.getPersonLastName());
         response.setAgreementDateFrom(agreementDateFrom);
         response.setAgreementDateTo(agreementDateTo);
-        response.setAgreementPrice(travelPremium.calculatePremium(request));
+        response.setCountry(request.getCountry());
+        response.setAgreementPremium(premiumCalculationResult.getTotalPremium());
+        response.setRisks(premiumCalculationResult.getRiskPremiums());
 
         return response;
     }
