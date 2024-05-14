@@ -41,9 +41,9 @@ class SelectedRiskValidationTest {
         AgreementDTO agreement = mock(AgreementDTO.class);
         when(agreement.getSelectedRisks()).thenReturn(List.of("RISK_IC_1", "RISK_IC_2"));
         ClassifierValue classifierValue = mock(ClassifierValue.class);
-        when(classifierValueRepository.findByClassifierTitleAndIc("RISK TYPE", "RISK_IC_1"))
+        when(classifierValueRepository.findByClassifierTitleAndIc("RISK_TYPE", "RISK_IC_1"))
                 .thenReturn(Optional.of(classifierValue));
-        when(classifierValueRepository.findByClassifierTitleAndIc("RISK TYPE", "RISK_IC_2"))
+        when(classifierValueRepository.findByClassifierTitleAndIc("RISK_TYPE", "RISK_IC_2"))
                 .thenReturn(Optional.of(classifierValue));
         assertTrue(validation.validateList(agreement).isEmpty());
     }
@@ -52,9 +52,9 @@ class SelectedRiskValidationTest {
     public void shouldValidateWithErrors() {
         AgreementDTO agreement = mock(AgreementDTO.class);
         when(agreement.getSelectedRisks()).thenReturn(List.of("RISK_IC_1", "RISK_IC_2"));
-        when(classifierValueRepository.findByClassifierTitleAndIc("RISK TYPE", "RISK_IC_1"))
+        when(classifierValueRepository.findByClassifierTitleAndIc("RISK_TYPE", "RISK_IC_1"))
                 .thenReturn(Optional.empty());
-        when(classifierValueRepository.findByClassifierTitleAndIc("RISK TYPE", "RISK_IC_2"))
+        when(classifierValueRepository.findByClassifierTitleAndIc("RISK_TYPE", "RISK_IC_2"))
                 .thenReturn(Optional.empty());
 
         ValidationErrorDTO error = mock(ValidationErrorDTO.class);

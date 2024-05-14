@@ -13,7 +13,7 @@ import java.util.Optional;
 class EmptyMedicalRiskLimitLevelValidation
         extends TravelAgreementFieldValidationImpl {
 
-    @Value("$[medical.risk.limit.level.enabled:false]")
+    @Value("${medical.risk.limit.level.enabled:false}")
     private Boolean medicalRiskLimitLevelEnabled;
 
     @Autowired
