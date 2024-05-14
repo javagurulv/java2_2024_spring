@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AgreementWriter {
+class AgreementWriter {
 
     @Autowired
     private AgreementEntityRepository repository;
 
-    public AgreementEntity writeAgreement(AgreementDTO agreement) {
+    AgreementEntity writeAgreement(AgreementDTO agreement) {
         AgreementEntity newAgreementEntity = new AgreementEntity();
         newAgreementEntity.setDateFrom(agreement.agreementDateFrom());
         newAgreementEntity.setDateTo(agreement.agreementDateTo());

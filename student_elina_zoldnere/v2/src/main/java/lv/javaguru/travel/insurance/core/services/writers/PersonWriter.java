@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class PersonWriter {
+class PersonWriter {
 
     @Autowired
     private PersonEntityRepository repository;
 
-    public PersonEntity writePersonIfNotExists(PersonDTO person) {
+    PersonEntity writePersonIfNotExists(PersonDTO person) {
         Optional<PersonEntity> personOpt = repository.findBy(
                 person.personFirstName(),
                 person.personLastName(),

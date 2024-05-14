@@ -4,8 +4,6 @@ import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreC
 import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreResult;
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
-import lv.javaguru.travel.insurance.core.services.writers.AgreementWriter;
-import lv.javaguru.travel.insurance.core.services.writers.PersonWriter;
 import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
 
@@ -30,9 +28,7 @@ public class TravelCalculatePremiumServiceImplTest {
     @Mock
     private CalculateAndUpdateAgreementWithPremiums calculateAndUpdateAgreementMock;
     @Mock
-    private PersonWriter personWriterMock;
-    @Mock
-    private AgreementWriter agreementWriterMock;
+    private EntityWriter entityWriterMock;
     @Mock
     private TravelCalculatePremiumCoreCommand commandMock;
 
