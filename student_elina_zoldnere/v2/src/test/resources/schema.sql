@@ -1,8 +1,8 @@
 
 CREATE TABLE classifiers (
   id BIGINT NOT NULL AUTO_INCREMENT,
-  title VARCHAR(200) NOT NULL,
-  description VARCHAR(100) NOT NULL,
+  title VARCHAR(100) NOT NULL,
+  description VARCHAR(500) NOT NULL,
   PRIMARY KEY (id)
 );
 
@@ -11,7 +11,7 @@ CREATE UNIQUE INDEX ix_classifiers_title ON classifiers(title);
 CREATE TABLE classifier_values (
   id BIGINT NOT NULL AUTO_INCREMENT,
   classifier_id BIGINT NOT NULL,
-  ic VARCHAR(200) NOT NULL,
+  ic VARCHAR(100) NOT NULL,
   description VARCHAR(500) NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (classifier_id) REFERENCES classifiers(id)
@@ -22,7 +22,7 @@ ON classifier_values(ic);
 
 CREATE TABLE country_default_day_rate (
   id BIGINT NOT NULL AUTO_INCREMENT,
-  country_ic VARCHAR(200) NOT NULL,
+  country_ic VARCHAR(100) NOT NULL,
   default_day_rate DECIMAL(10,2) NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (country_ic) REFERENCES classifier_values(ic)
@@ -39,12 +39,32 @@ CREATE TABLE age_coefficient (
     PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS medical_risk_limit_level (
+CREATE TABLE medical_risk_limit_level (
    id BIGINT NOT NULL AUTO_INCREMENT,
-   medical_risk_limit_level_ic VARCHAR(200) NOT NULL,
+   medical_risk_limit_level_ic VARCHAR(100) NOT NULL,
    coefficient DECIMAL(10,2) NOT NULL,
    PRIMARY KEY (id)
 );
 
 CREATE UNIQUE INDEX ix_medical_risk_limit_level_ic
 ON medical_risk_limit_level (medical_risk_limit_level_ic);
+
+CREATE TABLE persons (
+   id BIGINT NOT NULL AUTO_INCREMENT,
+   first_name VARCHAR(200) NOT NULL,
+   last_name VARCHAR(200) NOT NULL,
+   personal_code VARCHAR(100)NOT NULL,
+   birth_date TIMESTAMP NOT NULL,
+   PRIMARY KEY (id)
+);
+
+CREATE UNIQUE INDEX ix_unique_persons ON persons(first_name, last_name, personal_code);
+
+CREATE TABLE agreements (
+   id BIGINT NOT NULL AUTO_INCREMENT,
+   date_from TIMESTAMP NOT NULL,
+   date_to TIMESTAMP NOT NULL,
+   country VARCHAR(100)NOT NULL,
+   premium DECIMAL(10,2) NOT NULL,
+   PRIMARY KEY (id)
+);

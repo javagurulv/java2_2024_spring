@@ -48,7 +48,7 @@ class SelectedRiskValidation
     }
 
     private boolean existInDatabase(String riskIc){
-        return classifierValueRepository.findByClassifierTitleAndIc("RISK TYPE", riskIc).isPresent();
+        return classifierValueRepository.findByClassifierTitleAndIc("RISK_TYPE", riskIc).isPresent();
     }
 
 

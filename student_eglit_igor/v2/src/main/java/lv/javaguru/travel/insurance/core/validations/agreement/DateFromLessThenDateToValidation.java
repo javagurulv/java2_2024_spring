@@ -16,6 +16,9 @@ class DateFromLessThenDateToValidation
 
     @Override
     public Optional<ValidationErrorDTO> validate(AgreementDTO agreement){
+        if (agreement.getAgreementDateTo() == null || agreement.getAgreementDateFrom() == null) {
+            return Optional.empty();
+        }
         return (dateFromIsAfterDateTo(agreement))
                 ? Optional.of(errorFactory.buildError("ERROR_CODE_7"))
                 : Optional.empty();
