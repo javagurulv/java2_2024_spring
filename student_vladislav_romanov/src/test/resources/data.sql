@@ -92,6 +92,17 @@ INSERT INTO classifier_values(
     description)
 SELECT
     cl.id,
+    'GREECE',
+    'Greece'
+FROM classifiers as cl
+WHERE cl.title = 'COUNTRY';
+
+INSERT INTO classifier_values(
+    classifier_id,
+    ic,
+    description)
+SELECT
+    cl.id,
     'SPAIN',
     'Spain'
 FROM classifiers as cl

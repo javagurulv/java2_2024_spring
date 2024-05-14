@@ -2,7 +2,7 @@
   "personFirstName" : "Vladislav",
   "personLastName" : "Romanov",
   "agreementDateFrom" : "2030-03-10",
-  "agreementDateTo" : null,
-  "country" : "GREECE",
+  "agreementDateTo" : "2030-03-20",
+  "country" : "",
   "selected_risks" : ["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
 }
