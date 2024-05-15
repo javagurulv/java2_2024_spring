@@ -14,14 +14,12 @@ class SelectedRisksWriter {
     private SelectedRisksEntityRepository repository;
 
     void writeSelectedRisks(AgreementDTO agreement, AgreementEntity agreementEntity) {
-        agreement.selectedRisks().stream()
-                .map(riskIc -> {
-                    SelectedRisksEntity riskEntity = new SelectedRisksEntity();
-                    riskEntity.setAgreementEntity(agreementEntity);
-                    riskEntity.setRiskIc(riskIc);
-                    return riskEntity;
-                })
-                .forEach(repository::save);
+        agreement.selectedRisks().forEach(riskIc -> {
+            SelectedRisksEntity riskEntity = new SelectedRisksEntity();
+            riskEntity.setAgreementEntity(agreementEntity);
+            riskEntity.setRiskIc(riskIc);
+            repository.save(riskEntity);
+        });
     }
 
 }

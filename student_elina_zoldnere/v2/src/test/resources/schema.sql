@@ -88,3 +88,12 @@ CREATE TABLE agreement_persons (
     FOREIGN KEY (agreement_id) REFERENCES agreements(id),
     FOREIGN KEY (person_id) REFERENCES persons(id)
 );
+
+CREATE TABLE agreement_person_risks (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    agreement_person_id BIGINT NOT NULL,
+    risk_ic VARCHAR(100) NOT NULL,
+    premium DECIMAL(10,2) NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (agreement_person_id) REFERENCES agreement_persons(id)
+);
