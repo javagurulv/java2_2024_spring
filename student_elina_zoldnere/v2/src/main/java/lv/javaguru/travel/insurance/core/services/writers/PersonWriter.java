@@ -23,12 +23,12 @@ class PersonWriter {
         if (personOpt.isPresent()) {
             return personOpt.get();
         } else {
-            PersonEntity newPersonEntity = new PersonEntity();
-            newPersonEntity.setFirstName(person.personFirstName());
-            newPersonEntity.setLastName(person.personLastName());
-            newPersonEntity.setPersonalCode(person.personalCode());
-            newPersonEntity.setBirthDate(person.personBirthDate());
-            return repository.save(newPersonEntity);
+            PersonEntity personEntity = new PersonEntity();
+            personEntity.setFirstName(person.personFirstName());
+            personEntity.setLastName(person.personLastName());
+            personEntity.setPersonalCode(person.personalCode());
+            personEntity.setBirthDate(person.personBirthDate());
+            return repository.save(personEntity);
         }
     }
 

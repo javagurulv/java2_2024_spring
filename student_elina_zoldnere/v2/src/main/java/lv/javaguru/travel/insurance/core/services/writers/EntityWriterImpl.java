@@ -15,15 +15,14 @@ class EntityWriterImpl implements EntityWriter {
     private PersonWriter personWriter;
     @Autowired
     private SelectedRisksWriter risksWriter;
+    @Autowired
+    private AgreementPersonsWriter agreementPersonsWriter;
 
     @Override
     public void writeEntities(AgreementDTO agreement) {
-        writePersons(agreement);
         AgreementEntity agreementEntity = agreementWriter.writeAgreement(agreement);
+        agreementPersonsWriter.writeAgreementPersons(agreement, agreementEntity);
         risksWriter.writeSelectedRisks(agreement, agreementEntity);
-    }
-    private void writePersons(AgreementDTO agreement) {
-        agreement.persons().forEach(person -> personWriter.writePersonIfNotExists(person));
     }
 
 }
