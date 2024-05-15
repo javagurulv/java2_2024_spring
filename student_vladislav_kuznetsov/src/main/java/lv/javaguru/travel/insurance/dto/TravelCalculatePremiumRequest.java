@@ -34,6 +34,7 @@ public class TravelCalculatePremiumRequest {
     private List<String> selectedRisks;
 
     private String country;
+    private String medicalRiskLimitLevel;
 
     public TravelCalculatePremiumRequest(String personFirstName, String personLastName) {
         this.personFirstName = personFirstName;
