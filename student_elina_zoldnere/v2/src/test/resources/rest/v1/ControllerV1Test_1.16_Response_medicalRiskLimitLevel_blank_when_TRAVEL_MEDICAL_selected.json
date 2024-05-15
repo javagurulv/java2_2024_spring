@@ -4,15 +4,5 @@
       "errorCode": "ERROR_CODE_8",
       "description": "Field medicalRiskLimitLevel is empty when medical risk limit level enabled!"
     }
-  ],
-  "personFirstName": null,
-  "personLastName": null,
-  "personalCode": null,
-  "personBirthDate" : null,
-  "agreementDateFrom": null,
-  "agreementDateTo": null,
-  "agreementPremium": null,
-  "riskPremiums" : null,
-  "country" : null,
-  "medicalRiskLimitLevel" : null
+  ]
 }

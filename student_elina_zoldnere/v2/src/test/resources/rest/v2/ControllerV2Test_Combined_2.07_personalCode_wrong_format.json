@@ -31,11 +31,6 @@
         "errorCode": "ERROR_CODE_15",
         "description": "Wrong personalCode format! Use 123456-12345."
       }
-    ],
-    "agreementDateFrom": null,
-    "agreementDateTo": null,
-    "country": null,
-    "persons": null,
-    "agreementPremium" : null
+    ]
   }
 }

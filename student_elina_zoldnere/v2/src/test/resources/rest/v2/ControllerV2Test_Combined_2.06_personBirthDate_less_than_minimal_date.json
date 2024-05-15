@@ -31,11 +31,6 @@
         "errorCode": "ERROR_CODE_14",
         "description": "PersonBirthDate is not a valid date!"
       }
-    ],
-    "agreementDateFrom": null,
-    "agreementDateTo": null,
-    "country": null,
-    "persons": null,
-    "agreementPremium" : null
+    ]
   }
 }

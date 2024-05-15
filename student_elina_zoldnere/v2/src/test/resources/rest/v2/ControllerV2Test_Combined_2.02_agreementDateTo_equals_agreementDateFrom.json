@@ -31,11 +31,6 @@
         "errorCode": "ERROR_CODE_13",
         "description": "AgreementDateTo must be after AgreementDateFrom!"
       }
-    ],
-    "agreementDateFrom": null,
-    "agreementDateTo": null,
-    "country": null,
-    "persons": null,
-    "agreementPremium" : null
+    ]
   }
 }

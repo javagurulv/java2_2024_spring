@@ -31,11 +31,6 @@
         "errorCode": "ERROR_CODE_6",
         "description": "Field country is empty!"
       }
-    ],
-    "agreementDateFrom": null,
-    "agreementDateTo": null,
-    "country": null,
-    "persons": null,
-    "agreementPremium" : null
+    ]
   }
 }

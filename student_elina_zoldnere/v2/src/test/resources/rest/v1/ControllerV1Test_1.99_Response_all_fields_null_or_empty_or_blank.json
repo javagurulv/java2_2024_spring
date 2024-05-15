@@ -32,15 +32,5 @@
       "errorCode": "ERROR_CODE_9",
       "description": "Field personalCode is empty!"
     }
-  ],
-  "personFirstName": null,
-  "personLastName": null,
-  "personalCode": null,
-  "personBirthDate" : null,
-  "agreementDateFrom": null,
-  "agreementDateTo": null,
-  "agreementPremium": null,
-  "riskPremiums" : null,
-  "country" : null,
-  "medicalRiskLimitLevel" : null
+  ]
 }

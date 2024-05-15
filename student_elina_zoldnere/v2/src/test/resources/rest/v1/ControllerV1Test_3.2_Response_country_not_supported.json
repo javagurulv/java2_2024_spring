@@ -4,15 +4,5 @@
       "errorCode": "ERROR_CODE_92",
       "description": "Country value NOT_SUPPORTED is not supported!"
     }
-  ],
-  "personFirstName": null,
-  "personLastName": null,
-  "personalCode": null,
-  "personBirthDate" : null,
-  "agreementDateFrom": null,
-  "agreementDateTo": null,
-  "agreementPremium": null,
-  "riskPremiums" : null,
-  "country" : null,
-  "medicalRiskLimitLevel" : null
+  ]
 }

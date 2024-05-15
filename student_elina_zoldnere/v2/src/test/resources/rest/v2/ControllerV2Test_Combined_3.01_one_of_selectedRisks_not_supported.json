@@ -31,11 +31,6 @@
         "errorCode": "ERROR_CODE_91",
         "description": "Risk type value NOT_SUPPORTED_1 is not supported!"
       }
-    ],
-    "agreementDateFrom": null,
-    "agreementDateTo": null,
-    "country": null,
-    "persons": null,
-    "agreementPremium" : null
+    ]
   }
 }
