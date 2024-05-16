@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+
+    <changeSet author="elina.zoldnere InsuranceApplication" id="33">
+        <addColumn tableName="agreements">
+            <column name="uuid" type="VARCHAR(36)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet author="elina.zoldnere InsuranceApplication" id="34">
+        <createIndex tableName="agreements"
+                     indexName="ix_agreements_uuid"
+                     unique="true">
+            <column name="uuid"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>

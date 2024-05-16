@@ -6,6 +6,8 @@ import lv.javaguru.travel.insurance.core.repositories.entities.AgreementEntityRe
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 class AgreementWriter {
 
@@ -18,6 +20,7 @@ class AgreementWriter {
         newAgreementEntity.setDateTo(agreement.agreementDateTo());
         newAgreementEntity.setCountry(agreement.country());
         newAgreementEntity.setPremium(agreement.agreementPremium());
+        newAgreementEntity.setUuid(UUID.randomUUID().toString());
         return repository.save(newAgreementEntity);
     }
 

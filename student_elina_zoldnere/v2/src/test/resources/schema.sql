@@ -66,8 +66,11 @@ CREATE TABLE agreements (
    date_to TIMESTAMP NOT NULL,
    country VARCHAR(100) NOT NULL,
    premium DECIMAL(10,2) NOT NULL,
+   uuid VARCHAR(36) NOT NULL,
    PRIMARY KEY (id)
 );
+
+CREATE UNIQUE INDEX ix_agreements_uuid ON agreements(uuid);
 
 CREATE TABLE selected_risks (
    id BIGINT NOT NULL AUTO_INCREMENT,
