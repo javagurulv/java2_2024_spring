@@ -10,7 +10,7 @@
   "risks": [
     {
       "riskIc": "TRAVEL_MEDICAL",
-      "premium": 1.20
+      "premium": 1.32
     },
     {
       "riskIc": "TRAVEL_CANCELLATION",
@@ -21,5 +21,5 @@
       "premium": 0
     }
   ],
-  "agreementPremium": 1.20
+  "agreementPremium": 1.32
 }
