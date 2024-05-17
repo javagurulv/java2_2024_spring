@@ -1,0 +1,36 @@
+{
+  "request": {
+    "agreementDateFrom" : "2030-05-29",
+    "agreementDateTo" : "2030-06-29",
+    "country" : "SPAIN",
+    "medicalRiskLimitLevel" : "LEVEL_10000",
+    "selected_risks":["NOT_EXISTING_RISK_TYPE"],
+    "persons" : [
+      {
+        "personFirstName" : "Vasja",
+        "personLastName" : "Pupkin",
+        "personBirthDate" : "2010-05-29"
+      },
+      {
+        "personFirstName" : "Petja",
+        "personLastName" : "Pupkin",
+        "personBirthDate" : "2010-02-29"
+      }
+    ]
+  }
+,
+  "expected result": {
+    "errors": [
+      {
+        "errorCode": "ERROR_CODE_9",
+        "description": "Risk Type ic = NOT_EXISTING_RISK_TYPE not supported!"
+      }
+    ],
+    "agreementDateFrom": null,
+    "agreementDateTo": null,
+    "country": null,
+    "medicalRiskLimitLevel": null,
+    "agreementPremium": null,
+    "persons": null
+  }
+}

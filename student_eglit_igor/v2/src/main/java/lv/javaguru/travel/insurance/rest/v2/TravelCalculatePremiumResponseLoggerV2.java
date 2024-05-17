@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.rest.v2;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lv.javaguru.travel.insurance.dto.v2.TravelCalculatePremiumResponseV2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +14,8 @@ public class TravelCalculatePremiumResponseLoggerV2 {
 
     void log(TravelCalculatePremiumResponseV2 response){
         ObjectMapper objectMapper = new ObjectMapper();
-        try {
+        objectMapper.registerModule(new JavaTimeModule());
+    try {
             String json = objectMapper.writeValueAsString(response);
             logger.info("RESPONSE: " + json);
         } catch (Exception e) {

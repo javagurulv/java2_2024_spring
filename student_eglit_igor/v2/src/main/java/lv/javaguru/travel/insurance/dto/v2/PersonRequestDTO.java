@@ -27,10 +27,4 @@ public class PersonRequestDTO {
     @JsonFormat(pattern="yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate personBirthDate;
-
-    @JsonSerialize(using = BigDecimalSerializer.class)
-    private BigDecimal personPremium;
-
-    @JsonAlias("person_risks")
-    private List<RiskPremium> personRisks;
 }

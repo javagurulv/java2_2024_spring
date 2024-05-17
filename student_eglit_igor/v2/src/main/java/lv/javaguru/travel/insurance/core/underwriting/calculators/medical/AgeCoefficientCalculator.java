@@ -9,11 +9,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.time.Period;
 
 @Component
 class AgeCoefficientCalculator {
 
-    @Value( "${medical.age.coefficient.enabled:false}" )
+    @Value( "${medical.age.coefficient.enabled:true}" )
     private Boolean medicalRiskAgeCoefficientEnabled;
 
     @Autowired
@@ -37,7 +38,7 @@ class AgeCoefficientCalculator {
     private Integer calculateAge(PersonDTO person) {
         var personBirthDate = person.personBirthDate();
         var currentDate = dateTimeUtil.getCurrentDateTime();
-        return personBirthDate.until(currentDate).getYears();
+        return Period. between(personBirthDate, currentDate).getYears();
     }
     private static BigDecimal getDefaultValue() {
         return BigDecimal.ONE;

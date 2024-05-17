@@ -1,0 +1,36 @@
+{
+  "request": {
+    "agreementDateFrom" : "2025-05-25",
+    "agreementDateTo" : "2025-05-29",
+    "country" : "SPAIN",
+    "medicalRiskLimitLevel" : "LEVEL_10000",
+    "selected_risks":["TRAVEL_MEDICAL"],
+    "persons" : [
+      {
+        "personFirstName" : "Vasja",
+        "personLastName" : "Pupkin",
+        "personBirthDate" : null
+      },
+      {
+        "personFirstName" : "Petja",
+        "personLastName" : "Pupkin",
+        "personBirthDate" : "1950-02-29"
+      }
+    ]
+  }
+,
+  "expected result": {
+    "errors": [
+      {
+        "errorCode": "ERROR_CODE_12",
+        "description": "Field personBirthDate is empty!"
+      }
+    ],
+    "agreementDateFrom": null,
+    "agreementDateTo": null,
+    "country": null,
+    "medicalRiskLimitLevel": null,
+    "agreementPremium": null,
+    "persons": null
+  }
+}
