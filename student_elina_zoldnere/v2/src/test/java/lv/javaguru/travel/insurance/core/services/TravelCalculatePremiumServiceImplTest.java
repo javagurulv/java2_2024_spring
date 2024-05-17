@@ -18,6 +18,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -47,6 +48,7 @@ public class TravelCalculatePremiumServiceImplTest {
         assertEquals(1, result.getErrors().size());
         assertEquals("errorCode", result.getErrors().get(0).errorCode());
         assertEquals("description", result.getErrors().get(0).description());
+        verifyNoInteractions(calculateAndUpdateAgreementMock, entityWriterMock);
     }
 
     @Test
@@ -58,13 +60,14 @@ public class TravelCalculatePremiumServiceImplTest {
         when(agreementValidatorMock.validate(command.getAgreement()))
                 .thenReturn(Collections.emptyList());
         when(calculateAndUpdateAgreementMock.calculateAgreementPremiums(agreement))
-                .thenReturn(agreement.withPremium(personsWithRisks, BigDecimal.TEN));
+                .thenReturn(agreement.withPremiums(personsWithRisks, BigDecimal.TEN, "UUID"));
 
         TravelCalculatePremiumCoreResult result = service.calculatePremium(command);
 
         assertEquals(BigDecimal.TEN, result.getAgreement().agreementPremium());
         assertEquals(1, result.getAgreement().persons().size());
         assertEquals(BigDecimal.TEN, result.getAgreement().persons().get(0).personRisks().get(0).premium());
+        assertEquals("UUID", result.getAgreement().uuid());
     }
 
     @Test
@@ -76,7 +79,7 @@ public class TravelCalculatePremiumServiceImplTest {
         when(agreementValidatorMock.validate(command.getAgreement()))
                 .thenReturn(Collections.emptyList());
         when(calculateAndUpdateAgreementMock.calculateAgreementPremiums(agreement))
-                .thenReturn(agreement.withPremium(personsWithRisks, BigDecimal.valueOf(20)));
+                .thenReturn(agreement.withPremiums(personsWithRisks, BigDecimal.valueOf(20), "UUID"));
 
         TravelCalculatePremiumCoreResult result = service.calculatePremium(command);
 
@@ -84,6 +87,7 @@ public class TravelCalculatePremiumServiceImplTest {
         assertEquals(2, result.getAgreement().persons().size());
         assertEquals(BigDecimal.TEN, result.getAgreement().persons().get(0).personRisks().get(0).premium());
         assertEquals(BigDecimal.TEN, result.getAgreement().persons().get(1).personRisks().get(0).premium());
+        assertEquals("UUID", result.getAgreement().uuid());
     }
 
 }

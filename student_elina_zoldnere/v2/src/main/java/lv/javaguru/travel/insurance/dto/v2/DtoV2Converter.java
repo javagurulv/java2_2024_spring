@@ -89,7 +89,8 @@ public class DtoV2Converter {
                 request.getCountry(),
                 request.getSelectedRisks(),
                 persons,
-                BigDecimal.ZERO);
+                BigDecimal.ZERO,
+                null);
     }
 
     private PersonDTO buildPersonFromRequest(PersonRequestDTO personRequestDTO) {

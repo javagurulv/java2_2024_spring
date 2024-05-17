@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class CalculateAndUpdateAgreementWithPremiums {
@@ -19,8 +20,9 @@ public class CalculateAndUpdateAgreementWithPremiums {
     AgreementDTO calculateAgreementPremiums(AgreementDTO agreement) {
         List<PersonDTO> personsWithRiskPremiums = calculateAndUpdatePersons.calculateRiskPremiumsForAllPersons(agreement);
         BigDecimal totalAgreementPremium = calculateTotalPremium.calculateTotalAgreementPremium(personsWithRiskPremiums);
+        String uuid = UUID.randomUUID().toString();
         // new agreement instance!
-        return agreement.withPremium(personsWithRiskPremiums, totalAgreementPremium);
+        return agreement.withPremiums(personsWithRiskPremiums, totalAgreementPremium, uuid);
     }
 
 }

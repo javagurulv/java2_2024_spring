@@ -80,7 +80,8 @@ public class DtoV1Converter {
                 request.getCountry(),
                 request.getSelectedRisks(),
                 List.of(person),
-                BigDecimal.ZERO);
+                BigDecimal.ZERO,
+                null);
     }
 
 }

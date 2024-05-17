@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.core.underwriting;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,7 +14,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -43,13 +43,14 @@ public class TravelCalculatePremiumUnderwritingImplTest {
     void calculateAgreementPremium_ShouldReturnCorrectResult(
             String testName, List<String> selectedRisks, BigDecimal expectedPremium, int expectedRiskDTOCount) {
         PersonDTO person = helper.newPersonDTO();
-        AgreementDTO agreement = new AgreementDTO(
-                new Date(2025 - 1900, 2, 10),
-                new Date(2025 - 1900, 2, 11),
-                "SPAIN",
-                selectedRisks,
-                List.of(person),
-                BigDecimal.ZERO);
+        AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
+                .withDateFrom(helper.newDate("2025.03.10"))
+                .withDateTo(helper.newDate("2025.03.11"))
+                .withCountry("SPAIN")
+                .withSelectedRisks(selectedRisks)
+                .withPerson(person)
+                .withPremium(BigDecimal.ZERO)
+                .build();
         when(singleRiskCalculatorMock.calculatePremium(any(), eq(agreement), eq(person)))
                 .thenReturn(helper.newRiskDTO());
         when(totalRiskCalculatorMock.calculatePremium(anyList())).thenReturn(BigDecimal.TEN);

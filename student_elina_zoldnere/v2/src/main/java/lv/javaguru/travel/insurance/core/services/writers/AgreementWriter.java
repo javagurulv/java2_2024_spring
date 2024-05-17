@@ -20,7 +20,7 @@ class AgreementWriter {
         newAgreementEntity.setDateTo(agreement.agreementDateTo());
         newAgreementEntity.setCountry(agreement.country());
         newAgreementEntity.setPremium(agreement.agreementPremium());
-        newAgreementEntity.setUuid(UUID.randomUUID().toString());
+        newAgreementEntity.setUuid(agreement.uuid());
         return repository.save(newAgreementEntity);
     }
 

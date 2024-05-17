@@ -15,16 +15,18 @@ public record AgreementDTO(
 
         List<PersonDTO> persons,
 
-        BigDecimal agreementPremium) {
+        BigDecimal agreementPremium,
+
+        String uuid) {
 
     // Copy constructor that allows to add agreementPremium and updated persons, effectively copying other values
-    public AgreementDTO withPremium(List<PersonDTO> persons, BigDecimal agreementPremium) {
+    public AgreementDTO withPremiums(List<PersonDTO> persons, BigDecimal agreementPremium, String uuid) {
         return new AgreementDTO(agreementDateFrom,
                 agreementDateTo,
                 country,
                 selectedRisks,
                 persons,
-                agreementPremium);
+                agreementPremium,
+                uuid);
     }
-
 }

@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder;
 import lv.javaguru.travel.insurance.core.domain.CountryDefaultDayRate;
 import lv.javaguru.travel.insurance.core.repositories.CountryDefaultDayRateRepository;
 import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
@@ -12,7 +13,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,13 +51,14 @@ class CountryDefaultDayRateRetrieverTest {
 
     @Test
     void findCountryDefaultDayRate_shouldThrowExceptionWhenRateDoesNotExist() {
-        AgreementDTO agreement = new AgreementDTO(
-                new Date(2025 - 1900, 2, 10),
-                new Date(2025 - 1900, 2, 11),
-                "INVALID",
-                List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"),
-                List.of(helper.newPersonDTO()),
-                BigDecimal.ZERO);
+        AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
+                .withDateFrom(helper.newDate("2025.03.10"))
+                .withDateTo(helper.newDate("2025.03.11"))
+                .withCountry("INVALID")
+                .withSelectedRisks(List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"))
+                .withPerson(helper.newPersonDTO())
+                .withPremium(BigDecimal.ZERO)
+                .build();
 
         when(countryDefaultDayRateRepositoryMock.findByCountryIc("INVALID"))
                 .thenReturn(Optional.empty());
