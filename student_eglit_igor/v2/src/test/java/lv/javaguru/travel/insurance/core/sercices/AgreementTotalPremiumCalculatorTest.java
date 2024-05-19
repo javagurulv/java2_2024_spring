@@ -23,10 +23,10 @@ class AgreementTotalPremiumCalculatorTest {
         RiskDTO risk22 = new RiskDTO("RISK_2", BigDecimal.ONE);
 
         var person1 = new PersonDTO("Joe", "Doe",
-                LocalDate.of(2000, 1, 1),
+                LocalDate.of(2000, 1, 1),"MEDICAL_RISK_LIMIT",
                 List.of(risk11, risk12));
         var person2 = new PersonDTO("Jane", "Doe",
-                LocalDate.of(2000, 1, 1),
+                LocalDate.of(2000, 1, 1),"MEDICAL_RISK_LIMIT",
                 List.of(risk21, risk22));
 
         var agreement = new AgreementDTO();

@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations.person;
 
+import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
@@ -15,6 +16,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -27,18 +29,20 @@ class EmptyPersonBirthDateValidationTest {
 
     @Test
     public void shouldReturnNoErrorWhenPersonBirthDateIsPresent() {
-        PersonDTO person = new PersonDTO("John", "Doe", LocalDate.now().minusYears(20), Collections.emptyList());
-        Optional<ValidationErrorDTO> errorOpt = validation.validate(person);
+        AgreementDTO agreement = mock(AgreementDTO.class);
+        PersonDTO person = new PersonDTO("John", "Doe", LocalDate.now().minusYears(20),"MEDICAL_RISK", Collections.emptyList());
+        Optional<ValidationErrorDTO> errorOpt = validation.validate(agreement, person);
         assertTrue(errorOpt.isEmpty());
     }
 
     @Test
     public void shouldReturnErrorWhenPersonBirthDateIsNull() {
-        PersonDTO person = new PersonDTO("John", "Doe", null, Collections.emptyList());
+        AgreementDTO agreement = mock(AgreementDTO.class);
+        PersonDTO person = new PersonDTO("John", "Doe", null,"MEDICAL_RISK", Collections.emptyList());
 
         when(errorFactory.buildError("ERROR_CODE_12"))
                 .thenReturn(new ValidationErrorDTO("ERROR_CODE_12", "Field personBirthDate is in the future!"));
-        Optional<ValidationErrorDTO> errorOpt = validation.validate(person);
+        Optional<ValidationErrorDTO> errorOpt = validation.validate(agreement, person);
         assertTrue(errorOpt.isPresent());
         assertEquals("ERROR_CODE_12", errorOpt.get().getErrorCode());
         assertEquals("Field personBirthDate is in the future!", errorOpt.get().getDescription());

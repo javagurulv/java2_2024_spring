@@ -18,8 +18,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -28,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ParameterizedControllerV2_2test {
+public class ParameterizedControllerV2Test {
     @Autowired
     private MockMvc mockMvc;
 
@@ -79,7 +77,8 @@ public class ParameterizedControllerV2_2test {
                 Arguments.of("Test case 22", "rest/v2/test_case_22/data.json"),
                 Arguments.of("Test case 23", "rest/v2/test_case_23/data.json"),
                 Arguments.of("Test case 24", "rest/v2/test_case_24/data.json"),
-                Arguments.of("Test case 25", "rest/v2/test_case_25/data.json")
+                Arguments.of("Test case 25", "rest/v2/test_case_25/data.json"),
+                Arguments.of("Test case 26", "rest/v2/test_case_26/data.json")
         );
     }
 

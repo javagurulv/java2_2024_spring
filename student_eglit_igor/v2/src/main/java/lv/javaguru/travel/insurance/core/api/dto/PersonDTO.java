@@ -13,5 +13,6 @@ public record PersonDTO (
         String personFirstName,
         String personLastName,
         LocalDate personBirthDate,
+        String medicalRiskLimitLevel,
         List<RiskDTO> risks
 ){ }

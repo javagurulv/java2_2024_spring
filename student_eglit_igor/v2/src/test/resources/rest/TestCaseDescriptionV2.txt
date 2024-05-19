@@ -99,5 +99,14 @@ Request: medicalRiskLimitLevel is null, RISK_TYPE - TRAVEL_MEDICAL.
 Response: error code = ERROR_CODE_14.
 
 Test Case 26:
-Request: medicalRiskLimitLevel is NOT_EXISTING_MEDICAL_RISK_LIMIT_LEVEL, RISK_TYPE - TRAVEL_MEDICAL.
+Request: multiply medicalRiskLimitLevel is NOT_EXISTING_MEDICAL_RISK_LIMIT_LEVEL, RISK_TYPE - TRAVEL_MEDICAL.
 Response: error code = ERROR_CODE_15.
+
+Test Case 27:
+Request: multiply medicalRiskLimitLevel is empty, RISK_TYPE - TRAVEL_MEDICAL.
+Response: error code = ERROR_CODE_14.
+
+Test Case 28:
+Request: multiply medicalRiskLimitLevel is null, RISK_TYPE - TRAVEL_MEDICAL.
+Response: error code = ERROR_CODE_14.
+

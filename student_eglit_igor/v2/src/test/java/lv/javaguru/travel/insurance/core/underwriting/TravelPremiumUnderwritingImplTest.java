@@ -28,7 +28,7 @@ class TravelPremiumUnderwritingImplTest {
     @Test
     void shouldCalculateTotalPremiumAsSumOfRiskPremiums() {
         AgreementDTO agreement = mock(AgreementDTO.class);
-        PersonDTO person = new PersonDTO("Name", "Surname", LocalDate.of(2000, 1, 1), List.of(new RiskDTO()));
+        PersonDTO person = new PersonDTO("Name", "Surname", LocalDate.of(2000, 1, 1), "MEDICAL_RISK_LIMIT", List.of(new RiskDTO()));
         List<RiskDTO> risks = List.of(
                 new RiskDTO("TRAVEL_MEDICAL", BigDecimal.ONE),
                 new RiskDTO("TRAVEL_EVACUATION", BigDecimal.ONE)

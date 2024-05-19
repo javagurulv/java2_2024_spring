@@ -22,6 +22,7 @@ class AgreementPersonsPremiumCalculator {
             PersonDTO updatedPerson = new PersonDTO(person.personFirstName(),
                     person.personLastName(),
                     person.personBirthDate(),
+                    person.medicalRiskLimitLevel(),
                     calculationResult.getRisks());
             updatedPersons.add(updatedPerson);
         });

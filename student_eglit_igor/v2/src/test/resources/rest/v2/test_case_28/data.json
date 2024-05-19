@@ -3,7 +3,7 @@
 
     "agreementDateFrom": "2030-05-20",
     "agreementDateTo": "2030-05-29",
-    "country": "NOT_EXISTING_COUNTRY",
+    "country": "SPAIN",
     "selected_risks": [
       "TRAVEL_MEDICAL"
     ],
@@ -12,13 +12,13 @@
         "personFirstName": "Vasja",
         "personLastName": "Pupkin",
         "personBirthDate": "2010-02-29",
-        "medicalRiskLimitLevel": "LEVEL_10000"
+        "medicalRiskLimitLevel": null
       },
       {
         "personFirstName": "Petja",
         "personLastName": "Pupkin",
         "personBirthDate": "2010-05-29",
-        "medicalRiskLimitLevel": "LEVEL_10000"
+        "medicalRiskLimitLevel": null
       }
     ]
   }
@@ -26,8 +26,12 @@
   "expected result": {
     "errors": [
       {
-        "errorCode": "ERROR_CODE_11",
-        "description": "Country ic = NOT_EXISTING_COUNTRY is not supported!"
+        "errorCode": "ERROR_CODE_14",
+        "description": "Field Medical_Risk_Limit_Level should not be empty!"
+      },
+      {
+        "errorCode": "ERROR_CODE_14",
+        "description": "Field Medical_Risk_Limit_Level should not be empty!"
       }
     ],
     "agreementDateFrom": null,

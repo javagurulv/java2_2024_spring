@@ -1,20 +1,24 @@
 {
   "request": {
-    "agreementDateFrom" : "2025-05-25",
-    "agreementDateTo" : "2025-05-29",
-    "country" : "SPAIN",
-    "medicalRiskLimitLevel" : "LEVEL_10000",
-    "selected_risks":["TRAVEL_MEDICAL"],
-    "persons" : [
+
+    "agreementDateFrom": "2025-05-25",
+    "agreementDateTo": "2025-05-29",
+    "country": "SPAIN",
+    "selected_risks": [
+      "TRAVEL_MEDICAL"
+    ],
+    "persons": [
       {
-        "personFirstName" : "Vasja",
-        "personLastName" : "Pupkin",
-        "personBirthDate" : null
+        "personFirstName": "Vasja",
+        "personLastName": "Pupkin",
+        "personBirthDate": null,
+        "medicalRiskLimitLevel": "LEVEL_10000"
       },
       {
-        "personFirstName" : "Petja",
-        "personLastName" : "Pupkin",
-        "personBirthDate" : null
+        "personFirstName": "Petja",
+        "personLastName": "Pupkin",
+        "personBirthDate": null,
+        "medicalRiskLimitLevel": "LEVEL_10000"
       }
     ]
   }
@@ -33,7 +37,6 @@
     "agreementDateFrom": null,
     "agreementDateTo": null,
     "country": null,
-    "medicalRiskLimitLevel": null,
     "agreementPremium": null,
     "persons": null
   }

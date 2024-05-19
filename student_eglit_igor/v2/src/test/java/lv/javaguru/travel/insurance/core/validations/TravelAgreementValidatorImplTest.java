@@ -30,7 +30,7 @@ public class TravelAgreementValidatorImplTest {
     public void shouldNotReturnErrors() {
         AgreementDTO agreement = mock(AgreementDTO.class);
         when(agreementFieldValidator.validate(agreement)).thenReturn(List.of());
-        when(personFieldValidator.validate(agreement.getPersons())).thenReturn(List.of());
+        when(personFieldValidator.validate(agreement)).thenReturn(List.of());
         List<ValidationErrorDTO> errors = validator.validate(agreement);
         assertTrue(errors.isEmpty());
     }
@@ -39,7 +39,7 @@ public class TravelAgreementValidatorImplTest {
     public void shouldReturnAgreementErrors() {
         AgreementDTO agreement = mock(AgreementDTO.class);
         when(agreementFieldValidator.validate(agreement)).thenReturn(List.of(new ValidationErrorDTO()));
-        when(personFieldValidator.validate(agreement.getPersons())).thenReturn(List.of());
+        when(personFieldValidator.validate(agreement)).thenReturn(List.of());
         List<ValidationErrorDTO> errors = validator.validate(agreement);
         assertEquals(1, errors.size());
     }
@@ -48,7 +48,7 @@ public class TravelAgreementValidatorImplTest {
     public void shouldReturnPersonErrors() {
         AgreementDTO agreement = mock(AgreementDTO.class);
         when(agreementFieldValidator.validate(agreement)).thenReturn(List.of());
-        when(personFieldValidator.validate(agreement.getPersons())).thenReturn(List.of(new ValidationErrorDTO()));
+        when(personFieldValidator.validate(agreement)).thenReturn(List.of(new ValidationErrorDTO()));
         List<ValidationErrorDTO> errors = validator.validate(agreement);
         assertEquals(1, errors.size());
     }
@@ -56,7 +56,7 @@ public class TravelAgreementValidatorImplTest {
     public void shouldReturnAgreementAndPersonErrors() {
         AgreementDTO agreement = mock(AgreementDTO.class);
         when(agreementFieldValidator.validate(agreement)).thenReturn(List.of(new ValidationErrorDTO()));
-        when(personFieldValidator.validate(agreement.getPersons())).thenReturn(List.of(new ValidationErrorDTO()));
+        when(personFieldValidator.validate(agreement)).thenReturn(List.of(new ValidationErrorDTO()));
         List<ValidationErrorDTO> errors = validator.validate(agreement);
         assertEquals(2, errors.size());
     }

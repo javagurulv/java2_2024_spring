@@ -39,7 +39,7 @@ class TravelMedicalRiskPremiumCalculatorTest {
     @BeforeEach
     void setUp() {
         agreement = new AgreementDTO();
-        person = new PersonDTO("John", "Doe", LocalDate.of(1990, 1, 1), List.of(new RiskDTO()));
+        person = new PersonDTO("John", "Doe", LocalDate.of(1990, 1, 1),"TRAVEL_MEDICAL" ,List.of(new RiskDTO()));
     }
 
     @Test
@@ -52,7 +52,7 @@ class TravelMedicalRiskPremiumCalculatorTest {
         when(dayCountCalculator.calculate(agreement)).thenReturn(daysCount);
         when(countryDefaultDayRateCalculator.calculate(agreement)).thenReturn(countryDefaultRate);
         when(ageCoefficientCalculator.calculate(person)).thenReturn(ageCoefficient);
-        when(riskLimitLevelCalculator.calculate(agreement)).thenReturn(riskLimitLevelCoefficient);
+        when(riskLimitLevelCalculator.calculate(person)).thenReturn(riskLimitLevelCoefficient);
 
         BigDecimal expectedPremium = countryDefaultRate.multiply(daysCount).multiply(ageCoefficient)
                 .multiply(riskLimitLevelCoefficient)
