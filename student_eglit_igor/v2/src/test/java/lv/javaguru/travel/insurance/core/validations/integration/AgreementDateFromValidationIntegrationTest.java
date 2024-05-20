@@ -31,7 +31,10 @@ public class AgreementDateFromValidationIntegrationTest {
                 .withLastName("Pupkin")
                 .withBirthDate(LocalDate.of(2000, 1, 1))
                 .withMedicalRiskLimitLevel("LEVEL_10000")
-                .withRisks(List.of(new RiskDTO(), new RiskDTO()))
+                .withRisks(List.of(RiskDTOBuilder.createRisk()
+                        .withRiskIc("TRAVEL_MEDICAL")
+                        .withPremium(BigDecimal.valueOf(100))
+                        .build()))
                 .build();
 
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
