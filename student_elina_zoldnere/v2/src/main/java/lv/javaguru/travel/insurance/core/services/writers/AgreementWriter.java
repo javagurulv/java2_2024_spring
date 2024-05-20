@@ -6,8 +6,6 @@ import lv.javaguru.travel.insurance.core.repositories.entities.AgreementEntityRe
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.UUID;
-
 @Component
 class AgreementWriter {
 
