@@ -11,16 +11,17 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-class TravelCalculatePremiumControllerAspect {
+class TravelControllerAspect {
 
-    private static final Logger logger = LoggerFactory.getLogger(TravelCalculatePremiumControllerAspect.class);
+    private static final Logger logger = LoggerFactory.getLogger(TravelControllerAspect.class);
 
-    @Pointcut("execution(* lv.javaguru.travel.insurance.rest.*.TravelCalculatePremiumController*.calculatePremium(..))")
-    public void calculatePremiumMethod() {
+    @Pointcut("execution(* lv.javaguru.travel.insurance.rest.*.*Controller*.calculatePremium(..)) || " +
+            "execution(* lv.javaguru.travel.insurance.rest.internal.*Controller*.getAgreement(..))")
+    public void controllerMethods() {
     }
 
-    @Around("calculatePremiumMethod()")
-    public Object logCalculatePremium(ProceedingJoinPoint joinPoint) throws Throwable {
+    @Around("controllerMethods()")
+    public Object logControllerMethod(ProceedingJoinPoint joinPoint) throws Throwable {
         Stopwatch stopwatch = Stopwatch.createStarted();
 
         Object response = joinPoint.proceed();
@@ -36,4 +37,5 @@ class TravelCalculatePremiumControllerAspect {
     }
 
 }
+
 

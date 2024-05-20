@@ -17,8 +17,7 @@ import java.util.List;
 @Component
 public class DtoInternalConverter {
 
-    public TravelGetAgreementCoreCommand buildCoreCommand(TravelGetAgreementRequest request) {
-        String uuid = request.getUuid();
+    public TravelGetAgreementCoreCommand buildCoreCommand(String uuid) {
         return new TravelGetAgreementCoreCommand(uuid);
     }
 

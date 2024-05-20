@@ -27,9 +27,12 @@ class ControllerLogRequest {
                 } catch (JsonProcessingException e) {
                     logger.error("Error converting request to JSON", e);
                 }
+            } else if (request instanceof String) {
+                logger.info("REQUEST: {}", request);
             } else {
                 logger.warn("Unexpected request object type: {}", request.getClass().getName());
             }
         }
     }
+
 }
