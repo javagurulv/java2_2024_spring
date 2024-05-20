@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -19,17 +20,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @AutoConfigureMockMvc
 public class AgreementDateFromValidationIntegrationTest {
 
-    @Autowired private TravelAgreementValidator validator;
+    @Autowired
+    private TravelAgreementValidator validator;
 
     @Test
-    public void shouldReturnErrorWhenDateFromIsNull(){
-        PersonDTO person = new PersonDTO(
-                "Vasja",
-                "Pupkin",
-                LocalDate.of(2000, 1, 1),
-                "LEVEL_10000",
-                List.of()
-        );
+    public void shouldReturnErrorWhenDateFromIsNull() {
+
+        PersonDTO person = PersonDTOBuilder.createPerson()
+                .withFirstName("Vasja")
+                .withLastName("Pupkin")
+                .withBirthDate(LocalDate.of(2000, 1, 1))
+                .withMedicalRiskLimitLevel("LEVEL_10000")
+                .withRisks(List.of(new RiskDTO(), new RiskDTO()))
+                .build();
 
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
                 .withDateFrom(null)
@@ -47,7 +50,7 @@ public class AgreementDateFromValidationIntegrationTest {
     }
 
     @Test
-    public void shouldReturnErrorWhenDateFromIsInThePast(){
+    public void shouldReturnErrorWhenDateFromIsInThePast() {
         PersonDTO person = new PersonDTO(
                 "Vasja",
                 "Pupkin",
@@ -72,7 +75,7 @@ public class AgreementDateFromValidationIntegrationTest {
     }
 
     @Test
-    public void shouldReturnErrorWhenCountryIsNull(){
+    public void shouldReturnErrorWhenCountryIsNull() {
         PersonDTO person = new PersonDTO(
                 "Vasja",
                 "Pupkin",
@@ -97,14 +100,14 @@ public class AgreementDateFromValidationIntegrationTest {
     }
 
     @Test
-    public void shouldReturnErrorThenFirstNameIsEmpty(){
-        PersonDTO person = new PersonDTO(
-                "",
-                "Pupkin",
-                LocalDate.of(2000, 1, 1),
-                "LEVEL_10000",
-                List.of()
-        );
+    public void shouldReturnErrorThenFirstNameIsEmpty() {
+        PersonDTO person = PersonDTOBuilder.createPerson()
+                .withFirstName("")
+                .withLastName("Pupkin")
+                .withBirthDate(LocalDate.of(2000, 1, 1))
+                .withMedicalRiskLimitLevel("LEVEL_10000")
+                .withRisk(new RiskDTO())
+                .build();
 
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
                 .withDateFrom(LocalDate.of(2030, 1, 1))
@@ -122,7 +125,7 @@ public class AgreementDateFromValidationIntegrationTest {
     }
 
     @Test
-    public void shouldReturnMultiplyErrorThenFirstNamesAreEmpty(){
+    public void shouldReturnMultiplyErrorThenFirstNamesAreEmpty() {
         PersonDTO person = new PersonDTO(
                 "",
                 "Pupkin",
