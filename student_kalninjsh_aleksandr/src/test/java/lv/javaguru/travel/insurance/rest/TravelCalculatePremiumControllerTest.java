@@ -146,8 +146,8 @@ public class TravelCalculatePremiumControllerTest {
                 .andExpect(jsonPath("personFirstName", is("Tom")))
                 .andExpect(jsonPath("personLastName", is("Sawyer")))
                 .andExpect(jsonPath("agreementDateFrom", is("2005-02-24")))
-                .andExpect(jsonPath("agreementDateTo", is("2005-07-15")))
-                .andExpect(jsonPath("agreementPrice", is(141)))
+                .andExpect(jsonPath("agreementDateTo", is("2005-05-15")))
+                .andExpect(jsonPath("agreementPrice", is(80)))
                 .andExpect(jsonPath("errors", is(nullValue())))
                 .andReturn();
     }
