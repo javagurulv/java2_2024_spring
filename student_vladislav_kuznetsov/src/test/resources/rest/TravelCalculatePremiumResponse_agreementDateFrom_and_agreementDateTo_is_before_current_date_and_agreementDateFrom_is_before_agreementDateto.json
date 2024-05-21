@@ -13,6 +13,8 @@
   "personLastName": null,
   "agreementDateFrom": null,
   "agreementDateTo": null,
+  "personBirthDate": null,
   "agreementPremium": null,
-  "risks": null
+  "risks": null,
+  "medicalRiskLimitLevel": null
 }

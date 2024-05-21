@@ -1,9 +1,10 @@
 {
   "personFirstName" : null,
   "personLastName" : "Pupkin",
-  "personBirthDate" : "1989-01-25",
-  "agreementDateFrom" : "2024-05-28",
+  "personBirthDate" : "2000-05-29",
+  "agreementDateFrom" : "2025-05-25",
   "agreementDateTo" : "2025-05-29",
   "country" : "SPAIN",
+  "medicalRiskLimitLevel" : "LEVEL_10000",
   "selected_risks":["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"]
 }

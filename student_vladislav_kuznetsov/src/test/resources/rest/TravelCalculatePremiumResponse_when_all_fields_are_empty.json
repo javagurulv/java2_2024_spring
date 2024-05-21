@@ -1,6 +1,10 @@
 {
   "errors": [
     {
+      "errorCode": "ERROR_CODE_11",
+      "description": "Field personBirthDate must not be empty!"
+    },
+    {
       "errorCode": "ERROR_CODE_8",
       "description": "Field selected risks must not be empty!"
     },
@@ -25,6 +29,8 @@
   "personLastName": null,
   "agreementDateFrom": null,
   "agreementDateTo": null,
+  "personBirthDate": null,
   "agreementPremium": null,
-  "risks": null
+  "risks": null,
+  "medicalRiskLimitLevel": null
 }
