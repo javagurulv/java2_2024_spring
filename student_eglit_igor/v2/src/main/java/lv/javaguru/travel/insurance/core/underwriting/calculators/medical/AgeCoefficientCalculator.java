@@ -14,7 +14,7 @@ import java.time.Period;
 @Component
 class AgeCoefficientCalculator {
 
-    @Value( "${medical.age.coefficient.enabled:true}" )
+    @Value( "${medical.risk.age.coefficient.enabled:false}" )
     private Boolean medicalRiskAgeCoefficientEnabled;
 
     @Autowired

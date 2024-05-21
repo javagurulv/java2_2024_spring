@@ -33,10 +33,11 @@ class AgeCoefficientCalculatorTest {
 
     @InjectMocks
     private AgeCoefficientCalculator calculator;
- private PersonDTO person;
+    private PersonDTO person;
+
     @BeforeEach
     void setUp() {
-         person = new PersonDTO("John", "Doe", LocalDate.of(1990, 1, 1),"MEDICAL_RISK_LIMIT", List.of(new RiskDTO()));
+        person = new PersonDTO("John", "Doe", LocalDate.of(1990, 1, 1), "MEDICAL_RISK_LIMIT", List.of(new RiskDTO()));
     }
 
     @Test
