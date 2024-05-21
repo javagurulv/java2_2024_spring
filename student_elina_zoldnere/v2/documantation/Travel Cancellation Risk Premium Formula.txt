@@ -1,0 +1,63 @@
+Travel Cancellation Risk Premium Calculation Formula
+                    
+Formula:
+Premium = BasePremium * DestinationCoefficient * DurationCoefficient * AgeCoefficient * LimitLevelCoefficient
+
+Components Description
+
+BasePremium:
+    This is a standard premium amount set as the starting point for the calculation.
+    Example: BasePremium = €10.
+
+DestinationCoefficient:
+    This coefficient adjusts the premium based on the destination of the trip. Different destinations might have 
+    different risk levels.
+    Example Implementation:
+        Latvia -> 1.2
+        Spain -> 1.5
+        Egypt -> 2.0
+    Default Value: 1.0 if no specific coefficient is defined for the destination.
+
+DurationCoefficient:
+    This coefficient adjusts the premium based on the duration of the trip. Longer trips typically have higher 
+    coefficients.
+    Example Implementation:
+        1-7 days -> 1.0
+        8-14 days -> 1.2
+        15-21 days -> 1.5
+        22+ days -> 2.0
+    Default Value: 1.0 for trips of 1-7 days.
+
+AgeCoefficient:
+    This coefficient adjusts the premium based on the age of the customer.
+    Example Implementation:
+        0-10 years -> 0.8
+        11-17 years -> 1.0
+        18-25 years -> 1.2
+        26-50 years -> 1.1
+        51+ years -> 1.3
+    Default Value: 1.0 for the age group 11-17 years.
+
+LimitLevelCoefficient:
+    This coefficient adjusts the premium based on the total cost of the trip or the insurance coverage amount.
+    Example Implementation:
+        0-1000 EUR -> 1.0
+        1001-3000 EUR -> 1.2
+        3001-5000 EUR -> 1.5
+        5001+ EUR -> 2.0
+    Default Value: 1.0 for trips costing 0-1000 EUR.
+
+Example Calculation
+Assume the following scenario:
+
+    BasePremium: €10
+    Destination: Spain (DestinationCoefficient = 1.5)
+    Trip Duration: 10 days (DurationCoefficient = 1.2)
+    Customer Age: 30 years (AgeCoefficient = 1.1)
+    Trip Cost: 4000 EUR (LimitLevelCoefficient = 1.5)
+
+Using the formula:
+Premium = BasePremium * DestinationCoefficient * DurationCoefficient * AgeCoefficient * LimitLevelCoefficient
+Premium = 10 * 1.5 * 1.2 * 1.1 * 1.5 = €29.70
+
+This means the calculated premium for this specific trip is €29.70.
