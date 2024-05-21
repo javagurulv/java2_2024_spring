@@ -2,12 +2,11 @@ package lv.javaguru.travel.insurance.rest.internal;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import lv.javaguru.travel.insurance.core.domain.entities.AgreementEntity;;
+import lv.javaguru.travel.insurance.core.domain.entities.AgreementEntity;
 import lv.javaguru.travel.insurance.rest.JsonFileReader;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
@@ -32,7 +31,6 @@ import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 class TravelGetAgreementControllerInternalTest {
 
     @Autowired
@@ -52,7 +50,7 @@ class TravelGetAgreementControllerInternalTest {
         JsonObject setUpRequestJson = testDataJson.getAsJsonObject("set-up request");
         JsonObject expectedResponseJson = testDataJson.getAsJsonObject("expectedResponse");
 
-        MockHttpServletResponse setUpResponse = mockMvc.perform(post("/insurance/travel/api/v2/")
+        mockMvc.perform(post("/insurance/travel/api/v2/")
                         .content(setUpRequestJson.toString())
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
@@ -64,13 +62,34 @@ class TravelGetAgreementControllerInternalTest {
 
         expectedResponseJson.addProperty("uuid", insertedUuid);
 
-        MockHttpServletResponse response = mockMvc.perform(get("/insurance/travel/api/internal/agreement/" + insertedUuid)
+        MockHttpServletResponse response = mockMvc.perform(get(
+                        "/insurance/travel/api/internal/agreement/" + insertedUuid)
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse();
 
         String expectedResponseAsString = expectedResponseJson.toString();
+        String actualResponseAsString = response.getContentAsString(StandardCharsets.UTF_8);
+
+        assertJson(actualResponseAsString)
+                .where()
+                .keysInAnyOrder()
+                .arrayInAnyOrder()
+                .isEqualTo(expectedResponseAsString);
+    }
+
+    @Test
+    public void controller_ShouldReturnErrorForNotExistingUuid() throws Exception {
+        MockHttpServletResponse response = mockMvc.perform(get(
+                        "/insurance/travel/api/internal/agreement/NOT-EXISTING-UUID")
+                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse();
+
+        String expectedResponseAsString = reader.readJsonFromFile(
+                "internal/ControllerInternalTest_Response_3.01_uuid_not_in_database.json");
         String actualResponseAsString = response.getContentAsString(StandardCharsets.UTF_8);
 
         assertJson(actualResponseAsString)

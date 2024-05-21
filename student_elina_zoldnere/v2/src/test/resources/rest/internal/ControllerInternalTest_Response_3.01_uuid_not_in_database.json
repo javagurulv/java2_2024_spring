@@ -1,0 +1,8 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_22",
+      "description": "Uuid NOT-EXISTING-UUID is not in database!"
+    }
+  ]
+}
