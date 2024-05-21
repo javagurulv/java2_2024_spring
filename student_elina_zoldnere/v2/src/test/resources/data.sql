@@ -51,3 +51,9 @@ VALUES ('LEVEL_10000', 1.0),
        ('LEVEL_15000', 1.2),
        ('LEVEL_20000', 1.5),
        ('LEVEL_50000', 2.0);
+
+INSERT INTO travel_cost_coefficient (travel_cost_from, travel_cost_to, premium)
+VALUES (0, 5000, 10),
+       (5000.01, 10000, 30),
+       (10000.01, 20000, 100),
+       (20000.01, 1000000 ,500);

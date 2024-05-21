@@ -34,6 +34,7 @@ class PersonDTOReader {
                 person.getPersonalCode(),
                 person.getBirthDate(),
                 agreementPerson.getMedicalRiskLimitLevel(),
+                agreementPerson.getTravelCost(),
                 personRisks
         );
     }

@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core.domain;
+package lv.javaguru.travel.insurance.core.domain.cancellation;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,21 +18,21 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "age_coefficient")
-public class AgeCoefficient {
+@Table(name = "travel_cost_coefficient")
+public class TravelCostCoefficient {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "age_from", nullable = false)
-    private Integer ageFrom;
+    @Column(name = "travel_cost_from", precision = 10, scale = 2, nullable = false)
+    private BigDecimal travelCostFrom;
 
-    @Column(name = "age_to", nullable = false)
-    private Integer ageTo;
+    @Column(name = "travel_cost_to", precision = 10, scale = 2, nullable = false)
+    private BigDecimal travelCostTo;
 
-    @Column(name = "coefficient", precision = 10, scale = 2, nullable = false)
-    private BigDecimal coefficient;
+    @Column(name = "premium", precision = 10, scale = 2, nullable = false)
+    private BigDecimal travelCostPremium;
 
 }

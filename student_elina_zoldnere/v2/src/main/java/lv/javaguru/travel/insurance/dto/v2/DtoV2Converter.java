@@ -100,6 +100,7 @@ public class DtoV2Converter {
                 personRequestDTO.getPersonalCode(),
                 personRequestDTO.getPersonBirthDate(),
                 personRequestDTO.getMedicalRiskLimitLevel(),
+                personRequestDTO.getTravelCost(),
                 Collections.emptyList());
     }
 

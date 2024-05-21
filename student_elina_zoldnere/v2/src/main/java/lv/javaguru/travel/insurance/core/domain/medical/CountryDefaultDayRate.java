@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core.domain;
+package lv.javaguru.travel.insurance.core.domain.medical;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,24 +10,26 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "medical_risk_limit_level")
-public class MedicalRiskLimitLevel {
+@Entity
+@Table(name = "country_default_day_rate")
+public class CountryDefaultDayRate {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "medical_risk_limit_level_ic", nullable = false)
-    private String medicalRiskLimitLevelIc;
+    @Column(name = "country_ic", nullable = false)
+    private String countryIc;
 
-    @Column(name = "coefficient", precision = 10, scale = 2, nullable = false)
-    private BigDecimal coefficient;
+    @Column(name = "default_day_rate", precision = 10, scale = 2, nullable = false)
+    private BigDecimal defaultDayRate;
 
 }

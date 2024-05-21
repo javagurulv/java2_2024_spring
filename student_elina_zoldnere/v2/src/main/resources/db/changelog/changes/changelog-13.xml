@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+
+    <changeSet author="elina.zoldnere InsuranceApplication" id="35">
+        <createTable tableName="travel_cost_coefficient">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="travel_cost_from" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="travel_cost_to" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="premium" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="elina.zoldnere InsuranceApplication" id="36">
+        <sql>
+            INSERT INTO travel_cost_coefficient(id, travel_cost_from, travel_cost_to, premium)
+            VALUES (1002, 0, 5000, 10);
+
+            INSERT INTO travel_cost_coefficient(travel_cost_from, travel_cost_to, premium)
+            (5000.01, 10000, 30),
+            (10000.01, 20000, 100),
+            (20000.01, 1000000 ,500);
+        </sql>
+    </changeSet>
+
+    <changeSet author="elina.zoldnere InsuranceApplication" id="37">
+        <addColumn tableName="agreement_persons">
+            <column name="travel_cost" type="DECIMAL(10,2)">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>

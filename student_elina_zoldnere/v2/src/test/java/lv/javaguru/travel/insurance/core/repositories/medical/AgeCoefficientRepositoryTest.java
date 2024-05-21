@@ -1,6 +1,7 @@
-package lv.javaguru.travel.insurance.core.repositories;
+package lv.javaguru.travel.insurance.core.repositories.medical;
 
-import lv.javaguru.travel.insurance.core.domain.AgeCoefficient;
+import lv.javaguru.travel.insurance.core.domain.medical.AgeCoefficient;
+import lv.javaguru.travel.insurance.core.repositories.medical.AgeCoefficientRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

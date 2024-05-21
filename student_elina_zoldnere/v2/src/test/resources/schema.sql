@@ -87,6 +87,7 @@ CREATE TABLE agreement_persons (
     agreement_id BIGINT NOT NULL,
     person_id BIGINT NOT NULL,
     medical_risk_limit_level VARCHAR(100),
+    travel_cost DECIMAL(10,2),
     PRIMARY KEY (id),
     FOREIGN KEY (agreement_id) REFERENCES agreements(id),
     FOREIGN KEY (person_id) REFERENCES persons(id)
@@ -99,4 +100,12 @@ CREATE TABLE agreement_person_risks (
     premium DECIMAL(10,2) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (agreement_person_id) REFERENCES agreement_persons(id)
+);
+
+CREATE TABLE travel_cost_coefficient (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    travel_cost_from DECIMAL(10,2) NOT NULL,
+    travel_cost_to DECIMAL(10,2) NOT NULL,
+    premium DECIMAL(10,2) NOT NULL,
+    PRIMARY KEY (id)
 );

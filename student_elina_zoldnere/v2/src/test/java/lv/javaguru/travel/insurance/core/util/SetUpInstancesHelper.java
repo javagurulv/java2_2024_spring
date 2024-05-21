@@ -48,6 +48,7 @@ public class SetUpInstancesHelper {
                 .withPersonalCode("123456-12345")
                 .withPersonBirthdate(newDate("1990.01.01"))
                 .withMedicalRiskLimitLevel("LEVEL_10000")
+                .withTravelCost(BigDecimal.valueOf(6000))
                 .build();
     }
 

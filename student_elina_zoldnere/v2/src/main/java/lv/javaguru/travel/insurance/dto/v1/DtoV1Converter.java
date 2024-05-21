@@ -68,6 +68,7 @@ public class DtoV1Converter {
                 request.getPersonalCode(),
                 request.getPersonBirthDate(),
                 request.getMedicalRiskLimitLevel(),
+                request.getTravelCost(),
                 Collections.emptyList());
     }
 

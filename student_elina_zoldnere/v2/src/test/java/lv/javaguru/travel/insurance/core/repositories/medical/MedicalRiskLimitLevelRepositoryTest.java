@@ -1,6 +1,7 @@
-package lv.javaguru.travel.insurance.core.repositories;
+package lv.javaguru.travel.insurance.core.repositories.medical;
 
-import lv.javaguru.travel.insurance.core.domain.MedicalRiskLimitLevel;
+import lv.javaguru.travel.insurance.core.domain.medical.MedicalRiskLimitLevel;
+import lv.javaguru.travel.insurance.core.repositories.medical.MedicalRiskLimitLevelRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

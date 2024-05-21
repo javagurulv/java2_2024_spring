@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core.domain;
+package lv.javaguru.travel.insurance.core.domain.medical;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,18 +18,21 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "country_default_day_rate")
-public class CountryDefaultDayRate {
+@Table(name = "age_coefficient")
+public class AgeCoefficient {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "country_ic", nullable = false)
-    private String countryIc;
+    @Column(name = "age_from", nullable = false)
+    private Integer ageFrom;
 
-    @Column(name = "default_day_rate", precision = 10, scale = 2, nullable = false)
-    private BigDecimal defaultDayRate;
+    @Column(name = "age_to", nullable = false)
+    private Integer ageTo;
+
+    @Column(name = "coefficient", precision = 10, scale = 2, nullable = false)
+    private BigDecimal coefficient;
 
 }

@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -37,5 +38,8 @@ public class AgreementPersonEntity {
 
     @Column(name = "medical_risk_limit_level")
     private String medicalRiskLimitLevel;
+
+    @Column(name = "travel_cost")
+    private BigDecimal travelCost;
 
 }
