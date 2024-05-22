@@ -24,7 +24,7 @@ class TravelMedicalRiskPremiumCalculatorTest {
     @Mock
     private CountryDefaultDayRateRetriever countryDefaultDayRateRetrieverMock;
     @Mock
-    private AgeCoefficientRetriever ageCoefficientRetrieverMock;
+    private TMAgeCoefficientRetriever ageCoefficientRetrieverMock;
     @Mock
     private MedicalRiskLimitLevelCoefficientRetriever limitLevelCoefficientRetrieverMock;
 

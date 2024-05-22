@@ -15,8 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.math.BigDecimal;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -25,10 +25,11 @@ import static org.mockito.Mockito.when;
 class TravelCostCoefficientRetrieverTest {
 
     @Mock
-    private TravelCostCoefficientRepository costCoefficientRepositoryMock;;
+    private TravelCostCoefficientRepository costCoefficientRepositoryMock;
+    ;
 
     @InjectMocks
-    private TravelCostCoefficientRetriever  costCoefficientRetriever;
+    private TravelCostCoefficientRetriever costCoefficientRetriever;
 
     @Autowired
     @InjectMocks
@@ -47,7 +48,7 @@ class TravelCostCoefficientRetrieverTest {
         when(travelCostCoefficientMock.getTravelCostPremium()).thenReturn(travelCostPremium);
 
         BigDecimal actualTravelCostPremium = costCoefficientRetriever.findTravelCostPremium(person);
-        assertEquals(travelCostPremium, actualTravelCostPremium);
+        assertThat(actualTravelCostPremium).isEqualTo(travelCostPremium);
     }
 
     @Test
@@ -58,9 +59,9 @@ class TravelCostCoefficientRetrieverTest {
         when(costCoefficientRepositoryMock.findByTravelCost(BigDecimal.valueOf(10000000)))
                 .thenReturn(Optional.empty());
 
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> costCoefficientRetriever
-                .findTravelCostPremium(person));
-        assertEquals("Premium for travel cost = 10000000 not found!", exception.getMessage());
+        assertThatThrownBy(() -> costCoefficientRetriever.findTravelCostPremium(person))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("Premium for travel cost = 10000000 not found!");
     }
 
 }

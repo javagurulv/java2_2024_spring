@@ -1,17 +1,17 @@
 package lv.javaguru.travel.insurance.core.repositories.medical;
 
-import lv.javaguru.travel.insurance.core.domain.medical.AgeCoefficient;
+import lv.javaguru.travel.insurance.core.domain.medical.TMAgeCoefficient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 
-public interface AgeCoefficientRepository extends JpaRepository<AgeCoefficient, Long> {
+public interface TMAgeCoefficientRepository extends JpaRepository<TMAgeCoefficient, Long> {
 
-    @Query("SELECT ac from AgeCoefficient ac " +
+    @Query("SELECT ac from TMAgeCoefficient ac " +
             "where ac.ageFrom <= :age " +
             "and ac.ageTo >= :age")
-    Optional<AgeCoefficient> findCoefficient(@Param("age") Integer age);
+    Optional<TMAgeCoefficient> findCoefficient(@Param("age") Integer age);
 
 }

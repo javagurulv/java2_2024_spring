@@ -18,8 +18,8 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "age_coefficient")
-public class AgeCoefficient {
+@Table(name = "travel_medical_age_coefficient")
+public class TMAgeCoefficient {
 
     @Id
     @Column(name = "id")

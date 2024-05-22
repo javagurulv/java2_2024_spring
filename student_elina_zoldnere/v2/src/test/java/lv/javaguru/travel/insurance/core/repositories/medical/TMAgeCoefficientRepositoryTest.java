@@ -1,7 +1,6 @@
 package lv.javaguru.travel.insurance.core.repositories.medical;
 
-import lv.javaguru.travel.insurance.core.domain.medical.AgeCoefficient;
-import lv.javaguru.travel.insurance.core.repositories.medical.AgeCoefficientRepository;
+import lv.javaguru.travel.insurance.core.domain.medical.TMAgeCoefficient;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +17,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
-class AgeCoefficientRepositoryTest {
+class TMAgeCoefficientRepositoryTest {
 
     @Autowired
-    private AgeCoefficientRepository ageCoefficientRepository;
+    private TMAgeCoefficientRepository ageCoefficientRepository;
 
     @Test
     public void injectedRepositoryAreNotNull() {
@@ -30,14 +29,14 @@ class AgeCoefficientRepositoryTest {
 
     @Test
     public void shouldFindAgeCoefficient() {
-        Optional<AgeCoefficient> ageCoefficientOpt = ageCoefficientRepository.findCoefficient(30);
+        Optional<TMAgeCoefficient> ageCoefficientOpt = ageCoefficientRepository.findCoefficient(30);
         assertTrue(ageCoefficientOpt.isPresent());
         assertEquals(new BigDecimal("1.10"), ageCoefficientOpt.get().getCoefficient());
     }
 
     @Test
     public void shouldNotFindByInvalidAge() {
-        Optional<AgeCoefficient> ageCoefficientOpt = ageCoefficientRepository.findCoefficient(null);
+        Optional<TMAgeCoefficient> ageCoefficientOpt = ageCoefficientRepository.findCoefficient(null);
         assertTrue(ageCoefficientOpt.isEmpty());
     }
 

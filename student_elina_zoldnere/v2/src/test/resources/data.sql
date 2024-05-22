@@ -22,7 +22,7 @@ VALUES ('LATVIA', 1.00),
        ('SPAIN', 2.50),
        ('JAPAN', 3.50);
 
-INSERT INTO age_coefficient (age_from, age_to, coefficient)
+INSERT INTO travel_medical_age_coefficient (age_from, age_to, coefficient)
 VALUES (0, 5, 1.1),
        (6, 10, 0.7),
        (11, 17, 1.0),

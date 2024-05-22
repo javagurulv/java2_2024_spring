@@ -1,8 +1,8 @@
 package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
-import lv.javaguru.travel.insurance.core.domain.medical.AgeCoefficient;
-import lv.javaguru.travel.insurance.core.repositories.medical.AgeCoefficientRepository;
+import lv.javaguru.travel.insurance.core.domain.medical.TMAgeCoefficient;
+import lv.javaguru.travel.insurance.core.repositories.medical.TMAgeCoefficientRepository;
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
 import org.junit.jupiter.api.Test;
@@ -23,15 +23,15 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class AgeCoefficientRetrieverTest {
+class TMAgeCoefficientRetrieverTest {
 
     @Mock
     private DateTimeUtil dateTimeUtilMock;
     @Mock
-    private AgeCoefficientRepository ageCoefficientRepositoryMock;
+    private TMAgeCoefficientRepository ageCoefficientRepositoryMock;
 
     @InjectMocks
-    private AgeCoefficientRetriever ageCoefficientRetriever;
+    private TMAgeCoefficientRetriever ageCoefficientRetriever;
 
     @Autowired
     @InjectMocks
@@ -43,7 +43,7 @@ class AgeCoefficientRetrieverTest {
         PersonDTO person = helper.newPersonDTO();
         BigDecimal ageCoefficient = BigDecimal.valueOf(1.1);
 
-        AgeCoefficient ageCoefficientMock = mock(AgeCoefficient.class);
+        TMAgeCoefficient ageCoefficientMock = mock(TMAgeCoefficient.class);
         when(ageCoefficientRepositoryMock.findCoefficient(any()))
                 .thenReturn(Optional.of(ageCoefficientMock));
         when(ageCoefficientMock.getCoefficient()).thenReturn(ageCoefficient);

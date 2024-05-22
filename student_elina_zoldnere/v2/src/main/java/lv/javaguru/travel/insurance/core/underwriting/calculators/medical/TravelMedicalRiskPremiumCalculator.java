@@ -17,7 +17,7 @@ class TravelMedicalRiskPremiumCalculator implements TravelRiskPremiumCalculator 
     @Autowired
     private CountryDefaultDayRateRetriever countryDefaultDayRateRetriever;
     @Autowired
-    private AgeCoefficientRetriever ageCoefficientRetriever;
+    private TMAgeCoefficientRetriever ageCoefficientRetriever;
     @Autowired
     private MedicalRiskLimitLevelCoefficientRetriever limitLevelCoefficientRetriever;
 
