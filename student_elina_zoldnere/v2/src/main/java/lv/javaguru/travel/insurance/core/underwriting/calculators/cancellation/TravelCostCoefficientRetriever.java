@@ -12,11 +12,11 @@ import java.math.BigDecimal;
 class TravelCostCoefficientRetriever {
 
     @Autowired
-    private TravelCostCoefficientRepository costCoefficientRepository;
+    private TravelCostCoefficientRepository repository;
 
     BigDecimal findTravelCostPremium(PersonDTO person) {
         BigDecimal travelCost = person.travelCost();
-        return costCoefficientRepository.findByTravelCost(travelCost)
+        return repository.findCoefficientByTravelCost(travelCost)
                 .map(TravelCostCoefficient::getTravelCostPremium)
                 .orElseThrow(() -> new RuntimeException("Premium for travel cost = " + travelCost + " not found!"));
     }

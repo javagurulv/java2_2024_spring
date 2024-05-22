@@ -57,3 +57,10 @@ VALUES (0, 5000, 10),
        (5000.01, 10000, 30),
        (10000.01, 20000, 100),
        (20000.01, 1000000 ,500);
+
+INSERT INTO travel_cancellation_age_coefficient (age_from, age_to, premium)
+VALUES (0, 9, 5),
+       (10, 17, 10),
+       (18, 39, 20),
+       (40, 64, 30),
+       (65, 150, 50);

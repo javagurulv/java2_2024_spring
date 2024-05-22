@@ -27,7 +27,7 @@ class TravelCostCoefficientRepositoryTest {
     @Test
     public void findByTravelCost_ShouldFindExistingCoefficient() {
         Optional<TravelCostCoefficient> travelCostCoefficientOpt =
-                repository.findByTravelCost(new BigDecimal("6000"));
+                repository.findCoefficientByTravelCost(new BigDecimal("6000"));
 
         assertThat(travelCostCoefficientOpt).isPresent()
                 .map(TravelCostCoefficient::getTravelCostPremium)
@@ -35,16 +35,16 @@ class TravelCostCoefficientRepositoryTest {
     }
 
     @Test
-    public void findByTravelCost_ShouldNotFindCoefficientWhenTravelCostDoesNotExist() {
-        Optional<TravelCostCoefficient> travelCostCoefficientOpt = repository.findByTravelCost(null);
+    public void findCoefficientByTravelCost_ShouldNotFindCoefficientWhenTravelCostIsNull() {
+        Optional<TravelCostCoefficient> travelCostCoefficientOpt = repository.findCoefficientByTravelCost(null);
 
         assertThat(travelCostCoefficientOpt).isEmpty();
     }
 
     @Test
-    public void findByTravelCost_ShouldNotFindCoefficientWhenCoefficientDoesNotExist() {
+    public void findCoefficientByTravelCost_ShouldNotFindCoefficientWhenCoefficientDoesNotExist() {
         Optional<TravelCostCoefficient> travelCostCoefficientOpt =
-                repository.findByTravelCost(new BigDecimal("10000000"));
+                repository.findCoefficientByTravelCost(new BigDecimal("10000000"));
 
         assertThat(travelCostCoefficientOpt).isEmpty();
     }

@@ -13,6 +13,6 @@ public interface TravelCostCoefficientRepository extends JpaRepository<TravelCos
     @Query("SELECT tc from TravelCostCoefficient tc " +
             "where tc.travelCostFrom <= :travel_cost " +
             "and tc.travelCostTo >= :travel_cost")
-    Optional<TravelCostCoefficient> findByTravelCost(@Param("travel_cost") BigDecimal travelCost);
+    Optional<TravelCostCoefficient> findCoefficientByTravelCost(@Param("travel_cost") BigDecimal travelCost);
 
 }

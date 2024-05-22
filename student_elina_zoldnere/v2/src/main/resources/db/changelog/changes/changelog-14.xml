@@ -11,4 +11,34 @@
                 newTableName="travel_medical_age_coefficient"/>
     </changeSet>
 
+    <changeSet author="elina.zoldnere InsuranceApplication" id="39">
+        <createTable tableName="travel_cancellation_age_coefficient">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="age_from" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="age_to" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="premium" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="elina.zoldnere InsuranceApplication" id="40">
+        <sql>
+            INSERT INTO travel_cancellation_age_coefficient (id, age_from, age_to, premium)
+            VALUES (1002,0, 9, 5);
+
+            INSERT INTO travel_cancellation_age_coefficient (age_from, age_to, premium)
+            VALUES(10, 17, 10),
+            (18, 39, 20),
+            (40, 64, 30),
+            (65, 150, 50);
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>

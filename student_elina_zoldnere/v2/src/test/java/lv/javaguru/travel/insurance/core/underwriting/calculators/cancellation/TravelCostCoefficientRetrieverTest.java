@@ -43,7 +43,7 @@ class TravelCostCoefficientRetrieverTest {
                 .build();
 
         TravelCostCoefficient travelCostCoefficientMock = mock(TravelCostCoefficient.class);
-        when(costCoefficientRepositoryMock.findByTravelCost(any()))
+        when(costCoefficientRepositoryMock.findCoefficientByTravelCost(any()))
                 .thenReturn(Optional.of(travelCostCoefficientMock));
         when(travelCostCoefficientMock.getTravelCostPremium()).thenReturn(travelCostPremium);
 
@@ -56,7 +56,7 @@ class TravelCostCoefficientRetrieverTest {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withTravelCost(BigDecimal.valueOf(10000000))
                 .build();
-        when(costCoefficientRepositoryMock.findByTravelCost(BigDecimal.valueOf(10000000)))
+        when(costCoefficientRepositoryMock.findCoefficientByTravelCost(BigDecimal.valueOf(10000000)))
                 .thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> costCoefficientRetriever.findTravelCostPremium(person))
