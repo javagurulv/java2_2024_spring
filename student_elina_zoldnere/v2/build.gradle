@@ -40,6 +40,9 @@ tasks.withType(JavaExec).configureEach {defaultCharacterEncoding = "UTF-8"}
 tasks.withType(Javadoc).configureEach {options.encoding = "UTF-8"}
 tasks.withType(Test).configureEach {defaultCharacterEncoding = "UTF-8"}
 
+tasks.register('cleanLogs', Delete) {delete fileTree(dir: 'logs')}
+tasks.named('clean') {dependsOn tasks.named('cleanLogs')}
+
 jar {
 	enabled = false
 }
