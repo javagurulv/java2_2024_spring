@@ -18,13 +18,13 @@ class TCAgeCoefficientRetriever {
     @Autowired
     private TCAgeCoefficientRepository repository;
 
-    BigDecimal getAgeCoefficient(PersonDTO person) {
+    BigDecimal findAgeCoefficient(PersonDTO person) {
         Date personBirthDate = person.personBirthDate();
         Date currentDate = dateTimeUtil.currentTimeToday(); // hours and seconds does not matter
         Integer age = dateTimeUtil.calculateDifferenceBetweenDatesInYears(personBirthDate, currentDate);
 
         return repository.findCoefficientByAge(age)
-                .map(TCAgeCoefficient::getPremium)
+                .map(TCAgeCoefficient::getCoefficient)
                 .orElseThrow(() -> new RuntimeException("Coefficient for age = " + age + " not found!"));
     }
 

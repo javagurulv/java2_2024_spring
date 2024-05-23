@@ -12,10 +12,6 @@
       "premium" : 3.30
     },
     {
-      "riskIc" : "TRAVEL_CANCELLATION",
-      "premium" : 0.00
-    },
-    {
       "riskIc" : "TRAVEL_LOSS_BAGGAGE",
       "premium" : 0.00
     }

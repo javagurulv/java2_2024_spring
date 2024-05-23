@@ -30,7 +30,7 @@ class TravelCostCoefficientRepositoryTest {
                 repository.findCoefficientByTravelCost(new BigDecimal("6000"));
 
         assertThat(travelCostCoefficientOpt).isPresent()
-                .map(TCTravelCostCoefficient::getTravelCostPremium)
+                .map(TCTravelCostCoefficient::getCoefficient)
                 .contains(new BigDecimal("30.00"));
     }
 

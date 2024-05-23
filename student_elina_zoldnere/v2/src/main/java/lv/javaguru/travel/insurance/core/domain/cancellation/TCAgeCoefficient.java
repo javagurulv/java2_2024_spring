@@ -32,7 +32,7 @@ public class TCAgeCoefficient {
     @Column(name = "age_to", nullable = false)
     private Integer ageTo;
 
-    @Column(name = "premium", precision = 10, scale = 2, nullable = false)
-    private BigDecimal premium;
+    @Column(name = "coefficient", precision = 10, scale = 2, nullable = false)
+    private BigDecimal coefficient;
 
 }

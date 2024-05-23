@@ -14,11 +14,11 @@ class TCTravelCostCoefficientRetriever {
     @Autowired
     private TCTravelCostCoefficientRepository repository;
 
-    BigDecimal findTravelCostPremium(PersonDTO person) {
+    BigDecimal findTravelCostCoefficient(PersonDTO person) {
         BigDecimal travelCost = person.travelCost();
         return repository.findCoefficientByTravelCost(travelCost)
-                .map(TCTravelCostCoefficient::getTravelCostPremium)
-                .orElseThrow(() -> new RuntimeException("Premium for travel cost = " + travelCost + " not found!"));
+                .map(TCTravelCostCoefficient::getCoefficient)
+                .orElseThrow(() -> new RuntimeException("Coefficient for travel cost = " + travelCost + " not found!"));
     }
 
 }

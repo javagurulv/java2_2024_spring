@@ -32,7 +32,7 @@ public class TCTravelCostCoefficient {
     @Column(name = "travel_cost_to", precision = 10, scale = 2, nullable = false)
     private BigDecimal travelCostTo;
 
-    @Column(name = "premium", precision = 10, scale = 2, nullable = false)
-    private BigDecimal travelCostPremium;
+    @Column(name = "coefficient", precision = 10, scale = 2, nullable = false)
+    private BigDecimal coefficient;
 
 }

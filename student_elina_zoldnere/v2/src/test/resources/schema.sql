@@ -105,7 +105,7 @@ CREATE TABLE travel_cost_coefficient (
     id BIGINT NOT NULL AUTO_INCREMENT,
     travel_cost_from DECIMAL(10,2) NOT NULL,
     travel_cost_to DECIMAL(10,2) NOT NULL,
-    premium DECIMAL(10,2) NOT NULL,
+    coefficient DECIMAL(10,2) NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -113,7 +113,7 @@ CREATE TABLE travel_cancellation_age_coefficient (
     id BIGINT NOT NULL AUTO_INCREMENT,
     age_from INT NOT NULL,
     age_to INT NOT NULL,
-    premium DECIMAL(10,2) NOT NULL,
+    coefficient DECIMAL(10,2) NOT NULL,
     PRIMARY KEY (id)
 );
 

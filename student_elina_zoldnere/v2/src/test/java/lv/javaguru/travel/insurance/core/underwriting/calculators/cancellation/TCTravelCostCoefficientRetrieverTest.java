@@ -37,7 +37,7 @@ class TCTravelCostCoefficientRetrieverTest {
 
     @Test
     void findTravelCostPremium_shouldFindRateWhenTravelCostExists() {
-        BigDecimal travelCostPremium = BigDecimal.valueOf(30);
+        BigDecimal coefficient = BigDecimal.valueOf(30);
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withTravelCost(BigDecimal.valueOf(6000))
                 .build();
@@ -45,10 +45,10 @@ class TCTravelCostCoefficientRetrieverTest {
         TCTravelCostCoefficient travelCostCoefficientMock = mock(TCTravelCostCoefficient.class);
         when(costCoefficientRepositoryMock.findCoefficientByTravelCost(any()))
                 .thenReturn(Optional.of(travelCostCoefficientMock));
-        when(travelCostCoefficientMock.getTravelCostPremium()).thenReturn(travelCostPremium);
+        when(travelCostCoefficientMock.getCoefficient()).thenReturn(coefficient);
 
-        BigDecimal actualTravelCostPremium = costCoefficientRetriever.findTravelCostPremium(person);
-        assertThat(actualTravelCostPremium).isEqualTo(travelCostPremium);
+        BigDecimal actualTravelCostPremium = costCoefficientRetriever.findTravelCostCoefficient(person);
+        assertThat(actualTravelCostPremium).isEqualTo(coefficient);
     }
 
     @Test
@@ -59,9 +59,9 @@ class TCTravelCostCoefficientRetrieverTest {
         when(costCoefficientRepositoryMock.findCoefficientByTravelCost(BigDecimal.valueOf(10000000)))
                 .thenReturn(Optional.empty());
 
-        assertThatThrownBy(() -> costCoefficientRetriever.findTravelCostPremium(person))
+        assertThatThrownBy(() -> costCoefficientRetriever.findTravelCostCoefficient(person))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessage("Premium for travel cost = 10000000 not found!");
+                .hasMessage("Coefficient for travel cost = 10000000 not found!");
     }
 
 }
