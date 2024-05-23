@@ -19,7 +19,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Entity
 @Table(name = "travel_cost_coefficient")
-public class TravelCostCoefficient {
+public class TCTravelCostCoefficient {
 
     @Id
     @Column(name = "id")
@@ -32,7 +32,7 @@ public class TravelCostCoefficient {
     @Column(name = "travel_cost_to", precision = 10, scale = 2, nullable = false)
     private BigDecimal travelCostTo;
 
-    @Column(name = "premium", precision = 10, scale = 2, nullable = false)
-    private BigDecimal travelCostPremium;
+    @Column(name = "coefficient", precision = 10, scale = 2, nullable = false)
+    private BigDecimal coefficient;
 
 }

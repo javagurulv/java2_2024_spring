@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.repositories.cancellation;
 
-import lv.javaguru.travel.insurance.core.domain.cancellation.TravelCostCoefficient;
+import lv.javaguru.travel.insurance.core.domain.cancellation.TCTravelCostCoefficient;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class TravelCostCoefficientRepositoryTest {
 
     @Autowired
-    private TravelCostCoefficientRepository repository;
+    private TCTravelCostCoefficientRepository repository;
 
     @Test
     public void injectedRepositoryAreNotNull() {
@@ -26,24 +26,24 @@ class TravelCostCoefficientRepositoryTest {
 
     @Test
     public void findByTravelCost_ShouldFindExistingCoefficient() {
-        Optional<TravelCostCoefficient> travelCostCoefficientOpt =
+        Optional<TCTravelCostCoefficient> travelCostCoefficientOpt =
                 repository.findCoefficientByTravelCost(new BigDecimal("6000"));
 
         assertThat(travelCostCoefficientOpt).isPresent()
-                .map(TravelCostCoefficient::getTravelCostPremium)
+                .map(TCTravelCostCoefficient::getCoefficient)
                 .contains(new BigDecimal("30.00"));
     }
 
     @Test
     public void findCoefficientByTravelCost_ShouldNotFindCoefficientWhenTravelCostIsNull() {
-        Optional<TravelCostCoefficient> travelCostCoefficientOpt = repository.findCoefficientByTravelCost(null);
+        Optional<TCTravelCostCoefficient> travelCostCoefficientOpt = repository.findCoefficientByTravelCost(null);
 
         assertThat(travelCostCoefficientOpt).isEmpty();
     }
 
     @Test
     public void findCoefficientByTravelCost_ShouldNotFindCoefficientWhenCoefficientDoesNotExist() {
-        Optional<TravelCostCoefficient> travelCostCoefficientOpt =
+        Optional<TCTravelCostCoefficient> travelCostCoefficientOpt =
                 repository.findCoefficientByTravelCost(new BigDecimal("10000000"));
 
         assertThat(travelCostCoefficientOpt).isEmpty();

@@ -46,9 +46,9 @@ class TCAgeCoefficientRetrieverTest {
         TCAgeCoefficient ageCoefficientMock = mock(TCAgeCoefficient.class);
         when(repositoryMock.findCoefficientByAge(any()))
                 .thenReturn(Optional.of(ageCoefficientMock));
-        when(ageCoefficientMock.getPremium()).thenReturn(ageCoefficient);
+        when(ageCoefficientMock.getCoefficient()).thenReturn(ageCoefficient);
 
-        BigDecimal actualAgeCoefficient = retriever.getAgeCoefficient(person);
+        BigDecimal actualAgeCoefficient = retriever.findAgeCoefficient(person);
         assertThat(actualAgeCoefficient).isEqualTo(ageCoefficient);
     }
 
@@ -63,7 +63,7 @@ class TCAgeCoefficientRetrieverTest {
 
         Integer age = dateTimeUtilMock.calculateDifferenceBetweenDatesInYears(any(), any());
 
-        assertThatThrownBy(() -> retriever.getAgeCoefficient(person))
+        assertThatThrownBy(() -> retriever.findAgeCoefficient(person))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessage("Coefficient for age = 160 not found!");
     }

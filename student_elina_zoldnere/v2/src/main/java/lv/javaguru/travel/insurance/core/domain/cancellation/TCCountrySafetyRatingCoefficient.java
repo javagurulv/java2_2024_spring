@@ -18,19 +18,16 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "travel_cancellation_age_coefficient")
-public class TCAgeCoefficient {
+@Table(name = "travel_cancellation_country_safety_rating_coefficient")
+public class TCCountrySafetyRatingCoefficient {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "age_from", nullable = false)
-    private Integer ageFrom;
-
-    @Column(name = "age_to", nullable = false)
-    private Integer ageTo;
+    @Column(name = "country_ic", nullable = false)
+    private String countryIc;
 
     @Column(name = "coefficient", precision = 10, scale = 2, nullable = false)
     private BigDecimal coefficient;

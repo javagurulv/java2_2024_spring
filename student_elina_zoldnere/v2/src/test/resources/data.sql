@@ -52,15 +52,20 @@ VALUES ('LEVEL_10000', 1.0),
        ('LEVEL_20000', 1.5),
        ('LEVEL_50000', 2.0);
 
-INSERT INTO travel_cost_coefficient (travel_cost_from, travel_cost_to, premium)
+INSERT INTO travel_cost_coefficient (travel_cost_from, travel_cost_to, coefficient)
 VALUES (0, 5000, 10),
        (5000.01, 10000, 30),
        (10000.01, 20000, 100),
        (20000.01, 1000000 ,500);
 
-INSERT INTO travel_cancellation_age_coefficient (age_from, age_to, premium)
+INSERT INTO travel_cancellation_age_coefficient (age_from, age_to, coefficient)
 VALUES (0, 9, 5),
        (10, 17, 10),
        (18, 39, 20),
        (40, 64, 30),
        (65, 150, 50);
+
+INSERT INTO travel_cancellation_country_safety_rating_coefficient (country_ic, coefficient)
+VALUES ('LATVIA', 5.00),
+       ('SPAIN', 8.00),
+       ('JAPAN', 9.00);

@@ -16,7 +16,7 @@
             <column name="travel_cost_to" type="DECIMAL(10,2)">
                 <constraints nullable="false"/>
             </column>
-            <column name="premium" type="DECIMAL(10,2)">
+            <column name="coefficient" type="DECIMAL(10,2)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -24,10 +24,10 @@
 
     <changeSet author="elina.zoldnere InsuranceApplication" id="36">
         <sql>
-            INSERT INTO travel_cost_coefficient(id, travel_cost_from, travel_cost_to, premium)
+            INSERT INTO travel_cost_coefficient(id, travel_cost_from, travel_cost_to, coefficient)
             VALUES (1002, 0, 5000, 10);
 
-            INSERT INTO travel_cost_coefficient(travel_cost_from, travel_cost_to, premium)
+            INSERT INTO travel_cost_coefficient(travel_cost_from, travel_cost_to, coefficient)
             VALUES (5000.01, 10000, 30),
             (10000.01, 20000, 100),
             (20000.01, 1000000 ,500);
