@@ -1,4 +1,3 @@
-include 'student_lastname_firstname'
 include 'student_daugele_svetlana'
 include 'student_dzianis_asipenka'
 include 'student_eglit_igor:v1'
