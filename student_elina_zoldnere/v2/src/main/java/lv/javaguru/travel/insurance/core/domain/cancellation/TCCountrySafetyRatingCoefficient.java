@@ -18,21 +18,18 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "travel_cost_coefficient")
-public class TravelCostCoefficient {
+@Table(name = "travel_cancellation_country_safety_rating_coefficient")
+public class TCCountrySafetyRatingCoefficient {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "travel_cost_from", precision = 10, scale = 2, nullable = false)
-    private BigDecimal travelCostFrom;
+    @Column(name = "country_ic", nullable = false)
+    private String countryIc;
 
-    @Column(name = "travel_cost_to", precision = 10, scale = 2, nullable = false)
-    private BigDecimal travelCostTo;
-
-    @Column(name = "premium", precision = 10, scale = 2, nullable = false)
-    private BigDecimal travelCostPremium;
+    @Column(name = "coefficient", precision = 10, scale = 2, nullable = false)
+    private BigDecimal coefficient;
 
 }

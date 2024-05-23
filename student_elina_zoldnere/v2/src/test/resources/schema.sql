@@ -24,8 +24,7 @@ CREATE TABLE country_default_day_rate (
   id BIGINT NOT NULL AUTO_INCREMENT,
   country_ic VARCHAR(100) NOT NULL,
   default_day_rate DECIMAL(10,2) NOT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (country_ic) REFERENCES classifier_values(ic)
+  PRIMARY KEY (id)
 );
 
 CREATE UNIQUE INDEX ix_country_default_day_rate_country_ic
@@ -117,3 +116,13 @@ CREATE TABLE travel_cancellation_age_coefficient (
     premium DECIMAL(10,2) NOT NULL,
     PRIMARY KEY (id)
 );
+
+CREATE TABLE travel_cancellation_country_safety_rating_coefficient (
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  country_ic VARCHAR(100) NOT NULL,
+  coefficient DECIMAL(10,2) NOT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE UNIQUE INDEX ix_travel_cancellation_country_safety_rating_coefficient_country_ic
+ON travel_cancellation_country_safety_rating_coefficient (country_ic);

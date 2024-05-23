@@ -2,8 +2,8 @@ package lv.javaguru.travel.insurance.core.underwriting.calculators.cancellation;
 
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
-import lv.javaguru.travel.insurance.core.domain.cancellation.TravelCostCoefficient;
-import lv.javaguru.travel.insurance.core.repositories.cancellation.TravelCostCoefficientRepository;
+import lv.javaguru.travel.insurance.core.domain.cancellation.TCTravelCostCoefficient;
+import lv.javaguru.travel.insurance.core.repositories.cancellation.TCTravelCostCoefficientRepository;
 import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,14 +22,14 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class TravelCostCoefficientRetrieverTest {
+class TCTravelCostCoefficientRetrieverTest {
 
     @Mock
-    private TravelCostCoefficientRepository costCoefficientRepositoryMock;
+    private TCTravelCostCoefficientRepository costCoefficientRepositoryMock;
     ;
 
     @InjectMocks
-    private TravelCostCoefficientRetriever costCoefficientRetriever;
+    private TCTravelCostCoefficientRetriever costCoefficientRetriever;
 
     @Autowired
     @InjectMocks
@@ -42,7 +42,7 @@ class TravelCostCoefficientRetrieverTest {
                 .withTravelCost(BigDecimal.valueOf(6000))
                 .build();
 
-        TravelCostCoefficient travelCostCoefficientMock = mock(TravelCostCoefficient.class);
+        TCTravelCostCoefficient travelCostCoefficientMock = mock(TCTravelCostCoefficient.class);
         when(costCoefficientRepositoryMock.findCoefficientByTravelCost(any()))
                 .thenReturn(Optional.of(travelCostCoefficientMock));
         when(travelCostCoefficientMock.getTravelCostPremium()).thenReturn(travelCostPremium);
