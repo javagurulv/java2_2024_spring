@@ -1,0 +1,46 @@
+{
+  "request": {
+
+    "agreementDateFrom": "2030-05-20",
+    "agreementDateTo": "2030-05-29",
+    "country": "SPAIN",
+    "selected_risks": [
+      "TRAVEL_MEDICAL"
+    ],
+    "persons": [
+      {
+        "personFirstName": "Vasja",
+        "personLastName": "Pupkin",
+        "personCode" : null,
+        "personBirthDate": "2010-02-29",
+        "medicalRiskLimitLevel": "LEVEL_10000"
+      },
+      {
+        "personFirstName": "Petja",
+        "personLastName": "Pupkin",
+        "personCode" : null,
+        "personBirthDate": "2010-05-29",
+        "medicalRiskLimitLevel": "LEVEL_10000"
+      }
+    ]
+  }
+,
+  "expected result": {
+    "errors": [
+      {
+        "errorCode": "ERROR_CODE_16",
+        "description": "Field personCode is empty!"
+      },
+
+      {
+        "errorCode": "ERROR_CODE_16",
+        "description": "Field personCode is empty!"
+      }
+    ],
+    "agreementDateFrom": null,
+    "agreementDateTo": null,
+    "country": null,
+    "agreementPremium": null,
+    "persons": null
+  }
+}

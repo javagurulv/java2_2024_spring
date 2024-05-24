@@ -12,6 +12,7 @@ import java.util.List;
 public record PersonDTO (
         String personFirstName,
         String personLastName,
+        String personCode,
         LocalDate personBirthDate,
         String medicalRiskLimitLevel,
         List<RiskDTO> risks

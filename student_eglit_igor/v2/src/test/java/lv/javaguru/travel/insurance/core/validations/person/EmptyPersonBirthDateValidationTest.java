@@ -30,7 +30,7 @@ class EmptyPersonBirthDateValidationTest {
     @Test
     public void shouldReturnNoErrorWhenPersonBirthDateIsPresent() {
         AgreementDTO agreement = mock(AgreementDTO.class);
-        PersonDTO person = new PersonDTO("John", "Doe", LocalDate.now().minusYears(20),"MEDICAL_RISK", Collections.emptyList());
+        PersonDTO person = new PersonDTO("John", "Doe", "12345",LocalDate.now().minusYears(20),"MEDICAL_RISK", Collections.emptyList());
         Optional<ValidationErrorDTO> errorOpt = validation.validate(agreement, person);
         assertTrue(errorOpt.isEmpty());
     }
@@ -38,7 +38,7 @@ class EmptyPersonBirthDateValidationTest {
     @Test
     public void shouldReturnErrorWhenPersonBirthDateIsNull() {
         AgreementDTO agreement = mock(AgreementDTO.class);
-        PersonDTO person = new PersonDTO("John", "Doe", null,"MEDICAL_RISK", Collections.emptyList());
+        PersonDTO person = new PersonDTO("John", "Doe", "12345",null,"MEDICAL_RISK", Collections.emptyList());
 
         when(errorFactory.buildError("ERROR_CODE_12"))
                 .thenReturn(new ValidationErrorDTO("ERROR_CODE_12", "Field personBirthDate is in the future!"));

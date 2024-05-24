@@ -78,7 +78,14 @@ public class ParameterizedControllerV2Test {
                 Arguments.of("Test case 23", "rest/v2/test_case_23/data.json"),
                 Arguments.of("Test case 24", "rest/v2/test_case_24/data.json"),
                 Arguments.of("Test case 25", "rest/v2/test_case_25/data.json"),
-                Arguments.of("Test case 26", "rest/v2/test_case_26/data.json")
+                Arguments.of("Test case 26", "rest/v2/test_case_26/data.json"),
+                Arguments.of("Test case 27", "rest/v2/test_case_27/data.json"),
+                Arguments.of("Test case 28", "rest/v2/test_case_28/data.json"),
+                Arguments.of("Test case 29", "rest/v2/test_case_29/data.json"),
+                Arguments.of("Test case 30", "rest/v2/test_case_30/data.json"),
+                Arguments.of("Test case 31", "rest/v2/test_case_31/data.json"),
+                Arguments.of("Test case 32", "rest/v2/test_case_32/data.json"),
+                Arguments.of("Test case 33", "rest/v2/test_case_33/data.json")
         );
     }
 

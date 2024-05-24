@@ -98,3 +98,9 @@ Test Case 20
 selectedRisksNotSupportedRequest.json / selectedRisksNotSupportedResponse.json:
 Selected risks not supported in request and response:
 Checking that the system correctly handles a request with selected risks that are not supported and returns the expected response.
+
+Test Case 21
+personCode null
+
+Test Case 22
+personCode empty

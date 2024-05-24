@@ -61,7 +61,9 @@ public class ParameterizedControllerTest {
                 Arguments.of("Empty medical risk level, then selected risks for travel medical exists in request and response", "rest/v1/test_case_17/request.json", "rest/v1/test_case_17/response.json"),
                 Arguments.of("Empty selected risks field in request and response", "rest/v1/test_case_18/request.json", "rest/v1/test_case_18/response.json"),
                 Arguments.of("Null selected risks field in request and response", "rest/v1/test_case_19/request.json", "rest/v1/test_case_19/response.json"),
-                Arguments.of("Selected risks not supported in request and response", "rest/v1/test_case_20/request.json", "rest/v1/test_case_20/response.json")
+                Arguments.of("Selected risks not supported in request and response", "rest/v1/test_case_20/request.json", "rest/v1/test_case_20/response.json"),
+                Arguments.of("Null personCode in request", "rest/v1/test_case_21/request.json", "rest/v1/test_case_21/response.json"),
+                Arguments.of("Empty personCode in request", "rest/v1/test_case_22/request.json", "rest/v1/test_case_22/response.json")
         );
     }
     private String getActualJson(String filePath) throws Exception {

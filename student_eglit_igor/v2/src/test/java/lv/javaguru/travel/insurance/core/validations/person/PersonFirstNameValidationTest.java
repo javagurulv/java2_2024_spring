@@ -28,7 +28,7 @@ class PersonFirstNameValidationTest {
     @Test
     public void shouldReturnErrorWhenPersonFirstNameIsNull() {
         AgreementDTO agreement = mock(AgreementDTO.class);
-       var person = new PersonDTO(null, "Doe", null, null, List.of());
+       var person = new PersonDTO(null, "Doe", "12345",null, null, List.of());
         when(errorFactory.buildError("ERROR_CODE_1")).thenReturn(new ValidationErrorDTO("ERROR_CODE_1", "Field personFirstName is empty!"));
         Optional<ValidationErrorDTO> errorOpt = validation.validate(agreement, person);
         assertTrue(errorOpt.isPresent());
@@ -38,7 +38,7 @@ class PersonFirstNameValidationTest {
     @Test
     public void shouldReturnErrorWhenPersonFirstNameIsEmpty() {
         AgreementDTO agreement = mock(AgreementDTO.class);
-        var person = new PersonDTO("", "Doe", null, null, List.of());
+        var person = new PersonDTO("", "Doe", "12345",null, null, List.of());
         var validationError = mock(ValidationErrorDTO.class);
         when(errorFactory.buildError("ERROR_CODE_1")).thenReturn(validationError);
         Optional<ValidationErrorDTO> errorOpt = validation.validate(agreement, person);
@@ -48,7 +48,7 @@ class PersonFirstNameValidationTest {
     @Test
     public void shouldNotReturnErrorWhenPersonFirstNameIsPresent() {
         AgreementDTO agreement = mock(AgreementDTO.class);
-        var person = new PersonDTO("John", "Doe", null, null, List.of());
+        var person = new PersonDTO("John", "Doe", "12345",null, null, List.of());
         Optional<ValidationErrorDTO> errorOpt = validation.validate(agreement, person);
         assertTrue(errorOpt.isEmpty());
     }

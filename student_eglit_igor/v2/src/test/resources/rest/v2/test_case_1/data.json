@@ -11,12 +11,14 @@
       {
         "personFirstName": "Vasja",
         "personLastName": "Pupkin",
+        "personCode" : "12345",
         "personBirthDate": "2000-05-29",
         "medicalRiskLimitLevel": "LEVEL_10000"
       },
       {
         "personFirstName": "Petja",
         "personLastName": "Pupkin",
+        "personCode" : "12345",
         "personBirthDate": "1950-02-28",
         "medicalRiskLimitLevel": "LEVEL_10000"
       }
@@ -32,6 +34,7 @@
       {
         "personFirstName": "Vasja",
         "personLastName": "Pupkin",
+        "personCode" : "12345",
         "personBirthDate": "2000-05-29",
         "medicalRiskLimitLevel": "LEVEL_10000",
         "personPremium": 11.00,
@@ -45,6 +48,7 @@
       {
         "personFirstName": "Petja",
         "personLastName": "Pupkin",
+        "personCode" : "12345",
         "personBirthDate": "1950-02-28",
         "medicalRiskLimitLevel": "LEVEL_10000",
         "personPremium": 15.00,

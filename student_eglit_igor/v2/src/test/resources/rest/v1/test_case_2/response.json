@@ -2,6 +2,7 @@
   "errors": null,
   "personFirstName": "Vasja",
   "personLastName": "Pupkin",
+  "personCode": "12345",
   "personBirthDate": "1990-01-01",
   "agreementDateFrom": "2025-01-01",
   "agreementDateTo": "2025-01-02",

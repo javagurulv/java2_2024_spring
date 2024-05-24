@@ -29,6 +29,7 @@ public class AgreementDateFromValidationIntegrationTest {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withFirstName("Vasja")
                 .withLastName("Pupkin")
+                .withPersonCode("12345")
                 .withBirthDate(LocalDate.of(2000, 1, 1))
                 .withMedicalRiskLimitLevel("LEVEL_10000")
                 .build();
@@ -53,6 +54,7 @@ public class AgreementDateFromValidationIntegrationTest {
         PersonDTO person = new PersonDTO(
                 "Vasja",
                 "Pupkin",
+                "12345",
                 LocalDate.of(2000, 1, 1),
                 "LEVEL_10000",
                 List.of()
@@ -78,6 +80,7 @@ public class AgreementDateFromValidationIntegrationTest {
         PersonDTO person = new PersonDTO(
                 "Vasja",
                 "Pupkin",
+                "12345",
                 LocalDate.of(2000, 1, 1),
                 "LEVEL_10000",
                 List.of()
@@ -103,6 +106,7 @@ public class AgreementDateFromValidationIntegrationTest {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withFirstName("")
                 .withLastName("Pupkin")
+                .withPersonCode("12345")
                 .withBirthDate(LocalDate.of(2000, 1, 1))
                 .withMedicalRiskLimitLevel("LEVEL_10000")
                 .build();
@@ -127,6 +131,7 @@ public class AgreementDateFromValidationIntegrationTest {
         PersonDTO person = new PersonDTO(
                 "",
                 "Pupkin",
+                "12345",
                 LocalDate.of(2000, 1, 1),
                 "LEVEL_10000",
                 List.of()
@@ -134,6 +139,7 @@ public class AgreementDateFromValidationIntegrationTest {
         PersonDTO person2 = new PersonDTO(
                 "",
                 "Pupkin",
+                "12345",
                 LocalDate.of(2000, 12, 1),
                 "LEVEL_10000",
                 List.of()

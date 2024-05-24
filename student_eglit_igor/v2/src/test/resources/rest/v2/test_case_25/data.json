@@ -8,12 +8,14 @@
       {
         "personFirstName" : "Vasja",
         "personLastName" : "Pupkin",
+        "personCode" : "12345",
         "personBirthDate" : "2010-05-29",
         "medicalRiskLimitLevel" : null
       },
       {
         "personFirstName" : "Petja",
         "personLastName" : "Pupkin",
+        "personCode" : "12345",
         "personBirthDate" : "2010-02-29",
         "medicalRiskLimitLevel" : "LEVEL_10000"
       }

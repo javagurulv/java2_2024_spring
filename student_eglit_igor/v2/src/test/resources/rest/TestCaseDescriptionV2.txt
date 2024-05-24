@@ -114,3 +114,18 @@ Test Case 29:
 Request: multiply selectedRisk is NOT_EXISTING_RISK_TYPE and NOT_EXISTING_RISK_TYPE_2.
 Response: error code = ERROR_CODE_9.
 
+Test Case 30:
+Request: single first person personCode is empty, RISK_TYPE - TRAVEL_MEDICAL.
+Response: error code = ERROR_CODE_16.
+
+Test Case 31:
+Request: single second person personCode is empty, RISK_TYPE - TRAVEL_MEDICAL.
+Response: error code = ERROR_CODE_16.
+
+Test Case 32:
+Request: multiply personCode is empty, RISK_TYPE - TRAVEL_MEDICAL.
+Response: error code = ERROR_CODE_16.
+
+Test Case 33:
+Request: multiply personCode is null, RISK_TYPE - TRAVEL_MEDICAL.
+Response: error code = ERROR_CODE_16.

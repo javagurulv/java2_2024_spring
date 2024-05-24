@@ -27,7 +27,7 @@ class TravelPersonFieldValidatorTest {
     @Test
     public void shouldNotReturnErrors() {
         var agreement = mock(AgreementDTO.class);
-        var person = new PersonDTO("Name", "Surname", LocalDate.of(2000, 1, 1), "MEDICAL_RISK",List.of(new RiskDTO()));
+        var person = new PersonDTO("Name", "Surname", "12345",LocalDate.of(2000, 1, 1), "MEDICAL_RISK",List.of(new RiskDTO()));
         TravelPersonFieldValidation validation1 = mock(TravelPersonFieldValidation.class);
         lenient().when(validation1.validate(agreement, person)).thenReturn(Optional.empty());
         lenient().when(validation1.validateList(agreement, person)).thenReturn(List.of());
@@ -46,7 +46,7 @@ class TravelPersonFieldValidatorTest {
     @Test
     public void shouldReturnSinglePersonErrors() {
         var agreement = mock(AgreementDTO.class);
-        var person = new PersonDTO("Name", "Surname", LocalDate.of(2000, 1, 1), "MEDICAL_RISK", List.of(new RiskDTO()));
+        var person = new PersonDTO("Name", "Surname", "12345",LocalDate.of(2000, 1, 1), "MEDICAL_RISK", List.of(new RiskDTO()));
         lenient().when(agreement.getPersons()).thenReturn(List.of(person));
         TravelPersonFieldValidation validation1 = mock(TravelPersonFieldValidation.class);
         when(validation1.validate(agreement, person)).thenReturn(Optional.of(new ValidationErrorDTO("code1", "description1")));
@@ -68,7 +68,7 @@ class TravelPersonFieldValidatorTest {
     @Test
     public void shouldReturnLIstPersonErrors() {
         var agreement = mock(AgreementDTO.class);
-        var person = new PersonDTO("Name", "Surname", LocalDate.of(2000, 1, 1), "MEDICAL_RISK", List.of(new RiskDTO()));
+        var person = new PersonDTO("Name", "Surname", "12345",LocalDate.of(2000, 1, 1), "MEDICAL_RISK", List.of(new RiskDTO()));
         lenient().when(agreement.getPersons()).thenReturn(List.of(person));
         TravelPersonFieldValidation validation1 = mock(TravelPersonFieldValidation.class);
         when(validation1.validateList(agreement, person)).thenReturn(List.of(new ValidationErrorDTO("code1", "description1")));

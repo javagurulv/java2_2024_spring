@@ -19,8 +19,10 @@ class AgreementPersonsPremiumCalculator {
         List<PersonDTO> updatedPersons = new ArrayList<>();
         agreement.getPersons().forEach(person -> {
             TravelPremiumCalculationResult calculationResult = premiumUnderwriting.calculatePremium(agreement, person);
-            PersonDTO updatedPerson = new PersonDTO(person.personFirstName(),
+            PersonDTO updatedPerson = new PersonDTO(
+                    person.personFirstName(),
                     person.personLastName(),
+                    person.personCode(),
                     person.personBirthDate(),
                     person.medicalRiskLimitLevel(),
                     calculationResult.getRisks());

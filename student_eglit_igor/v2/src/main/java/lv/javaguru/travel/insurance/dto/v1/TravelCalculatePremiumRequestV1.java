@@ -19,6 +19,7 @@ public class TravelCalculatePremiumRequestV1 {
 
     private String personFirstName;
     private String personLastName;
+    private String personCode;
 
     @JsonFormat(pattern="yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")

@@ -1,6 +1,7 @@
 {
   "personFirstName" : "",
   "personLastName" : "",
+  "personCode" : "",
   "personBirthDate" : "",
   "agreementDateFrom" : "",
   "agreementDateTo" : "",

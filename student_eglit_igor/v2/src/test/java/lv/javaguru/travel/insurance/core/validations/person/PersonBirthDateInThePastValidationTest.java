@@ -33,7 +33,7 @@ class PersonBirthDateInThePastValidationTest {
     @Test
     public void shouldReturnErrorWhenPersonBirthDateInTheFuture() {
         AgreementDTO agreement = mock(AgreementDTO.class);
-        var person = new PersonDTO("John", "Doe", LocalDate.now().plusYears(20), "MEDICAL_RISK",Collections.emptyList());
+        var person = new PersonDTO("John", "Doe", "12345",LocalDate.now().plusYears(20), "MEDICAL_RISK",Collections.emptyList());
         when(dateTimeUtil.getCurrentDateTime()).thenReturn(LocalDate.now());
         when(errorFactory.buildError("ERROR_CODE_13")).thenReturn(new ValidationErrorDTO("ERROR_CODE_13", "Field personBirthDate is in the future!"));
         Optional<ValidationErrorDTO> errorOpt = validation.validate(agreement, person);
@@ -44,7 +44,7 @@ class PersonBirthDateInThePastValidationTest {
     @Test
     public void shouldNotReturnErrorWhenPersonBirthDateDateInThePast() {
         AgreementDTO agreement = mock(AgreementDTO.class);
-        var person = new PersonDTO("John", "Doe", LocalDate.now().minusYears(20), "MEDICAL_RISK", Collections.emptyList());
+        var person = new PersonDTO("John", "Doe", "12345",LocalDate.now().minusYears(20), "MEDICAL_RISK", Collections.emptyList());
         when(dateTimeUtil.getCurrentDateTime()).thenReturn(LocalDate.now());
         Optional<ValidationErrorDTO> errorOpt = validation.validate(agreement,person);
         assertTrue(errorOpt.isEmpty());

@@ -38,6 +38,7 @@ public class AgeCoefficientSwitchEnabledIntegrationTest {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withFirstName("Vasja")
                 .withLastName("Pupkin")
+                .withPersonCode("12345")
                 .withBirthDate(LocalDate.of(2000, 1, 1))
                 .withMedicalRiskLimitLevel("LEVEL_20000")
                 .build();

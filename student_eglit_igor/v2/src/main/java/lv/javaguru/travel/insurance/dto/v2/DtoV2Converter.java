@@ -59,6 +59,7 @@ public class DtoV2Converter {
         PersonResponseDTO person = new PersonResponseDTO();
         person.setPersonFirstName(personDTO.personFirstName());
         person.setPersonLastName(personDTO.personLastName());
+        person.setPersonCode(personDTO.personCode());
         person.setPersonBirthDate(personDTO.personBirthDate());
         person.setMedicalRiskLimitLevel(personDTO.medicalRiskLimitLevel());
 
@@ -77,6 +78,7 @@ public class DtoV2Converter {
         return new PersonDTO(
                 personRequestDTO.getPersonFirstName(),
                 personRequestDTO.getPersonLastName(),
+                personRequestDTO.getPersonCode(),
                 personRequestDTO.getPersonBirthDate(),
                 personRequestDTO.getMedicalRiskLimitLevel(),
                 List.of());

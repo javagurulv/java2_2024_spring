@@ -11,12 +11,14 @@
       {
         "personFirstName": "Vasja",
         "personLastName": "Pupkin",
+        "personCode" : "12345",
         "personBirthDate": "2010-02-29",
         "medicalRiskLimitLevel": "NOT_EXISTING_MEDICAL_RISK_LIMIT_LEVEL"
       },
       {
         "personFirstName": "Petja",
         "personLastName": "Pupkin",
+        "personCode" : "12345",
         "personBirthDate": "2010-05-29",
         "medicalRiskLimitLevel": "NOT_EXISTING_MEDICAL_RISK_LIMIT_LEVEL"
       }

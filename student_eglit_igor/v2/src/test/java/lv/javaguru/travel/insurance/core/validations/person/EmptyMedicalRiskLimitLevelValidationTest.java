@@ -37,7 +37,7 @@ class EmptyMedicalRiskLimitLevelValidationTest {
     @Test
     public void shouldReturnValidationErrorWhenMedicalRiskLimitLevelEnabledAndNullOrBlank() {
         agreement.setSelectedRisks(List.of("TRAVEL_MEDICAL"));
-        person = new PersonDTO("John", "Doe", LocalDate.of(2000, 1, 1), null, List.of());
+        person = new PersonDTO("John", "Doe", "12345",LocalDate.of(2000, 1, 1), null, List.of());
         ValidationErrorDTO expectedError = mock(ValidationErrorDTO.class);
         when(errorFactory.buildError("ERROR_CODE_14")).thenReturn(expectedError);
 
@@ -52,7 +52,7 @@ class EmptyMedicalRiskLimitLevelValidationTest {
     @Test
     public void shouldNotReturnValidationErrorWhenMedicalRiskLimitLevelEnabledAndIsNotBlank() {
        agreement.setSelectedRisks(List.of("TRAVEL_MEDICAL"));
-       person = new PersonDTO("John", "Doe", LocalDate.of(2000, 1, 1), "MEDICAL_RISK_LIMIT", List.of());
+       person = new PersonDTO("John", "Doe", "12345",LocalDate.of(2000, 1, 1), "MEDICAL_RISK_LIMIT", List.of());
        ReflectionTestUtils.setField(validation, "medicalRiskLimitLevelEnabled", true);
        Optional<ValidationErrorDTO> result = validation.validate(agreement, person);
        assertTrue(result.isEmpty());
@@ -60,7 +60,7 @@ class EmptyMedicalRiskLimitLevelValidationTest {
     @Test
     public void shouldNotReturnValidationErrorWhenMedicalRiskLimitLevelDisabled() {
         agreement.setSelectedRisks(List.of("TRAVEL_MEDICAL"));
-        person = new PersonDTO("John", "Doe", LocalDate.of(2000, 1, 1), null, List.of());
+        person = new PersonDTO("John", "Doe", "12345",LocalDate.of(2000, 1, 1), null, List.of());
         ReflectionTestUtils.setField(validation, "medicalRiskLimitLevelEnabled", false);
         Optional<ValidationErrorDTO> result = validation.validate(agreement, person);
         assertTrue(result.isEmpty());
