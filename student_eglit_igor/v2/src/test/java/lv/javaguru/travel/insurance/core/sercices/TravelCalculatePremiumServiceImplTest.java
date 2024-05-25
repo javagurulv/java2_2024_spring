@@ -3,6 +3,7 @@ package lv.javaguru.travel.insurance.core.sercices;
 import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreCommand;
 import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreResult;
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
@@ -30,6 +32,7 @@ class TravelCalculatePremiumServiceImplTest {
     private AgreementTotalPremiumCalculator agreementTotalPremiumCalculator;
     @Mock
     private ResponseBuilder responseBuilder;
+    @Mock private PersonSaver personSaver;
 
     @InjectMocks
     private TravelCalculatePremiumServiceImpl premiumService;
@@ -47,12 +50,21 @@ class TravelCalculatePremiumServiceImplTest {
         assertEquals(1, result.getErrors().size());
         assertEquals("Error code", result.getErrors().get(0).getErrorCode());
         assertEquals("Error description", result.getErrors().get(0).getDescription());
-        verifyNoInteractions(agreementPersonsPremiumCalculator, agreementPersonsPremiumCalculator);
+        verifyNoInteractions(agreementPersonsPremiumCalculator, agreementPersonsPremiumCalculator, personSaver);
     }
 
     @Test
     public void shouldCalculatePersonsPremium() {
+        var person = new PersonDTO(
+                "John",
+                "Dou",
+                "12345",
+                LocalDate.of(2000, 1, 1),
+                "TRAVEL_MEDICAL",
+                List.of()
+        );
         var agreement = new AgreementDTO();
+        agreement.setPersons(List.of(person));
         when(agreementValidator.validate(agreement)).thenReturn(Collections.emptyList());
         when(responseBuilder.buildResponse(agreement)).thenReturn(new TravelCalculatePremiumCoreResult(Collections.emptyList(), agreement));
         premiumService.calculatePremium(new TravelCalculatePremiumCoreCommand(agreement));
@@ -61,7 +73,16 @@ class TravelCalculatePremiumServiceImplTest {
 
     @Test
     public void shouldCalculateAgreementTotalPremium() {
+        var person = new PersonDTO(
+                "John",
+                "Dou",
+                "12345",
+                LocalDate.of(2000, 1, 1),
+                "TRAVEL_MEDICAL",
+                List.of()
+        );
         var agreement = new AgreementDTO();
+        agreement.setPersons(List.of(person));
         when(agreementValidator.validate(agreement)).thenReturn(Collections.emptyList());
         when(agreementTotalPremiumCalculator.calculate(agreement)).thenReturn(BigDecimal.ONE);
         when(responseBuilder.buildResponse(agreement)).thenReturn(new TravelCalculatePremiumCoreResult(Collections.emptyList(), agreement));

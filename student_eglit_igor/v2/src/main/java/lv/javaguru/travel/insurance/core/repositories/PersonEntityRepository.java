@@ -1,6 +1,6 @@
-package org.javaguru.travel.insurance.core.repositories;
+package lv.javaguru.travel.insurance.core.repositories;
 
-import org.javaguru.travel.insurance.core.domain.PersonEntity;
+import lv.javaguru.travel.insurance.core.domain.PersonEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -19,5 +19,4 @@ public interface PersonEntityRepository extends
             @Param("lastName") String lastName,
             @Param("personCode") String personCode
     );
-
 }
