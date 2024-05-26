@@ -10,6 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -23,9 +24,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class AgeCoefficientCalculatorTest {
-    @Mock
-    private DateTimeService dateTimeUtil;
+class AgeCoefficientCalculatorTest {
+
+    @Mock private DateTimeService dateTimeUtil;
     @Mock private AgeCoefficientRepository ageCoefficientRepository;
 
     @InjectMocks
@@ -36,15 +37,16 @@ public class AgeCoefficientCalculatorTest {
     @BeforeEach
     void setUp() {
         request = new TravelCalculatePremiumRequest();
-        request.setPersonBirthDate(Date.from(LocalDate.of(1989, 1, 25)
+        request.setPersonBirthDate(Date.from(LocalDate.of(1990, 1, 1)
                 .atStartOfDay(ZoneId.systemDefault()).toInstant()));
     }
 
     @Test
     void shouldFindCoefficientWhenAgeCoefficientExists() {
-        LocalDate currentDate = LocalDate.of(2024, 5, 12);
-        int age = 35;
-        BigDecimal expectedCoefficient = BigDecimal.valueOf(1.1);
+        ReflectionTestUtils.setField(calculator, "medicalRiskAgeCoefficientEnabled", true);
+        LocalDate currentDate = LocalDate.of(2023, 3, 27);
+        int age = 33;
+        BigDecimal expectedCoefficient = BigDecimal.valueOf(1.2);
 
         when(dateTimeUtil.getCurrentDateTime()).thenReturn(Date.from(currentDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
         AgeCoefficient ageCoefficient = mock(AgeCoefficient.class);
@@ -58,8 +60,9 @@ public class AgeCoefficientCalculatorTest {
 
     @Test
     void shouldThrowExceptionWhenAgeCoefficientNotFound() {
-        LocalDate currentDate = LocalDate.of(2024, 5, 12);
-        int age = 35;
+        ReflectionTestUtils.setField(calculator, "medicalRiskAgeCoefficientEnabled", true);
+        LocalDate currentDate = LocalDate.of(2023, 3, 27);
+        int age = 33;
 
         when(dateTimeUtil.getCurrentDateTime()).thenReturn(Date.from(currentDate.atStartOfDay(ZoneId.systemDefault()).toInstant()));
         when(ageCoefficientRepository.findCoefficient(age)).thenReturn(Optional.empty());
