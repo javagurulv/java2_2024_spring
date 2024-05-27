@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.underwriting;
 
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
@@ -18,20 +18,22 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class TravelPremiumUnderwritingTest {
+public class TravelPremiumUnderwritingImplTest {
 
     @Mock
     private DateTimeUtil dateTimeUtil;
 
     @InjectMocks
-    private TravelPremiumUnderwriting premiumUnderwriting;
+    private TravelPremiumUnderwritingImpl premiumUnderwriting;
 
     @Test
     public void checkResponseWithCorrectAgreementPrice() {
         TravelCalculatePremiumRequest travelCalculatePremiumRequest = mock(TravelCalculatePremiumRequest.class);
         when(travelCalculatePremiumRequest.getAgreementDateFrom()).thenReturn(makeDate("10.10.2010"));
         when(travelCalculatePremiumRequest.getAgreementDateTo()).thenReturn(makeDate("11.10.2010"));
-        when(dateTimeUtil.calculateDateFromTo(travelCalculatePremiumRequest.getAgreementDateFrom(), travelCalculatePremiumRequest.getAgreementDateTo())).thenReturn(1L);
+        when(dateTimeUtil.calculateDateFromTo(
+                travelCalculatePremiumRequest.getAgreementDateFrom(),
+                travelCalculatePremiumRequest.getAgreementDateTo())).thenReturn(1L);
         BigDecimal premium = premiumUnderwriting.calculatedPremium(travelCalculatePremiumRequest);
         assertEquals(premium, new BigDecimal(1));
     }
