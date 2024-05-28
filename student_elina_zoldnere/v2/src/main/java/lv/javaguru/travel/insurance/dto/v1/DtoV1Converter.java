@@ -7,6 +7,7 @@ import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.dto.RiskPremium;
 import lv.javaguru.travel.insurance.dto.ValidationError;
+import lv.javaguru.travel.insurance.dto.v2.PersonResponseDTO;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -40,19 +41,20 @@ public class DtoV1Converter {
 
     private TravelCalculatePremiumResponseV1 buildSuccessfulResponse(TravelCalculatePremiumCoreResult coreResult) {
         AgreementDTO agreement = coreResult.getAgreement();
+        PersonDTO person = agreement.persons().get(0);
 
         TravelCalculatePremiumResponseV1 response = new TravelCalculatePremiumResponseV1();
-        response.setPersonFirstName(agreement.persons().get(0).personFirstName());
-        response.setPersonLastName(agreement.persons().get(0).personLastName());
-        response.setPersonalCode(agreement.persons().get(0).personalCode());
-        response.setPersonBirthDate(agreement.persons().get(0).personBirthDate());
+        response.setPersonFirstName(person.personFirstName());
+        response.setPersonLastName(person.personLastName());
+        response.setPersonalCode(person.personalCode());
+        response.setPersonBirthDate(person.personBirthDate());
         response.setAgreementDateFrom(agreement.agreementDateFrom());
         response.setAgreementDateTo(agreement.agreementDateTo());
         response.setCountry(agreement.country());
-        response.setMedicalRiskLimitLevel(agreement.persons().get(0).medicalRiskLimitLevel());
+        response.setMedicalRiskLimitLevel(person.medicalRiskLimitLevel());
+        response.setTravelCost(person.travelCost());
         response.setAgreementPremium(agreement.agreementPremium());
 
-        PersonDTO person = agreement.persons().get(0);
         List<RiskPremium> riskPremiums = person.personRisks().stream()
                 .map(riskDTO -> new RiskPremium(riskDTO.riskIc(), riskDTO.premium()))
                 .toList();

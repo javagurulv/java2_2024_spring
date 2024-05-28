@@ -45,7 +45,7 @@
                 </div>
                 <br>
                 <div>
-                    <label for="personalCode">Person Code:</label>
+                    <label for="personalCode">Personal Code:</label>
                     <input type="text" th:field="*{persons[__${personStat.index}__].personalCode}"/>
                 </div>
                 <br>
@@ -57,6 +57,10 @@
                 <div>
                     <label for="medicalRiskLimitLevel">Medical Risk Limit Level:</label>
                     <input type="text" th:field="*{persons[__${personStat.index}__].medicalRiskLimitLevel}"/>
+                </div>
+                <div>
+                    <label for="travelCost">Travel Cost:</label>
+                    <input type="text" th:field="*{persons[__${personStat.index}__].travelCost}"/>
                 </div>
                 <br>
             </div>
@@ -76,7 +80,9 @@
             <h3 th:text="${person.personFirstName} + ' ' + ${person.personLastName}"></h3>
             <p th:text="'Personal Code: ' + ${person.personalCode}"></p>
             <p th:text="'Birth Date: ' + ${#dates.format(person.personBirthDate, 'yyyy-MM-dd')}"></p>
-            <p th:text="'Medical Risk Limit Level: ' + ${person.medicalRiskLimitLevel}"></p>
+            <p th:if="${person.medicalRiskLimitLevel != null}"
+               th:text="'Medical Risk Limit Level: ' + ${person.medicalRiskLimitLevel}"></p>
+            <p th:if="${person.travelCost != null}" th:text="'Travel Cost: ' + ${person.travelCost}"></p>
             <p th:text="'Person Premium: ' + ${person.personPremium}"></p>
             <p>Risks:</p>
             <ul>
@@ -133,6 +139,10 @@
                         <input type="text" id="persons[${index}].medicalRiskLimitLevel" name="persons[${index}].medicalRiskLimitLevel" />
                     </div>
                     <br>
+                    <div>
+                        <label for="persons[${index}].travelCost">Travel Cost:</label>
+                        <input type="text" id="persons[${index}].travelCost" name="persons[${index}].travelCost" />
+                    </div>
                 </div>`;
             personsContainer.insertAdjacentHTML('beforeend', personTemplate);
         }
@@ -144,7 +154,6 @@
                 personsContainer.removeChild(personForms[personForms.length - 1]);
             }
         }
-
 </script>
 </body>
 </html>
