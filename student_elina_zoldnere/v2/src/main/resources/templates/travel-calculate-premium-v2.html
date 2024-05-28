@@ -80,9 +80,10 @@
             <h3 th:text="${person.personFirstName} + ' ' + ${person.personLastName}"></h3>
             <p th:text="'Personal Code: ' + ${person.personalCode}"></p>
             <p th:text="'Birth Date: ' + ${#dates.format(person.personBirthDate, 'yyyy-MM-dd')}"></p>
-            <p th:if="${person.medicalRiskLimitLevel != null}"
+            <p th:if="${person.medicalRiskLimitLevel != null and !#strings.isEmpty(person.medicalRiskLimitLevel)}"
                th:text="'Medical Risk Limit Level: ' + ${person.medicalRiskLimitLevel}"></p>
-            <p th:if="${person.travelCost != null}" th:text="'Travel Cost: ' + ${person.travelCost}"></p>
+            <p th:if="${person.travelCost} != null"
+               th:text="'Travel Cost: ' + ${person.travelCost}"></p>
             <p th:text="'Person Premium: ' + ${person.personPremium}"></p>
             <p>Risks:</p>
             <ul>

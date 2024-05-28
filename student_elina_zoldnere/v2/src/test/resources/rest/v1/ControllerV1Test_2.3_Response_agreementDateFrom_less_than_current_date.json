@@ -1,8 +1,0 @@
-{
-  "errors": [
-    {
-      "errorCode": "ERROR_CODE_11",
-      "description": "Field agreementDateFrom is in the past!"
-    }
-  ]
-}

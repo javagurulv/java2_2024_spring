@@ -42,7 +42,7 @@ class TravelCalculatePremiumControllerV2Test {
         return fileProvider.provideTestData("v2")
                 .map(data ->
                         DynamicTest.dynamicTest("Test Case: "
-                                        + data.replace("ControllerV2Test_Combined_", ""),
+                                        + data.replace("ControllerV2Test_", ""),
                                 () -> calculateAndCompareResponse((data)))
                 );
     }

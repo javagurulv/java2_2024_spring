@@ -1,0 +1,24 @@
+{
+  "request": {
+    "personFirstName": "Jānis",
+    "personLastName": "Bērziņš",
+    "personalCode": "123456-12345",
+    "personBirthDate": "1990-01-01",
+    "agreementDateFrom": "2025-03-10",
+    "agreementDateTo": "2025-03-11",
+    "selectedRisks": [
+      "TRAVEL_MEDICAL",
+      "TRAVEL_LOSS_BAGGAGE"
+    ],
+    "country": "SPAIN",
+    "medicalRiskLimitLevel": "NOT_SUPPORTED"
+  },
+  "expectedResponse": {
+    "errors": [
+      {
+        "errorCode": "ERROR_CODE_93",
+        "description": "Medical Risk Limit Level value NOT_SUPPORTED is not supported!"
+      }
+    ]
+  }
+}
