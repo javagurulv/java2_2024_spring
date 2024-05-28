@@ -1,7 +1,10 @@
 package lv.javaguru.travel.insurance.core;
 
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 
 import org.springframework.stereotype.Component;
+
+import java.math.BigDecimal;
 
 
 import java.time.ZoneId;
@@ -19,7 +22,7 @@ public class DateTimeService {
     }
 
     Date currentDate() {
-        ZonedDateTime zonedDateTime = ZonedDateTime.now(ZoneId.of("Latvia/Riga"));
+        ZonedDateTime zonedDateTime = ZonedDateTime.now(ZoneId.of("Europe/Riga"));
         return Date.from(zonedDateTime.toInstant());
     }
 
