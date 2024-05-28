@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core.domain;
+package lv.javaguru.travel.insurance.core.domain.entities;
 
 
 

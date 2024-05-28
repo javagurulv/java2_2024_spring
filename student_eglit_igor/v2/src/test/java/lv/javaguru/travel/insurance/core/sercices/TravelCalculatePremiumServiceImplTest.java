@@ -5,6 +5,7 @@ import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreR
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
+
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,7 +33,10 @@ class TravelCalculatePremiumServiceImplTest {
     private AgreementTotalPremiumCalculator agreementTotalPremiumCalculator;
     @Mock
     private ResponseBuilder responseBuilder;
-    @Mock private PersonSaver personSaver;
+    @Mock
+    private PersonEntityFactory personEntityFactory;
+    @Mock
+    private AgreementEntityFactory agreementEntityFactory;
 
     @InjectMocks
     private TravelCalculatePremiumServiceImpl premiumService;
@@ -50,7 +54,7 @@ class TravelCalculatePremiumServiceImplTest {
         assertEquals(1, result.getErrors().size());
         assertEquals("Error code", result.getErrors().get(0).getErrorCode());
         assertEquals("Error description", result.getErrors().get(0).getDescription());
-        verifyNoInteractions(agreementPersonsPremiumCalculator, agreementPersonsPremiumCalculator, personSaver);
+        verifyNoInteractions(agreementPersonsPremiumCalculator, agreementPersonsPremiumCalculator, personEntityFactory);
     }
 
     @Test
@@ -88,5 +92,22 @@ class TravelCalculatePremiumServiceImplTest {
         when(responseBuilder.buildResponse(agreement)).thenReturn(new TravelCalculatePremiumCoreResult(Collections.emptyList(), agreement));
         TravelCalculatePremiumCoreResult result = premiumService.calculatePremium(new TravelCalculatePremiumCoreCommand(agreement));
         assertEquals(BigDecimal.ONE, result.getAgreement().getAgreementPremium());
+    }
+
+    @Test
+    public void shouldSaveAgreement(){
+        var person = new PersonDTO(
+                "John",
+                "Dou",
+                "12345",
+                LocalDate.of(2000, 1, 1),
+                "TRAVEL_MEDICAL",
+                List.of()
+        );
+        var agreement = new AgreementDTO();
+        agreement.setPersons(List.of(person));
+        when(agreementValidator.validate(agreement)).thenReturn(Collections.emptyList());
+        premiumService.calculatePremium(new TravelCalculatePremiumCoreCommand(agreement));
+        verify(agreementEntityFactory).createAgreementEntity(agreement);
     }
 }

@@ -59,3 +59,12 @@ PRIMARY KEY (id)
 );
 
 CREATE UNIQUE INDEX ix_unique_persons ON persons(first_name, last_name, person_code);
+
+CREATE TAble agreements(
+id BIGINT NOT NULL AUTO_INCREMENT,
+date_from DATE NOT NULL,
+date_to DATE NOT NULL,
+country VARCHAR(100) NOT NULL,
+premium DECIMAL(10,2) NOT NULL,
+PRIMARY KEY (id)
+);
