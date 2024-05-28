@@ -4,34 +4,26 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
-
-    <changeSet author="root" id="20">
-        <createTable tableName="persons">
+    <changeSet id="23" author="root">
+        <createTable tableName="selected_risks">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="first_name" type="VARCHAR(200)">
+            <column name="agreement_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
-            <column name="last_name" type="VARCHAR(200)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="person_code" type="VARCHAR(100)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="birth_date" type="DATE">
+            <column name="risk_ic" type="VARCHAR(100)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
 
-    <changeSet author="root" id="21">
-        <createIndex indexName="ix_unique_persons"
-                     tableName="persons"
+    <changeSet id="24" author="root">
+        <createIndex tableName="selected_risks"
+                     indexName="ix_selected_risks_agreement_id_risk_ic"
                      unique="true">
-            <column name="first_name"/>
-            <column name="last_name"/>
-            <column name="person_code"/>
+            <column name="agreement_id"/>
+            <column name="risk_ic"/>
         </createIndex>
     </changeSet>
 

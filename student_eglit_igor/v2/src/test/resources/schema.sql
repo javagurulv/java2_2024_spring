@@ -60,7 +60,7 @@ PRIMARY KEY (id)
 
 CREATE UNIQUE INDEX ix_unique_persons ON persons(first_name, last_name, person_code);
 
-CREATE TAble agreements(
+CREATE TABLE agreements(
 id BIGINT NOT NULL AUTO_INCREMENT,
 date_from DATE NOT NULL,
 date_to DATE NOT NULL,
@@ -68,3 +68,13 @@ country VARCHAR(100) NOT NULL,
 premium DECIMAL(10,2) NOT NULL,
 PRIMARY KEY (id)
 );
+
+CREATE TABLE  selected_risks (
+id BIGINT NOT NULL AUTO_INCREMENT,
+agreement_id BIGINT NOT NULL,
+risk_ic VARCHAR(100) NOT NULL,
+PRIMARY KEY (id)
+);
+
+CREATE UNIQUE INDEX ix_selected_risks_agreement_id_risk_ic
+ON selected_risks(agreement_id, risk_ic);
