@@ -1,0 +1,28 @@
+{
+  "request": {
+    "personFirstName": "Jānis",
+    "personLastName": "Bērziņš",
+    "personalCode": "123456-12345",
+    "personBirthDate": "1990-01-01",
+    "agreementDateFrom": "2025-03-10",
+    "agreementDateTo": "2025-03-11",
+    "selectedRisks": [
+      "NOT_SUPPORTED_1",
+      "NOT_SUPPORTED_2"
+    ],
+    "country": "SPAIN",
+    "medicalRiskLimitLevel": "LEVEL_15000"
+  },
+  "expectedResponse": {
+    "errors": [
+      {
+        "errorCode": "ERROR_CODE_91",
+        "description": "Risk type value NOT_SUPPORTED_1 is not supported!"
+      },
+      {
+        "errorCode": "ERROR_CODE_91",
+        "description": "Risk type value NOT_SUPPORTED_2 is not supported!"
+      }
+    ]
+  }
+}

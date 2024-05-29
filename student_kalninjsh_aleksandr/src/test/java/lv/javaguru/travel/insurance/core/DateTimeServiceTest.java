@@ -1,7 +1,11 @@
 package lv.javaguru.travel.insurance.core;
 
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
+
 
 import org.junit.jupiter.api.Test;
+import java.math.BigDecimal;
 
 
 import java.text.ParseException;
