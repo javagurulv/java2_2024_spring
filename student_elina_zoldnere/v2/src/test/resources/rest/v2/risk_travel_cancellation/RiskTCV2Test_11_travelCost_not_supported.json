@@ -1,0 +1,37 @@
+{
+  "request": {
+    "agreementDateFrom": "2025-03-10",
+    "agreementDateTo": "2025-03-11",
+    "selectedRisks": [
+      "TRAVEL_MEDICAL",
+      "TRAVEL_CANCELLATION"
+    ],
+    "country": "SPAIN",
+    "persons": [
+      {
+        "personFirstName": "Jānis",
+        "personLastName": "Bērziņš",
+        "personalCode": "123456-12345",
+        "personBirthDate": "1990-01-01",
+        "medicalRiskLimitLevel": "LEVEL_15000",
+        "travelCost" : "2000000"
+      },
+      {
+        "personFirstName": "Kārlis",
+        "personLastName": "Krūmiņš",
+        "personalCode": "234567-23456",
+        "personBirthDate": "1989-01-01",
+        "medicalRiskLimitLevel": "LEVEL_15000",
+        "travelCost": "6000"
+      }
+    ]
+  },
+  "expectedResponse": {
+    "errors": [
+      {
+        "errorCode": "ERROR_CODE_94",
+        "description": "Travel Cost value 2000000 is not supported!"
+      }
+    ]
+  }
+}
