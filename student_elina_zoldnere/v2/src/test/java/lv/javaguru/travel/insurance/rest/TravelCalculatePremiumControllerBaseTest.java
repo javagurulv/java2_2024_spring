@@ -1,9 +1,7 @@
-package lv.javaguru.travel.insurance.rest.v1;
+package lv.javaguru.travel.insurance.rest;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import lv.javaguru.travel.insurance.rest.JsonFileReader;
-import lv.javaguru.travel.insurance.rest.TestDataFileProvider;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,33 +24,41 @@ import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-class TravelCalculatePremiumControllerV1Test {
+public abstract class TravelCalculatePremiumControllerBaseTest {
 
     @Autowired
-    private MockMvc mockMvc;
+    protected MockMvc mockMvc;
     @Autowired
-    private JsonFileReader reader;
+    protected JsonFileReader reader;
     @Autowired
-    private Gson gson;
+    protected Gson gson;
     @Autowired
-    private TestDataFileProvider fileProvider;
+    protected TestDataFileProvider fileProvider;
+
+    protected abstract String getTestDataPath();
+
+    protected abstract String getTestCasePrefix();
+
+    protected abstract String getEndpoint();
+
 
     @TestFactory
     public Stream<DynamicTest> dynamicTestsFromStream() {
-        return fileProvider.provideTestData("v1")
+        return fileProvider.provideTestData(getTestDataPath())
                 .map(data ->
                         DynamicTest.dynamicTest("Test Case: "
-                                        + data.replace("ControllerV1Test_", ""),
+                                        + data.replace(getTestCasePrefix(), ""),
                                 () -> calculateAndCompareResponse((data)))
                 );
     }
 
     private void calculateAndCompareResponse(String fileName) throws Exception {
-        JsonObject testDataJson = gson.fromJson(reader.readJsonFromFile("v1/" + fileName),  JsonObject.class);
+        JsonObject testDataJson =
+                gson.fromJson(reader.readJsonFromFile(getTestDataPath() + fileName), JsonObject.class);
         JsonObject requestJson = testDataJson.getAsJsonObject("request");
         JsonObject expectedResponseJson = testDataJson.getAsJsonObject("expectedResponse");
 
-        MockHttpServletResponse calculatedResponse = mockMvc.perform(post("/insurance/travel/api/v1/")
+        MockHttpServletResponse calculatedResponse = mockMvc.perform(post(getEndpoint())
                         .content(requestJson.toString())
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())

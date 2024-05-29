@@ -35,7 +35,7 @@ public class JsonFileReaderTest {
                     }
                 }""";
 
-        String actualJson = reader.readJsonFromFile("v1/ControllerV1Test_1.1_personFirstName_null.json");
+        String actualJson = reader.readJsonFromFile("v1/person/PersonV1Test_01_personFirstName_null.json");
 
         ObjectMapper mapper = new ObjectMapper();
         assertEquals(mapper.readTree(expectedJson), mapper.readTree(actualJson));
