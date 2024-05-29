@@ -1,8 +1,17 @@
 {
-  "errors": null,
-  "personFirstName": "Valera",
-  "personLastName": "Kovss",
-  "agreementDateFrom": "2021-05-25",
-  "agreementDateTo": "2021-05-29",
-  "agreementPrice": 0
+  "errors": [
+    {
+      "field": "agreementDateFrom",
+      "message": "Must be in the future!"
+    },
+    {
+      "field": "agreementDateTo",
+      "message": "Must be in the future!"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPrice": null
 }
