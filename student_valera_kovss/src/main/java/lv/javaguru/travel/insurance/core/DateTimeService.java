@@ -3,25 +3,26 @@ package lv.javaguru.travel.insurance.core;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.springframework.stereotype.Component;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 @Component
 class DateTimeService {
 
-    public long calculateDateFromTo(TravelCalculatePremiumRequest request) {
-        long diff = request.getAgreementDateFrom().getTime() - request.getAgreementDateTo().getTime();
+    long getDaysBetween(Date date1, Date date2) {
+        long diff = date2.getTime() - date1.getTime();
         return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-
-
     }
 
+    Date getCurrentDateTime() {
+        ZoneId zone = ZoneId.of("Europe/Riga");
+        ZonedDateTime zonedDateTime = ZonedDateTime.now(zone);
+        return Date.from(zonedDateTime.toInstant());
+    }
 
     public long calculateAgreementDaysBetweenDates(Date agreementDateFrom, Date agreementDateTo) {
         return 0;
     }
 
-    public Object getDaysBetween(Date agreementDateFrom, Date agreementDateTo) {
-        return null;
-    }
 }
-
