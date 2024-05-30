@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.loadtesting;
 
+import com.google.common.base.Stopwatch;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import lv.javaguru.travel.insurance.rest.JsonFileReader;
@@ -8,6 +9,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.concurrent.TimeUnit;
 
 import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
 
@@ -28,9 +31,14 @@ public class RestCallExample {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> requestEntity = new HttpEntity<>(requestJsonString, headers);
+
+        Stopwatch stopwatch = Stopwatch.createStarted();
         ResponseEntity<String> response = restTemplate.postForEntity(urlV2, requestEntity, String.class);
+        stopwatch.stop();
 
         String calculatedResponseAsString = response.getBody();
+
+        System.out.println("Request processing time: " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " (ms)");
 
         assertJson(calculatedResponseAsString)
                 .where()
