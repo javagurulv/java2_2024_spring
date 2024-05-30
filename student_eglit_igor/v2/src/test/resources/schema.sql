@@ -89,3 +89,17 @@ PRIMARY KEY (id),
 foreign key (agreement_id) references agreements(id),
 foreign key (person_id) references persons(id)
 );
+CREATE UNIQUE INDEX ix_agreement_persons_agreement_id_person_id
+ON agreement_persons(agreement_id, person_id);
+
+CREATE TABLE agreement_person_risks (
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  agreement_person_id BIGINT NOT NULL,
+  risk_ic VARCHAR(100) NOT NULL,
+  premium DECIMAL(10,2) NOT NULL,
+  PRIMARY KEY (id),
+  foreign key (agreement_person_id) references agreement_persons(id)
+);
+
+CREATE UNIQUE INDEX ix_agreement_person_risks_agreement_person_id_risk_ic
+ON agreement_person_risks(agreement_person_id, risk_ic);

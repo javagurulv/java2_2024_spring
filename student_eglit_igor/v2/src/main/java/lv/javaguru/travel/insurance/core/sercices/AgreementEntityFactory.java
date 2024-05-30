@@ -1,12 +1,11 @@
 package lv.javaguru.travel.insurance.core.sercices;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
-import lv.javaguru.travel.insurance.core.domain.entities.AgreementEntity;
-import lv.javaguru.travel.insurance.core.domain.entities.AgreementPersonEntity;
-import lv.javaguru.travel.insurance.core.domain.entities.PersonEntity;
-import lv.javaguru.travel.insurance.core.domain.entities.SelectedRiskEntity;
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
+import lv.javaguru.travel.insurance.core.domain.entities.*;
 import lv.javaguru.travel.insurance.core.repositories.entities.AgreementEntityRepository;
 import lv.javaguru.travel.insurance.core.repositories.entities.AgreementPersonEntityRepository;
+import lv.javaguru.travel.insurance.core.repositories.entities.AgreementPersonRiskEntityRepository;
 import lv.javaguru.travel.insurance.core.repositories.entities.SelectedRiskEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,6 +21,8 @@ class AgreementEntityFactory {
     private SelectedRiskEntityRepository selectedRiskEntityRepository;
     @Autowired
     private AgreementPersonEntityRepository agreementPersonEntityRepository;
+    @Autowired
+    AgreementPersonRiskEntityRepository agreementPersonRiskEntityRepository;
 
     AgreementEntity createAgreementEntity(AgreementDTO agreementDTO) {
         AgreementEntity agreementEntity = saveAgreement(agreementDTO);
@@ -39,18 +40,6 @@ class AgreementEntityFactory {
         return agreementEntityRepository.save(agreementEntity);
     }
 
-    private void saveAllAgreementPersons(AgreementDTO agreementDTO,
-                                         AgreementEntity agreementEntity) {
-        agreementDTO.getPersons().forEach(personDTO -> {
-            PersonEntity personEntity = personEntityFactory.createPersonEntity(personDTO);
-            AgreementPersonEntity agreementPersonEntity = new AgreementPersonEntity();
-            agreementPersonEntity.setAgreement(agreementEntity);
-            agreementPersonEntity.setPerson(personEntity);
-            agreementPersonEntity.setMedicalRiskLimitLevel(personDTO.medicalRiskLimitLevel());
-            agreementPersonEntityRepository.save(agreementPersonEntity);
-        });
-    }
-
     private void saveAllSelectedRisks(AgreementDTO agreementDTO,
                                       AgreementEntity agreementEntity) {
         agreementDTO.getSelectedRisks().forEach(riskIc -> {
@@ -60,4 +49,38 @@ class AgreementEntityFactory {
             selectedRiskEntityRepository.save(riskEntity);
         });
     }
+
+    private void saveAllAgreementPersons(AgreementDTO agreementDTO,
+                                         AgreementEntity agreementEntity) {
+        agreementDTO.getPersons().forEach(personDTO -> {
+            PersonEntity personEntity = personEntityFactory.createPersonEntity(personDTO);
+            AgreementPersonEntity agreementPersonEntity = saveAgreementPerson(agreementEntity,
+                    personDTO,
+                    personEntity);
+            saveAllPersonRisks(personDTO, agreementPersonEntity);
+        });
+    }
+
+    private void saveAllPersonRisks(PersonDTO personDTO, AgreementPersonEntity agreementPersonEntity) {
+        personDTO.risks().forEach(riskDTO -> {
+            AgreementPersonRiskEntity agreementPersonRiskEntity = new AgreementPersonRiskEntity();
+            agreementPersonRiskEntity.setAgreementPerson(agreementPersonEntity);
+            agreementPersonRiskEntity.setRiskIc(riskDTO.getRiskIc());
+            agreementPersonRiskEntity.setPremium(riskDTO.getPremium());
+            agreementPersonRiskEntityRepository.save(agreementPersonRiskEntity);
+        });
+    }
+
+    private AgreementPersonEntity saveAgreementPerson(AgreementEntity agreementEntity,
+                                                       PersonDTO personDTO,
+                                                       PersonEntity personEntity) {
+        AgreementPersonEntity agreementPersonEntity = new AgreementPersonEntity();
+        agreementPersonEntity.setAgreement(agreementEntity);
+        agreementPersonEntity.setPerson(personEntity);
+        agreementPersonEntity.setMedicalRiskLimitLevel(personDTO.medicalRiskLimitLevel());
+        agreementPersonEntity = agreementPersonEntityRepository.save(agreementPersonEntity);
+        return agreementPersonEntity;
+    }
+
+
 }
