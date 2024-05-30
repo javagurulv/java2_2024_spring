@@ -1,18 +1,13 @@
 package lv.javaguru.travel.insurance.core;
 
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
-import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumResponse;
-
 
 import org.junit.jupiter.api.Test;
-import java.math.BigDecimal;
-
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DateTimeServiceTest {
 
@@ -20,10 +15,10 @@ class DateTimeServiceTest {
 
     @Test
     public void daysBetweenDates() {
-        Date dateFrom = createDate("2005.05.15");
-        Date dateTo = createDate("2005.05.20");
+        Date dateFrom = createDate("2023.01.01");
+        Date dateTo = createDate("2023.01.10");
         long numberOfDays = service.calculateAgreementDaysBetweenDates(dateFrom, dateTo);
-        assertEquals(numberOfDays, 5);
+        assertEquals(numberOfDays, 9);
     }
 
     private Date createDate(String dateString) {

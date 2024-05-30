@@ -1,0 +1,17 @@
+{
+  "errors": [
+    {
+      "field": "agreementDateFrom",
+      "message": "Must be less then agreementDateTo"
+    },
+    {
+      "field": "agreementDateTo",
+      "message": "Should not be in the past!"
+    }
+  ],
+  "personFirstName": null,
+  "personLastName": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "agreementPrice": null
+}

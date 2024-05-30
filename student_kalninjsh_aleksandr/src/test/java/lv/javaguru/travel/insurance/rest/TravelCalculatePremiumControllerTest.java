@@ -93,6 +93,20 @@ public class TravelCalculatePremiumControllerTest {
         "rest/PremiumControllerResponse_all_fields_are_specified.json");
     }
 
+    @Test
+    @DisplayName("8.agreementDateFrom is in the past")
+    public void agreementDateFromIsInThePast() throws Exception {
+        executeAndEvaluate("rest/PremiumControllerRequest_agreementDateFrom_is_in_the_past.json",
+                "rest/PremiumControllerResponse_agreementDateFrom_is_in_the_past.json");
+    }
+
+    @Test
+    @DisplayName("9.agreementDateTo_is_in_the_past")
+    public void agreementDateToIsInThePast() throws Exception {
+        executeAndEvaluate("rest/PremiumControllerRequest_agreementDateTo_is_in_the_past.json",
+                "rest/PremiumControllerResponse_agreementDateTo_is_in_the_past.json");
+    }
+
     private void executeAndEvaluate(String jsonRequestFilePath, String jsonResponseFilePath) throws Exception {
         MvcResult calculatedResult = mockMvc.perform(post("/insurance/travel/")
                 .content(jsonFileReader.readJsonFromFile(jsonRequestFilePath))
