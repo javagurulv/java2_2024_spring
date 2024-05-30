@@ -4,15 +4,15 @@ import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreC
 import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreResult;
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
-import lv.javaguru.travel.insurance.core.sercices.AgreementEntityFactory;
-
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Component
+@Transactional
 class TravelCalculatePremiumServiceImpl
         implements TravelCalculatePremiumService {
 
