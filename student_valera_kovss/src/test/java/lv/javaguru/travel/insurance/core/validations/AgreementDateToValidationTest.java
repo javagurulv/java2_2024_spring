@@ -1,5 +1,6 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.validations;
 
+import lv.javaguru.travel.insurance.core.validation.AgreementDateToValidation;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
@@ -14,26 +15,26 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class AgreementDateFromValidationTest {
+class AgreementDateToValidationTest {
 
 
-    private ValidateAgreementDateFrom validation = new ValidateAgreementDateFrom();
+    private AgreementDateToValidation validation = new AgreementDateToValidation();
 
     @Test
-    public void shouldAgreementDateFromIsNull() {
+    public void shouldReturnErrorWhenAgreementDateToIsNull() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getAgreementDateFrom()).thenReturn(null);
-        Optional<ValidationError> errorOpt = validation.validateAgreementDateFrom(request);
+        when(request.getAgreementDateTo()).thenReturn(null);
+        Optional<ValidationError> errorOpt = validation.validateAgreementDateTo(request);
         assertTrue(errorOpt.isPresent());
-        assertEquals(errorOpt.get().getField(), "agreementDateFrom");
+        assertEquals(errorOpt.get().getField(), "agreementDateTo");
         assertEquals(errorOpt.get().getMessage(), "Must not be empty!");
     }
 
     @Test
-    public void shouldAgreementDateFromIsPresent() {
+    public void shouldNotReturnErrorWhenAgreementDateToIsPresent() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getAgreementDateFrom()).thenReturn(createDate("04.01.2024"));
-        Optional<ValidationError> errorOpt = validation.validateAgreementDateFrom(request);
+        when(request.getAgreementDateTo()).thenReturn(createDate("04.01.2024"));
+        Optional<ValidationError> errorOpt = validation.validateAgreementDateTo(request);
         assertTrue(errorOpt.isEmpty());
     }
 
@@ -44,6 +45,6 @@ class AgreementDateFromValidationTest {
             throw new RuntimeException(e);
         }
     }
-}
 
+}
 
