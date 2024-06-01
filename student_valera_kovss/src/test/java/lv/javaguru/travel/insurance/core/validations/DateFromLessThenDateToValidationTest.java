@@ -23,7 +23,7 @@ class DateFromLessThenDateToValidationTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(createDate("10.01.2025"));
         when(request.getAgreementDateTo()).thenReturn(createDate("05.01.2024"));
-        Optional<ValidationError> errorOpt = validation.validateDateFromLessThenDateTo(request);
+        Optional<ValidationError> errorOpt = validation.execute(request);
         assertTrue(errorOpt.isPresent());
         assertEquals(errorOpt.get().getField(), "agreementDateFrom");
         assertEquals(errorOpt.get().getMessage(), "Must be less then agreementDateTo!");
@@ -34,7 +34,7 @@ class DateFromLessThenDateToValidationTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(createDate("04.01.2024"));
         when(request.getAgreementDateTo()).thenReturn(createDate("04.01.2024"));
-        Optional<ValidationError> errorOpt = validation.validateDateFromLessThenDateTo(request);
+        Optional<ValidationError> errorOpt = validation.execute(request);
         assertTrue(errorOpt.isPresent());
         assertEquals(errorOpt.get().getField(), "agreementDateFrom");
         assertEquals(errorOpt.get().getMessage(), "Must be less then agreementDateTo!");
@@ -45,7 +45,7 @@ class DateFromLessThenDateToValidationTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(createDate("04.01.2024"));
         when(request.getAgreementDateTo()).thenReturn(createDate("05.01.2024"));
-        Optional<ValidationError> errorOpt = validation.validateDateFromLessThenDateTo(request);
+        Optional<ValidationError> errorOpt = validation.execute(request);
         assertTrue(errorOpt.isEmpty());
     }
 

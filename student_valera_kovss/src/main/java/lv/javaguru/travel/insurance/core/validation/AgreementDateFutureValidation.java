@@ -9,12 +9,14 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 import java.util.Optional;
 
-@Component public class AgreementDateFutureValidation {
+@Component
+public class AgreementDateFutureValidation implements RequestValidation {
 
     @Autowired
     private DateTimeService dateTimeService;
 
-    public Optional<ValidationError> validateDateFromInFuture(TravelCalculatePremiumRequest request) {
+    @Override
+    public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
         Date dateFrom = request.getAgreementDateFrom();
         Date currentDateTime = dateTimeService.getCurrentDateTime();
         return (dateFrom != null && dateFrom.before(currentDateTime))

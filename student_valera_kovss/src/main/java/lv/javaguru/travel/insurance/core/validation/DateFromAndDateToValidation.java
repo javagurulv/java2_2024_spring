@@ -7,10 +7,10 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 import java.util.Optional;
 @Component
-public class DateFromAndDateToValidation {
+public class DateFromAndDateToValidation implements RequestValidation {
 
-
-    public Optional<ValidationError> validateDateFromLessThenDateTo(TravelCalculatePremiumRequest request) {
+    @Override
+    public Optional<ValidationError>execute(TravelCalculatePremiumRequest request) {
         Date dateFrom = request.getAgreementDateFrom();
         Date dateTo = request.getAgreementDateTo();
         return (dateFrom != null && dateTo != null

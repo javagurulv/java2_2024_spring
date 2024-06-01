@@ -23,7 +23,6 @@ import static org.mockito.Mockito.when;
 class AgreementDateFromInFutureValidationTest {
 
     @Mock
-
     private DateTimeService dateTimeService;
 
     @InjectMocks
@@ -34,7 +33,7 @@ class AgreementDateFromInFutureValidationTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(createDate("01.02.2022"));
         when(dateTimeService.getCurrentDateTime()).thenReturn(createDate("01.04.2024"));
-        Optional<ValidationError> errorOpt = validation.validateDateFromInFuture(request);
+        Optional<ValidationError> errorOpt = validation.execute(request);
         assertTrue(errorOpt.isPresent());
         assertEquals(errorOpt.get().getField(), "agreementDateFrom");
         assertEquals(errorOpt.get().getMessage(), "Must be in the future!");
@@ -45,7 +44,7 @@ class AgreementDateFromInFutureValidationTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(createDate("04.01.2024"));
         when(dateTimeService.getCurrentDateTime()).thenReturn(createDate("01.01.2023"));
-        Optional<ValidationError> errorOpt = validation.validateDateFromInFuture(request);
+        Optional<ValidationError> errorOpt = validation.execute(request);
         assertTrue(errorOpt.isEmpty());
     }
 
