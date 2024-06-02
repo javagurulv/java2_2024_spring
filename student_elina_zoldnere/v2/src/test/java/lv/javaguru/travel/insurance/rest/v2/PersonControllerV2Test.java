@@ -1,8 +1,8 @@
 package lv.javaguru.travel.insurance.rest.v2;
 
-import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumControllerBaseTest;
+import lv.javaguru.travel.insurance.rest.TravelCalculatePremiumControllerTestTemplate;
 
-class PersonControllerV2Test extends TravelCalculatePremiumControllerBaseTest {
+class PersonControllerV2Test extends TravelCalculatePremiumControllerTestTemplate {
 
     @Override
     protected String getTestDataPath() {
