@@ -30,11 +30,6 @@
         "errorCode": "ERROR_CODE_1",
         "description": "Field personFirstName is empty!"
       }
-    ],
-    "agreementDateFrom": null,
-    "agreementDateTo": null,
-    "country": null,
-    "agreementPremium": null,
-    "persons": null
+    ]
   }
 }

@@ -34,11 +34,6 @@
         "errorCode": "ERROR_CODE_15",
         "description": "Field Medical_Risk_Limit_Level ic = NOT_EXISTING_MEDICAL_RISK_LIMIT_LEVEL is not supported!"
       }
-    ],
-    "agreementDateFrom": null,
-    "agreementDateTo": null,
-    "country": null,
-    "agreementPremium": null,
-    "persons": null
+    ]
   }
 }

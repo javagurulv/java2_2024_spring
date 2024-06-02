@@ -4,15 +4,5 @@
       "errorCode": "ERROR_CODE_14",
       "description": "Field Medical_Risk_Limit_Level should not be empty!"
     }
-  ],
-  "personFirstName": null,
-  "personLastName": null,
-  "personCode": null,
-  "personBirthDate": null,
-  "agreementDateFrom": null,
-  "agreementDateTo": null,
-  "country" : null,
-  "medicalRiskLimitLevel" : null,
-  "risks" : null,
-  "agreementPremium": null
+  ]
 }
