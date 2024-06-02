@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
-class AgreementDateFromInFutureValidationTest {
+public class AgreementDateFromInFutureValidationTest {
 
     @Mock
     private DateTimeService dateTimeService;
