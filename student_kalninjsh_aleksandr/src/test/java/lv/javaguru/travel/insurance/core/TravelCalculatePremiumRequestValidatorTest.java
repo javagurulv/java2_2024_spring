@@ -8,196 +8,61 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 import java.util.List;
+import java.util.Optional;
 
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class TravelCalculatePremiumRequestValidatorTest {
+public class TravelCalculatePremiumRequestValidatorTest {
 
     @Mock
     private TravelCalculatePremiumRequest request;
 
     @Mock
-    private DateTimeService service;
+    private PersonFirstNameValidation personFirstNameValidation;
+    @Mock
+    private PersonLastNameValidation personLastNameValidation;
+    @Mock
+    private AgreementDateFromValidation agreementDateFromValidation;
+    @Mock
+    private AgreementDateToValidation agreementDateToValidation;
+    @Mock
+    private AgreementDateFromLessThenAgreementDateToValidation agreementDateFromLessThenAgreementDateToValidation;
+    @Mock
+    private AgreementDateFromNotInThePastValidation agreementDateFromNotInThePastValidation;
+    @Mock
+    private AgreementDateToNotInThePastValidation agreementDateToNotInThePastValidation;
 
     @InjectMocks
     private TravelCalculatePremiumRequestValidator requestValidator;
 
     @Test
-    public void returnErrorWhenPersonFirstNameIsNull() {
-        when(request.getPersonFirstName()).thenReturn(null);
-        when(request.getPersonLastName()).thenReturn("personLastName");
-        when(request.getAgreementDateFrom()).thenReturn(createDate("2025.01.01"));
-        when(request.getAgreementDateTo()).thenReturn(createDate("2025.01.10"));
-        when(service.currentDate()).thenReturn(createDate("2023.01.01"));
-        List<ValidationError> errors = requestValidator.validate(request);
-        assertEquals(errors.size(), 1);
-        assertEquals(errors.get(0).getField(), "personFirstName");
-        assertEquals(errors.get(0).getMessage(), "Must not be empty");
-    }
-
-    @Test
-    public void returnErrorWhenPersonFirstNameIsEmpty() {
-        when(request.getPersonFirstName()).thenReturn("");
-        when(request.getPersonLastName()).thenReturn("personLastName");
-        when(request.getAgreementDateFrom()).thenReturn(createDate("2025.01.01"));
-        when(request.getAgreementDateTo()).thenReturn(createDate("2025.01.10"));
-        when(service.currentDate()).thenReturn(createDate("2023.01.01"));
-        List<ValidationError> errors = requestValidator.validate(request);
-        assertEquals(errors.size(), 1);
-        assertEquals(errors.get(0).getField(), "personFirstName");
-        assertEquals(errors.get(0).getMessage(), "Must not be empty");
-    }
-
-    @Test
-    public void notReturnErrorIfThereIsPersonName() {
-        when(request.getPersonFirstName()).thenReturn("Tom");
-        when(request.getPersonLastName()).thenReturn("personLastName");
-        when(request.getAgreementDateFrom()).thenReturn(createDate("2025.01.01"));
-        when(request.getAgreementDateTo()).thenReturn(createDate("2025.01.10"));
-        when(service.currentDate()).thenReturn(createDate("2023.01.01"));
+    public void validationSucceed() {
+        when(personLastNameValidation.validatePersonLastName(request)).thenReturn(Optional.empty());
+        when(personLastNameValidation.validatePersonLastName(request)).thenReturn(Optional.empty());
+        when(agreementDateFromValidation.validateAgreementDateFrom(request)).thenReturn(Optional.empty());
+        when(agreementDateToValidation.validateAgreementDateTo(request)).thenReturn(Optional.empty());
+        when(agreementDateFromLessThenAgreementDateToValidation.validateAgreementDateFromLessThenAgreementDateTo(request)).thenReturn(Optional.empty());
+        when(agreementDateFromNotInThePastValidation.validateAgreementDateFromNotInThePast(request)).thenReturn(Optional.empty());
+        when(agreementDateToNotInThePastValidation.validateAgreementDateToNotInThePast(request)).thenReturn(Optional.empty());
         List<ValidationError> errors = requestValidator.validate(request);
         assertTrue(errors.isEmpty());
     }
 
     @Test
-    public void returnErrorWhenPersonLastNameIsNull() {
-        when(request.getPersonFirstName()).thenReturn("personFirstName");
-        when(request.getPersonLastName()).thenReturn(null);
-        when(request.getAgreementDateFrom()).thenReturn(createDate("2025.01.01"));
-        when(request.getAgreementDateTo()).thenReturn(createDate("2025.01.10"));
-        when(service.currentDate()).thenReturn(createDate("2023.01.01"));
+    public void returnError() {
+        when(personFirstNameValidation.validatePersonFirstName(request)).thenReturn(Optional.of(new ValidationError()));
+        when(personLastNameValidation.validatePersonLastName(request)).thenReturn(Optional.of(new ValidationError()));
+        when(agreementDateFromValidation.validateAgreementDateFrom(request)).thenReturn(Optional.of(new ValidationError()));
+        when(agreementDateToValidation.validateAgreementDateTo(request)).thenReturn(Optional.of(new ValidationError()));
+        when(agreementDateFromLessThenAgreementDateToValidation.validateAgreementDateFromLessThenAgreementDateTo(request)).thenReturn(Optional.of(new ValidationError()));
+        when(agreementDateFromNotInThePastValidation.validateAgreementDateFromNotInThePast(request)).thenReturn(Optional.of(new ValidationError()));
+        when(agreementDateToNotInThePastValidation.validateAgreementDateToNotInThePast(request)).thenReturn(Optional.of(new ValidationError()));
         List<ValidationError> errors = requestValidator.validate(request);
-        assertEquals(errors.size(), 1);
-        assertEquals(errors.get(0).getField(), "personLastName");
-        assertEquals(errors.get(0).getMessage(), "Must not be empty");
+        assertEquals(errors.size(), 7);
     }
-
-    @Test
-    public void returnErrorWhenPersonLastNameIsEmpty() {
-        when(request.getPersonFirstName()).thenReturn("personFirstName");
-        when(request.getPersonLastName()).thenReturn("");
-        when(request.getAgreementDateFrom()).thenReturn(createDate("2025.01.01"));
-        when(request.getAgreementDateTo()).thenReturn(createDate("2025.01.10"));
-        when(service.currentDate()).thenReturn(createDate("2023.01.01"));
-        List<ValidationError> errors = requestValidator.validate(request);
-        assertEquals(errors.size(), 1);
-        assertEquals(errors.get(0).getField(), "personLastName");
-        assertEquals(errors.get(0).getMessage(), "Must not be empty");
-    }
-
-    @Test
-    public void notReturnErrorIfThereIsPersonLastName() {
-        when(request.getPersonFirstName()).thenReturn("personFirstName");
-        when(request.getPersonLastName()).thenReturn("Sawyer");
-        when(request.getAgreementDateFrom()).thenReturn(createDate("2025.01.01"));
-        when(request.getAgreementDateTo()).thenReturn(createDate("2025.01.10"));
-        when(service.currentDate()).thenReturn(createDate("2023.01.01"));
-        List<ValidationError> errors = requestValidator.validate(request);
-        assertTrue(errors.isEmpty());
-    }
-
-    @Test
-    public void returnErrorWhenAgreementDateFromIsNull() {
-        when(request.getPersonFirstName()).thenReturn("personFirstName");
-        when(request.getPersonLastName()).thenReturn("Sawyer");
-        when(request.getAgreementDateFrom()).thenReturn(null);
-        when(request.getAgreementDateTo()).thenReturn(createDate("2025.01.10"));
-        when(service.currentDate()).thenReturn(createDate("2023.01.01"));
-        List<ValidationError> errors = requestValidator.validate(request);
-        assertEquals(errors.size(), 1);
-        assertEquals(errors.get(0).getField(), "agreementDateFrom");
-        assertEquals(errors.get(0).getMessage(), "Must not be empty");
-    }
-
-    @Test
-    public void notReturnErrorIfThereIsAgreementDateFrom() {
-        when(request.getPersonFirstName()).thenReturn("personFirstName");
-        when(request.getPersonLastName()).thenReturn("personLastName");
-        when(request.getAgreementDateFrom()).thenReturn(createDate("2025.01.01"));
-        when(request.getAgreementDateTo()).thenReturn(createDate("2025.01.10"));
-        when(service.currentDate()).thenReturn(createDate("2023.01.01"));
-        List<ValidationError> errors = requestValidator.validate(request);
-        assertTrue(errors.isEmpty());
-    }
-
-    @Test
-    public void returnErrorWhenAgreementDateToIsNull() {
-        when(request.getPersonFirstName()).thenReturn("personFirstName");
-        when(request.getPersonLastName()).thenReturn("personLastName");
-        when(request.getAgreementDateFrom()).thenReturn(createDate("2025.01.01"));
-        when(request.getAgreementDateTo()).thenReturn(null);
-        when(service.currentDate()).thenReturn(createDate("2023.01.01"));
-        List<ValidationError> errors = requestValidator.validate(request);
-        assertEquals(errors.size(), 1);
-        assertEquals(errors.get(0).getField(), "agreementDateTo");
-        assertEquals(errors.get(0).getMessage(), "Must not be empty");
-    }
-
-    @Test
-    public void notReturnErrorIfThereIsAgreementDateTo() {
-        when(request.getPersonFirstName()).thenReturn("personFirstName");
-        when(request.getPersonLastName()).thenReturn("personLastName");
-        when(request.getAgreementDateFrom()).thenReturn(createDate("2025.01.01"));
-        when(request.getAgreementDateTo()).thenReturn(createDate("2025.01.10"));
-        when(service.currentDate()).thenReturn(createDate("2023.01.01"));
-        List<ValidationError> errors = requestValidator.validate(request);
-        assertTrue(errors.isEmpty());
-    }
-
-    @Test
-    public void returnErrorWhenAgreementDateFromIsAfterAgreementDateTo() {
-        when(request.getPersonFirstName()).thenReturn("personFirstName");
-        when(request.getPersonLastName()).thenReturn("personLastName");
-        when(request.getAgreementDateFrom()).thenReturn(createDate("2025.01.10"));
-        when(request.getAgreementDateTo()).thenReturn(createDate("2025.01.01"));
-        when(service.currentDate()).thenReturn(createDate("2023.01.01"));
-        List<ValidationError> errors = requestValidator.validate(request);
-        assertEquals(errors.size(), 1);
-        assertEquals(errors.get(0).getField(), "agreementDateFrom");
-        assertEquals(errors.get(0).getMessage(), "Must be less then agreementDateTo");
-    }
-
-    @Test
-    public void returnErrorWhenAgreementDateFromIsInThePast() {
-        when(request.getPersonFirstName()).thenReturn("personFirstName");
-        when(request.getPersonLastName()).thenReturn("personLastName");
-        when(request.getAgreementDateFrom()).thenReturn(createDate("2020.01.01"));
-        when(request.getAgreementDateTo()).thenReturn(createDate("2025.01.10"));
-        when(service.currentDate()).thenReturn(createDate("2023.01.01"));
-        List<ValidationError> errors = requestValidator.validate(request);
-        assertFalse(errors.isEmpty());
-        assertEquals(errors.size(), 1);
-        assertEquals(errors.get(0).getField(), "agreementDateFrom");
-        assertEquals(errors.get(0).getMessage(), "Should not be in the past!");
-    }
-
-    @Test
-    public void returnErrorWhenAgreementDateToIsInThePast() {
-        when(request.getPersonFirstName()).thenReturn("personFirstName");
-        when(request.getPersonLastName()).thenReturn("personLastName");
-        when(request.getAgreementDateFrom()).thenReturn(createDate("2025.01.01"));
-        when(request.getAgreementDateTo()).thenReturn(createDate("2020.01.10"));
-        when(service.currentDate()).thenReturn(createDate("2023.01.01"));
-        List<ValidationError> errors = requestValidator.validate(request);
-        assertFalse(errors.isEmpty());
-        assertEquals(errors.size(), 2);
-        assertEquals(errors.get(1).getField(), "agreementDateTo");
-        assertEquals(errors.get(1).getMessage(), "Should not be in the past!");
-    }
-
-    private Date createDate(String dateString) {
-        try {
-            return new SimpleDateFormat("yyyy.MM.dd").parse(dateString);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
 }
