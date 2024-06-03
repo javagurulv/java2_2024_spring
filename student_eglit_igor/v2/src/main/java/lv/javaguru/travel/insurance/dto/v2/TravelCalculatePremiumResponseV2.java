@@ -23,6 +23,8 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TravelCalculatePremiumResponseV2 extends CoreResponse {
 
+    private String uuid;
+
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate agreementDateFrom;
 

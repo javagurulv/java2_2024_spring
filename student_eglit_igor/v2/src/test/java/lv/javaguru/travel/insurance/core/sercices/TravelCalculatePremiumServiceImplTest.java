@@ -6,6 +6,7 @@ import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 
+import lv.javaguru.travel.insurance.core.domain.entities.AgreementEntity;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,6 +38,7 @@ class TravelCalculatePremiumServiceImplTest {
     private PersonEntityFactory personEntityFactory;
     @Mock
     private AgreementEntityFactory agreementEntityFactory;
+
 
     @InjectMocks
     private TravelCalculatePremiumServiceImpl premiumService;
@@ -70,6 +72,8 @@ class TravelCalculatePremiumServiceImplTest {
         var agreement = new AgreementDTO();
         agreement.setPersons(List.of(person));
         when(agreementValidator.validate(agreement)).thenReturn(Collections.emptyList());
+        var agreementEntity = new AgreementEntity();
+        when(agreementEntityFactory.createAgreementEntity(agreement)).thenReturn(agreementEntity);
         when(premiumServiceImplResponseBuilder.buildResponse(agreement)).thenReturn(new TravelCalculatePremiumCoreResult(Collections.emptyList(), agreement));
         premiumService.calculatePremium(new TravelCalculatePremiumCoreCommand(agreement));
         verify(agreementPersonsPremiumCalculator).calculateRiskPremiums(agreement);
@@ -88,6 +92,8 @@ class TravelCalculatePremiumServiceImplTest {
         var agreement = new AgreementDTO();
         agreement.setPersons(List.of(person));
         when(agreementValidator.validate(agreement)).thenReturn(Collections.emptyList());
+        var agreementEntity = new AgreementEntity();
+        when(agreementEntityFactory.createAgreementEntity(agreement)).thenReturn(agreementEntity);
         when(agreementTotalPremiumCalculator.calculate(agreement)).thenReturn(BigDecimal.ONE);
         when(premiumServiceImplResponseBuilder.buildResponse(agreement)).thenReturn(new TravelCalculatePremiumCoreResult(Collections.emptyList(), agreement));
         TravelCalculatePremiumCoreResult result = premiumService.calculatePremium(new TravelCalculatePremiumCoreCommand(agreement));
@@ -107,6 +113,8 @@ class TravelCalculatePremiumServiceImplTest {
         var agreement = new AgreementDTO();
         agreement.setPersons(List.of(person));
         when(agreementValidator.validate(agreement)).thenReturn(Collections.emptyList());
+        var agreementEntity = new AgreementEntity();
+        when(agreementEntityFactory.createAgreementEntity(agreement)).thenReturn(agreementEntity);
         premiumService.calculatePremium(new TravelCalculatePremiumCoreCommand(agreement));
         verify(agreementEntityFactory).createAgreementEntity(agreement);
     }
