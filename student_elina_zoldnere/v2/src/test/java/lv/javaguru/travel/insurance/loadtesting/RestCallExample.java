@@ -3,9 +3,6 @@ package lv.javaguru.travel.insurance.loadtesting;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -20,17 +17,10 @@ class RestCallExample {
 
         int numThreads = 50;
         ExecutorService executorService = Executors.newFixedThreadPool(numThreads * 2);
-        List<Callable<Void>> tasks = new ArrayList<>();
 
         for (int i = 0; i < numThreads; i++) {
-            tasks.add(Executors.callable(new V1Call(statisticV1), null));
-            tasks.add(Executors.callable(new V2Call(statisticV2), null));
-        }
-
-        try {
-            executorService.invokeAll(tasks);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            executorService.submit(new V1Call(statisticV1), null);
+            executorService.submit(new V2Call(statisticV2), null);
         }
 
         executorService.shutdown();

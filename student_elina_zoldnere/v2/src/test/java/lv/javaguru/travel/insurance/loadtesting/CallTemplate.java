@@ -51,8 +51,13 @@ abstract class CallTemplate implements Runnable {
         stopwatch.stop();
 
         Long processingTimeMillis = stopwatch.elapsed(TimeUnit.MILLISECONDS);
-        statistic.addExecutionTime(processingTimeMillis);
-        logger.info("Request {} processing time: {} (ms)", identifier, processingTimeMillis);
+        if (statistic != null) {
+            statistic.addExecutionTime(processingTimeMillis);
+            logger.info("Request {} processing time: {} (ms)", identifier, processingTimeMillis);
+        } else {
+            logger.info("Warm-up {} processing time: {} (ms), not included in statistics.",
+                    identifier, processingTimeMillis);
+        }
     }
 
     private void executeCallAndCompare(String requestJsonString, String expectedResponseString, String url) {
