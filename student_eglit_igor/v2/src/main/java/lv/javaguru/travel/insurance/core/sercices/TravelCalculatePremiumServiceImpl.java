@@ -23,7 +23,7 @@ class TravelCalculatePremiumServiceImpl
     @Autowired
     private AgreementPersonsPremiumCalculator agreementPersonsPremiumCalculator;
     @Autowired
-    private ResponseBuilder responseBuilder;
+    private PremiumServiceImplResponseBuilder premiumServiceImplResponseBuilder;
     @Autowired
     private AgreementEntityFactory agreementEntityFactory;
 
@@ -33,9 +33,9 @@ class TravelCalculatePremiumServiceImpl
         if (errors.isEmpty()) {
             calculatePremium(command.getAgreement());
             agreementEntityFactory.createAgreementEntity(command.getAgreement());
-            return responseBuilder.buildResponse(command.getAgreement());
+            return premiumServiceImplResponseBuilder.buildResponse(command.getAgreement());
         } else {
-            return responseBuilder.buildResponse(errors);
+            return premiumServiceImplResponseBuilder.buildResponse(errors);
         }
     }
     private void calculatePremium(AgreementDTO agreement) {

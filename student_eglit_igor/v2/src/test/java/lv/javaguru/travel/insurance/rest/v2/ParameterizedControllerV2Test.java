@@ -3,7 +3,7 @@ package lv.javaguru.travel.insurance.rest.v2;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lv.javaguru.travel.insurance.rest.v1.JsonFileReader;
+import lv.javaguru.travel.insurance.rest.JsonFileReader;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

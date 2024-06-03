@@ -32,7 +32,7 @@ class TravelCalculatePremiumServiceImplTest {
     @Mock
     private AgreementTotalPremiumCalculator agreementTotalPremiumCalculator;
     @Mock
-    private ResponseBuilder responseBuilder;
+    private PremiumServiceImplResponseBuilder premiumServiceImplResponseBuilder;
     @Mock
     private PersonEntityFactory personEntityFactory;
     @Mock
@@ -48,7 +48,7 @@ class TravelCalculatePremiumServiceImplTest {
 
         var validationError = new ValidationErrorDTO("Error code", "Error description");
         when(agreementValidator.validate(agreement)).thenReturn(List.of(validationError));
-        when(responseBuilder.buildResponse(List.of(validationError))).thenReturn(new TravelCalculatePremiumCoreResult(List.of(validationError)));
+        when(premiumServiceImplResponseBuilder.buildResponse(List.of(validationError))).thenReturn(new TravelCalculatePremiumCoreResult(List.of(validationError)));
         TravelCalculatePremiumCoreResult result = premiumService.calculatePremium(command);
 
         assertEquals(1, result.getErrors().size());
@@ -70,7 +70,7 @@ class TravelCalculatePremiumServiceImplTest {
         var agreement = new AgreementDTO();
         agreement.setPersons(List.of(person));
         when(agreementValidator.validate(agreement)).thenReturn(Collections.emptyList());
-        when(responseBuilder.buildResponse(agreement)).thenReturn(new TravelCalculatePremiumCoreResult(Collections.emptyList(), agreement));
+        when(premiumServiceImplResponseBuilder.buildResponse(agreement)).thenReturn(new TravelCalculatePremiumCoreResult(Collections.emptyList(), agreement));
         premiumService.calculatePremium(new TravelCalculatePremiumCoreCommand(agreement));
         verify(agreementPersonsPremiumCalculator).calculateRiskPremiums(agreement);
     }
@@ -89,7 +89,7 @@ class TravelCalculatePremiumServiceImplTest {
         agreement.setPersons(List.of(person));
         when(agreementValidator.validate(agreement)).thenReturn(Collections.emptyList());
         when(agreementTotalPremiumCalculator.calculate(agreement)).thenReturn(BigDecimal.ONE);
-        when(responseBuilder.buildResponse(agreement)).thenReturn(new TravelCalculatePremiumCoreResult(Collections.emptyList(), agreement));
+        when(premiumServiceImplResponseBuilder.buildResponse(agreement)).thenReturn(new TravelCalculatePremiumCoreResult(Collections.emptyList(), agreement));
         TravelCalculatePremiumCoreResult result = premiumService.calculatePremium(new TravelCalculatePremiumCoreCommand(agreement));
         assertEquals(BigDecimal.ONE, result.getAgreement().getAgreementPremium());
     }

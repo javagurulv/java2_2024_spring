@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-class ResponseBuilder {
+class PremiumServiceImplResponseBuilder {
 
     TravelCalculatePremiumCoreResult buildResponse(List<ValidationErrorDTO> errors) {
         return new TravelCalculatePremiumCoreResult(errors);
