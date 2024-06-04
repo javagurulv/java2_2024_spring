@@ -7,7 +7,7 @@ import lv.javaguru.travel.insurance.core.sercices.TravelCalculatePremiumService;
 import lv.javaguru.travel.insurance.dto.v2.DtoV2Converter;
 import lv.javaguru.travel.insurance.dto.v2.TravelCalculatePremiumRequestV2;
 import lv.javaguru.travel.insurance.dto.v2.TravelCalculatePremiumResponseV2;
-import lv.javaguru.travel.insurance.rest.common.TravelCalculatePremiumRequestExecutionTimeLogger;
+import lv.javaguru.travel.insurance.rest.common.TravelRestRequestExecutionTimeLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +20,7 @@ public class TravelCalculatePremiumRestControllerV2 {
 
     @Autowired private TravelCalculatePremiumRequestLoggerV2 requestLogger;
     @Autowired private TravelCalculatePremiumResponseLoggerV2 responseLogger;
-    @Autowired private TravelCalculatePremiumRequestExecutionTimeLogger executionTimeLogger;
+    @Autowired private TravelRestRequestExecutionTimeLogger executionTimeLogger;
     @Autowired private TravelCalculatePremiumService calculatePremiumService;
     @Autowired private DtoV2Converter dtoV2Converter;
 
