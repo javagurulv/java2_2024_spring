@@ -1,5 +1,6 @@
-package lv.javaguru.travel.insurance.core;
+package lv.javaguru.travel.insurance.core.validations;
 
+import lv.javaguru.travel.insurance.core.DateTimeService;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,7 @@ import java.util.Date;
 import java.util.Optional;
 
 @Component
-class AgreementDateToNotInThePastValidation {
+public class AgreementDateToNotInThePastValidation {
 
     @Autowired
     private DateTimeService service;

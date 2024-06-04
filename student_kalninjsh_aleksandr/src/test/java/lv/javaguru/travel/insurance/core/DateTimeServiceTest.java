@@ -9,7 +9,7 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class DateTimeServiceTest {
+public class DateTimeServiceTest {
 
     private DateTimeService service = new DateTimeService();
 
