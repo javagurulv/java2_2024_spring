@@ -1,7 +1,7 @@
 System Load Testing
 
 1. System performance benchmark.
-    - BaseLine performance (idle system) - 10 ms.
+    - BaseLine performance (idle system, in-memory database) - 10 ms.
     An average from 12 requests of 1 thread (12 requests in total) in 60 seconds.
 
     - Industry standards for simple insurance calculations - 200-500 ms.
@@ -47,3 +47,11 @@ Total amount of 250-300 calls per second was reached.
     Acceptable performance: 180 to ... total requests per second.
     Degraded performance: > ...
 Total amount of 180-220 calls per second was reached.
+
+3.5 Performance comparison without caching vs with caching.
+    REST V2, server database (MySQL).
+    20 requests of 1 thread in 20 seconds (1 request per second).
+
+    Average processing time:
+        without caching: 76 ms per request
+        with caching (Spring Boot + Caffeine): 51 ms per request
