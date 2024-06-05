@@ -20,7 +20,7 @@ public class TravelGetAgreementCoreResult {
     private AgreementDTO agreement;
 
     public boolean hasErrors() {
-        return errors != null & !errors.isEmpty();
+        return errors != null && !errors.isEmpty();
     }
 
     public TravelGetAgreementCoreResult(List<ValidationErrorDTO> errors) {
