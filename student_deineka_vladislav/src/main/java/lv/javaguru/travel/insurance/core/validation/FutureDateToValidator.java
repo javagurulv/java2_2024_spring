@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.Optional;
 
 @Component
-class FutureDateToValidator implements TravelRequestValidation {
+class FutureDateToValidator extends TravelRequestValidationImpl {
 
     @Autowired
     DateTimeUtil dateTimeUtil;
@@ -18,7 +18,7 @@ class FutureDateToValidator implements TravelRequestValidation {
     ValidationErrorFactory validationErrorFactory;
 
     @Override
-    public Optional<ValidationErrors> execute(TravelCalculatePremiumRequest request) {
+    public Optional<ValidationErrors> validate(TravelCalculatePremiumRequest request) {
         Date dateTo = request.getAgreementDateTo();
         Date today = dateTimeUtil.getTodayDateTime();
         return (dateTo != null && dateTo.before(today))

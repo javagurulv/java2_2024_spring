@@ -29,7 +29,7 @@ class NoOneRiskSelectedValidatorTest {
         when(premiumRequest.getSelectedRisks()).thenReturn(null);
         ValidationErrors validationErrors = mock(ValidationErrors.class);
         when(validationErrorFactory.createError("ERROR_CODE_8")).thenReturn(validationErrors);
-        Optional<ValidationErrors> errorsOptional = noOneRiskSelectedValidator.execute(premiumRequest);
+        Optional<ValidationErrors> errorsOptional = noOneRiskSelectedValidator.validate(premiumRequest);
         assertTrue(errorsOptional.isPresent());
         assertSame(errorsOptional.get(), validationErrors);
     }
@@ -40,7 +40,7 @@ class NoOneRiskSelectedValidatorTest {
         when(premiumRequest.getSelectedRisks()).thenReturn(List.of());
         ValidationErrors validationErrors = mock(ValidationErrors.class);
         when(validationErrorFactory.createError("ERROR_CODE_8")).thenReturn(validationErrors);
-        Optional<ValidationErrors> errorsOptional = noOneRiskSelectedValidator.execute(premiumRequest);
+        Optional<ValidationErrors> errorsOptional = noOneRiskSelectedValidator.validate(premiumRequest);
         assertTrue(errorsOptional.isPresent());
         assertSame(errorsOptional.get(), validationErrors);
     }
@@ -49,7 +49,7 @@ class NoOneRiskSelectedValidatorTest {
     public void noErrorIfSelectedRiskIsPresent() {
         TravelCalculatePremiumRequest premiumRequest = mock(TravelCalculatePremiumRequest.class);
         when(premiumRequest.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
-        Optional<ValidationErrors> errorsOptional = noOneRiskSelectedValidator.execute(premiumRequest);
+        Optional<ValidationErrors> errorsOptional = noOneRiskSelectedValidator.validate(premiumRequest);
         assertTrue(errorsOptional.isEmpty());
         verifyNoInteractions(validationErrorFactory);
     }

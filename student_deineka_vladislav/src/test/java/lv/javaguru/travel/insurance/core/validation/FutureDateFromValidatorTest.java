@@ -36,7 +36,7 @@ class FutureDateFromValidatorTest {
         when(dateTimeUtil.getTodayDateTime()).thenReturn(createNewDate("10.10.2024"));
         ValidationErrors validationErrors = mock(ValidationErrors.class);
         when(validationErrorFactory.createError("ERROR_CODE_5")).thenReturn(validationErrors);
-        Optional<ValidationErrors> errorsOptional = futureDateFromValidator.execute(premiumRequest);
+        Optional<ValidationErrors> errorsOptional = futureDateFromValidator.validate(premiumRequest);
         assertTrue(errorsOptional.isPresent());
         assertSame(errorsOptional.get(), validationErrors);
     }
@@ -46,7 +46,7 @@ class FutureDateFromValidatorTest {
         TravelCalculatePremiumRequest premiumRequest = mock(TravelCalculatePremiumRequest.class);
         when(premiumRequest.getAgreementDateFrom()).thenReturn(createNewDate("10.10.2030"));
         when(dateTimeUtil.getTodayDateTime()).thenReturn(createNewDate("10.10.2024"));
-        Optional<ValidationErrors> errorsOptional = futureDateFromValidator.execute(premiumRequest);
+        Optional<ValidationErrors> errorsOptional = futureDateFromValidator.validate(premiumRequest);
         assertTrue(errorsOptional.isEmpty());
         verifyNoInteractions(validationErrorFactory);
     }

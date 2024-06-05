@@ -89,6 +89,13 @@ public class TravelCalculatePremiumControllerTest {
                                 "rest/TravelCalculatePremiumResponse_dateTo_earlier_dateFrom.json");
     }
 
+//    @Test
+//    @DisplayName("Test 10: selected risk not supported")
+//    public void selectedRiskNotSupported() throws Exception {
+//        generalizingAndComparing("rest/TravelCalculatePremiumRequest_selectedRisk_is_not_supported.json",
+//                                "rest/TravelCalculatePremiumResponse_selectedRisk_is_not_supported.json");
+//    }
+
     private void generalizingAndComparing(String jsonRequestFilePath, String jsonResponseFilePath) throws Exception {
         String jsonRequest = jsonFileReader.getJsonFromFile(jsonRequestFilePath);
 

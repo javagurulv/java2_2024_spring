@@ -31,7 +31,7 @@ class DateFromValidatorTest {
         when(premiumRequest.getAgreementDateFrom()).thenReturn(null);
         ValidationErrors validationErrors = mock(ValidationErrors.class);
         when(validationErrorFactory.createError("ERROR_CODE_3")).thenReturn(validationErrors);
-        Optional<ValidationErrors> errorsOptional = dateFromValidator.execute(premiumRequest);
+        Optional<ValidationErrors> errorsOptional = dateFromValidator.validate(premiumRequest);
         assertTrue(errorsOptional.isPresent());
         assertSame(errorsOptional.get(), validationErrors);
     }
@@ -40,7 +40,7 @@ class DateFromValidatorTest {
     public void noErrorIfDateFromIsPresent() {
         TravelCalculatePremiumRequest premiumRequest = mock(TravelCalculatePremiumRequest.class);
         when(premiumRequest.getAgreementDateFrom()).thenReturn(createNewDate("10.10.2030"));
-        Optional<ValidationErrors> errorsOptional = dateFromValidator.execute(premiumRequest);
+        Optional<ValidationErrors> errorsOptional = dateFromValidator.validate(premiumRequest);
         assertTrue(errorsOptional.isEmpty());
         verifyNoInteractions(validationErrorFactory);
     }

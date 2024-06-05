@@ -26,9 +26,9 @@ public class TravelCalculatePremiumRequestValidatorImplTest {
     public void noErrors() {
         TravelCalculatePremiumRequest premiumRequest = mock(TravelCalculatePremiumRequest.class);
         TravelRequestValidation firstValidation = mock(TravelRequestValidation.class);
-        when(firstValidation.execute(premiumRequest)).thenReturn(Optional.empty());
+        when(firstValidation.validate(premiumRequest)).thenReturn(Optional.empty());
         TravelRequestValidation secondValidation = mock(TravelRequestValidation.class);
-        when(secondValidation.execute(premiumRequest)).thenReturn(Optional.empty());
+        when(secondValidation.validate(premiumRequest)).thenReturn(Optional.empty());
         List<TravelRequestValidation> travelRequestValidations = List.of(firstValidation, secondValidation);
 
         ReflectionTestUtils.setField(travelCalculatePremiumRequestValidator, "travelRequestValidations", travelRequestValidations);
@@ -40,9 +40,9 @@ public class TravelCalculatePremiumRequestValidatorImplTest {
     public void error() {
         TravelCalculatePremiumRequest premiumRequest = mock(TravelCalculatePremiumRequest.class);
         TravelRequestValidation firstValidation = mock(TravelRequestValidation.class);
-        when(firstValidation.execute(premiumRequest)).thenReturn(Optional.of(new ValidationErrors()));
+        when(firstValidation.validate(premiumRequest)).thenReturn(Optional.of(new ValidationErrors()));
         TravelRequestValidation secondValidation = mock(TravelRequestValidation.class);
-        when(secondValidation.execute(premiumRequest)).thenReturn(Optional.of(new ValidationErrors()));
+        when(secondValidation.validate(premiumRequest)).thenReturn(Optional.of(new ValidationErrors()));
         List<TravelRequestValidation> travelRequestValidations = List.of(firstValidation, secondValidation);
 
         ReflectionTestUtils.setField(travelCalculatePremiumRequestValidator, "travelRequestValidations", travelRequestValidations);

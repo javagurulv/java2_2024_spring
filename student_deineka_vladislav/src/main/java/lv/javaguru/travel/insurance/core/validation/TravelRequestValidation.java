@@ -3,9 +3,13 @@ package lv.javaguru.travel.insurance.core.validation;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationErrors;
 
+import java.util.List;
 import java.util.Optional;
 
-public interface TravelRequestValidation {
+interface TravelRequestValidation {
 
-    Optional<ValidationErrors> execute(TravelCalculatePremiumRequest travelCalculatePremiumRequest);
+    Optional<ValidationErrors> validate(TravelCalculatePremiumRequest travelCalculatePremiumRequest);
+    List<ValidationErrors> listValidation(TravelCalculatePremiumRequest premiumRequest);
+
+
 }

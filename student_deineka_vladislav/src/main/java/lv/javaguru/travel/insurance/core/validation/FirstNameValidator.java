@@ -8,13 +8,13 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-class FirstNameValidator implements TravelRequestValidation {
+class FirstNameValidator extends TravelRequestValidationImpl {
 
     @Autowired
     private ValidationErrorFactory validationErrorFactory;
 
     @Override
-    public Optional<ValidationErrors> execute(TravelCalculatePremiumRequest travelCalculatePremiumRequest) {
+    public Optional<ValidationErrors> validate(TravelCalculatePremiumRequest travelCalculatePremiumRequest) {
         return (travelCalculatePremiumRequest.getPersonFirstName() == null ||travelCalculatePremiumRequest.getPersonFirstName().isEmpty())
                 ? Optional.of(validationErrorFactory.createError("ERROR_CODE_1"))
                 : Optional.empty();

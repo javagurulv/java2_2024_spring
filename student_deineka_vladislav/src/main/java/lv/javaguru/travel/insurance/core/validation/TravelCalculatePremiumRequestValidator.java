@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface TravelCalculatePremiumRequestValidator {
 
-    List<ValidationErrors> validation(TravelCalculatePremiumRequest request);
+    List<ValidationErrors> validation(TravelCalculatePremiumRequest premiumRequest);
 }

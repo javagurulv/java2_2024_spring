@@ -9,13 +9,13 @@ import java.util.Date;
 import java.util.Optional;
 
 @Component
-class DateFromSmallerThanDateToValidator implements TravelRequestValidation {
+class DateFromSmallerThanDateToValidator extends TravelRequestValidationImpl {
 
     @Autowired
     private ValidationErrorFactory validationErrorFactory;
 
     @Override
-    public Optional<ValidationErrors> execute(TravelCalculatePremiumRequest request) {
+    public Optional<ValidationErrors> validate(TravelCalculatePremiumRequest request) {
         Date dateFrom = request.getAgreementDateFrom();
         Date dateTo = request.getAgreementDateTo();
         return (dateFrom != null && dateTo != null

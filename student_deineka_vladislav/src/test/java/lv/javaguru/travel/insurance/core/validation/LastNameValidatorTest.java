@@ -28,7 +28,7 @@ class LastNameValidatorTest {
         when(premiumRequest.getPersonLastName()).thenReturn(null);
         ValidationErrors validationErrors = mock(ValidationErrors.class);
         when(validationErrorFactory.createError("ERROR_CODE_2")).thenReturn(validationErrors);
-        Optional<ValidationErrors> errorsOptional = lastNameValidator.execute(premiumRequest);
+        Optional<ValidationErrors> errorsOptional = lastNameValidator.validate(premiumRequest);
         assertTrue(errorsOptional.isPresent());
         assertSame(errorsOptional.get(), validationErrors);
     }
@@ -39,7 +39,7 @@ class LastNameValidatorTest {
         when(premiumRequest.getPersonLastName()).thenReturn("");
         ValidationErrors validationErrors = mock(ValidationErrors.class);
         when(validationErrorFactory.createError("ERROR_CODE_2")).thenReturn(validationErrors);
-        Optional<ValidationErrors> errorsOptional = lastNameValidator.execute(premiumRequest);
+        Optional<ValidationErrors> errorsOptional = lastNameValidator.validate(premiumRequest);
         assertTrue(errorsOptional.isPresent());
         assertSame(errorsOptional.get(), validationErrors);
     }
@@ -48,7 +48,7 @@ class LastNameValidatorTest {
     public void noErrorIfLastNameIsPresent() {
         TravelCalculatePremiumRequest premiumRequest = mock(TravelCalculatePremiumRequest.class);
         when(premiumRequest.getPersonLastName()).thenReturn("Johnson");
-        Optional<ValidationErrors> errorsOptional = lastNameValidator.execute(premiumRequest);
+        Optional<ValidationErrors> errorsOptional = lastNameValidator.validate(premiumRequest);
         assertTrue(errorsOptional.isEmpty());
         verifyNoInteractions(validationErrorFactory);
     }

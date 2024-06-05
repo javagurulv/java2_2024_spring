@@ -33,7 +33,7 @@ class DateFromSmallerOrEqualThanDateToValidatorTest {
         when(premiumRequest.getAgreementDateTo()).thenReturn(createNewDate("10.10.2030"));
         ValidationErrors validationErrors = mock(ValidationErrors.class);
         when(validationErrorFactory.createError("ERROR_CODE_7")).thenReturn(validationErrors);
-        Optional<ValidationErrors> errorsOptional = dateFromSmallerThanDateToValidator.execute(premiumRequest);
+        Optional<ValidationErrors> errorsOptional = dateFromSmallerThanDateToValidator.validate(premiumRequest);
         assertTrue(errorsOptional.isPresent());
         assertSame(errorsOptional.get(), validationErrors);
     }
@@ -45,7 +45,7 @@ class DateFromSmallerOrEqualThanDateToValidatorTest {
         when(premiumRequest.getAgreementDateTo()).thenReturn(createNewDate("10.10.2030"));
         ValidationErrors validationErrors = mock(ValidationErrors.class);
         when(validationErrorFactory.createError("ERROR_CODE_7")).thenReturn(validationErrors);
-        Optional<ValidationErrors> errorsOptional = dateFromSmallerThanDateToValidator.execute(premiumRequest);
+        Optional<ValidationErrors> errorsOptional = dateFromSmallerThanDateToValidator.validate(premiumRequest);
         assertTrue(errorsOptional.isPresent());
         assertSame(errorsOptional.get(), validationErrors);
     }
