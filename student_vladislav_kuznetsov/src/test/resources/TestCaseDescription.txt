@@ -1,0 +1,77 @@
+Test Case 1:
+Request: Person first name field is not entered.
+Response: error code response ERROR_CODE_1.
+
+Test Case 2:
+Request: Person last name field is not entered.
+Response: error code response ERROR_CODE_2.
+
+Test Case 3:
+Request: Person first name and Person Last name are not entered.
+Response: error code response ERROR_CODE_1; ERROR_CODE_2.
+
+Test Case 4:
+Request: Agreement date from is not entered.
+Response: error code response ERROR_CODE_3.
+
+Test Case 5:
+Request: Agreement date to is not entered.
+Response: error code response ERROR_CODE_5.
+
+Test Case 6:
+Request: Agreement date to and agreement date from are not entered.
+Response: error code response ERROR_CODE_3; ERROR_CODE_5.
+
+Test Case 7:
+Request: agreementDateTo is before agreementDateFrom.
+Response: error code response ERROR_CODE_4; ERROR_CODE_6.
+
+Test Case 8:
+Request: agreementDateTo is equal agreementDateFrom.
+Response: error code response ERROR_CODE_6.
+
+Test Case 9:
+Request: agreementDateFrom is before currentDate.
+Response: error code response ERROR_CODE_6.
+
+Test Case 10:
+Request: personFirstName, personLastName, agreementDateFrom, agreementDateTo.
+Response: No errors.
+
+
+Test Case 11:
+Request: agreementDateFrom is entered in wrong Date format.
+Response: ERROR_CODE_4.
+
+Test Case 12:
+Request: All fields are null.
+Response: ERROR_CODE_1; ERROR_CODE_2; ERROR_CODE_3; ERROR_CODE_5; ERROR_CODE_8; ERROR_CODE_11.
+
+Test Case 13:
+Request: All fields are entered and agreementDateTo is in wrong data format.
+Response: ERROR_CODE_6.
+
+Test Case 14:
+Request: agreementDateFrom and agreementDateTo is before current date and equal.
+Response: ERROR_CODE_4; ERROR_CODE_6.
+
+Test Case 15:
+Request: agreementDateTo is before current date.
+Response: ERROR_CODE_4; ERROR_CODE_6.
+
+Test Case 16:
+Request: agreementDateFrom and agreementDateTo is before current date and agreementDateFrom is before agreementDateTo.
+Response: ERROR_CODE_4; ERROR_CODE_6.
+
+Test Case 17:
+Request: Field selected risk is empty.
+Response: ERROR_CODE_8.
+
+Test Case 18:
+Request: Field selected risk is null.
+Response: ERROR_CODE_8.
+
+
+
+
+

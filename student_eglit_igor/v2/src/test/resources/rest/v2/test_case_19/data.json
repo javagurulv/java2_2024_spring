@@ -29,11 +29,6 @@
         "errorCode": "ERROR_CODE_8",
         "description": "Field selected_risks is empty!"
       }
-    ],
-    "agreementDateFrom": null,
-    "agreementDateTo": null,
-    "country": null,
-    "agreementPremium": null,
-    "persons": null
+    ]
   }
 }

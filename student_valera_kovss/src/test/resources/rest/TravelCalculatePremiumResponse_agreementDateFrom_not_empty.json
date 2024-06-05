@@ -1,6 +1,10 @@
 {
   "errors": [
     {
+      "field": "agreementDateTo",
+      "message": "Must be in the future!"
+    },
+    {
       "field": "agreementDateFrom",
       "message": "Must not be empty!"
     }

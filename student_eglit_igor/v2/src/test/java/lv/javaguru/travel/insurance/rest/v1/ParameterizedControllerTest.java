@@ -1,5 +1,6 @@
 package lv.javaguru.travel.insurance.rest.v1;
 
+import lv.javaguru.travel.insurance.rest.JsonFileReader;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

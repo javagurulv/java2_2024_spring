@@ -43,7 +43,7 @@ class ValidateCountryIntegrationTest {
                 .withDateFrom(helper.newDate("2025.03.10"))
                 .withDateTo(helper.newDate("2025.03.11"))
                 .withCountry("INVALID")
-                .withSelectedRisks(List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"))
+                .withSelectedRisks(List.of("TRAVEL_MEDICAL", "TRAVEL_LOSS_BAGGAGE"))
                 .withPerson(person)
                 .withPremium(BigDecimal.ZERO)
                 .build();
@@ -69,7 +69,7 @@ class ValidateCountryIntegrationTest {
                 .withDateFrom(helper.newDate("2025.03.10"))
                 .withDateTo(helper.newDate("2025.03.11"))
                 .withCountry(null)
-                .withSelectedRisks(List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"))
+                .withSelectedRisks(List.of("TRAVEL_MEDICAL", "TRAVEL_LOSS_BAGGAGE"))
                 .withPerson(person)
                 .withPremium(BigDecimal.ZERO)
                 .build();

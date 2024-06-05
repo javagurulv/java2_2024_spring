@@ -19,7 +19,7 @@
             <column name="person_code" type="VARCHAR(100)">
                 <constraints nullable="false"/>
             </column>
-            <column name="birth_date" type="DATETIME">
+            <column name="birth_date" type="DATE">
                 <constraints nullable="false"/>
             </column>
         </createTable>

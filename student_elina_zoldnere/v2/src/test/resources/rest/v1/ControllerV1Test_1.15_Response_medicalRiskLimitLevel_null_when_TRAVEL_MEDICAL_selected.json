@@ -1,8 +1,0 @@
-{
-  "errors": [
-    {
-      "errorCode": "ERROR_CODE_8",
-      "description": "Field medicalRiskLimitLevel is empty when medical risk limit level enabled!"
-    }
-  ]
-}

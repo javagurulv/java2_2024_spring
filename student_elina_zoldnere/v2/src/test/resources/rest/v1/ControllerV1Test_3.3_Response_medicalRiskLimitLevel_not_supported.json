@@ -1,8 +1,0 @@
-{
-  "errors": [
-    {
-      "errorCode": "ERROR_CODE_93",
-      "description": "Medical Risk Limit Level value NOT_SUPPORTED is not supported!"
-    }
-  ]
-}

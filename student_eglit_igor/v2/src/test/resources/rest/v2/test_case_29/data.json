@@ -34,11 +34,6 @@
         "errorCode": "ERROR_CODE_9",
         "description": "Risk Type ic = NOT_EXISTING_RISK_TYPE_2 not supported!"
       }
-    ],
-    "agreementDateFrom": null,
-    "agreementDateTo": null,
-    "country": null,
-    "agreementPremium": null,
-    "persons": null
+    ]
   }
 }

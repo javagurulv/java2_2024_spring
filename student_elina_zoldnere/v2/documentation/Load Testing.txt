@@ -1,0 +1,49 @@
+System Load Testing
+
+1. System performance benchmark.
+    - BaseLine performance (idle system) - 10 ms.
+    An average from 12 requests of 1 thread (12 requests in total) in 60 seconds.
+
+    - Industry standards for simple insurance calculations - 200-500 ms.
+    Based on information provided by GhatGPT.
+
+2. System performance thresholds.
+    Considering measured baseline and industry standards, following levels of average processing time are set:
+
+    - Optimal performance =< 200 ms (20 times the baseline of 10 ms).
+
+    - Acceptable performance 220 to 500 ms.
+
+    - Degraded performance > 500 ms.
+
+3. Load testing results.
+3.1 REST V1, in-memory database (H2).
+    Optimal performance: < 500 total requests per second.
+    Acceptable performance: 500 to ... total requests per second.
+    Degraded performance: > ...
+
+
+3.2 REST V2, in-memory database (H2).
+    Optimal performance: < 450 total requests per second.
+    Acceptable performance: 450 to ... total requests per second.
+    Degraded performance: > ...
+
+The results are not very accurate, though, because as the load increases, system delays in performing calls become
+more significant. This caused the total time for performing requests to significantly exceed the desired time.
+
+Taking this into account, actual running time measurement was added, and the actual performed calls per second were
+calculated. However, starting from 500 actual calls per second, the more load added, the more execution was
+delayed, and the change of average processing time was minimal. Actually I could not reach more than 500-600 actual
+calls per second.
+
+3.3 REST V1, server database (MySQL).
+    Optimal performance: < 200 total requests per second.
+    Acceptable performance: 200 to ... total requests per second.
+    Degraded performance: > ...
+Total amount of 250-300 calls per second was reached.
+
+3.4 REST V2, server database (MySQL).
+    Optimal performance: < 180 total requests per second.
+    Acceptable performance: 180 to ... total requests per second.
+    Degraded performance: > ...
+Total amount of 180-220 calls per second was reached.

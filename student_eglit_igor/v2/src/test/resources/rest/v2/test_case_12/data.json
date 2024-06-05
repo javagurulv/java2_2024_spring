@@ -31,11 +31,6 @@
         "errorCode": "ERROR_CODE_13",
         "description": "Field personBirthDate is in the future!"
       }
-    ],
-    "agreementDateFrom": null,
-    "agreementDateTo": null,
-    "country": null,
-    "agreementPremium": null,
-    "persons": null
+    ]
   }
 }

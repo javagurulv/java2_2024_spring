@@ -1,0 +1,24 @@
+{
+  "request": {
+    "personFirstName": "Jānis",
+    "personLastName": "Bērziņš",
+    "personalCode": "123456-12345",
+    "personBirthDate": "1990-01-01",
+    "agreementDateFrom": null,
+    "agreementDateTo": "2025-03-11",
+    "selectedRisks": [
+      "TRAVEL_MEDICAL",
+      "TRAVEL_LOSS_BAGGAGE"
+    ],
+    "country": "SPAIN",
+    "medicalRiskLimitLevel": "LEVEL_15000"
+  },
+  "expectedResponse": {
+    "errors": [
+      {
+        "errorCode": "ERROR_CODE_3",
+        "description": "Field agreementDateFrom is empty!"
+      }
+    ]
+  }
+}

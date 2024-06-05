@@ -1,6 +1,7 @@
 package lv.javaguru.travel.insurance.rest;
 
-import org.junit.jupiter.api.DisplayName;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +11,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 
-import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -28,130 +29,77 @@ public class TravelCalculatePremiumControllerTest {
     @Autowired private JsonFileReader jsonFileReader;
 
     @Test
-    @DisplayName("1: firstName is not empty")
-    public void firstNameNotProvided() throws Exception {
-        mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("rest/PremiumControllerRequest_personFirstName_is_not_empty.json"))
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("personFirstName", is(nullValue())))
-                .andExpect(jsonPath("personLastName", is(nullValue())))
-                .andExpect(jsonPath("agreementDateFrom", is(nullValue())))
-                .andExpect(jsonPath("agreementDateTo", is(nullValue())))
-                .andExpect(jsonPath("agreementPrice", is(nullValue())))
-                .andExpect(jsonPath("errors", is(notNullValue())))
-                .andExpect(jsonPath("errors", hasSize(1)))
-                .andExpect(jsonPath("errors[0].field", is("personFirstName")))
-                .andExpect(jsonPath("errors[0].message", is("Must not be empty!")))
-                .andReturn();
+    public void firstNameNotEmpty() throws Exception {
+        executeAndCompare(
+                "rest/PremiumControllerRequest_personFirstName_is_not_empty.json",
+                "rest/TravelCalculatePremiumResponse_firstName_not_empty.json"
+        );
     }
 
     @Test
-    @DisplayName("2: lastName is not empty")
-    public void lastNameNotProvided() throws Exception {
-        mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("rest/PremiumControllerRequest_personLastName_not_or_empty.json"))
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("personFirstName", is(nullValue())))
-                .andExpect(jsonPath("personLastName", is(nullValue())))
-                .andExpect(jsonPath("agreementDateFrom", is(nullValue())))
-                .andExpect(jsonPath("agreementDateTo", is(nullValue())))
-                .andExpect(jsonPath("agreementPrice", is(nullValue())))
-                .andExpect(jsonPath("errors", is(notNullValue())))
-                .andExpect(jsonPath("errors", hasSize(1)))
-                .andExpect(jsonPath("errors[0].field", is("personLastName")))
-                .andExpect(jsonPath("errors[0].message", is("Must not be empty!")))
-                .andReturn();
+    public void lastNameNotEmpty() throws Exception {
+        executeAndCompare(
+                "rest/PremiumControllerRequest_personLastName_not_or_empty.json",
+                "rest/TravelCalculatePremiumResponse_lastName_not_empty.json"
+        );
     }
 
     @Test
-    @DisplayName("3: agreementDateFrom is not empty")
-    public void agreementDateFromNotProvided() throws Exception {
-        mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("rest/PremiumControllerRequest_agreementDateFrom_null_or_empty.json"))
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("personFirstName", is(nullValue())))
-                .andExpect(jsonPath("personLastName", is(nullValue())))
-                .andExpect(jsonPath("agreementDateFrom", is(nullValue())))
-                .andExpect(jsonPath("agreementDateTo", is(nullValue())))
-                .andExpect(jsonPath("agreementPrice", is(nullValue())))
-                .andExpect(jsonPath("errors", is(notNullValue())))
-                .andExpect(jsonPath("errors", hasSize(1)))
-                .andExpect(jsonPath("errors[0].field", is("agreementDateFrom")))
-                .andExpect(jsonPath("errors[0].message", is("Must not be empty!")))
-                .andReturn();
+    public void agreementDateFromNotEmpty() throws Exception {
+        executeAndCompare(
+                "rest/PremiumControllerRequest_agreementDateFrom_null_or_empty.json",
+                "rest/TravelCalculatePremiumResponse_agreementDateFrom_not_empty.json"
+        );
     }
 
     @Test
-    @DisplayName("4: agreementDateTo is not empty")
-    public void agreementDateToNotProvided() throws Exception {
-        mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("rest/PremiumControllerRequest_agreementDateTo_null_or_empty.json"))
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("personFirstName", is(nullValue())))
-                .andExpect(jsonPath("personLastName", is(nullValue())))
-                .andExpect(jsonPath("agreementDateFrom", is(nullValue())))
-                .andExpect(jsonPath("agreementDateTo", is(nullValue())))
-                .andExpect(jsonPath("agreementPrice", is(nullValue())))
-                .andExpect(jsonPath("errors", is(notNullValue())))
-                .andExpect(jsonPath("errors", hasSize(1)))
-                .andExpect(jsonPath("errors[0].field", is("agreementDateTo")))
-                .andExpect(jsonPath("errors[0].message", is("Must not be empty!")))
-                .andReturn();
+    public void agreementDateToNotEmpty() throws Exception {
+        executeAndCompare(
+                "rest/PremiumControllerRequest_agreementDateTo_null_or_empty.json",
+                "rest/TravelCalculatePremiumResponse_agreementDateTo_not_empty.json"
+        );
     }
 
     @Test
-    @DisplayName("5: all fields is not empty")
-    public void allFieldsNotProvided() throws Exception {
-        mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("rest/PremiumControllerRequest_all_fields_is_not_empty.json"))
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("personFirstName", is(nullValue())))
-                .andExpect(jsonPath("personLastName", is(nullValue())))
-                .andExpect(jsonPath("agreementDateFrom", is(nullValue())))
-                .andExpect(jsonPath("agreementDateTo", is(nullValue())))
-                .andExpect(jsonPath("agreementPrice", is(nullValue())))
-                .andExpect(jsonPath("errors", is(notNullValue())))
-                .andExpect(jsonPath("errors", hasSize(4)))
-                .andReturn();
+    public void agreementDateToAndAgreementDateFrom() throws Exception {
+        executeAndCompare(
+                "rest/TravelCalculatePremiumRequest_dateTo_and_dateFrom.json",
+                "rest/TravelCalculatePremiumResponse_dateTo_and_dateFrom.json"
+        );
     }
 
     @Test
-    @DisplayName("6: agreementDateTo - agreementDateFrom")
-    public void agreementDateToLessThenAgreementDateFrom() throws Exception {
-        mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumRequest_dateTo_and_dateFrom.json"))
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("personFirstName", is("Valera")))
-                .andExpect(jsonPath("personLastName", is("Kovss")))
-                .andExpect(jsonPath("agreementDateFrom", is("2021-05-25")))
-                .andExpect(jsonPath("agreementDateTo", is("2021-05-29")))
-                .andExpect(jsonPath("agreementPrice", is(0)))
-                .andExpect(jsonPath("errors", is(nullValue())))
-                .andReturn();
+    public void allFieldsNotEmpty() throws Exception {
+        executeAndCompare(
+                "rest/PremiumControllerRequest_all_fields_is_not_empty.json",
+                "rest/TravelCalculatePremiumResponse_allFields_not_empty.json"
+        );
     }
 
-
-
     @Test
-    @DisplayName("7: Right")
-    public void success() throws Exception {
-        mockMvc.perform(post("/insurance/travel/")
-                        .content(jsonFileReader.readJsonFromFile("rest/TravelCalculatePremiumRequest.Right.json"))
+    public void RightRequest() throws Exception {
+        executeAndCompare(
+                "rest/TravelCalculatePremiumRequest.Right.json",
+                "rest/TravelCalculatePremiumResponse_Right.json"
+        );
+    }
+
+    private void executeAndCompare(String jsonRequestFilePath,
+                                   String jsonResponseFilePath) throws Exception {
+        String jsonRequest = jsonFileReader.readJsonFromFile(jsonRequestFilePath);
+
+        MvcResult result = mockMvc.perform(post("/insurance/travel/")
+                        .content(jsonRequest)
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("personFirstName", is("Valera")))
-                .andExpect(jsonPath("personLastName", is("Kovss")))
-                .andExpect(jsonPath("agreementDateFrom", is("2021-05-25")))
-                .andExpect(jsonPath("agreementDateTo", is("2021-05-29")))
-                .andExpect(jsonPath("agreementPrice", is(0)))
-                .andExpect(jsonPath("errors", is(nullValue())))
                 .andReturn();
+
+        String responseBodyContent = result.getResponse().getContentAsString();
+
+        String jsonResponse = jsonFileReader.readJsonFromFile(jsonResponseFilePath);
+
+        ObjectMapper mapper = new ObjectMapper();
+        assertEquals(mapper.readTree(responseBodyContent), mapper.readTree(jsonResponse));
     }
 
 }

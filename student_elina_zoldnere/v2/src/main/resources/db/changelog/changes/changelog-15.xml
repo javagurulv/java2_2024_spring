@@ -19,13 +19,13 @@
         </createTable>
     </changeSet>
 
-    <changeSet author="elina.zoldnere InsuranceApplication" id="42">
-        <createIndex indexName="ix_travel_cancellation_country_safety_rating_coefficient_country_ic"
-                     tableName="travel_cancellation_country_safety_rating_coefficient"
-                     unique="true">
+    <changeSet id="42" author="elina.zoldnere InsuranceApplication">
+        <createIndex indexName="ix_travel_cancel_cntry_safety_rating_coeff_cntry_ic"
+                     tableName="travel_cancellation_country_safety_rating_coefficient">
             <column name="country_ic"/>
         </createIndex>
     </changeSet>
+
 
     <changeSet author="elina.zoldnere InsuranceApplication" id="43">
         <sql>

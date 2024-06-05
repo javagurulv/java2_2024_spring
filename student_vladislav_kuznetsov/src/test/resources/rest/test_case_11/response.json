@@ -1,0 +1,24 @@
+{
+  "errors": null,
+  "personFirstName": "Vasja",
+  "personLastName": "Pupkin",
+  "agreementDateFrom": "2024-06-26",
+  "agreementDateTo": "2024-06-30",
+  "personBirthDate": null,
+  "agreementPremium": 11.00,
+  "risks": [
+    {
+      "riskIc": "TRAVEL_MEDICAL",
+      "premium": 11.00
+    },
+    {
+      "riskIc": "TRAVEL_CANCELLATION",
+      "premium": 0.00
+    },
+    {
+      "riskIc": "TRAVEL_LOSS_BAGGAGE",
+      "premium": 0.00
+    }
+  ],
+  "medicalRiskLimitLevel": null
+}

@@ -1,8 +1,0 @@
-{
-  "errors": [
-    {
-      "errorCode": "ERROR_CODE_14",
-      "description": "PersonBirthDate is not a valid date!"
-    }
-  ]
-}

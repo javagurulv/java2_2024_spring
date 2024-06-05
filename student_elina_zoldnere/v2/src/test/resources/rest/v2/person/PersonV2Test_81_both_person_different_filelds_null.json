@@ -1,0 +1,39 @@
+{
+  "request": {
+    "agreementDateFrom": "2025-03-10",
+    "agreementDateTo": "2025-03-11",
+    "selectedRisks": [
+      "TRAVEL_MEDICAL",
+      "TRAVEL_LOSS_BAGGAGE"
+    ],
+    "country": "SPAIN",
+    "persons": [
+      {
+        "personFirstName": "Jānis",
+        "personLastName": "Bērziņš",
+        "personalCode": "123456-12345",
+        "personBirthDate": null,
+        "medicalRiskLimitLevel": "LEVEL_15000"
+      },
+      {
+        "personFirstName": null,
+        "personLastName": "Krūmiņš",
+        "personalCode": "234567-23456",
+        "personBirthDate": "1989-01-01",
+        "medicalRiskLimitLevel": "LEVEL_15000"
+      }
+    ]
+  },
+  "expectedResponse": {
+    "errors": [
+      {
+        "errorCode": "ERROR_CODE_1",
+        "description": "Field personFirstName is empty!"
+      },
+      {
+        "errorCode": "ERROR_CODE_7",
+        "description": "Field personBirthDate is empty!"
+      }
+    ]
+  }
+}

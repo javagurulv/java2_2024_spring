@@ -1,0 +1,49 @@
+{
+  "request": {
+    "personFirstName": "",
+    "personLastName": "   ",
+    "personalCode": null,
+    "personBirthDate": null,
+    "agreementDateFrom": null,
+    "agreementDateTo": null,
+    "selectedRisks": null,
+    "country": "    ",
+    "medicalRiskLimitLevel": null
+  },
+  "expectedResponse": {
+    "errors": [
+      {
+        "errorCode": "ERROR_CODE_1",
+        "description": "Field personFirstName is empty!"
+      },
+      {
+        "errorCode": "ERROR_CODE_2",
+        "description": "Field personLastName is empty!"
+      },
+      {
+        "errorCode": "ERROR_CODE_3",
+        "description": "Field agreementDateFrom is empty!"
+      },
+      {
+        "errorCode": "ERROR_CODE_4",
+        "description": "Field agreementDateTo is empty!"
+      },
+      {
+        "errorCode": "ERROR_CODE_5",
+        "description": "Field selectedRisks is empty!"
+      },
+      {
+        "errorCode": "ERROR_CODE_6",
+        "description": "Field country is empty!"
+      },
+      {
+        "errorCode": "ERROR_CODE_7",
+        "description": "Field personBirthDate is empty!"
+      },
+      {
+        "errorCode": "ERROR_CODE_9",
+        "description": "Field personalCode is empty!"
+      }
+    ]
+  }
+}
