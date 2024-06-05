@@ -4,7 +4,6 @@ import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 
-
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,7 +19,7 @@ class PersonLastNameValidationTest {
     public void returnErrorWhenPersonLastNameIsNull() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonLastName()).thenReturn(null);
-        Optional<ValidationError> error = validation.validatePersonLastName(request);
+        Optional<ValidationError> error = validation.execute(request);
         assertTrue(error.isPresent());
         assertEquals(error.get().getField(), "personLastName");
         assertEquals(error.get().getMessage(), "Must not be empty!");
@@ -30,7 +29,7 @@ class PersonLastNameValidationTest {
     public void returnErrorWhenPersonLastNameIsEmpty() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonFirstName()).thenReturn("");
-        Optional<ValidationError> error = validation.validatePersonLastName(request);
+        Optional<ValidationError> error = validation.execute(request);
         assertTrue(error.isPresent());
         assertEquals(error.get().getField(), "personLastName");
         assertEquals(error.get().getMessage(), "Must not be empty!");
@@ -40,7 +39,7 @@ class PersonLastNameValidationTest {
     public void notReturnErrorIfThereIsPersonLastName() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getPersonLastName()).thenReturn("Sawyer");
-        Optional<ValidationError> error = validation.validatePersonLastName(request);
+        Optional<ValidationError> error = validation.execute(request);
         assertTrue(error.isEmpty());
     }
 }

@@ -4,7 +4,6 @@ import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import lv.javaguru.travel.insurance.dto.ValidationError;
 import org.junit.jupiter.api.Test;
 
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,7 +24,7 @@ class AgreementDateToValidationTest {
     public void returnErrorWhenAgreementDateToIsNull() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateTo()).thenReturn(null);
-        Optional<ValidationError> error = validation.validateAgreementDateTo(request);
+        Optional<ValidationError> error = validation.execute(request);
         assertEquals(error.get().getField(), "agreementDateTo");
         assertEquals(error.get().getMessage(), "Must not be empty!");
     }
@@ -34,7 +33,7 @@ class AgreementDateToValidationTest {
     public void notReturnErrorIfThereIsAgreementDateTo() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateTo()).thenReturn(createDate("2025.01.10"));
-        Optional<ValidationError> error = validation.validateAgreementDateTo(request);
+        Optional<ValidationError> error = validation.execute(request);
         assertTrue(error.isEmpty());
     }
 

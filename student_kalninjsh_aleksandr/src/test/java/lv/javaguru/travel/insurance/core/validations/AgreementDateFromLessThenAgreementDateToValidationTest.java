@@ -23,7 +23,7 @@ class AgreementDateFromLessThenAgreementDateToValidationTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateFrom()).thenReturn(createDate("2025.01.10"));
         when(request.getAgreementDateTo()).thenReturn(createDate("2025.01.01"));
-        Optional<ValidationError> error = validation.validateAgreementDateFromLessThenAgreementDateTo(request);
+        Optional<ValidationError> error = validation.execute(request);
         assertTrue(error.isPresent());
         assertEquals(error.get().getField(), "agreementDateFrom");
         assertEquals(error.get().getMessage(), "Must be less then agreementDateTo!");

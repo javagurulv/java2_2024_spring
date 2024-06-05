@@ -33,7 +33,7 @@ class AgreementDateToNotInThePastTest {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
         when(request.getAgreementDateTo()).thenReturn(createDate("2020.01.10"));
         when(service.currentDate()).thenReturn(createDate("2023.01.01"));
-        Optional<ValidationError> error = validation.validateAgreementDateToNotInThePast(request);
+        Optional<ValidationError> error = validation.execute(request);
         assertTrue(error.isPresent());
         assertEquals(error.get().getField(), "agreementDateTo");
         assertEquals(error.get().getMessage(), "Should not be in the past!");
