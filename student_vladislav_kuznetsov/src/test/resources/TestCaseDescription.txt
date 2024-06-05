@@ -35,7 +35,7 @@ Request: agreementDateFrom is before currentDate.
 Response: error code response ERROR_CODE_6.
 
 Test Case 10:
-Request: personFirstName, personLastName, agreementDateFrom, agreementDateTo.
+Request: All fields are entered.
 Response: No errors.
 
 
@@ -70,6 +70,14 @@ Response: ERROR_CODE_8.
 Test Case 18:
 Request: Field selected risk is null.
 Response: ERROR_CODE_8.
+
+Test Case 19:
+Request: country is null, RISK_TYPE - TRAVEL_EVACUATION.
+Response: error code = ERROR_CODE_10.
+
+Test Case 20:
+Request: country is empty, RISK_TYPE - TRAVEL_EVACUATION.
+Response: error code = ERROR_CODE_10.
 
 
 

@@ -10,6 +10,6 @@ public class TravelCalculatePremiumControlerTestCase18 extends TravelCalculatePr
 
     @Override
     protected String getTestCaseFolderName() {
-        return "test_case_17";
+        return "test_case_18";
     }
 }

@@ -1,24 +1,16 @@
 {
-  "errors": null,
-  "personFirstName": "Vasja",
-  "personLastName": "Pupkin",
-  "agreementDateFrom": "2024-06-26",
-  "agreementDateTo": "2024-06-30",
-  "personBirthDate": null,
-  "agreementPremium": 11.00,
-  "risks": [
+  "errors": [
     {
-      "riskIc": "TRAVEL_MEDICAL",
-      "premium": 11.00
-    },
-    {
-      "riskIc": "TRAVEL_CANCELLATION",
-      "premium": 0.00
-    },
-    {
-      "riskIc": "TRAVEL_LOSS_BAGGAGE",
-      "premium": 0.00
+      "errorCode": "ERROR_CODE_4",
+      "description": "Field agreementDateFrom invalid date !"
     }
   ],
+  "personFirstName": null,
+  "personLastName": null,
+  "agreementDateFrom": null,
+  "agreementDateTo": null,
+  "personBirthDate": null,
+  "agreementPremium": null,
+  "risks": null,
   "medicalRiskLimitLevel": null
 }

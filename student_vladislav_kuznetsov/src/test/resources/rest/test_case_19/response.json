@@ -1,12 +1,8 @@
 {
   "errors": [
     {
-      "errorCode": "ERROR_CODE_4",
-      "description": "Field agreementDateFrom invalid date !"
-    },
-    {
-      "errorCode": "ERROR_CODE_6",
-      "description": "Field agreementDatTo invalid date !"
+      "errorCode": "ERROR_CODE_10",
+      "description": "Field country must not be empty!"
     }
   ],
   "personFirstName": null,
