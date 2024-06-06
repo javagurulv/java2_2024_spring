@@ -5,7 +5,7 @@ import lv.javaguru.travel.insurance.dto.ValidationError;
 
 import java.util.Optional;
 
-public interface RequestValidation {
+interface RequestValidation {
 
     Optional<ValidationError> execute(TravelCalculatePremiumRequest request);
 }
