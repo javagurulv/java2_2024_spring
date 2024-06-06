@@ -19,41 +19,22 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class EmptyCountryValidationTest {
 
-    @Mock
-    private ValidationErrorFactory errorFactory;
+    @Mock private ValidationErrorFactory errorFactory;
 
     @InjectMocks
     private EmptyCountryValidation validation;
 
     @Test
-    public void shouldReturnNoErrorWhenSelectedRisksIsNull() {
+    public void shouldReturnNoErrorWhenCountryIsPresent() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getSelectedRisks()).thenReturn(null);
-        Optional<ValidationError> errorOpt = validation.validate(request);
-        assertTrue(errorOpt.isEmpty());
-    }
-
-    @Test
-    public void shouldReturnNoErrorWhenSelectedRisksNotContainsTravelMedical() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getSelectedRisks()).thenReturn(List.of("TRAVEL_EVACUATION"));
-        Optional<ValidationError> errorOpt = validation.validate(request);
-        assertTrue(errorOpt.isEmpty());
-    }
-
-    @Test
-    public void shouldReturnNoErrorWhenSelectedRisksContainsTravelMedicalAndCountryIsPresent() {
-        TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
         when(request.getCountry()).thenReturn("SPAIN");
         Optional<ValidationError> errorOpt = validation.validate(request);
         assertTrue(errorOpt.isEmpty());
     }
 
     @Test
-    public void shouldReturnErrorWhenSelectedRisksContainsTravelMedicalAndCountryIsNull() {
+    public void shouldReturnErrorWhenCountryIsNull() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
         when(request.getCountry()).thenReturn(null);
         when(errorFactory.buildError("ERROR_CODE_10"))
                 .thenReturn(new ValidationError("ERROR_CODE_10", "Country must be provided when TRAVEL_MEDICAL is selected"));
@@ -64,9 +45,8 @@ class EmptyCountryValidationTest {
     }
 
     @Test
-    public void shouldReturnErrorWhenSelectedRisksContainsTravelMedicalAndCountryIsEmpty() {
+    public void shouldReturnErrorWhenCountryIsEmpty() {
         TravelCalculatePremiumRequest request = mock(TravelCalculatePremiumRequest.class);
-        when(request.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
         when(request.getCountry()).thenReturn("");
         when(errorFactory.buildError("ERROR_CODE_10"))
                 .thenReturn(new ValidationError("ERROR_CODE_10", "Country must be provided when TRAVEL_MEDICAL is selected"));
@@ -75,5 +55,6 @@ class EmptyCountryValidationTest {
         assertEquals("ERROR_CODE_10", errorOpt.get().getErrorCode());
         assertEquals("Country must be provided when TRAVEL_MEDICAL is selected", errorOpt.get().getDescription());
     }
+
 
 }

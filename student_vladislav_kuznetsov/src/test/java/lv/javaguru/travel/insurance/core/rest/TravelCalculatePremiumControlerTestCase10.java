@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 public class TravelCalculatePremiumControlerTestCase10 extends TravelCalculatePremiumControllerTest{
     @Test
     @Disabled
-
     public void execute() throws Exception {
         executeAndCompare();
     }

@@ -10,12 +10,13 @@ import java.util.Date;
 import java.util.Optional;
 
 @Component
-public class AgreementDateFromNotInThePastValidation {
+class AgreementDateFromNotInThePastValidation implements RequestValidation {
 
     @Autowired
     private DateTimeService service;
 
-    public Optional<ValidationError> validateAgreementDateFromNotInThePast(TravelCalculatePremiumRequest request) {
+    @Override
+    public Optional<ValidationError> execute(TravelCalculatePremiumRequest request) {
         Date dateFrom = request.getAgreementDateFrom();
         Date currentDate = service.currentDate();
         return (dateFrom != null && dateFrom.before(currentDate))

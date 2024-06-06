@@ -5,7 +5,7 @@
   "agreementDateFrom": "2024-06-26",
   "agreementDateTo": "2024-06-30",
   "personBirthDate": null,
-  "agreementPremium": 11.00,
+  "agreementPremium": 10.00,
   "risks": [
     {
       "riskIc": "TRAVEL_MEDICAL",
