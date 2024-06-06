@@ -80,7 +80,7 @@ class TravelCalculatePremiumServiceImplTest {
         when(travelCalculatePremiumRequestValidator.validation(travelCalculatePremiumRequest)).thenReturn(List.of());
         when(travelPremiumUnderwriting.calculatedPremium(travelCalculatePremiumRequest)).thenReturn(new BigDecimal(1));
         TravelCalculatePremiumResponse travelCalculatePremiumResponse = premiumService.calculatePremium(travelCalculatePremiumRequest);
-        assertNotNull(travelCalculatePremiumResponse.getAgreementPrice());
+        assertEquals(travelCalculatePremiumResponse.getAgreementPrice(), new BigDecimal(1));
     }
 
     @Test

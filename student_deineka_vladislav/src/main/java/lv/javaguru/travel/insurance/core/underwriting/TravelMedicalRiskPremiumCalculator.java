@@ -1,6 +1,8 @@
 package lv.javaguru.travel.insurance.core.underwriting;
 
+import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -8,10 +10,13 @@ import java.math.BigDecimal;
 @Component
 class TravelMedicalRiskPremiumCalculator implements TravelRiskPremiumCalculator {
 
+    @Autowired
+    private DateTimeUtil dateTimeUtil;
 
     @Override
     public BigDecimal calculatePremium(TravelCalculatePremiumRequest premiumRequest) {
-        return BigDecimal.ZERO;
+        var daysFromTo = dateTimeUtil.calculateDateFromTo(premiumRequest.getAgreementDateFrom(), premiumRequest.getAgreementDateTo());
+        return new BigDecimal(daysFromTo);
     }
 
     @Override
