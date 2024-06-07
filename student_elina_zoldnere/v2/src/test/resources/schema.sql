@@ -126,3 +126,12 @@ CREATE TABLE travel_cancellation_country_safety_rating_coefficient (
 
 CREATE UNIQUE INDEX ix_travel_cancellation_country_safety_rating_coefficient_country_ic
 ON travel_cancellation_country_safety_rating_coefficient (country_ic);
+
+CREATE TABLE exported_agreements (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    uuid VARCHAR(255) NOT NULL,
+    exported_at TIMESTAMP NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE UNIQUE INDEX ix_exported_agreements_uuid ON exported_agreements (uuid);

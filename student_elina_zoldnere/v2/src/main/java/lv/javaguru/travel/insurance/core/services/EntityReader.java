@@ -1,8 +1,8 @@
 package lv.javaguru.travel.insurance.core.services;
 
-import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.dto.serialize.AgreementSerialDTO;
 
 public interface EntityReader {
-    AgreementDTO readEntitiesByUuid(String uuid);
+    AgreementSerialDTO readEntitiesByUuid(String uuid);
 
 }
