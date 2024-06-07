@@ -3,6 +3,20 @@
   "personLastName": "Johnson",
   "agreementDateFrom": "2030-10-10",
   "agreementDateTo": "2030-10-11",
-  "agreementPrice": 1,
-  "validationErrors": null
+  "agreementPremium": 1,
+  "validationErrors": null,
+  "risks" : [
+    {
+      "riskIc" : "TRAVEL_MEDICAL",
+      "premium" : 1
+    },
+    {
+      "riskIc" : "TRAVEL_CANCELLATION",
+      "premium" : 0
+    },
+    {
+      "riskIc" : "TRAVEL_BAGGAGE_LOSS",
+      "premium" : 0
+    }
+  ]
 }
