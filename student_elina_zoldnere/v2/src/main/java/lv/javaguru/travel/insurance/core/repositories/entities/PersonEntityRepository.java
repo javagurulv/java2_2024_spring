@@ -11,7 +11,7 @@ import org.springframework.lang.NonNull;
 import java.util.Optional;
 
 public interface PersonEntityRepository extends JpaRepository<PersonEntity, Long> {
-    @Cacheable(cacheNames = "personEntityCache", key = "#firstName + '_' + #lastName + '_' + #personalCode")
+    //@Cacheable(cacheNames = "personEntityCache", key = "#firstName + '_' + #lastName + '_' + #personalCode")
     @Query("SELECT pe from PersonEntity pe " +
             "where pe.firstName = :firstName " +
             "      and pe.lastName = :lastName " +
@@ -21,7 +21,7 @@ public interface PersonEntityRepository extends JpaRepository<PersonEntity, Long
             @Param("lastName") String lastName,
             @Param("personalCode") String personalCode
     );
-
+/*
     @Override
     @CacheEvict(cacheNames = "personEntityCache", allEntries = true)
     <S extends PersonEntity> @NonNull S save(@NonNull S entity);
@@ -41,5 +41,5 @@ public interface PersonEntityRepository extends JpaRepository<PersonEntity, Long
     @Override
     @CacheEvict(cacheNames = "personEntityCache", allEntries = true)
     void deleteAll();
-
+*/
 }

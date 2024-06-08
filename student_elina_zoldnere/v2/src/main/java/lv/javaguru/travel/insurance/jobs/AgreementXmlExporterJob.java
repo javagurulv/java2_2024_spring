@@ -4,7 +4,6 @@ import lv.javaguru.travel.insurance.core.api.command.TravelGetAgreementCoreComma
 import lv.javaguru.travel.insurance.core.api.command.TravelGetAgreementCoreResult;
 import lv.javaguru.travel.insurance.core.api.command.TravelGetNotExportedAgreementUuidsCoreCommand;
 import lv.javaguru.travel.insurance.core.api.command.TravelGetNotExportedAgreementUuidsCoreResult;
-import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.services.TravelGetAgreementService;
 import lv.javaguru.travel.insurance.core.services.TravelGetNotExportedAgreementUuidsService;
 import lv.javaguru.travel.insurance.dto.serialize.AgreementSerialDTO;
@@ -24,8 +23,14 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 @Component
@@ -35,6 +40,8 @@ public class AgreementXmlExporterJob {
     private boolean jobEnabled;
     @Value("${agreement.xml.exporter.job.path}")
     private String exportPath;
+    @Value("${agreement.xml.exporter.job.thread.count:1}")
+    private int parallelThreadCount;
 
     @Autowired
     private TravelGetNotExportedAgreementUuidsService getUuidsService;
@@ -49,15 +56,57 @@ public class AgreementXmlExporterJob {
     public void executeJob() {
         if (jobEnabled) {
             logger.info("AgreementXmlExporterJob started");
-            processAgreements();
+
+            List<String> uuids = getUuids();
+            ExecutorService executorService = Executors.newFixedThreadPool(parallelThreadCount);
+            List<Future<Void>> futures = new ArrayList<>();
+
+            try {
+                submitTasks(uuids, executorService, futures);
+                waitForTasksToCompleteExecution(futures);
+            } finally {
+                executorServiceShutdown(executorService);
+            }
+
             logger.info("AgreementXmlExporterJob finished");
         }
     }
 
-    private void processAgreements() {
+    private void submitTasks(List<String> uuids, ExecutorService executorService, List<Future<Void>> futures) {
+        uuids.forEach(uuid -> {
+            futures.add(executorService.submit(() -> {
+                        processAgreement(uuid);
+                        return null;
+                    })
+            );
+        });
+    }
+
+    private void waitForTasksToCompleteExecution(List<Future<Void>> futures) {
+        futures.forEach(future -> {
+            try {
+                future.get();
+            } catch (InterruptedException | ExecutionException e) {
+                logger.error("Error executing task", e);
+            }
+        });
+    }
+
+    private void executorServiceShutdown(ExecutorService executorService) {
+        executorService.shutdown();
+        try {
+            if (!executorService.awaitTermination(60, TimeUnit.SECONDS)) {
+                executorService.shutdownNow();
+            }
+        } catch (InterruptedException e) {
+            executorService.shutdownNow();
+        }
+    }
+
+    private List<String> getUuids() {
         TravelGetNotExportedAgreementUuidsCoreResult uuidResult =
                 getUuidsService.getUuids(new TravelGetNotExportedAgreementUuidsCoreCommand());
-        uuidResult.getUuids().forEach(this::processAgreement);
+        return uuidResult.getUuids();
     }
 
     private void processAgreement(String uuid) {
@@ -81,8 +130,8 @@ public class AgreementXmlExporterJob {
             logger.warn("Could not convert to xml agreement with UUID {}", uuid, e);
         } catch (IOException e) {
             logger.warn("Could not write to file agreement with UUID {}", uuid, e);
+        }
     }
-}
 
     private String convertAgreementToXml(AgreementSerialDTO agreement) throws JAXBException {
         JAXBContext context = JAXBContext.newInstance(AgreementSerialDTO.class);

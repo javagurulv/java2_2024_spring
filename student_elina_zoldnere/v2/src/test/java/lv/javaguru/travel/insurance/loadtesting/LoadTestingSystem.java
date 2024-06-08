@@ -14,7 +14,7 @@ class LoadTestingSystem {
 
     public static void main(String[] args) {
 
-        new LoadTestingSystem().executeForADefinedTime(20, 1, 2, "V2");
+        new LoadTestingSystem().executeForADefinedTime(20, 1, 5, "V2");
     }
 
     void executeForADefinedTime(int timeInSeconds, int parallelThreadCount, int batchCount, String version) {
