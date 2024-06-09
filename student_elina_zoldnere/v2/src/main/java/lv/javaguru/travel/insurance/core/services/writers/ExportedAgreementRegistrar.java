@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.jobs;
+package lv.javaguru.travel.insurance.core.services.writers;
 
 import lv.javaguru.travel.insurance.core.domain.entities.ExportedAgreementUuidEntity;
 import lv.javaguru.travel.insurance.core.repositories.entities.ExportedAgreementEntityUuidRepository;
@@ -8,12 +8,12 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 @Component
-class ExportedAgreementRegistrar {
+public class ExportedAgreementRegistrar {
 
     @Autowired
     private ExportedAgreementEntityUuidRepository repository;
 
-    void registerExport(String uuid, Date exportedAt) {
+    public void registerExport(String uuid, Date exportedAt) {
         ExportedAgreementUuidEntity entity = new ExportedAgreementUuidEntity();
         entity.setUuid(uuid);
         entity.setExportedAt(exportedAt);

@@ -1,7 +1,9 @@
 package lv.javaguru.travel.insurance.jobs;
 
+import lv.javaguru.travel.insurance.core.api.command.TravelExportAgreementToXmlCoreCommand;
 import lv.javaguru.travel.insurance.core.api.command.TravelGetNotExportedAgreementUuidsCoreCommand;
 import lv.javaguru.travel.insurance.core.api.command.TravelGetNotExportedAgreementUuidsCoreResult;
+import lv.javaguru.travel.insurance.core.services.TravelExportAgreementToXmlService;
 import lv.javaguru.travel.insurance.core.services.TravelGetNotExportedAgreementUuidsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +31,7 @@ public class AgreementXmlExporterJob {
     @Autowired
     private TravelGetNotExportedAgreementUuidsService getUuidsService;
     @Autowired
-    private AgreementXmlExporter exporter;
+    private TravelExportAgreementToXmlService service;
 
     private static final Logger logger = LoggerFactory.getLogger(AgreementXmlExporterJob.class);
 
@@ -55,7 +57,7 @@ public class AgreementXmlExporterJob {
 
     private void submitTasks(List<String> uuids, ExecutorService executorService, List<Future<Void>> futures) {
         uuids.forEach(uuid -> futures.add(executorService.submit(() -> {
-                    exporter.processAgreement(uuid);
+                    service.exportAgreement(new TravelExportAgreementToXmlCoreCommand(uuid));
                     return null;
                 })
         ));
