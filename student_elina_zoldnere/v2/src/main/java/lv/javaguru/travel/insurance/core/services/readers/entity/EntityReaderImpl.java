@@ -1,10 +1,9 @@
-package lv.javaguru.travel.insurance.core.services.readers;
+package lv.javaguru.travel.insurance.core.services.readers.entity;
 
 import lv.javaguru.travel.insurance.core.domain.entities.AgreementEntity;
 import lv.javaguru.travel.insurance.core.domain.entities.AgreementPersonEntity;
 import lv.javaguru.travel.insurance.core.repositories.entities.AgreementEntityRepository;
 import lv.javaguru.travel.insurance.core.repositories.entities.AgreementPersonEntityRepository;
-import lv.javaguru.travel.insurance.core.services.EntityReader;
 import lv.javaguru.travel.insurance.dto.serialize.AgreementSerialDTO;
 import lv.javaguru.travel.insurance.dto.serialize.PersonSerialDTO;
 import org.springframework.beans.factory.annotation.Autowired;

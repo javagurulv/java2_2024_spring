@@ -10,15 +10,15 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-class ValidatePersonLastName extends PersonFieldValidationImpl {
+class ValidatePersonFirstNameNotNullOrBlank extends PersonFieldValidationImpl {
 
     @Autowired
     private ValidationErrorFactory validationErrorFactory;
 
     @Override
     public Optional<ValidationErrorDTO> validateSingle(AgreementDTO agreement, PersonDTO person) {
-        return (person.personLastName() == null || person.personLastName().isBlank())
-                ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_2"))
+        return (person.personFirstName() == null || person.personFirstName().isBlank())
+                ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_1"))
                 : Optional.empty();
     }
 

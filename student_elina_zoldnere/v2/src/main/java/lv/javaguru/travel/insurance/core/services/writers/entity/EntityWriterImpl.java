@@ -1,9 +1,8 @@
-package lv.javaguru.travel.insurance.core.services.writers;
+package lv.javaguru.travel.insurance.core.services.writers.entity;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.domain.entities.AgreementEntity;
 import lv.javaguru.travel.insurance.core.domain.entities.AgreementPersonEntity;
-import lv.javaguru.travel.insurance.core.services.EntityWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

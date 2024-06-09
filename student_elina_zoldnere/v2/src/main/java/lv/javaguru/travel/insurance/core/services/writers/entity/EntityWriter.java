@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core.services;
+package lv.javaguru.travel.insurance.core.services.writers.entity;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 

@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ValidatePersonLastNameIntegrationTest {
+public class ValidatePersonLastNameNotNullOrBlankIntegrationTest {
 
     @Autowired
     private TravelAgreementValidator validator;

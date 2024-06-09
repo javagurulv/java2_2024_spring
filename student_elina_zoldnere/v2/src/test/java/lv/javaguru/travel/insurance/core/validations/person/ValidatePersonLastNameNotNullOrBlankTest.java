@@ -14,7 +14,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Collections;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -23,13 +22,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class ValidatePersonLastNameTest {
+class ValidatePersonLastNameNotNullOrBlankTest {
 
     @Mock
     private ValidationErrorFactory errorMock;
 
     @InjectMocks
-    private ValidatePersonLastName validate;
+    private ValidatePersonLastNameNotNullOrBlank validate;
     @InjectMocks
     private SetUpInstancesHelper helper;
 

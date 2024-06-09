@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core.services.readers;
+package lv.javaguru.travel.insurance.core.services.readers.entity;
 
 import lv.javaguru.travel.insurance.core.domain.entities.AgreementPersonEntity;
 import lv.javaguru.travel.insurance.core.domain.entities.AgreementPersonRisksEntity;

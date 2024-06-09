@@ -22,13 +22,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class ValidatePersonFirstNameTest {
+class ValidatePersonFirstNameNotNullOrBlankTest {
 
     @Mock
     private ValidationErrorFactory errorMock;
 
     @InjectMocks
-    private ValidatePersonFirstName validate;
+    private ValidatePersonFirstNameNotNullOrBlank validate;
     @InjectMocks
     private SetUpInstancesHelper helper;
 

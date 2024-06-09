@@ -3,6 +3,7 @@ package lv.javaguru.travel.insurance.core.services;
 import lv.javaguru.travel.insurance.core.api.command.TravelGetAgreementCoreCommand;
 import lv.javaguru.travel.insurance.core.api.command.TravelGetAgreementCoreResult;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
+import lv.javaguru.travel.insurance.core.services.readers.entity.EntityReader;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementUuidValidator;
 import lv.javaguru.travel.insurance.dto.serialize.AgreementSerialDTO;
 import org.springframework.beans.factory.annotation.Autowired;

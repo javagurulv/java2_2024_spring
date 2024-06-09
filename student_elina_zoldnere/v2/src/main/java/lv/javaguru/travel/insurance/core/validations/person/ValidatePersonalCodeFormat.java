@@ -16,6 +16,14 @@ class ValidatePersonalCodeFormat extends PersonFieldValidationImpl {
     @Autowired
     private ValidationErrorFactory validationErrorFactory;
 
+    /**
+     * Regex to validate the personal code format:<br>
+     * \d{6}     Exactly six digits<br>
+     * -         A hyphen character<br>
+     * \d{5}     Exactly five digits
+     */
+    private static final String PERSONAL_CODE_REGEX = "\\d{6}-\\d{5}";
+
     @Override
     public Optional<ValidationErrorDTO> validateSingle(AgreementDTO agreement, PersonDTO person) {
         return (person.personalCode() != null && !person.personalCode().isBlank())
@@ -24,7 +32,6 @@ class ValidatePersonalCodeFormat extends PersonFieldValidationImpl {
     }
 
     private Optional<ValidationErrorDTO> validatePersonalCode(PersonDTO person) {
-        String PERSONAL_CODE_REGEX = "\\d{6}-\\d{5}";
         return (!Pattern.matches(PERSONAL_CODE_REGEX, person.personalCode()))
                 ? Optional.of(validationErrorFactory.buildError("ERROR_CODE_15"))
                 : Optional.empty();
