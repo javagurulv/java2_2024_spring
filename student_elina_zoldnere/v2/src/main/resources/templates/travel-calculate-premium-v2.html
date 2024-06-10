@@ -70,6 +70,7 @@
     <button type="button" onclick="addPerson()">Add Person</button>
     <button type="button" onclick="removePerson()">Remove Person</button>
     <button type="submit">Calculate Premium</button>
+    <button type="button" onclick="clearForm()">Clear</button>
 </form>
 
 <!-- Added condition if response != null -->
@@ -109,70 +110,72 @@
     <br>
 </div>
 <script>
-        function addPerson() {
-            let personsContainer = document.getElementById("persons-container");
-            let index = document.getElementsByClassName("person-form").length;
-            let personTemplate = `
-                <div class="person-form">
-                    <h3>Person ${index + 1}</h3>
-                    <div>
-                        <label for="persons[${index}].personFirstName">First Name:</label>
-                        <input type="text" id="persons[${index}].personFirstName" name="persons[${index}].personFirstName" />
-                    </div>
-                    <br>
-                    <div>
-                        <label for="persons[${index}].personLastName">Last Name:</label>
-                        <input type="text" id="persons[${index}].personLastName" name="persons[${index}].personLastName" />
-                    </div>
-                    <br>
-                    <div>
-                        <label for="persons[${index}].personalCode">Personal Code:</label>
-                        <input type="text" id="persons[${index}].personalCode" name="persons[${index}].personalCode" />
-                    </div>
-                    <br>
-                    <div>
-                        <label for="persons[${index}].personBirthDate">Birth Date:</label>
-                        <input type="date" id="persons[${index}].personBirthDate" name="persons[${index}].personBirthDate" />
-                    </div>
-                    <br>
-                    <div>
-                        <label for="persons[${index}].medicalRiskLimitLevel">Medical Risk Limit Level:</label>
-                        <input type="text" id="persons[${index}].medicalRiskLimitLevel" name="persons[${index}].medicalRiskLimitLevel" />
-                    </div>
-                    <br>
-                    <div>
-                        <label for="persons[${index}].travelCost">Travel Cost:</label>
-                        <input type="text" id="persons[${index}].travelCost" name="persons[${index}].travelCost" />
-                    </div>
-                </div>`;
-            personsContainer.insertAdjacentHTML('beforeend', personTemplate);
-        }
+    function addPerson() {
+        let personsContainer = document.getElementById("persons-container");
+        let index = document.getElementsByClassName("person-form").length;
+        let personTemplate = `
+            <div class="person-form">
+                <h3>Person ${index + 1}</h3>
+                <div>
+                    <label for="persons[${index}].personFirstName">First Name:</label>
+                    <input type="text" id="persons[${index}].personFirstName" name="persons[${index}].personFirstName" />
+                </div>
+                <br>
+                <div>
+                    <label for="persons[${index}].personLastName">Last Name:</label>
+                    <input type="text" id="persons[${index}].personLastName" name="persons[${index}].personLastName" />
+                </div>
+                <br>
+                <div>
+                    <label for="persons[${index}].personalCode">Personal Code:</label>
+                    <input type="text" id="persons[${index}].personalCode" name="persons[${index}].personalCode" />
+                </div>
+                <br>
+                <div>
+                    <label for="persons[${index}].personBirthDate">Birth Date:</label>
+                    <input type="date" id="persons[${index}].personBirthDate" name="persons[${index}].personBirthDate" />
+                </div>
+                <br>
+                <div>
+                    <label for="persons[${index}].medicalRiskLimitLevel">Medical Risk Limit Level:</label>
+                    <input type="text" id="persons[${index}].medicalRiskLimitLevel" name="persons[${index}].medicalRiskLimitLevel" />
+                </div>
+                <br>
+                <div>
+                    <label for="persons[${index}].travelCost">Travel Cost:</label>
+                    <input type="text" id="persons[${index}].travelCost" name="persons[${index}].travelCost" />
+                </div>
+            </div>`;
+        personsContainer.insertAdjacentHTML('beforeend', personTemplate);
+    }
 
-        function removePerson() {
-            let personsContainer = document.getElementById("persons-container");
-            let personForms = document.getElementsByClassName("person-form");
-            if (personForms.length > 0) {
-                personsContainer.removeChild(personForms[personForms.length - 1]);
-            }
+    function removePerson() {
+        let personsContainer = document.getElementById("persons-container");
+        let personForms = document.getElementsByClassName("person-form");
+        if (personForms.length > 0) {
+            personsContainer.removeChild(personForms[personForms.length - 1]);
         }
-</script>
+    }
 
-<script>
     document.addEventListener('DOMContentLoaded', (event) => {
-    const agreementDateFrom = document.getElementById('agreementDateFrom');
-    const agreementDateTo= document.getElementById('agreementDateTo');
+        const agreementDateFrom = document.getElementById('agreementDateFrom');
+        const agreementDateTo= document.getElementById('agreementDateTo');
 
-    const today = new Date();
+        const today = new Date();
 
-    const dateFrom = new Date();
-    dateFrom.setDate(today.getDate() + 1);
+        const dateFrom = new Date();
+        dateFrom.setDate(today.getDate() + 1);
 
-    const dateTo = new Date();
-    dateTo.setDate(today.getDate() + 2);
+        const dateTo = new Date();
+        dateTo.setDate(today.getDate() + 2);
 
-    agreementDateFrom.value = dateFrom.toISOString().split('T')[0];
-    agreementDateTo.value = dateTo.toISOString().split('T')[0];
+        agreementDateFrom.value = dateFrom.toISOString().split('T')[0];
+        agreementDateTo.value = dateTo.toISOString().split('T')[0];
     });
+
+    function clearForm() {
+        window.location.href = window.location.href.split('?')[0];
+    }
 
 </script>
 
