@@ -26,11 +26,11 @@ class TCCountrySafetyRatingCoefficientRepositoryTest {
 
     @Test
     public void findByCountryIc_ShouldFindExistingCoefficient() {
-        Optional<TCCountrySafetyRatingCoefficient> coefficientOpt = repository.findCoefficientByCountryIc("SPAIN");
+        Optional<TCCountrySafetyRatingCoefficient> dayRateOpt = repository.findCoefficientByCountryIc("SPAIN");
 
-        assertThat(coefficientOpt).isPresent()
-                .map(TCCountrySafetyRatingCoefficient::getCoefficient)
-                .contains(new BigDecimal("8.00"));
+        assertThat(dayRateOpt)
+                .get()
+                .satisfies(d -> assertThat(d.getCoefficient()).isEqualTo(new BigDecimal("8.00")));
     }
 
     @Test

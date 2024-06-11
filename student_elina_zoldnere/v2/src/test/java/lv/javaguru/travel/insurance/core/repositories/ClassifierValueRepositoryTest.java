@@ -12,9 +12,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @ExtendWith(SpringExtension.class)
@@ -34,9 +33,13 @@ class ClassifierValueRepositoryTest {
     public void shouldFindRiskTypeValue(String riskType) {
         Optional<ClassifierValue> valueOpt = classifierValueRepository.findByClassifierTitleAndIc(
                 "RISK_TYPE", riskType);
-        assertTrue(valueOpt.isPresent());
-        assertEquals(riskType, valueOpt.get().getIc());
-        assertEquals("RISK_TYPE", valueOpt.get().getClassifier().getTitle());
+
+        assertThat(valueOpt)
+                .get()
+                .satisfies(value -> {
+                    assertThat(value.getIc()).isEqualTo(riskType);
+                    assertThat(value.getClassifier().getTitle()).isEqualTo("RISK_TYPE");
+                });
     }
 
     private static Stream<String> riskTypeValues() {
@@ -55,9 +58,13 @@ class ClassifierValueRepositoryTest {
     public void shouldFindCountryValue(String country) {
         Optional<ClassifierValue> valueOpt = classifierValueRepository.findByClassifierTitleAndIc(
                 "COUNTRY", country);
-        assertTrue(valueOpt.isPresent());
-        assertEquals(country, valueOpt.get().getIc());
-        assertEquals("COUNTRY", valueOpt.get().getClassifier().getTitle());
+
+        assertThat(valueOpt)
+                .get()
+                .satisfies(value -> {
+                    assertThat(value.getIc()).isEqualTo(country);
+                    assertThat(value.getClassifier().getTitle()).isEqualTo("COUNTRY");
+                });
     }
 
     private static Stream<String> countryValues() {
@@ -72,7 +79,8 @@ class ClassifierValueRepositoryTest {
     public void shouldNotFind_RiskType_FAKE() {
         Optional<ClassifierValue> valueOpt = classifierValueRepository.findByClassifierTitleAndIc(
                 "RISK_TYPE", "FAKE");
-        assertTrue(valueOpt.isEmpty());
+
+        assertThat(valueOpt).isEmpty();
     }
 
 }

@@ -10,9 +10,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.math.BigDecimal;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @ExtendWith(SpringExtension.class)
@@ -30,14 +29,17 @@ class TMAgeCoefficientRepositoryTest {
     @Test
     public void shouldFindAgeCoefficient() {
         Optional<TMAgeCoefficient> ageCoefficientOpt = ageCoefficientRepository.findCoefficient(30);
-        assertTrue(ageCoefficientOpt.isPresent());
-        assertEquals(new BigDecimal("1.10"), ageCoefficientOpt.get().getCoefficient());
+
+        assertThat(ageCoefficientOpt)
+                .get()
+                .satisfies(a -> assertThat(a.getCoefficient()).isEqualTo(new BigDecimal("1.10")));
     }
 
     @Test
     public void shouldNotFindByInvalidAge() {
         Optional<TMAgeCoefficient> ageCoefficientOpt = ageCoefficientRepository.findCoefficient(null);
-        assertTrue(ageCoefficientOpt.isEmpty());
+
+        assertThat(ageCoefficientOpt).isEmpty();
     }
 
 }

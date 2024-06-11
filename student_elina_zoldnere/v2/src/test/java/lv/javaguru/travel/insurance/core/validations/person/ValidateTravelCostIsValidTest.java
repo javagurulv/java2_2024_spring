@@ -47,10 +47,10 @@ class ValidateTravelCostIsValidTest {
 
         assertThat(result)
                 .isPresent()
-                .get()
-                .extracting("errorCode", "description")
-                .containsExactly("ERROR_CODE_94",
-                        "Travel Cost value 2000000 is not supported!");
+                .hasValueSatisfying(error -> {
+                    assertThat(error.errorCode()).isEqualTo("ERROR_CODE_94");
+                    assertThat(error.description()).isEqualTo("Travel Cost value 2000000 is not supported!");
+                });
     }
 
     @Test

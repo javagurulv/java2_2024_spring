@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class DateTimeUtilTest {
 
@@ -18,7 +17,7 @@ public class DateTimeUtilTest {
 
         long difference = timeUtil.calculateDifferenceBetweenDatesInDays(sampleDateFrom, sampleDateTo);
 
-        assertEquals(difference, 1);
+        assertThat(difference).isEqualTo(1);
     }
 
     @Test
@@ -27,7 +26,7 @@ public class DateTimeUtilTest {
 
         Date result = timeUtil.subtractYears(sampleDate, 150);
 
-        assertEquals(1875 - 1900, result.getYear());
+        assertThat(result.getYear()).isEqualTo(1875 - 1900);
     }
 
 }

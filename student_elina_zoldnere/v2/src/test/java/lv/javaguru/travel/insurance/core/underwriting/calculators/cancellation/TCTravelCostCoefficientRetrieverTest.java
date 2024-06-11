@@ -4,13 +4,11 @@ import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
 import lv.javaguru.travel.insurance.core.domain.cancellation.TCTravelCostCoefficient;
 import lv.javaguru.travel.insurance.core.repositories.cancellation.TCTravelCostCoefficientRepository;
-import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.util.Optional;
@@ -26,14 +24,9 @@ class TCTravelCostCoefficientRetrieverTest {
 
     @Mock
     private TCTravelCostCoefficientRepository costCoefficientRepositoryMock;
-    ;
 
     @InjectMocks
     private TCTravelCostCoefficientRetriever costCoefficientRetriever;
-
-    @Autowired
-    @InjectMocks
-    private SetUpInstancesHelper helper;
 
     @Test
     void findTravelCostPremium_shouldFindRateWhenTravelCostExists() {
@@ -48,6 +41,7 @@ class TCTravelCostCoefficientRetrieverTest {
         when(travelCostCoefficientMock.getCoefficient()).thenReturn(coefficient);
 
         BigDecimal actualTravelCostPremium = costCoefficientRetriever.findTravelCostCoefficient(person);
+
         assertThat(actualTravelCostPremium).isEqualTo(coefficient);
     }
 
@@ -56,6 +50,7 @@ class TCTravelCostCoefficientRetrieverTest {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withTravelCost(BigDecimal.valueOf(10000000))
                 .build();
+
         when(costCoefficientRepositoryMock.findCoefficientByTravelCost(BigDecimal.valueOf(10000000)))
                 .thenReturn(Optional.empty());
 

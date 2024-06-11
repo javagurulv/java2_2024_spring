@@ -70,13 +70,7 @@ public class CacheConfig {
                 .maximumSize(200)
                 .expireAfterWrite(30, TimeUnit.MINUTES)
                 .build());
-        /*
-        cacheManager.registerCustomCache("personEntityCache", Caffeine.newBuilder()
-                .initialCapacity(100)
-                .maximumSize(1000)
-                .expireAfterAccess(30, TimeUnit.MINUTES)
-                .build());
-        */
+
         return cacheManager;
     }
 

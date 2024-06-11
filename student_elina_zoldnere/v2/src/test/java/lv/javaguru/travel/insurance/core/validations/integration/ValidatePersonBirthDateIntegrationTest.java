@@ -5,8 +5,9 @@ import lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
-import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
+import lv.javaguru.travel.insurance.core.util.HelperUtil;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(SpringExtension.class)
@@ -26,7 +28,7 @@ public class ValidatePersonBirthDateIntegrationTest {
     @Autowired
     private TravelAgreementValidator validator;
     @Autowired
-    private SetUpInstancesHelper helper;
+    private HelperUtil helper;
 
     @Test
     public void validate_ShouldReturnErrorWhenPersonBirthDateIsNull() {
@@ -46,11 +48,13 @@ public class ValidatePersonBirthDateIntegrationTest {
                 .withPerson(person)
                 .build();
 
-        List<ValidationErrorDTO> errors = validator.validate(agreement);
+        List<ValidationErrorDTO> result = validator.validate(agreement);
 
-        assertEquals(1, errors.size());
-        assertEquals("ERROR_CODE_7", errors.get(0).errorCode());
-        assertEquals("Field personBirthDate is empty!", errors.get(0).description());
+        assertThat(result)
+                .hasSize(1)
+                .extracting("errorCode", "description")
+                .containsExactly(
+                        Assertions.tuple("ERROR_CODE_7", "Field personBirthDate is empty!"));
     }
 
     @Test
@@ -71,11 +75,13 @@ public class ValidatePersonBirthDateIntegrationTest {
                 .withPerson(person)
                 .build();
 
-        List<ValidationErrorDTO> errors = validator.validate(agreement);
+        List<ValidationErrorDTO> result = validator.validate(agreement);
 
-        assertEquals(1, errors.size());
-        assertEquals("ERROR_CODE_14", errors.get(0).errorCode());
-        assertEquals("PersonBirthDate is not a valid date!", errors.get(0).description());
+        assertThat(result)
+                .hasSize(1)
+                .extracting("errorCode", "description")
+                .containsExactly(
+                        Assertions.tuple("ERROR_CODE_14", "PersonBirthDate is not a valid date!"));
     }
 
     @Test
@@ -96,11 +102,13 @@ public class ValidatePersonBirthDateIntegrationTest {
                 .withPerson(person)
                 .build();
 
-        List<ValidationErrorDTO> errors = validator.validate(agreement);
+        List<ValidationErrorDTO> result = validator.validate(agreement);
 
-        assertEquals(1, errors.size());
-        assertEquals("ERROR_CODE_14", errors.get(0).errorCode());
-        assertEquals("PersonBirthDate is not a valid date!", errors.get(0).description());
+        assertThat(result)
+                .hasSize(1)
+                .extracting("errorCode", "description")
+                .containsExactly(
+                        Assertions.tuple("ERROR_CODE_14", "PersonBirthDate is not a valid date!"));
     }
 
 }

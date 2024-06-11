@@ -29,9 +29,9 @@ class TravelCostCoefficientRepositoryTest {
         Optional<TCTravelCostCoefficient> travelCostCoefficientOpt =
                 repository.findCoefficientByTravelCost(new BigDecimal("6000"));
 
-        assertThat(travelCostCoefficientOpt).isPresent()
-                .map(TCTravelCostCoefficient::getCoefficient)
-                .contains(new BigDecimal("30.00"));
+        assertThat(travelCostCoefficientOpt )
+                .get()
+                .satisfies(t -> assertThat(t.getCoefficient()).isEqualTo(new BigDecimal("30.00")));
     }
 
     @Test

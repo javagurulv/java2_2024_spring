@@ -3,7 +3,6 @@ package lv.javaguru.travel.insurance.core.validations.agreement;
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
-import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,12 +10,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.math.BigDecimal;
-import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -27,18 +23,11 @@ class ValidateAgreementDateToNotNullTest {
 
     @InjectMocks
     private ValidateAgreementDateToNotNull validate;
-    @InjectMocks
-    private SetUpInstancesHelper helper;
 
     @Test
     public void validate_ShouldReturnErrorWhenAgreementDateToIsNull() {
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
-                .withDateFrom(helper.newDate("2025.03.10"))
                 .withDateTo(null)
-                .withCountry("SPAIN")
-                .withSelectedRisks(List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"))
-                .withPerson(helper.newPersonDTO())
-                .withPremium(BigDecimal.ZERO)
                 .build();
 
         when(errorMock.buildError("ERROR_CODE_4"))
@@ -46,9 +35,12 @@ class ValidateAgreementDateToNotNullTest {
 
         Optional<ValidationErrorDTO> result = validate.validateSingle(agreement);
 
-        assertTrue(result.isPresent());
-        assertEquals("ERROR_CODE_4", result.get().errorCode());
-        assertEquals("Field agreementDateTo is empty!", result.get().description());
+        assertThat(result)
+                .isPresent()
+                .hasValueSatisfying(error -> {
+                    assertThat(error.errorCode()).isEqualTo("ERROR_CODE_4");
+                    assertThat(error.description()).isEqualTo("Field agreementDateTo is empty!");
+                });
     }
 
 }

@@ -1,14 +1,13 @@
 package lv.javaguru.travel.insurance.core.validations.person;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.domain.ClassifierValue;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
-import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
-import org.hibernate.collection.internal.PersistentSortedMap;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,8 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
@@ -33,39 +31,38 @@ class ValidateMedicalRiskLimitLevelIsInDatabaseTest {
 
     @InjectMocks
     private ValidateMedicalRiskLimitLevelIsInDatabase validateRiskLimitLevel;
-    @InjectMocks
-    private SetUpInstancesHelper helper;
 
     @Test
     public void validateSingle_ShouldReturnCorrectResponseWhenMedicalRiskLimitLevelIsNotSupported() {
-        AgreementDTO agreement = helper.newAgreementDTO();
+        AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
+                .withSelectedRisk("TRAVEL_MEDICAL")
+                .build();
         PersonDTO person = PersonDTOBuilder.createPerson()
-                .withPersonFirstName("Jānis")
-                .withPersonLastName("Bērziņš")
-                .withPersonalCode("123456-12345")
-                .withPersonBirthdate(helper.newDate("1990.01.01"))
                 .withMedicalRiskLimitLevel("INVALID")
                 .build();
 
         when(repositoryMock.findByClassifierTitleAndIc("MEDICAL_RISK_LIMIT_LEVEL", "INVALID"))
                 .thenReturn(Optional.empty());
 
-        ValidationErrorDTO error = new ValidationErrorDTO("ERROR_CODE_93", "description");
-        lenient().when(errorFactoryMock.buildError(eq("ERROR_CODE_93"), anyList())).thenReturn(error);
+        lenient().when(errorFactoryMock.buildError(eq("ERROR_CODE_93"), anyList()))
+                .thenReturn(new ValidationErrorDTO("ERROR_CODE_93", "description"));
 
         Optional<ValidationErrorDTO> result = validateRiskLimitLevel.validateSingle(agreement, person);
 
-        assertTrue(result.isPresent());
+        assertThat(result)
+                .isPresent()
+                .hasValueSatisfying(error -> {
+                    assertThat(error.errorCode()).isEqualTo("ERROR_CODE_93");
+                    assertThat(error.description()).isEqualTo("description");
+                });
     }
 
     @Test
     public void validateSingle_ShouldNotReturnErrorWhenMedicalRiskLimitLevelExists() {
-        AgreementDTO agreement = helper.newAgreementDTO();
+        AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
+                .withSelectedRisk("TRAVEL_MEDICAL")
+                .build();
         PersonDTO person = PersonDTOBuilder.createPerson()
-                .withPersonFirstName("Jānis")
-                .withPersonLastName("Bērziņš")
-                .withPersonalCode("123456-12345")
-                .withPersonBirthdate(helper.newDate("1990.01.01"))
                 .withMedicalRiskLimitLevel("LEVEL_10000")
                 .build();
 
@@ -74,7 +71,7 @@ class ValidateMedicalRiskLimitLevelIsInDatabaseTest {
 
         Optional<ValidationErrorDTO> result = validateRiskLimitLevel.validateSingle(agreement, person);
 
-        assertFalse(result.isPresent());
+        assertThat(result).isNotPresent();
     }
 
 }

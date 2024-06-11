@@ -6,7 +6,7 @@ import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
 import lv.javaguru.travel.insurance.core.underwriting.TravelCalculatePremiumUnderwriting;
 import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumCalculationResult;
-import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
+import lv.javaguru.travel.insurance.core.util.HelperUtil;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -18,10 +18,10 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import java.math.BigDecimal;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
-@SpringBootTest(properties={"age.coefficient.enabled=false", "medical.risk.limit.level.enabled=false"})
+@SpringBootTest(properties = {"age.coefficient.enabled=false", "medical.risk.limit.level.enabled=false"})
 @AutoConfigureMockMvc
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
@@ -29,7 +29,7 @@ public class AgeCoefficientOffMedicalRiskLimitLevelOffIntegrationTest {
     @Autowired
     private TravelCalculatePremiumUnderwriting underwriting;
     @Autowired
-    private SetUpInstancesHelper helper;
+    private HelperUtil helper;
 
     @Test
     public void calculateAgreementPremium_whenAgeCoefficientEnabled() {
@@ -49,9 +49,9 @@ public class AgeCoefficientOffMedicalRiskLimitLevelOffIntegrationTest {
                 .withPerson(person)
                 .build();
 
-       TravelPremiumCalculationResult result = underwriting.calculateAgreementPremium(agreement, person);
+        TravelPremiumCalculationResult result = underwriting.calculateAgreementPremium(agreement, person);
 
-        assertEquals(new BigDecimal("2.50"), result.getAgreementPremium());
+        assertThat(result.getAgreementPremium()).isEqualTo(new BigDecimal("2.50"));
     }
 
 }
