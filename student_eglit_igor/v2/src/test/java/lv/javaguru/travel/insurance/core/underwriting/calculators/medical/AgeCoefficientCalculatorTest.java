@@ -37,7 +37,7 @@ class AgeCoefficientCalculatorTest {
 
     @BeforeEach
     void setUp() {
-        person = new PersonDTO("John", "Doe", "12345",LocalDate.of(1990, 1, 1), "MEDICAL_RISK_LIMIT", List.of(new RiskDTO()));
+        person = new PersonDTO("John", "Doe", "12345",LocalDate.of(1990, 1, 1), "MEDICAL_RISK_LIMIT", BigDecimal.ONE, List.of(new RiskDTO()));
     }
 
     @Test

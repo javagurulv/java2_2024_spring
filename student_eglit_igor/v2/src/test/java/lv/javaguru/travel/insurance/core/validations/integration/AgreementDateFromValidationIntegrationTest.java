@@ -57,6 +57,7 @@ public class AgreementDateFromValidationIntegrationTest {
                 "12345",
                 LocalDate.of(2000, 1, 1),
                 "LEVEL_10000",
+                BigDecimal.ONE,
                 List.of()
         );
 
@@ -83,6 +84,7 @@ public class AgreementDateFromValidationIntegrationTest {
                 "12345",
                 LocalDate.of(2000, 1, 1),
                 "LEVEL_10000",
+                BigDecimal.ONE,
                 List.of()
         );
 
@@ -134,6 +136,7 @@ public class AgreementDateFromValidationIntegrationTest {
                 "12345",
                 LocalDate.of(2000, 1, 1),
                 "LEVEL_10000",
+                BigDecimal.ONE,
                 List.of()
         );
         PersonDTO person2 = new PersonDTO(
@@ -142,6 +145,7 @@ public class AgreementDateFromValidationIntegrationTest {
                 "12345",
                 LocalDate.of(2000, 12, 1),
                 "LEVEL_10000",
+                BigDecimal.ONE,
                 List.of()
         );
 

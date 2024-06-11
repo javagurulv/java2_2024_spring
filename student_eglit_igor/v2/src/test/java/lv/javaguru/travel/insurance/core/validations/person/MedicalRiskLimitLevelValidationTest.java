@@ -12,6 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
@@ -33,7 +34,7 @@ class MedicalRiskLimitLevelValidationTest {
     @Test
     public void shouldNotReturnErrorWhenMedicalRiskLimitLevelExistInDb() {
         AgreementDTO agreement = mock(AgreementDTO.class);
-        PersonDTO person = new PersonDTO("John", "Doe", "12345",LocalDate.of(2000, 1, 1), "LEVEL_10000", Collections.emptyList());
+        PersonDTO person = new PersonDTO("John", "Doe", "12345",LocalDate.of(2000, 1, 1), "LEVEL_10000", BigDecimal.ONE, Collections.emptyList());
         lenient().when(agreement.getPersons()).thenReturn(List.of(person));
         ClassifierValue classifierValue = mock(ClassifierValue.class);
         lenient().when(classifierValueRepository.findByClassifierTitleAndIc("MEDICAL_RISK_LIMIT_LEVEL", "LEVEL_10000"))
@@ -47,7 +48,7 @@ class MedicalRiskLimitLevelValidationTest {
     public void shouldReturnErrorWhenMedicalRiskLimitLevelNotExistInDb() {
         AgreementDTO agreement = mock(AgreementDTO.class);
         ValidationErrorDTO error = mock(ValidationErrorDTO.class);
-        PersonDTO person = new PersonDTO("John", "Doe", "12345",LocalDate.of(2000, 1, 1), "NOT_EXISTING_MEDICAL_RISK_LIMIT_LEVEL", Collections.emptyList());
+        PersonDTO person = new PersonDTO("John", "Doe", "12345",LocalDate.of(2000, 1, 1), "NOT_EXISTING_MEDICAL_RISK_LIMIT_LEVEL", BigDecimal.ONE, Collections.emptyList());
         lenient().when(agreement.getPersons()).thenReturn(List.of(person));
         lenient().when(classifierValueRepository.findByClassifierTitleAndIc("MEDICAL_RISK_LIMIT_LEVEL", "NOT_EXISTING_MEDICAL_RISK_LIMIT_LEVEL"))
                 .thenReturn(Optional.empty());

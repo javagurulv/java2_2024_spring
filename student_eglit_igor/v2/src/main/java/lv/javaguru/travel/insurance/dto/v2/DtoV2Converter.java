@@ -82,6 +82,7 @@ public class DtoV2Converter {
                 personRequestDTO.getPersonCode(),
                 personRequestDTO.getPersonBirthDate(),
                 personRequestDTO.getMedicalRiskLimitLevel(),
+                BigDecimal.ONE,
                 List.of());
     }
 

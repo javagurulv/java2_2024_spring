@@ -24,9 +24,11 @@ class AgreementTotalPremiumCalculatorTest {
 
         var person1 = new PersonDTO("Joe", "Doe","12345",
                 LocalDate.of(2000, 1, 1),"MEDICAL_RISK_LIMIT",
+                BigDecimal.ONE,
                 List.of(risk11, risk12));
         var person2 = new PersonDTO("Jane", "Doe","12345",
                 LocalDate.of(2000, 1, 1),"MEDICAL_RISK_LIMIT",
+                BigDecimal.ONE,
                 List.of(risk21, risk22));
 
         var agreement = new AgreementDTO();

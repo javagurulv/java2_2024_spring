@@ -67,6 +67,7 @@ class TravelCalculatePremiumServiceImplTest {
                 "12345",
                 LocalDate.of(2000, 1, 1),
                 "TRAVEL_MEDICAL",
+                BigDecimal.ONE,
                 List.of()
         );
         var agreement = new AgreementDTO();
@@ -87,6 +88,7 @@ class TravelCalculatePremiumServiceImplTest {
                 "12345",
                 LocalDate.of(2000, 1, 1),
                 "TRAVEL_MEDICAL",
+                BigDecimal.ONE,
                 List.of()
         );
         var agreement = new AgreementDTO();
@@ -108,6 +110,7 @@ class TravelCalculatePremiumServiceImplTest {
                 "12345",
                 LocalDate.of(2000, 1, 1),
                 "TRAVEL_MEDICAL",
+                BigDecimal.ONE,
                 List.of()
         );
         var agreement = new AgreementDTO();

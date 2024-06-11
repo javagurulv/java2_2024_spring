@@ -13,6 +13,7 @@ import lv.javaguru.travel.insurance.core.repositories.entities.SelectedRiskEntit
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,6 +48,7 @@ class AgreementDTOLoader {
                             personEntity.getPerson().getPersonCode(),
                             personEntity.getPerson().getBirthDate(),
                             personEntity.getMedicalRiskLimitLevel(),
+                            BigDecimal.ONE,
                             (agreementPersonRiskEntityRepository.findByAgreementPerson(personEntity)
                                     .stream()
                                     .map(agreementPersonRiskEntity -> {

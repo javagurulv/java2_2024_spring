@@ -1,10 +1,6 @@
 package lv.javaguru.travel.insurance.core.api.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -15,5 +11,6 @@ public record PersonDTO (
         String personCode,
         LocalDate personBirthDate,
         String medicalRiskLimitLevel,
+        BigDecimal travelCost,
         List<RiskDTO> risks
 ){ }
