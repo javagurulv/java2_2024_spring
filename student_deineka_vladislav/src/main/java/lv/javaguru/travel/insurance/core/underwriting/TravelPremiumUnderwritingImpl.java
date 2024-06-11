@@ -13,31 +13,28 @@ import java.util.List;
 class TravelPremiumUnderwritingImpl implements TravelPremiumUnderwriting {
 
     @Autowired
-    private List<TravelRiskPremiumCalculator> riskPremiumCalculators;
+    private SelectedRisksPremiumCalculator riskPremiumCalculators;
 
     @Override
     public TravelPremiumCalculationResult calculationPremium(TravelCalculatePremiumRequest premiumRequest) {
-        List<RiskPremium> riskPremiums = premiumRequest.getSelectedRisks().stream()
-                .map(riskIc -> { BigDecimal riskPremium = calculatePremiumForRisk(riskIc, premiumRequest);
-                                return new RiskPremium(riskIc, riskPremium); })
-                .toList();
-
-        BigDecimal totalPremium = riskPremiums.stream()
-                .map(RiskPremium::getPremium)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-
+        List<RiskPremium> riskPremiums = selectedRiskPremiumCalculation(premiumRequest);
+        BigDecimal totalPremium = totalPremiumCalculation(riskPremiums);
         return new TravelPremiumCalculationResult(totalPremium, riskPremiums);
     }
 
-    private BigDecimal calculatePremiumForRisk(String riskIc, TravelCalculatePremiumRequest premiumRequest) {
-        var riskPremiumCalculator = findRiskPremiumCalculator(riskIc);
-        return riskPremiumCalculator.calculatePremium(premiumRequest);
+    private List<RiskPremium> selectedRiskPremiumCalculation(TravelCalculatePremiumRequest premiumRequest) {
+        return riskPremiumCalculators.calculationPremium(premiumRequest);
     }
 
-    private TravelRiskPremiumCalculator findRiskPremiumCalculator(String riskIc) {
-        return riskPremiumCalculators.stream()
-                .filter(riskCalculator -> riskCalculator.getRiskIc().equals(riskIc))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("riskIc is not supported = " + riskIc));
+    private static  BigDecimal totalPremiumCalculation(List<RiskPremium> riskPremiums) {
+        return riskPremiums.stream()
+                .map(RiskPremium::getPremium)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
+
+
+
+
+
+
 }
