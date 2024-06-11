@@ -4,6 +4,7 @@ dependencies {
 
 	implementation('com.fasterxml.jackson.core:jackson-core:2.14.2')
 	implementation('ch.qos.logback:logback-classic:1.2.3')
+	implementation('com.google.guava:guava:30.1-jre')
 
 	compileOnly('org.projectlombok:lombok:1.18.24')
 	annotationProcessor('org.projectlombok:lombok:1.18.24')
