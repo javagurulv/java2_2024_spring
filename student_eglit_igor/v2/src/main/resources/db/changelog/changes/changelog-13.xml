@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
 
-    <changeSet id="35" author="root">
+    <changeSet id="34" author="root">
         <createTable tableName="travel_cost_coefficient">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
