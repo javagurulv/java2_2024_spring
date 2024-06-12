@@ -20,12 +20,12 @@ class ClassifierRepositoryTest {
     private ClassifierRepository classifierRepository;
 
     @Test
-    public void injectedRepositoryAreNotNull() {
+    void injectedRepositoryAreNotNull() {
         assertNotNull(classifierRepository);
     }
 
     @Test
-    public void shouldFindRiskTypeClassifier() {
+    void shouldFindRiskTypeClassifier() {
         Optional<Classifier> riskTypeOpt = classifierRepository.findByTitle("RISK_TYPE");
 
         assertThat(riskTypeOpt)
@@ -34,7 +34,7 @@ class ClassifierRepositoryTest {
     }
 
     @Test
-    public void shouldFindCountryClassifier() {
+    void shouldFindCountryClassifier() {
         Optional<Classifier> riskTypeOpt = classifierRepository.findByTitle("COUNTRY");
 
         assertThat(riskTypeOpt)
@@ -43,7 +43,7 @@ class ClassifierRepositoryTest {
     }
 
     @Test
-    public void shouldNotFindFakeClassifier() {
+    void shouldNotFindFakeClassifier() {
         Optional<Classifier> riskTypeOpt = classifierRepository.findByTitle("FAKE");
 
         assertThat(riskTypeOpt).isEmpty();

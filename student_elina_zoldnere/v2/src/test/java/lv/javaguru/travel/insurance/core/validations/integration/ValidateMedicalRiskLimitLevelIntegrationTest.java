@@ -31,7 +31,7 @@ class ValidateMedicalRiskLimitLevelIntegrationTest {
     private DateHelper helper;
 
     @Test
-    public void validate_ShouldReturnErrorWhenMedicalRiskLimitLevelIsNotValid() {
+    void validate_ShouldReturnErrorWhenMedicalRiskLimitLevelIsNotValid() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
@@ -60,7 +60,7 @@ class ValidateMedicalRiskLimitLevelIntegrationTest {
     }
 
     @Test
-    public void validate_ShouldReturnErrorMedicalRiskLimitLevelIsNullAndRiskTypeTravelMedicalSelected() {
+    void validate_ShouldReturnErrorMedicalRiskLimitLevelIsNullAndRiskTypeTravelMedicalSelected() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
@@ -89,7 +89,7 @@ class ValidateMedicalRiskLimitLevelIntegrationTest {
     }
 
     @Test
-    public void validate_ShouldNotReturnErrorMedicalRiskLimitLevelIsNullAndRiskTypeTravelMedicalNotSelected() {
+    void validate_ShouldNotReturnErrorMedicalRiskLimitLevelIsNullAndRiskTypeTravelMedicalNotSelected() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")

@@ -21,12 +21,12 @@ class MedicalRiskLimitLevelRepositoryTest {
     private MedicalRiskLimitLevelRepository limitLevelRepository;
 
     @Test
-    public void injectedRepositoryAreNotNull() {
+    void injectedRepositoryAreNotNull() {
         assertNotNull(limitLevelRepository);
     }
 
     @Test
-    public void shouldFindCoefficientForExistingMedicalRiskLimitLevel() {
+    void shouldFindCoefficientForExistingMedicalRiskLimitLevel() {
         Optional<MedicalRiskLimitLevel> limitLevelOpt = limitLevelRepository
                 .findByMedicalRiskLimitLevelIc("LEVEL_10000");
 
@@ -36,7 +36,7 @@ class MedicalRiskLimitLevelRepositoryTest {
     }
 
     @Test
-    public void shouldReturnEmptyForInvalidMedicalRiskLimitLevel() {
+    void shouldReturnEmptyForInvalidMedicalRiskLimitLevel() {
         Optional<MedicalRiskLimitLevel> limitLevelOpt = limitLevelRepository.findByMedicalRiskLimitLevelIc("INVALID");
 
         assertThat(limitLevelOpt).isEmpty();

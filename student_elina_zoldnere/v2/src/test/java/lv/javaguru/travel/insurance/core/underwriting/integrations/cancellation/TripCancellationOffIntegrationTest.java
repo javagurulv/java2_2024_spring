@@ -34,7 +34,7 @@ public class TripCancellationOffIntegrationTest {
     private DateHelper helper;
 
     @Test
-    public void calculateAgreementPremium_whenTripCancellationEnabled() {
+    void calculateAgreementPremium_whenTripCancellationEnabled() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")

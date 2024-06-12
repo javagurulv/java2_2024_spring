@@ -43,7 +43,7 @@ public abstract class TravelCalculatePremiumControllerTestTemplate {
 
 
     @TestFactory
-    public Stream<DynamicTest> dynamicTestsFromStream() {
+    Stream<DynamicTest> dynamicTestsFromStream() {
         return fileProvider.provideTestData(getTestDataPath())
                 .map(data ->
                         DynamicTest.dynamicTest("Test Case: "

@@ -32,7 +32,7 @@ public class AgeCoefficientOffMedicalRiskLimitLevelOffIntegrationTest {
     private DateHelper helper;
 
     @Test
-    public void calculateAgreementPremium_whenAgeCoefficientEnabled() {
+    void calculateAgreementPremium_whenAgeCoefficientEnabled() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")

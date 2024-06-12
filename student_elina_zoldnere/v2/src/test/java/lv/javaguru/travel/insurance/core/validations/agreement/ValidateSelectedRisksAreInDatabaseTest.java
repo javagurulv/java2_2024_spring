@@ -67,7 +67,7 @@ class ValidateSelectedRisksAreInDatabaseTest {
     }
 
     @Test
-    public void validateList_ShouldNotReturnErrorWhenSelectedRisksAreInDatabase() {
+    void validateList_ShouldNotReturnErrorWhenSelectedRisksAreInDatabase() {
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
                 .withSelectedRisks(List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION"))
                 .build();

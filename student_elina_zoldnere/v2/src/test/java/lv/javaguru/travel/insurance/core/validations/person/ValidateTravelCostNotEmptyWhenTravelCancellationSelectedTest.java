@@ -28,7 +28,7 @@ class ValidateTravelCostNotEmptyWhenTravelCancellationSelectedTest {
     private ValidateTravelCostNotEmptyWhenTravelCancellationSelected validate;
 
     @Test
-    public void validateSingle_ShouldReturnErrorWhenTravelCostNullAndTravelCancellationSelected() {
+    void validateSingle_ShouldReturnErrorWhenTravelCostNullAndTravelCancellationSelected() {
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
                 .withSelectedRisk("TRAVEL_CANCELLATION")
                 .build();
@@ -51,7 +51,7 @@ class ValidateTravelCostNotEmptyWhenTravelCancellationSelectedTest {
     }
 
     @Test
-    public void validateSingle_ShouldNotReturnErrorWhenTravelCancellationNotSelected() {
+    void validateSingle_ShouldNotReturnErrorWhenTravelCancellationNotSelected() {
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
                 .withSelectedRisk("TRAVEL_MEDICAL")
                 .build();

@@ -22,7 +22,7 @@ import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class TravelGetAgreementServiceImplTest {
+class TravelGetAgreementServiceImplTest {
 
     @Mock
     private TravelAgreementUuidValidator uuidValidatorMock;
@@ -33,7 +33,7 @@ public class TravelGetAgreementServiceImplTest {
     private TravelGetAgreementServiceImpl service;
 
     @Test
-    public void getAgreement_ShouldCorrectlyReturnExistingAgreement() {
+    void getAgreement_ShouldCorrectlyReturnExistingAgreement() {
         TravelGetAgreementCoreCommand command = new TravelGetAgreementCoreCommand("UUID");
         String uuid = command.getUuid();
 
@@ -48,7 +48,7 @@ public class TravelGetAgreementServiceImplTest {
     }
 
     @Test
-    public void getAgreement_ShouldReturnErrorWhenAgreementDoesNotExists() {
+    void getAgreement_ShouldReturnErrorWhenAgreementDoesNotExists() {
         TravelGetAgreementCoreCommand command = new TravelGetAgreementCoreCommand("NOT-EXISTING-UUID");
         ValidationErrorDTO validationError = ValidationErrorDTOBuilder.createValidationError().build();
 

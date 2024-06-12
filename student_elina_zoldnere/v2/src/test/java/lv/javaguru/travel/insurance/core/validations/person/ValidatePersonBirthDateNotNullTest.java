@@ -27,7 +27,7 @@ class ValidatePersonBirthDateNotNullTest {
     private ValidatePersonBirthDateNotNull validate;
 
     @Test
-    public void validate_ShouldReturnErrorWhenPersonBirthDateFromIsNull() {
+    void validate_ShouldReturnErrorWhenPersonBirthDateFromIsNull() {
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement().build();
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonBirthdate(null)

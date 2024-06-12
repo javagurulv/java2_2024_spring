@@ -22,12 +22,12 @@ class TMAgeCoefficientRepositoryTest {
     private TMAgeCoefficientRepository ageCoefficientRepository;
 
     @Test
-    public void injectedRepositoryAreNotNull() {
+    void injectedRepositoryAreNotNull() {
         assertNotNull(ageCoefficientRepository);
     }
 
     @Test
-    public void shouldFindAgeCoefficient() {
+    void shouldFindAgeCoefficient() {
         Optional<TMAgeCoefficient> ageCoefficientOpt = ageCoefficientRepository.findCoefficient(30);
 
         assertThat(ageCoefficientOpt)
@@ -36,7 +36,7 @@ class TMAgeCoefficientRepositoryTest {
     }
 
     @Test
-    public void shouldNotFindByInvalidAge() {
+    void shouldNotFindByInvalidAge() {
         Optional<TMAgeCoefficient> ageCoefficientOpt = ageCoefficientRepository.findCoefficient(null);
 
         assertThat(ageCoefficientOpt).isEmpty();

@@ -31,7 +31,7 @@ class ValidateMedicalRiskLimitLevelIsInDatabaseTest {
     private ValidateMedicalRiskLimitLevelIsInDatabase validate;
 
     @Test
-    public void validateSingle_ShouldReturnCorrectResponseWhenMedicalRiskLimitLevelIsNotSupported() {
+    void validateSingle_ShouldReturnCorrectResponseWhenMedicalRiskLimitLevelIsNotSupported() {
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
                 .withSelectedRisk("TRAVEL_MEDICAL")
                 .build();
@@ -56,7 +56,7 @@ class ValidateMedicalRiskLimitLevelIsInDatabaseTest {
     }
 
     @Test
-    public void validateSingle_ShouldNotReturnErrorWhenMedicalRiskLimitLevelExists() {
+    void validateSingle_ShouldNotReturnErrorWhenMedicalRiskLimitLevelExists() {
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
                 .withSelectedRisk("TRAVEL_MEDICAL")
                 .build();

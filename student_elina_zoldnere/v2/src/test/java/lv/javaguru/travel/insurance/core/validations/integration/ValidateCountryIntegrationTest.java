@@ -31,7 +31,7 @@ class ValidateCountryIntegrationTest {
     private DateHelper helper;
 
     @Test
-    public void validate_ShouldReturnErrorWhenCountryIsNotValid() {
+    void validate_ShouldReturnErrorWhenCountryIsNotValid() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
@@ -59,7 +59,7 @@ class ValidateCountryIntegrationTest {
     }
 
     @Test
-    public void validate_ShouldReturnErrorWhenCountryIsNull() {
+    void validate_ShouldReturnErrorWhenCountryIsNull() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")

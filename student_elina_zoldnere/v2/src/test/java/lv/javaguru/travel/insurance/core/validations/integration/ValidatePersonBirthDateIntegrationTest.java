@@ -30,7 +30,7 @@ public class ValidatePersonBirthDateIntegrationTest {
     private DateHelper helper;
 
     @Test
-    public void validate_ShouldReturnErrorWhenPersonBirthDateIsNull() {
+    void validate_ShouldReturnErrorWhenPersonBirthDateIsNull() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
@@ -57,7 +57,7 @@ public class ValidatePersonBirthDateIntegrationTest {
     }
 
     @Test
-    public void validate_ShouldReturnErrorWhenPersonBirthDateAfterCurrentDate() {
+    void validate_ShouldReturnErrorWhenPersonBirthDateAfterCurrentDate() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
@@ -84,7 +84,7 @@ public class ValidatePersonBirthDateIntegrationTest {
     }
 
     @Test
-    public void validate_ShouldReturnErrorWhenPersonBirthDateLessThanMinimalDate() {
+    void validate_ShouldReturnErrorWhenPersonBirthDateLessThanMinimalDate() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")

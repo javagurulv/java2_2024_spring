@@ -21,7 +21,7 @@ class ErrorCodeUtilTest {
     private ErrorCodeUtil errorCodeUtil;
 
     @Test
-    public void getErrorDescription_ShouldReturnCorrectDescription() {
+    void getErrorDescription_ShouldReturnCorrectDescription() {
         String errorCode = "ERROR_CODE";
         String expectedDescription = "Error description";
 
@@ -33,7 +33,7 @@ class ErrorCodeUtilTest {
     }
 
     @Test
-    public void getErrorDescriptionWithPlaceholders_ShouldReturnCorrectDescription() {
+    void getErrorDescriptionWithPlaceholders_ShouldReturnCorrectDescription() {
         String errorCode = "ERROR_CODE";
         String descriptionWithPlaceholders = "Error description {placeholder}";
         List<Placeholder> placeholders = List.of(new Placeholder("placeholder", "VALUE"));
@@ -46,7 +46,7 @@ class ErrorCodeUtilTest {
     }
 
     @Test
-    public void getErrorDescription_ShouldNotReturnDescriptionFromInvalidCode() {
+    void getErrorDescription_ShouldNotReturnDescriptionFromInvalidCode() {
         String errorCode = "INVALID_CODE";
 
         when(resolverMock.getPropertyDescription(errorCode)).thenReturn(null);

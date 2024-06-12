@@ -30,7 +30,7 @@ public class ValidatePersonLastNameIntegrationTest {
     private DateHelper helper;
 
     @Test
-    public void validate_ShouldReturnErrorWhenPersonLastNameIsNull() {
+    void validate_ShouldReturnErrorWhenPersonLastNameIsNull() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName(null)
@@ -57,7 +57,7 @@ public class ValidatePersonLastNameIntegrationTest {
     }
 
     @Test
-    public void validate_ShouldReturnErrorWhenPersonLastNameContainsNotAllowedChars() {
+    void validate_ShouldReturnErrorWhenPersonLastNameContainsNotAllowedChars() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Vasja")
                 .withPersonLastName("Пупкин")
@@ -85,7 +85,7 @@ public class ValidatePersonLastNameIntegrationTest {
     }
 
     @Test
-    public void validate_ShouldReturnErrorWhenPersonLastNameExceedsAllowedLength() {
+    void validate_ShouldReturnErrorWhenPersonLastNameExceedsAllowedLength() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvw" +

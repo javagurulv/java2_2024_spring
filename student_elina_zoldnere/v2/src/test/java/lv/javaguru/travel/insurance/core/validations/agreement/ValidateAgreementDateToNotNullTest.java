@@ -25,7 +25,7 @@ class ValidateAgreementDateToNotNullTest {
     private ValidateAgreementDateToNotNull validate;
 
     @Test
-    public void validate_ShouldReturnErrorWhenAgreementDateToIsNull() {
+    void validate_ShouldReturnErrorWhenAgreementDateToIsNull() {
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
                 .withDateTo(null)
                 .build();

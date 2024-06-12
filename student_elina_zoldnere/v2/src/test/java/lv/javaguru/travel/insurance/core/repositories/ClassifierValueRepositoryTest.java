@@ -24,13 +24,13 @@ class ClassifierValueRepositoryTest {
     private ClassifierValueRepository classifierValueRepository;
 
     @Test
-    public void injectedRepositoryAreNotNull() {
+    void injectedRepositoryAreNotNull() {
         assertNotNull(classifierValueRepository);
     }
 
     @ParameterizedTest
     @MethodSource("riskTypeValues")
-    public void shouldFindRiskTypeValue(String riskType) {
+    void shouldFindRiskTypeValue(String riskType) {
         Optional<ClassifierValue> valueOpt = classifierValueRepository.findByClassifierTitleAndIc(
                 "RISK_TYPE", riskType);
 
@@ -55,7 +55,7 @@ class ClassifierValueRepositoryTest {
 
     @ParameterizedTest
     @MethodSource("countryValues")
-    public void shouldFindCountryValue(String country) {
+    void shouldFindCountryValue(String country) {
         Optional<ClassifierValue> valueOpt = classifierValueRepository.findByClassifierTitleAndIc(
                 "COUNTRY", country);
 
@@ -76,7 +76,7 @@ class ClassifierValueRepositoryTest {
     }
 
     @Test
-    public void shouldNotFind_RiskType_FAKE() {
+    void shouldNotFind_RiskType_FAKE() {
         Optional<ClassifierValue> valueOpt = classifierValueRepository.findByClassifierTitleAndIc(
                 "RISK_TYPE", "FAKE");
 

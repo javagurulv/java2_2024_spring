@@ -31,7 +31,7 @@ class ValidateAgreementDateToNotLessThanTodayTest {
     private DateHelper helper;
 
     @Test
-    public void validate_ShouldReturnErrorWhenAgreementDateToLessThanToday() {
+    void validate_ShouldReturnErrorWhenAgreementDateToLessThanToday() {
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
                 .withDateFrom(helper.newDate("2025.03.10"))
                 .withDateTo(helper.newDate("2025.03.11"))

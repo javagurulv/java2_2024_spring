@@ -30,7 +30,7 @@ public class ValidateAgreementDateFromIntegrationTest {
     private DateHelper helper;
 
     @Test
-    public void validate_ShouldReturnErrorWhenAgreementDateFromIsNull() {
+    void validate_ShouldReturnErrorWhenAgreementDateFromIsNull() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
@@ -57,7 +57,7 @@ public class ValidateAgreementDateFromIntegrationTest {
     }
 
     @Test
-    public void validate_ShouldReturnErrorWhenAgreementDateFromLessThanToday() {
+    void validate_ShouldReturnErrorWhenAgreementDateFromLessThanToday() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")

@@ -69,7 +69,7 @@ class ValidateMedicalRiskLimitLevelNotEmptyOrNullTest {
     }
 
     @Test
-    public void validateSingle_ShouldNotReturnErrorWhenMedicalRiskLimitLevelIsDisabled() {
+    void validateSingle_ShouldNotReturnErrorWhenMedicalRiskLimitLevelIsDisabled() {
         ReflectionTestUtils.setField(validate, "medicalRiskLimitLevelEnabled", Boolean.FALSE);
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement().build();
         PersonDTO person = PersonDTOBuilder.createPerson().build();

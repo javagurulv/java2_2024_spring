@@ -17,7 +17,7 @@ class LoadTestingSystem {
         new LoadTestingSystem().executeForADefinedTime(20, 1, 5, "V2");
     }
 
-    void executeForADefinedTime(int timeInSeconds, int parallelThreadCount, int batchCount, String version) {
+    private void executeForADefinedTime(int timeInSeconds, int parallelThreadCount, int batchCount, String version) {
         int executionTimeInMillis = timeInSeconds * 1000;
         long intervalBetweenRequestsInMillis = executionTimeInMillis / batchCount;
         ExecutorService executorService = Executors.newFixedThreadPool(parallelThreadCount);

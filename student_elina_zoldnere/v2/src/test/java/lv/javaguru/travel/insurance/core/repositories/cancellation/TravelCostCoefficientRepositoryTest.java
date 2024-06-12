@@ -20,12 +20,12 @@ class TravelCostCoefficientRepositoryTest {
     private TCTravelCostCoefficientRepository repository;
 
     @Test
-    public void injectedRepositoryAreNotNull() {
+    void injectedRepositoryAreNotNull() {
         assertThat(repository).isNotNull();
     }
 
     @Test
-    public void findByTravelCost_ShouldFindExistingCoefficient() {
+    void findByTravelCost_ShouldFindExistingCoefficient() {
         Optional<TCTravelCostCoefficient> travelCostCoefficientOpt =
                 repository.findCoefficientByTravelCost(new BigDecimal("6000"));
 
@@ -35,14 +35,14 @@ class TravelCostCoefficientRepositoryTest {
     }
 
     @Test
-    public void findCoefficientByTravelCost_ShouldNotFindCoefficientWhenTravelCostIsNull() {
+    void findCoefficientByTravelCost_ShouldNotFindCoefficientWhenTravelCostIsNull() {
         Optional<TCTravelCostCoefficient> travelCostCoefficientOpt = repository.findCoefficientByTravelCost(null);
 
         assertThat(travelCostCoefficientOpt).isEmpty();
     }
 
     @Test
-    public void findCoefficientByTravelCost_ShouldNotFindCoefficientWhenCoefficientDoesNotExist() {
+    void findCoefficientByTravelCost_ShouldNotFindCoefficientWhenCoefficientDoesNotExist() {
         Optional<TCTravelCostCoefficient> travelCostCoefficientOpt =
                 repository.findCoefficientByTravelCost(new BigDecimal("10000000"));
 

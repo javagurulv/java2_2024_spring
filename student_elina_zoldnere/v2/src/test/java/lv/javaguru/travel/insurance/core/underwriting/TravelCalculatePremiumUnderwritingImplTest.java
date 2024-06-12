@@ -25,7 +25,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class TravelCalculatePremiumUnderwritingImplTest {
+class TravelCalculatePremiumUnderwritingImplTest {
 
     @Mock
     private SingleRiskPremiumCalculator singleRiskCalculatorMock;

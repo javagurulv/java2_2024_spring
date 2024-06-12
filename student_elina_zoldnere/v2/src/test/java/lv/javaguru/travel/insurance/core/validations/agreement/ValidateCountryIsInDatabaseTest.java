@@ -29,7 +29,7 @@ class ValidateCountryIsInDatabaseTest {
     private ValidateCountryIsInDatabase validate;
 
     @Test
-    public void validateSingle_ShouldReturnCorrectResponseWhenCountryIsNotSupported() {
+    void validateSingle_ShouldReturnCorrectResponseWhenCountryIsNotSupported() {
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
                 .withCountry("INVALID")
                 .build();
@@ -51,7 +51,7 @@ class ValidateCountryIsInDatabaseTest {
     }
 
     @Test
-    public void validateSingle_ShouldNotReturnErrorWhenCountryIsInDatabase() {
+    void validateSingle_ShouldNotReturnErrorWhenCountryIsInDatabase() {
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
                 .withCountry("SPAIN")
                 .build();

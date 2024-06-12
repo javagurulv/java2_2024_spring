@@ -26,7 +26,7 @@ abstract class CallTemplate implements Runnable {
     private static final Logger logger = LoggerFactory.getLogger(CallTemplate.class);
     private final LoadTestingStatistic statistic;
 
-    public CallTemplate(LoadTestingStatistic statistic) {
+    CallTemplate(LoadTestingStatistic statistic) {
         this.statistic = statistic;
     }
 

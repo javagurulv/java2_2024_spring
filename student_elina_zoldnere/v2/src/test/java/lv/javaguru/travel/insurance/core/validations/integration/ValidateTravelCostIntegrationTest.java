@@ -27,7 +27,7 @@ class ValidateTravelCostIntegrationTest {
     private DateHelper helper;
 
     @Test
-    public void validate_ShouldReturnErrorWhenTravelCostIsNotValid() {
+    void validate_ShouldReturnErrorWhenTravelCostIsNotValid() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
@@ -56,7 +56,7 @@ class ValidateTravelCostIntegrationTest {
     }
 
     @Test
-    public void validate_ShouldReturnErrorWhenTravelCostIsNullAndRiskTypeTravelCancellationSelected() {
+    void validate_ShouldReturnErrorWhenTravelCostIsNullAndRiskTypeTravelCancellationSelected() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
@@ -85,7 +85,7 @@ class ValidateTravelCostIntegrationTest {
     }
 
     @Test
-    public void validate_ShouldNotReturnErrorWhenTravelCostIsNullAndRiskTypeTravelCancellationNotSelected() {
+    void validate_ShouldNotReturnErrorWhenTravelCostIsNullAndRiskTypeTravelCancellationNotSelected() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")

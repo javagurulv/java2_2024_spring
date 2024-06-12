@@ -28,7 +28,7 @@ import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class TravelCalculatePremiumServiceImplTest {
+class TravelCalculatePremiumServiceImplTest {
 
     @Mock
     private TravelAgreementValidator agreementValidatorMock;
@@ -43,7 +43,7 @@ public class TravelCalculatePremiumServiceImplTest {
     private TravelCalculatePremiumServiceImpl service;
 
     @Test
-    public void calculatePremium_ShouldReturnErrors() {
+    void calculatePremium_ShouldReturnErrors() {
         ValidationErrorDTO validationError = ValidationErrorDTOBuilder.createValidationError()
                 .withErrorCode("ERROR_CODE")
                 .withDescription("DESCRIPTION")
@@ -64,7 +64,7 @@ public class TravelCalculatePremiumServiceImplTest {
     }
 
     @Test
-    public void calculatePremium_ShouldReturnCorrectResponseWithOnePerson() {
+    void calculatePremium_ShouldReturnCorrectResponseWithOnePerson() {
         RiskDTO risk = RiskDTOBuilder.createRisk().withPremium(BigDecimal.TEN).build();
         List<PersonDTO> persons = List.of(PersonDTOBuilder.createPerson().withPersonRisk(risk).build());
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
@@ -89,7 +89,7 @@ public class TravelCalculatePremiumServiceImplTest {
     }
 
     @Test
-    public void calculatePremium_ShouldReturnCorrectResponseWithTwoPersons() {
+    void calculatePremium_ShouldReturnCorrectResponseWithTwoPersons() {
         RiskDTO risk1 = RiskDTOBuilder.createRisk().withPremium(BigDecimal.TEN).build();
         RiskDTO risk2 = RiskDTOBuilder.createRisk().withPremium(BigDecimal.TEN).build();
         List<PersonDTO> persons = List.of(PersonDTOBuilder.createPerson().withPersonRisk(risk1).build(),

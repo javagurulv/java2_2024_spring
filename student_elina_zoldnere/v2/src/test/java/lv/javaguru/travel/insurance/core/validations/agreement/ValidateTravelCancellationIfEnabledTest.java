@@ -27,7 +27,7 @@ class ValidateTravelCancellationIfEnabledTest {
     private ValidateTravelCancellationIfEnabled validate;
 
     @Test
-    public void validateSingle_ShouldReturnErrorWhenTravelCancellationSelectedButFeatureDisabled() {
+    void validateSingle_ShouldReturnErrorWhenTravelCancellationSelectedButFeatureDisabled() {
         ReflectionTestUtils.setField(validate, "isTripCancellationEnabled", Boolean.FALSE);
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
                 .withSelectedRisk("TRAVEL_CANCELLATION")
@@ -48,7 +48,7 @@ class ValidateTravelCancellationIfEnabledTest {
     }
 
     @Test
-    public void validateSingle_ShouldNotReturnErrorWhenTravelCancellationSelectedAndFeatureEnabled() {
+    void validateSingle_ShouldNotReturnErrorWhenTravelCancellationSelectedAndFeatureEnabled() {
         ReflectionTestUtils.setField(validate, "isTripCancellationEnabled", Boolean.TRUE);
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
                 .withSelectedRisk("TRAVEL_CANCELLATION")

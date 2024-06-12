@@ -21,12 +21,12 @@ class CountryDefaultDayRepositoryTest {
     private CountryDefaultDayRateRepository dayRateRepository;
 
     @Test
-    public void injectedRepositoryAreNotNull() {
+    void injectedRepositoryAreNotNull() {
         assertNotNull(dayRateRepository);
     }
 
     @Test
-    public void shouldFindCountryDayRate() {
+    void shouldFindCountryDayRate() {
         Optional<CountryDefaultDayRate> dayRateOpt = dayRateRepository.findByCountryIc("SPAIN");
 
         assertThat(dayRateOpt)
@@ -35,7 +35,7 @@ class CountryDefaultDayRepositoryTest {
     }
 
     @Test
-    public void shouldNotFindInvalidDayRate() {
+    void shouldNotFindInvalidDayRate() {
         Optional<CountryDefaultDayRate> dayRateOpt = dayRateRepository.findByCountryIc("INVALID");
 
         assertThat(dayRateOpt).isEmpty();

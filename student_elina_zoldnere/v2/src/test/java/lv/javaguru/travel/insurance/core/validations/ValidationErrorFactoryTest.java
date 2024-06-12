@@ -25,7 +25,7 @@ class ValidationErrorFactoryTest {
     private ValidationErrorFactory errorFactory;
 
     @Test
-    public void buildError_shouldReturnErrorWithDescription() {
+    void buildError_shouldReturnErrorWithDescription() {
         when(errorCodeUtilMock.getErrorDescription("ERROR_CODE"))
                 .thenReturn("error description");
 
@@ -36,7 +36,7 @@ class ValidationErrorFactoryTest {
     }
 
     @Test
-    public void buildError_shouldReturnErrorWithDescriptionAndPlaceholders() {
+    void buildError_shouldReturnErrorWithDescriptionAndPlaceholders() {
         Placeholder placeholder = new Placeholder("placeholderName", "PH");
         when(errorCodeUtilMock.getErrorDescription("ERROR_CODE", List.of(placeholder)))
                 .thenReturn("error description PH");

@@ -20,12 +20,12 @@ class TCCountrySafetyRatingCoefficientRepositoryTest {
     private TCCountrySafetyRatingCoefficientRepository repository;
 
     @Test
-    public void injectedRepositoryAreNotNull() {
+    void injectedRepositoryAreNotNull() {
         assertThat(repository).isNotNull();
     }
 
     @Test
-    public void findByCountryIc_ShouldFindExistingCoefficient() {
+    void findByCountryIc_ShouldFindExistingCoefficient() {
         Optional<TCCountrySafetyRatingCoefficient> dayRateOpt = repository.findCoefficientByCountryIc("SPAIN");
 
         assertThat(dayRateOpt)
@@ -34,14 +34,14 @@ class TCCountrySafetyRatingCoefficientRepositoryTest {
     }
 
     @Test
-    public void findByCountryIc_ShouldNotFindCoefficientWhenAgeIsNull() {
+    void findByCountryIc_ShouldNotFindCoefficientWhenAgeIsNull() {
         Optional<TCCountrySafetyRatingCoefficient> dayRateOpt = repository.findCoefficientByCountryIc(null);
 
         assertThat(dayRateOpt).isEmpty();
     }
 
     @Test
-    public void findByCountryIc_ShouldNotFindCoefficientWhenCoefficientDoesNotExist() {
+    void findByCountryIc_ShouldNotFindCoefficientWhenCoefficientDoesNotExist() {
         Optional<TCCountrySafetyRatingCoefficient> dayRateOpt = repository.findCoefficientByCountryIc("INVALID");
 
         assertThat(dayRateOpt).isEmpty();

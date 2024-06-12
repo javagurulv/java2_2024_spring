@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class TravelGetNotExportedAgreementUuidsServiceImplTest {
+class TravelGetNotExportedAgreementUuidsServiceImplTest {
 
     @Mock
     private AgreementEntityRepository agreementRepositoryMock;
@@ -24,7 +24,7 @@ public class TravelGetNotExportedAgreementUuidsServiceImplTest {
     private TravelGetNotExportedAgreementUuidsServiceImpl service;
 
     @Test
-    public void getUuids_ShouldCorrectlyReturnResult(){
+    void getUuids_ShouldCorrectlyReturnResult(){
         List<String> uuids = List.of("UUID1", "UUID2");
         TravelGetNotExportedAgreementUuidsCoreCommand command = new TravelGetNotExportedAgreementUuidsCoreCommand();
 

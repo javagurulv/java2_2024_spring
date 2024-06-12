@@ -31,7 +31,7 @@ class ValidateTravelCostIsValidTest {
     private ValidateTravelCostIsValidWhenTravelCancellationSelected validate;
 
     @Test
-    public void validateSingle_ShouldReturnCorrectResponseWhenTravelCostIsNotSupported() {
+    void validateSingle_ShouldReturnCorrectResponseWhenTravelCostIsNotSupported() {
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
                 .withSelectedRisk("TRAVEL_CANCELLATION")
                 .build();
@@ -54,7 +54,7 @@ class ValidateTravelCostIsValidTest {
     }
 
     @Test
-    public void validateSingle_ShouldNotReturnErrorWhenTravelCostIsValid() {
+    void validateSingle_ShouldNotReturnErrorWhenTravelCostIsValid() {
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
                 .withSelectedRisk("TRAVEL_CANCELLATION")
                 .build();

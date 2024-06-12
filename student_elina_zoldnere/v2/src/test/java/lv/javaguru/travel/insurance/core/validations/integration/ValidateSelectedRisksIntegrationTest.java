@@ -31,7 +31,7 @@ class ValidateSelectedRisksIntegrationTest {
     private DateHelper helper;
 
     @Test
-    public void validate_ShouldReturnErrorWhenOneSelectedRiskIsNotValid() {
+    void validate_ShouldReturnErrorWhenOneSelectedRiskIsNotValid() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
@@ -59,7 +59,7 @@ class ValidateSelectedRisksIntegrationTest {
     }
 
     @Test
-    public void validate_ShouldReturnErrorWhenTwoSelectedRisksAreNotValid() {
+    void validate_ShouldReturnErrorWhenTwoSelectedRisksAreNotValid() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
@@ -89,7 +89,7 @@ class ValidateSelectedRisksIntegrationTest {
     }
 
     @Test
-    public void validate_ShouldReturnErrorWhenSelectedRiskIsNull() {
+    void validate_ShouldReturnErrorWhenSelectedRiskIsNull() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")

@@ -26,7 +26,7 @@ public class ValidatePersonalCodeIntegrationTest {
     private DateHelper helper;
 
     @Test
-    public void validate_ShouldReturnErrorWhenPersonalCodeIsNull() {
+    void validate_ShouldReturnErrorWhenPersonalCodeIsNull() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
@@ -53,7 +53,7 @@ public class ValidatePersonalCodeIntegrationTest {
     }
 
     @Test
-    public void validate_ShouldReturnErrorWhenPersonalCodeIsWrongFormat() {
+    void validate_ShouldReturnErrorWhenPersonalCodeIsWrongFormat() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
