@@ -25,7 +25,7 @@ class ValidateCountryNotEmptyOrNullTest {
     private ValidationErrorFactory errorFactoryMock;
 
     @InjectMocks
-    private ValidateCountryNotEmptyOrNull validateCountry;
+    private ValidateCountryNotEmptyOrNull validate;
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("countryValue")
@@ -37,7 +37,7 @@ class ValidateCountryNotEmptyOrNullTest {
         when(errorFactoryMock.buildError("ERROR_CODE_6"))
                 .thenReturn(new ValidationErrorDTO("ERROR_CODE_6", "Field country is empty!"));
 
-        Optional<ValidationErrorDTO> result = validateCountry.validateSingle(agreement);
+        Optional<ValidationErrorDTO> result = validate.validateSingle(agreement);
 
         assertThat(result)
                 .isPresent()

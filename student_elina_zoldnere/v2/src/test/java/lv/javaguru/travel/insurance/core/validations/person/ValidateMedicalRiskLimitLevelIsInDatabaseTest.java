@@ -17,8 +17,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.anyList;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -30,7 +28,7 @@ class ValidateMedicalRiskLimitLevelIsInDatabaseTest {
     private ValidationErrorFactory errorFactoryMock;
 
     @InjectMocks
-    private ValidateMedicalRiskLimitLevelIsInDatabase validateRiskLimitLevel;
+    private ValidateMedicalRiskLimitLevelIsInDatabase validate;
 
     @Test
     public void validateSingle_ShouldReturnCorrectResponseWhenMedicalRiskLimitLevelIsNotSupported() {
@@ -47,7 +45,7 @@ class ValidateMedicalRiskLimitLevelIsInDatabaseTest {
         lenient().when(errorFactoryMock.buildError(eq("ERROR_CODE_93"), anyList()))
                 .thenReturn(new ValidationErrorDTO("ERROR_CODE_93", "description"));
 
-        Optional<ValidationErrorDTO> result = validateRiskLimitLevel.validateSingle(agreement, person);
+        Optional<ValidationErrorDTO> result = validate.validateSingle(agreement, person);
 
         assertThat(result)
                 .isPresent()
@@ -69,7 +67,7 @@ class ValidateMedicalRiskLimitLevelIsInDatabaseTest {
         when(repositoryMock.findByClassifierTitleAndIc("MEDICAL_RISK_LIMIT_LEVEL", "LEVEL_10000"))
                 .thenReturn(Optional.of(new ClassifierValue()));
 
-        Optional<ValidationErrorDTO> result = validateRiskLimitLevel.validateSingle(agreement, person);
+        Optional<ValidationErrorDTO> result = validate.validateSingle(agreement, person);
 
         assertThat(result).isNotPresent();
     }

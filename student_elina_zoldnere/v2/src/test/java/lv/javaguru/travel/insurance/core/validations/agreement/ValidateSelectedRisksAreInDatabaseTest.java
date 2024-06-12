@@ -6,6 +6,7 @@ import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.domain.ClassifierValue;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -20,9 +21,11 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -34,7 +37,7 @@ class ValidateSelectedRisksAreInDatabaseTest {
     private ValidationErrorFactory errorFactoryMock;
 
     @InjectMocks
-    private ValidateSelectedRisksAreInDatabase validateRisks;
+    private ValidateSelectedRisksAreInDatabase validate;
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("riskTypeValues")
@@ -51,7 +54,7 @@ class ValidateSelectedRisksAreInDatabaseTest {
         lenient().when(errorFactoryMock.buildError(eq("ERROR_CODE_9"), anyList()))
                 .thenReturn(new ValidationErrorDTO("ERROR_CODE_9", "description"));
 
-        List<ValidationErrorDTO> result = validateRisks.validateList(agreement);
+        List<ValidationErrorDTO> result = validate.validateList(agreement);
 
         assertThat(result).hasSize(expectedSize);
     }
@@ -61,6 +64,21 @@ class ValidateSelectedRisksAreInDatabaseTest {
                 Arguments.of("one selectedRisk is invalid", "TRAVEL_MEDICAL", "INVALID", 1),
                 Arguments.of("two selectedRisks are invalid", "INVALID", "INVALID", 2)
         );
+    }
+
+    @Test
+    public void validateList_ShouldNotReturnErrorWhenSelectedRisksAreInDatabase() {
+        AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
+                .withSelectedRisks(List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION"))
+                .build();
+
+        when(repositoryMock.findByClassifierTitleAndIc(any(), any()))
+                .thenReturn(Optional.of(new ClassifierValue()));
+
+        List<ValidationErrorDTO> result = validate.validateList(agreement);
+
+        assertThat(result).isEmpty();
+        verifyNoInteractions(errorFactoryMock);
     }
 
 }

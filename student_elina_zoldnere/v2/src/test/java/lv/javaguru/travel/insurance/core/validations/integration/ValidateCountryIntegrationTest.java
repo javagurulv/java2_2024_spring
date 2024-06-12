@@ -5,7 +5,7 @@ import lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
-import lv.javaguru.travel.insurance.core.util.HelperUtil;
+import lv.javaguru.travel.insurance.core.util.DateHelper;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -28,7 +28,7 @@ class ValidateCountryIntegrationTest {
     @Autowired
     private TravelAgreementValidator validator;
     @Autowired
-    private HelperUtil helper;
+    private DateHelper helper;
 
     @Test
     public void validate_ShouldReturnErrorWhenCountryIsNotValid() {

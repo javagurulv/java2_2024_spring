@@ -6,7 +6,7 @@ import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
 import lv.javaguru.travel.insurance.core.underwriting.TravelCalculatePremiumUnderwriting;
 import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumCalculationResult;
-import lv.javaguru.travel.insurance.core.util.HelperUtil;
+import lv.javaguru.travel.insurance.core.util.DateHelper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -29,7 +29,7 @@ public class AgeCoefficientOffMedicalRiskLimitLevelOnIntegrationTest {
     @Autowired
     private TravelCalculatePremiumUnderwriting underwriting;
     @Autowired
-    private HelperUtil helper;
+    private DateHelper helper;
 
     @Test
     public void calculateAgreementPremium_whenAgeCoefficientEnabled() {

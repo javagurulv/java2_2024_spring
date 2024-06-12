@@ -25,7 +25,7 @@ class ValidateTravelCostNotEmptyWhenTravelCancellationSelectedTest {
     private ValidationErrorFactory errorFactoryMock;
 
     @InjectMocks
-    private ValidateTravelCostNotEmptyWhenTravelCancellationSelected validateTravelCost;
+    private ValidateTravelCostNotEmptyWhenTravelCancellationSelected validate;
 
     @Test
     public void validateSingle_ShouldReturnErrorWhenTravelCostNullAndTravelCancellationSelected() {
@@ -40,7 +40,7 @@ class ValidateTravelCostNotEmptyWhenTravelCancellationSelectedTest {
                 .thenReturn(new ValidationErrorDTO("ERROR_CODE_10",
                         "Field travelCost is empty when travel cancellation risk selected!"));
 
-        Optional<ValidationErrorDTO> result = validateTravelCost.validateSingle(agreement, person);
+        Optional<ValidationErrorDTO> result = validate.validateSingle(agreement, person);
 
         assertThat(result)
                 .isPresent()
@@ -59,7 +59,7 @@ class ValidateTravelCostNotEmptyWhenTravelCancellationSelectedTest {
                 .withTravelCost(null)
                 .build();
 
-        Optional<ValidationErrorDTO> result = validateTravelCost.validateSingle(agreement, person);
+        Optional<ValidationErrorDTO> result = validate.validateSingle(agreement, person);
 
         assertThat(result).isNotPresent();
         verifyNoInteractions(errorFactoryMock);

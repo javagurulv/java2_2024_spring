@@ -5,7 +5,7 @@ import lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
-import lv.javaguru.travel.insurance.core.util.HelperUtil;
+import lv.javaguru.travel.insurance.core.util.DateHelper;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -28,7 +28,7 @@ class ValidateMedicalRiskLimitLevelIntegrationTest {
     @Autowired
     private TravelAgreementValidator validator;
     @Autowired
-    private HelperUtil helper;
+    private DateHelper helper;
 
     @Test
     public void validate_ShouldReturnErrorWhenMedicalRiskLimitLevelIsNotValid() {
@@ -60,7 +60,7 @@ class ValidateMedicalRiskLimitLevelIntegrationTest {
     }
 
     @Test
-    public void validate_ShouldReturnErrorMedicalRiskLimitLevelIsNull() {
+    public void validate_ShouldReturnErrorMedicalRiskLimitLevelIsNullAndRiskTypeTravelMedicalSelected() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
@@ -86,6 +86,30 @@ class ValidateMedicalRiskLimitLevelIntegrationTest {
                 .containsExactly(
                         Assertions.tuple("ERROR_CODE_8",
                                 "Field medicalRiskLimitLevel is empty when medical risk limit level enabled!"));
+    }
+
+    @Test
+    public void validate_ShouldNotReturnErrorMedicalRiskLimitLevelIsNullAndRiskTypeTravelMedicalNotSelected() {
+        PersonDTO person = PersonDTOBuilder.createPerson()
+                .withPersonFirstName("Jānis")
+                .withPersonLastName("Bērziņš")
+                .withPersonalCode("123456-12345")
+                .withPersonBirthdate(helper.newDate("1990.01.01"))
+                .withMedicalRiskLimitLevel(null)
+                .build();
+
+        AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
+                .withDateFrom(helper.newDate("2025.03.10"))
+                .withDateTo(helper.newDate("2025.03.11"))
+                .withCountry("SPAIN")
+                .withSelectedRisks(List.of("TRAVEL_LOSS_BAGGAGE"))
+                .withPerson(person)
+                .withPremium(BigDecimal.ZERO)
+                .build();
+
+        List<ValidationErrorDTO> result = validator.validate(agreement);
+
+        assertThat(result).isEmpty();
     }
 
 }

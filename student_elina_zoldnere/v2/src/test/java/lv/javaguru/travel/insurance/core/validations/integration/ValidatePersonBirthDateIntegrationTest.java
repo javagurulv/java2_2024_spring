@@ -5,7 +5,7 @@ import lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
-import lv.javaguru.travel.insurance.core.util.HelperUtil;
+import lv.javaguru.travel.insurance.core.util.DateHelper;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -28,7 +27,7 @@ public class ValidatePersonBirthDateIntegrationTest {
     @Autowired
     private TravelAgreementValidator validator;
     @Autowired
-    private HelperUtil helper;
+    private DateHelper helper;
 
     @Test
     public void validate_ShouldReturnErrorWhenPersonBirthDateIsNull() {

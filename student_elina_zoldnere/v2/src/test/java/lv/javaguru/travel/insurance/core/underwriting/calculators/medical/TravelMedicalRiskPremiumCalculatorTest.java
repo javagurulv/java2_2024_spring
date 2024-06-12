@@ -51,7 +51,7 @@ class TravelMedicalRiskPremiumCalculatorTest {
                 .multiply(dayCount)
                 .multiply(ageCoefficient)
                 .multiply(limitLevelCoefficient)
-                .setScale(2, RoundingMode.HALF_UP);;
+                .setScale(2, RoundingMode.HALF_UP);
         BigDecimal actualPremium = medicalRiskPremiumCalculator.calculateRiskPremium(agreement, person);
 
         assertThat(actualPremium).isEqualTo(expectedPremium);

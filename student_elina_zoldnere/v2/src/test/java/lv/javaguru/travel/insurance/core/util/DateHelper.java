@@ -8,7 +8,7 @@ import java.util.Date;
 
 
 @Component
-public class HelperUtil {
+public class DateHelper {
 
     public Date newDate(String dateStr) {
         try {

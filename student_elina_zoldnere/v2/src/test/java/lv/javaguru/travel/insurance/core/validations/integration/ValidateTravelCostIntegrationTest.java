@@ -1,10 +1,6 @@
 package lv.javaguru.travel.insurance.core.validations.integration;
 
-import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
-import lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder;
-import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
-import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
-import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
+import lv.javaguru.travel.insurance.core.api.dto.*;
 import lv.javaguru.travel.insurance.core.util.DateHelper;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
 import org.assertj.core.api.Assertions;
@@ -23,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-class ValidateSelectedRisksIntegrationTest {
+class ValidateTravelCostIntegrationTest {
 
     @Autowired
     private TravelAgreementValidator validator;
@@ -31,20 +27,20 @@ class ValidateSelectedRisksIntegrationTest {
     private DateHelper helper;
 
     @Test
-    public void validate_ShouldReturnErrorWhenOneSelectedRiskIsNotValid() {
+    public void validate_ShouldReturnErrorWhenTravelCostIsNotValid() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
                 .withPersonalCode("123456-12345")
                 .withPersonBirthdate(helper.newDate("1990.01.01"))
-                .withMedicalRiskLimitLevel("LEVEL_10000")
+                .withTravelCost(new BigDecimal("2000000"))
                 .build();
 
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
                 .withDateFrom(helper.newDate("2025.03.10"))
                 .withDateTo(helper.newDate("2025.03.11"))
                 .withCountry("SPAIN")
-                .withSelectedRisks(List.of("TRAVEL_MEDICAL", "INVALID", "TRAVEL_LOSS_BAGGAGE"))
+                .withSelectedRisks(List.of("TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"))
                 .withPerson(person)
                 .withPremium(BigDecimal.ZERO)
                 .build();
@@ -55,54 +51,25 @@ class ValidateSelectedRisksIntegrationTest {
                 .hasSize(1)
                 .extracting("errorCode", "description")
                 .containsExactly(
-                        Assertions.tuple("ERROR_CODE_91", "Risk type value INVALID is not supported!"));
+                        Assertions.tuple("ERROR_CODE_94",
+                                "Travel Cost value 2000000 is not supported!"));
     }
 
     @Test
-    public void validate_ShouldReturnErrorWhenTwoSelectedRisksAreNotValid() {
+    public void validate_ShouldReturnErrorWhenTravelCostIsNullAndRiskTypeTravelCancellationSelected() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
                 .withPersonalCode("123456-12345")
                 .withPersonBirthdate(helper.newDate("1990.01.01"))
-                .withMedicalRiskLimitLevel("LEVEL_10000")
+                .withTravelCost(null)
                 .build();
 
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
                 .withDateFrom(helper.newDate("2025.03.10"))
                 .withDateTo(helper.newDate("2025.03.11"))
                 .withCountry("SPAIN")
-                .withSelectedRisks(List.of("TRAVEL_MEDICAL", "INVALID1", "INVALID2"))
-                .withPerson(person)
-                .withPremium(BigDecimal.ZERO)
-                .build();
-
-        List<ValidationErrorDTO> result = validator.validate(agreement);
-
-        assertThat(result)
-                .hasSize(2)
-                .extracting("errorCode", "description")
-                .containsExactlyInAnyOrder(
-                        Assertions.tuple("ERROR_CODE_91", "Risk type value INVALID1 is not supported!"),
-                        Assertions.tuple("ERROR_CODE_91", "Risk type value INVALID2 is not supported!")
-                );
-    }
-
-    @Test
-    public void validate_ShouldReturnErrorWhenSelectedRiskIsNull() {
-        PersonDTO person = PersonDTOBuilder.createPerson()
-                .withPersonFirstName("Jānis")
-                .withPersonLastName("Bērziņš")
-                .withPersonalCode("123456-12345")
-                .withPersonBirthdate(helper.newDate("1990.01.01"))
-                .withMedicalRiskLimitLevel("LEVEL_10000")
-                .build();
-
-        AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
-                .withDateFrom(helper.newDate("2025.03.10"))
-                .withDateTo(helper.newDate("2025.03.11"))
-                .withCountry("SPAIN")
-                .withSelectedRisks(null)
+                .withSelectedRisks(List.of("TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"))
                 .withPerson(person)
                 .withPremium(BigDecimal.ZERO)
                 .build();
@@ -113,7 +80,32 @@ class ValidateSelectedRisksIntegrationTest {
                 .hasSize(1)
                 .extracting("errorCode", "description")
                 .containsExactly(
-                        Assertions.tuple("ERROR_CODE_5", "Field selectedRisks is empty!"));
+                        Assertions.tuple("ERROR_CODE_10",
+                                "Field travelCost is empty when travel cancellation risk selected!"));
+    }
+
+    @Test
+    public void validate_ShouldNotReturnErrorWhenTravelCostIsNullAndRiskTypeTravelCancellationNotSelected() {
+        PersonDTO person = PersonDTOBuilder.createPerson()
+                .withPersonFirstName("Jānis")
+                .withPersonLastName("Bērziņš")
+                .withPersonalCode("123456-12345")
+                .withPersonBirthdate(helper.newDate("1990.01.01"))
+                .withTravelCost(null)
+                .build();
+
+        AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
+                .withDateFrom(helper.newDate("2025.03.10"))
+                .withDateTo(helper.newDate("2025.03.11"))
+                .withCountry("SPAIN")
+                .withSelectedRisks(List.of("TRAVEL_LOSS_BAGGAGE"))
+                .withPerson(person)
+                .withPremium(BigDecimal.ZERO)
+                .build();
+
+        List<ValidationErrorDTO> result = validator.validate(agreement);
+
+        assertThat(result).isEmpty();
     }
 
 }

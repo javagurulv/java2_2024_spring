@@ -52,9 +52,6 @@
         <tr th:each="error : ${response.errors}">
     <td th:text="${error.errorCode}"/>
     <td th:text="${error.description}"/>
-    </tr>
-    </td>
-
     <h3>
         <label th:if="${response.agreementPremium != null}"
                th:text="'AGREEMENT PREMIUM: ' + ${response.agreementPremium}"></label>
@@ -65,8 +62,6 @@
         <tr th:each="risk : ${response.riskPremiums}">
     <td th:text="${risk.riskIc}"/>
     <td th:text="${risk.premium}"/>
-    </tr>
-    </td>
 </div>
 
 <script>

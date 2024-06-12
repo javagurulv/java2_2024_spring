@@ -21,7 +21,7 @@ import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
 abstract class CallTemplate implements Runnable {
 
     @Autowired
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
     private static final Logger logger = LoggerFactory.getLogger(CallTemplate.class);
     private final LoadTestingStatistic statistic;

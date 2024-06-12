@@ -1,12 +1,14 @@
-package lv.javaguru.travel.insurance.core.underwriting.integrations.medical;
+package lv.javaguru.travel.insurance.core.underwriting.integrations.cancellation;
 
+import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreCommand;
+import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreResult;
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
-import lv.javaguru.travel.insurance.core.underwriting.TravelCalculatePremiumUnderwriting;
-import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumCalculationResult;
+import lv.javaguru.travel.insurance.core.services.TravelCalculatePremiumService;
 import lv.javaguru.travel.insurance.core.util.DateHelper;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -21,37 +23,43 @@ import java.math.BigDecimal;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
-@SpringBootTest(properties = {"age.coefficient.enabled=true", "medical.risk.limit.level.enabled=false"})
+@SpringBootTest(properties = {"feature.tripCancellation.enabled=false"})
 @AutoConfigureMockMvc
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
-public class AgeCoefficientOnMedicalRiskLimitLevelOffIntegrationTest {
+public class TripCancellationOffIntegrationTest {
     @Autowired
-    private TravelCalculatePremiumUnderwriting underwriting;
+    private TravelCalculatePremiumService service;
     @Autowired
     private DateHelper helper;
 
     @Test
-    public void calculateAgreementPremium_whenAgeCoefficientEnabled() {
+    public void calculateAgreementPremium_whenTripCancellationEnabled() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
                 .withPersonalCode("123456-12345")
                 .withPersonBirthdate(helper.newDate("1990.01.01"))
-                .withMedicalRiskLimitLevel("LEVEL_20000")
+                .withTravelCost(new BigDecimal("6000"))
                 .build();
 
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
                 .withDateFrom(helper.newDate("2025.03.10"))
                 .withDateTo(helper.newDate("2025.03.11"))
                 .withCountry("SPAIN")
-                .withSelectedRisk("TRAVEL_MEDICAL")
+                .withSelectedRisk("TRAVEL_CANCELLATION")
                 .withPerson(person)
                 .build();
 
-        TravelPremiumCalculationResult result = underwriting.calculateAgreementPremium(agreement, person);
+        TravelCalculatePremiumCoreCommand command = new TravelCalculatePremiumCoreCommand(agreement);
 
-        assertThat(result.getAgreementPremium()).isEqualTo(new BigDecimal("2.75"));
+        TravelCalculatePremiumCoreResult result = service.calculatePremium(command);
+
+        assertThat(result.getErrors())
+                .hasSize(1)
+                .extracting("errorCode", "description")
+                .containsExactly(
+                        Assertions.tuple("ERROR_CODE_61", "Travel cancellation risk currently disabled!"));
     }
 
 }

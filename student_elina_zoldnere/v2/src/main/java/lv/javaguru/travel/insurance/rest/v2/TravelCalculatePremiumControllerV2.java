@@ -3,8 +3,6 @@ package lv.javaguru.travel.insurance.rest.v2;
 import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreCommand;
 import lv.javaguru.travel.insurance.core.api.command.TravelCalculatePremiumCoreResult;
 import lv.javaguru.travel.insurance.core.services.TravelCalculatePremiumService;
-import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumRequestV1;
-import lv.javaguru.travel.insurance.dto.v1.TravelCalculatePremiumResponseV1;
 import lv.javaguru.travel.insurance.dto.v2.DtoV2Converter;
 import lv.javaguru.travel.insurance.dto.v2.TravelCalculatePremiumRequestV2;
 import lv.javaguru.travel.insurance.dto.v2.TravelCalculatePremiumResponseV2;

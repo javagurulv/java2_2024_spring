@@ -6,7 +6,7 @@ import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
-import lv.javaguru.travel.insurance.core.util.HelperUtil;
+import lv.javaguru.travel.insurance.core.util.DateHelper;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,11 +37,11 @@ class ValidatePersonBirthDateIsValidTest {
     @InjectMocks
     private ValidatePersonBirthDateIsValid validate;
 
-    private static HelperUtil helper;
+    private static DateHelper helper;
 
     @BeforeAll
     static void setUp() {
-        helper = new HelperUtil();
+        helper = new DateHelper();
     }
 
     @ParameterizedTest(name = "{0}")

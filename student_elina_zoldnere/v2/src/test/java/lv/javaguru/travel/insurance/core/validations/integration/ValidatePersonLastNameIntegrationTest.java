@@ -15,7 +15,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-class ValidateSelectedRisksIntegrationTest {
+public class ValidatePersonLastNameIntegrationTest {
 
     @Autowired
     private TravelAgreementValidator validator;
@@ -31,10 +30,10 @@ class ValidateSelectedRisksIntegrationTest {
     private DateHelper helper;
 
     @Test
-    public void validate_ShouldReturnErrorWhenOneSelectedRiskIsNotValid() {
+    public void validate_ShouldReturnErrorWhenPersonLastNameIsNull() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
-                .withPersonLastName("Bērziņš")
+                .withPersonLastName(null)
                 .withPersonalCode("123456-12345")
                 .withPersonBirthdate(helper.newDate("1990.01.01"))
                 .withMedicalRiskLimitLevel("LEVEL_10000")
@@ -44,9 +43,8 @@ class ValidateSelectedRisksIntegrationTest {
                 .withDateFrom(helper.newDate("2025.03.10"))
                 .withDateTo(helper.newDate("2025.03.11"))
                 .withCountry("SPAIN")
-                .withSelectedRisks(List.of("TRAVEL_MEDICAL", "INVALID", "TRAVEL_LOSS_BAGGAGE"))
+                .withSelectedRisk("TRAVEL_MEDICAL")
                 .withPerson(person)
-                .withPremium(BigDecimal.ZERO)
                 .build();
 
         List<ValidationErrorDTO> result = validator.validate(agreement);
@@ -55,14 +53,14 @@ class ValidateSelectedRisksIntegrationTest {
                 .hasSize(1)
                 .extracting("errorCode", "description")
                 .containsExactly(
-                        Assertions.tuple("ERROR_CODE_91", "Risk type value INVALID is not supported!"));
+                        Assertions.tuple("ERROR_CODE_2", "Field personLastName is empty!"));
     }
 
     @Test
-    public void validate_ShouldReturnErrorWhenTwoSelectedRisksAreNotValid() {
+    public void validate_ShouldReturnErrorWhenPersonLastNameContainsNotAllowedChars() {
         PersonDTO person = PersonDTOBuilder.createPerson()
-                .withPersonFirstName("Jānis")
-                .withPersonLastName("Bērziņš")
+                .withPersonFirstName("Vasja")
+                .withPersonLastName("Пупкин")
                 .withPersonalCode("123456-12345")
                 .withPersonBirthdate(helper.newDate("1990.01.01"))
                 .withMedicalRiskLimitLevel("LEVEL_10000")
@@ -72,39 +70,8 @@ class ValidateSelectedRisksIntegrationTest {
                 .withDateFrom(helper.newDate("2025.03.10"))
                 .withDateTo(helper.newDate("2025.03.11"))
                 .withCountry("SPAIN")
-                .withSelectedRisks(List.of("TRAVEL_MEDICAL", "INVALID1", "INVALID2"))
+                .withSelectedRisk("TRAVEL_MEDICAL")
                 .withPerson(person)
-                .withPremium(BigDecimal.ZERO)
-                .build();
-
-        List<ValidationErrorDTO> result = validator.validate(agreement);
-
-        assertThat(result)
-                .hasSize(2)
-                .extracting("errorCode", "description")
-                .containsExactlyInAnyOrder(
-                        Assertions.tuple("ERROR_CODE_91", "Risk type value INVALID1 is not supported!"),
-                        Assertions.tuple("ERROR_CODE_91", "Risk type value INVALID2 is not supported!")
-                );
-    }
-
-    @Test
-    public void validate_ShouldReturnErrorWhenSelectedRiskIsNull() {
-        PersonDTO person = PersonDTOBuilder.createPerson()
-                .withPersonFirstName("Jānis")
-                .withPersonLastName("Bērziņš")
-                .withPersonalCode("123456-12345")
-                .withPersonBirthdate(helper.newDate("1990.01.01"))
-                .withMedicalRiskLimitLevel("LEVEL_10000")
-                .build();
-
-        AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
-                .withDateFrom(helper.newDate("2025.03.10"))
-                .withDateTo(helper.newDate("2025.03.11"))
-                .withCountry("SPAIN")
-                .withSelectedRisks(null)
-                .withPerson(person)
-                .withPremium(BigDecimal.ZERO)
                 .build();
 
         List<ValidationErrorDTO> result = validator.validate(agreement);
@@ -113,7 +80,37 @@ class ValidateSelectedRisksIntegrationTest {
                 .hasSize(1)
                 .extracting("errorCode", "description")
                 .containsExactly(
-                        Assertions.tuple("ERROR_CODE_5", "Field selectedRisks is empty!"));
+                        Assertions.tuple("ERROR_CODE_17", "Wrong personLastName format! Allowed symbols " +
+                                "include Latin and Latvian characters, hyphens, and spaces."));
+    }
+
+    @Test
+    public void validate_ShouldReturnErrorWhenPersonLastNameExceedsAllowedLength() {
+        PersonDTO person = PersonDTOBuilder.createPerson()
+                .withPersonFirstName("Jānis")
+                .withPersonLastName("abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvw" +
+                        "xyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefg" +
+                        "hijklmnopqrstuvwxyzabcdefghijklmnopqrs")
+                .withPersonalCode("123456-12345")
+                .withPersonBirthdate(helper.newDate("1990.01.01"))
+                .withMedicalRiskLimitLevel("LEVEL_10000")
+                .build();
+
+        AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
+                .withDateFrom(helper.newDate("2025.03.10"))
+                .withDateTo(helper.newDate("2025.03.11"))
+                .withCountry("SPAIN")
+                .withSelectedRisk("TRAVEL_MEDICAL")
+                .withPerson(person)
+                .build();
+
+        List<ValidationErrorDTO> result = validator.validate(agreement);
+
+        assertThat(result)
+                .hasSize(1)
+                .extracting("errorCode", "description")
+                .containsExactly(
+                        Assertions.tuple("ERROR_CODE_71", "Last name must not exceed 200 characters!"));
     }
 
 }

@@ -3,61 +3,56 @@ package lv.javaguru.travel.insurance.core.validations.agreement;
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
-import lv.javaguru.travel.insurance.core.domain.ClassifierValue;
-import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class ValidateCountryIsInDatabaseTest {
+class ValidateTravelCancellationIfEnabledTest {
 
-    @Mock
-    private ClassifierValueRepository repositoryMock;
     @Mock
     private ValidationErrorFactory errorFactoryMock;
 
     @InjectMocks
-    private ValidateCountryIsInDatabase validate;
+    private ValidateTravelCancellationIfEnabled validate;
 
     @Test
-    public void validateSingle_ShouldReturnCorrectResponseWhenCountryIsNotSupported() {
+    public void validateSingle_ShouldReturnErrorWhenTravelCancellationSelectedButFeatureDisabled() {
+        ReflectionTestUtils.setField(validate, "isTripCancellationEnabled", Boolean.FALSE);
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
-                .withCountry("INVALID")
+                .withSelectedRisk("TRAVEL_CANCELLATION")
                 .build();
 
-        when(repositoryMock.findByClassifierTitleAndIc("COUNTRY", "INVALID"))
-                .thenReturn(Optional.empty());
-
-        lenient().when(errorFactoryMock.buildError(eq("ERROR_CODE_92"), anyList()))
-                .thenReturn(new ValidationErrorDTO("ERROR_CODE_92", "description"));
+        when(errorFactoryMock.buildError("ERROR_CODE_61"))
+                .thenReturn(new ValidationErrorDTO("ERROR_CODE_61",
+                        "Travel cancellation risk currently disabled!"));
 
         Optional<ValidationErrorDTO> result = validate.validateSingle(agreement);
 
         assertThat(result)
                 .isPresent()
-                .hasValueSatisfying(error -> {
-                    assertThat(error.errorCode()).isEqualTo("ERROR_CODE_92");
-                    assertThat(error.description()).isEqualTo("description");
+                .hasValueSatisfying(e -> {
+                    assertThat(e.errorCode()).isEqualTo("ERROR_CODE_61");
+                    assertThat(e.description()).isEqualTo("Travel cancellation risk currently disabled!");
                 });
     }
 
     @Test
-    public void validateSingle_ShouldNotReturnErrorWhenCountryIsInDatabase() {
+    public void validateSingle_ShouldNotReturnErrorWhenTravelCancellationSelectedAndFeatureEnabled() {
+        ReflectionTestUtils.setField(validate, "isTripCancellationEnabled", Boolean.TRUE);
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
-                .withCountry("SPAIN")
+                .withSelectedRisk("TRAVEL_CANCELLATION")
                 .build();
-
-        when(repositoryMock.findByClassifierTitleAndIc("COUNTRY", "SPAIN"))
-                .thenReturn(Optional.of(new ClassifierValue()));
 
         Optional<ValidationErrorDTO> result = validate.validateSingle(agreement);
 

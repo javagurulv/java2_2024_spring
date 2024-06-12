@@ -1,4 +1,4 @@
-package lv.javaguru.travel.insurance.core.underwriting.integrations.medical;
+package lv.javaguru.travel.insurance.core.underwriting.integrations.cancellation;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder;
@@ -21,37 +21,37 @@ import java.math.BigDecimal;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
-@SpringBootTest(properties = {"age.coefficient.enabled=true", "medical.risk.limit.level.enabled=false"})
+@SpringBootTest(properties = {"feature.tripCancellation.enabled=true"})
 @AutoConfigureMockMvc
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
-public class AgeCoefficientOnMedicalRiskLimitLevelOffIntegrationTest {
+public class TripCancellationOnIntegrationTest {
     @Autowired
     private TravelCalculatePremiumUnderwriting underwriting;
     @Autowired
     private DateHelper helper;
 
     @Test
-    public void calculateAgreementPremium_whenAgeCoefficientEnabled() {
+    public void calculateAgreementPremium_whenTripCancellationEnabled() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
                 .withPersonalCode("123456-12345")
                 .withPersonBirthdate(helper.newDate("1990.01.01"))
-                .withMedicalRiskLimitLevel("LEVEL_20000")
+                .withTravelCost(new BigDecimal("6000"))
                 .build();
 
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
                 .withDateFrom(helper.newDate("2025.03.10"))
                 .withDateTo(helper.newDate("2025.03.11"))
                 .withCountry("SPAIN")
-                .withSelectedRisk("TRAVEL_MEDICAL")
+                .withSelectedRisk("TRAVEL_CANCELLATION")
                 .withPerson(person)
                 .build();
 
         TravelPremiumCalculationResult result = underwriting.calculateAgreementPremium(agreement, person);
 
-        assertThat(result.getAgreementPremium()).isEqualTo(new BigDecimal("2.75"));
+        assertThat(result.getAgreementPremium()).isEqualTo(new BigDecimal("58.00"));
     }
 
 }

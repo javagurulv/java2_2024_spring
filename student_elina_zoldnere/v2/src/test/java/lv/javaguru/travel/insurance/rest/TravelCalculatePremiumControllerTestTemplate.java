@@ -21,9 +21,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest
-@AutoConfigureMockMvc
+    @ExtendWith(SpringExtension.class)
+    @SpringBootTest
+    @AutoConfigureMockMvc
 public abstract class TravelCalculatePremiumControllerTestTemplate {
 
     @Autowired

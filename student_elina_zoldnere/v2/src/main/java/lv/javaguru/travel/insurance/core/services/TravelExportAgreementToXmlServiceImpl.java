@@ -26,7 +26,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 @Transactional
@@ -61,7 +60,7 @@ public class TravelExportAgreementToXmlServiceImpl implements TravelExportAgreem
         }
     }
 
-    TravelExportAgreementToXmlCoreResult processExport(String uuid, Placeholder uuidPlaceH)
+    private TravelExportAgreementToXmlCoreResult processExport(String uuid, Placeholder uuidPlaceH)
             throws JAXBException, IOException {
 
         AgreementSerialDTO agreement = getAgreementData(uuid);
@@ -79,7 +78,7 @@ public class TravelExportAgreementToXmlServiceImpl implements TravelExportAgreem
         }
     }
 
-    TravelExportAgreementToXmlCoreResult handleException(
+    private TravelExportAgreementToXmlCoreResult handleException(
             String errorCode, String uuid, Placeholder uuidPlaceH, Exception e) {
         logger.warn("Exception during export for agreement with UUID {}", uuid, e);
         return new TravelExportAgreementToXmlCoreResult(List.of(

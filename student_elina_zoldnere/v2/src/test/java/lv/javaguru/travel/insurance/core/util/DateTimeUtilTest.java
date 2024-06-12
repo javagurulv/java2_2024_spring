@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class DateTimeUtilTest {
 
-    private DateTimeUtil timeUtil = new DateTimeUtil();
+    private final DateTimeUtil timeUtil = new DateTimeUtil();
 
     @Test
     public void calculateDifferenceBetweenDays_ShouldCalculateCorrectResult() {

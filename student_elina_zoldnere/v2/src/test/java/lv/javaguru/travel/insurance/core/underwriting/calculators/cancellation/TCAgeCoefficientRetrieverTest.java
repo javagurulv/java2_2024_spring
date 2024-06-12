@@ -5,7 +5,7 @@ import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
 import lv.javaguru.travel.insurance.core.domain.cancellation.TCAgeCoefficient;
 import lv.javaguru.travel.insurance.core.repositories.cancellation.TCAgeCoefficientRepository;
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
-import lv.javaguru.travel.insurance.core.util.HelperUtil;
+import lv.javaguru.travel.insurance.core.util.DateHelper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -33,7 +33,7 @@ class TCAgeCoefficientRetrieverTest {
     private TCAgeCoefficientRetriever retriever;
 
     @InjectMocks
-    private HelperUtil helper;
+    private DateHelper helper;
 
     @Test
     void findAgeCoefficient_shouldFindCoefficientWhenCoefficientExists() {

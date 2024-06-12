@@ -27,7 +27,7 @@ class ValidateSelectedRisksNotEmptyOrNullTest {
     private ValidationErrorFactory errorFactoryMock;
 
     @InjectMocks
-    private ValidateSelectedRisksNotEmptyOrNull validateRisks;
+    private ValidateSelectedRisksNotEmptyOrNull validate;
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("selectedRisksValues")
@@ -40,13 +40,13 @@ class ValidateSelectedRisksNotEmptyOrNullTest {
         when(errorFactoryMock.buildError("ERROR_CODE_5"))
                 .thenReturn(new ValidationErrorDTO("ERROR_CODE_5", "Field selectedRisks is empty!"));
 
-        Optional<ValidationErrorDTO> result = validateRisks.validateSingle(agreement);
+        Optional<ValidationErrorDTO> result = validate.validateSingle(agreement);
 
         assertThat(result)
                 .isPresent()
-                .hasValueSatisfying(error -> {
-                    assertThat(error.errorCode()).isEqualTo("ERROR_CODE_5");
-                    assertThat(error.description()).isEqualTo("Field selectedRisks is empty!");
+                .hasValueSatisfying(e -> {
+                    assertThat(e.errorCode()).isEqualTo("ERROR_CODE_5");
+                    assertThat(e.description()).isEqualTo("Field selectedRisks is empty!");
                 });
     }
 
