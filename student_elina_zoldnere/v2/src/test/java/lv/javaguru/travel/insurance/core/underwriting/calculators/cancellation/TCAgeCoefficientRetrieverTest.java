@@ -5,13 +5,12 @@ import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
 import lv.javaguru.travel.insurance.core.domain.cancellation.TCAgeCoefficient;
 import lv.javaguru.travel.insurance.core.repositories.cancellation.TCAgeCoefficientRepository;
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
-import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
+import lv.javaguru.travel.insurance.core.util.DateHelper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.util.Optional;
@@ -32,9 +31,9 @@ class TCAgeCoefficientRetrieverTest {
 
     @InjectMocks
     private TCAgeCoefficientRetriever retriever;
-    @Autowired
+
     @InjectMocks
-    private SetUpInstancesHelper helper;
+    private DateHelper helper;
 
     @Test
     void findAgeCoefficient_shouldFindCoefficientWhenCoefficientExists() {
@@ -49,6 +48,7 @@ class TCAgeCoefficientRetrieverTest {
         when(ageCoefficientMock.getCoefficient()).thenReturn(ageCoefficient);
 
         BigDecimal actualAgeCoefficient = retriever.findAgeCoefficient(person);
+
         assertThat(actualAgeCoefficient).isEqualTo(ageCoefficient);
     }
 
@@ -60,8 +60,6 @@ class TCAgeCoefficientRetrieverTest {
         when(dateTimeUtilMock.calculateDifferenceBetweenDatesInYears(any(), any())).thenReturn(160);
         when(repositoryMock.findCoefficientByAge(any()))
                 .thenReturn(Optional.empty());
-
-        Integer age = dateTimeUtilMock.calculateDifferenceBetweenDatesInYears(any(), any());
 
         assertThatThrownBy(() -> retriever.findAgeCoefficient(person))
                 .isInstanceOf(RuntimeException.class)

@@ -5,8 +5,9 @@ import lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
-import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
+import lv.javaguru.travel.insurance.core.util.DateHelper;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.math.BigDecimal;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -27,10 +28,10 @@ class ValidateCountryIntegrationTest {
     @Autowired
     private TravelAgreementValidator validator;
     @Autowired
-    private SetUpInstancesHelper helper;
+    private DateHelper helper;
 
     @Test
-    public void validate_ShouldReturnErrorWhenCountryIsNotValid() {
+    void validate_ShouldReturnErrorWhenCountryIsNotValid() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
@@ -48,15 +49,17 @@ class ValidateCountryIntegrationTest {
                 .withPremium(BigDecimal.ZERO)
                 .build();
 
-        List<ValidationErrorDTO> errors = validator.validate(agreement);
+        List<ValidationErrorDTO> result = validator.validate(agreement);
 
-        assertEquals(errors.size(), 1);
-        assertEquals("ERROR_CODE_92", errors.get(0).errorCode());
-        assertEquals("Country value INVALID is not supported!", errors.get(0).description());
+        assertThat(result)
+                .hasSize(1)
+                .extracting("errorCode", "description")
+                .containsExactly(
+                        Assertions.tuple("ERROR_CODE_92", "Country value INVALID is not supported!"));
     }
 
     @Test
-    public void validate_ShouldReturnErrorWhenCountryIsNull() {
+    void validate_ShouldReturnErrorWhenCountryIsNull() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
@@ -74,12 +77,13 @@ class ValidateCountryIntegrationTest {
                 .withPremium(BigDecimal.ZERO)
                 .build();
 
-        List<ValidationErrorDTO> errors = validator.validate(agreement);
+        List<ValidationErrorDTO> result = validator.validate(agreement);
 
-        assertEquals(errors.size(), 1);
-        assertEquals("ERROR_CODE_6", errors.get(0).errorCode());
-        assertEquals("Field country is empty!", errors.get(0).description());
+        assertThat(result)
+                .hasSize(1)
+                .extracting("errorCode", "description")
+                .containsExactly(
+                        Assertions.tuple("ERROR_CODE_6", "Field country is empty!"));
     }
-
 
 }

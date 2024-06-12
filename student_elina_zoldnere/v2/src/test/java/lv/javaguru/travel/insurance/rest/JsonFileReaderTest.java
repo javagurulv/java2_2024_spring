@@ -6,12 +6,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class JsonFileReaderTest {
+class JsonFileReaderTest {
 
     private final JsonFileReader reader = new JsonFileReader();
 
     @Test
-    public void JsonFileReader_ShouldReturnCorrectResult() throws JsonProcessingException {
+    void JsonFileReader_ShouldReturnCorrectResult() throws JsonProcessingException {
         String expectedJson = """
                 {
                     "request" : {

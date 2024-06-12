@@ -5,7 +5,6 @@ import lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.domain.ClassifierValue;
 import lv.javaguru.travel.insurance.core.repositories.ClassifierValueRepository;
-import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,14 +12,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.math.BigDecimal;
-import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.anyList;
-import static org.mockito.ArgumentMatchers.eq;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -32,49 +26,43 @@ class ValidateCountryIsInDatabaseTest {
     private ValidationErrorFactory errorFactoryMock;
 
     @InjectMocks
-    private ValidateCountryIsInDatabase validateCountry;
-    @InjectMocks
-    private SetUpInstancesHelper helper;
+    private ValidateCountryIsInDatabase validate;
 
     @Test
-    public void validateSingle_ShouldReturnCorrectResponseWhenCountryIsNotSupported() {
+    void validateSingle_ShouldReturnCorrectResponseWhenCountryIsNotSupported() {
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
-                .withDateFrom(helper.newDate("2025.03.10"))
-                .withDateTo(helper.newDate("2025.03.11"))
                 .withCountry("INVALID")
-                .withSelectedRisks(List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"))
-                .withPerson(helper.newPersonDTO())
-                .withPremium(BigDecimal.ZERO)
                 .build();
 
         when(repositoryMock.findByClassifierTitleAndIc("COUNTRY", "INVALID"))
                 .thenReturn(Optional.empty());
 
-        ValidationErrorDTO error = new ValidationErrorDTO("ERROR_CODE_92", "description");
-        lenient().when(errorFactoryMock.buildError(eq("ERROR_CODE_92"), anyList())).thenReturn(error);
+        lenient().when(errorFactoryMock.buildError(eq("ERROR_CODE_92"), anyList()))
+                .thenReturn(new ValidationErrorDTO("ERROR_CODE_92", "description"));
 
-        Optional<ValidationErrorDTO> result = validateCountry.validateSingle(agreement);
+        Optional<ValidationErrorDTO> result = validate.validateSingle(agreement);
 
-        assertTrue(result.isPresent());
+        assertThat(result)
+                .isPresent()
+                .hasValueSatisfying(error -> {
+                    assertThat(error.errorCode()).isEqualTo("ERROR_CODE_92");
+                    assertThat(error.description()).isEqualTo("description");
+                });
     }
 
     @Test
-    public void validateSingle_ShouldNotReturnErrorWhenCountryExists() {
+    void validateSingle_ShouldNotReturnErrorWhenCountryIsInDatabase() {
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
-                .withDateFrom(helper.newDate("2025.03.10"))
-                .withDateTo(helper.newDate("2025.03.11"))
                 .withCountry("SPAIN")
-                .withSelectedRisks(List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"))
-                .withPerson(helper.newPersonDTO())
-                .withPremium(BigDecimal.ZERO)
                 .build();
 
         when(repositoryMock.findByClassifierTitleAndIc("COUNTRY", "SPAIN"))
                 .thenReturn(Optional.of(new ClassifierValue()));
 
-        Optional<ValidationErrorDTO> result = validateCountry.validateSingle(agreement);
+        Optional<ValidationErrorDTO> result = validate.validateSingle(agreement);
 
-        assertFalse(result.isPresent());
+        assertThat(result).isNotPresent();
+        verifyNoInteractions(errorFactoryMock);
     }
 
 }

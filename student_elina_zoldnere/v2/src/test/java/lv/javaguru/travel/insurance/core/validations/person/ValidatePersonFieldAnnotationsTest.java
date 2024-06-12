@@ -35,7 +35,7 @@ class ValidatePersonFieldAnnotationsTest {
     private ValidatePersonFieldAnnotations validate;
 
     @Test
-    public void validate_ShouldReturnErrorWithOneConstraintViolation() {
+    void validate_ShouldReturnErrorWithOneConstraintViolation() {
         PersonDTO person = PersonDTOBuilder.createPerson().build();
 
         ConstraintViolation<PersonDTO> violationMock = mock(ConstraintViolation.class);
@@ -57,7 +57,7 @@ class ValidatePersonFieldAnnotationsTest {
 
 
     @Test
-    public void validate_ShouldReturnErrorWithTwoConstraintViolations() {
+    void validate_ShouldReturnErrorWithTwoConstraintViolations() {
         PersonDTO person = PersonDTOBuilder.createPerson().build();
 
         ConstraintViolation<PersonDTO> firstViolationMock = mock(ConstraintViolation.class);
@@ -75,7 +75,7 @@ class ValidatePersonFieldAnnotationsTest {
     }
 
     @Test
-    public void validate_ShouldNotReturnErrorsWhenNoViolations() {
+    void validate_ShouldNotReturnErrorsWhenNoViolations() {
         PersonDTO person = PersonDTOBuilder.createPerson().build();
 
         when(validatorMock.validate(person)).thenReturn(Collections.emptySet());

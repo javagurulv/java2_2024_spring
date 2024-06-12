@@ -28,10 +28,10 @@ class ValidateTravelCostIsValidTest {
     private ValidationErrorFactory errorFactoryMock;
 
     @InjectMocks
-    private ValidateTravelCostIsValidWhenTravelCancellationSelected validateTravelCost;
+    private ValidateTravelCostIsValidWhenTravelCancellationSelected validate;
 
     @Test
-    public void validateSingle_ShouldReturnCorrectResponseWhenTravelCostIsNotSupported() {
+    void validateSingle_ShouldReturnCorrectResponseWhenTravelCostIsNotSupported() {
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
                 .withSelectedRisk("TRAVEL_CANCELLATION")
                 .build();
@@ -43,18 +43,18 @@ class ValidateTravelCostIsValidTest {
                 .thenReturn(new ValidationErrorDTO("ERROR_CODE_94",
                         "Travel Cost value 2000000 is not supported!"));
 
-        Optional<ValidationErrorDTO> result = validateTravelCost.validateSingle(agreement, person);
+        Optional<ValidationErrorDTO> result = validate.validateSingle(agreement, person);
 
         assertThat(result)
                 .isPresent()
-                .get()
-                .extracting("errorCode", "description")
-                .containsExactly("ERROR_CODE_94",
-                        "Travel Cost value 2000000 is not supported!");
+                .hasValueSatisfying(error -> {
+                    assertThat(error.errorCode()).isEqualTo("ERROR_CODE_94");
+                    assertThat(error.description()).isEqualTo("Travel Cost value 2000000 is not supported!");
+                });
     }
 
     @Test
-    public void validateSingle_ShouldNotReturnErrorWhenTravelCostIsValid() {
+    void validateSingle_ShouldNotReturnErrorWhenTravelCostIsValid() {
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
                 .withSelectedRisk("TRAVEL_CANCELLATION")
                 .build();
@@ -62,7 +62,7 @@ class ValidateTravelCostIsValidTest {
                 .withTravelCost(new BigDecimal("6000"))
                 .build();
 
-        Optional<ValidationErrorDTO> result = validateTravelCost.validateSingle(agreement, person);
+        Optional<ValidationErrorDTO> result = validate.validateSingle(agreement, person);
 
         assertThat(result).isNotPresent();
         verifyNoInteractions(errorFactoryMock);

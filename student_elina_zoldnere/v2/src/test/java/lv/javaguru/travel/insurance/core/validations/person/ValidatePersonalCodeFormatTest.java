@@ -31,7 +31,7 @@ class ValidatePersonalCodeFormatTest {
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("personalCodeValue")
-    public void validate_ShouldReturnErrorWhenPersonFirstNameIsNotValid(String testName, String personalCode) {
+    public void validate_ShouldReturnErrorWhenPersonalCodeIsNotValid(String testName, String personalCode) {
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement().build();
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonalCode(personalCode)
@@ -53,8 +53,8 @@ class ValidatePersonalCodeFormatTest {
 
     private static Stream<Arguments> personalCodeValue() {
         return Stream.of(
-                Arguments.of("personalCode wrong format", "12345612345"),
-                Arguments.of("personalCode wrong length", "123456-123456"),
+                Arguments.of("personalCode is in wrong format", "12345612345"),
+                Arguments.of("personalCode is in wrong length", "123456-123456"),
                 Arguments.of("personalCode contains letters", "ABCDEF-12345")
         );
     }

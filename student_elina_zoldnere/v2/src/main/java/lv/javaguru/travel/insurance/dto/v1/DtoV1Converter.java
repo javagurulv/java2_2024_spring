@@ -7,7 +7,6 @@ import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.dto.RiskPremium;
 import lv.javaguru.travel.insurance.dto.ValidationError;
-import lv.javaguru.travel.insurance.dto.v2.PersonResponseDTO;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;

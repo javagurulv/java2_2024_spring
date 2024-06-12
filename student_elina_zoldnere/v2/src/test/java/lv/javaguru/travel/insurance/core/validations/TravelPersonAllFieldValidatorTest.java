@@ -1,8 +1,11 @@
 package lv.javaguru.travel.insurance.core.validations;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder;
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
-import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
+import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTOBuilder;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -26,32 +29,40 @@ class TravelPersonAllFieldValidatorTest {
 
     @InjectMocks
     private TravelPersonAllFieldValidator validator;
-    @InjectMocks
-    private SetUpInstancesHelper helper;
 
     @Test
     void collectPersonErrors_ShouldReturnErrorWhenPersonSingleValidationFail() {
-        AgreementDTO agreement = helper.newAgreementDTO();
+        PersonDTO person = PersonDTOBuilder.createPerson().build();
+        AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
+                .withPerson(person)
+                .build();
+        ValidationErrorDTO validationError = ValidationErrorDTOBuilder.createValidationError().build();
+
         PersonFieldValidation personValidationMock = mock(PersonFieldValidation.class);
         when(personFieldValidation.stream()).thenAnswer(invocation -> Stream.of(personValidationMock));
         when(personValidationMock.validateSingle(any(), any()))
-                .thenReturn(Optional.of(helper.newValidationErrorDTO()));
+                .thenReturn(Optional.of(validationError));
 
-        List<ValidationErrorDTO> errors = validator.collectPersonErrors(agreement);
+        List<ValidationErrorDTO> result = validator.collectPersonErrors(agreement);
 
-        assertEquals(1, errors.size());
+        assertThat(result).hasSize(1);
     }
 
     @Test
     void collectPersonErrors_ShouldReturnErrorWhenPersonListValidationFail() {
-        AgreementDTO agreement = helper.newAgreementDTO();
+        PersonDTO person = PersonDTOBuilder.createPerson().build();
+        AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
+                .withPerson(person)
+                .build();
+        ValidationErrorDTO validationError = ValidationErrorDTOBuilder.createValidationError().build();
+
         PersonFieldValidation personValidationMock = mock(PersonFieldValidation.class);
         when(personFieldValidation.stream()).thenAnswer(invocation -> Stream.of(personValidationMock));
-        when(personValidationMock.validateList(any())).thenReturn(List.of(helper.newValidationErrorDTO()));
+        when(personValidationMock.validateList(any())).thenReturn(List.of(validationError));
 
-        List<ValidationErrorDTO> errors = validator.collectPersonErrors(agreement);
+        List<ValidationErrorDTO> result = validator.collectPersonErrors(agreement);
 
-        assertEquals(1, errors.size());
+        assertThat(result).hasSize(1);
     }
 
 }

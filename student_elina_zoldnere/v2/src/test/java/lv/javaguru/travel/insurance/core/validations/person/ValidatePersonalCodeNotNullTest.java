@@ -1,10 +1,10 @@
 package lv.javaguru.travel.insurance.core.validations.person;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
-import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,8 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -29,19 +28,13 @@ class ValidatePersonalCodeNotNullTest {
 
     @InjectMocks
     private ValidatePersonalCodeNotNullOrBlank validate;
-    @InjectMocks
-    private SetUpInstancesHelper helper;
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("personalCodeValue")
-    public void validate_ShouldReturnErrorWhenPersonFirstNameIsNotValid(String testName, String personalCode) {
-        AgreementDTO agreement = helper.newAgreementDTO();
+    public void validate_ShouldReturnErrorWhenPersonalCodeIsNullOrBlank(String testName, String personalCode) {
+        AgreementDTO agreement = AgreementDTOBuilder.createAgreement().build();
         PersonDTO person = PersonDTOBuilder.createPerson()
-                .withPersonFirstName("Jānis")
-                .withPersonLastName("Bērziņš")
                 .withPersonalCode(personalCode)
-                .withPersonBirthdate(helper.newDate("1990.01.01"))
-                .withMedicalRiskLimitLevel("LEVEL_10000")
                 .build();
 
         when(errorMock.buildError("ERROR_CODE_9"))
@@ -49,16 +42,19 @@ class ValidatePersonalCodeNotNullTest {
 
         Optional<ValidationErrorDTO> result = validate.validateSingle(agreement, person);
 
-        assertTrue(result.isPresent());
-        assertEquals("ERROR_CODE_9", result.get().errorCode());
-        assertEquals("Field personalCode is empty!", result.get().description());
+        assertThat(result)
+                .isPresent()
+                .hasValueSatisfying(error -> {
+                    assertThat(error.errorCode()).isEqualTo("ERROR_CODE_9");
+                    assertThat(error.description()).isEqualTo("Field personalCode is empty!");
+                });
     }
 
     private static Stream<Arguments> personalCodeValue() {
         return Stream.of(
-                Arguments.of("personalCode null", null),
-                Arguments.of("personalCode empty", ""),
-                Arguments.of("personalCode blank", "     ")
+                Arguments.of("personalCode is null", null),
+                Arguments.of("personalCode is empty", ""),
+                Arguments.of("personalCode is blank", "     ")
         );
     }
 

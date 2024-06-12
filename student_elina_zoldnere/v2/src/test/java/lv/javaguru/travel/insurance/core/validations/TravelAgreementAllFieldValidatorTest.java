@@ -1,8 +1,9 @@
 package lv.javaguru.travel.insurance.core.validations;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
-import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
+import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTOBuilder;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -26,33 +27,48 @@ class TravelAgreementAllFieldValidatorTest {
 
     @InjectMocks
     private TravelAgreementAllFieldValidator validator;
-    @InjectMocks
-    private SetUpInstancesHelper helper;
-
-    private AgreementDTO agreement;
 
     @Test
     void collectAgreementErrors_ShouldReturnErrorWhenAgreementSingleValidationFail() {
-        agreement = helper.newAgreementDTO();
+        AgreementDTO agreement = AgreementDTOBuilder.createAgreement().build();
+        ValidationErrorDTO validationError = ValidationErrorDTOBuilder.createValidationError().build();
+
         AgreementFieldValidation agreementValidationMock = mock(AgreementFieldValidation.class);
         when(agreementFieldValidation.stream()).thenAnswer(invocation -> Stream.of(agreementValidationMock));
-        when(agreementValidationMock.validateSingle(any())).thenReturn(Optional.of(helper.newValidationErrorDTO()));
+        when(agreementValidationMock.validateSingle(any())).thenReturn(Optional.of(validationError));
 
-        List<ValidationErrorDTO> errors = validator.collectAgreementErrors(agreement);
+        List<ValidationErrorDTO> result = validator.collectAgreementErrors(agreement);
 
-        assertEquals(1, errors.size());
+        assertThat(result).hasSize(1);
     }
 
     @Test
-    void collectAgreementErrors_ShouldReturnErrorWhenAgreementListValidationFail() {
-        agreement = helper.newAgreementDTO();
+    void collectAgreementErrors_ShouldReturnErrorWhenAgreementListValidationFailWithOneError() {
+        AgreementDTO agreement = AgreementDTOBuilder.createAgreement().build();
+        ValidationErrorDTO validationError = ValidationErrorDTOBuilder.createValidationError().build();
+
         AgreementFieldValidation agreementValidationMock = mock(AgreementFieldValidation.class);
         when(agreementFieldValidation.stream()).thenAnswer(invocation -> Stream.of(agreementValidationMock));
-        when(agreementValidationMock.validateList(any())).thenReturn(List.of(helper.newValidationErrorDTO()));
+        when(agreementValidationMock.validateList(any())).thenReturn(List.of(validationError));
 
-        List<ValidationErrorDTO> errors = validator.collectAgreementErrors(agreement);
+        List<ValidationErrorDTO> result = validator.collectAgreementErrors(agreement);
 
-        assertEquals(1, errors.size());
+        assertThat(result).hasSize(1);
+    }
+
+    @Test
+    void collectAgreementErrors_ShouldReturnErrorWhenAgreementListValidationFailWithTwoErrors() {
+        AgreementDTO agreement = AgreementDTOBuilder.createAgreement().build();
+        ValidationErrorDTO validationError1 = ValidationErrorDTOBuilder.createValidationError().build();
+        ValidationErrorDTO validationError2 = ValidationErrorDTOBuilder.createValidationError().build();
+
+        AgreementFieldValidation agreementValidationMock = mock(AgreementFieldValidation.class);
+        when(agreementFieldValidation.stream()).thenAnswer(invocation -> Stream.of(agreementValidationMock));
+        when(agreementValidationMock.validateList(any())).thenReturn(List.of(validationError1, validationError2));
+
+        List<ValidationErrorDTO> result = validator.collectAgreementErrors(agreement);
+
+        assertThat(result).hasSize(2);
     }
 
 }

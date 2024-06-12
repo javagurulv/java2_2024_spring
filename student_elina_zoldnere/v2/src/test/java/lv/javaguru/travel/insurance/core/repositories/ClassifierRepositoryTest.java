@@ -9,10 +9,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
@@ -22,28 +20,33 @@ class ClassifierRepositoryTest {
     private ClassifierRepository classifierRepository;
 
     @Test
-    public void injectedRepositoryAreNotNull() {
+    void injectedRepositoryAreNotNull() {
         assertNotNull(classifierRepository);
     }
 
     @Test
-    public void shouldFindRiskTypeClassifier() {
+    void shouldFindRiskTypeClassifier() {
         Optional<Classifier> riskTypeOpt = classifierRepository.findByTitle("RISK_TYPE");
-        assertTrue(riskTypeOpt.isPresent());
-        assertEquals("RISK_TYPE", riskTypeOpt.get().getTitle());
+
+        assertThat(riskTypeOpt)
+                .get()
+                .satisfies(r -> assertThat(r.getTitle()).isEqualTo("RISK_TYPE"));
     }
 
     @Test
-    public void shouldFindCountryClassifier() {
+    void shouldFindCountryClassifier() {
         Optional<Classifier> riskTypeOpt = classifierRepository.findByTitle("COUNTRY");
-        assertTrue(riskTypeOpt.isPresent());
-        assertEquals("COUNTRY", riskTypeOpt.get().getTitle());
+
+        assertThat(riskTypeOpt)
+                .get()
+                .satisfies(r -> assertThat(r.getTitle()).isEqualTo("COUNTRY"));
     }
 
     @Test
-    public void shouldNotFindFakeClassifier() {
+    void shouldNotFindFakeClassifier() {
         Optional<Classifier> riskTypeOpt = classifierRepository.findByTitle("FAKE");
-        assertTrue(riskTypeOpt.isEmpty());
+
+        assertThat(riskTypeOpt).isEmpty();
     }
 
 }

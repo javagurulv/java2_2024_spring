@@ -1,7 +1,9 @@
 package lv.javaguru.travel.insurance.core.services;
 
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
-import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
+import lv.javaguru.travel.insurance.core.api.dto.RiskDTO;
+import lv.javaguru.travel.insurance.core.api.dto.RiskDTOBuilder;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -10,24 +12,24 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.math.BigDecimal;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
-public class CalculateTotalAgreementPremiumTest {
-
-    @InjectMocks
-    private SetUpInstancesHelper helper;
+class CalculateTotalAgreementPremiumTest {
 
     @InjectMocks
     private CalculateTotalAgreementPremium calculate;
 
     @Test
     void calculateTotalAgreementPremium_ReturnsCorrectResult(){
-        List<PersonDTO> personsWithRisks = List.of(helper.newPersonWithRiskDTO(), helper.newPersonWithRiskDTO());
+        RiskDTO risk1 = RiskDTOBuilder.createRisk().withPremium(BigDecimal.TEN).build();
+        RiskDTO risk2 = RiskDTOBuilder.createRisk().withPremium(BigDecimal.TEN).build();
+        List<PersonDTO> persons = List.of(
+                PersonDTOBuilder.createPerson().withPersonRisks(List.of(risk1, risk2)).build());
 
-        BigDecimal result = calculate.calculateTotalAgreementPremium(personsWithRisks);
+        BigDecimal result = calculate.calculateTotalAgreementPremium(persons);
 
-        assertEquals(BigDecimal.valueOf(20), result);
+        assertThat(result).isEqualTo(BigDecimal.valueOf(20));
     }
 
 }

@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 @Configuration
 @EnableCaching
-public class CacheConfig {
+class CacheConfig {
 
     @Bean
     public CacheManager cacheManager() {
@@ -70,13 +70,7 @@ public class CacheConfig {
                 .maximumSize(200)
                 .expireAfterWrite(30, TimeUnit.MINUTES)
                 .build());
-        /*
-        cacheManager.registerCustomCache("personEntityCache", Caffeine.newBuilder()
-                .initialCapacity(100)
-                .maximumSize(1000)
-                .expireAfterAccess(30, TimeUnit.MINUTES)
-                .build());
-        */
+
         return cacheManager;
     }
 
