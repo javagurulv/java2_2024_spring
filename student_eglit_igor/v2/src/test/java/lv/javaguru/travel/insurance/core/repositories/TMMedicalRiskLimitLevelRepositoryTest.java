@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.repositories;
 
-import lv.javaguru.travel.insurance.core.domain.MedicalRiskLimitLevel;
+import lv.javaguru.travel.insurance.core.domain.TMMedicalRiskLimitLevel;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,9 +17,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
-class MedicalRiskLimitLevelRepositoryTest {
+class TMMedicalRiskLimitLevelRepositoryTest {
     @Autowired
-    private MedicalRiskLimitLevelRepository limitLevelRepository;
+    private TMMedicalRiskLimitLevelRepository limitLevelRepository;
 
     @Test
     public void injectedRepositoryAreNotNull() {
@@ -32,7 +32,7 @@ class MedicalRiskLimitLevelRepositoryTest {
     @ParameterizedTest
     @MethodSource("medicalRiskLimitLevelValues")
     public void searchMedicalRiskLimitLevel(String level, String coefficient) {
-        Optional<MedicalRiskLimitLevel> limitLevelOpt = limitLevelRepository.findByMedicalRiskLimitLevelIc(level);
+        Optional<TMMedicalRiskLimitLevel> limitLevelOpt = limitLevelRepository.findByMedicalRiskLimitLevelIc(level);
         assertEquals(level, limitLevelOpt.get().getMedicalRiskLimitLevelIc());
         assertEquals(coefficient, limitLevelOpt.get().getCoefficient().toString());
     }

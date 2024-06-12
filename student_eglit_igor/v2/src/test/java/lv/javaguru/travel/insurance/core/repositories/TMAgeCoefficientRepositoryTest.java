@@ -17,26 +17,26 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
 
-class AgeCoefficientRepositoryTest {
+class TMAgeCoefficientRepositoryTest {
 
     @Autowired
-    private AgeCoefficientRepository ageCoefficientRepository;
+    private TMAgeCoefficientRepository TMAgeCoefficientRepository;
 
     @Test
     public void injectedRepositoryAreNotNull(){
-        assertNotNull(ageCoefficientRepository);
+        assertNotNull(TMAgeCoefficientRepository);
     }
     @Test
     public void shouldReturnEmptyOptional_whenAgeIsNotInRange() {
-        assertTrue(ageCoefficientRepository.findCoefficient(-1).isEmpty());
-        assertTrue(ageCoefficientRepository.findCoefficient(151).isEmpty());
+        assertTrue(TMAgeCoefficientRepository.findCoefficient(-1).isEmpty());
+        assertTrue(TMAgeCoefficientRepository.findCoefficient(151).isEmpty());
     }
 
     @ParameterizedTest
     @MethodSource("ageValues")
     public void findAgeCoefficientByAge_returnsCoefficient_whenAgeInRange(Integer age, BigDecimal expectedCoefficient) {
 
-        var valueOpt = ageCoefficientRepository.findCoefficient(age);
+        var valueOpt = TMAgeCoefficientRepository.findCoefficient(age);
         assertTrue(valueOpt.isPresent());
         assertEquals(expectedCoefficient, valueOpt.get().getCoefficient());
     }

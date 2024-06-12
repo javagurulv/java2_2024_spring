@@ -113,3 +113,15 @@ travel_cost_to DECIMAL(10,2) NOT NULL,
 coefficient DECIMAL(10,2) NOT NULL,
 PRIMARY KEY (id)
 );
+
+ALTER TABLE age_coefficient
+  RENAME TO travel_medical_age_coefficient;
+
+ALTER TABLE travel_cost_coefficient
+  RENAME TO travel_cancellation_travel_cost_coefficient;
+
+ALTER TABLE country_default_day_rate
+  RENAME TO travel_medical_country_default_day_rate;
+
+ALTER TABLE medical_risk_limit_level
+  RENAME TO travel_medical_risk_limit_level;

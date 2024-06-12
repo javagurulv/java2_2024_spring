@@ -1,8 +1,8 @@
 package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
-import lv.javaguru.travel.insurance.core.domain.CountryDefaultDayRate;
-import lv.javaguru.travel.insurance.core.repositories.CountryDefaultDayRateRepository;
+import lv.javaguru.travel.insurance.core.domain.TMCountryDefaultDayRate;
+import lv.javaguru.travel.insurance.core.repositories.TMCountryDefaultDayRateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,11 +11,11 @@ import java.math.BigDecimal;
 @Component
 class CountryDefaultDayRateCalculator {
 
-    @Autowired private CountryDefaultDayRateRepository countryDefaultDayRateRepository;
+    @Autowired private TMCountryDefaultDayRateRepository TMCountryDefaultDayRateRepository;
 
     BigDecimal calculate(AgreementDTO agreement){
-        return countryDefaultDayRateRepository.findByCountryIc(agreement.getCountry())
-                .map(CountryDefaultDayRate::getDefaultDayRate)
+        return TMCountryDefaultDayRateRepository.findByCountryIc(agreement.getCountry())
+                .map(TMCountryDefaultDayRate::getDefaultDayRate)
                 .orElseThrow(()->new RuntimeException("Country day rate not found by country id = " + agreement.getCountry()));
     }
 }

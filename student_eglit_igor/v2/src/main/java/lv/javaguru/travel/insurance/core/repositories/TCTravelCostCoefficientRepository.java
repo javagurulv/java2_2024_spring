@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.repositories;
 
-import lv.javaguru.travel.insurance.core.domain.TravelCostCoefficient;
+import lv.javaguru.travel.insurance.core.domain.TCTravelCostCoefficient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -8,11 +8,11 @@ import org.springframework.data.repository.query.Param;
 import java.math.BigDecimal;
 import java.util.Optional;
 
-public interface TravelCostCoefficientRepository
-        extends JpaRepository<TravelCostCoefficient, Long> {
+public interface TCTravelCostCoefficientRepository
+        extends JpaRepository<TCTravelCostCoefficient, Long> {
 
-    @Query("SELECT tc from TravelCostCoefficient tc " +
+    @Query("SELECT tc from TCTravelCostCoefficient tc " +
             "where tc.travelCostFrom <= :travelCost " +
             "and tc.travelCostTo >= :travelCost")
-    Optional<TravelCostCoefficient> findCoefficient(@Param("travelCost") BigDecimal travelCost);
+    Optional<TCTravelCostCoefficient> findCoefficient(@Param("travelCost") BigDecimal travelCost);
 }

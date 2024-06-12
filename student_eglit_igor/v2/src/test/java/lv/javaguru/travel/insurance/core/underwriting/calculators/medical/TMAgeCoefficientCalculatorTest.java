@@ -2,8 +2,8 @@ package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.RiskDTO;
-import lv.javaguru.travel.insurance.core.domain.AgeCoefficient;
-import lv.javaguru.travel.insurance.core.repositories.AgeCoefficientRepository;
+import lv.javaguru.travel.insurance.core.domain.TMAgeCoefficient;
+import lv.javaguru.travel.insurance.core.repositories.TMAgeCoefficientRepository;
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,12 +24,12 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class AgeCoefficientCalculatorTest {
+class TMAgeCoefficientCalculatorTest {
 
     @Mock
     private DateTimeUtil dateTimeUtil;
     @Mock
-    private AgeCoefficientRepository ageCoefficientRepository;
+    private TMAgeCoefficientRepository TMAgeCoefficientRepository;
 
     @InjectMocks
     private AgeCoefficientCalculator calculator;
@@ -48,9 +48,9 @@ class AgeCoefficientCalculatorTest {
         BigDecimal expectedCoefficient = BigDecimal.valueOf(1.2);
 
         when(dateTimeUtil.getCurrentDateTime()).thenReturn(currentDate);
-        AgeCoefficient ageCoefficient = mock(AgeCoefficient.class);
-        when(ageCoefficient.getCoefficient()).thenReturn(expectedCoefficient);
-        when(ageCoefficientRepository.findCoefficient(age)).thenReturn(Optional.of(ageCoefficient));
+        TMAgeCoefficient TMAgeCoefficient = mock(TMAgeCoefficient.class);
+        when(TMAgeCoefficient.getCoefficient()).thenReturn(expectedCoefficient);
+        when(TMAgeCoefficientRepository.findCoefficient(age)).thenReturn(Optional.of(TMAgeCoefficient));
 
         BigDecimal result = calculator.calculate(person);
 
@@ -64,7 +64,7 @@ class AgeCoefficientCalculatorTest {
         int age = 33;
 
         when(dateTimeUtil.getCurrentDateTime()).thenReturn(currentDate);
-        when(ageCoefficientRepository.findCoefficient(age)).thenReturn(Optional.empty());
+        when(TMAgeCoefficientRepository.findCoefficient(age)).thenReturn(Optional.empty());
 
         RuntimeException exception = assertThrows(RuntimeException.class, () -> calculator.calculate(person));
 

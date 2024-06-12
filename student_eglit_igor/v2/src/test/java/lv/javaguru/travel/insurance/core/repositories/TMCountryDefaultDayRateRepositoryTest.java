@@ -1,6 +1,6 @@
 package lv.javaguru.travel.insurance.core.repositories;
 
-import lv.javaguru.travel.insurance.core.domain.CountryDefaultDayRate;
+import lv.javaguru.travel.insurance.core.domain.TMCountryDefaultDayRate;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,26 +18,26 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
-class CountryDefaultDayRateRepositoryTest {
+class TMCountryDefaultDayRateRepositoryTest {
 
     @Autowired
-    private CountryDefaultDayRateRepository countryDefaultDayRateRepository;
+    private TMCountryDefaultDayRateRepository TMCountryDefaultDayRateRepository;
 
 
 
     @Test
     public void injectedRepositoryAreNotNull() {
-        assertNotNull(countryDefaultDayRateRepository);
+        assertNotNull(TMCountryDefaultDayRateRepository);
     }
     @Test
     public void shouldNotFindForUnknownCountry() {
-        Optional<CountryDefaultDayRate> valueOpt = countryDefaultDayRateRepository.findByCountryIc("FAKE_COUNTRY");
+        Optional<TMCountryDefaultDayRate> valueOpt = TMCountryDefaultDayRateRepository.findByCountryIc("FAKE_COUNTRY");
         assertTrue(valueOpt.isEmpty());
     }
     @ParameterizedTest
     @MethodSource("countryValues")
     public void searchCountryDefaultDayRate(String country, BigDecimal dayRate) {
-        Optional<CountryDefaultDayRate> valueOpt = countryDefaultDayRateRepository.findByCountryIc(country);
+        Optional<TMCountryDefaultDayRate> valueOpt = TMCountryDefaultDayRateRepository.findByCountryIc(country);
         assertTrue(valueOpt.isPresent());
         assertEquals(valueOpt.get().getCountryIc(), country);
         assertEquals(valueOpt.get().getDefaultDayRate(), dayRate);
