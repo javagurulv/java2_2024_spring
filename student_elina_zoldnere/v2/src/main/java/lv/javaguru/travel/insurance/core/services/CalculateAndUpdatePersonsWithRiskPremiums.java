@@ -29,4 +29,21 @@ class CalculateAndUpdatePersonsWithRiskPremiums {
         });
         return personsWithRisks;
     }
+
+/*
+    List<PersonDTO> calculateRiskPremiumsForAllPersons(AgreementDTO agreement) {
+        return agreement.persons().stream()
+                .map(person -> calculatePersonRisks(agreement, person))
+                .toList();
+    }
+
+    private PersonDTO calculatePersonRisks(AgreementDTO agreement, PersonDTO person) {
+        TravelPremiumCalculationResult calculationResult =
+                calculateUnderwriting.calculateAgreementPremium(agreement, person);
+        return person.withRisks(calculationResult.getRisks());
+    }
+*/
+
+
+
 }
