@@ -97,6 +97,20 @@ public class TravelCalculatePremiumControllerTest {
                                 "rest/TravelCalculatePremiumResponse_selectedRisk_is_not_supported.json");
     }
 
+    @Test
+    @DisplayName("Test 11: field country is empty")
+    public void fieldCountryIsEmpty() throws Exception {
+        generalizingAndComparing("rest/TravelCalculatePremiumRequest_country_empty_travel_medical.json",
+                                "rest/TravelCalculatePremiumResponse_country_empty_travel_medical.json");
+    }
+
+    @Test
+    @DisplayName("Test 12: field country is null")
+    public void fieldCountryIsNull() throws Exception {
+        generalizingAndComparing("rest/TravelCalculatePremiumRequest_country_null_travel_medical.json",
+                                "rest/TravelCalculatePremiumResponse_country_null_travel_medical.json");
+    }
+
     private void generalizingAndComparing(String jsonRequestFilePath, String jsonResponseFilePath) throws Exception {
         String jsonRequest = jsonFileReader.getJsonFromFile(jsonRequestFilePath);
 

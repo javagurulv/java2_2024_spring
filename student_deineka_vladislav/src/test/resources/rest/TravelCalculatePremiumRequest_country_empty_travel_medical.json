@@ -3,6 +3,6 @@
   "personLastName" : "Johnson",
   "agreementDateFrom" : "2030-10-10",
   "agreementDateTo" : "2030-10-11",
-  "country" : "SPAIN",
-  "selected_risks" : []
+  "country" : "",
+  "selected_risks" : ["TRAVEL_MEDICAL"]
 }

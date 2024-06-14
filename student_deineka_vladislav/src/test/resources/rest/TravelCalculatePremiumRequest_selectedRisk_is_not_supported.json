@@ -3,5 +3,6 @@
   "personLastName" : "Johnson",
   "agreementDateFrom" : "2030-10-10",
   "agreementDateTo" : "2030-10-11",
+  "country" : "SPAIN",
   "selected_risks" : ["NOT_VALID_RISK_IC_1", "NOT_VALID_RISK_IC_2"]
 }

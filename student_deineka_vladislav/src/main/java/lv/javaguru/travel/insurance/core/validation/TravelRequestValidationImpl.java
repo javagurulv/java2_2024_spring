@@ -15,7 +15,7 @@ abstract class TravelRequestValidationImpl implements TravelRequestValidation {
 
     @Override
     public List<ValidationErrors> listValidation(TravelCalculatePremiumRequest premiumRequest) {
-        return List.of();
+        return null;
     }
 
 }

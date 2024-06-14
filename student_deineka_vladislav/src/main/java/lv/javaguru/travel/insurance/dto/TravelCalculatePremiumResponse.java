@@ -34,4 +34,5 @@ public class TravelCalculatePremiumResponse extends CoreResponse {
         super(validationErrors);
     }
 
+    private String country;
 }

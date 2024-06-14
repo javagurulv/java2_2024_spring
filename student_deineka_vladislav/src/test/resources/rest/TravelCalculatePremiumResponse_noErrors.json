@@ -4,6 +4,7 @@
   "agreementDateFrom": "2030-10-10",
   "agreementDateTo": "2030-10-11",
   "agreementPremium": 1,
+  "country" : "SPAIN",
   "validationErrors": null,
   "risks" : [
     {

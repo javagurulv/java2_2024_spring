@@ -3,5 +3,6 @@
   "personLastName" : "Johnson",
   "agreementDateFrom" : null,
   "agreementDateTo" : "2030-10-11",
+  "country" : "SPAIN",
   "selected_risks" : ["TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_BAGGAGE_LOSS"]
 }
