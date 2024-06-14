@@ -108,16 +108,16 @@ INSERT INTO classifier_values(
     FROM classifiers as cl
     WHERE cl.title= 'COUNTRY';
 
- INSERT INTO country_default_day_rate(country_ic, default_day_rate)
+ INSERT INTO travel_medical_country_default_day_rate(country_ic, default_day_rate)
  VALUES('LATVIA', 1.00);
 
- INSERT INTO country_default_day_rate(country_ic, default_day_rate)
+ INSERT INTO travel_medical_country_default_day_rate(country_ic, default_day_rate)
  VALUES('SPAIN', 2.50);
 
- INSERT INTO country_default_day_rate(country_ic, default_day_rate)
+ INSERT INTO travel_medical_country_default_day_rate(country_ic, default_day_rate)
  VALUES('JAPAN', 3.50);
 
- INSERT INTO age_coefficient (age_from, age_to, coefficient)
+ INSERT INTO travel_medical_age_coefficient (age_from, age_to, coefficient)
      VALUES (0, 5, 1.10),
              (6, 10, 0.70),
              (11, 17, 1.00),
@@ -172,8 +172,14 @@ INSERT INTO classifier_values(
           FROM classifiers as cl
           WHERE cl.title = 'MEDICAL_RISK_LIMIT_LEVEL';
 
-    INSERT INTO medical_risk_limit_level(medical_risk_limit_level_ic, coefficient)
+    INSERT INTO travel_medical_risk_limit_level(medical_risk_limit_level_ic, coefficient)
     VALUES('LEVEL_10000', 1.00),
                 ('LEVEL_15000', 1.20),
                 ('LEVEL_20000', 1.50),
                 ('LEVEL_50000', 2.00);
+
+  INSERT INTO travel_cancellation_travel_cost_coefficient(travel_cost_from, travel_cost_to, coefficient)
+  VALUES(0, 4999.99, 10.0),
+        (5000, 9999.99, 30.0),
+        (10000, 19999.99, 100.0),
+        (20000, 1000000, 500.0);

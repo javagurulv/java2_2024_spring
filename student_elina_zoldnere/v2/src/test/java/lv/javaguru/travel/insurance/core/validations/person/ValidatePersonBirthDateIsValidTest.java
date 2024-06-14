@@ -1,11 +1,12 @@
 package lv.javaguru.travel.insurance.core.validations.person;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.util.DateTimeUtil;
-import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
+import lv.javaguru.travel.insurance.core.util.DateHelper;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,8 +21,7 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
@@ -37,41 +37,41 @@ class ValidatePersonBirthDateIsValidTest {
     @InjectMocks
     private ValidatePersonBirthDateIsValid validate;
 
-    private static SetUpInstancesHelper helper;
+    private static DateHelper helper;
 
     @BeforeAll
     static void setUp() {
-        helper = new SetUpInstancesHelper();
+        helper = new DateHelper();
     }
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("birthDateValue")
     public void validate_ShouldReturnErrorWhenPersonBirthDateIsNotValid(String testName, Date birthDate) {
-        AgreementDTO agreement = helper.newAgreementDTO();
+        AgreementDTO agreement = AgreementDTOBuilder.createAgreement().build();
         PersonDTO person = PersonDTOBuilder.createPerson()
-                .withPersonFirstName("Jānis")
-                .withPersonLastName("Bērziņš")
-                .withPersonalCode("123456-12345")
                 .withPersonBirthdate(birthDate)
-                .withMedicalRiskLimitLevel("LEVEL_10000")
                 .build();
 
         when(dateTimeUtil.startOfToday()).thenReturn(helper.newDate("2025.03.11"));
         when(dateTimeUtil.subtractYears(any(Date.class), eq(150))).thenReturn(helper.newDate("1875.03.11"));
         when(errorMock.buildError("ERROR_CODE_14"))
-                .thenReturn(new ValidationErrorDTO("ERROR_CODE_14", "PersonBirthDate is not a valid date!"));
+                .thenReturn(new ValidationErrorDTO("ERROR_CODE_14",
+                        "PersonBirthDate is not a valid date!"));
 
         Optional<ValidationErrorDTO> result = validate.validateSingle(agreement, person);
 
-        assertTrue(result.isPresent());
-        assertEquals("ERROR_CODE_14", result.get().errorCode());
-        assertEquals("PersonBirthDate is not a valid date!", result.get().description());
+        assertThat(result)
+                .isPresent()
+                .hasValueSatisfying(error -> {
+                    assertThat(error.errorCode()).isEqualTo("ERROR_CODE_14");
+                    assertThat(error.description()).isEqualTo("PersonBirthDate is not a valid date!");
+                });
     }
 
     private static Stream<Arguments> birthDateValue() {
         return Stream.of(
-                Arguments.of("birthDate after current date", helper.newDate("2030.03.11")),
-                Arguments.of("birthDate less than minimal", helper.newDate("1800.03.11"))
+                Arguments.of("BirthDate is after current date", helper.newDate("2030.03.11")),
+                Arguments.of("BirthDate is less than minimal", helper.newDate("1800.03.11"))
         );
     }
 

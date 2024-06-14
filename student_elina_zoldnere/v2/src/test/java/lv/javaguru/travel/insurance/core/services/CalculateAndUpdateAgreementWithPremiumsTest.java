@@ -1,8 +1,9 @@
 package lv.javaguru.travel.insurance.core.services;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
-import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
+import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -12,11 +13,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.math.BigDecimal;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class CalculateAndUpdateAgreementWithPremiumsTest {
+class CalculateAndUpdateAgreementWithPremiumsTest {
 
     @Mock
     private CalculateAndUpdatePersonsWithRiskPremiums calculateAndUpdatePersonsMock;
@@ -25,13 +26,17 @@ public class CalculateAndUpdateAgreementWithPremiumsTest {
 
     @InjectMocks
     private CalculateAndUpdateAgreementWithPremiums calculateAndUpdateAgreement;
-    @InjectMocks
-    private SetUpInstancesHelper helper;
 
     @Test
     void calculateAgreementPremiums_ShouldReturnCorrectResult() {
-        AgreementDTO agreement = helper.newAgreementDTO();
-        List<PersonDTO> personsWithRiskPremiums = List.of(helper.newPersonWithRiskDTO(), helper.newPersonWithRiskDTO());
+        AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
+                .withPremium(BigDecimal.ZERO)
+                .build();
+
+        PersonDTO person1 = PersonDTOBuilder.createPerson().build();
+        PersonDTO person2 = PersonDTOBuilder.createPerson().build();
+        List<PersonDTO> personsWithRiskPremiums = List.of(person1, person2);
+
         when(calculateAndUpdatePersonsMock.calculateRiskPremiumsForAllPersons(agreement))
                 .thenReturn(personsWithRiskPremiums);
         when(calculateTotalPremiumMock.calculateTotalAgreementPremium(personsWithRiskPremiums))
@@ -39,8 +44,8 @@ public class CalculateAndUpdateAgreementWithPremiumsTest {
 
         AgreementDTO agreementWithPremium = calculateAndUpdateAgreement.calculateAgreementPremiums(agreement);
 
-        assertEquals(BigDecimal.ZERO, agreement.agreementPremium());
-        assertEquals(BigDecimal.valueOf(100), agreementWithPremium.agreementPremium());
+        assertThat(agreement.agreementPremium()).isEqualTo(BigDecimal.ZERO);
+        assertThat(agreementWithPremium.agreementPremium()).isEqualTo(BigDecimal.valueOf(100));
     }
 
 }

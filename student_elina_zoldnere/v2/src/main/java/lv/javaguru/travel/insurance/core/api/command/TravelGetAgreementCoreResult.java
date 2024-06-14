@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
+import lv.javaguru.travel.insurance.dto.serialize.AgreementSerialDTO;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class TravelGetAgreementCoreResult {
 
     private List<ValidationErrorDTO> errors;
 
-    private AgreementDTO agreement;
+    private AgreementSerialDTO agreement;
 
     public boolean hasErrors() {
         return errors != null && !errors.isEmpty();

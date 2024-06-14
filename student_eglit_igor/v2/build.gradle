@@ -51,6 +51,12 @@ bootJar {
 	archiveVersion = '1.0.3'
 }
 
+task cleanLogs(type: Delete) {
+	delete 'logs'
+}
+clean.dependsOn cleanLogs
+
+
 publishing {
 	publications {
 		mavenJava(MavenPublication) {

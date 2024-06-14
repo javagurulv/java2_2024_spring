@@ -3,7 +3,7 @@ package lv.javaguru.travel.insurance.core.validations.agreement;
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
-import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
+import lv.javaguru.travel.insurance.core.util.DateHelper;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,14 +14,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -33,24 +30,20 @@ class ValidateAgreementDateChronologyTest {
     @InjectMocks
     private ValidateAgreementDateChronology validate;
 
-    private static SetUpInstancesHelper helper;
+    private static DateHelper helper;
 
     @BeforeAll
     static void setUp() {
-        helper = new SetUpInstancesHelper();
+        helper = new DateHelper();
     }
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("agreementDateToValue")
     public void validate_ShouldReturnErrorWhenAgreementDateChronologyIsWrong(String testName, Date agreementDateTo) {
-        helper = new SetUpInstancesHelper();
+        helper = new DateHelper();
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
                 .withDateFrom(helper.newDate("2025.03.10"))
                 .withDateTo(agreementDateTo)
-                .withCountry("SPAIN")
-                .withSelectedRisks(List.of("TRAVEL_MEDICAL", "TRAVEL_CANCELLATION", "TRAVEL_LOSS_BAGGAGE"))
-                .withPerson(helper.newPersonDTO())
-                .withPremium(BigDecimal.ZERO)
                 .build();
 
         when(errorMock.buildError("ERROR_CODE_13"))
@@ -59,16 +52,20 @@ class ValidateAgreementDateChronologyTest {
 
         Optional<ValidationErrorDTO> result = validate.validateSingle(agreement);
 
-        assertTrue(result.isPresent());
-        assertEquals("ERROR_CODE_13", result.get().errorCode());
-        assertEquals("AgreementDateTo must be after AgreementDateFrom!", result.get().description());
+        assertThat(result)
+                .isPresent()
+                .hasValueSatisfying(error -> {
+                    assertThat(error.errorCode()).isEqualTo("ERROR_CODE_13");
+                    assertThat(error.description()).isEqualTo(
+                            "AgreementDateTo must be after AgreementDateFrom!");
+                });
     }
 
     private static Stream<Arguments> agreementDateToValue() {
         return Stream.of(
-                Arguments.of("agreementDateTo equals agreementDateFrom",
+                Arguments.of("AgreementDateTo equals agreementDateFrom",
                         helper.newDate("2025.03.10")),
-                Arguments.of("agreementDateTo less than agreementDateFrom",
+                Arguments.of("AgreementDateTo less than agreementDateFrom",
                         helper.newDate("2025.03.09"))
         );
     }

@@ -39,7 +39,7 @@ class TravelMedicalRiskPremiumCalculatorTest {
     @BeforeEach
     void setUp() {
         agreement = new AgreementDTO();
-        person = new PersonDTO("John", "Doe", "12345",LocalDate.of(1990, 1, 1),"TRAVEL_MEDICAL" ,List.of(new RiskDTO()));
+        person = new PersonDTO("John", "Doe", "12345",LocalDate.of(1990, 1, 1),"TRAVEL_MEDICAL" , BigDecimal.ONE, List.of(new RiskDTO()));
 
     }
 

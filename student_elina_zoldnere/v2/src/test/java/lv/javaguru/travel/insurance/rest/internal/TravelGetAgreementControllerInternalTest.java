@@ -43,7 +43,7 @@ class TravelGetAgreementControllerInternalTest {
     private EntityManager entityManager;
 
     @Test
-    public void controller_ShouldFindExistingUuid() throws Exception {
+    void controller_ShouldFindExistingUuid() throws Exception {
         JsonObject testDataJson = gson.fromJson(reader.readJsonFromFile(
                         "internal/ControllerInternalTest_Combined_9.01_all_fields_are_present_and_valid.json"),
                 JsonObject.class);
@@ -80,7 +80,7 @@ class TravelGetAgreementControllerInternalTest {
     }
 
     @Test
-    public void controller_ShouldReturnErrorForNotExistingUuid() throws Exception {
+    void controller_ShouldReturnErrorForNotExistingUuid() throws Exception {
         MockHttpServletResponse response = mockMvc.perform(get(
                         "/insurance/travel/api/internal/agreement/NOT-EXISTING-UUID")
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))

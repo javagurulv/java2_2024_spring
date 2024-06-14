@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class TravelInsuranceControllerV1 {
+class TravelInsuranceControllerV1 {
 
     @Autowired
     private TravelCalculatePremiumService service;

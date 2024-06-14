@@ -5,8 +5,9 @@ import lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
-import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
+import lv.javaguru.travel.insurance.core.util.DateHelper;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -26,10 +27,10 @@ public class ValidateAgreementDateFromIntegrationTest {
     @Autowired
     private TravelAgreementValidator validator;
     @Autowired
-    private SetUpInstancesHelper helper;
+    private DateHelper helper;
 
     @Test
-    public void validate_ShouldReturnErrorWhenAgreementDateFromIsNull() {
+    void validate_ShouldReturnErrorWhenAgreementDateFromIsNull() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
@@ -46,15 +47,17 @@ public class ValidateAgreementDateFromIntegrationTest {
                 .withPerson(person)
                 .build();
 
-        List<ValidationErrorDTO> errors = validator.validate(agreement);
+        List<ValidationErrorDTO> result = validator.validate(agreement);
 
-        assertEquals(1, errors.size());
-        assertEquals("ERROR_CODE_3", errors.get(0).errorCode());
-        assertEquals("Field agreementDateFrom is empty!", errors.get(0).description());
+        assertThat(result)
+                .hasSize(1)
+                .extracting("errorCode", "description")
+                .containsExactly(
+                        Assertions.tuple("ERROR_CODE_3", "Field agreementDateFrom is empty!"));
     }
 
     @Test
-    public void validate_ShouldReturnErrorWhenAgreementDateFromLessThanToday() {
+    void validate_ShouldReturnErrorWhenAgreementDateFromLessThanToday() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
@@ -71,11 +74,13 @@ public class ValidateAgreementDateFromIntegrationTest {
                 .withPerson(person)
                 .build();
 
-        List<ValidationErrorDTO> errors = validator.validate(agreement);
+        List<ValidationErrorDTO> result = validator.validate(agreement);
 
-        assertEquals(1, errors.size());
-        assertEquals("ERROR_CODE_11", errors.get(0).errorCode());
-        assertEquals("Field agreementDateFrom is in the past!", errors.get(0).description());
+        assertThat(result)
+                .hasSize(1)
+                .extracting("errorCode", "description")
+                .containsExactly(
+                        Assertions.tuple("ERROR_CODE_11", "Field agreementDateFrom is in the past!"));
     }
 
 }

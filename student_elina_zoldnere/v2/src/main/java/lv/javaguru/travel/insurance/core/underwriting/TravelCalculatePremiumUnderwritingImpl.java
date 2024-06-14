@@ -30,4 +30,20 @@ class TravelCalculatePremiumUnderwritingImpl implements TravelCalculatePremiumUn
         return new TravelPremiumCalculationResult(agreementPremium, risks);
     }
 
+/*
+    @Override
+    public TravelPremiumCalculationResult calculateAgreementPremium(AgreementDTO agreement, PersonDTO person) {
+        List<RiskDTO> risks = calculateRisks(agreement, person);
+        BigDecimal agreementPremium = totalRiskCalculator.calculatePremium(risks);
+        return new TravelPremiumCalculationResult(agreementPremium, risks);
+    }
+
+    private List<RiskDTO> calculateRisks(AgreementDTO agreement, PersonDTO person) {
+        List<String> selectedRisks = agreement.selectedRisks();
+        return selectedRisks.stream()
+                .map(riskIc -> singleRiskCalculator.calculatePremium(riskIc, agreement, person))
+                .toList();
+    }
+*/
+
 }

@@ -5,8 +5,9 @@ import lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
-import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
+import lv.javaguru.travel.insurance.core.util.DateHelper;
 import lv.javaguru.travel.insurance.core.validations.TravelAgreementValidator;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -29,10 +28,10 @@ class ValidateSelectedRisksIntegrationTest {
     @Autowired
     private TravelAgreementValidator validator;
     @Autowired
-    private SetUpInstancesHelper helper;
+    private DateHelper helper;
 
     @Test
-    public void validate_ShouldReturnErrorWhenOneSelectedRiskIsNotValid() {
+    void validate_ShouldReturnErrorWhenOneSelectedRiskIsNotValid() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
@@ -50,15 +49,17 @@ class ValidateSelectedRisksIntegrationTest {
                 .withPremium(BigDecimal.ZERO)
                 .build();
 
-        List<ValidationErrorDTO> errors = validator.validate(agreement);
+        List<ValidationErrorDTO> result = validator.validate(agreement);
 
-        assertEquals(errors.size(), 1);
-        assertEquals("ERROR_CODE_91", errors.get(0).errorCode());
-        assertEquals("Risk type value INVALID is not supported!", errors.get(0).description());
+        assertThat(result)
+                .hasSize(1)
+                .extracting("errorCode", "description")
+                .containsExactly(
+                        Assertions.tuple("ERROR_CODE_91", "Risk type value INVALID is not supported!"));
     }
 
     @Test
-    public void validate_ShouldReturnErrorWhenTwoSelectedRisksAreNotValid() {
+    void validate_ShouldReturnErrorWhenTwoSelectedRisksAreNotValid() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
@@ -76,25 +77,19 @@ class ValidateSelectedRisksIntegrationTest {
                 .withPremium(BigDecimal.ZERO)
                 .build();
 
-        List<ValidationErrorDTO> errors = validator.validate(agreement);
+        List<ValidationErrorDTO> result = validator.validate(agreement);
 
-        assertEquals(2, errors.size());
-
-        List<String> expectedDescriptions = Arrays.asList(
-                "Risk type value INVALID1 is not supported!",
-                "Risk type value INVALID2 is not supported!");
-
-        assertTrue(errors.stream().anyMatch(error ->
-                "ERROR_CODE_91".equals(error.errorCode()) &&
-                        expectedDescriptions.contains(error.description())));
-
-        assertTrue(errors.stream().anyMatch(error ->
-                "ERROR_CODE_91".equals(error.errorCode()) &&
-                        expectedDescriptions.contains(error.description())));
+        assertThat(result)
+                .hasSize(2)
+                .extracting("errorCode", "description")
+                .containsExactlyInAnyOrder(
+                        Assertions.tuple("ERROR_CODE_91", "Risk type value INVALID1 is not supported!"),
+                        Assertions.tuple("ERROR_CODE_91", "Risk type value INVALID2 is not supported!")
+                );
     }
 
     @Test
-    public void validate_ShouldReturnErrorWhenSelectedRiskIsNull() {
+    void validate_ShouldReturnErrorWhenSelectedRiskIsNull() {
         PersonDTO person = PersonDTOBuilder.createPerson()
                 .withPersonFirstName("Jānis")
                 .withPersonLastName("Bērziņš")
@@ -112,11 +107,13 @@ class ValidateSelectedRisksIntegrationTest {
                 .withPremium(BigDecimal.ZERO)
                 .build();
 
-        List<ValidationErrorDTO> errors = validator.validate(agreement);
+        List<ValidationErrorDTO> result = validator.validate(agreement);
 
-        assertEquals(errors.size(), 1);
-        assertEquals("ERROR_CODE_5", errors.get(0).errorCode());
-        assertEquals("Field selectedRisks is empty!", errors.get(0).description());
+        assertThat(result)
+                .hasSize(1)
+                .extracting("errorCode", "description")
+                .containsExactly(
+                        Assertions.tuple("ERROR_CODE_5", "Field selectedRisks is empty!"));
     }
 
 }

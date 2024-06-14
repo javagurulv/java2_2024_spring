@@ -1,8 +1,9 @@
 package lv.javaguru.travel.insurance.core.validations;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
+import lv.javaguru.travel.insurance.core.api.dto.AgreementDTOBuilder;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
-import lv.javaguru.travel.insurance.core.util.SetUpInstancesHelper;
+import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTOBuilder;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -11,7 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -24,20 +25,21 @@ class TravelAgreementValidatorImplTest {
 
     @InjectMocks
     private TravelAgreementValidatorImpl validator;
-    @InjectMocks
-    private SetUpInstancesHelper helper;
 
     @Test
     void validate_ShouldSumUpErrorsCorrectly() {
-        AgreementDTO agreement = helper.newAgreementDTO();
+        AgreementDTO agreement = AgreementDTOBuilder.createAgreement().build();
+        ValidationErrorDTO validationError1 = ValidationErrorDTOBuilder.createValidationError().build();
+        ValidationErrorDTO validationError2 = ValidationErrorDTOBuilder.createValidationError().build();
+        ValidationErrorDTO validationError3 = ValidationErrorDTOBuilder.createValidationError().build();
+
         when(agreementAllFieldValidator.collectAgreementErrors(agreement))
-                .thenReturn(List.of(helper.newValidationErrorDTO(), helper.newValidationErrorDTO()));
-        when(personAllFieldValidator.collectPersonErrors(agreement))
-                .thenReturn(List.of(helper.newValidationErrorDTO()));
+                .thenReturn(List.of(validationError1, validationError2));
+        when(personAllFieldValidator.collectPersonErrors(agreement)).thenReturn(List.of(validationError3));
 
-        List<ValidationErrorDTO> errors = validator.validate(agreement);
+        List<ValidationErrorDTO> result = validator.validate(agreement);
 
-        assertEquals(3, errors.size());
+        assertThat(result).hasSize(3);
     }
 
 }

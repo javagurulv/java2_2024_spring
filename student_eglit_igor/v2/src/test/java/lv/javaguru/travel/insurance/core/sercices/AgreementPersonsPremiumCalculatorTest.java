@@ -27,8 +27,8 @@ class AgreementPersonsPremiumCalculatorTest {
 
     @Test
     void shouldCalculateRiskPremiumForAllPersons() {
-        var person1 = new PersonDTO("Joe", "Doe", "12345",LocalDate.of(2000, 1, 1), "MEDICAL_RISK_LIMIT", List.of());
-        var person2 = new PersonDTO("Jane", "Doe", "12345",LocalDate.of(2000, 1, 1), "MEDICAL_RISK_LIMIT",List.of());
+        var person1 = new PersonDTO("Joe", "Doe", "12345",LocalDate.of(2000, 1, 1), "MEDICAL_RISK_LIMIT", BigDecimal.ONE, List.of());
+        var person2 = new PersonDTO("Jane", "Doe", "12345",LocalDate.of(2000, 1, 1), "MEDICAL_RISK_LIMIT", BigDecimal.ONE, List.of());
 
         AgreementDTO agreement = new AgreementDTO();
         agreement.setPersons(List.of(person1, person2));

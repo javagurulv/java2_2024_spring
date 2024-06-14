@@ -1,7 +1,6 @@
 package lv.javaguru.travel.insurance.core.repositories.medical;
 
 import lv.javaguru.travel.insurance.core.domain.medical.MedicalRiskLimitLevel;
-import lv.javaguru.travel.insurance.core.repositories.medical.MedicalRiskLimitLevelRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +10,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.math.BigDecimal;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
@@ -23,22 +21,25 @@ class MedicalRiskLimitLevelRepositoryTest {
     private MedicalRiskLimitLevelRepository limitLevelRepository;
 
     @Test
-    public void injectedRepositoryAreNotNull() {
+    void injectedRepositoryAreNotNull() {
         assertNotNull(limitLevelRepository);
     }
 
     @Test
-    public void shouldFindCoefficientForExistingMedicalRiskLimitLevel() {
+    void shouldFindCoefficientForExistingMedicalRiskLimitLevel() {
         Optional<MedicalRiskLimitLevel> limitLevelOpt = limitLevelRepository
                 .findByMedicalRiskLimitLevelIc("LEVEL_10000");
-        assertTrue(limitLevelOpt.isPresent());
-        assertEquals(new BigDecimal("1.00"), limitLevelOpt.get().getCoefficient());
+
+        assertThat(limitLevelOpt)
+                .get()
+                .satisfies(l -> assertThat(l.getCoefficient()).isEqualTo(new BigDecimal("1.00")));
     }
 
     @Test
-    public void shouldReturnEmptyForInvalidMedicalRiskLimitLevel() {
+    void shouldReturnEmptyForInvalidMedicalRiskLimitLevel() {
         Optional<MedicalRiskLimitLevel> limitLevelOpt = limitLevelRepository.findByMedicalRiskLimitLevelIc("INVALID");
-        assertTrue(limitLevelOpt.isEmpty());
+
+        assertThat(limitLevelOpt).isEmpty();
     }
 
 }

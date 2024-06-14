@@ -42,6 +42,7 @@
     <input type="text" id="travelCost" th:field="${request.travelCost}"><br><br>
 
     <button type="submit">Calculate Premium</button>
+    <button type="button" onclick="clearForm()">Clear</button>
 </form>
 
 <!-- Added condition if response != null -->
@@ -67,6 +68,29 @@
     </tr>
     </td>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const agreementDateFrom = document.getElementById('agreementDateFrom');
+        const agreementDateTo= document.getElementById('agreementDateTo');
+
+        const today = new Date();
+
+        const dateFrom = new Date();
+        dateFrom.setDate(today.getDate() + 1);
+
+        const dateTo = new Date();
+        dateTo.setDate(today.getDate() + 2);
+
+        agreementDateFrom.value = dateFrom.toISOString().split('T')[0];
+        agreementDateTo.value = dateTo.toISOString().split('T')[0];
+    });
+
+    function clearForm() {
+        window.location.href = window.location.href.split('?')[0];
+    }
+
+</script>
 
 </body>
 </html>

@@ -11,7 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 
@@ -25,24 +25,26 @@ class ValidationErrorFactoryTest {
     private ValidationErrorFactory errorFactory;
 
     @Test
-    public void shouldReturnErrorWithDescription() {
+    void buildError_shouldReturnErrorWithDescription() {
         when(errorCodeUtilMock.getErrorDescription("ERROR_CODE"))
                 .thenReturn("error description");
 
         ValidationErrorDTO error = errorFactory.buildError("ERROR_CODE");
-        assertEquals("ERROR_CODE", error.errorCode());
-        assertEquals("error description", error.description());
+
+        assertThat(error.errorCode()).isEqualTo("ERROR_CODE");
+        assertThat(error.description()).isEqualTo("error description");
     }
 
     @Test
-    public void shouldReturnErrorWithDescriptionAndPlaceholders() {
+    void buildError_shouldReturnErrorWithDescriptionAndPlaceholders() {
         Placeholder placeholder = new Placeholder("placeholderName", "PH");
         when(errorCodeUtilMock.getErrorDescription("ERROR_CODE", List.of(placeholder)))
                 .thenReturn("error description PH");
 
         ValidationErrorDTO error = errorFactory.buildError("ERROR_CODE", List.of(placeholder));
-        assertEquals("ERROR_CODE", error.errorCode());
-        assertEquals("error description PH", error.description());
+
+        assertThat(error.errorCode()).isEqualTo("ERROR_CODE");
+        assertThat(error.description()).isEqualTo("error description PH");
     }
 
 }

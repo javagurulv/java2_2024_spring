@@ -20,26 +20,28 @@ class TCAgeCoefficientRepositoryTest {
     private TCAgeCoefficientRepository repository;
 
     @Test
-    public void injectedRepositoryAreNotNull() {
+    void injectedRepositoryAreNotNull() {
         assertThat(repository).isNotNull();
     }
 
     @Test
-    public void findAgeCoefficient_ShouldFindExistingCoefficient() {
+    void findAgeCoefficient_ShouldFindExistingCoefficient() {
         Optional<TCAgeCoefficient> ageCoefficientOpt = repository.findCoefficientByAge(30);
-        assertThat(ageCoefficientOpt).isPresent()
-                .map(TCAgeCoefficient::getCoefficient)
-                .contains(new BigDecimal("20.00"));
+
+        assertThat(ageCoefficientOpt)
+                .get()
+                .satisfies(a -> assertThat(a.getCoefficient()).isEqualTo(new BigDecimal("20.00")));
     }
 
     @Test
-    public void findAgeCoefficient_ShouldNotFindCoefficientWhenAgeIsNull() {
+    void findAgeCoefficient_ShouldNotFindCoefficientWhenAgeIsNull() {
         Optional<TCAgeCoefficient> ageCoefficientOpt = repository.findCoefficientByAge(null);
+
         assertThat(ageCoefficientOpt).isEmpty();
     }
 
     @Test
-    public void findAgeCoefficient_ShouldNotFindCoefficientWhenCoefficientDoesNotExist() {
+    void findAgeCoefficient_ShouldNotFindCoefficientWhenCoefficientDoesNotExist() {
         Optional<TCAgeCoefficient> ageCoefficientOpt =
                 repository.findCoefficientByAge(160);
 

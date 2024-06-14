@@ -41,7 +41,7 @@ class SelectedRisksPremiumCalculatorTest {
         when(riskPremiumCalculator1.getRiskIc()).thenReturn("TRAVEL_MEDICAL");
         when(riskPremiumCalculator1.calculatePremium(any(), any())).thenReturn(BigDecimal.ONE);
         AgreementDTO agreement = mock(AgreementDTO.class);
-        PersonDTO person = new PersonDTO("John", "Doe", "12345",LocalDate.of(2000, 1, 1), "MEDICAL_RISK_LIMIT",List.of(new RiskDTO()));
+        PersonDTO person = new PersonDTO("John", "Doe", "12345",LocalDate.of(2000, 1, 1), "MEDICAL_RISK_LIMIT", BigDecimal.ONE, List.of(new RiskDTO()));
         when(agreement.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL"));
         List<RiskDTO> riskPremiums = calculator.calculatePremiumForAllRisks(agreement, person);
         assertEquals(1, riskPremiums.size());
@@ -57,7 +57,7 @@ class SelectedRisksPremiumCalculatorTest {
         when(riskPremiumCalculator2.calculatePremium(any(), any())).thenReturn(BigDecimal.ONE);
 
         AgreementDTO agreement = mock(AgreementDTO.class);
-        PersonDTO person = new PersonDTO("John", "Doe", "12345",LocalDate.of(2000, 1, 1), "MEDICAL_RISK_LIMIT",List.of(new RiskDTO()));
+        PersonDTO person = new PersonDTO("John", "Doe", "12345",LocalDate.of(2000, 1, 1), "MEDICAL_RISK_LIMIT", BigDecimal.ONE, List.of(new RiskDTO()));
         when(agreement.getSelectedRisks()).thenReturn(List.of("TRAVEL_MEDICAL", "TRAVEL_EVACUATION"));
         List<RiskDTO> riskPremiums = calculator.calculatePremiumForAllRisks(agreement, person);
         assertEquals(2, riskPremiums.size());
@@ -72,7 +72,7 @@ class SelectedRisksPremiumCalculatorTest {
         when(riskPremiumCalculator2.getRiskIc()).thenReturn("TRAVEL_EVACUATION");
 
         AgreementDTO agreement = mock(AgreementDTO.class);
-        PersonDTO person = new PersonDTO("John", "Doe", "12345",LocalDate.of(2000, 1, 1),"MEDICAL_RISK_LIMIT", List.of(new RiskDTO()));
+        PersonDTO person = new PersonDTO("John", "Doe", "12345",LocalDate.of(2000, 1, 1),"MEDICAL_RISK_LIMIT", BigDecimal.ONE, List.of(new RiskDTO()));
 
         when(agreement.getSelectedRisks()).thenReturn(List.of("NOT_SUPPORTED_RISK_TYPE"));
 

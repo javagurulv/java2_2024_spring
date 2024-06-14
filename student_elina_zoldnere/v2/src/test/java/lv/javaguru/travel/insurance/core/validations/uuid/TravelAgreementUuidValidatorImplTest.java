@@ -4,6 +4,7 @@ import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
 import lv.javaguru.travel.insurance.core.domain.entities.AgreementEntity;
 import lv.javaguru.travel.insurance.core.repositories.entities.AgreementEntityRepository;
 import lv.javaguru.travel.insurance.core.validations.ValidationErrorFactory;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,11 +18,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -38,19 +39,23 @@ class TravelAgreementUuidValidatorImplTest {
     @ParameterizedTest(name = "{0}")
     @MethodSource("uuidValue")
     void validate_ShouldReturnErrorWhenUuidIsNullOrBlank(String testName, String uuid) {
-        ValidationErrorDTO error = new ValidationErrorDTO("ERROR_CODE_21", "description");
-        when(errorFactoryMock.buildError("ERROR_CODE_21")).thenReturn(error);
+        when(errorFactoryMock.buildError("ERROR_CODE_21"))
+                .thenReturn(new ValidationErrorDTO("ERROR_CODE_21", "DESCRIPTION"));
 
         List<ValidationErrorDTO> result = validator.validate(uuid);
 
-        assertEquals(1, result.size());
-        assertEquals(error, result.get(0));
+        assertThat(result)
+                .hasSize(1)
+                .extracting("errorCode", "description")
+                .containsExactly(
+                        Assertions.tuple("ERROR_CODE_21", "DESCRIPTION"));
     }
 
     private static Stream<Arguments> uuidValue() {
         return Stream.of(
-                Arguments.of("uuid null", null),
-                Arguments.of("uuid blank", "     ")
+                Arguments.of("uuid is null", null),
+                Arguments.of("uuid is empty", ""),
+                Arguments.of("uuid is blank", "     ")
         );
     }
 
@@ -58,14 +63,16 @@ class TravelAgreementUuidValidatorImplTest {
     void validate_ShouldReturnErrorWhenUuidDoesNotExistInRepository() {
         String uuid = "INVALID";
         when(agreementRepositoryMock.findByUuid(uuid)).thenReturn(Optional.empty());
-
-        ValidationErrorDTO error = new ValidationErrorDTO("ERROR_CODE_22", "description");
-        lenient().when(errorFactoryMock.buildError(eq("ERROR_CODE_22"), anyList())).thenReturn(error);
+        lenient().when(errorFactoryMock.buildError(eq("ERROR_CODE_22"), anyList()))
+                .thenReturn(new ValidationErrorDTO("ERROR_CODE_22", "DESCRIPTION"));
 
         List<ValidationErrorDTO> result = validator.validate(uuid);
 
-        assertEquals(1, result.size());
-        assertEquals(error, result.get(0));
+        assertThat(result)
+                .hasSize(1)
+                .extracting("errorCode", "description")
+                .containsExactly(
+                        Assertions.tuple("ERROR_CODE_22", "DESCRIPTION"));
     }
 
     @Test
@@ -75,7 +82,8 @@ class TravelAgreementUuidValidatorImplTest {
 
         List<ValidationErrorDTO> result = validator.validate(uuid);
 
-        assertTrue(result.isEmpty());
+        assertThat(result).isEmpty();
+        verifyNoInteractions(errorFactoryMock);
     }
 
 }

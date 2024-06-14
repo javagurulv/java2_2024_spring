@@ -1,6 +1,5 @@
 package lv.javaguru.travel.insurance.core.validations.person;
 
-import liquibase.pro.packaged.E;
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
 import lv.javaguru.travel.insurance.core.api.dto.PersonDTO;
 import lv.javaguru.travel.insurance.core.api.dto.ValidationErrorDTO;
@@ -10,13 +9,14 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -37,6 +37,7 @@ class EmptyPersonCodeValidationTest extends TravelPersonFieldValidationImpl {
                 "12345",
                 LocalDate.of(2000,1,1),
                 "MEDICAL_RISK",
+                BigDecimal.ONE,
                 List.of()
         );
         Optional<ValidationErrorDTO> errorOpt = validation.validate(agreement, person);
@@ -52,6 +53,7 @@ class EmptyPersonCodeValidationTest extends TravelPersonFieldValidationImpl {
                 null,
                 LocalDate.of(2000,1,1),
                 "MEDICAL_RISK",
+                BigDecimal.ONE,
                 List.of()
         );
         when(errorFactory.buildError("ERROR_CODE_16"))
@@ -70,6 +72,7 @@ class EmptyPersonCodeValidationTest extends TravelPersonFieldValidationImpl {
                 "",
                 LocalDate.of(2000,1,1),
                 "MEDICAL_RISK",
+                BigDecimal.ONE,
                 List.of()
         );
         when(errorFactory.buildError("ERROR_CODE_16"))

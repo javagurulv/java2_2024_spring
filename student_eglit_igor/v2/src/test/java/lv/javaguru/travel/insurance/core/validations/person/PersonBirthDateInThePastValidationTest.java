@@ -11,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Optional;
@@ -33,7 +34,7 @@ class PersonBirthDateInThePastValidationTest {
     @Test
     public void shouldReturnErrorWhenPersonBirthDateInTheFuture() {
         AgreementDTO agreement = mock(AgreementDTO.class);
-        var person = new PersonDTO("John", "Doe", "12345",LocalDate.now().plusYears(20), "MEDICAL_RISK",Collections.emptyList());
+        var person = new PersonDTO("John", "Doe", "12345",LocalDate.now().plusYears(20), "MEDICAL_RISK", BigDecimal.ONE, Collections.emptyList());
         when(dateTimeUtil.getCurrentDateTime()).thenReturn(LocalDate.now());
         when(errorFactory.buildError("ERROR_CODE_13")).thenReturn(new ValidationErrorDTO("ERROR_CODE_13", "Field personBirthDate is in the future!"));
         Optional<ValidationErrorDTO> errorOpt = validation.validate(agreement, person);
@@ -44,7 +45,7 @@ class PersonBirthDateInThePastValidationTest {
     @Test
     public void shouldNotReturnErrorWhenPersonBirthDateDateInThePast() {
         AgreementDTO agreement = mock(AgreementDTO.class);
-        var person = new PersonDTO("John", "Doe", "12345",LocalDate.now().minusYears(20), "MEDICAL_RISK", Collections.emptyList());
+        var person = new PersonDTO("John", "Doe", "12345",LocalDate.now().minusYears(20), "MEDICAL_RISK", BigDecimal.ONE, Collections.emptyList());
         when(dateTimeUtil.getCurrentDateTime()).thenReturn(LocalDate.now());
         Optional<ValidationErrorDTO> errorOpt = validation.validate(agreement,person);
         assertTrue(errorOpt.isEmpty());

@@ -5,5 +5,5 @@ import org.springframework.context.annotation.PropertySource;
 
 @Configuration
 @PropertySource("classpath:errorCodes.properties")
-public class ErrorPropertiesConfig {
+class ErrorPropertiesConfig {
 }

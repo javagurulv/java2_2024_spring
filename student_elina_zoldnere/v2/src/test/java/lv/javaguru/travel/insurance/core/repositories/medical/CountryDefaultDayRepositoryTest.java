@@ -1,7 +1,6 @@
 package lv.javaguru.travel.insurance.core.repositories.medical;
 
 import lv.javaguru.travel.insurance.core.domain.medical.CountryDefaultDayRate;
-import lv.javaguru.travel.insurance.core.repositories.medical.CountryDefaultDayRateRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +10,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.math.BigDecimal;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
@@ -23,21 +21,24 @@ class CountryDefaultDayRepositoryTest {
     private CountryDefaultDayRateRepository dayRateRepository;
 
     @Test
-    public void injectedRepositoryAreNotNull() {
+    void injectedRepositoryAreNotNull() {
         assertNotNull(dayRateRepository);
     }
 
     @Test
-    public void shouldFindCountryDayRate() {
+    void shouldFindCountryDayRate() {
         Optional<CountryDefaultDayRate> dayRateOpt = dayRateRepository.findByCountryIc("SPAIN");
-        assertTrue(dayRateOpt.isPresent());
-        assertEquals(new BigDecimal("2.50"), dayRateOpt.get().getDefaultDayRate());
+
+        assertThat(dayRateOpt)
+                .get()
+                .satisfies(d -> assertThat(d.getDefaultDayRate()).isEqualTo(new BigDecimal("2.50")));
     }
 
     @Test
-    public void shouldNotFindInvalidDayRate() {
+    void shouldNotFindInvalidDayRate() {
         Optional<CountryDefaultDayRate> dayRateOpt = dayRateRepository.findByCountryIc("INVALID");
-        assertTrue(dayRateOpt.isEmpty());
+
+        assertThat(dayRateOpt).isEmpty();
     }
 
 }

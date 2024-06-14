@@ -25,6 +25,7 @@ class AgreementPersonsPremiumCalculator {
                     person.personCode(),
                     person.personBirthDate(),
                     person.medicalRiskLimitLevel(),
+                    person.travelCost(),
                     calculationResult.getRisks());
             updatedPersons.add(updatedPerson);
         });

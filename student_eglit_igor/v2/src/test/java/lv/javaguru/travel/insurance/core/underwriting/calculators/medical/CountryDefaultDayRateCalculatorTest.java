@@ -1,8 +1,8 @@
 package lv.javaguru.travel.insurance.core.underwriting.calculators.medical;
 
 import lv.javaguru.travel.insurance.core.api.dto.AgreementDTO;
-import lv.javaguru.travel.insurance.core.domain.CountryDefaultDayRate;
-import lv.javaguru.travel.insurance.core.repositories.CountryDefaultDayRateRepository;
+import lv.javaguru.travel.insurance.core.domain.TMCountryDefaultDayRate;
+import lv.javaguru.travel.insurance.core.repositories.TMCountryDefaultDayRateRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,7 +20,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class CountryDefaultDayRateCalculatorTest {
 
-    @Mock private CountryDefaultDayRateRepository countryDefaultDayRateRepository;
+    @Mock private TMCountryDefaultDayRateRepository TMCountryDefaultDayRateRepository;
 
     @InjectMocks
     private CountryDefaultDayRateCalculator calculator;
@@ -34,16 +34,16 @@ class CountryDefaultDayRateCalculatorTest {
     @Test
     void shouldCalculateDayRateWhenCountryDayRateExists() {
         BigDecimal expectedDayRate = BigDecimal.valueOf(10.0);
-        CountryDefaultDayRate countryDefaultDayRate = mock(CountryDefaultDayRate.class);
-        when(countryDefaultDayRate.getDefaultDayRate()).thenReturn(expectedDayRate);
-        when(countryDefaultDayRateRepository.findByCountryIc(agreement.getCountry()))
-                .thenReturn(java.util.Optional.of(countryDefaultDayRate));
+        TMCountryDefaultDayRate TMCountryDefaultDayRate = mock(TMCountryDefaultDayRate.class);
+        when(TMCountryDefaultDayRate.getDefaultDayRate()).thenReturn(expectedDayRate);
+        when(TMCountryDefaultDayRateRepository.findByCountryIc(agreement.getCountry()))
+                .thenReturn(java.util.Optional.of(TMCountryDefaultDayRate));
         BigDecimal result = calculator.calculate(agreement);
         assertEquals(expectedDayRate, result);
     }
     @Test
     void shouldThrowExceptionWhenCountryDayRateNotFound() {
-       when(countryDefaultDayRateRepository.findByCountryIc(agreement.getCountry())).thenReturn(Optional.empty());
+       when(TMCountryDefaultDayRateRepository.findByCountryIc(agreement.getCountry())).thenReturn(Optional.empty());
        RuntimeException exception = assertThrows(RuntimeException.class, () -> calculator.calculate(agreement));
        assertEquals("Country day rate not found by country id = " + agreement.getCountry(), exception.getMessage());
     }
