@@ -15,17 +15,17 @@ import java.util.concurrent.TimeUnit;
 @EnableCaching
 class CacheConfig {
 
-    @Value("${cache.profile.1.initial.capacity}")
+    @Value("${cache.profile.1.initial.capacity:10}")
     private int profile1InitialCapacity;
-    @Value("${cache.profile.1.max.size}")
+    @Value("${cache.profile.1.max.size:50}")
     private int profile1MaxSize;
-    @Value("${cache.profile.1.expires.after.access}")
+    @Value("${cache.profile.1.expires.after.access:10}")
     private int profile1Expiration;
-    @Value("${cache.profile.2.initial.capacity}")
+    @Value("${cache.profile.2.initial.capacity:10}")
     private int profile2InitialCapacity;
-    @Value("${cache.profile.2.max.size}")
+    @Value("${cache.profile.2.max.size:50}")
     private int profile2MaxSize;
-    @Value("${cache.profile.2.expires.after.access}")
+    @Value("${cache.profile.2.expires.after.access:10}")
     private int profile2Expiration;
 
     @Bean
