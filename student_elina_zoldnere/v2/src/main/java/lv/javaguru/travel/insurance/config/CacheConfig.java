@@ -15,17 +15,17 @@ import java.util.concurrent.TimeUnit;
 @EnableCaching
 class CacheConfig {
 
-    @Value("${cache.profile.1.initial.capacity:10}")
+    @Value("${cache.profile.1.initial.capacity}")
     private int profile1InitialCapacity;
-    @Value("${cache.profile.1.max.size:50}")
+    @Value("${cache.profile.1.max.size}")
     private int profile1MaxSize;
-    @Value("${cache.profile.1.expires.after.access:10}")
+    @Value("${cache.profile.1.expires.after.access}")
     private int profile1Expiration;
-    @Value("${cache.profile.2.initial.capacity:10}")
+    @Value("${cache.profile.2.initial.capacity}")
     private int profile2InitialCapacity;
-    @Value("${cache.profile.2.max.size:50}")
+    @Value("${cache.profile.2.max.size}")
     private int profile2MaxSize;
-    @Value("${cache.profile.2.expires.after.access:10}")
+    @Value("${cache.profile.2.expires.after.access}")
     private int profile2Expiration;
 
     @Bean
@@ -41,7 +41,6 @@ class CacheConfig {
         cacheManager.registerCustomCache("countryDefaultDayRateCache", buildCaffeineProfile2());
         cacheManager.registerCustomCache("medicalRiskLimitLevelCache", buildCaffeineProfile1());
         cacheManager.registerCustomCache("tmAgeCoefficientCache", buildCaffeineProfile1());
-
         return cacheManager;
     }
 
