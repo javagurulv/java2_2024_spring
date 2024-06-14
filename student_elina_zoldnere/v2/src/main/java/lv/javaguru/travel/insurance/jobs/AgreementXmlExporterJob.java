@@ -23,6 +23,8 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class AgreementXmlExporterJob {
 
+    private static final Logger logger = LoggerFactory.getLogger(AgreementXmlExporterJob.class);
+
     @Value("${agreement.xml.exporter.job.enabled:false}")
     private boolean jobEnabled;
     @Value("${agreement.xml.exporter.job.thread.count:1}")
@@ -32,8 +34,6 @@ public class AgreementXmlExporterJob {
     private TravelGetNotExportedAgreementUuidsService getUuidsService;
     @Autowired
     private TravelExportAgreementToXmlService service;
-
-    private static final Logger logger = LoggerFactory.getLogger(AgreementXmlExporterJob.class);
 
     @Scheduled(fixedRate = 1, timeUnit = TimeUnit.MINUTES)
     public void executeJob() {

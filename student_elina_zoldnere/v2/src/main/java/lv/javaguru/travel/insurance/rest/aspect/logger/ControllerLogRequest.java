@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 class ControllerLogRequest {
 
     private static final Logger logger = LoggerFactory.getLogger(ControllerLogRequest.class);
+
     private static final ObjectMapper mapper = new ObjectMapper();
 
     public static void log(ProceedingJoinPoint joinPoint) {

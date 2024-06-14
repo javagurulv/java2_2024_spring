@@ -13,9 +13,6 @@ import java.util.regex.Pattern;
 @Component
 public class ValidatePersonFirstNameFormat extends PersonFieldValidationImpl {
 
-    @Autowired
-    private ValidationErrorFactory validationErrorFactory;
-
     /**
      * Regex to validate person first name:<br>
      * ^            Start of the string<br>
@@ -26,6 +23,9 @@ public class ValidatePersonFirstNameFormat extends PersonFieldValidationImpl {
      * $            End of the string
      */
     private static final String PERSON_FIRST_NAME_REGEX = "^[A-Za-zĀČĒĢĪĶĻŅŠŪŽāčēģīķļņšūž\\s\\-]+$";
+
+    @Autowired
+    private ValidationErrorFactory validationErrorFactory;
 
     @Override
     public Optional<ValidationErrorDTO> validateSingle(AgreementDTO agreement, PersonDTO person) {
