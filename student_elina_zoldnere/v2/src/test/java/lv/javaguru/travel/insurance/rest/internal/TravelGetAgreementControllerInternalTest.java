@@ -12,8 +12,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -23,6 +25,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.nio.charset.StandardCharsets;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -43,6 +46,7 @@ class TravelGetAgreementControllerInternalTest {
     private EntityManager entityManager;
 
     @Test
+    @WithMockUser(username = "user")
     void controller_ShouldFindExistingUuid() throws Exception {
         JsonObject testDataJson = gson.fromJson(reader.readJsonFromFile(
                         "internal/ControllerInternalTest_Combined_9.01_all_fields_are_present_and_valid.json"),
@@ -50,9 +54,12 @@ class TravelGetAgreementControllerInternalTest {
         JsonObject setUpRequestJson = testDataJson.getAsJsonObject("set-up request");
         JsonObject expectedResponseJson = testDataJson.getAsJsonObject("expectedResponse");
 
-        mockMvc.perform(post("/insurance/travel/api/v2/")
-                        .content(setUpRequestJson.toString())
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
+        MockHttpServletRequestBuilder requestBuilder = post("/insurance/travel/api/v2/")
+                .content(setUpRequestJson.toString())
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .with(csrf().asHeader()); // not the best fix
+
+        mockMvc.perform(requestBuilder)
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse();
@@ -80,6 +87,7 @@ class TravelGetAgreementControllerInternalTest {
     }
 
     @Test
+    @WithMockUser(username = "user")
     void controller_ShouldReturnErrorForNotExistingUuid() throws Exception {
         MockHttpServletResponse response = mockMvc.perform(get(
                         "/insurance/travel/api/internal/agreement/NOT-EXISTING-UUID")
