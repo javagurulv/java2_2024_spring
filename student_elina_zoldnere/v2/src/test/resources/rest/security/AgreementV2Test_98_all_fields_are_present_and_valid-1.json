@@ -1,0 +1,60 @@
+{
+  "request": {
+    "agreementDateFrom": "2025-03-10",
+    "agreementDateTo": "2025-03-11",
+    "selectedRisks": ["TRAVEL_MEDICAL"],
+    "country": "SPAIN",
+    "persons": [
+      {
+        "personFirstName": "Jānis",
+        "personLastName": "Bērziņš",
+        "personalCode": "123456-12345",
+        "personBirthDate": "1990-01-01",
+        "medicalRiskLimitLevel": "LEVEL_15000"
+      },
+      {
+        "personFirstName": "Kārlis",
+        "personLastName": "Krūmiņš",
+        "personalCode": "234567-23456",
+        "personBirthDate": "1989-01-01",
+        "medicalRiskLimitLevel": "LEVEL_15000"
+      }
+    ]
+  },
+  "expectedResponse": {
+    "agreementDateFrom": "2025-03-10",
+    "agreementDateTo": "2025-03-11",
+    "country": "SPAIN",
+    "agreementPremium": 6.60,
+    "persons": [
+      {
+        "personFirstName": "Jānis",
+        "personLastName": "Bērziņš",
+        "personalCode": "123456-12345",
+        "personBirthDate": "1990-01-01",
+        "medicalRiskLimitLevel": "LEVEL_15000",
+        "personPremium": 3.30,
+        "personRisks": [
+          {
+            "riskIc": "TRAVEL_MEDICAL",
+            "premium": 3.30
+          }
+        ]
+      },
+      {
+        "personFirstName": "Kārlis",
+        "personLastName": "Krūmiņš",
+        "personalCode": "234567-23456",
+        "personBirthDate": "1989-01-01",
+        "medicalRiskLimitLevel": "LEVEL_15000",
+        "personPremium": 3.30,
+        "personRisks": [
+          {
+            "riskIc": "TRAVEL_MEDICAL",
+            "premium": 3.30
+          }
+        ]
+      }
+    ]
+  }
+}

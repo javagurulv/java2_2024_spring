@@ -11,21 +11,26 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-class SecurityConfig {
+public class SecurityConfig {
 
     @Bean
     public InMemoryUserDetailsManager userDetailsManager() {
-        UserDetails user = User.withUsername("user")
-                .password(passwordEncoder().encode("javaguru"))
+        UserDetails user = User.withUsername("user1")
+                .password(passwordEncoder().encode("javaguru1"))
                 .roles("USER")
                 .build();
 
-        UserDetails admin = User.withUsername("admin")
-                .password(passwordEncoder().encode("javaguru"))
+        UserDetails admin = User.withUsername("admin2")
+                .password(passwordEncoder().encode("javaguru2"))
                 .roles("ADMIN")
                 .build();
 
-        return new InMemoryUserDetailsManager(user, admin);
+        UserDetails testUser = User.withUsername("testUser")
+                .password(passwordEncoder().encode("javaguru3"))
+                .roles("USER")
+                .build();
+
+        return new InMemoryUserDetailsManager(user, admin, testUser);
     }
 
     @Bean

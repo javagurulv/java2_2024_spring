@@ -15,7 +15,6 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -25,7 +24,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.nio.charset.StandardCharsets;
 
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -54,12 +52,9 @@ class TravelGetAgreementControllerInternalTest {
         JsonObject setUpRequestJson = testDataJson.getAsJsonObject("set-up request");
         JsonObject expectedResponseJson = testDataJson.getAsJsonObject("expectedResponse");
 
-        MockHttpServletRequestBuilder requestBuilder = post("/insurance/travel/api/v2/")
-                .content(setUpRequestJson.toString())
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .with(csrf().asHeader()); // not the best fix
-
-        mockMvc.perform(requestBuilder)
+        mockMvc.perform(post("/insurance/travel/api/v2/")
+                        .content(setUpRequestJson.toString())
+                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse();

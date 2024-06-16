@@ -14,12 +14,10 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
 import java.nio.charset.StandardCharsets;
 import java.util.stream.Stream;
 
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static uk.org.webcompere.modelassert.json.JsonAssertions.assertJson;
@@ -61,12 +59,9 @@ public abstract class TravelCalculatePremiumControllerTestTemplate {
         JsonObject requestJson = testDataJson.getAsJsonObject("request");
         JsonObject expectedResponseJson = testDataJson.getAsJsonObject("expectedResponse");
 
-        MockHttpServletRequestBuilder requestBuilder = post(getEndpoint())
-                .content(requestJson.toString())
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .with(csrf().asHeader()); // not the best fix
-
-        MockHttpServletResponse calculatedResponse = mockMvc.perform(requestBuilder)
+        MockHttpServletResponse calculatedResponse = mockMvc.perform(post(getEndpoint())
+                        .content(requestJson.toString())
+                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse();
