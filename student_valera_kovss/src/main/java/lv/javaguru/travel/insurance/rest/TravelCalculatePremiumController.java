@@ -28,4 +28,5 @@ public class TravelCalculatePremiumController {
 		return calculatePremiumService.calculatePremium(request);
 	}
 
+
 }

@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TravelCalculatePremiumResponseLogger {
+class TravelCalculatePremiumResponseLogger {
 
     static final Logger logger = LoggerFactory.getLogger(TravelCalculatePremiumResponseLogger.class);
 
@@ -21,6 +21,7 @@ public class TravelCalculatePremiumResponseLogger {
             logger.error("Error to convert response to JSON", e);
         }
     }
+
 
 }
 
