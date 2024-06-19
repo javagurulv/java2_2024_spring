@@ -39,7 +39,7 @@ class ValidateAgreementDateChronologyTest {
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("agreementDateToValue")
-    public void validate_ShouldReturnErrorWhenAgreementDateChronologyIsWrong(String testName, Date agreementDateTo) {
+    void validate_ShouldReturnErrorWhenAgreementDateChronologyIsWrong(String testName, Date agreementDateTo) {
         helper = new DateHelper();
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
                 .withDateFrom(helper.newDate("2025.03.10"))

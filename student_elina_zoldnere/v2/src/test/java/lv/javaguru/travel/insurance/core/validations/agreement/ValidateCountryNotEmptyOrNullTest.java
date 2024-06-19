@@ -29,7 +29,7 @@ class ValidateCountryNotEmptyOrNullTest {
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("countryValue")
-    public void validateSingle_ShouldReturnErrorWhenCountryIsNotValid(String testName, String country) {
+    public void validateSingle_ShouldReturnErrorWhenCountryIsEmptyOrNull(String testName, String country) {
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
                 .withCountry(country)
                 .build();

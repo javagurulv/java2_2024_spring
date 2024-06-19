@@ -25,7 +25,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @AutoConfigureMockMvc
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
-public class AgeCoefficientOnMedicalRiskLimitLevelOnIntegrationTest {
+class AgeCoefficientOnMedicalRiskLimitLevelOnIntegrationTest {
     @Autowired
     private TravelCalculatePremiumUnderwriting underwriting;
     @Autowired
