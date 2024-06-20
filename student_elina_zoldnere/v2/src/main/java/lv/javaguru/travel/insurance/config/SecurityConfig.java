@@ -15,22 +15,37 @@ public class SecurityConfig {
 
     @Bean
     public InMemoryUserDetailsManager userDetailsManager() {
-        UserDetails user = User.withUsername("user1")
+        UserDetails internalUser = User.withUsername("internal_user_1")
                 .password(passwordEncoder().encode("javaguru1"))
-                .roles("USER")
+                .roles("INTERNAL_USER")
                 .build();
 
-        UserDetails admin = User.withUsername("admin2")
+        UserDetails externalUser = User.withUsername("external_user_2")
                 .password(passwordEncoder().encode("javaguru2"))
+                .roles("EXTERNAL_USER")
+                .build();
+
+        UserDetails admin = User.withUsername("admin")
+                .password(passwordEncoder().encode("javaguru3"))
                 .roles("ADMIN")
                 .build();
 
-        UserDetails testUser = User.withUsername("testUser")
-                .password(passwordEncoder().encode("javaguru3"))
-                .roles("USER")
+        UserDetails internalTestUser = User.withUsername("internal_test_user")
+                .password(passwordEncoder().encode("javaguru4"))
+                .roles("INTERNAL_USER")
                 .build();
 
-        return new InMemoryUserDetailsManager(user, admin, testUser);
+        UserDetails externalTestUser = User.withUsername("external_test_user")
+                .password(passwordEncoder().encode("javaguru5"))
+                .roles("EXTERNAL_USER")
+                .build();
+
+        return new InMemoryUserDetailsManager(
+                internalUser,
+                externalUser,
+                admin,
+                internalTestUser,
+                externalTestUser);
     }
 
     @Bean
@@ -39,8 +54,16 @@ public class SecurityConfig {
                 .csrf().disable()
                 .authorizeRequests(authorizeRequests ->
                         authorizeRequests
-                                .antMatchers("/insurance/travel/api/**").authenticated()
-                                .anyRequest().permitAll()
+                                .antMatchers("/insurance/travel/web/**")
+                                .permitAll()
+
+                                .antMatchers("/insurance/travel/api/v**")
+                                .hasAnyRole("EXTERNAL_USER", "INTERNAL_USER", "ADMIN")
+
+                                .antMatchers("/insurance/travel/api/internal/**")
+                                .hasAnyRole("INTERNAL_USER", "ADMIN")
+
+                                .anyRequest().authenticated()
                 )
                 .httpBasic();
         return http.build();

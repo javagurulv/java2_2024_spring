@@ -1,9 +1,9 @@
 package lv.javaguru.travel.insurance.rest.security;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import lv.javaguru.travel.insurance.rest.JsonFileReader;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,27 +12,23 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Base64;
+import java.util.stream.Stream;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class SpringSecurityBasicTest {
+class ControllerV2AuthenticationAuthorizationTest {
 
     @Autowired
     private MockMvc mockMvc;
-    @Autowired
-    private JsonFileReader reader;
-    @Autowired
-    private Gson gson;
 
-    @Test
-    void restController_ShouldReturn200ForValidUserCredentials() throws Exception {
-        String requestJsonString = setUpRequestData();
-
-        String username = "testUser";
-        String password = "javaguru3";
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("validCredentialsProvider")
+    void restControllerV2_ShouldReturn200ForValidUserCredentials(String testName, String username, String password)
+            throws Exception {
+        String requestJsonString = setUpRequestDataMock();
         String basicAuthHeader = "Basic " + Base64.getEncoder().encodeToString((username + ":" + password).getBytes());
 
         mockMvc.perform(post("/insurance/travel/api/v2/")
@@ -42,12 +38,11 @@ class SpringSecurityBasicTest {
                 .andExpect(status().isOk());
     }
 
-    @Test
-    void restController_ShouldReturn401ForWrongPassword() throws Exception {
-        String requestJsonString = setUpRequestData();
-
-        String username = "testUser";
-        String password = "notValidPassword";
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("invalidCredentialsProvider")
+    void restControllerV2_ShouldReturn401ForWrongUserCredentials(String testName, String username, String password)
+            throws Exception {
+        String requestJsonString = setUpRequestDataMock();
         String basicAuthHeader = "Basic " + Base64.getEncoder().encodeToString((username + ":" + password).getBytes());
 
         mockMvc.perform(post("/insurance/travel/api/v2/")
@@ -58,23 +53,8 @@ class SpringSecurityBasicTest {
     }
 
     @Test
-    void restController_ShouldReturn401ForWrongUsername() throws Exception {
-        String requestJsonString = setUpRequestData();
-
-        String username = "notValidUsername";
-        String password = "javaguru3";
-        String basicAuthHeader = "Basic " + Base64.getEncoder().encodeToString((username + ":" + password).getBytes());
-
-        mockMvc.perform(post("/insurance/travel/api/v2/")
-                        .content(requestJsonString)
-                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                        .header(HttpHeaders.AUTHORIZATION, basicAuthHeader))
-                .andExpect(status().isUnauthorized());
-    }
-
-    @Test
-    void restController_ShouldReturn401ForIncorrectHeader() throws Exception {
-        String requestJsonString = setUpRequestData();
+    void restControllerV2_ShouldReturn401ForIncorrectHeader() throws Exception {
+        String requestJsonString = setUpRequestDataMock();
 
         String incorrectAuthHeader = "Incorrect Authentication header";
 
@@ -86,8 +66,8 @@ class SpringSecurityBasicTest {
     }
 
     @Test
-    void restController_ShouldReturn401ForNoCredentials() throws Exception {
-        String requestJsonString = setUpRequestData();
+    void restControllerV2_ShouldReturn401ForNoCredentials() throws Exception {
+        String requestJsonString = setUpRequestDataMock();
 
         mockMvc.perform(post("/insurance/travel/api/v2/")
                         .content(requestJsonString)
@@ -95,12 +75,23 @@ class SpringSecurityBasicTest {
                 .andExpect(status().isUnauthorized());
     }
 
-    private String setUpRequestData() {
-        JsonObject testDataJson = gson.fromJson(reader.readJsonFromFile(
-                        "security/AgreementV2Test_98_all_fields_are_present_and_valid-1.json"),
-                JsonObject.class);
-        JsonObject requestJson = testDataJson.getAsJsonObject("request");
-        return requestJson.toString();
+    private String setUpRequestDataMock() {
+        return "{\"key\":\"value\"}";
+    }
+
+    private static Stream<Arguments> validCredentialsProvider(){
+        return Stream.of(
+                Arguments.of("valid internal user", "internal_test_user", "javaguru4"),
+                Arguments.of("valid external user", "external_test_user", "javaguru5"),
+                Arguments.of("valid admin", "admin", "javaguru3")
+                );
+    }
+
+    private static Stream<Arguments> invalidCredentialsProvider(){
+        return Stream.of(
+                Arguments.of("invalid user name", "not_valid_username", "javaguru4"),
+                Arguments.of("invalid password", "internal_test_user", "notValidPassword")
+        );
     }
 
 }

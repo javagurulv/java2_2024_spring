@@ -43,7 +43,7 @@ public abstract class TravelCalculatePremiumControllerTestTemplate {
     protected abstract String getEndpoint();
 
     @TestFactory
-    @WithMockUser(username = "user")
+    @WithMockUser(username = "admin", roles = {"ADMIN"})
     Stream<DynamicTest> dynamicTestsFromStream() {
         return fileProvider.provideTestData(getTestDataPath())
                 .map(data ->
