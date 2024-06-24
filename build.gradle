@@ -29,5 +29,8 @@ subprojects {
 	test {
 		useJUnitPlatform()
 	}
-
+	dependencies {
+		implementation 'com.structurizr:structurizr-client:2.0.0'
+		implementation 'com.structurizr:structurizr-import:2.0.0'
+	}
 }
