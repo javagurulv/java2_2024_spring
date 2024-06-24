@@ -1,0 +1,369 @@
+{
+  "configuration" : { },
+  "description" : "Description",
+  "documentation" : { },
+  "id" : 1,
+  "lastModifiedAgent" : "structurizr-javascript",
+  "lastModifiedDate" : "2024-06-24T08:19:03Z",
+  "model" : {
+    "people" : [ {
+      "id" : "1",
+      "location" : "Unspecified",
+      "name" : "Insurance broker",
+      "properties" : {
+        "structurizr.dsl.identifier" : "u"
+      },
+      "relationships" : [ {
+        "description" : "Uses",
+        "destinationId" : "2",
+        "id" : "10",
+        "properties" : {
+          "structurizr.dsl.identifier" : "1ccb725b-a14f-49f2-8ca6-cc512ca64e93"
+        },
+        "sourceId" : "1",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Uses",
+        "destinationId" : "3",
+        "id" : "11",
+        "properties" : {
+          "structurizr.dsl.identifier" : "24dc3769-233e-4c48-8fc5-3fc88338b84e"
+        },
+        "sourceId" : "1",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Person"
+    } ],
+    "softwareSystems" : [ {
+      "containers" : [ {
+        "components" : [ {
+          "description" : "Handles incoming requests.",
+          "documentation" : { },
+          "id" : "4",
+          "name" : "TravelCalculatePremiumRequest",
+          "properties" : {
+            "structurizr.dsl.identifier" : "request"
+          },
+          "relationships" : [ {
+            "description" : "Receives",
+            "destinationId" : "6",
+            "id" : "13",
+            "properties" : {
+              "structurizr.dsl.identifier" : "950a3152-cf95-4b61-9973-947775cae7a7"
+            },
+            "sourceId" : "4",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component"
+        }, {
+          "description" : "Handles outgoing responses.",
+          "documentation" : { },
+          "id" : "5",
+          "name" : "TravelCalculatePremiumResponse",
+          "properties" : {
+            "structurizr.dsl.identifier" : "response"
+          },
+          "relationships" : [ {
+            "description" : "Returns to",
+            "destinationId" : "6",
+            "id" : "18",
+            "properties" : {
+              "structurizr.dsl.identifier" : "1f850ddb-1dc3-4207-8089-1b98d9653c62"
+            },
+            "sourceId" : "5",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component"
+        }, {
+          "description" : "Processes requests and delegates to TravelCalculatePremiumService.",
+          "documentation" : { },
+          "id" : "6",
+          "name" : "TravelCalculatePremiumController",
+          "properties" : {
+            "structurizr.dsl.identifier" : "controller"
+          },
+          "relationships" : [ {
+            "description" : "Calls for premium calculation",
+            "destinationId" : "8",
+            "id" : "14",
+            "properties" : {
+              "structurizr.dsl.identifier" : "e9aeeac2-a636-462e-a365-25fd04c69617"
+            },
+            "sourceId" : "6",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Calls for premium calculation",
+            "destinationId" : "7",
+            "id" : "15",
+            "linkedRelationshipId" : "14",
+            "sourceId" : "6"
+          }, {
+            "description" : "request/response",
+            "destinationId" : "1",
+            "id" : "19",
+            "properties" : {
+              "structurizr.dsl.identifier" : "d203c703-1a78-44cc-9f92-2fc5603b160f"
+            },
+            "sourceId" : "6",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component"
+        } ],
+        "description" : "Facilitates creating RESTful endpoints for HTTP interactions.",
+        "documentation" : { },
+        "id" : "3",
+        "name" : "REST",
+        "properties" : {
+          "structurizr.dsl.identifier" : "rest"
+        },
+        "relationships" : [ {
+          "description" : "calculate response",
+          "destinationId" : "7",
+          "id" : "12",
+          "properties" : {
+            "structurizr.dsl.identifier" : "14636b0e-06a4-4517-83ba-cf10dda14ff0"
+          },
+          "sourceId" : "3",
+          "tags" : "Relationship"
+        }, {
+          "description" : "Calls for premium calculation",
+          "destinationId" : "8",
+          "id" : "16",
+          "linkedRelationshipId" : "14",
+          "sourceId" : "3"
+        }, {
+          "description" : "request/response",
+          "destinationId" : "1",
+          "id" : "20",
+          "linkedRelationshipId" : "19",
+          "sourceId" : "3"
+        } ],
+        "tags" : "Element,Container"
+      }, {
+        "components" : [ {
+          "description" : "Calculates insurance premiums.",
+          "documentation" : { },
+          "id" : "8",
+          "name" : "TravelCalculatePremiumService",
+          "properties" : {
+            "structurizr.dsl.identifier" : "service"
+          },
+          "relationships" : [ {
+            "description" : "Uses",
+            "destinationId" : "9",
+            "id" : "17",
+            "properties" : {
+              "structurizr.dsl.identifier" : "ff70b8d8-f40e-4723-b8ff-59344d9b3b9b"
+            },
+            "sourceId" : "8",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component"
+        }, {
+          "description" : "Calculates date differences.",
+          "documentation" : { },
+          "id" : "9",
+          "name" : "DateTimeService",
+          "properties" : {
+            "structurizr.dsl.identifier" : "datetimeservice"
+          },
+          "tags" : "Element,Component"
+        } ],
+        "description" : "Manages HTTP requests/responses, session data, and provides foundational interfaces for extending web functionalities.",
+        "documentation" : { },
+        "id" : "7",
+        "name" : "CORE",
+        "properties" : {
+          "structurizr.dsl.identifier" : "core"
+        },
+        "tags" : "Element,Container"
+      } ],
+      "documentation" : { },
+      "id" : "2",
+      "location" : "Unspecified",
+      "name" : "Web Application",
+      "properties" : {
+        "structurizr.dsl.identifier" : "ss"
+      },
+      "relationships" : [ {
+        "description" : "request/response",
+        "destinationId" : "1",
+        "id" : "21",
+        "linkedRelationshipId" : "19",
+        "sourceId" : "2"
+      } ],
+      "tags" : "Element,Software System"
+    } ]
+  },
+  "name" : "Name",
+  "properties" : {
+    "structurizr.dsl" : "d29ya3NwYWNlIHsNCg0KICAgIG1vZGVsIHsNCiAgICAgICAgdSA9IHBlcnNvbiAiSW5zdXJhbmNlIGJyb2tlciINCiAgICAgICAgc3MgPSBzb2Z0d2FyZVN5c3RlbSAiV2ViIEFwcGxpY2F0aW9uIiB7DQogICAgICAgICAgICByZXN0ID0gY29udGFpbmVyICJSRVNUIiAiRmFjaWxpdGF0ZXMgY3JlYXRpbmcgUkVTVGZ1bCBlbmRwb2ludHMgZm9yIEhUVFAgaW50ZXJhY3Rpb25zLiIgew0KICAgICAgICAgICAgICAgIHJlcXVlc3QgPSBjb21wb25lbnQgIlRyYXZlbENhbGN1bGF0ZVByZW1pdW1SZXF1ZXN0IiB7DQogICAgICAgICAgICAgICAgICAgIGRlc2NyaXB0aW9uICJIYW5kbGVzIGluY29taW5nIHJlcXVlc3RzLiINCiAgICAgICAgICAgICAgICB9DQogICAgICAgICAgICAgICAgcmVzcG9uc2UgPSBjb21wb25lbnQgIlRyYXZlbENhbGN1bGF0ZVByZW1pdW1SZXNwb25zZSIgew0KICAgICAgICAgICAgICAgICAgICBkZXNjcmlwdGlvbiAiSGFuZGxlcyBvdXRnb2luZyByZXNwb25zZXMuIg0KICAgICAgICAgICAgICAgIH0NCiAgICAgICAgICAgICAgICBjb250cm9sbGVyID0gY29tcG9uZW50ICJUcmF2ZWxDYWxjdWxhdGVQcmVtaXVtQ29udHJvbGxlciIgew0KICAgICAgICAgICAgICAgICAgICBkZXNjcmlwdGlvbiAiUHJvY2Vzc2VzIHJlcXVlc3RzIGFuZCBkZWxlZ2F0ZXMgdG8gVHJhdmVsQ2FsY3VsYXRlUHJlbWl1bVNlcnZpY2UuIg0KICAgICAgICAgICAgICAgIH0NCiAgICAgICAgICAgIH0NCiAgICAgICAgICAgIGNvcmUgPSBjb250YWluZXIgIkNPUkUiICJNYW5hZ2VzIEhUVFAgcmVxdWVzdHMvcmVzcG9uc2VzLCBzZXNzaW9uIGRhdGEsIGFuZCBwcm92aWRlcyBmb3VuZGF0aW9uYWwgaW50ZXJmYWNlcyBmb3IgZXh0ZW5kaW5nIHdlYiBmdW5jdGlvbmFsaXRpZXMuIiB7DQogICAgICAgICAgICAgICAgc2VydmljZSA9IGNvbXBvbmVudCAiVHJhdmVsQ2FsY3VsYXRlUHJlbWl1bVNlcnZpY2UiIHsNCiAgICAgICAgICAgICAgICAgICAgZGVzY3JpcHRpb24gIkNhbGN1bGF0ZXMgaW5zdXJhbmNlIHByZW1pdW1zLiINCiAgICAgICAgICAgICAgICB9DQogICAgICAgICAgICAgICAgZGF0ZVRpbWVTZXJ2aWNlID0gY29tcG9uZW50ICJEYXRlVGltZVNlcnZpY2UiIHsNCiAgICAgICAgICAgICAgICAgICAgZGVzY3JpcHRpb24gIkNhbGN1bGF0ZXMgZGF0ZSBkaWZmZXJlbmNlcy4iDQogICAgICAgICAgICAgICAgfQ0KICAgICAgICAgICAgfQ0KICAgICAgICB9DQoNCiAgICAgICAgdSAtPiBzcyAiVXNlcyINCiAgICAgICAgdSAtPiByZXN0ICJVc2VzIg0KICAgICAgICByZXN0IC0+IGNvcmUgImNhbGN1bGF0ZSByZXNwb25zZSINCiAgICAgICAgcmVxdWVzdCAtPiBjb250cm9sbGVyICJSZWNlaXZlcyINCiAgICAgICAgY29udHJvbGxlciAtPiBzZXJ2aWNlICJDYWxscyBmb3IgcHJlbWl1bSBjYWxjdWxhdGlvbiINCiAgICAgICAgc2VydmljZSAtPiBkYXRlVGltZVNlcnZpY2UgIlVzZXMiDQogICAgICAgIA0KICAgICAgICByZXNwb25zZSAtPiBjb250cm9sbGVyICJSZXR1cm5zIHRvIg0KICAgICAgICBjb250cm9sbGVyIC0+IHUgInJlcXVlc3QvcmVzcG9uc2UiDQogICAgfQ0KDQogICAgdmlld3Mgew0KICAgICAgICBzeXN0ZW1Db250ZXh0IHNzICJCdXNpbmVzc1ZpZXciIHsNCiAgICAgICAgICAgIGluY2x1ZGUgKg0KICAgICAgICAgICAgYXV0b2xheW91dCBscg0KICAgICAgICB9DQoNCiAgICAgICAgY29udGFpbmVyIHNzICJDb250YWluZXJWaWV3IiB7DQogICAgICAgICAgICBpbmNsdWRlICoNCiAgICAgICAgICAgIGF1dG9sYXlvdXQgbHINCiAgICAgICAgfQ0KDQogICAgICAgIGNvbXBvbmVudCByZXN0ICJSRVNUX2VsZW1lbnRzIiB7DQogICAgICAgICAgICBpbmNsdWRlICoNCiAgICAgICAgICAgIGF1dG9sYXlvdXQgbHINCiAgICAgICAgfQ0KICAgICAgICBjb21wb25lbnQgY29yZSAiQ09SRV9lbGVtZW50cyIgew0KICAgICAgICAgICAgaW5jbHVkZSAqDQogICAgICAgICAgICBhdXRvbGF5b3V0IGxyDQogICAgICAgIH0NCg0KICAgICAgICB0aGVtZSBkZWZhdWx0DQogICAgfQ0KDQp9DQo="
+  },
+  "views" : {
+    "componentViews" : [ {
+      "automaticLayout" : {
+        "applied" : false,
+        "edgeSeparation" : 0,
+        "implementation" : "Graphviz",
+        "nodeSeparation" : 300,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 300,
+        "vertices" : false
+      },
+      "containerId" : "3",
+      "dimensions" : {
+        "height" : 1630,
+        "width" : 2520
+      },
+      "elements" : [ {
+        "id" : "1",
+        "x" : 1894,
+        "y" : 1029
+      }, {
+        "id" : "4",
+        "x" : 219,
+        "y" : 334
+      }, {
+        "id" : "5",
+        "x" : 219,
+        "y" : 934
+      }, {
+        "id" : "6",
+        "x" : 969,
+        "y" : 634
+      }, {
+        "id" : "7",
+        "x" : 1869,
+        "y" : 199
+      } ],
+      "externalContainerBoundariesVisible" : false,
+      "key" : "REST_elements",
+      "order" : 3,
+      "relationships" : [ {
+        "id" : "13"
+      }, {
+        "id" : "15"
+      }, {
+        "id" : "18"
+      }, {
+        "id" : "19"
+      } ]
+    }, {
+      "automaticLayout" : {
+        "applied" : false,
+        "edgeSeparation" : 0,
+        "implementation" : "Graphviz",
+        "nodeSeparation" : 300,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 300,
+        "vertices" : false
+      },
+      "containerId" : "7",
+      "dimensions" : {
+        "height" : 811,
+        "width" : 2520
+      },
+      "elements" : [ {
+        "id" : "3",
+        "x" : 200,
+        "y" : 219
+      }, {
+        "id" : "8",
+        "x" : 1100,
+        "y" : 219
+      }, {
+        "id" : "9",
+        "x" : 1850,
+        "y" : 219
+      } ],
+      "externalContainerBoundariesVisible" : false,
+      "key" : "CORE_elements",
+      "order" : 4,
+      "relationships" : [ {
+        "id" : "16"
+      }, {
+        "id" : "17"
+      } ]
+    } ],
+    "configuration" : {
+      "branding" : { },
+      "lastSavedView" : "CORE_elements",
+      "metadataSymbols" : "SquareBrackets",
+      "styles" : { },
+      "terminology" : { },
+      "themes" : [ "https://static.structurizr.com/themes/default/theme.json" ]
+    },
+    "containerViews" : [ {
+      "automaticLayout" : {
+        "applied" : false,
+        "edgeSeparation" : 0,
+        "implementation" : "Graphviz",
+        "nodeSeparation" : 300,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 300,
+        "vertices" : false
+      },
+      "dimensions" : {
+        "height" : 841,
+        "width" : 2470
+      },
+      "elements" : [ {
+        "id" : "1",
+        "x" : 199,
+        "y" : 199
+      }, {
+        "id" : "3",
+        "x" : 1049,
+        "y" : 249
+      }, {
+        "id" : "7",
+        "x" : 1799,
+        "y" : 249
+      } ],
+      "externalSoftwareSystemBoundariesVisible" : false,
+      "key" : "ContainerView",
+      "order" : 2,
+      "relationships" : [ {
+        "id" : "11"
+      }, {
+        "id" : "12"
+      }, {
+        "id" : "20"
+      } ],
+      "softwareSystemId" : "2"
+    } ],
+    "systemContextViews" : [ {
+      "automaticLayout" : {
+        "applied" : false,
+        "edgeSeparation" : 0,
+        "implementation" : "Graphviz",
+        "nodeSeparation" : 300,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 300,
+        "vertices" : false
+      },
+      "dimensions" : {
+        "height" : 800,
+        "width" : 1550
+      },
+      "elements" : [ {
+        "id" : "1",
+        "x" : 199,
+        "y" : 200
+      }, {
+        "id" : "2",
+        "x" : 899,
+        "y" : 250
+      } ],
+      "enterpriseBoundaryVisible" : true,
+      "key" : "BusinessView",
+      "order" : 1,
+      "relationships" : [ {
+        "id" : "10"
+      }, {
+        "id" : "21"
+      } ],
+      "softwareSystemId" : "2"
+    } ]
+  }
+}
