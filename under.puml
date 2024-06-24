@@ -1,0 +1,65 @@
+@startuml
+interface org.javaguru.travel.insurance.core.underwriting.TravelRiskPremiumCalculator {
+~ BigDecimal calculatePremium(TravelCalculatePremiumRequest)
+~ String getRiskIc()
+}
+
+class org.javaguru.travel.insurance.core.underwriting.calculators.TravelLoseBaggageRiskPremiumCalculator {
++ BigDecimal calculatePremium(TravelCalculatePremiumRequest)
++ String getRiskIc()
+}
+
+class org.javaguru.travel.insurance.core.underwriting.calculators.TravelEvacuationRiskPremiumCalculator {
++ BigDecimal calculatePremium(TravelCalculatePremiumRequest)
++ String getRiskIc()
+}
+
+class org.javaguru.travel.insurance.core.underwriting.TravelPremiumCalculationResult {
+- BigDecimal totalPremium
+- List<RiskPremium> riskPremiums
+}
+
+interface org.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwriting {
+~ TravelPremiumCalculationResult calculatePremium(TravelCalculatePremiumRequest)
+}
+
+class org.javaguru.travel.insurance.core.underwriting.calculators.TravelSportActivitiesRiskPremiumCalculator {
++ BigDecimal calculatePremium(TravelCalculatePremiumRequest)
++ String getRiskIc()
+}
+
+class org.javaguru.travel.insurance.core.underwriting.calculators.TravelThirdPartyLiabilityRiskPremiumCalculator {
++ BigDecimal calculatePremium(TravelCalculatePremiumRequest)
++ String getRiskIc()
+}
+
+class org.javaguru.travel.insurance.core.underwriting.calculators.TravelMedicalRiskPremiumCalculator {
+- DateTimeUtil dateTimeUtil
++ BigDecimal calculatePremium(TravelCalculatePremiumRequest)
++ String getRiskIc()
+}
+
+
+class org.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwritingImpl {
+- List<TravelRiskPremiumCalculator> riskPremiumCalculators
++ TravelPremiumCalculationResult calculatePremium(TravelCalculatePremiumRequest)
+- BigDecimal calculatePremiumForRisk(String,TravelCalculatePremiumRequest)
+- TravelRiskPremiumCalculator findRiskPremiumCalculator(String)
+}
+
+
+class org.javaguru.travel.insurance.core.underwriting.calculators.TravelTripCancellationRiskPremiumCalculator {
++ BigDecimal calculatePremium(TravelCalculatePremiumRequest)
++ String getRiskIc()
+}
+
+
+
+org.javaguru.travel.insurance.core.underwriting.TravelRiskPremiumCalculator <|.. org.javaguru.travel.insurance.core.underwriting.calculators.TravelLoseBaggageRiskPremiumCalculator
+org.javaguru.travel.insurance.core.underwriting.TravelRiskPremiumCalculator <|.. org.javaguru.travel.insurance.core.underwriting.calculators.TravelEvacuationRiskPremiumCalculator
+org.javaguru.travel.insurance.core.underwriting.TravelRiskPremiumCalculator <|.. org.javaguru.travel.insurance.core.underwriting.calculators.TravelSportActivitiesRiskPremiumCalculator
+org.javaguru.travel.insurance.core.underwriting.TravelRiskPremiumCalculator <|.. org.javaguru.travel.insurance.core.underwriting.calculators.TravelThirdPartyLiabilityRiskPremiumCalculator
+org.javaguru.travel.insurance.core.underwriting.TravelRiskPremiumCalculator <|.. org.javaguru.travel.insurance.core.underwriting.calculators.TravelMedicalRiskPremiumCalculator
+org.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwriting <|.. org.javaguru.travel.insurance.core.underwriting.TravelPremiumUnderwritingImpl
+org.javaguru.travel.insurance.core.underwriting.TravelRiskPremiumCalculator <|.. org.javaguru.travel.insurance.core.underwriting.calculators.TravelTripCancellationRiskPremiumCalculator
+@enduml
