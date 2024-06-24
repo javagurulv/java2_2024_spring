@@ -1,0 +1,60 @@
+@startuml
+interface TravelPremiumUnderwriting {
+~ BigDecimal calculatePremium(TravelCalculatePremiumRequest)
+}
+
+class TravelPremiumUnderwritingImpl {
+- List<TravelRiskPremiumCalculator> riskPremiumCalculators
++ BigDecimal calculatePremium(TravelCalculatePremiumRequest)
+- BigDecimal calculatePremiumForRisk(String,TravelCalculatePremiumRequest)
+- TravelRiskPremiumCalculator findRiskPremiumCalculator(String)
+}
+
+
+class TravelLoseBaggageRiskPremiumCalculator {
++ BigDecimal calculatePremium(TravelCalculatePremiumRequest)
++ String getRiskIc()
+}
+
+class TravelMedicalRiskPremiumCalculator {
+- DateTimeUtil dateTimeUtil
++ BigDecimal calculatePremium(TravelCalculatePremiumRequest)
++ String getRiskIc()
+}
+
+
+class TravelTripCancellationRiskPremiumCalculator {
++ BigDecimal calculatePremium(TravelCalculatePremiumRequest)
++ String getRiskIc()
+}
+
+class TravelThirdPartyLiabilityRiskPremiumCalculator {
++ BigDecimal calculatePremium(TravelCalculatePremiumRequest)
++ String getRiskIc()
+}
+
+interface TravelRiskPremiumCalculator {
+~ BigDecimal calculatePremium(TravelCalculatePremiumRequest)
+~ String getRiskIc()
+}
+
+class TravelSportActivitiesRiskPremiumCalculator {
++ BigDecimal calculatePremium(TravelCalculatePremiumRequest)
++ String getRiskIc()
+}
+
+class TravelEvacuationRiskPremiumCalculator {
++ BigDecimal calculatePremium(TravelCalculatePremiumRequest)
++ String getRiskIc()
+}
+
+
+
+TravelPremiumUnderwriting <|.. TravelPremiumUnderwritingImpl
+TravelRiskPremiumCalculator <|.. TravelLoseBaggageRiskPremiumCalculator
+TravelRiskPremiumCalculator <|.. TravelMedicalRiskPremiumCalculator
+TravelRiskPremiumCalculator <|.. TravelTripCancellationRiskPremiumCalculator
+TravelRiskPremiumCalculator <|.. TravelThirdPartyLiabilityRiskPremiumCalculator
+TravelRiskPremiumCalculator <|.. TravelSportActivitiesRiskPremiumCalculator
+TravelRiskPremiumCalculator <|.. TravelEvacuationRiskPremiumCalculator
+@enduml
