@@ -21,7 +21,7 @@ public class StructurizrStarter {
         }
         System.out.println("Structurizr Lite WAR file was found: " + liteWar.getAbsolutePath());
 
-        File configPackage = new File("teacher/step_71/src/main/java/diagram");
+        File configPackage = new File("teacher/step_73/src/main/java/diagram");
 
         if (!configPackage.exists()) {
             throw new IOException("workspace.dsl not found: " + configPackage.getAbsolutePath());

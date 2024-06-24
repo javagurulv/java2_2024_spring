@@ -171,7 +171,7 @@ workspace {
                 icon services.png
             }
             element "underwriting" {
-                icon services.png
+                icon underwriting.png
             }
             element "validations" {
                 icon validations.png
