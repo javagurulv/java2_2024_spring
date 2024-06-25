@@ -3,8 +3,7 @@
   "description" : "Description",
   "documentation" : { },
   "id" : 1,
-  "lastModifiedAgent" : "structurizr-javascript",
-  "lastModifiedDate" : "2024-06-24T23:13:08Z",
+  "lastModifiedDate" : "2024-06-25T13:01:54Z",
   "model" : {
     "people" : [ {
       "description" : "Browser",
@@ -19,7 +18,7 @@
         "destinationId" : "2",
         "id" : "33",
         "properties" : {
-          "structurizr.dsl.identifier" : "e29a1462-8bbd-4ebb-8a50-e1b626c9005a"
+          "structurizr.dsl.identifier" : "95b4cb70-7bf7-4b90-ac84-81e5da36107f"
         },
         "sourceId" : "1",
         "tags" : "Relationship"
@@ -28,7 +27,7 @@
         "destinationId" : "3",
         "id" : "34",
         "properties" : {
-          "structurizr.dsl.identifier" : "f2873e9c-70f1-4c2e-a802-72d318bdb70c"
+          "structurizr.dsl.identifier" : "46467dd1-0849-45b5-a7ed-e4f5cbeac524"
         },
         "sourceId" : "1",
         "tags" : "Relationship"
@@ -50,7 +49,7 @@
             "destinationId" : "8",
             "id" : "40",
             "properties" : {
-              "structurizr.dsl.identifier" : "37db4780-294f-4712-94ed-565bcc3bcca4"
+              "structurizr.dsl.identifier" : "8b8c644f-c9b2-4889-8614-bbb90302fd55"
             },
             "sourceId" : "4",
             "tags" : "Relationship"
@@ -65,7 +64,7 @@
             "destinationId" : "1",
             "id" : "46",
             "properties" : {
-              "structurizr.dsl.identifier" : "500e878b-6330-4748-b014-10b01932d85b"
+              "structurizr.dsl.identifier" : "15d55c38-00af-402f-b1a9-c79bff1920f9"
             },
             "sourceId" : "4",
             "tags" : "Relationship"
@@ -74,7 +73,7 @@
             "destinationId" : "9",
             "id" : "49",
             "properties" : {
-              "structurizr.dsl.identifier" : "99953434-3d77-4411-8de9-a7bb47173d90"
+              "structurizr.dsl.identifier" : "76c3591b-002a-480a-86b0-8ebcb7f00f8b"
             },
             "sourceId" : "4",
             "tags" : "Relationship"
@@ -83,7 +82,7 @@
             "destinationId" : "5",
             "id" : "54",
             "properties" : {
-              "structurizr.dsl.identifier" : "7eb5c10e-aadd-431f-b322-0526e5cadf90"
+              "structurizr.dsl.identifier" : "5a28c9b0-a702-4bf8-b649-8328d0b5a993"
             },
             "sourceId" : "4",
             "tags" : "Relationship"
@@ -92,7 +91,7 @@
             "destinationId" : "6",
             "id" : "55",
             "properties" : {
-              "structurizr.dsl.identifier" : "7f43bde0-3561-4632-867e-cc4bc8181b3c"
+              "structurizr.dsl.identifier" : "bddafae4-f013-4b25-87fb-45d734009bd9"
             },
             "sourceId" : "4",
             "tags" : "Relationship"
@@ -129,7 +128,7 @@
           "destinationId" : "7",
           "id" : "35",
           "properties" : {
-            "structurizr.dsl.identifier" : "a5709b97-8f6c-4c1a-bbb7-7686bf1a4255"
+            "structurizr.dsl.identifier" : "cee9fe91-8d39-4f84-9d7b-97c47d3f6371"
           },
           "sourceId" : "3",
           "tags" : "Relationship"
@@ -167,7 +166,7 @@
             "destinationId" : "10",
             "id" : "53",
             "properties" : {
-              "structurizr.dsl.identifier" : "bf5ce20d-c55b-4a16-a8f4-2acb7f6ac60d"
+              "structurizr.dsl.identifier" : "6985d2f1-0fc6-4b85-a050-b307d5a0f2f6"
             },
             "sourceId" : "8",
             "tags" : "Relationship"
@@ -176,7 +175,7 @@
             "destinationId" : "11",
             "id" : "57",
             "properties" : {
-              "structurizr.dsl.identifier" : "82741abf-ba7d-4820-bff7-899bdd7e3dce"
+              "structurizr.dsl.identifier" : "9f4ba0b1-c49e-4d3d-b997-e773c6d16a83"
             },
             "sourceId" : "8",
             "tags" : "Relationship"
@@ -204,7 +203,7 @@
             "destinationId" : "11",
             "id" : "43",
             "properties" : {
-              "structurizr.dsl.identifier" : "c9162ce2-1afc-4a2d-993b-7f2ba3142557"
+              "structurizr.dsl.identifier" : "037a157f-7267-401f-ab47-5159db15a554"
             },
             "sourceId" : "10",
             "tags" : "Relationship"
@@ -213,7 +212,7 @@
             "destinationId" : "19",
             "id" : "65",
             "properties" : {
-              "structurizr.dsl.identifier" : "02bb130e-3f87-4428-83fe-3d7015645b77"
+              "structurizr.dsl.identifier" : "fb1da2d1-ccf6-4a09-8d79-31f49c87769e"
             },
             "sourceId" : "10",
             "tags" : "Relationship"
@@ -238,7 +237,7 @@
             "destinationId" : "21",
             "id" : "58",
             "properties" : {
-              "structurizr.dsl.identifier" : "82d6abd5-ac93-4294-b027-e5de266cd5fa"
+              "structurizr.dsl.identifier" : "062b2c3e-f600-4a4a-a457-b576f02aa7c2"
             },
             "sourceId" : "11",
             "tags" : "Relationship"
@@ -263,7 +262,7 @@
             "destinationId" : "26",
             "id" : "62",
             "properties" : {
-              "structurizr.dsl.identifier" : "daeaa025-8f4b-4e2e-a1d3-42dd0b9c0bab"
+              "structurizr.dsl.identifier" : "693b2c53-7f1d-48f9-9bd3-940dfaddbd65"
             },
             "sourceId" : "12",
             "tags" : "Relationship"
@@ -282,7 +281,7 @@
             "destinationId" : "26",
             "id" : "64",
             "properties" : {
-              "structurizr.dsl.identifier" : "4dbece6e-ec7e-4d3d-96c2-3b913875b361"
+              "structurizr.dsl.identifier" : "16ccf466-6dc6-4960-8891-51d280eb0751"
             },
             "sourceId" : "13",
             "tags" : "Relationship"
@@ -342,7 +341,7 @@
             "destinationId" : "4",
             "id" : "36",
             "properties" : {
-              "structurizr.dsl.identifier" : "a1d2e371-7ef0-4846-9981-9911a282a760"
+              "structurizr.dsl.identifier" : "278e1aee-6c34-4a06-8a77-cc79eee78dd8"
             },
             "sourceId" : "15",
             "tags" : "Relationship"
@@ -367,7 +366,7 @@
             "destinationId" : "4",
             "id" : "44",
             "properties" : {
-              "structurizr.dsl.identifier" : "7bf2e3c1-539d-41c2-801e-ce33b937fa2f"
+              "structurizr.dsl.identifier" : "962e75ac-b71d-49cb-bd5d-f25bbcec7c6d"
             },
             "sourceId" : "16",
             "tags" : "Relationship"
@@ -392,7 +391,7 @@
             "destinationId" : "16",
             "id" : "51",
             "properties" : {
-              "structurizr.dsl.identifier" : "d22fa191-65e0-4cd3-a198-74ca350e373a"
+              "structurizr.dsl.identifier" : "d3fbd97d-f4a6-44c6-b562-dae9bc82c85d"
             },
             "sourceId" : "17",
             "tags" : "Relationship"
@@ -411,7 +410,7 @@
             "destinationId" : "17",
             "id" : "52",
             "properties" : {
-              "structurizr.dsl.identifier" : "35776c76-cfc6-4f3c-8a8d-13d3a6e2736a"
+              "structurizr.dsl.identifier" : "310ba751-b87c-47d9-ba0b-f6490254d44a"
             },
             "sourceId" : "18",
             "tags" : "Relationship"
@@ -471,7 +470,7 @@
             "destinationId" : "26",
             "id" : "69",
             "properties" : {
-              "structurizr.dsl.identifier" : "9ea7aba8-0558-4780-afd7-e5a0a8676808"
+              "structurizr.dsl.identifier" : "83bcb8e1-446b-4efe-aea9-f6713d62f0fe"
             },
             "sourceId" : "22",
             "tags" : "Relationship"
@@ -516,7 +515,7 @@
             "destinationId" : "3",
             "id" : "71",
             "properties" : {
-              "structurizr.dsl.identifier" : "d8050c56-0d91-4e5d-8b84-759ee28d1550"
+              "structurizr.dsl.identifier" : "cf648bb1-6bd4-410e-a4ea-ddbef0da449f"
             },
             "sourceId" : "25",
             "tags" : "Relationship"
@@ -541,7 +540,7 @@
           "destinationId" : "23",
           "id" : "73",
           "properties" : {
-            "structurizr.dsl.identifier" : "d069d257-049c-4c30-92b5-fc8d0ca3d90d"
+            "structurizr.dsl.identifier" : "874d8561-ef63-4db5-be71-436b1f07fd21"
           },
           "sourceId" : "24",
           "tags" : "Relationship"
@@ -574,7 +573,7 @@
         "destinationId" : "26",
         "id" : "56",
         "properties" : {
-          "structurizr.dsl.identifier" : "8e7f1fcb-b12f-48dd-a4d7-54b71d7e14b6"
+          "structurizr.dsl.identifier" : "76c0d115-82d5-4ad4-8b6d-70c08bc05063"
         },
         "sourceId" : "2",
         "tags" : "Relationship"
@@ -716,50 +715,46 @@
         "vertices" : false
       },
       "containerId" : "7",
-      "dimensions" : {
-        "height" : 2540,
-        "width" : 4900
-      },
       "elements" : [ {
         "id" : "3",
-        "x" : 199,
-        "y" : 1420
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "8",
-        "x" : 1099,
-        "y" : 240
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "9",
-        "x" : 1099,
-        "y" : 1420
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "10",
-        "x" : 1849,
-        "y" : 830
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "11",
-        "x" : 2599,
-        "y" : 220
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "12",
-        "x" : 2599,
-        "y" : 1420
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "13",
-        "x" : 2599,
-        "y" : 820
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "14",
-        "x" : 2599,
-        "y" : 2040
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "20",
-        "x" : 3499,
-        "y" : 220
+        "x" : 0,
+        "y" : 0
       }, {
         "id" : "26",
-        "x" : 4249,
-        "y" : 1040
+        "x" : 0,
+        "y" : 0
       } ],
       "externalContainerBoundariesVisible" : false,
       "key" : "CORE_elements",
@@ -955,8 +950,7 @@
     } ],
     "configuration" : {
       "branding" : { },
-      "lastSavedView" : "CORE_elements",
-      "metadataSymbols" : "SquareBrackets",
+      "lastSavedView" : "BusinessView",
       "styles" : {
         "elements" : [ {
           "shape" : "Cylinder",
