@@ -1,0 +1,77 @@
+@startuml
+class org.javaguru.travel.insurance.rest.v1.TravelCalculatePremiumResponseLoggerV1 {
+- {static} Logger logger
+~ void log(TravelCalculatePremiumResponseV1)
+}
+
+
+class org.javaguru.travel.insurance.rest.v1.TravelCalculatePremiumRestControllerV1 {
+- TravelCalculatePremiumRequestLoggerV1 requestLogger
+- TravelCalculatePremiumResponseLoggerV1 responseLogger
+- TravelRestRequestExecutionTimeLogger executionTimeLogger
+- TravelCalculatePremiumService calculatePremiumService
+- DtoV1Converter dtoV1Converter
++ TravelCalculatePremiumResponseV1 calculatePremium(TravelCalculatePremiumRequestV1)
+- TravelCalculatePremiumResponseV1 processRequest(TravelCalculatePremiumRequestV1)
+}
+
+
+class org.javaguru.travel.insurance.rest.common.TravelRestRequestExecutionTimeLogger {
+- {static} Logger logger
++ void logExecutionTime(Stopwatch)
+}
+
+
+class org.javaguru.travel.insurance.rest.v2.TravelCalculatePremiumRequestLoggerV2 {
+- {static} Logger logger
+~ void log(TravelCalculatePremiumRequestV2)
+}
+
+
+class org.javaguru.travel.insurance.rest.internal.TravelGetAgreementResponseLogger {
+- {static} Logger logger
+~ void log(TravelGetAgreementResponse)
+}
+
+
+class org.javaguru.travel.insurance.rest.v2.TravelCalculatePremiumRestControllerV2 {
+- TravelCalculatePremiumRequestLoggerV2 requestLogger
+- TravelCalculatePremiumResponseLoggerV2 responseLogger
+- TravelRestRequestExecutionTimeLogger executionTimeLogger
+- TravelCalculatePremiumService calculatePremiumService
+- DtoV2Converter dtoV2Converter
++ TravelCalculatePremiumResponseV2 calculatePremium(TravelCalculatePremiumRequestV2)
+- TravelCalculatePremiumResponseV2 processRequest(TravelCalculatePremiumRequestV2)
+}
+
+
+class org.javaguru.travel.insurance.rest.v2.TravelCalculatePremiumResponseLoggerV2 {
+- {static} Logger logger
+~ void log(TravelCalculatePremiumResponseV2)
+}
+
+
+class org.javaguru.travel.insurance.rest.internal.TravelGetAgreementRestController {
+- TravelGetAgreementRequestLogger requestLogger
+- TravelGetAgreementResponseLogger responseLogger
+- TravelRestRequestExecutionTimeLogger executionTimeLogger
+- TravelGetAgreementService getAgreementService
+- GetAgreementDtoConverter dtoConverter
++ TravelGetAgreementResponse getAgreement(String)
+- TravelGetAgreementResponse processRequest(String)
+}
+
+
+class org.javaguru.travel.insurance.rest.internal.TravelGetAgreementRequestLogger {
+- {static} Logger logger
+~ void log(String)
+}
+
+
+class org.javaguru.travel.insurance.rest.v1.TravelCalculatePremiumRequestLoggerV1 {
+- {static} Logger logger
+~ void log(TravelCalculatePremiumRequestV1)
+}
+
+
+@enduml
