@@ -1,6 +1,5 @@
 package lv.javaguru.travel.insurance.core.underwriting;
 
-import lv.javaguru.travel.insurance.core.underwriting.calculators.TravelPremiumCalculationResult;
 import lv.javaguru.travel.insurance.dto.RiskPremium;
 import lv.javaguru.travel.insurance.dto.TravelCalculatePremiumRequest;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,23 +1,24 @@
 {
   "personFirstName": "Bob",
   "personLastName": "Johnson",
+  "personBirthDate" : "2010-10-10",
   "agreementDateFrom": "2030-10-10",
   "agreementDateTo": "2030-10-11",
-  "agreementPremium": 1,
+  "agreementPremium": 2.50,
   "country" : "SPAIN",
   "validationErrors": null,
   "risks" : [
     {
       "riskIc" : "TRAVEL_MEDICAL",
-      "premium" : 1
+      "premium" : 2.50
     },
     {
       "riskIc" : "TRAVEL_CANCELLATION",
-      "premium" : 0
+      "premium" : 0.0
     },
     {
       "riskIc" : "TRAVEL_BAGGAGE_LOSS",
-      "premium" : 0
+      "premium" : 0.0
     }
   ]
 }

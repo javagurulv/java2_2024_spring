@@ -1,8 +1,8 @@
 {
   "validationErrors": [
     {
-      "errorCode": "ERROR_CODE_4",
-      "description": "Field agreementDateTo cannot be empty!"
+      "errorCode": "ERROR_CODE_12",
+      "description": "Field personBirthDate cannot be from the past!"
     }
   ],
   "personFirstName" : null,

@@ -22,7 +22,7 @@ class EmptyCountryValidationTest {
     private ValidationErrorFactory validationErrorFactory;
 
     @InjectMocks
-    private EmptyCountryValidation countryValidation;
+    private EmptyCountryValidator countryValidation;
 
     @Test
     public void noErrorIfSelectedRiskIsNull() {

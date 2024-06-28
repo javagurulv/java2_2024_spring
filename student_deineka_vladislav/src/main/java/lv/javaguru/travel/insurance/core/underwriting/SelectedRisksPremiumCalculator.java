@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Component
-public class SelectedRisksPremiumCalculator {
+class SelectedRisksPremiumCalculator {
 
     @Autowired
     private List<TravelRiskPremiumCalculator> riskPremiumCalculators;
