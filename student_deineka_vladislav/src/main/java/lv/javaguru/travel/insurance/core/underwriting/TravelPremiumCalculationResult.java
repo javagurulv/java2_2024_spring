@@ -13,5 +13,5 @@ public class TravelPremiumCalculationResult {
 
     private BigDecimal totalPremium;
 
-    private List<RiskPremium> riskPremiums;
+    private List<RiskPremium> riskPremiumList;
 }

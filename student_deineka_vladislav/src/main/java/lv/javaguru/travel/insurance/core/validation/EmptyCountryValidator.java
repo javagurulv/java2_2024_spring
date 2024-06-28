@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-class EmptyCountryValidation extends TravelRequestValidationImpl {
+class EmptyCountryValidator extends TravelRequestValidationImpl {
 
     @Autowired
     private ValidationErrorFactory validationErrorFactory;
