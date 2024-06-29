@@ -1,0 +1,12 @@
+{
+  "errors": [
+    {
+      "errorCode": "ERROR_CODE_23",
+      "description": "Person last name [Pupkin 1] allowed symbols contains latin chars, hyphen and spaces!"
+    },
+    {
+      "errorCode": "ERROR_CODE_23",
+      "description": "Person last name [Pupkin 2] allowed symbols contains latin chars, hyphen and spaces!"
+    }
+  ]
+}
