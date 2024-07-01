@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -43,6 +44,7 @@ class TravelGetAgreementControllerInternalTest {
     private EntityManager entityManager;
 
     @Test
+    @WithMockUser(username = "admin", roles = {"ADMIN"})
     void controller_ShouldFindExistingUuid() throws Exception {
         JsonObject testDataJson = gson.fromJson(reader.readJsonFromFile(
                         "internal/ControllerInternalTest_Combined_9.01_all_fields_are_present_and_valid.json"),
@@ -80,6 +82,7 @@ class TravelGetAgreementControllerInternalTest {
     }
 
     @Test
+    @WithMockUser(username = "admin", roles = {"ADMIN"})
     void controller_ShouldReturnErrorForNotExistingUuid() throws Exception {
         MockHttpServletResponse response = mockMvc.perform(get(
                         "/insurance/travel/api/internal/agreement/NOT-EXISTING-UUID")

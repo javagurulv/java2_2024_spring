@@ -80,9 +80,11 @@ public class DtoV2Converter {
     }
 
     private AgreementDTO buildAgreement(TravelCalculatePremiumRequestV2 request) {
-        List<PersonDTO> persons = request.getPersons().stream()
-                .map(this::buildPersonFromRequest)
-                .toList();
+        List<PersonDTO> persons = (request.getPersons() != null)
+                ? request.getPersons().stream()
+                    .map(this::buildPersonFromRequest)
+                    .toList()
+                : Collections.emptyList();
 
         return new AgreementDTO(
                 request.getAgreementDateFrom(),

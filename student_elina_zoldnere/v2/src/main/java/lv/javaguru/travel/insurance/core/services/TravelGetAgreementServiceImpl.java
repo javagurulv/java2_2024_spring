@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class TravelGetAgreementServiceImpl implements TravelGetAgreementService {
+class TravelGetAgreementServiceImpl implements TravelGetAgreementService {
 
     @Autowired
     private TravelAgreementUuidValidator uuidValidator;

@@ -27,7 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @AutoConfigureMockMvc
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
-public class TripCancellationOffIntegrationTest {
+class TripCancellationOffIntegrationTest {
     @Autowired
     private TravelCalculatePremiumService service;
     @Autowired

@@ -2,7 +2,7 @@
   "errors": [
     {
       "field": "agreementDateFrom",
-      "message": "Must be less then agreementDateTo"
+      "message": "Must be less then agreementDateTo!"
     }
   ],
   "personFirstName": null,

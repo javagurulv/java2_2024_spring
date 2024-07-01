@@ -31,7 +31,7 @@ class ValidateSelectedRisksNotEmptyOrNullTest {
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("selectedRisksValues")
-    public void validateSingle_ShouldReturnErrorWhenSelectedRisksAreNotValid(
+    void validateSingle_ShouldReturnErrorWhenSelectedRisksAreNotValid(
             String testName, List<String> selectedRisks) {
         AgreementDTO agreement = AgreementDTOBuilder.createAgreement()
                 .withSelectedRisks(selectedRisks)

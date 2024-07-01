@@ -29,7 +29,9 @@ import java.util.List;
 
 @Component
 @Transactional
-public class TravelExportAgreementToXmlServiceImpl implements TravelExportAgreementToXmlService {
+class TravelExportAgreementToXmlServiceImpl implements TravelExportAgreementToXmlService {
+
+    private static final Logger logger = LoggerFactory.getLogger(TravelExportAgreementToXmlServiceImpl.class);
 
     @Value("${agreement.xml.exporter.job.path}")
     private String exportPath;
@@ -40,8 +42,6 @@ public class TravelExportAgreementToXmlServiceImpl implements TravelExportAgreem
     private ExportedAgreementRegistrar registrar;
     @Autowired
     private ValidationErrorFactory errorFactory;
-
-    private static final Logger logger = LoggerFactory.getLogger(TravelExportAgreementToXmlServiceImpl.class);
 
     @Override
     public TravelExportAgreementToXmlCoreResult exportAgreement(TravelExportAgreementToXmlCoreCommand command) {

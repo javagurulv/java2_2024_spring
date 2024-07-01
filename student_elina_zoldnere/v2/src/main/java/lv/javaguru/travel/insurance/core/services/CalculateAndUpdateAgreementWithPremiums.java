@@ -21,7 +21,6 @@ class CalculateAndUpdateAgreementWithPremiums {
         List<PersonDTO> personsWithRiskPremiums = calculateAndUpdatePersons.calculateRiskPremiumsForAllPersons(agreement);
         BigDecimal totalAgreementPremium = calculateTotalPremium.calculateTotalAgreementPremium(personsWithRiskPremiums);
         String uuid = UUID.randomUUID().toString();
-        // new agreement instance!
         return agreement.withPremiums(personsWithRiskPremiums, totalAgreementPremium, uuid);
     }
 

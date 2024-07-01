@@ -56,4 +56,14 @@
         <appender-ref ref="REQUEST_RESPONSE_FILE_APPENDER" />
     </logger>
 
+    <!-- Temporary debug loggers for Spring Security -->
+    <logger name="org.springframework.security" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="APPLICATION_FILE_APPENDER" />
+    </logger>
+    <logger name="org.springframework.security.web.access" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="APPLICATION_FILE_APPENDER" />
+    </logger>
+
 </configuration>

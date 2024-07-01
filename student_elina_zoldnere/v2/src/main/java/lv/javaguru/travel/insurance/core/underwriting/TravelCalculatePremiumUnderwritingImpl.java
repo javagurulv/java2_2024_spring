@@ -19,31 +19,15 @@ class TravelCalculatePremiumUnderwritingImpl implements TravelCalculatePremiumUn
 
     @Override
     public TravelPremiumCalculationResult calculateAgreementPremium(AgreementDTO agreement, PersonDTO person) {
-        List<String> selectedRisks = agreement.selectedRisks();
-
-        List<RiskDTO> risks = selectedRisks.stream()
-                .map(riskIc -> singleRiskCalculator.calculatePremium(riskIc, agreement, person))
-                .toList();
-
-        BigDecimal agreementPremium = totalRiskCalculator.calculatePremium(risks);
-
-        return new TravelPremiumCalculationResult(agreementPremium, risks);
-    }
-
-/*
-    @Override
-    public TravelPremiumCalculationResult calculateAgreementPremium(AgreementDTO agreement, PersonDTO person) {
-        List<RiskDTO> risks = calculateRisks(agreement, person);
+        List<RiskDTO> risks = calculateRiskPremiums(agreement, person);
         BigDecimal agreementPremium = totalRiskCalculator.calculatePremium(risks);
         return new TravelPremiumCalculationResult(agreementPremium, risks);
     }
 
-    private List<RiskDTO> calculateRisks(AgreementDTO agreement, PersonDTO person) {
-        List<String> selectedRisks = agreement.selectedRisks();
-        return selectedRisks.stream()
+    private List<RiskDTO> calculateRiskPremiums (AgreementDTO agreement, PersonDTO person) {
+        return agreement.selectedRisks().stream()
                 .map(riskIc -> singleRiskCalculator.calculatePremium(riskIc, agreement, person))
                 .toList();
     }
-*/
 
 }

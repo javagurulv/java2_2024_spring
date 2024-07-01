@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Component
-public class TravelAgreementUuidValidatorImpl implements TravelAgreementUuidValidator {
+class TravelAgreementUuidValidatorImpl implements TravelAgreementUuidValidator {
 
     @Autowired
     private ValidationErrorFactory errorFactory;

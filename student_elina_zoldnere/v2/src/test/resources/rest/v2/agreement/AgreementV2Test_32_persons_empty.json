@@ -1,0 +1,20 @@
+{
+  "request": {
+    "agreementDateFrom": "2025-03-10",
+    "agreementDateTo": "2025-03-11",
+    "selectedRisks": [
+      "TRAVEL_MEDICAL",
+      "TRAVEL_LOSS_BAGGAGE"
+    ],
+    "country": "SPAIN",
+    "persons": []
+  },
+  "expectedResponse": {
+    "errors": [
+      {
+        "errorCode": "ERROR_CODE_18",
+        "description": "No persons added to agreement! Agreement must contain at least one person!"
+      }
+    ]
+  }
+}

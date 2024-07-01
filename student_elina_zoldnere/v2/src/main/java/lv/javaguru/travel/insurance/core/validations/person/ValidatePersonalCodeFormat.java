@@ -13,9 +13,6 @@ import java.util.regex.Pattern;
 @Component
 class ValidatePersonalCodeFormat extends PersonFieldValidationImpl {
 
-    @Autowired
-    private ValidationErrorFactory validationErrorFactory;
-
     /**
      * Regex to validate the personal code format:<br>
      * \d{6}     Exactly six digits<br>
@@ -23,6 +20,9 @@ class ValidatePersonalCodeFormat extends PersonFieldValidationImpl {
      * \d{5}     Exactly five digits
      */
     private static final String PERSONAL_CODE_REGEX = "\\d{6}-\\d{5}";
+
+    @Autowired
+    private ValidationErrorFactory validationErrorFactory;
 
     @Override
     public Optional<ValidationErrorDTO> validateSingle(AgreementDTO agreement, PersonDTO person) {

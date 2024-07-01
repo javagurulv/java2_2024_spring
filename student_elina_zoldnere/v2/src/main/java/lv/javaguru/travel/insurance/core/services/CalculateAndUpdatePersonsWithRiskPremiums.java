@@ -7,7 +7,6 @@ import lv.javaguru.travel.insurance.core.underwriting.TravelPremiumCalculationRe
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -17,33 +16,15 @@ class CalculateAndUpdatePersonsWithRiskPremiums {
     private TravelCalculatePremiumUnderwriting calculateUnderwriting;
 
     List<PersonDTO> calculateRiskPremiumsForAllPersons(AgreementDTO agreement) {
-        List<PersonDTO> personsWithRisks = new ArrayList<>();
-
-        agreement.persons().forEach(person -> {
-            TravelPremiumCalculationResult calculationResult =
-                    calculateUnderwriting.calculateAgreementPremium(agreement, person);
-
-            // new person instance!
-            PersonDTO personWithRisks = person.withRisks(calculationResult.getRisks());
-            personsWithRisks.add(personWithRisks);
-        });
-        return personsWithRisks;
-    }
-
-/*
-    List<PersonDTO> calculateRiskPremiumsForAllPersons(AgreementDTO agreement) {
         return agreement.persons().stream()
-                .map(person -> calculatePersonRisks(agreement, person))
+                .map(person -> calculateRiskPremiumsForOnePerson(agreement, person))
                 .toList();
     }
 
-    private PersonDTO calculatePersonRisks(AgreementDTO agreement, PersonDTO person) {
+    private PersonDTO calculateRiskPremiumsForOnePerson(AgreementDTO agreement, PersonDTO person) {
         TravelPremiumCalculationResult calculationResult =
                 calculateUnderwriting.calculateAgreementPremium(agreement, person);
         return person.withRisks(calculationResult.getRisks());
     }
-*/
-
-
 
 }

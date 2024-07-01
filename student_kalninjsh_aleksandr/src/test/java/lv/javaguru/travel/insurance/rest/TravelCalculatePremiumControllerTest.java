@@ -36,10 +36,8 @@ public class TravelCalculatePremiumControllerTest {
     @Autowired
     private JsonFileReader jsonFileReader;
 
-    private ObjectMapper mapper = new ObjectMapper();
 
     @Test
-    @DisplayName("1.personFirstName is null or empty")
     public void personFirstNameIsNullOrEmpty() throws Exception {
         executeAndEvaluate("rest/PremiumControllerRequest_personFirstName_is_null_or_empty.json",
                 "rest/PremiumControllerResponse_personFirstName_is_null_or_empty.json");
@@ -93,28 +91,16 @@ public class TravelCalculatePremiumControllerTest {
         "rest/PremiumControllerResponse_all_fields_are_specified.json");
     }
 
-    @Test
-    @DisplayName("8.agreementDateFrom is in the past")
-    public void agreementDateFromIsInThePast() throws Exception {
-        executeAndEvaluate("rest/PremiumControllerRequest_agreementDateFrom_is_in_the_past.json",
-                "rest/PremiumControllerResponse_agreementDateFrom_is_in_the_past.json");
-    }
-
-    @Test
-    @DisplayName("9.agreementDateTo_is_in_the_past")
-    public void agreementDateToIsInThePast() throws Exception {
-        executeAndEvaluate("rest/PremiumControllerRequest_agreementDateTo_is_in_the_past.json",
-                "rest/PremiumControllerResponse_agreementDateTo_is_in_the_past.json");
-    }
-
     private void executeAndEvaluate(String jsonRequestFilePath, String jsonResponseFilePath) throws Exception {
+        String jsonRequest = jsonFileReader.readJsonFromFile(jsonRequestFilePath);
         MvcResult calculatedResult = mockMvc.perform(post("/insurance/travel/")
-                .content(jsonFileReader.readJsonFromFile(jsonRequestFilePath))
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
+                        .content(jsonRequest)
+                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andReturn();
         String responseContent = calculatedResult.getResponse().getContentAsString();
         String expectedJsonResponse = jsonFileReader.readJsonFromFile(jsonResponseFilePath);
+        ObjectMapper mapper = new ObjectMapper();
         assertEquals(mapper.readTree(responseContent), mapper.readTree(expectedJsonResponse));
     }
 

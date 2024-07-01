@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class EntityReaderImpl implements EntityReader {
+class EntityReaderImpl implements EntityReader {
     @Autowired
     private AgreementEntityRepository agreementRepository;
     @Autowired

@@ -183,3 +183,10 @@ INSERT INTO classifier_values(
         (5000, 9999.99, 30.0),
         (10000, 19999.99, 100.0),
         (20000, 1000000, 500.0);
+
+ INSERT INTO travel_cancellation_age_coefficient(age_from, age_to, coefficient)
+ VALUES(0, 9, 5.0),
+        (10, 17, 10.0),
+        (18, 39, 20.0),
+        (40, 64, 30.0),
+        (65, 200, 50.0);
