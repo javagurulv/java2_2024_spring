@@ -15,7 +15,8 @@ class SelectedRisksPremiumCalculator {
     private List<TravelRiskPremiumCalculator> riskPremiumCalculators;
 
     List<RiskPremium> calculationPremium(TravelCalculatePremiumRequest premiumRequest) {
-        return premiumRequest.getSelectedRisks().stream()
+        return premiumRequest.getSelectedRisks()
+                .stream()
                 .map(riskIc -> new RiskPremium(riskIc, calculatePremiumForRisk(riskIc, premiumRequest)))
                 .toList();
     }
