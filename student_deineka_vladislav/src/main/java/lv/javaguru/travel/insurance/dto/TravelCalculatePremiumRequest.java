@@ -14,7 +14,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class TravelCalculatePremiumRequest {
 
     private String personFirstName;
